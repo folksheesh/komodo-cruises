@@ -2,48 +2,102 @@
 :root {
   --grey: #cdcdcd;
   --ocean-50: #f2f8fc;
-  --ocean-70a: rgba(34,63,98,0.7);
-  --ocean-80a: rgba(34,63,98,0.8);
-  --ocean-15a: rgba(34,63,98,0.15);
-  --ocean-10a: rgba(34,63,98,0.10);
+  --ocean-70a: rgba(34, 63, 98, 0.7);
+  --ocean-80a: rgba(34, 63, 98, 0.8);
+  --ocean-15a: rgba(34, 63, 98, 0.15);
+  --ocean-10a: rgba(34, 63, 98, 0.10);
   --ocean-700: #295c96;
   --ocean-800: #254f7d;
   --ocean-900: #223f62;
   --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
-  --edge-pad: 30px; /* consistent small gutter from viewport edges */
-  --bg-primary: #f4f1ec; /* Main background color */
+  --edge-pad: 30px;
+  /* consistent small gutter from viewport edges */
+  --bg-primary: #f4f1ec;
+  /* Main background color */
 }
 
 /* Base typography */
-html, body { margin: 0; font-family: var(--font-sans); font-size: 14px; font-weight: 600; color: var(--ocean-900); overflow-x: hidden; background: var(--bg-primary); }
-* { box-sizing: border-box; }
+html,
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ocean-900);
+  overflow-x: hidden;
+  background: var(--bg-primary);
+}
+
+* {
+  box-sizing: border-box;
+}
 
 /* Global page background */
-#app, .app-container, main { background: var(--bg-primary); min-height: 100vh; }
+#app,
+.app-container,
+main {
+  background: var(--bg-primary);
+  min-height: 100vh;
+}
 
 /* Layout helpers */
-.container { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
-.mt-16 { margin-top: 4rem; }
-.mt-4 { margin-top: 1rem; }
-.text-sm { font-size: 0.875rem; }
+.container {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.mt-16 {
+  margin-top: 4rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
 
 /* Navbar */
-.nav-container { background: var(--bg-primary); backdrop-filter: none; border-bottom: none; }
-.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem var(--edge-pad); }
-.nav-overlay { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: var(--bg-primary); }
+.nav-container {
+  background: var(--bg-primary);
+  backdrop-filter: none;
+  border-bottom: none;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem var(--edge-pad);
+}
+
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: var(--bg-primary);
+}
 
 /* Home page navigation - transparent */
 body:has(.hero-section) .nav-container,
 body:has(.hero-section) .nav-overlay,
 .home-nav .nav-container,
 .home-nav .nav-overlay,
-.hero-section ~ * .nav-container,
-.hero-section ~ * .nav-overlay {
+.hero-section~* .nav-container,
+.hero-section~* .nav-overlay {
   background: transparent !important;
 }
 
-.plan-container { max-width: 980px; margin: 0 auto; padding: 1rem var(--edge-pad); }
+.plan-container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1rem var(--edge-pad);
+}
 
 /* Left logo */
 .logo-singita {
@@ -61,12 +115,47 @@ body:has(.hero-section) .nav-overlay,
   align-items: center;
   gap: 1.5rem;
 }
+
 /* Results nav */
-.brand-text { font-family: var(--font-sans); font-weight: 700; font-size: 1.35rem; color: var(--ocean-900); }
-.back-link { color: #2b5279; text-decoration: none; font-weight: 600; text-underline-offset: 3px; transition: color .18s ease, opacity .18s ease; opacity: .96; }
-.back-link:hover { text-decoration: underline; text-underline-offset: 3px; opacity: .84; }
-.link-close { color: var(--ocean-700); text-decoration: none; font-weight: 600; background: transparent; border: none; text-underline-offset: 3px; transition: color .18s ease, opacity .18s ease; opacity: .96; }
-.link-close:hover { text-decoration: underline; text-underline-offset: 3px; opacity: .84; }
+.brand-text {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--ocean-900);
+}
+
+.back-link {
+  color: #2b5279;
+  text-decoration: none;
+  font-weight: 600;
+  text-underline-offset: 3px;
+  transition: color .18s ease, opacity .18s ease;
+  opacity: .96;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: .84;
+}
+
+.link-close {
+  color: var(--ocean-700);
+  text-decoration: none;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  text-underline-offset: 3px;
+  transition: color .18s ease, opacity .18s ease;
+  opacity: .96;
+}
+
+.link-close:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: .84;
+}
+
 .btn-plan {
   background: #c99b7b;
   color: #fff;
@@ -75,15 +164,17 @@ body:has(.hero-section) .nav-overlay,
   border: none;
   border-radius: 8px;
   padding: 0.75rem 2.5rem;
-  box-shadow: 0 2px 0 rgba(0,0,0,.08);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .08);
   cursor: pointer;
   margin-right: 1.5rem;
   text-decoration: none;
   transition: filter .15s;
 }
+
 .btn-plan:hover {
   filter: brightness(0.97);
 }
+
 .nav-search {
   display: flex;
   align-items: center;
@@ -91,6 +182,7 @@ body:has(.hero-section) .nav-overlay,
   color: #444;
   font-size: 1rem;
 }
+
 .nav-label {
   font-family: var(--font-sans);
   font-size: 1.08rem;
@@ -98,6 +190,7 @@ body:has(.hero-section) .nav-overlay,
   color: #444;
   margin-left: 2px;
 }
+
 .nav-menu {
   display: flex;
   align-items: center;
@@ -106,9 +199,10 @@ body:has(.hero-section) .nav-overlay,
   font-size: 1rem;
   margin-left: 1.5rem;
 }
+
 /* Home nav theme: turn nav to white on hero */
 body:has(.hero-section) .nav-search,
-body:has(.hero-section) .nav-label, 
+body:has(.hero-section) .nav-label,
 body:has(.hero-section) .nav-menu,
 body:has(.hero-section) .nav-right,
 body:has(.hero-section) .brand-text,
@@ -121,8 +215,9 @@ body:has(.hero-section) .btn-plan,
 .home-nav .brand-text,
 .home-nav .brand-chip,
 .home-nav .btn-plan {
-  color: rgba(255,255,255,.95) !important;
+  color: rgba(255, 255, 255, .95) !important;
 }
+
 .brand-chip {
   color: #fff;
   font-size: large;
@@ -130,70 +225,110 @@ body:has(.hero-section) .btn-plan,
 }
 
 /* Footer */
-.site-footer { background: var(--ocean-900); color: #fff; }
-.footer-inner { padding: 1.5rem var(--edge-pad); }
+.site-footer {
+  background: var(--ocean-900);
+  color: #fff;
+}
 
-/* ===== MOBILE RESPONSIVE ===== */
+.footer-inner {
+  padding: 1.5rem var(--edge-pad);
+}
+
+/* ===== ENHANCED MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
   :root {
-    --edge-pad: 16px;
+    --edge-pad: 18px;
   }
-  
+
+  html {
+    font-size: 15px;
+    /* Slightly larger base for readability */
+  }
+
   .container {
-    padding: 0 1rem;
+    padding: 0 1.125rem;
   }
-  
+
   .nav-inner {
     padding: 1rem var(--edge-pad);
   }
-  
+
   .logo-singita {
     font-size: 1.6rem;
     margin-right: 1rem;
   }
-  
+
   .nav-right {
     gap: 0.75rem;
   }
-  
+
   .btn-plan {
-    padding: 0.6rem 1.25rem;
+    padding: 0.7rem 1.5rem;
     font-size: 0.95rem;
     margin-right: 0.5rem;
+    border-radius: 10px;
   }
-  
+
   .nav-label {
     display: none;
   }
-  
+
   .nav-menu {
     margin-left: 0.5rem;
+  }
+
+  .brand-chip {
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .nav-inner {
-    padding: 0.75rem 0.75rem;
+  :root {
+    --edge-pad: 16px;
   }
-  
+
+  .nav-inner {
+    padding: 0.875rem var(--edge-pad);
+  }
+
   .logo-singita {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     margin-right: 0.5rem;
   }
-  
+
   .btn-plan {
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
+    padding: 0.65rem 1.25rem;
+    font-size: 0.9rem;
     margin-right: 0;
+    min-height: 44px;
+    /* Touch-friendly */
   }
-  
+
+  .nav-search,
+  .nav-menu {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .nav-search svg,
   .nav-menu svg {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
   }
-  
+
   .brand-text {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+  }
+
+  .brand-chip {
+    font-size: 1rem;
+    padding: 0.25rem 0;
+  }
+
+  .back-link {
+    font-size: 0.9rem;
   }
 }
