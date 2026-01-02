@@ -5,14 +5,16 @@
 }
 
 .results-container {
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 2rem max(2rem, 5vw);
+  /* Responsive horizontal padding */
 }
 
 .results-layout {
   display: grid;
-  grid-template-columns: 1fr 360px;
+  grid-template-columns: 1fr minmax(300px, 360px);
+  /* Flexible sidebar width */
   gap: 2rem;
   align-items: start;
 }
@@ -27,6 +29,13 @@
 @media (max-width: 768px) {
   .results-layout {
     grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .results-container {
+    padding: 1rem max(1rem, 5vw);
+    /* Maintain responsive padding on mobile */
   }
 }
 
@@ -34,6 +43,7 @@
   .results-container {
     padding: 1rem 0.75rem;
   }
+
   .results-title {
     font-size: 1.75rem;
     padding: 1rem 0;
@@ -50,8 +60,8 @@
 .results-title {
   font-family: var(--font-serif, serif);
   color: #2d4059;
-  font-size: 3rem;
-  font-weight: 400;
+  font-size: 3.5rem;
+  font-weight: 100;
   padding: 2rem 0;
 }
 
@@ -100,41 +110,52 @@
     border-radius: 8px;
     margin: 0 -0.5rem;
   }
+
   .cabin-image {
     height: 200px;
   }
+
   .cabin-content {
     padding: 1rem;
     gap: 1rem;
   }
+
   .cabin-name {
     font-size: 1.25rem;
   }
+
   .cabin-location {
     font-size: 1rem;
   }
+
   .cabin-location-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
   }
+
   .availability-box {
     padding: 1rem;
   }
+
   .availability-title {
     font-size: 0.95rem;
   }
+
   .availability-text {
     font-size: 0.85rem;
   }
+
   .gallery-nav {
     width: 36px;
     height: 36px;
     font-size: 20px;
   }
+
   .gallery-prev {
     left: 8px;
   }
+
   .gallery-next {
     right: 8px;
   }
@@ -336,10 +357,10 @@
 }
 
 .suite-availability {
-   font-size: 1.1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #2d4059;
-  margin-top:-5px;
+  margin-top: -5px;
 }
 
 .cabin-info-right {
@@ -425,30 +446,30 @@
   .cabin-content {
     padding: 1.5rem;
   }
-  
+
   .cabin-name {
     font-size: 1.5rem;
   }
-  
+
   .cabin-header {
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .cabin-details-btn {
     align-self: flex-start;
   }
-  
+
   .cabin-info-section {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
   }
-  
+
   .cabin-info-right {
     width: auto;
   }
-  
+
   .btn-add-to-itinerary {
     width: auto;
   }
@@ -606,11 +627,11 @@
     display: flex;
     flex-direction: column;
   }
-  
+
   .results-main {
     order: 1;
   }
-  
+
   .sidebar-container {
     order: 2;
     position: relative;
@@ -623,13 +644,13 @@
     border-radius: 0;
     transform: none;
   }
-  
+
   .itinerary-sidebar,
   .check-availability-section {
     padding: 1.25rem;
     border-radius: 8px;
   }
-  
+
   .itinerary-title,
   .section-title-sidebar {
     font-size: 1.35rem;
@@ -641,12 +662,12 @@
     margin-top: 1rem;
     gap: 1rem;
   }
-  
+
   .itinerary-sidebar,
   .check-availability-section {
     padding: 1rem;
   }
-  
+
   .itinerary-title,
   .section-title-sidebar {
     font-size: 1.25rem;
@@ -658,6 +679,10 @@
   border: 1px solid #eee;
   padding: 1.5rem;
   border-radius: 8px;
+  width: 100%;
+  /* Ensure it fills the container */
+  box-sizing: border-box;
+  /* Include padding in width */
 }
 
 .section-title-sidebar {
@@ -676,6 +701,9 @@
   height: fit-content;
   position: sticky;
   top: 2rem;
+  width: 100%;
+  /* Ensure sticky container also fills width */
+  box-sizing: border-box;
 }
 
 /* Itinerary Sidebar */
@@ -684,6 +712,8 @@
   border-radius: 8px;
   padding: 2rem;
   border: 1px solid #eee;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .itinerary-title {
@@ -1022,13 +1052,46 @@
 }
 
 /* New styles for API integration */
-.loading-state,
 .error-state,
 .no-search {
   padding: 3rem 2rem;
   text-align: center;
   background: #f4f1ec;
   border-radius: 8px;
+}
+
+.loading-state {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 2rem;
+  background: #f4f1ec;
+  border-radius: 8px;
+}
+
+.loading-text {
+  font-family: var(--font-serif, serif);
+  font-size: 2.5rem;
+  color: #2d4059;
+  letter-spacing: 0.05em;
+  margin: 0;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
 }
 
 .error-state h3 {
@@ -1195,7 +1258,7 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
-.modal-close {
+.modal-close-details {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -1240,28 +1303,28 @@
   .modal-content .modal-body {
     grid-template-columns: 1fr;
   }
-  
+
   .modal-content {
     max-height: 100vh;
     height: 100%;
     border-radius: 0;
   }
-  
+
   .modal-image-section {
     order: 1;
   }
-  
+
   .modal-info-section {
     order: 2;
     padding: 1.25rem;
     gap: 1rem;
   }
-  
+
   .modal-cabin-image {
     min-height: 250px;
     max-height: 300px;
   }
-  
+
   .modal-gallery-nav {
     width: 32px;
     height: 32px;
@@ -1277,17 +1340,17 @@
     top: 0.5rem;
     right: 0.5rem;
   }
-  
+
   .modal-header {
     padding: 0.75rem 1rem;
     font-size: 0.8rem;
   }
-  
+
   .modal-cabin-image {
     min-height: 200px;
     max-height: 250px;
   }
-  
+
   .modal-info-section {
     padding: 1rem;
   }
@@ -1642,12 +1705,12 @@
     display: flex;
     flex-direction: column;
   }
-  
+
   .enquiry-form-section {
     order: 1;
     flex-shrink: 0;
   }
-  
+
   .enquiry-summary-section {
     order: 2;
     border-left: none;
@@ -1663,39 +1726,39 @@
   .enquiry-modal-header {
     padding: 0.75rem 1rem;
   }
-  
+
   .enquiry-modal-title {
     font-size: 1.1rem;
     margin-left: 0;
   }
-  
+
   .enquiry-modal-close {
     margin-right: 0;
     padding: 0.25rem 0.5rem;
     font-size: 0.9rem;
   }
-  
+
   .enquiry-form-section {
     padding: 1.25rem 1rem;
   }
-  
+
   .enquiry-summary-section {
     padding: 1.25rem 1rem;
   }
-  
+
   .enquiry-intro {
     font-size: 0.9rem;
     margin-bottom: 1.25rem;
   }
-  
+
   .enquiry-form {
     gap: 1rem;
   }
-  
+
   .summary-title {
     font-size: 1.25rem;
   }
-  
+
   .summary-description {
     font-size: 0.8rem;
     margin-bottom: 1rem;
@@ -1745,20 +1808,20 @@
     grid-template-columns: 1fr;
     gap: 0.75rem;
   }
-  
+
   .form-group {
     gap: 0.35rem;
   }
-  
+
   .form-label {
     font-size: 0.85rem;
   }
-  
+
   .form-control {
     padding: 0.65rem;
     font-size: 0.85rem;
   }
-  
+
   .phone-input {
     grid-template-columns: 90px 1fr;
   }
@@ -2241,4 +2304,101 @@
 
 .btn-submit-guest:hover {
   background: #1e2a3d;
+}
+
+/* Sidebar Skeleton Loader */
+.sidebar-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  width: 100%;
+}
+
+.skeleton-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skeleton-label {
+  width: 30%;
+  height: 14px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-input {
+  width: 100%;
+  height: 42px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.skeleton-text-lg {
+  width: 60%;
+  height: 14px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-btn {
+  width: 100%;
+  height: 48px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer Animation */
+.skeleton-input::after,
+.skeleton-btn::after,
+.skeleton-label::after,
+.skeleton-text-lg::after,
+.skeleton-circle::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
 }

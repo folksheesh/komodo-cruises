@@ -3,10 +3,8 @@
     <div class="results-container">
       <div class="results-layout">
         <div class="results-main">
-          <h2 class="results-title">Your Search Results</h2>
-
           <div v-if="loading" class="loading-state">
-            <p>Loading availability data...</p>
+            <p class="loading-text">Loading</p>
           </div>
 
           <div v-else-if="error" class="error-state">
@@ -15,39 +13,56 @@
           </div>
 
           <div v-else>
+            <h2 class="results-title">Your Search Results</h2>
             <div class="results-intro">
               <div v-if="allStartDateCabins.length" class="success-message">
                 <p>
                   <strong>Your preferred travel dates are available!</strong>
-                  We have a team of Singita Journey Designers who are ready to plan your trip. Simply select the results that suit your preferences best and submit your enquiry.
+                  We have a team of Singita Journey Designers who are ready to plan your trip. Simply select the results
+                  that suit your preferences best and submit your enquiry.
                 </p>
-                <p class="results-note-muted"><span class="semibold">Note:</span> These results indicate availability and do not guarantee a booking.</p>
+                <p class="results-note-muted"><span class="semibold">Note:</span> These results indicate availability
+                  and do not guarantee a booking.</p>
               </div>
 
               <div v-else-if="!flexibleAlt" class="no-availability">
-                <p><strong>Your preferred dates are unfortunately not available, but there is availability at other Singita lodges or on alternate dates.</strong></p>
-                <p>We have a team of Singita Journey Designers who are ready to plan your trip. Simply select the results that suit your preferences best and submit your enquiry.</p>
-                <p class="results-note-muted"><span class="semibold">Note:</span> These results indicate availability and do not guarantee a booking.</p>
+                <p><strong>Your preferred dates are unfortunately not available, but there is availability at other
+                    Singita lodges or on alternate dates.</strong></p>
+                <p>We have a team of Singita Journey Designers who are ready to plan your trip. Simply select the
+                  results that suit your preferences best and submit your enquiry.</p>
+                <p class="results-note-muted"><span class="semibold">Note:</span> These results indicate availability
+                  and do not guarantee a booking.</p>
               </div>
             </div>
 
-            <div v-if="allStartDateCabins.length" class="lodge-results">
-              <div class="cabin-card" v-for="item in allStartDateCabins" :key="item.key">
+            <div v-if="displayItems.length" class="lodge-results">
+              <div class="cabin-card" v-for="item in displayItems" :key="item.uniqueKey">
+                <!-- Image Section -->
                 <div class="cabin-image" style="position:relative;overflow:hidden;">
-                  <transition :name="getGalleryDirection(item.key) === 'left' ? 'slide-left' : 'slide-right'" mode="out-in">
-                    <img :src="getGalleryImages(item)[getGalleryIndex(item.key)] || '/src/images/komodo.jpg'" :alt="item.cabinName" referrerpolicy="no-referrer" decoding="async" loading="lazy" @error="onImgError($event, getGalleryImages(item)[getGalleryIndex(item.key)])" :key="getGalleryIndex(item.key)" />
+                  <transition :name="item.isGallery && getGalleryDirection(item.id) === 'left' ? 'slide-left' : 'slide-right'" mode="out-in">
+                    <img 
+                      :src="item.isGallery 
+                        ? (getGalleryImages(item.originalItem)[getGalleryIndex(item.id)] || '/src/images/komodo.jpg') 
+                        : (item.image || '/src/images/komodo.jpg')"
+                      :alt="item.title" referrerpolicy="no-referrer" decoding="async" loading="lazy"
+                      @error="onImgError($event, item.image)"
+                      :key="item.isGallery ? getGalleryIndex(item.id) : 0" 
+                    />
                   </transition>
-                  <button class="gallery-nav gallery-prev" @click="prevImage(item.key)" aria-label="Previous image">&lsaquo;</button>
-                  <button class="gallery-nav gallery-next" @click="nextImage(item.key)" aria-label="Next image">&rsaquo;</button>
+                  <template v-if="item.isGallery">
+                    <button class="gallery-nav gallery-prev" @click="prevImage(item.id)" aria-label="Previous image">&lsaquo;</button>
+                    <button class="gallery-nav gallery-next" @click="nextImage(item.id)" aria-label="Next image">&rsaquo;</button>
+                  </template>
                 </div>
 
+                <!-- Content Section -->
                 <div class="cabin-content">
                   <div class="cabin-header">
                     <div class="cabin-title-group">
-                      <h3 class="cabin-name">{{ item.cabinName }}</h3>
+                      <h3 class="cabin-name">{{ item.title }}</h3>
                       <div class="cabin-location-row">
-                        <p class="cabin-location">{{ formatShipName(item.operatorLabel) }}</p>
-                        <button class="cabin-details-btn" @click="viewCabinDetails(item)">
+                        <p class="cabin-location">{{ item.subtitle }}</p>
+                        <button class="cabin-details-btn" @click="item.availabilityType === 'standard' && viewCabinDetails(item.originalItem)">
                           Cabin details <img :src="rightArrowIcon" alt="arrow" class="arrow-icon" />
                         </button>
                       </div>
@@ -56,111 +71,29 @@
 
                   <div class="cabin-divider"></div>
 
-                  <div class="availability-box">
-                    <h4 class="availability-title">Great news, we have availability!</h4>
-                    <p class="availability-text">Select the result that best suits you from the list below and it will be added to the itinerary summary on the right.</p>
+                  <!-- Availability Box -->
+                  <div :class="item.availabilityType === 'standard' ? 'availability-box' : 'availability-alternative'">
+                    <h4 class="availability-title">{{ item.availabilityTitle }}</h4>
+                    <p class="availability-text">{{ item.availabilityText }}</p>
                   </div>
 
+                  <!-- Info Section -->
                   <div class="cabin-info-section">
                     <div class="cabin-info-left">
-                      <p class="suite-price"><strong>Start from</strong> {{ item.price || 'Rp3,650,000' }} per adult, per night</p>
-                      <p class="suite-availability">{{ item.available || 1 }} available</p>
+                      <template v-for="(price, pIdx) in item.prices" :key="pIdx">
+                        <p class="suite-price"><strong>{{ price.label }}</strong> {{ price.value }} per adult, per night</p>
+                      </template>
+                      <p class="suite-availability">{{ item.availabilityCount }}</p>
                     </div>
                     <div class="cabin-info-right">
-                      <button class="btn-add-to-itinerary" @click="toggleItinerary(item)" :class="{ 'in-itinerary': isInItinerary(item) }">
-                        <span class="btn-text">{{ isInItinerary(item) ? 'Remove' : 'Add to itinerary' }}</span>
+                      <button class="btn-add-to-itinerary" @click="toggleItinerary(item.originalItem)"
+                        :class="{ 'in-itinerary': isInItinerary(item.originalItem) }">
+                        <span class="btn-text">{{ isInItinerary(item.originalItem) ? 'Remove' : 'Add to itinerary' }}</span>
                         <span class="btn-icon">
-                          <span v-if="isInItinerary(item)" class="icon-x">✕</span>
+                          <span v-if="isInItinerary(item.originalItem)" class="icon-x">✕</span>
                           <span v-else class="icon-circle"></span>
                         </span>
                       </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div v-else-if="flexibleAlt && hasAltStartDateCabins" class="availability-alternative" style="margin-bottom:1rem;">
-              <h4>Alternative options are available</h4>
-              <p>There are cabins available on other ships for your selected date. Adjust your ship selection to view them.</p>
-            </div>
-
-            <div class="lodge-results" v-else-if="flexibleAlt && cabinCards.length">
-              <div class="lodge-card" v-for="item in cabinCards" :key="item.ship + ':' + item.cabinName">
-                <div class="lodge-gallery">
-                  <div class="lodge-image">
-                    <img :src="item.image" :alt="item.cabinName" referrerpolicy="no-referrer" decoding="async" loading="lazy" @error="onImgError($event, item.image)" />
-                    <button class="gallery-prev" @click="prevImage(item.cabinName)">&lt;</button>
-                    <button class="gallery-next" @click="nextImage(item.cabinName)">&gt;</button>
-                  </div>
-                </div>
-
-                <div class="lodge-info">
-                  <div class="lodge-header" style="display:flex; align-items:flex-start; justify-content:space-between; gap:1rem;">
-                    <div>
-                      <h3 class="lodge-name" style="margin:0;">{{ item.cabinName }}</h3>
-                      <p class="lodge-location" style="margin:.25rem 0 0;">{{ displayDestinations }}</p>
-                    </div>
-                    <button class="lodge-details-btn">Cabin details &gt;</button>
-                  </div>
-
-                  <div class="availability-success">
-                    <h4>Great news, we have availability!</h4>
-                    <p>Select the result that best suits you from the list below and it will be added to the itinerary summary on the right.</p>
-                  </div>
-
-                  <div class="suites-info">
-                    <div class="suites-header" style="display:flex; align-items:center; justify-content:space-between;">
-                      <h5 style="margin:0;">Suite</h5>
-                      <span class="price-from">1 available</span>
-                    </div>
-                    <p class="availability-count" style="margin:.25rem 0 1rem;">Date: {{ formatDate(item.date) }}</p>
-                    <div class="action-buttons" style="display:flex; gap:.5rem; align-items:center;">
-                      <button class="btn-details">Room & Rate Details &gt;</button>
-                      <button class="btn-add-itinerary">Add to itinerary</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="lodge-results" v-else-if="flexibleAlt && availabilityResults.length">
-              <div class="lodge-card" v-for="result in availabilityResults" :key="result.lodge">
-                <div class="lodge-gallery">
-                  <div class="lodge-image">
-                    <img :src="result.image" :alt="result.lodge" referrerpolicy="no-referrer" decoding="async" loading="lazy" @error="onImgError($event, result.image)" />
-                    <button class="gallery-prev" @click="prevImage(result.lodge)">&lt;</button>
-                    <button class="gallery-next" @click="nextImage(result.lodge)">&gt;</button>
-                  </div>
-                </div>
-
-                <div class="lodge-info">
-                  <div class="lodge-header" style="display:flex; align-items:flex-start; justify-content:space-between; gap:1rem;">
-                    <div>
-                      <h3 class="lodge-name" style="margin:0;">{{ result.lodge }}</h3>
-                      <p class="lodge-location" style="margin:.25rem 0 0;">{{ displayDestinations }}</p>
-                    </div>
-                    <button class="lodge-details-btn">Cabin details &gt;</button>
-                  </div>
-
-                  <div v-if="result.hasAvailability" class="availability-success">
-                    <h4>Great news, we have availability!</h4>
-                    <p>Select the result that best suits you from the list below and it will be added to the itinerary summary on the right.</p>
-                  </div>
-                  <div v-else class="availability-alternative">
-                    <h4>Alternative options are available</h4>
-                    <p>Unfortunately, there isn't availability for your selected dates. However, the following alternate options may suit your requirements.</p>
-                  </div>
-
-                  <div class="suites-info">
-                    <div class="suites-header" style="display:flex; align-items:center; justify-content:space-between;">
-                      <h5 style="margin:0;">Suite</h5>
-                      <span class="price-from">{{ result.availableCabinsCount }} available</span>
-                    </div>
-                    <p class="availability-count" style="margin:.25rem 0 1rem;">Date: {{ formatDate(result.dateFrom) }}</p>
-                    <div class="action-buttons" style="display:flex; gap:.5rem; align-items:center;">
-                      <button class="btn-details">Room & Rate Details &gt;</button>
-                      <button class="btn-add-itinerary">Add to itinerary</button>
                     </div>
                   </div>
                 </div>
@@ -178,145 +111,189 @@
           <div class="sidebar-section check-availability-section">
             <h3 class="section-title-sidebar">Check Availability</h3>
 
-            <div class="list dropdown" ref="destDropdown">
-              <div class="list-heading">Destinations</div>
-              <button type="button" :class="['select-summary', (openRegions || hoverRegions) ? 'is-filled' : '']" @mouseenter="hoverRegions = true" @mouseleave="hoverRegions = false" @click.stop="toggleDropdown('regions')" :aria-expanded="openRegions ? 'true' : 'false'">
-                <span>Destinations: {{ formDestinations.length }}</span>
-                <span class="caret">
-                  <img :src="openRegions ? upArrowIcon : downArrowIcon" alt="" aria-hidden="true" class="caret-icon" />
-                </span>
-              </button>
-              <div v-if="openRegions" class="dropdown-panel" @click.stop>
-                <div class="dropdown-group-title">{{ REGION_NAME }}</div>
-                <div class="list-row" v-for="d in DESTINATIONS" :key="d" @click="toggleDestination(d)">
-                  <div class="list-text">{{ d }}</div>
-                  <input class="check" type="checkbox" :value="d" v-model="formDestinations" @click.stop />
+            <template v-if="loading">
+              <div class="sidebar-skeleton">
+                <div class="skeleton-group">
+                  <div class="skeleton-label"></div>
+                  <div class="skeleton-input"></div>
                 </div>
-                <div class="dropdown-footer" @click="nextDropdown('regions')">
-                  <span>Next</span>
-                  <span style="font-size:1.1rem;">&rsaquo;</span>
+                <div class="skeleton-group">
+                  <div class="skeleton-label"></div>
+                  <div class="skeleton-input"></div>
                 </div>
+                <div class="skeleton-group">
+                  <div class="skeleton-label"></div>
+                  <div class="skeleton-input"></div>
+                </div>
+                <div class="skeleton-group">
+                  <div class="skeleton-label"></div>
+                  <div class="skeleton-input"></div>
+                </div>
+                <div class="skeleton-toggle">
+                  <div class="skeleton-text-lg"></div>
+                  <div class="skeleton-circle"></div>
+                </div>
+                <div class="skeleton-btn"></div>
               </div>
-            </div>
+            </template>
 
-            <div class="list dropdown" ref="shipsDropdown">
-              <div class="list-heading">Ships</div>
-              <button type="button" :class="['select-summary', (openShips || hoverShips) ? 'is-filled' : '']" @mouseenter="hoverShips = true" @mouseleave="hoverShips = false" @click.stop="toggleDropdown('ships')" :aria-expanded="openShips ? 'true' : 'false'">
-                <span>Ships: {{ formShipIds.length }}</span>
-                <span class="caret">
-                  <img :src="openShips ? upArrowIcon : downArrowIcon" alt="" aria-hidden="true" class="caret-icon" />
-                </span>
-              </button>
-              <div v-if="openShips" class="dropdown-panel" @click.stop>
-                <div class="dropdown-group-title">{{ shipsGroupTitle }}</div>
-                <div v-if="shipsLoading" class="muted">Loading ships...</div>
-                <template v-else>
-                  <div class="list-row" v-for="s in shipsList" :key="s.id" @click="toggleShip(s.id)">
-                    <div class="list-text">{{ s.label }}</div>
-                    <input class="check" type="checkbox" :value="s.id" v-model="formShipIds" @click.stop />
+            <template v-else>
+              <div class="list dropdown" ref="destDropdown">
+                <div class="list-heading">Destinations</div>
+                <button type="button" :class="['select-summary', (openRegions || hoverRegions) ? 'is-filled' : '']"
+                  @mouseenter="hoverRegions = true" @mouseleave="hoverRegions = false"
+                  @click.stop="toggleDropdown('regions')" :aria-expanded="openRegions ? 'true' : 'false'">
+                  <span>Destinations: {{ formDestinations.length }}</span>
+                  <span class="caret">
+                    <img :src="openRegions ? upArrowIcon : downArrowIcon" alt="" aria-hidden="true"
+                      class="caret-icon" />
+                  </span>
+                </button>
+                <div v-if="openRegions" class="dropdown-panel" @click.stop>
+                  <div class="dropdown-group-title">{{ REGION_NAME }}</div>
+                  <div class="list-row" v-for="d in DESTINATIONS" :key="d" @click="toggleDestination(d)">
+                    <div class="list-text">{{ d }}</div>
+                    <input class="check" type="checkbox" :value="d" v-model="formDestinations" @click.stop />
                   </div>
-                  <div v-if="shipsList.length === 0" class="muted">No ships found from API.</div>
-                </template>
-                <div class="dropdown-footer" @click="nextDropdown('ships')">
-                  <span>Next</span>
-                  <span style="font-size:1.1rem;">&rsaquo;</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="list dropdown" ref="guestsDropdown">
-              <div class="list-heading">Guests</div>
-              <button type="button" :class="['select-summary', (openGuests || hoverGuests) ? 'is-filled' : '']" @mouseenter="hoverGuests = true" @mouseleave="hoverGuests = false" @click.stop="toggleDropdown('guests')" :aria-expanded="openGuests ? 'true' : 'false'">
-                <span>{{ guestsTotal }} Guests</span>
-                <span class="caret">
-                  <img :src="openGuests ? upArrowIcon : downArrowIcon" alt="" aria-hidden="true" class="caret-icon" />
-                </span>
-              </button>
-              <div v-if="openGuests" class="dropdown-panel" @click.stop>
-                <div class="dropdown-group-title">Guests</div>
-                <div class="simple-guests">
-                  <div class="simple-guests-label">Guests</div>
-                  <div class="simple-guests-ctrls">
-                    <button type="button" class="btn-icon" @click="decGuests">−</button>
-                    <span class="count">{{ guestsTotal }}</span>
-                    <button type="button" class="btn-icon" @click="incGuests">+</button>
+                  <div class="dropdown-footer" @click="nextDropdown('regions')">
+                    <span>Next</span>
+                    <span style="font-size:1.1rem;">&rsaquo;</span>
                   </div>
                 </div>
-                <div class="dropdown-footer" @click="nextDropdown('guests')">
-                  <span>Next</span>
-                  <span style="font-size:1.1rem;">&rsaquo;</span>
-                </div>
               </div>
-            </div>
 
-            <div class="list dropdown" ref="datesDropdown">
-              <div class="list-heading">Dates</div>
-              <button type="button" :class="['select-summary', (openDates || hoverDates) ? 'is-filled' : '']" @mouseenter="hoverDates = true" @mouseleave="hoverDates = false" @click.stop="toggleDropdown('dates')" :aria-expanded="openDates ? 'true' : 'false'">
-                <span>{{ formDateFrom ? `${formDateFrom} → ${getEndDate(formDateFrom)}` : 'Select date' }}</span>
-                <span class="caret">
-                  <img :src="openDates ? upArrowIcon : downArrowIcon" alt="" aria-hidden="true" class="caret-icon" />
-                </span>
-              </button>
-              <div v-if="openDates" class="dropdown-panel" @click.stop>
-                <div class="dropdown-group-title">Dates</div>
-                <div class="date-input-section">
-                  <label class="date-label">Date Range:</label>
-                  <input type="text" disabled class="input date-input" :value="formDateFrom ? `${formatDate(formDateFrom)} → ${formatDate(getEndDate(formDateFrom))}` : ''" />
-                </div>
-                <div class="custom-calendar">
-                  <div class="calendar-header">
-                    <button class="calendar-nav" @click="prevMonth" type="button">&lsaquo;</button>
-                    <h4 class="calendar-title">{{ currentMonthYear }}</h4>
-                    <button class="calendar-nav" @click="nextMonth" type="button">&rsaquo;</button>
-                  </div>
-                  <div class="calendar-grid">
-                    <div class="calendar-weekdays">
-                      <div class="weekday">Su</div>
-                      <div class="weekday">Mo</div>
-                      <div class="weekday">Tu</div>
-                      <div class="weekday">We</div>
-                      <div class="weekday">Th</div>
-                      <div class="weekday">Fr</div>
-                      <div class="weekday">Sa</div>
+              <div class="list dropdown" ref="shipsDropdown">
+                <div class="list-heading">Ships</div>
+                <button type="button" :class="['select-summary', (openShips || hoverShips) ? 'is-filled' : '']"
+                  @mouseenter="hoverShips = true" @mouseleave="hoverShips = false" @click.stop="toggleDropdown('ships')"
+                  :aria-expanded="openShips ? 'true' : 'false'">
+                  <span>Ships: {{ formShipIds.length }}</span>
+                  <span class="caret">
+                    <img :src="openShips ? upArrowIcon : downArrowIcon" alt="" aria-hidden="true" class="caret-icon" />
+                  </span>
+                </button>
+                <div v-if="openShips" class="dropdown-panel" @click.stop>
+                  <div class="dropdown-group-title">{{ shipsGroupTitle }}</div>
+                  <div v-if="shipsLoading" class="muted">Loading ships...</div>
+                  <template v-else>
+                    <div class="list-row" v-for="s in shipsList" :key="s.id" @click="toggleShip(s.id)">
+                      <div class="list-text">{{ s.label }}</div>
+                      <input class="check" type="checkbox" :value="s.id" v-model="formShipIds" @click.stop />
                     </div>
-                    <div class="calendar-days">
-                      <button v-for="day in calendarDays" :key="day.key" class="calendar-day" :class="{
-                        'other-month': !day.isCurrentMonth,
-                        'selected': day.isSelected,
-                        'disabled': !day.isSelectable,
-                        'monday': day.isMonday,
-                        'friday': day.isFriday,
-                      }" :disabled="!day.isSelectable" @click="selectDateSidebar(day)" type="button">
-                        {{ day.date }}
-                      </button>
+                    <div v-if="shipsList.length === 0" class="muted">No ships found from API.</div>
+                  </template>
+                  <div class="dropdown-footer" @click="nextDropdown('ships')">
+                    <span>Next</span>
+                    <span style="font-size:1.1rem;">&rsaquo;</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="list dropdown" ref="guestsDropdown">
+                <div class="list-heading">Guests</div>
+                <button type="button" :class="['select-summary', (openGuests || hoverGuests) ? 'is-filled' : '']"
+                  @mouseenter="hoverGuests = true" @mouseleave="hoverGuests = false"
+                  @click.stop="toggleDropdown('guests')" :aria-expanded="openGuests ? 'true' : 'false'">
+                  <span>{{ guestsTotal }} Guests</span>
+                  <span class="caret">
+                    <img :src="openGuests ? upArrowIcon : downArrowIcon" alt="" aria-hidden="true" class="caret-icon" />
+                  </span>
+                </button>
+                <div v-if="openGuests" class="dropdown-panel" @click.stop>
+                  <div class="dropdown-group-title">Guests</div>
+                  <div class="simple-guests">
+                    <div class="simple-guests-label">Guests</div>
+                    <div class="simple-guests-ctrls">
+                      <button type="button" class="btn-icon" @click="decGuests">−</button>
+                      <span class="count">{{ guestsTotal }}</span>
+                      <button type="button" class="btn-icon" @click="incGuests">+</button>
                     </div>
                   </div>
-                </div>
-                <div class="dropdown-footer" @click="nextDropdown('dates')">
-                  <span>Next</span>
-                  <span style="font-size:1.1rem;">&rsaquo;</span>
+                  <div class="dropdown-footer" @click="nextDropdown('guests')">
+                    <span>Next</span>
+                    <span style="font-size:1.1rem;">&rsaquo;</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="sidebar-alt" style="display:flex; align-items:center; justify-content:space-between; gap:.75rem; margin-top:.75rem;">
-              <div class="muted" style="font-size:.9rem;">My dates are flexible, show alternatives</div>
-              <button :aria-pressed="flexibleAlt ? 'true' : 'false'" @click="toggleFlexible" title="toggle alternatives" :style="{
-                width: '32px', height: '32px', borderRadius: '9999px', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                background: flexibleAlt ? '#efcab6' : '#e5e7eb', color: flexibleAlt ? '#7a3e2d' : '#374151',
-              }">
-                {{ flexibleAlt ? '✓' : '•' }}
-              </button>
-            </div>
+              <div class="list dropdown" ref="datesDropdown">
+                <div class="list-heading">Dates</div>
+                <button type="button" :class="['select-summary', (openDates || hoverDates) ? 'is-filled' : '']"
+                  @mouseenter="hoverDates = true" @mouseleave="hoverDates = false" @click.stop="toggleDropdown('dates')"
+                  :aria-expanded="openDates ? 'true' : 'false'">
+                  <span>{{ formDateFrom ? `${formDateFrom} → ${getEndDate(formDateFrom)}` : 'Select date' }}</span>
+                  <span class="caret">
+                    <img :src="openDates ? upArrowIcon : downArrowIcon" alt="" aria-hidden="true" class="caret-icon" />
+                  </span>
+                </button>
+                <div v-if="openDates" class="dropdown-panel" @click.stop>
 
-            <div class="sidebar-actions">
-              <button class="btn-primary" @click="applySidebarChanges">Apply</button>
-            </div>
+
+                  <div class="custom-calendar">
+                    <div class="calendar-header">
+                      <h4 class="calendar-title">{{ currentMonthYear }}</h4>
+                      <div class="calendar-nav-group">
+                        <button class="calendar-nav" @click="prevMonth" type="button">‹</button>
+                        <button class="calendar-nav" @click="nextMonth" type="button">›</button>
+                      </div>
+                    </div>
+                    <div class="calendar-grid">
+                      <div class="calendar-weekdays">
+                        <div class="weekday">Su</div>
+                        <div class="weekday">Mo</div>
+                        <div class="weekday">Tu</div>
+                        <div class="weekday">We</div>
+                        <div class="weekday">Th</div>
+                        <div class="weekday">Fr</div>
+                        <div class="weekday">Sa</div>
+                      </div>
+                      <div class="calendar-days">
+                        <button v-for="day in calendarDays" :key="day.key" class="calendar-day" :class="{
+                          'other-month': !day.isCurrentMonth,
+                          'selected': day.isSelected,
+                          'disabled': !day.isSelectable,
+                          'monday': day.isMonday,
+                          'friday': day.isFriday,
+                          'in-range': day.isInRange,
+                          'range-start': day.isRangeStart,
+                          'range-middle': day.isRangeMiddle,
+                          'range-end': day.isRangeEnd
+                        }" :disabled="!day.isSelectable" @click="selectDateSidebar(day)" type="button">
+                          {{ day.date }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dropdown-footer" @click="nextDropdown('dates')">
+                    <span>Next</span>
+                    <span style="font-size:1.1rem;">›</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="sidebar-alt"
+                style="display:flex; align-items:center; justify-content:space-between; gap:.75rem; margin-top:.75rem;">
+                <div class="muted" style="font-size:.9rem;">My dates are flexible, show alternatives</div>
+                <button :aria-pressed="flexibleAlt ? 'true' : 'false'" @click="toggleFlexible"
+                  title="toggle alternatives" :style="{
+                    width: '32px', height: '32px', borderRadius: '9999px', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    background: flexibleAlt ? '#efcab6' : '#e5e7eb', color: flexibleAlt ? '#7a3e2d' : '#374151',
+                  }">
+                  {{ flexibleAlt ? '✓' : '•' }}
+                </button>
+              </div>
+
+              <div class="sidebar-actions">
+                <button class="btn-primary" @click="applySidebarChanges">Apply</button>
+              </div>
+            </template>
           </div>
 
-          <div class="itinerary-sidebar">
+          <div v-if="!loading" class="itinerary-sidebar">
             <h3 class="itinerary-title">Your Itinerary</h3>
-            <p class="itinerary-description">This is a summary of the accommodation you have selected. After submitting your booking request, a Singita Journey Designer will make contact to book and confirm your trip.</p>
+            <p class="itinerary-description">This is a summary of the accommodation you have selected. After submitting
+              your
+              booking request, a Singita Journey Designer will make contact to book and confirm your trip.</p>
 
             <div class="itinerary-divider"></div>
 
@@ -345,16 +322,21 @@
                 <span class="itinerary-total-amount">{{ itineraryTotals.formattedTotal }}</span>
               </div>
               <p class="itinerary-total-note">
-                Includes {{ itineraryTotals.pricedCount }} of {{ itineraryItems.length }} selections. Final amounts are confirmed by our Journey Designers.
+                Includes {{ itineraryTotals.pricedCount }} of {{ itineraryItems.length }} selections. Final amounts are
+                confirmed
+                by our Journey Designers.
               </p>
               <p v-if="itineraryTotals.missingCount" class="itinerary-total-note">
-                {{ itineraryTotals.missingCount }} selection{{ itineraryTotals.missingCount > 1 ? 's' : '' }} doesn't have live pricing and is excluded from this estimate.
+                {{ itineraryTotals.missingCount }} selection{{ itineraryTotals.missingCount > 1 ? 's' : '' }} doesn't
+                have live
+                pricing and is excluded from this estimate.
               </p>
             </div>
             <p v-else-if="itineraryItems.length" class="itinerary-total-note">
               Pricing for the selected cabins will be confirmed by our Journey Designers.
             </p>
-            <button v-if="itineraryItems.length" class="btn-send-enquiry" @click="openEnquiryModal">Send Availability Enquiry</button>
+            <button v-if="itineraryItems.length" class="btn-send-enquiry" @click="openEnquiryModal">Send Availability
+              Enquiry</button>
 
             <a href="#" class="link-speak-with-us">Speak with us &rsaquo;</a>
           </div>
@@ -364,7 +346,7 @@
 
     <div v-if="showCabinModal && selectedCabin" class="modal-overlay" @click="closeCabinModal">
       <div class="modal-content" @click.stop>
-        <button class="modal-close" @click="closeCabinModal">✕</button>
+        <button class="modal-close-details" @click="closeCabinModal">✕</button>
 
         <div class="modal-header">
           <span class="modal-title">Room Information</span>
@@ -372,7 +354,8 @@
 
         <div class="modal-body">
           <div class="modal-image-section">
-            <img :src="selectedCabin.image" :alt="selectedCabin.cabinName" referrerpolicy="no-referrer" class="modal-cabin-image" @error="onImgError($event, selectedCabin.image)" />
+            <img :src="selectedCabin.image" :alt="selectedCabin.cabinName" referrerpolicy="no-referrer"
+              class="modal-cabin-image" @error="onImgError($event, selectedCabin.image)" />
             <button class="modal-gallery-nav modal-gallery-prev" aria-label="Previous">&lsaquo;</button>
             <button class="modal-gallery-nav modal-gallery-next" aria-label="Next">&rsaquo;</button>
           </div>
@@ -382,7 +365,8 @@
 
             <div class="modal-cabin-meta">
               <span class="modal-meta-item">Sleeps {{ selectedCabinCapacity || '—' }}</span>
-              <span class="modal-meta-item">{{ selectedCabinCapacity ? selectedCabinCapacity + ' pax' : 'Capacity info' }}</span>
+              <span class="modal-meta-item">{{ selectedCabinCapacity ? selectedCabinCapacity + ' pax' : 'Capacity info'
+              }}</span>
               <span class="modal-meta-item">Private cabin</span>
             </div>
 
@@ -403,16 +387,20 @@
 
             <div class="modal-rate-section">
               <h3 class="modal-rate-title">Direct Rate</h3>
-              <p class="modal-rate-description">Beat those winter blues with a 2 night stay and enjoy 10% off accommodation.</p>
+              <p class="modal-rate-description">Beat those winter blues with a 2 night stay and enjoy 10% off
+                accommodation.
+              </p>
 
               <div class="modal-rate-details">
                 <div class="modal-rate-info">
                   <div class="cabin-quantity-selector">
                     <label class="quantity-label">Number of Cabins</label>
                     <div class="quantity-controls">
-                      <button class="quantity-btn" @click="decrementCabinQuantity" :disabled="cabinQuantity <= 1">−</button>
+                      <button class="quantity-btn" @click="decrementCabinQuantity"
+                        :disabled="cabinQuantity <= 1">−</button>
                       <span class="quantity-value">{{ cabinQuantity }}</span>
-                      <button class="quantity-btn" @click="incrementCabinQuantity" :disabled="cabinQuantity >= (selectedCabin?.available || 1)">+</button>
+                      <button class="quantity-btn" @click="incrementCabinQuantity"
+                        :disabled="cabinQuantity >= (selectedCabin?.available || 1)">+</button>
                     </div>
                     <span class="quantity-available">{{ selectedCabin?.available || 0 }} available</span>
                   </div>
@@ -454,9 +442,11 @@
             <div class="guest-counter-row">
               <div class="guest-counter-label">Number of Cabins</div>
               <div class="guest-counter-controls">
-                <button type="button" class="guest-counter-btn" @click="decrementModalGuests" :disabled="modalGuests <= 1">−</button>
+                <button type="button" class="guest-counter-btn" @click="decrementModalGuests"
+                  :disabled="modalGuests <= 1">−</button>
                 <span class="guest-counter-value">{{ modalGuests }}</span>
-                <button type="button" class="guest-counter-btn" @click="incrementModalGuests" :disabled="modalGuests >= maxGuestsForPendingItem">+</button>
+                <button type="button" class="guest-counter-btn" @click="incrementModalGuests"
+                  :disabled="modalGuests >= maxGuestsForPendingItem">+</button>
               </div>
             </div>
             <div class="guest-available-note">
@@ -482,7 +472,8 @@
 
         <div class="enquiry-modal-body">
           <div class="enquiry-form-section">
-            <p class="enquiry-intro">Please complete the form below and one of our Journey Designers will contact you shortly to plan your trip.</p>
+            <p class="enquiry-intro">Please complete the form below and one of our Journey Designers will contact you
+              shortly to plan your trip.</p>
 
             <form class="enquiry-form" @submit.prevent="submitEnquiry">
               <div class="form-row">
@@ -577,20 +568,24 @@
               </div>
 
               <p class="form-note">
-                <strong>PLEASE NOTE:</strong> These results indicate availability and do not guarantee a booking. One of our Journey Designers will contact you shortly to plan your trip.
+                <strong>PLEASE NOTE:</strong> These results indicate availability and do not guarantee a booking. One of
+                our
+                Journey Designers will contact you shortly to plan your trip.
               </p>
 
               <button type="submit" class="btn-submit-enquiry" :disabled="enquirySubmitting">
                 {{ enquirySubmitting ? 'PROCESSING...' : 'PROCEED TO PAYMENT' }}
               </button>
 
-              <p class="form-recaptcha">This form is protected by reCAPTCHA Enterprise and the Google Privacy Policy and Terms of Service apply.</p>
+              <p class="form-recaptcha">This form is protected by reCAPTCHA Enterprise and the Google Privacy Policy and
+                Terms of Service apply.</p>
             </form>
           </div>
 
           <div class="enquiry-summary-section">
             <h3 class="summary-title">Your Itinerary</h3>
-            <p class="summary-description">This is a summary of the accommodation you've selected. One of our Singita Journey Designers will contact you shortly to plan your trip.</p>
+            <p class="summary-description">This is a summary of the accommodation you've selected. One of our Singita
+              Journey Designers will contact you shortly to plan your trip.</p>
             <div class="summary-items">
               <div v-for="(item, index) in itineraryItems" :key="index" class="summary-item">
                 <div class="summary-item-header">
@@ -607,7 +602,8 @@
                     <span class="pricing-value">{{ item.price }}</span>
                   </div>
                   <div class="pricing-row">
-                    <span class="pricing-label">× {{ item.guests || 2 }} guest{{ (item.guests || 2) > 1 ? 's' : '' }}</span>
+                    <span class="pricing-label">× {{ item.guests || 2 }} guest{{ (item.guests || 2) > 1 ? 's' : ''
+                    }}</span>
                     <span class="pricing-value">{{ formatItemSubtotal(item) }}</span>
                   </div>
                 </div>
@@ -718,7 +714,7 @@ const downArrowIcon = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/200
 const upArrowIcon = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>'
 const rightArrowIcon = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'
 
-const loading = ref(false)
+const loading = ref(true)
 const error = ref('')
 const searchCriteria = ref(null)
 const shipAvailability = ref({})
@@ -846,11 +842,41 @@ const calendarDays = computed(() => {
   const days = []
   const endDate = new Date(lastDay)
   endDate.setDate(endDate.getDate() + (6 - lastDay.getDay()))
+
+  // Calculate date range for highlighting (startDate + 2 days)
+  let rangeStartDate = null
+  let rangeEndDate = null
+  if (formDateFrom.value) {
+    rangeStartDate = new Date(formDateFrom.value + 'T00:00:00')
+    rangeEndDate = new Date(rangeStartDate)
+    rangeEndDate.setDate(rangeEndDate.getDate() + 2)
+  }
+
   for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
     const dayOfWeek = date.getDay()
     const isCurrentMonth = date.getMonth() === currentMonth.value
     const isSelectable = isCurrentMonth && date >= today && (dayOfWeek === 1 || dayOfWeek === 5)
     const dateString = formatDateToString(date)
+
+    // Check if in range
+    let isInRange = false
+    let isRangeStart = false
+    let isRangeMiddle = false
+    let isRangeEnd = false
+    if (rangeStartDate && rangeEndDate && isCurrentMonth) {
+      const currentDate = new Date(date)
+      if (currentDate >= rangeStartDate && currentDate <= rangeEndDate) {
+        isInRange = true
+        if (currentDate.getTime() === rangeStartDate.getTime()) {
+          isRangeStart = true
+        } else if (currentDate.getTime() === rangeEndDate.getTime()) {
+          isRangeEnd = true
+        } else {
+          isRangeMiddle = true
+        }
+      }
+    }
+
     days.push({
       key: date.getTime(),
       date: date.getDate(),
@@ -860,6 +886,10 @@ const calendarDays = computed(() => {
       isSelected: formDateFrom.value === dateString,
       isMonday: dayOfWeek === 1,
       isFriday: dayOfWeek === 5,
+      isInRange,
+      isRangeStart,
+      isRangeMiddle,
+      isRangeEnd
     })
   }
   return days
@@ -1134,26 +1164,74 @@ const allStartDateCabins = computed(() => {
   }
   const items = Array.from(map.values())
   items.sort((a, b) => (a.operatorLabel || '').localeCompare(b.operatorLabel || '') || (a.cabinName || '').localeCompare(b.cabinName || ''))
+  
   return items
 })
 
-const hasAltStartDateCabins = computed(() => {
-  const sc = searchCriteria.value
-  const g = globalStartAvailability.value
-  if (!sc || !g || !Array.isArray(g.operators)) return false
-  const selectedMatchers = selectedShipMatchers.value
-  if (selectedMatchers.length === 0) return false
-  for (const op of g.operators) {
-    const operatorLabel = op.operator
-    const cabins = op.cabins || []
-    for (const cb of cabins) {
-      const available = getCabinAvailable(cb)
-      if (available != null && available <= 0) continue
-      const shipName = getShipName(cb, operatorLabel)
-      if (!matchesSelectedShip(shipName, selectedShipMatchers.value)) return true
-    }
+const displayItems = computed(() => {
+  // Priority 1: Standard Results (Exact Match)
+  if (allStartDateCabins.value.length > 0) {
+    return allStartDateCabins.value.map(item => ({
+      id: item.key,
+      uniqueKey: item.key,
+      title: item.cabinName,
+      subtitle: formatShipName(item.operatorLabel),
+      image: item.image,
+      prices: [{ label: 'Start from', value: item.price || 'Rp3,650,000' }],
+      availabilityCount: item.availableText,
+      date: formatDate(item.date),
+      availabilityType: 'standard', // Green box
+      availabilityTitle: 'Great news, we have availability!',
+      availabilityText: 'Select the result that best suits you from the list below and it will be added to the itinerary summary on the right.',
+      originalItem: item,
+      isGallery: true
+    }))
   }
-  return false
+
+  // Priority 2: Alternative Results (Specific Cabins on other ships/dates)
+  if (flexibleAlt.value && cabinCards.value.length > 0) {
+    return cabinCards.value.map((item, idx) => ({
+      id: item.ship + ':' + item.cabinName,
+      uniqueKey: item.ship + ':' + item.cabinName + idx,
+      title: item.cabinName,
+      subtitle: formatShipName(item.ship),
+      image: item.image,
+      prices: item.price ? [{ label: 'Start from', value: item.price }] : [{ label: 'Price on request', value: '' }],
+      availabilityCount: item.date ? formatDate(item.date) : 'Available',
+      date: formatDate(item.date),
+      availabilityType: 'standard', // Use standard/success style even for alternatives if they are specific results
+      availabilityTitle: 'Great news, we have availability!',
+      availabilityText: 'Select the result that best suits you from the list below and it will be added to the itinerary summary on the right.',
+      originalItem: item, // Note: Action buttons logic relies on item structure, might need adaptation
+      isGallery: false // Alternative results currently implemented as single image in refactor, can be upgraded
+    }))
+  }
+
+  // Priority 3: General Availability (Aggregated by Ship)
+  if (flexibleAlt.value && availabilityResults.value.length > 0) {
+    return availabilityResults.value.map(result => {
+      const isSuccess = result.hasAvailability
+      return {
+        id: result.lodge,
+        uniqueKey: result.lodge,
+        title: result.lodge,
+        subtitle: displayDestinations.value,
+        image: result.image,
+        prices: [], // General availability might not have specific price ready
+        availabilityCount: `${result.availableCabinsCount} available`,
+        date: formatDate(result.dateFrom),
+        availabilityType: isSuccess ? 'standard' : 'alternative',
+        availabilityTitle: isSuccess ? 'Great news, we have availability!' : 'Alternative options are available',
+        availabilityText: isSuccess 
+          ? 'Select the result that best suits you from the list below and it will be added to the itinerary summary on the right.'
+          : 'Unfortunately, there isn\'t availability for your selected dates. However, the following alternate options may suit your requirements.',
+        originalItem: result,
+        isGallery: true // has next/prev methods working for lodges
+      }
+    })
+  }
+
+  return []
 })
 
 const maxGuestsForPendingItem = computed(() => {
@@ -1291,7 +1369,7 @@ async function checkAvailability() {
         if (Array.isArray(cab?.allCabins)) {
           allowed = cab.allCabins.map(c => String(c).split(' (')[0].trim())
         }
-      } catch {}
+      } catch { }
       if (allowed.length === 0) {
         try {
           const globalCab = await getGlobalCabinsOnce()
@@ -1302,7 +1380,7 @@ async function checkAvailability() {
               allowed = op.cabins.map(c => String(c).split(' (')[0].trim())
             }
           }
-        } catch {}
+        } catch { }
       }
       allowedBySheet[sheet] = Array.from(new Set(allowed.map(normalizeCabinName)))
     }))
@@ -1379,7 +1457,7 @@ function applySidebarChanges() {
       ship: labels[0] || '',
       lodges: labels.slice(),
       dateFrom: formDateFrom.value,
-      dateTo: formDateFrom.value ? addDaysToDateString(formDateFrom.value, 3) : '',
+      dateTo: formDateFrom.value ? addDaysToDateString(formDateFrom.value, 2) : '',
       adults: guestsTotal.value,
       children: 0,
       age3_9: 0,
@@ -1418,7 +1496,7 @@ onBeforeUnmount(() => {
 
 onMounted(async () => {
   try {
-    await loadDetailCabins()
+
     const saved = localStorage.getItem('komodo_search_criteria')
     if (saved) {
       searchCriteria.value = JSON.parse(saved)
@@ -1439,12 +1517,16 @@ onMounted(async () => {
         currentYear.value = d.getFullYear()
       }
     }
-    await checkAvailability()
+    // Run API calls in parallel for faster loading
+    await Promise.all([
+      loadDetailCabins(),
+      loadShipsList(),
+      checkAvailability()
+    ])
   } catch (err) {
     console.error('Failed to load search criteria:', err)
     error.value = 'Failed to load search criteria'
   }
-  await loadShipsList()
 
   // DEBUG: log semua key di detailCabinMap
   setTimeout(() => {
@@ -1565,7 +1647,7 @@ function extractCapacityNumber(item) {
     return null
   }
   const capStr = (item.capacity || item.capacity_lock || '').toString()
- 
+
   if (capStr) {
     const nums = (capStr.match(/\d+/g) || []).map(n => parseInt(n, 10))
     if (nums.length) return Math.max(...nums)
@@ -1949,35 +2031,46 @@ loadItinerary()
 </script>
 
 <style>
-.slide-fade-enter-active, .slide-fade-leave-active {
-  transition: all 0.4s cubic-bezier(.55,0,.1,1);
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.4s cubic-bezier(.55, 0, .1, 1);
 }
+
 .slide-fade-enter-from {
   transform: translateX(100%);
   opacity: 0;
 }
+
 .slide-fade-leave-to {
   transform: translateX(-100%);
   opacity: 0;
 }
-.slide-fade-enter-to, .slide-fade-leave-from {
+
+.slide-fade-enter-to,
+.slide-fade-leave-from {
   transform: translateX(0);
   opacity: 1;
 }
 
-.slide-right-enter-active, .slide-right-leave-active,
-.slide-left-enter-active, .slide-left-leave-active {
-  transition: transform 0.18s cubic-bezier(.55,0,.1,1), opacity 0.18s cubic-bezier(.55,0,.1,1);
+.slide-right-enter-active,
+.slide-right-leave-active,
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: transform 0.18s cubic-bezier(.55, 0, .1, 1), opacity 0.18s cubic-bezier(.55, 0, .1, 1);
 }
+
 .slide-right-enter-from {
   transform: translateX(100%);
   opacity: 0;
 }
+
 .slide-right-leave-to {
   transform: translateX(-100%);
   opacity: 0;
 }
-.slide-right-enter-to, .slide-right-leave-from {
+
+.slide-right-enter-to,
+.slide-right-leave-from {
   transform: translateX(0);
   opacity: 1;
 }
@@ -1986,11 +2079,14 @@ loadItinerary()
   transform: translateX(-100%);
   opacity: 0;
 }
+
 .slide-left-leave-to {
   transform: translateX(100%);
   opacity: 0;
 }
-.slide-left-enter-to, .slide-left-leave-from {
+
+.slide-left-enter-to,
+.slide-left-leave-from {
   transform: translateX(0);
   opacity: 1;
 }

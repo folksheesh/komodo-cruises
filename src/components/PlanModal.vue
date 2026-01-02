@@ -3,199 +3,227 @@
     <transition name="modal-fade">
       <div v-if="isOpen" class="modal-overlay">
         <div class="modal-container">
-        <!-- Modal Header with Close -->
-        <div class="modal-header">
-          <div class="modal-header-content">
-            <h2 class="modal-title">Plan your trip</h2>
-            <button class="modal-close" @click="closeModal">Close ✕</button>
+          <!-- Modal Header with Close -->
+          <div class="modal-header">
+            <div class="modal-header-content">
+              <h2 class="modal-title">Plan your trip</h2>
+              <button class="modal-close" @click="closeModal">Close ✕</button>
+            </div>
+          </div>
+
+          <!-- Plan Content (same as Plan.vue) -->
+          <div class="modal-body">
+            <section class="plan-wrap plan-page">
+              <div class="plan-content">
+                <!-- Steps Header -->
+                <div class="steps" role="tablist" aria-label="Plan steps">
+                  <button class="step" :class="{ 'step-active': step === 1 }" @click="go(1)">Step 1</button>
+                  <button class="step" :class="{ 'step-active': step === 2 }" @click="go(2)"
+                    :disabled="!canGoStep2">Step
+                    2</button>
+                  <button class="step" :class="{ 'step-active': step === 3 }" @click="go(3)"
+                    :disabled="!canGoStep3">Step
+                    3</button>
+                  <button class="step" :class="{ 'step-active': step === 4 }" @click="go(4)"
+                    :disabled="!canGoStep4">Step
+                    4</button>
+                  <button class="step" :class="{ 'step-active': step === 5 }" @click="go(5)"
+                    :disabled="!canGoStep4">Step
+                    5</button>
+                </div>
+
+                <!-- Step 1: Regions (multi select) -->
+                <div v-if="step === 1">
+                  <h3 class="step-title">Destinations</h3>
+                  <p class="results-note">Select the destinations you're interested in:</p>
+
+                  <div class="list">
+                    <div class="list-heading">Nusa Tenggara Timur</div>
+
+                    <div class="list-row" v-for="d in DESTINATIONS" :key="d">
+                      <div class="list-text">{{ d }}</div>
+                      <input class="check" type="checkbox" :value="d" v-model="selectedDestinations"
+                        :aria-label="`Destination ${d}`" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Step 2: Ships -->
+                <div v-else-if="step === 2">
+                  <h3 class="step-title">Ships</h3>
+                  <p class="results-note">Please select one or more ships:</p>
+
+                  <div class="list">
+                    <div class="list-heading">Available Ships</div>
+
+                    <div v-if="shipsLoading" class="muted">Loading ships...</div>
+                    <template v-else>
+                      <div class="list-row" v-for="s in shipsList" :key="s.id">
+                        <div class="list-text">{{ s.label }}</div>
+                        <input class="check" type="checkbox" :value="s.id" v-model="selectedShipIds"
+                          :aria-label="`Ship ${s.label}`" />
+                      </div>
+                      <div v-if="shipsList.length === 0" class="muted">No ships found from API.</div>
+                    </template>
+                  </div>
+                </div>
+
+                <!-- Step 3: Dates -->
+                <div v-else-if="step === 3">
+                  <h3 class="step-title">Dates</h3>
+                  <p class="results-note">Select the dates which will suit you:</p>
+
+                  <!-- Date Range Display Box -->
+                  <div class="date-range-display">
+                    <span class="date-value">{{ dateFrom || 'Select start date' }}</span>
+                    <span class="date-arrow">→</span>
+                    <span class="date-value">{{ dateTo || '' }}</span>
+                  </div>
+
+                  <div class="custom-calendar">
+                    <div class="calendar-header">
+                      <h4 class="calendar-title">{{ currentMonthYear }}</h4>
+                      <div class="calendar-nav-group">
+                        <button class="calendar-nav" @click="prevMonth" type="button">‹</button>
+                        <button class="calendar-nav" @click="nextMonth" type="button">›</button>
+                      </div>
+                    </div>
+
+                    <div class="calendar-grid">
+                      <div class="calendar-weekdays">
+                        <div class="weekday">Su</div>
+                        <div class="weekday">Mo</div>
+                        <div class="weekday">Tu</div>
+                        <div class="weekday">We</div>
+                        <div class="weekday">Th</div>
+                        <div class="weekday">Fr</div>
+                        <div class="weekday">Sa</div>
+                      </div>
+
+                      <div class="calendar-days">
+                        <button v-for="day in calendarDays" :key="day.key" class="calendar-day" :class="{
+                          'other-month': !day.isCurrentMonth,
+                          'selected': day.isSelected,
+                          'disabled': !day.isSelectable,
+                          'monday': day.isMonday,
+                          'friday': day.isFriday,
+                          'in-range': day.isInRange,
+                          'range-start': day.isRangeStart,
+                          'range-middle': day.isRangeMiddle,
+                          'range-end': day.isRangeEnd
+                        }" :disabled="!day.isSelectable" @click="selectDate(day)" type="button">
+                          {{ day.date }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Step 4: Guests -->
+                <div v-else-if="step === 4">
+                  <h3 class="step-title">Guests</h3>
+                  <p class="results-note">Please indicate how many adults will need to be accommodated.</p>
+                  <p class="results-note">If your booking includes children, please enquire directly on the next step.
+                  </p>
+                  <p class="results-note">View our child policy for each lodge here.</p>
+
+                  <div class="counters">
+                    <div class="counter-row">
+                      <div class="counter-text">
+                        <div class="semibold">Adults</div>
+                        <div class="muted text-sm">Ages 17+</div>
+                      </div>
+                      <div class="counter-ctrls">
+                        <button type="button" class="btn-icon" @click="dec('adults')">−</button>
+                        <span class="count">{{ adults }}</span>
+                        <button type="button" class="btn-icon" @click="inc('adults')">+</button>
+                      </div>
+                    </div>
+
+                    <div class="counter-row">
+                      <div class="counter-text">
+                        <div class="semibold">Children</div>
+                        <div class="muted text-sm">Ages 10 - 16</div>
+                      </div>
+                      <div class="counter-ctrls">
+                        <button type="button" class="btn-icon" @click="dec('children')">−</button>
+                        <span class="count">{{ children }}</span>
+                        <button type="button" class="btn-icon" @click="inc('children')">+</button>
+                      </div>
+                    </div>
+
+                    <div class="counter-row">
+                      <div class="counter-text">
+                        <div class="semibold">Ages 3 - 9</div>
+                      </div>
+                      <div class="counter-ctrls">
+                        <button type="button" class="btn-icon" @click="dec('age3_9')">−</button>
+                        <span class="count">{{ age3_9 }}</span>
+                        <button type="button" class="btn-icon" @click="inc('age3_9')">+</button>
+                      </div>
+                    </div>
+
+                    <div class="counter-row">
+                      <div class="counter-text">
+                        <div class="semibold">Ages 0 - 2</div>
+                      </div>
+                      <div class="counter-ctrls">
+                        <button type="button" class="btn-icon" @click="dec('age0_2')">−</button>
+                        <span class="count">{{ age0_2 }}</span>
+                        <button type="button" class="btn-icon" @click="inc('age0_2')">+</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Step 5: Actions -->
+                <div v-else>
+                  <h3 class="step-title">Check Availability</h3>
+                  <p class="results-note">
+                    To see if we have availability for your preferred criteria, please click the button below.
+                  </p>
+                  <div class="mt-4">
+                    <button class="btn-primary" @click="checkAvailability">Check now</button>
+                  </div>
+
+                  <div class="section-divider" style="margin:1.5rem 0"></div>
+
+                  <h4 class="section-title">Speak with a Komodo Cruises Travel Advisor</h4>
+                  <p class="results-note">
+                    Need some help to plan your trip? Enquire below to contact one of our Komodo Cruises Travel
+                    Advisors.
+                  </p>
+                  <div class="mt-4">
+                    <button class="btn-primary" @click="enquireNow">Enquire now</button>
+                  </div>
+                </div>
+
+                <!-- Bottom bar navigation -->
+                <div class="bottom-bar">
+                  <div class="nav-inner-footer">
+                    <button class="link-muted text-icon-btn" v-if="step > 1" @click="prev">
+                      <img :src="LeftArrow" alt="Previous" class="nav-arrow" />
+                      {{ prevLabel }}
+                    </button>
+                    <!-- <span v-else></span> removed spacer -->
+                    <button class="btn-primary text-icon-btn" @click="next">
+                      {{ nextLabel }}
+                      <img :src="RightArrow" alt="Next" class="nav-arrow white-filter" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
-
-        <!-- Plan Content (same as Plan.vue) -->
-        <div class="modal-body">
-          <section class="plan-wrap plan-page">
-            <div class="plan-content">
-              <!-- Steps Header -->
-              <div class="steps" role="tablist" aria-label="Plan steps">
-                <button class="step" :class="{ 'step-active': step === 1 }" @click="go(1)">Step 1</button>
-                <button class="step" :class="{ 'step-active': step === 2 }" @click="go(2)" :disabled="!canGoStep2">Step
-                  2</button>
-                <button class="step" :class="{ 'step-active': step === 3 }" @click="go(3)" :disabled="!canGoStep3">Step
-                  3</button>
-                <button class="step" :class="{ 'step-active': step === 4 }" @click="go(4)" :disabled="!canGoStep4">Step
-                  4</button>
-                <button class="step" :class="{ 'step-active': step === 5 }" @click="go(5)" :disabled="!canGoStep4">Step
-                  5</button>
-              </div>
-
-              <!-- Step 1: Regions (multi select) -->
-              <div v-if="step === 1">
-                <h3 class="step-title">Destinations</h3>
-                <p class="results-note">Select the destinations you're interested in:</p>
-
-                <div class="list">
-                  <div class="list-heading">Nusa Tenggara Timur</div>
-
-                  <div class="list-row" v-for="d in DESTINATIONS" :key="d">
-                    <div class="list-text">{{ d }}</div>
-                    <input class="check" type="checkbox" :value="d" v-model="selectedDestinations"
-                      :aria-label="`Destination ${d}`" />
-                  </div>
-                </div>
-              </div>
-
-              <!-- Step 2: Ships -->
-              <div v-else-if="step === 2">
-                <h3 class="step-title">Ships</h3>
-                <p class="results-note">Please select one or more ships:</p>
-
-                <div class="list">
-                  <div class="list-heading">Available Ships</div>
-
-                  <div v-if="shipsLoading" class="muted">Loading ships...</div>
-                  <template v-else>
-                  <div class="list-row" v-for="s in shipsList" :key="s.id">
-                    <div class="list-text">{{ s.label }}</div>
-                    <input class="check" type="checkbox" :value="s.id" v-model="selectedShipIds" :aria-label="`Ship ${s.label}`" />
-                  </div>
-                    <div v-if="shipsList.length === 0" class="muted">No ships found from API.</div>
-                  </template>
-                </div>
-              </div>
-
-              <!-- Step 3: Dates -->
-              <div v-else-if="step === 3">
-                <h3 class="step-title">Dates</h3>
-                <p class="results-note">Select the start date for your trip:</p>
-                <p class="results-note text-sm">Trips start only on Mondays and Fridays.</p>
-
-                <div class="date-input-section">
-                  <label class="date-label">Start Date:</label>
-                  <input type="text" disabled class="input date-input" v-model="dateFrom" :min="minDate" />
-                </div>
-
-                <div class="custom-calendar">
-                  <div class="calendar-header">
-                    <button class="calendar-nav" @click="prevMonth" type="button">‹</button>
-                    <h4 class="calendar-title">{{ currentMonthYear }}</h4>
-                    <button class="calendar-nav" @click="nextMonth" type="button">›</button>
-                  </div>
-
-                  <div class="calendar-grid">
-                    <div class="calendar-weekdays">
-                      <div class="weekday">Su</div>
-                      <div class="weekday">Mo</div>
-                      <div class="weekday">Tu</div>
-                      <div class="weekday">We</div>
-                      <div class="weekday">Th</div>
-                      <div class="weekday">Fr</div>
-                      <div class="weekday">Sa</div>
-                    </div>
-
-                    <div class="calendar-days">
-                      <button v-for="day in calendarDays" :key="day.key" class="calendar-day" :class="{
-                        'other-month': !day.isCurrentMonth,
-                        'selected': day.isSelected,
-                        'disabled': !day.isSelectable,
-                        'monday': day.isMonday,
-                        'friday': day.isFriday
-                      }" :disabled="!day.isSelectable" @click="selectDate(day)" type="button">
-                        {{ day.date }}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Step 4: Guests -->
-              <div v-else-if="step === 4">
-                <h3 class="step-title">Guests</h3>
-                <p class="results-note">Please indicate how many adults will need to be accommodated.</p>
-                <p class="results-note">If your booking includes children, please enquire directly on the next step.</p>
-                <p class="results-note">View our child policy for each lodge here.</p>
-
-                <div class="counters">
-                  <div class="counter-row">
-                    <div class="counter-text">
-                      <div class="semibold">Adults</div>
-                      <div class="muted text-sm">Ages 17+</div>
-                    </div>
-                    <div class="counter-ctrls">
-                      <button type="button" class="btn-icon" @click="dec('adults')">−</button>
-                      <span class="count">{{ adults }}</span>
-                      <button type="button" class="btn-icon" @click="inc('adults')">+</button>
-                    </div>
-                  </div>
-
-                  <div class="counter-row">
-                    <div class="counter-text">
-                      <div class="semibold">Children</div>
-                      <div class="muted text-sm">Ages 10 - 16</div>
-                    </div>
-                    <div class="counter-ctrls">
-                      <button type="button" class="btn-icon" @click="dec('children')">−</button>
-                      <span class="count">{{ children }}</span>
-                      <button type="button" class="btn-icon" @click="inc('children')">+</button>
-                    </div>
-                  </div>
-
-                  <div class="counter-row">
-                    <div class="counter-text">
-                      <div class="semibold">Ages 3 - 9</div>
-                    </div>
-                    <div class="counter-ctrls">
-                      <button type="button" class="btn-icon" @click="dec('age3_9')">−</button>
-                      <span class="count">{{ age3_9 }}</span>
-                      <button type="button" class="btn-icon" @click="inc('age3_9')">+</button>
-                    </div>
-                  </div>
-
-                  <div class="counter-row">
-                    <div class="counter-text">
-                      <div class="semibold">Ages 0 - 2</div>
-                    </div>
-                    <div class="counter-ctrls">
-                      <button type="button" class="btn-icon" @click="dec('age0_2')">−</button>
-                      <span class="count">{{ age0_2 }}</span>
-                      <button type="button" class="btn-icon" @click="inc('age0_2')">+</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Step 5: Actions -->
-              <div v-else>
-                <h3 class="step-title">Check Availability</h3>
-                <p class="results-note">
-                  To see if we have availability for your preferred criteria, please click the button below.
-                </p>
-                <div class="mt-4">
-                  <button class="btn-primary" @click="checkAvailability">Check now</button>
-                </div>
-
-                <div class="section-divider" style="margin:1.5rem 0"></div>
-
-                <h4 class="section-title">Speak with a Komodo Cruises Travel Advisor</h4>
-                <p class="results-note">
-                  Need some help to plan your trip? Enquire below to contact one of our Komodo Cruises Travel Advisors.
-                </p>
-                <div class="mt-4">
-                  <button class="btn-primary" @click="enquireNow">Enquire now</button>
-                </div>
-              </div>
-
-              <!-- Bottom bar navigation -->
-              <div class="bottom-bar">
-                <div class="nav-inner" style="display:flex; align-items:center; justify-content:space-between;">
-                  <button class="link-muted" v-if="step > 1" @click="prev">‹ {{ prevLabel }}</button>
-                  <span v-else></span>
-                  <button class="btn-primary" @click="next">{{ nextLabel }}</button>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
       </div>
+    </transition>
+
+    <!-- Toast Notification -->
+    <transition name="toast-slide">
+      <div v-if="toastVisible" class="toast-notification">
+        <span class="toast-icon">⚠️</span>
+        <span class="toast-message">{{ toastMessage }}</span>
       </div>
     </transition>
   </teleport>
@@ -204,7 +232,9 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted, defineProps, defineEmits } from 'vue'
 import { getOperators } from '../services/komodoApi'
-import { formatDateToString, addDaysToDateString, getTodayString } from '../utils/dateUtils'
+import { formatDateToString, addDaysToDateString, getTodayString, parseDateString } from '../utils/dateUtils'
+import LeftArrow from '../images/arrows/left-arrow.svg'
+import RightArrow from '../images/arrows/right-arrow.svg'
 import '../styles/pages/plan.css'
 
 const props = defineProps({
@@ -237,13 +267,18 @@ const children = ref(0)
 const age3_9 = ref(0)
 const age0_2 = ref(0)
 
+// Toast state
+const toastVisible = ref(false)
+const toastMessage = ref('')
+let toastTimeout = null
+
 // Calendar state
 const currentMonth = ref(new Date().getMonth())
 const currentYear = ref(new Date().getFullYear())
 
 const labels = ['Destinations', 'Ships', 'Dates', 'Guests', 'Submit']
 const prevLabel = computed(() => labels[step.value - 2] || '')
-const nextLabel = computed(() => step.value < 5 ? (labels[step.value - 1] + ' ›') : 'Submit ›')
+const nextLabel = computed(() => step.value < 5 ? labels[step.value - 1] : 'Submit')
 
 /** Calendar computed properties */
 const minDate = computed(() => getTodayString())
@@ -267,6 +302,15 @@ const calendarDays = computed(() => {
   const endDate = new Date(lastDay)
   endDate.setDate(endDate.getDate() + (6 - lastDay.getDay()))
 
+  // Calculate date range for highlighting (startDate + 2 days)
+  let rangeStartDate = null
+  let rangeEndDate = null
+  if (dateFrom.value) {
+    rangeStartDate = parseDateString(dateFrom.value)
+    rangeEndDate = new Date(rangeStartDate)
+    rangeEndDate.setDate(rangeEndDate.getDate() + 2)
+  }
+
   for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
     const dayOfWeek = date.getDay() // 0 = Sunday, 1 = Monday, 5 = Friday
     const isCurrentMonth = date.getMonth() === currentMonth.value
@@ -277,6 +321,25 @@ const calendarDays = computed(() => {
     // Use utility function for consistent date formatting
     const dateString = formatDateToString(date)
 
+    // Check if in range
+    let isInRange = false
+    let isRangeStart = false
+    let isRangeMiddle = false
+    let isRangeEnd = false
+    if (rangeStartDate && rangeEndDate && isCurrentMonth) {
+      const currentDate = new Date(date)
+      if (currentDate >= rangeStartDate && currentDate <= rangeEndDate) {
+        isInRange = true
+        if (currentDate.getTime() === rangeStartDate.getTime()) {
+          isRangeStart = true
+        } else if (currentDate.getTime() === rangeEndDate.getTime()) {
+          isRangeEnd = true
+        } else {
+          isRangeMiddle = true
+        }
+      }
+    }
+
     days.push({
       key: date.getTime(),
       date: date.getDate(),
@@ -285,7 +348,11 @@ const calendarDays = computed(() => {
       isSelectable,
       isSelected: dateFrom.value === dateString,
       isMonday: dayOfWeek === 1,
-      isFriday: dayOfWeek === 5
+      isFriday: dayOfWeek === 5,
+      isInRange,
+      isRangeStart,
+      isRangeMiddle,
+      isRangeEnd
     })
   }
 
@@ -440,14 +507,14 @@ function restorePageScroll() {
 function normalizeConfigShips(list) {
   return Array.isArray(list)
     ? list.map(s => {
-        const label = s.label?.trim() || ''
-        const sheet = s.sheet?.trim() || label
-        return {
-          id: s.id || `${label}__${sheet}`,
-          label,
-          sheet
-        }
-      }).filter(s => s.label && s.sheet)
+      const label = s.label?.trim() || ''
+      const sheet = s.sheet?.trim() || label
+      return {
+        id: s.id || `${label}__${sheet}`,
+        label,
+        sheet
+      }
+    }).filter(s => s.label && s.sheet)
     : []
 }
 
@@ -466,8 +533,12 @@ function dec(which) {
 }
 
 function toast(msg) {
-  // sementara pake alert; ganti dengan toaster kamu kalau ada
-  alert(msg)
+  toastMessage.value = msg
+  toastVisible.value = true
+  if (toastTimeout) clearTimeout(toastTimeout)
+  toastTimeout = setTimeout(() => {
+    toastVisible.value = false
+  }, 3000)
 }
 
 /** Calendar methods */
@@ -492,8 +563,8 @@ function nextMonth() {
 function selectDate(day) {
   if (day.isSelectable) {
     dateFrom.value = day.fullDate
-    // For trips, we can automatically set end date (e.g., 3 days later)
-    dateTo.value = addDaysToDateString(day.fullDate, 3)
+    // For 3 days 2 nights trip, end date is start + 2 days
+    dateTo.value = addDaysToDateString(day.fullDate, 2)
   }
 }
 
@@ -555,9 +626,9 @@ function selectDate(day) {
 /* Title fleksibel (biar nggak nabrak tombol) */
 .modal-title {
   margin: 0;
-  font-size: 1.3rem;
-  font-weight: 400;
-  color: var(--ocean-900);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: black;
   font-family: var(--font-serif, serif);
 
   flex: 1;
@@ -575,14 +646,15 @@ function selectDate(day) {
   border: none;
   font-size: 1.1rem;
   cursor: pointer;
-  color: var(--ocean-700);
+  color: black;
   padding: .5rem .75rem;
   margin-right: 30px;
   border-radius: .25rem;
   text-decoration: none;
   text-underline-offset: 3px;
   transition: color .18s ease, opacity .18s ease;
-  opacity: .96; /* subtle base for smoother fade in/out */
+  opacity: .96;
+  /* subtle base for smoother fade in/out */
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -593,8 +665,9 @@ function selectDate(day) {
 
 .modal-close:hover {
   background: transparent;
-  color: var(--ocean-900);
-  opacity: .84; /* stronger but still subtle */
+  color: black;
+  opacity: .84;
+  /* stronger but still subtle */
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -632,18 +705,33 @@ function selectDate(day) {
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
   z-index: 20;
   backdrop-filter: blur(6px);
-  padding: 1rem 2rem;
+  padding: 1.25rem 150px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-sizing: border-box;
 }
 
-.modal-body .bottom-bar .nav-inner {
+.modal-body .bottom-bar .nav-inner-footer {
   background: white;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 2rem;
   width: 100%;
+}
+
+.modal-body .bottom-bar .btn-primary {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border-radius: 7px;
+}
+
+.modal-body .bottom-bar .link-muted {
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.5rem 0;
 }
 
 /* Override plan.css backgrounds for modal */
@@ -662,16 +750,16 @@ function selectDate(day) {
   .modal-header {
     padding: 0.5rem 1rem;
   }
-  
+
   .modal-header-content {
     margin-left: 0;
     margin-right: 0;
   }
-  
+
   .modal-title {
     font-size: 1.1rem;
   }
-  
+
   .modal-close {
     padding: 0.4rem 0.5rem;
     margin-right: 0;
@@ -683,28 +771,97 @@ function selectDate(day) {
   .modal-header {
     padding: 0.5rem 0.75rem;
   }
-  
+
   .modal-title {
     font-size: 1rem;
   }
-  
+
   .modal-close {
     padding: 0.35rem 0.4rem;
     font-size: 0.9rem;
   }
-  
+
   .modal-body .plan-content {
     padding: 1.5rem 1rem;
     padding-bottom: 5rem;
   }
-  
+
   .modal-body .bottom-bar {
     padding: 0.75rem 1rem;
   }
-  
+
   .modal-body .bottom-bar .nav-inner {
     flex-wrap: wrap;
     gap: 0.5rem;
   }
+}
+
+.nav-arrow {
+  height: 0.8em;
+  width: auto;
+  display: inline-block;
+  margin-top: -1px;
+}
+
+.text-icon-btn {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+}
+
+.white-filter {
+  filter: brightness(0) invert(1);
+}
+
+/* Toast Notification Styles - Premium Look */
+.toast-notification {
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2d4059;
+  /* Brand Navy */
+  color: #ffffff;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  /* Rounded pill shape for softer look */
+  box-shadow: 0 8px 24px rgba(45, 64, 89, 0.25);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: sans-serif;
+  /* Clean sans-serif */
+  font-size: 1rem;
+  font-weight: 500;
+  max-width: 90%;
+  min-width: unset;
+  /* Remove min-width to fit content nicely */
+  justify-content: center;
+  border-bottom: none;
+  /* Remove border for cleaner look */
+}
+
+.toast-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.toast-message {
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+/* Toast animation - Smooth Slide Down */
+.toast-slide-enter-active,
+.toast-slide-leave-active {
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  /* Elegant easing */
+}
+
+.toast-slide-enter-from,
+.toast-slide-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-40px);
 }
 </style>

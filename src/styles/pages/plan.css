@@ -17,7 +17,7 @@
 
 .step-title {
   font-family: var(--font-serif);
-  font-weight: 100;
+  font-weight: 500;
   color: var(--ocean-900);
   font-size: 2.25rem;
   margin: 0 0 .5rem;
@@ -76,7 +76,7 @@
   }
 
   .list-text {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 }
 
@@ -103,6 +103,8 @@
 
 .list-text {
   color: var(--ocean-900);
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .radio {
@@ -243,21 +245,53 @@
   }
 }
 
-/* Custom Calendar */
-.custom-calendar {
-  margin-top: 1.5rem;
+/* ============================================
+   SINGITA-STYLE CALENDAR
+   ============================================ */
+
+/* Date Range Display Box */
+.date-range-display {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
   border: 1px solid var(--ocean-15a);
-  border-radius: 0.5rem;
-  padding: 1rem;
+  border-radius: 0.375rem;
   background: #fff;
-  max-width: 350px;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: var(--ocean-900);
+  width: fit-content;
 }
 
+.date-range-display .date-value {
+  font-weight: 500;
+}
+
+.date-range-display .date-arrow {
+  color: var(--ocean-70a);
+  font-size: 1rem;
+}
+
+/* Custom Calendar Container */
+.custom-calendar {
+  margin-top: 0.5rem;
+  border: 1px solid var(--ocean-15a);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  /* Added shadow */
+  max-width: 320px;
+}
+
+/* Calendar Header - Month Title Left, Nav Right */
 .calendar-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 .calendar-title {
@@ -267,31 +301,44 @@
   margin: 0;
 }
 
+.calendar-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .calendar-nav {
   background: none;
-  border: 1px solid var(--ocean-15a);
-  border-radius: 0.25rem;
-  width: 2rem;
-  height: 2rem;
+  border: none;
+  width: 1.75rem;
+  height: 1.75rem;
   cursor: pointer;
   color: var(--ocean-900);
-  font-size: 1rem;
+  font-size: 1.25rem;
   transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
 }
 
 .calendar-nav:hover {
   background: var(--ocean-15a);
 }
 
+/* Calendar Grid */
 .calendar-grid {
   width: 100%;
 }
 
+/* Weekday Headers */
 .calendar-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0.125rem;
-  margin-bottom: 0.25rem;
+  gap: 0;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--ocean-15a);
+  padding-bottom: 0.5rem;
 }
 
 .weekday {
@@ -299,188 +346,143 @@
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--ocean-70a);
-  padding: 0.25rem;
+  padding: 0.25rem 0;
 }
 
+/* Calendar Days Grid */
 .calendar-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0.125rem;
+  gap: 0;
 }
 
+/* Individual Day Cell */
 .calendar-day {
   background: none;
-  border: 1px solid transparent;
-  border-radius: 0.25rem;
-  padding: 0.5rem;
+  border: none;
+  padding: 0.625rem 0;
   cursor: pointer;
-  font-size: 0.75rem;
-  transition: all 0.2s;
+  font-size: 0.875rem;
+  transition: all 0.15s;
   color: var(--ocean-900);
-  min-height: 2rem;
-  width: 2rem;
+  min-height: 2.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
-.calendar-day:hover:not(:disabled) {
+/* Hover states - solid blue, square corners */
+.calendar-day:hover:not(:disabled):not(.other-month) {
   background: var(--ocean-15a);
+  /* Keep distinct hover for non-selected */
+  border-radius: 0;
+  /* Square corners */
 }
 
-.calendar-day.other-month {
-  color: var(--ocean-30a);
-}
+/* ============================================
+   DATE RANGE "BOOK FOLD" EFFECT (SOLID COLORS)
+   ============================================ */
 
-.calendar-day.disabled {
-  color: var(--ocean-30a);
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.calendar-day.selected {
-  background: #2563eb;
-  color: white;
-  border-color: #2563eb;
+/* Start date - SOLID Dark Blue */
+.calendar-day.in-range.range-start,
+.calendar-day.in-range.range-start.selected,
+.calendar-day.selected.in-range.range-start {
+  background: #254f7d !important;
+  /* Solid Ocean-800 equivalent */
+  color: white !important;
   font-weight: 600;
+  border-radius: 0;
+  /* Square corners requested */
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  z-index: 20;
 }
 
-.calendar-day.monday:not(.disabled):not(.other-month) {
-  border-color: #c99b7b;
-  background: rgba(201, 155, 123, 0.1);
-}
-
-.calendar-day.friday:not(.disabled):not(.other-month) {
-  border-color: #c99b7b;
-  background: rgba(201, 155, 123, 0.1);
-}
-
-.calendar-day.monday.selected,
-.calendar-day.friday.selected {
-  background: #2563eb;
-  border-color: #2563eb;
-  color: white;
-  font-weight: 600;
-}
-
-/* Custom Calendar */
-.custom-calendar {
-  margin-top: 1.5rem;
-  border: 1px solid var(--ocean-15a);
-  border-radius: 0.5rem;
-  padding: 1rem;
-  background: #fff;
-  max-width: 350px;
-}
-
-.calendar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.75rem;
-}
-
-.calendar-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--ocean-900);
-  margin: 0;
-}
-
-.calendar-nav {
-  background: none;
-  border: 1px solid var(--ocean-15a);
-  border-radius: 0.25rem;
-  width: 2rem;
-  height: 2rem;
-  cursor: pointer;
-  color: var(--ocean-900);
-  font-size: 1rem;
-  transition: all 0.2s;
-}
-
-.calendar-nav:hover {
-  background: var(--ocean-15a);
-}
-
-.calendar-grid {
-  width: 100%;
-}
-
-.calendar-weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 0.125rem;
-  margin-bottom: 0.25rem;
-}
-
-.weekday {
-  text-align: center;
-  font-size: 0.75rem;
+/* Middle date(s) - SOLID Light Blue */
+.calendar-day.in-range.range-middle {
+  background: transparent !important;
+  color: white !important;
   font-weight: 500;
-  color: var(--ocean-70a);
-  padding: 0.25rem;
+  border-radius: 0;
+  border-bottom: none !important;
+  z-index: 5;
+  overflow: visible;
 }
 
-.calendar-days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 0.125rem;
+/* Middle date BACKGROUND (Wider) - SOLID COLOR */
+.calendar-day.in-range.range-middle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -10px;
+  right: -10px;
+  background: #6a8caf;
+  /* Solid lighter blue approx match to opacity */
+  z-index: -1;
 }
 
-.calendar-day {
-  background: none;
-  border: 1px solid transparent;
-  border-radius: 0.25rem;
-  padding: 0.5rem;
-  cursor: pointer;
-  font-size: 0.75rem;
-  transition: all 0.2s;
-  color: var(--ocean-900);
-  min-height: 2rem;
-  width: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Middle date extension (Tab effect) - SOLID COLOR */
+.calendar-day.in-range.range-middle::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: -20px;
+  right: -20px;
+  height: 3px;
+  background: #6a8caf;
+  /* Match above solid color */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  z-index: -1;
 }
 
-.calendar-day:hover:not(:disabled) {
-  background: var(--ocean-15a);
+/* End date - SOLID Dark Blue */
+.calendar-day.in-range.range-end {
+  background: #254f7d !important;
+  /* Solid Ocean-800 */
+  color: white !important;
+  font-weight: 500;
+  border-radius: 0;
+  /* Square corners */
+  border-right: 1px solid rgba(255, 255, 255, 0.25);
+  z-index: 20;
 }
 
-.calendar-day.other-month {
-  color: var(--ocean-30a);
+/* Fix offside spill for edge cases */
+/* If middle date is in last column (Saturday), don't extend right */
+.calendar-day.in-range.range-middle:nth-child(7n)::before,
+.calendar-day.in-range.range-middle:nth-child(7n)::after {
+  right: 0;
 }
 
-.calendar-day.disabled {
-  color: var(--ocean-30a);
-  cursor: not-allowed;
-  opacity: 0.5;
+/* If middle date is in first column (Sunday), don't extend left (Safety check) */
+.calendar-day.in-range.range-middle:nth-child(7n+1)::before,
+.calendar-day.in-range.range-middle:nth-child(7n+1)::after {
+  left: 0;
 }
 
-.calendar-day.selected {
-  background: #2563eb;
-  color: white;
-  border-color: #2563eb;
-  font-weight: 600;
+/* Hover over range - keep solid styling */
+.calendar-day.in-range:hover,
+.calendar-day.in-range.range-start:hover,
+.calendar-day.in-range.range-middle:hover,
+.calendar-day.in-range.range-end:hover {
+  border-radius: 0;
 }
 
-.calendar-day.monday:not(.disabled):not(.other-month) {
-  border-color: #c99b7b;
-  background: rgba(201, 155, 123, 0.1);
+/* Hover states - darker blue for all range dates */
+.calendar-day.in-range:hover,
+.calendar-day.in-range.range-start:hover,
+.calendar-day.in-range.range-middle:hover,
+.calendar-day.in-range.range-end:hover {
+  background: var(--ocean-900, #223f62) !important;
+  color: white !important;
 }
 
-.calendar-day.friday:not(.disabled):not(.other-month) {
-  border-color: #c99b7b;
-  background: rgba(201, 155, 123, 0.1);
-}
-
-.calendar-day.monday.selected,
-.calendar-day.friday.selected {
-  background: #2563eb;
-  border-color: #2563eb;
-  color: white;
-  font-weight: 600;
+/* Override Monday/Friday when in range */
+.calendar-day.monday.in-range,
+.calendar-day.friday.in-range {
+  background: rgba(41, 92, 150, 0.85) !important;
+  color: white !important;
 }
 
 .counters {
@@ -570,12 +572,11 @@
 .link-muted {
   background: none;
   border: none;
-  color: var(--ocean-70a);
   cursor: pointer;
   text-decoration: none;
   text-underline-offset: 3px;
   transition: color .18s ease, opacity .18s ease;
-  opacity: .96;
+  font-weight: 500;
 }
 
 .link-muted:hover {
@@ -628,8 +629,8 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, .12), 0 2px 4px rgba(0, 0, 0, .06);
   z-index: 60;
   padding: .75rem 1rem;
-  max-height: 340px;
-  overflow: auto;
+  /* max-height: 340px;  Removed to allow full content visibility */
+  /* overflow: auto;     Removed to prevent internal scroll */
 }
 
 .dropdown-panel .list-row {
@@ -739,6 +740,7 @@
   color: var(--ocean-70a);
   margin-bottom: 1rem;
   line-height: 1.5;
+  opacity: 80%;
 }
 
 /* Button styles */

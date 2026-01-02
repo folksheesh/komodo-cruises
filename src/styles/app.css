@@ -17,6 +17,11 @@
   /* Main background color */
 }
 
+/* Specific override for Plan page nav to match modal headers */
+.nav-inner.plan-mode {
+  padding: 1.5rem max(3.5rem, 5vw) 1.5rem max(var(--edge-pad), 5vw);
+}
+
 /* Base typography */
 html,
 body {
@@ -71,7 +76,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem var(--edge-pad);
+  padding: 1.5rem max(var(--edge-pad), 5vw);
 }
 
 .nav-overlay {
@@ -113,7 +118,7 @@ body:has(.hero-section) .nav-overlay,
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.2rem;
 }
 
 /* Results nav */
@@ -124,36 +129,56 @@ body:has(.hero-section) .nav-overlay,
   color: var(--ocean-900);
 }
 
-.back-link {
+.home-link {
   color: #2b5279;
   text-decoration: none;
   font-weight: 600;
   text-underline-offset: 3px;
   transition: color .18s ease, opacity .18s ease;
   opacity: .96;
+  font-size: 1.2rem;
+  display: flex;
+  /* Added for alignment */
+  align-items: center;
+  /* Vertically center */
+  gap: 0.5rem;
+  /* Space between text and icon */
 }
 
-.back-link:hover {
+.home-link:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
   opacity: .84;
 }
 
-.link-close {
+.logout-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.link-close.close-btn-style {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   color: var(--ocean-700);
   text-decoration: none;
-  font-weight: 600;
-  background: transparent;
-  border: none;
-  text-underline-offset: 3px;
-  transition: color .18s ease, opacity .18s ease;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: opacity 0.2s;
   opacity: .96;
 }
 
-.link-close:hover {
+.link-close.close-btn-style:hover {
+  opacity: 1;
+}
+
+.link-close.close-btn-style:hover .btn-text {
   text-decoration: underline;
-  text-underline-offset: 3px;
-  opacity: .84;
+  text-underline-offset: 4px;
+}
+
+.link-close.close-btn-style .close-icon {
+  font-size: 1.2rem;
 }
 
 .btn-plan {
@@ -181,6 +206,12 @@ body:has(.hero-section) .nav-overlay,
   gap: 0.25rem;
   color: #444;
   font-size: 1rem;
+  cursor: pointer;
+}
+
+.nav-search:hover .nav-label {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .nav-label {
@@ -197,17 +228,16 @@ body:has(.hero-section) .nav-overlay,
   gap: 0.5rem;
   color: #444;
   font-size: 1rem;
-  margin-left: 1.5rem;
+  cursor: pointer;
+}
+
+.nav-menu:hover .nav-label {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 /* Home nav theme: turn nav to white on hero */
-body:has(.hero-section) .nav-search,
-body:has(.hero-section) .nav-label,
-body:has(.hero-section) .nav-menu,
-body:has(.hero-section) .nav-right,
-body:has(.hero-section) .brand-text,
-body:has(.hero-section) .brand-chip,
-body:has(.hero-section) .btn-plan,
+/* Home nav theme: turn nav to white on hero */
 .home-nav .nav-search,
 .home-nav .nav-label,
 .home-nav .nav-menu,
@@ -215,7 +245,25 @@ body:has(.hero-section) .btn-plan,
 .home-nav .brand-text,
 .home-nav .brand-chip,
 .home-nav .btn-plan {
-  color: rgba(255, 255, 255, .95) !important;
+  color: rgba(255, 255, 255, .95);
+  transition: color 0.4s ease;
+}
+
+/* When scrolled past hero, turn nav back to dark blue */
+.home-nav.scrolled .nav-search,
+.home-nav.scrolled .nav-label,
+.home-nav.scrolled .nav-menu,
+.home-nav.scrolled .nav-right,
+.home-nav.scrolled .brand-text,
+.home-nav.scrolled .brand-chip,
+.home-nav.scrolled .btn-plan {
+  color: var(--ocean-900);
+}
+
+/* Fallback for body:has if needed, but scoped to allow override */
+body:has(.hero-section):not(:has(.scrolled)) .nav-search,
+body:has(.hero-section):not(:has(.scrolled)) .brand-chip {
+  color: rgba(255, 255, 255, .95);
 }
 
 .brand-chip {
@@ -249,9 +297,9 @@ body:has(.hero-section) .btn-plan,
     padding: 0 1.125rem;
   }
 
-  .nav-inner {
+  /* .nav-inner {
     padding: 1rem var(--edge-pad);
-  }
+  } */
 
   .logo-singita {
     font-size: 1.6rem;
@@ -287,9 +335,9 @@ body:has(.hero-section) .btn-plan,
     --edge-pad: 16px;
   }
 
-  .nav-inner {
+  /* .nav-inner {
     padding: 0.875rem var(--edge-pad);
-  }
+  } */
 
   .logo-singita {
     font-size: 1.35rem;
@@ -329,6 +377,26 @@ body:has(.hero-section) .btn-plan,
   }
 
   .back-link {
-    font-size: 0.9rem;
+    font-size: 1rem;
+  }
+
+  /* Mobile Nav Override: Semi-transparent Theme Background + Dark Text */
+  body:has(.hero-section) .nav-container,
+  body:has(.hero-section) .nav-overlay,
+  .home-nav .nav-container,
+  .home-nav .nav-overlay {
+    background: var(--bg-primary) !important;
+  }
+
+  .home-nav .nav-search,
+  .home-nav .nav-label,
+  .home-nav .nav-menu,
+  .home-nav .nav-right,
+  .home-nav .brand-text,
+  .home-nav .brand-chip,
+  .home-nav .btn-plan,
+  .nav-menu svg,
+  .nav-search svg {
+    color: var(--ocean-900) !important;
   }
 }
