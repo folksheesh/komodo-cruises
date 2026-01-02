@@ -57,7 +57,8 @@
   }
 
   .step-title {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
+    font-weight: 600;
   }
 
   .steps {
@@ -72,11 +73,11 @@
   }
 
   .list-row {
-    padding: 0.875rem 0;
+    padding: 0.5rem 0 !important;
   }
 
   .list-text {
-    font-size: 1rem;
+    font-size: 1rem !important;
   }
 }
 
@@ -97,8 +98,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.1rem 0;
-  border-bottom: 1px solid var(--ocean-15a);
+  padding: 1rem 0;
+  /* border-bottom: 1px solid var(--ocean-15a); */
 }
 
 .list-text {

@@ -12,6 +12,25 @@ const menuOpen = ref(false);
 const planOpen = ref(false);
 const inDarkSection = ref(false);
 
+const currentLang = ref("EN");
+const langOpen = ref(false);
+const languages = [
+  { code: "EN", label: "English" },
+  { code: "ID", label: "Indonesia" },
+  { code: "ZH", label: "Chinese" },
+  { code: "ES", label: "Spanish" },
+  { code: "FR", label: "French" },
+];
+
+const toggleLang = () => {
+  langOpen.value = !langOpen.value;
+};
+
+const selectLang = (lang) => {
+  currentLang.value = lang.code;
+  langOpen.value = false;
+};
+
 const handleScroll = () => {
   // Check if scrolled past hero (approx 80vh or 600px)
   isScrolled.value = window.scrollY > window.innerHeight * 0.8;
@@ -139,20 +158,36 @@ onUnmounted(() => {
               <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
           </span>
-          <span class="nav-lang">
-            <svg
-              width="10"
-              height="6"
-              viewBox="0 0 10 6"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.2"
-              style="margin-right: 6px"
-            >
-              <path d="M1 1L5 5L9 1" />
-            </svg>
-            EN
-          </span>
+          <div
+            class="nav-lang-wrapper"
+            @click="toggleLang"
+            title="Select Language"
+          >
+            <span class="nav-lang">
+              <svg
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.2"
+                style="margin-right: 6px"
+              >
+                <path d="M1 1L5 5L9 1" />
+              </svg>
+              {{ currentLang }}
+            </span>
+            <div v-if="langOpen" class="lang-dropdown">
+              <div
+                v-for="lang in languages"
+                :key="lang.code"
+                class="lang-option"
+                @click.stop="selectLang(lang)"
+              >
+                {{ lang.label }}
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- CENTER: Brand Logo -->
@@ -164,8 +199,8 @@ onUnmounted(() => {
 
         <!-- RIGHT: Login, Search, Book -->
         <div class="nav-right">
-          <button class="nav-text-item" @click="openPlanModal">
-            Plan your trip
+          <button class="nav-text-item nav-plan-item" @click="openPlanModal">
+            PLAN <span class="desktop-only">YOUR</span> TRIP
           </button>
           <span class="nav-text-item">LOGIN</span>
 

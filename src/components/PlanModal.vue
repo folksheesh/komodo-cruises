@@ -15,35 +15,170 @@
           <div class="modal-body">
             <section class="plan-wrap plan-page">
               <div class="plan-content">
-                <!-- Steps Header -->
-                <div class="steps" role="tablist" aria-label="Plan steps">
-                  <button class="step" :class="{ 'step-active': step === 1 }" @click="go(1)">Step 1</button>
-                  <button class="step" :class="{ 'step-active': step === 2 }" @click="go(2)"
-                    :disabled="!canGoStep2">Step
-                    2</button>
-                  <button class="step" :class="{ 'step-active': step === 3 }" @click="go(3)"
-                    :disabled="!canGoStep3">Step
-                    3</button>
-                  <button class="step" :class="{ 'step-active': step === 4 }" @click="go(4)"
-                    :disabled="!canGoStep4">Step
-                    4</button>
-                  <button class="step" :class="{ 'step-active': step === 5 }" @click="go(5)"
-                    :disabled="!canGoStep4">Step
-                    5</button>
+                <!-- Wizard Progress Bar -->
+                <div class="wizard-progress">
+                  <!-- Step 1 -->
+                  <div
+                    class="wizard-step"
+                    :class="{ completed: step > 1, active: step === 1 }"
+                    @click="go(1)"
+                  >
+                    <div class="wizard-circle">
+                      <svg
+                        v-if="step > 1"
+                        class="wizard-check"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3"
+                      >
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span v-else>1</span>
+                    </div>
+                    <span class="wizard-label">Destinations</span>
+                  </div>
+                  <div
+                    class="wizard-line"
+                    :class="{ completed: step > 1 }"
+                  ></div>
+
+                  <!-- Step 2 -->
+                  <div
+                    class="wizard-step"
+                    :class="{
+                      completed: step > 2,
+                      active: step === 2,
+                      disabled: !canGoStep2,
+                    }"
+                    @click="canGoStep2 && go(2)"
+                  >
+                    <div class="wizard-circle">
+                      <svg
+                        v-if="step > 2"
+                        class="wizard-check"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3"
+                      >
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span v-else>2</span>
+                    </div>
+                    <span class="wizard-label">Ships</span>
+                  </div>
+                  <div
+                    class="wizard-line"
+                    :class="{ completed: step > 2 }"
+                  ></div>
+
+                  <!-- Step 3 -->
+                  <div
+                    class="wizard-step"
+                    :class="{
+                      completed: step > 3,
+                      active: step === 3,
+                      disabled: !canGoStep3,
+                    }"
+                    @click="canGoStep3 && go(3)"
+                  >
+                    <div class="wizard-circle">
+                      <svg
+                        v-if="step > 3"
+                        class="wizard-check"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3"
+                      >
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span v-else>3</span>
+                    </div>
+                    <span class="wizard-label">Dates</span>
+                  </div>
+                  <div
+                    class="wizard-line"
+                    :class="{ completed: step > 3 }"
+                  ></div>
+
+                  <!-- Step 4 -->
+                  <div
+                    class="wizard-step"
+                    :class="{
+                      completed: step > 4,
+                      active: step === 4,
+                      disabled: !canGoStep4,
+                    }"
+                    @click="canGoStep4 && go(4)"
+                  >
+                    <div class="wizard-circle">
+                      <svg
+                        v-if="step > 4"
+                        class="wizard-check"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3"
+                      >
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span v-else>4</span>
+                    </div>
+                    <span class="wizard-label">Guests</span>
+                  </div>
+                  <div
+                    class="wizard-line"
+                    :class="{ completed: step > 4 }"
+                  ></div>
+
+                  <!-- Step 5 -->
+                  <div
+                    class="wizard-step"
+                    :class="{
+                      completed: step === 5,
+                      active: step === 5,
+                      disabled: !canGoStep4,
+                    }"
+                    @click="canGoStep4 && go(5)"
+                  >
+                    <div class="wizard-circle">
+                      <svg
+                        v-if="step === 5"
+                        class="wizard-check"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3"
+                      >
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span v-else>5</span>
+                    </div>
+                    <span class="wizard-label">Submit</span>
+                  </div>
                 </div>
 
                 <!-- Step 1: Regions (multi select) -->
                 <div v-if="step === 1">
                   <h3 class="step-title">Destinations</h3>
-                  <p class="results-note">Select the destinations you're interested in:</p>
+                  <p class="results-note">
+                    Select the destinations you're interested in:
+                  </p>
 
                   <div class="list">
                     <div class="list-heading">Nusa Tenggara Timur</div>
 
                     <div class="list-row" v-for="d in DESTINATIONS" :key="d">
                       <div class="list-text">{{ d }}</div>
-                      <input class="check" type="checkbox" :value="d" v-model="selectedDestinations"
-                        :aria-label="`Destination ${d}`" />
+                      <input
+                        class="check"
+                        type="checkbox"
+                        :value="d"
+                        v-model="selectedDestinations"
+                        :aria-label="`Destination ${d}`"
+                      />
                     </div>
                   </div>
                 </div>
@@ -56,14 +191,23 @@
                   <div class="list">
                     <div class="list-heading">Available Ships</div>
 
-                    <div v-if="shipsLoading" class="muted">Loading ships...</div>
+                    <div v-if="shipsLoading" class="muted">
+                      Loading ships...
+                    </div>
                     <template v-else>
                       <div class="list-row" v-for="s in shipsList" :key="s.id">
                         <div class="list-text">{{ s.label }}</div>
-                        <input class="check" type="checkbox" :value="s.id" v-model="selectedShipIds"
-                          :aria-label="`Ship ${s.label}`" />
+                        <input
+                          class="check"
+                          type="checkbox"
+                          :value="s.id"
+                          v-model="selectedShipIds"
+                          :aria-label="`Ship ${s.label}`"
+                        />
                       </div>
-                      <div v-if="shipsList.length === 0" class="muted">No ships found from API.</div>
+                      <div v-if="shipsList.length === 0" class="muted">
+                        No ships found from API.
+                      </div>
                     </template>
                   </div>
                 </div>
@@ -71,21 +215,37 @@
                 <!-- Step 3: Dates -->
                 <div v-else-if="step === 3">
                   <h3 class="step-title">Dates</h3>
-                  <p class="results-note">Select the dates which will suit you:</p>
+                  <p class="results-note">
+                    Select the dates which will suit you:
+                  </p>
 
                   <!-- Date Range Display Box -->
                   <div class="date-range-display">
-                    <span class="date-value">{{ dateFrom || 'Select start date' }}</span>
+                    <span class="date-value">{{
+                      dateFrom || "Select start date"
+                    }}</span>
                     <span class="date-arrow">→</span>
-                    <span class="date-value">{{ dateTo || '' }}</span>
+                    <span class="date-value">{{ dateTo || "" }}</span>
                   </div>
 
                   <div class="custom-calendar">
                     <div class="calendar-header">
                       <h4 class="calendar-title">{{ currentMonthYear }}</h4>
                       <div class="calendar-nav-group">
-                        <button class="calendar-nav" @click="prevMonth" type="button">‹</button>
-                        <button class="calendar-nav" @click="nextMonth" type="button">›</button>
+                        <button
+                          class="calendar-nav"
+                          @click="prevMonth"
+                          type="button"
+                        >
+                          ‹
+                        </button>
+                        <button
+                          class="calendar-nav"
+                          @click="nextMonth"
+                          type="button"
+                        >
+                          ›
+                        </button>
                       </div>
                     </div>
 
@@ -101,17 +261,25 @@
                       </div>
 
                       <div class="calendar-days">
-                        <button v-for="day in calendarDays" :key="day.key" class="calendar-day" :class="{
-                          'other-month': !day.isCurrentMonth,
-                          'selected': day.isSelected,
-                          'disabled': !day.isSelectable,
-                          'monday': day.isMonday,
-                          'friday': day.isFriday,
-                          'in-range': day.isInRange,
-                          'range-start': day.isRangeStart,
-                          'range-middle': day.isRangeMiddle,
-                          'range-end': day.isRangeEnd
-                        }" :disabled="!day.isSelectable" @click="selectDate(day)" type="button">
+                        <button
+                          v-for="day in calendarDays"
+                          :key="day.key"
+                          class="calendar-day"
+                          :class="{
+                            'other-month': !day.isCurrentMonth,
+                            selected: day.isSelected,
+                            disabled: !day.isSelectable,
+                            monday: day.isMonday,
+                            friday: day.isFriday,
+                            'in-range': day.isInRange,
+                            'range-start': day.isRangeStart,
+                            'range-middle': day.isRangeMiddle,
+                            'range-end': day.isRangeEnd,
+                          }"
+                          :disabled="!day.isSelectable"
+                          @click="selectDate(day)"
+                          type="button"
+                        >
                           {{ day.date }}
                         </button>
                       </div>
@@ -122,10 +290,17 @@
                 <!-- Step 4: Guests -->
                 <div v-else-if="step === 4">
                   <h3 class="step-title">Guests</h3>
-                  <p class="results-note">Please indicate how many adults will need to be accommodated.</p>
-                  <p class="results-note">If your booking includes children, please enquire directly on the next step.
+                  <p class="results-note">
+                    Please indicate how many adults will need to be
+                    accommodated.
                   </p>
-                  <p class="results-note">View our child policy for each lodge here.</p>
+                  <p class="results-note">
+                    If your booking includes children, please enquire directly
+                    on the next step.
+                  </p>
+                  <p class="results-note">
+                    View our child policy for each lodge here.
+                  </p>
 
                   <div class="counters">
                     <div class="counter-row">
@@ -134,9 +309,21 @@
                         <div class="muted text-sm">Ages 17+</div>
                       </div>
                       <div class="counter-ctrls">
-                        <button type="button" class="btn-icon" @click="dec('adults')">−</button>
+                        <button
+                          type="button"
+                          class="btn-icon"
+                          @click="dec('adults')"
+                        >
+                          −
+                        </button>
                         <span class="count">{{ adults }}</span>
-                        <button type="button" class="btn-icon" @click="inc('adults')">+</button>
+                        <button
+                          type="button"
+                          class="btn-icon"
+                          @click="inc('adults')"
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
 
@@ -146,9 +333,21 @@
                         <div class="muted text-sm">Ages 10 - 16</div>
                       </div>
                       <div class="counter-ctrls">
-                        <button type="button" class="btn-icon" @click="dec('children')">−</button>
+                        <button
+                          type="button"
+                          class="btn-icon"
+                          @click="dec('children')"
+                        >
+                          −
+                        </button>
                         <span class="count">{{ children }}</span>
-                        <button type="button" class="btn-icon" @click="inc('children')">+</button>
+                        <button
+                          type="button"
+                          class="btn-icon"
+                          @click="inc('children')"
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
 
@@ -157,9 +356,21 @@
                         <div class="semibold">Ages 3 - 9</div>
                       </div>
                       <div class="counter-ctrls">
-                        <button type="button" class="btn-icon" @click="dec('age3_9')">−</button>
+                        <button
+                          type="button"
+                          class="btn-icon"
+                          @click="dec('age3_9')"
+                        >
+                          −
+                        </button>
                         <span class="count">{{ age3_9 }}</span>
-                        <button type="button" class="btn-icon" @click="inc('age3_9')">+</button>
+                        <button
+                          type="button"
+                          class="btn-icon"
+                          @click="inc('age3_9')"
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
 
@@ -168,9 +379,21 @@
                         <div class="semibold">Ages 0 - 2</div>
                       </div>
                       <div class="counter-ctrls">
-                        <button type="button" class="btn-icon" @click="dec('age0_2')">−</button>
+                        <button
+                          type="button"
+                          class="btn-icon"
+                          @click="dec('age0_2')"
+                        >
+                          −
+                        </button>
                         <span class="count">{{ age0_2 }}</span>
-                        <button type="button" class="btn-icon" @click="inc('age0_2')">+</button>
+                        <button
+                          type="button"
+                          class="btn-icon"
+                          @click="inc('age0_2')"
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -180,35 +403,50 @@
                 <div v-else>
                   <h3 class="step-title">Check Availability</h3>
                   <p class="results-note">
-                    To see if we have availability for your preferred criteria, please click the button below.
+                    To see if we have availability for your preferred criteria,
+                    please click the button below.
                   </p>
                   <div class="mt-4">
-                    <button class="btn-primary" @click="checkAvailability">Check now</button>
+                    <button class="btn-primary" @click="checkAvailability">
+                      Check now
+                    </button>
                   </div>
 
-                  <div class="section-divider" style="margin:1.5rem 0"></div>
+                  <div class="section-divider" style="margin: 1.5rem 0"></div>
 
-                  <h4 class="section-title">Speak with a Komodo Cruises Travel Advisor</h4>
+                  <h4 class="section-title">
+                    Speak with a Komodo Cruises Travel Advisor
+                  </h4>
                   <p class="results-note">
-                    Need some help to plan your trip? Enquire below to contact one of our Komodo Cruises Travel
-                    Advisors.
+                    Need some help to plan your trip? Enquire below to contact
+                    one of our Komodo Cruises Travel Advisors.
                   </p>
                   <div class="mt-4">
-                    <button class="btn-primary" @click="enquireNow">Enquire now</button>
+                    <button class="btn-primary" @click="enquireNow">
+                      Enquire now
+                    </button>
                   </div>
                 </div>
 
                 <!-- Bottom bar navigation -->
                 <div class="bottom-bar">
                   <div class="nav-inner-footer">
-                    <button class="link-muted text-icon-btn" v-if="step > 1" @click="prev">
+                    <button
+                      class="link-muted text-icon-btn"
+                      v-if="step > 1"
+                      @click="prev"
+                    >
                       <img :src="LeftArrow" alt="Previous" class="nav-arrow" />
                       {{ prevLabel }}
                     </button>
                     <!-- <span v-else></span> removed spacer -->
                     <button class="btn-primary text-icon-btn" @click="next">
                       {{ nextLabel }}
-                      <img :src="RightArrow" alt="Next" class="nav-arrow white-filter" />
+                      <img
+                        :src="RightArrow"
+                        alt="Next"
+                        class="nav-arrow white-filter"
+                      />
                     </button>
                   </div>
                 </div>
@@ -230,112 +468,142 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted, defineProps, defineEmits } from 'vue'
-import { getOperators } from '../services/komodoApi'
-import { formatDateToString, addDaysToDateString, getTodayString, parseDateString } from '../utils/dateUtils'
-import LeftArrow from '../images/arrows/left-arrow.svg'
-import RightArrow from '../images/arrows/right-arrow.svg'
-import '../styles/pages/plan.css'
+import {
+  ref,
+  computed,
+  watch,
+  onMounted,
+  onUnmounted,
+  defineProps,
+  defineEmits,
+} from "vue";
+import { getOperators } from "../services/komodoApi";
+import {
+  formatDateToString,
+  addDaysToDateString,
+  getTodayString,
+  parseDateString,
+} from "../utils/dateUtils";
+import LeftArrow from "../images/arrows/left-arrow.svg";
+import RightArrow from "../images/arrows/right-arrow.svg";
+import "../styles/pages/plan.css";
 
 const props = defineProps({
-  isOpen: Boolean
-})
+  isOpen: Boolean,
+});
 
-const emit = defineEmits(['close', 'navigate-to-results'])
+const emit = defineEmits(["close", "navigate-to-results"]);
 
 /** ===== State ===== */
-const step = ref(1)
+const step = ref(1);
 // Fixed region label and static options
-const REGION_NAME = 'Nusa Tenggara Timur'
-const DESTINATIONS = ['Komodo National Park', 'Labuan Bajo']
+const REGION_NAME = "Nusa Tenggara Timur";
+const DESTINATIONS = ["Komodo National Park", "Labuan Bajo"];
 // Configured ships: display label + sheet name used by API
-const SHIPS_CONFIG = [] // Data kapal diambil dari API, bukan hardcoded
+const SHIPS_CONFIG = []; // Data kapal diambil dari API, bukan hardcoded
 
 // Ships loaded from API sheets (validated list of {label, sheet})
-const shipsList = ref([])
-const shipsLoading = ref(false)
+const shipsList = ref([]);
+const shipsLoading = ref(false);
 
 // Multiple destinations selection
-const selectedDestinations = ref([])
+const selectedDestinations = ref([]);
 // Selected ship sheets (array of sheet names)
-const selectedShipIds = ref([])
+const selectedShipIds = ref([]);
 
-const dateFrom = ref('')
-const dateTo = ref('') // Keep for compatibility but not used in UI
-const adults = ref(2)
-const children = ref(0)
-const age3_9 = ref(0)
-const age0_2 = ref(0)
+const dateFrom = ref("");
+const dateTo = ref(""); // Keep for compatibility but not used in UI
+const adults = ref(2);
+const children = ref(0);
+const age3_9 = ref(0);
+const age0_2 = ref(0);
 
 // Toast state
-const toastVisible = ref(false)
-const toastMessage = ref('')
-let toastTimeout = null
+const toastVisible = ref(false);
+const toastMessage = ref("");
+let toastTimeout = null;
 
 // Calendar state
-const currentMonth = ref(new Date().getMonth())
-const currentYear = ref(new Date().getFullYear())
+const currentMonth = ref(new Date().getMonth());
+const currentYear = ref(new Date().getFullYear());
 
-const labels = ['Destinations', 'Ships', 'Dates', 'Guests', 'Submit']
-const prevLabel = computed(() => labels[step.value - 2] || '')
-const nextLabel = computed(() => step.value < 5 ? labels[step.value - 1] : 'Submit')
+const labels = ["Destinations", "Ships", "Dates", "Guests", "Submit"];
+const prevLabel = computed(() => labels[step.value - 2] || "");
+const nextLabel = computed(() =>
+  step.value < 5 ? labels[step.value - 1] : "Submit"
+);
 
 /** Calendar computed properties */
-const minDate = computed(() => getTodayString())
+const minDate = computed(() => getTodayString());
 
 const currentMonthYear = computed(() => {
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December']
-  return `${monthNames[currentMonth.value]} ${currentYear.value}`
-})
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  return `${monthNames[currentMonth.value]} ${currentYear.value}`;
+});
 
 const calendarDays = computed(() => {
-  const firstDay = new Date(currentYear.value, currentMonth.value, 1)
-  const lastDay = new Date(currentYear.value, currentMonth.value + 1, 0)
-  const startDate = new Date(firstDay)
-  const today = new Date()
+  const firstDay = new Date(currentYear.value, currentMonth.value, 1);
+  const lastDay = new Date(currentYear.value, currentMonth.value + 1, 0);
+  const startDate = new Date(firstDay);
+  const today = new Date();
 
   // Start from Sunday of the week containing the 1st
-  startDate.setDate(startDate.getDate() - startDate.getDay())
+  startDate.setDate(startDate.getDate() - startDate.getDay());
 
-  const days = []
-  const endDate = new Date(lastDay)
-  endDate.setDate(endDate.getDate() + (6 - lastDay.getDay()))
+  const days = [];
+  const endDate = new Date(lastDay);
+  endDate.setDate(endDate.getDate() + (6 - lastDay.getDay()));
 
   // Calculate date range for highlighting (startDate + 2 days)
-  let rangeStartDate = null
-  let rangeEndDate = null
+  let rangeStartDate = null;
+  let rangeEndDate = null;
   if (dateFrom.value) {
-    rangeStartDate = parseDateString(dateFrom.value)
-    rangeEndDate = new Date(rangeStartDate)
-    rangeEndDate.setDate(rangeEndDate.getDate() + 2)
+    rangeStartDate = parseDateString(dateFrom.value);
+    rangeEndDate = new Date(rangeStartDate);
+    rangeEndDate.setDate(rangeEndDate.getDate() + 2);
   }
 
-  for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
-    const dayOfWeek = date.getDay() // 0 = Sunday, 1 = Monday, 5 = Friday
-    const isCurrentMonth = date.getMonth() === currentMonth.value
-    const isSelectable = isCurrentMonth &&
-      date >= today &&
-      (dayOfWeek === 1 || dayOfWeek === 5) // Monday or Friday only
+  for (
+    let date = new Date(startDate);
+    date <= endDate;
+    date.setDate(date.getDate() + 1)
+  ) {
+    const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, 5 = Friday
+    const isCurrentMonth = date.getMonth() === currentMonth.value;
+    const isSelectable =
+      isCurrentMonth && date >= today && (dayOfWeek === 1 || dayOfWeek === 5); // Monday or Friday only
 
     // Use utility function for consistent date formatting
-    const dateString = formatDateToString(date)
+    const dateString = formatDateToString(date);
 
     // Check if in range
-    let isInRange = false
-    let isRangeStart = false
-    let isRangeMiddle = false
-    let isRangeEnd = false
+    let isInRange = false;
+    let isRangeStart = false;
+    let isRangeMiddle = false;
+    let isRangeEnd = false;
     if (rangeStartDate && rangeEndDate && isCurrentMonth) {
-      const currentDate = new Date(date)
+      const currentDate = new Date(date);
       if (currentDate >= rangeStartDate && currentDate <= rangeEndDate) {
-        isInRange = true
+        isInRange = true;
         if (currentDate.getTime() === rangeStartDate.getTime()) {
-          isRangeStart = true
+          isRangeStart = true;
         } else if (currentDate.getTime() === rangeEndDate.getTime()) {
-          isRangeEnd = true
+          isRangeEnd = true;
         } else {
-          isRangeMiddle = true
+          isRangeMiddle = true;
         }
       }
     }
@@ -352,90 +620,111 @@ const calendarDays = computed(() => {
       isInRange,
       isRangeStart,
       isRangeMiddle,
-      isRangeEnd
-    })
+      isRangeEnd,
+    });
   }
 
-  return days
-})
+  return days;
+});
 
 /** Guards untuk step navigation */
-const canGoStep2 = computed(() => selectedDestinations.value.length > 0)
-const canGoStep3 = computed(() => selectedDestinations.value.length > 0 && selectedShipIds.value.length > 0)
-const canGoStep4 = computed(() => selectedDestinations.value.length > 0 && selectedShipIds.value.length > 0 && !!dateFrom.value)
+const canGoStep2 = computed(() => selectedDestinations.value.length > 0);
+const canGoStep3 = computed(
+  () =>
+    selectedDestinations.value.length > 0 && selectedShipIds.value.length > 0
+);
+const canGoStep4 = computed(
+  () =>
+    selectedDestinations.value.length > 0 &&
+    selectedShipIds.value.length > 0 &&
+    !!dateFrom.value
+);
 
 /** ===== Effects ===== */
 watch(selectedDestinations, () => {
   // reset ship saat ganti destinasi
-  selectedShipIds.value = []
-})
+  selectedShipIds.value = [];
+});
 
 // Watch modal open/close untuk handle body scrollbar
 const originalScrollStyles = {
-  bodyOverflow: '',
-  htmlOverflow: '',
-  bodyPadding: '',
-  htmlPadding: ''
-}
+  bodyOverflow: "",
+  htmlOverflow: "",
+  bodyPadding: "",
+  htmlPadding: "",
+};
 
-watch(() => props.isOpen, (isOpen) => {
-  if (isOpen) {
-    lockPageScroll()
-  } else {
-    restorePageScroll()
-  }
-}, { immediate: true })
+watch(
+  () => props.isOpen,
+  (isOpen) => {
+    if (isOpen) {
+      lockPageScroll();
+    } else {
+      restorePageScroll();
+    }
+  },
+  { immediate: true }
+);
 
 onMounted(() => {
-  loadShips()
-})
+  loadShips();
+});
 
 // Cleanup: pastikan scrollbar kembali saat component unmount
 onUnmounted(() => {
-  restorePageScroll()
-})
+  restorePageScroll();
+});
 
 /** ===== Actions ===== */
 function closeModal() {
-  emit('close')
+  emit("close");
 }
 
-function go(n) { step.value = n }
+function go(n) {
+  step.value = n;
+}
 
 function next() {
   // guard ringan biar UX jelas
-  if (step.value === 1 && selectedDestinations.value.length === 0) return toast('Please select at least one destination first.')
-  if (step.value === 2 && selectedShipIds.value.length === 0) return toast('Please select at least one ship first.')
-  if (step.value === 3 && !dateFrom.value) return toast('Please select a start date first.')
-  if (step.value < 5) step.value++
-  else goResults()
+  if (step.value === 1 && selectedDestinations.value.length === 0)
+    return toast("Please select at least one destination first.");
+  if (step.value === 2 && selectedShipIds.value.length === 0)
+    return toast("Please select at least one ship first.");
+  if (step.value === 3 && !dateFrom.value)
+    return toast("Please select a start date first.");
+  if (step.value < 5) step.value++;
+  else goResults();
 }
 
-function prev() { if (step.value > 1) step.value-- }
+function prev() {
+  if (step.value > 1) step.value--;
+}
 
 function checkAvailability() {
-  goResults()
+  goResults();
 }
 
 function enquireNow() {
-  goResults()
+  goResults();
 }
 
 function goResults() {
   // Save search criteria to localStorage for Results page
   // Map selected sheets back to labels for display
-  const selectedEntries = shipsList.value.filter(s => selectedShipIds.value.includes(s.id))
-  const selectedLabels = selectedEntries.map(s => s.label)
-  const selectedSheets = selectedEntries.map(s => s.sheet)
+  const selectedEntries = shipsList.value.filter((s) =>
+    selectedShipIds.value.includes(s.id)
+  );
+  const selectedLabels = selectedEntries.map((s) => s.label);
+  const selectedSheets = selectedEntries.map((s) => s.sheet);
 
   const searchCriteria = {
     region: REGION_NAME,
-    destination: selectedDestinations.value[0] || '', // backward-compat single
+    destination: selectedDestinations.value[0] || "", // backward-compat single
     destinations: selectedDestinations.value.slice(),
     ships: selectedLabels, // display labels
     shipSheets: selectedSheets,
     // backward-compat
-    ship: selectedLabels[0] || '',
+    ship: selectedLabels[0] || "",
     lodges: selectedLabels.slice(),
     dateFrom: dateFrom.value,
     dateTo: dateTo.value,
@@ -444,127 +733,136 @@ function goResults() {
     age3_9: age3_9.value,
     age0_2: age0_2.value,
     totalGuests: adults.value + children.value + age3_9.value + age0_2.value,
-    timestamp: Date.now()
-  }
+    timestamp: Date.now(),
+  };
 
-  localStorage.setItem('komodo_search_criteria', JSON.stringify(searchCriteria))
-  emit('navigate-to-results')
+  localStorage.setItem(
+    "komodo_search_criteria",
+    JSON.stringify(searchCriteria)
+  );
+  emit("navigate-to-results");
 }
 
 async function loadShips() {
-  shipsLoading.value = true
+  shipsLoading.value = true;
   try {
-    const res = await getOperators()
-    const normalized = (res.operators || []).map(op => {
-      const label = op.operator?.trim() || ''
-      const sheet = op.sourceSheet?.trim() || label
-      return {
-        id: `${label}__${sheet}`,
-        label,
-        sheet
-      }
-    }).filter(s => s.label && s.sheet)
-    shipsList.value = normalized.length ? normalized : normalizeConfigShips(SHIPS_CONFIG)
+    const res = await getOperators();
+    const normalized = (res.operators || [])
+      .map((op) => {
+        const label = op.operator?.trim() || "";
+        const sheet = op.sourceSheet?.trim() || label;
+        return {
+          id: `${label}__${sheet}`,
+          label,
+          sheet,
+        };
+      })
+      .filter((s) => s.label && s.sheet);
+    shipsList.value = normalized.length
+      ? normalized
+      : normalizeConfigShips(SHIPS_CONFIG);
   } catch (e) {
-    console.warn('Failed to load operators:', e)
-    shipsList.value = normalizeConfigShips(SHIPS_CONFIG)
+    console.warn("Failed to load operators:", e);
+    shipsList.value = normalizeConfigShips(SHIPS_CONFIG);
   } finally {
-    shipsLoading.value = false
+    shipsLoading.value = false;
   }
 }
 
 function lockPageScroll() {
-  const body = document.body
-  const html = document.documentElement
-  if (!body || !html) return
+  const body = document.body;
+  const html = document.documentElement;
+  if (!body || !html) return;
 
-  const scrollBarWidth = window.innerWidth - html.clientWidth
-  originalScrollStyles.bodyOverflow = body.style.overflow
-  originalScrollStyles.htmlOverflow = html.style.overflow
-  originalScrollStyles.bodyPadding = body.style.paddingRight
-  originalScrollStyles.htmlPadding = html.style.paddingRight
+  const scrollBarWidth = window.innerWidth - html.clientWidth;
+  originalScrollStyles.bodyOverflow = body.style.overflow;
+  originalScrollStyles.htmlOverflow = html.style.overflow;
+  originalScrollStyles.bodyPadding = body.style.paddingRight;
+  originalScrollStyles.htmlPadding = html.style.paddingRight;
 
   if (scrollBarWidth > 0) {
-    const pad = `${scrollBarWidth}px`
-    body.style.paddingRight = pad
-    html.style.paddingRight = pad
+    const pad = `${scrollBarWidth}px`;
+    body.style.paddingRight = pad;
+    html.style.paddingRight = pad;
   }
-  body.style.overflow = 'hidden'
-  html.style.overflow = 'hidden'
+  body.style.overflow = "hidden";
+  html.style.overflow = "hidden";
 }
 
 function restorePageScroll() {
-  const body = document.body
-  const html = document.documentElement
-  if (!body || !html) return
+  const body = document.body;
+  const html = document.documentElement;
+  if (!body || !html) return;
 
-  body.style.overflow = originalScrollStyles.bodyOverflow
-  html.style.overflow = originalScrollStyles.htmlOverflow
-  body.style.paddingRight = originalScrollStyles.bodyPadding
-  html.style.paddingRight = originalScrollStyles.htmlPadding
+  body.style.overflow = originalScrollStyles.bodyOverflow;
+  html.style.overflow = originalScrollStyles.htmlOverflow;
+  body.style.paddingRight = originalScrollStyles.bodyPadding;
+  html.style.paddingRight = originalScrollStyles.htmlPadding;
 }
 
 function normalizeConfigShips(list) {
   return Array.isArray(list)
-    ? list.map(s => {
-      const label = s.label?.trim() || ''
-      const sheet = s.sheet?.trim() || label
-      return {
-        id: s.id || `${label}__${sheet}`,
-        label,
-        sheet
-      }
-    }).filter(s => s.label && s.sheet)
-    : []
+    ? list
+        .map((s) => {
+          const label = s.label?.trim() || "";
+          const sheet = s.sheet?.trim() || label;
+          return {
+            id: s.id || `${label}__${sheet}`,
+            label,
+            sheet,
+          };
+        })
+        .filter((s) => s.label && s.sheet)
+    : [];
 }
 
 function inc(which) {
-  if (which === 'adults') adults.value++
-  else if (which === 'children') children.value++
-  else if (which === 'age3_9') age3_9.value++
-  else if (which === 'age0_2') age0_2.value++
+  if (which === "adults") adults.value++;
+  else if (which === "children") children.value++;
+  else if (which === "age3_9") age3_9.value++;
+  else if (which === "age0_2") age0_2.value++;
 }
 
 function dec(which) {
-  if (which === 'adults' && adults.value > 0) adults.value--
-  else if (which === 'children' && children.value > 0) children.value--
-  else if (which === 'age3_9' && age3_9.value > 0) age3_9.value--
-  else if (which === 'age0_2' && age0_2.value > 0) age0_2.value--
+  if (which === "adults" && adults.value > 0) adults.value--;
+  else if (which === "children" && children.value > 0) children.value--;
+  else if (which === "age3_9" && age3_9.value > 0) age3_9.value--;
+  else if (which === "age0_2" && age0_2.value > 0) age0_2.value--;
 }
 
 function toast(msg) {
-  toastMessage.value = msg
-  toastVisible.value = true
-  if (toastTimeout) clearTimeout(toastTimeout)
+  toastMessage.value = msg;
+  toastVisible.value = true;
+  if (toastTimeout) clearTimeout(toastTimeout);
   toastTimeout = setTimeout(() => {
-    toastVisible.value = false
-  }, 3000)
+    toastVisible.value = false;
+  }, 3000);
 }
 
 /** Calendar methods */
 function prevMonth() {
   if (currentMonth.value === 0) {
-    currentMonth.value = 11
-    currentYear.value--
+    currentMonth.value = 11;
+    currentYear.value--;
   } else {
-    currentMonth.value--
+    currentMonth.value--;
   }
 }
 
 function nextMonth() {
   if (currentMonth.value === 11) {
-    currentMonth.value = 0
-    currentYear.value++
+    currentMonth.value = 0;
+    currentYear.value++;
   } else {
-    currentMonth.value++
+    currentMonth.value++;
   }
 }
 
 function selectDate(day) {
   if (day.isSelectable) {
-    dateFrom.value = day.fullDate
+    dateFrom.value = day.fullDate;
     // For 3 days 2 nights trip, end date is start + 2 days
-    dateTo.value = addDaysToDateString(day.fullDate, 2)
+    dateTo.value = addDaysToDateString(day.fullDate, 2);
   }
 }
 
@@ -593,6 +891,172 @@ function selectDate(day) {
   grid-template-rows: auto 1fr auto;
 }
 
+/* ===== WIZARD PROGRESS BAR ===== */
+.wizard-progress {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.wizard-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 70px;
+}
+
+.wizard-step.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.wizard-step:hover:not(.disabled) .wizard-circle {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(34, 63, 98, 0.3);
+}
+
+.wizard-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e5e7eb;
+  color: #6b7280;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 2px solid #e5e7eb;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 2;
+}
+
+.wizard-step.active .wizard-circle {
+  background: var(--ocean-900, #223f62);
+  border-color: var(--ocean-900, #223f62);
+  color: white;
+  box-shadow: 0 0 0 4px rgba(34, 63, 98, 0.2);
+  animation: pulse-ring 1.5s ease-out infinite;
+}
+
+.wizard-step.completed .wizard-circle {
+  background: var(--ocean-900, #223f62);
+  border-color: var(--ocean-900, #223f62);
+  color: white;
+}
+
+.wizard-check {
+  width: 18px;
+  height: 18px;
+  stroke: white;
+  animation: check-appear 0.3s ease-out forwards;
+}
+
+@keyframes check-appear {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 63, 98, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(34, 63, 98, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 63, 98, 0);
+  }
+}
+
+.wizard-label {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 500;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.wizard-step.active .wizard-label,
+.wizard-step.completed .wizard-label {
+  color: var(--ocean-900, #223f62);
+  font-weight: 600;
+}
+
+.wizard-line {
+  flex: 1;
+  height: 3px;
+  background: #e5e7eb;
+  margin-top: 16px;
+  min-width: 20px;
+  transition: background 0.5s ease;
+  position: relative;
+}
+
+.wizard-line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--ocean-900, #223f62);
+  transition: width 0.5s ease;
+}
+
+.wizard-line.completed::after {
+  width: 100%;
+}
+
+/* Mobile responsive wizard */
+@media (max-width: 640px) {
+  .wizard-progress {
+    padding: 1rem 0.5rem;
+  }
+
+  .wizard-step {
+    min-width: 50px;
+  }
+
+  .wizard-circle {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
+
+  .wizard-check {
+    width: 14px;
+    height: 14px;
+  }
+
+  .wizard-label {
+    font-size: 0.65rem;
+    margin-top: 0.4rem;
+  }
+
+  .wizard-line {
+    margin-top: 12px;
+    min-width: 10px;
+    height: 2px;
+  }
+}
+
 /* ===== MODAL HEADER/NAV - Independent ===== */
 :root {
   /* Satu variabel buat padding horizontal halaman */
@@ -602,10 +1066,10 @@ function selectDate(day) {
 /* Header */
 .modal-header {
   background: #fff;
-  border-bottom: 1px solid rgba(34, 63, 98, .15);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .05);
+  border-bottom: 1px solid rgba(34, 63, 98, 0.15);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   z-index: 10;
-  padding: .75rem 2rem;
+  padding: 0.75rem 2rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -647,26 +1111,25 @@ function selectDate(day) {
   font-size: 1.1rem;
   cursor: pointer;
   color: black;
-  padding: .5rem .75rem;
+  padding: 0.5rem 0.75rem;
   margin-right: 30px;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   text-decoration: none;
   text-underline-offset: 3px;
-  transition: color .18s ease, opacity .18s ease;
-  opacity: .96;
+  transition: color 0.18s ease, opacity 0.18s ease;
+  opacity: 0.96;
   /* subtle base for smoother fade in/out */
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
   white-space: nowrap;
 }
-
 
 .modal-close:hover {
   background: transparent;
   color: black;
-  opacity: .84;
+  opacity: 0.84;
   /* stronger but still subtle */
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -701,7 +1164,7 @@ function selectDate(day) {
   left: 0;
   right: 0;
   width: 100%;
-  border-top: 1px solid rgba(34, 63, 98, .08);
+  border-top: 1px solid rgba(34, 63, 98, 0.08);
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
   z-index: 20;
   backdrop-filter: blur(6px);

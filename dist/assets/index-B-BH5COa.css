@@ -70,7 +70,7 @@
     }
 
     .list-row {
-        padding: .875rem 0
+        padding: .2rem 0
     }
 
     .list-text {
@@ -95,7 +95,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 1.1rem 0;
+    padding: 1rem 0;
     border-bottom: 1px solid var(--ocean-15a)
 }
 
@@ -826,9 +826,6 @@
 }
 
 @media (max-width: 640px) {
-    .modal-header[data-v-b3412e6e] {
-        padding: .5rem .75rem
-    }
 
     .modal-title[data-v-b3412e6e] {
         font-size: 1rem
@@ -2400,7 +2397,6 @@
     }
 
     .modal-header {
-        padding: .75rem 1rem;
         font-size: .8rem
     }
 
