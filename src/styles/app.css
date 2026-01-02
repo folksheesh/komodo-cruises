@@ -1,4 +1,4 @@
-/* Simple, framework-free CSS equivalents for easy editing */
+﻿/* Simple, framework-free CSS equivalents for easy editing */
 :root {
   --grey: #cdcdcd;
   --ocean-50: #f2f8fc;
@@ -89,13 +89,20 @@ main {
 }
 
 /* Home page navigation - transparent */
-body:has(.hero-section) .nav-container,
-body:has(.hero-section) .nav-overlay,
-.home-nav .nav-container,
-.home-nav .nav-overlay,
-.hero-section~* .nav-container,
-.hero-section~* .nav-overlay {
+/* Home - transparent by default, white when scrolled */
+body:has(.hero-section) .nav-container:not(.scrolled),
+.home-nav .nav-container:not(.scrolled) {
   background: transparent !important;
+  box-shadow: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Scrolled state */
+body:has(.hero-section) .nav-container.scrolled,
+.home-nav .nav-container.scrolled,
+.hero-section~* .nav-container.scrolled {
+  background: #ffffff !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .plan-container {
@@ -105,20 +112,78 @@ body:has(.hero-section) .nav-overlay,
 }
 
 /* Left logo */
-.logo-singita {
-  font-size: 2.2rem;
-  color: #c99b7b;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  margin-right: 2.5rem;
-  margin-left: 0.25rem;
-}
-
-/* Right nav section */
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 2rem;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-lang {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.nav-text-item {
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-book-pill {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  color: #333;
+  padding: 0.6rem 1.75rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.btn-book-pill:hover {
+  opacity: 0.9;
+}
+
+/* Home Nav (Transparent) - Elements are White */
+.home-nav .nav-lang,
+.home-nav .nav-text-item {
+  color: white;
+}
+
+/* Pill button logic: On transparent background (hero), use distinct color */
+.home-nav:not(.scrolled) .btn-book-pill {
+  background-color: #5e3a58;
+  /* Purple from image */
+  color: white;
+}
+
+/* Scrolled Nav (White Background) - Elements are Dark */
+.home-nav.scrolled .nav-lang,
+.home-nav.scrolled .nav-text-item {
+  color: var(--ocean-900);
+}
+
+.home-nav.scrolled .btn-book-pill {
+  background-color: var(--ocean-900);
+  color: white;
 }
 
 /* Results nav */
@@ -272,6 +337,27 @@ body:has(.hero-section):not(:has(.scrolled)) .brand-chip {
   font-weight: 700;
 }
 
+/* Nav light theme - when over dark sections */
+/* Nav light theme - when over dark sections (ONLY when not scrolled) */
+.nav-light-theme.nav-container:not(.scrolled) {
+  background: transparent !important;
+}
+
+.nav-light-theme:not(.scrolled) .nav-search,
+.nav-light-theme:not(.scrolled) .nav-label,
+.nav-light-theme:not(.scrolled) .nav-menu,
+.nav-light-theme:not(.scrolled) .nav-right,
+.nav-light-theme:not(.scrolled) .brand-text,
+.nav-light-theme:not(.scrolled) .brand-chip {
+  color: rgba(255, 255, 255, 0.95) !important;
+  transition: color 0.4s ease;
+}
+
+.nav-light-theme:not(.scrolled) .nav-search svg,
+.nav-light-theme:not(.scrolled) .nav-menu svg {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
 /* Footer */
 .site-footer {
   background: var(--ocean-900);
@@ -290,16 +376,11 @@ body:has(.hero-section):not(:has(.scrolled)) .brand-chip {
 
   html {
     font-size: 15px;
-    /* Slightly larger base for readability */
   }
 
   .container {
     padding: 0 1.125rem;
   }
-
-  /* .nav-inner {
-    padding: 1rem var(--edge-pad);
-  } */
 
   .logo-singita {
     font-size: 1.6rem;
@@ -310,23 +391,44 @@ body:has(.hero-section):not(:has(.scrolled)) .brand-chip {
     gap: 0.75rem;
   }
 
-  .btn-plan {
-    padding: 0.7rem 1.5rem;
-    font-size: 0.95rem;
-    margin-right: 0.5rem;
-    border-radius: 10px;
-  }
-
+  .nav-lang,
+  .nav-text-item,
+  .nav-search,
   .nav-label {
-    display: none;
+    display: none !important;
   }
 
   .nav-menu {
-    margin-left: 0.5rem;
+    margin-left: 0;
   }
 
   .brand-chip {
     font-size: 1.1rem;
+  }
+
+  /* Transform Pill Button to Text Link on Mobile */
+  .btn-book-pill {
+    background: transparent !important;
+    padding: 0;
+    color: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    border-radius: 0;
+  }
+
+  .btn-book-pill svg {
+    width: 12px;
+    height: 12px;
+    stroke-width: 2px;
+  }
+
+  /* Center Logo logic */
+  .nav-center {
+    position: static !important;
+    transform: none !important;
+    flex: 1;
+    display: flex;
+    justify-content: center;
   }
 }
 
@@ -335,68 +437,18 @@ body:has(.hero-section):not(:has(.scrolled)) .brand-chip {
     --edge-pad: 16px;
   }
 
-  /* .nav-inner {
-    padding: 0.875rem var(--edge-pad);
-  } */
-
-  .logo-singita {
-    font-size: 1.35rem;
-    margin-right: 0.5rem;
+  /* Hero Nav Mobile: Transparent Background + White Text */
+  body:has(.hero-section) .nav-container:not(.scrolled),
+  .home-nav .nav-container:not(.scrolled) {
+    background: transparent !important;
   }
 
-  .btn-plan {
-    padding: 0.65rem 1.25rem;
-    font-size: 0.9rem;
-    margin-right: 0;
-    min-height: 44px;
-    /* Touch-friendly */
+  /* Scrolled Mobile: White Background + Dark Text */
+  body:has(.hero-section) .nav-container.scrolled,
+  .home-nav .nav-container.scrolled {
+    background: #ffffff !important;
   }
 
-  .nav-search,
-  .nav-menu {
-    min-width: 44px;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .nav-search svg,
-  .nav-menu svg {
-    width: 22px;
-    height: 22px;
-  }
-
-  .brand-text {
-    font-size: 1.15rem;
-  }
-
-  .brand-chip {
-    font-size: 1rem;
-    padding: 0.25rem 0;
-  }
-
-  .back-link {
-    font-size: 1rem;
-  }
-
-  /* Mobile Nav Override: Semi-transparent Theme Background + Dark Text */
-  body:has(.hero-section) .nav-container,
-  body:has(.hero-section) .nav-overlay,
-  .home-nav .nav-container,
-  .home-nav .nav-overlay {
-    background: var(--bg-primary) !important;
-  }
-
-  .home-nav .nav-search,
-  .home-nav .nav-label,
-  .home-nav .nav-menu,
-  .home-nav .nav-right,
-  .home-nav .brand-text,
-  .home-nav .brand-chip,
-  .home-nav .btn-plan,
-  .nav-menu svg,
-  .nav-search svg {
-    color: var(--ocean-900) !important;
-  }
+  /* Ensure text colors follow desktop logic (White on Transparent, Dark on White) */
+  /* The existing desktop rules already handle .home-nav vs .scrolled colors for children */
 }

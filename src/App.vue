@@ -1,46 +1,100 @@
-<script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import SearchModal from './components/SearchModal.vue'
-import MenuModal from './components/MenuModal.vue'
+﻿<script setup>
+import { ref, onMounted, onUnmounted } from "vue";
+import { useRouter } from "vue-router";
+import SearchModal from "./components/SearchModal.vue";
+import MenuModal from "./components/MenuModal.vue";
+import PlanModal from "./components/PlanModal.vue";
 
-const isScrolled = ref(false)
-const searchOpen = ref(false)
-const menuOpen = ref(false)
+const router = useRouter();
+const isScrolled = ref(false);
+const searchOpen = ref(false);
+const menuOpen = ref(false);
+const planOpen = ref(false);
+const inDarkSection = ref(false);
 
 const handleScroll = () => {
   // Check if scrolled past hero (approx 80vh or 600px)
-  isScrolled.value = window.scrollY > window.innerHeight * 0.8
-}
+  isScrolled.value = window.scrollY > window.innerHeight * 0.8;
+
+  // Check if nav is over a dark section (like ActivitiesCarousel)
+  const darkSections = document.querySelectorAll('[data-nav-theme="light"]');
+  let isOverDark = false;
+
+  darkSections.forEach((section) => {
+    const rect = section.getBoundingClientRect();
+    // Nav is about 80px tall, check if it's overlapping
+    if (rect.top <= 80 && rect.bottom >= 80) {
+      isOverDark = true;
+    }
+  });
+
+  inDarkSection.value = isOverDark;
+};
 
 const openSearchFromMenu = () => {
-  menuOpen.value = false
+  menuOpen.value = false;
   setTimeout(() => {
-    searchOpen.value = true
-  }, 300) // Small delay for fade out
-}
+    searchOpen.value = true;
+  }, 300); // Small delay for fade out
+};
+
+const openPlanModal = () => {
+  planOpen.value = true;
+};
+
+const handlePlanNavigate = () => {
+  planOpen.value = false;
+  router.push("/results");
+};
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-})
+  window.addEventListener("scroll", handleScroll);
+});
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <template>
   <div>
     <SearchModal :isOpen="searchOpen" @close="searchOpen = false" />
-    <MenuModal :isOpen="menuOpen" @close="menuOpen = false" @open-search="openSearchFromMenu" />
+    <PlanModal
+      :isOpen="planOpen"
+      @close="planOpen = false"
+      @navigate-to-results="handlePlanNavigate"
+    />
+    <MenuModal
+      :isOpen="menuOpen"
+      @close="menuOpen = false"
+      @open-search="openSearchFromMenu"
+    />
 
     <header
-      :class="['nav-container', { 'nav-overlay': $route.path === '/', 'home-nav': $route.path === '/', 'scrolled': isScrolled }]">
+      :class="[
+        'nav-container',
+        {
+          'nav-overlay': $route.path === '/',
+          'home-nav': $route.path === '/',
+          scrolled: isScrolled,
+          'nav-light-theme': inDarkSection,
+        },
+      ]"
+    >
       <nav class="nav-inner plan-mode" v-if="$route.meta.planHeader">
-        <div style="display:flex; align-items:center; gap:.75rem; color: var(--ocean-900)">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--ocean-900);
+          "
+        >
           <div class="brand">Plan your trip</div>
         </div>
         <router-link class="link-close close-btn-style" to="/">
-          <span class="btn-text">Close</span> <span class="close-icon">✕</span>
+          <span class="btn-text">Close</span>
+          <span class="close-icon">âœ•</span>
         </router-link>
       </nav>
       <nav class="nav-inner" v-else-if="$route.path === '/results'">
@@ -50,8 +104,17 @@ onUnmounted(() => {
         <div class="nav-right">
           <router-link to="/" class="home-link">
             Back to Home
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="logout-icon" stroke="currentColor"
-              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              class="logout-icon"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
               <polyline points="16 17 21 12 16 7"></polyline>
               <line x1="21" y1="12" x2="9" y2="12"></line>
@@ -60,38 +123,96 @@ onUnmounted(() => {
         </div>
       </nav>
       <nav class="nav-inner" v-else>
+        <!-- LEFT: Menu Trigger & Language -->
         <div class="nav-left">
-          <span class="brand-chip">Komodo Cruises</span>
+          <span class="nav-menu" @click="menuOpen = true" title="Menu">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.2"
+            >
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </span>
+          <span class="nav-lang">
+            <svg
+              width="10"
+              height="6"
+              viewBox="0 0 10 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.2"
+              style="margin-right: 6px"
+            >
+              <path d="M1 1L5 5L9 1" />
+            </svg>
+            EN
+          </span>
         </div>
+
+        <!-- CENTER: Brand Logo -->
+        <div class="nav-center">
+          <router-link to="/" class="brand-link">
+            <span class="brand-chip">KOMODO CRUISES</span>
+          </router-link>
+        </div>
+
+        <!-- RIGHT: Login, Search, Book -->
         <div class="nav-right">
-          <router-link v-if="$route.path !== '/'" to="/plan" class="btn-plan">Plan your trip</router-link>
+          <button class="nav-text-item" @click="openPlanModal">
+            Plan your trip
+          </button>
+          <span class="nav-text-item">LOGIN</span>
 
-          <!-- Search Trigger -->
-          <span class="nav-search" @click="searchOpen = true" style="cursor: pointer;">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="vertical-align:middle;margin-right:4px">
-              <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="2" />
-              <line x1="15.2" y1="15.2" x2="19" y2="19" stroke="currentColor" stroke-width="2" />
-            </svg>
-            <span class="nav-label">Search</span>
-          </span>
-
-          <!-- Menu Trigger -->
-          <span class="nav-menu" @click="menuOpen = true" style="cursor: pointer;">
-            <span class="nav-label">Menu</span>
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="currentColor"
-              style="vertical-align:middle;margin-left:6px">
-              <rect y="6" width="28" height="3" rx="1.5" />
-              <rect y="13" width="28" height="3" rx="1.5" />
-              <rect y="20" width="28" height="3" rx="1.5" />
+          <span class="nav-search" @click="searchOpen = true" title="Search">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.2"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
           </span>
+
+          <router-link
+            v-if="$route.path !== '/'"
+            to="/plan"
+            class="btn-book-pill"
+          >
+            BOOK NOW
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              style="margin-left: 8px"
+            >
+              <path d="M2 20h20M12 4v12m0 0l-4-4m4 4l4-4" />
+              <!-- Replaced icon with a simple arrow or bell as placeholder, standard book icon often calendar or arrow -->
+            </svg>
+          </router-link>
         </div>
       </nav>
     </header>
     <router-view />
-    <footer v-if="!$route.meta.planHeader && $route.path !== '/'" class="site-footer mt-16">
-      <div class="footer-inner container text-sm">© {{ new Date().getFullYear() }} Komodo Cruises</div>
+    <footer
+      v-if="!$route.meta.planHeader && $route.path !== '/'"
+      class="site-footer mt-16"
+    >
+      <div class="footer-inner container text-sm">
+        Â© {{ new Date().getFullYear() }} Komodo Cruises
+      </div>
     </footer>
   </div>
-
 </template>

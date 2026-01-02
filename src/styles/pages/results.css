@@ -1,6 +1,6 @@
 /* Results page styles */
 .results-wrap {
-  background: var(--bg-primary, #f4f1ec);
+  background: #ffffff;
   min-height: 100vh;
 }
 
@@ -52,7 +52,7 @@
 
 /* Main Results Section */
 .results-main {
-  background: #f4f1ec;
+  background: #ffffff;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -93,7 +93,7 @@
 .cabin-card {
   display: grid;
   grid-template-columns: 400px 1fr;
-  background: var(--bg-primary, #f4f1ec);
+  background: #ffffff;
   border-radius: 0;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -586,7 +586,7 @@
 
 /* Suites Info */
 .suites-info {
-  border-top: 1px solid #f4f1ec;
+  border-top: 1px solid #e5e7eb;
   padding-top: 1rem;
 }
 
@@ -935,7 +935,7 @@
 .checkbox-group {
   margin-top: 1.5rem;
   padding-top: 1rem;
-  border-top: 1px solid #f4f1ec;
+  border-top: 1px solid #e5e7eb;
 }
 
 .checkbox-label {
@@ -1279,7 +1279,7 @@
 }
 
 .modal-close:hover {
-  background: #f4f1ec;
+  background: #f3f4f6;
 }
 
 .modal-header {
@@ -1658,7 +1658,7 @@
 }
 
 .enquiry-modal-header {
-  background: #f4f1ec;
+  background: #ffffff;
   padding: 0.5rem;
   display: flex;
   justify-content: space-between;
@@ -2169,7 +2169,7 @@
 }
 
 .guest-modal-close:hover {
-  background: #f4f1ec;
+  background: #f3f4f6;
 }
 
 .guest-modal-header {
