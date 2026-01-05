@@ -90,7 +90,7 @@
                 </div>
               </div>
 
-               <div class="results-controls-right">
+              <div class="results-controls-right">
                 <span class="results-count"
                   >{{ sortedDisplayItems.length }}
                   {{ sortedDisplayItems.length === 1 ? "Room" : "Rooms" }}</span
@@ -184,7 +184,7 @@
                       <li
                         v-for="(feature, fIdx) in getCabinOverview(
                           item.originalItem
-                        ).slice(0, 4)"
+                        ).slice(0, 3)"
                         :key="fIdx"
                       >
                         {{ feature }}
@@ -192,13 +192,13 @@
                     </ul>
                     <ul
                       class="overview-list"
-                      v-if="getCabinOverview(item.originalItem).length > 4"
+                      v-if="getCabinOverview(item.originalItem).length > 3"
                     >
                       <li
                         v-for="(feature, fIdx) in getCabinOverview(
                           item.originalItem
-                        ).slice(4, 8)"
-                        :key="fIdx + 4"
+                        ).slice(3, 6)"
+                        :key="fIdx + 3"
                       >
                         {{ feature }}
                       </li>
@@ -225,14 +225,16 @@
                         v-for="(price, pIdx) in item.prices"
                         :key="pIdx"
                       >
-                        <p class="suite-price">
-                          <strong>{{ price.label }}</strong>
-                          {{ price.value }} per adult, per night
-                        </p>
+                        <div class="price-display">
+                          <p class="price-main">
+                            <span class="price-label">From</span>
+                            <span class="price-value"
+                              >IDR {{ price.value }}</span
+                            >
+                          </p>
+                          <p class="price-sub">per person, per night</p>
+                        </div>
                       </template>
-                      <p class="suite-availability">
-                        {{ item.availabilityCount }}
-                      </p>
                     </div>
                     <div class="cabin-info-right">
                       <button
@@ -2279,6 +2281,8 @@ function getCabinOverview(item) {
       "Air conditioning",
       "Sea view",
       "Daily housekeeping",
+      "Private bathroom",
+      "Air conditioning",
     ];
   const detail = item.detail || item;
   const features = [];
@@ -2314,7 +2318,9 @@ function getCabinOverview(item) {
       "All cabins are non-smoking",
       "Private bathroom",
       "Air conditioning",
-      "Daily housekeeping"
+      "Daily housekeeping",
+      "Private bathroom",
+      "Air conditioning"
     );
   }
 

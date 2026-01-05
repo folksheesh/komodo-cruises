@@ -321,6 +321,7 @@ onUnmounted(() => {
   gap: 0.6rem;
   z-index: 20;
   padding-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .activity-dot {
@@ -466,6 +467,7 @@ onUnmounted(() => {
     left: 50%;
     transform: translateX(-50%);
     bottom: 0.5rem;
+    margin-bottom: 0px;
   }
 
   .activities-nav {

@@ -124,7 +124,7 @@ const currentDestination = computed(() => destinations[currentIndex.value]);
 const slideWidth = computed(() => {
   if (windowWidth.value <= 480) return windowWidth.value * 0.765;
   if (windowWidth.value <= 768) return windowWidth.value * 0.675;
-  return Math.min(windowWidth.value * 0.62, 950); // Larger on desktop
+  return Math.min(windowWidth.value * 0.5, 750); // Smaller on desktop
 });
 
 const slideGap = computed(() => {
@@ -226,7 +226,7 @@ onUnmounted(() => {
 
 .carousel-track {
   display: flex;
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   width: max-content;
 }
 
