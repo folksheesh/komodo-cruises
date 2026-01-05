@@ -395,9 +395,8 @@
 }
 
 .hf-logo {
-	font-family: var(--font-serif);
-	font-weight: 400;
-	letter-spacing: .02em;
+	font-family: var(--font-sans);
+	font-weight: 600;
 	font-size: clamp(1.5rem, 2.6vw, 2rem);
 	margin-bottom: .5rem;
 }

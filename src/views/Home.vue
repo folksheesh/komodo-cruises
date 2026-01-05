@@ -216,7 +216,7 @@
       <!-- Top row: Brand + Links -->
       <div class="hf-top">
         <div class="hf-brand">
-          <div class="hf-logo">Komodo Cruises</div>
+          <div class="hf-logo">KOMODO CRUISES</div>
           <div class="hf-copy">Rare journeys across the Komodo Islands.</div>
         </div>
         <nav class="hf-links">

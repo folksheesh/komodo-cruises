@@ -10,7 +10,7 @@
   --ocean-800: #254f7d;
   --ocean-900: #223f62;
   --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-serif: mrs-eaves-xl-serif, Georgia, "Times New Roman", Times, serif;
   --edge-pad: 30px;
   /* consistent small gutter from viewport edges */
   --bg-primary: #f4f1ec;

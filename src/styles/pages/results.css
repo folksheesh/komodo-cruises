@@ -61,7 +61,7 @@
   font-family: var(--font-serif, serif);
   color: #2d4059;
   font-size: 3.5rem;
-  font-weight: 100;
+  font-weight: lighter;
   padding: 2rem 0;
 }
 
@@ -133,8 +133,9 @@
   font-size: 0.9rem;
   color: #2d4059;
   cursor: pointer;
-  padding: 0.5rem 0;
+  /* padding: 0.5rem 0; */
   font-weight: 500;
+  border-bottom: 1px solid black;
 }
 
 .sort-btn:hover {
@@ -451,11 +452,10 @@
 }
 
 .caret-icon {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: auto;
   display: block;
-  filter: invert(0);
-  transition: filter 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .select-summary.is-filled .caret-icon {
@@ -494,7 +494,6 @@
 
 /* Cabin Info Section */
 .cabin-info-section {
-  border-top: 1px solid #e5e7eb;
   padding-top: 1.25rem;
   display: flex;
   justify-content: space-between;
@@ -835,7 +834,6 @@
   .itinerary-sidebar,
   .check-availability-section {
     padding: 1.25rem;
-    border-radius: 8px;
   }
 
   .itinerary-title,
@@ -861,11 +859,16 @@
   }
 }
 
+.select-summary {
+  font-family: var(--font-serif);
+  font-weight: 200;
+}
+
 .check-availability-section {
+  margin-top: 30px;
   background: white;
   border: 1px solid #eee;
   padding: 1.5rem;
-  border-radius: 8px;
   width: 100%;
   /* Ensure it fills the container */
   box-sizing: border-box;
@@ -896,7 +899,6 @@
 /* Itinerary Sidebar */
 .itinerary-sidebar {
   background: white;
-  border-radius: 8px;
   padding: 2rem;
   border: 1px solid #eee;
   width: 100%;
@@ -1074,7 +1076,7 @@
 .sidebar-section h3 {
   font-family: var(--font-serif, 'Playfair Display', serif);
   font-size: 1.75rem;
-  font-weight: 700;
+  font-weight: 100;
   color: #2d4059;
   margin: 0 0 1rem 0;
   line-height: 1.2;
@@ -1255,7 +1257,7 @@
   align-items: center;
   padding: 3rem 2rem;
   background: #f4f1ec;
-  border-radius: 8px;
+  margin-top: 30px;
 }
 
 .loading-text {
@@ -1264,6 +1266,7 @@
   color: #2d4059;
   letter-spacing: 0.05em;
   margin: 0;
+  font-weight: 200;
   animation: pulse 2s infinite ease-in-out;
 }
 

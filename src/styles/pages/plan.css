@@ -595,7 +595,6 @@
   padding: .75rem .875rem;
   background: #fff;
   border: 1px solid var(--ocean-15a);
-  border-radius: .375rem;
   cursor: pointer;
   color: var(--ocean-900);
 }
@@ -626,7 +625,6 @@
   right: 0;
   background: #fff;
   border: 1px solid var(--ocean-15a);
-  border-radius: .5rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, .12), 0 2px 4px rgba(0, 0, 0, .06);
   z-index: 60;
   padding: .75rem 1rem;

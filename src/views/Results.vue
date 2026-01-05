@@ -51,12 +51,6 @@
             <!-- Results Controls Bar -->
             <div v-if="sortedDisplayItems.length" class="results-controls">
               <div class="results-controls-left">
-                <span class="results-count"
-                  >{{ sortedDisplayItems.length }}
-                  {{ sortedDisplayItems.length === 1 ? "Room" : "Rooms" }}</span
-                >
-              </div>
-              <div class="results-controls-right">
                 <div class="sort-dropdown" ref="sortDropdownRef">
                   <span class="sort-label">SORT BY</span>
                   <button
@@ -95,6 +89,13 @@
                   </div>
                 </div>
               </div>
+
+               <div class="results-controls-right">
+                <span class="results-count"
+                  >{{ sortedDisplayItems.length }}
+                  {{ sortedDisplayItems.length === 1 ? "Room" : "Rooms" }}</span
+                >
+              </div>
             </div>
 
             <div v-if="sortedDisplayItems.length" class="lodge-results">
@@ -121,8 +122,8 @@
                         item.isGallery
                           ? getGalleryImages(item.originalItem)[
                               getGalleryIndex(item.id)
-                            ] || '/src/images/komodo.jpg'
-                          : item.image || '/src/images/komodo.jpg'
+                            ] || '/src/images/cabin.jpg'
+                          : item.image || '/src/images/cabin.jpg'
                       "
                       :alt="item.title"
                       referrerpolicy="no-referrer"
@@ -518,39 +519,6 @@
                     <span style="font-size: 1.1rem">›</span>
                   </div>
                 </div>
-              </div>
-
-              <div
-                class="sidebar-alt"
-                style="
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                  gap: 0.75rem;
-                  margin-top: 0.75rem;
-                "
-              >
-                <div class="muted" style="font-size: 0.9rem">
-                  My dates are flexible, show alternatives
-                </div>
-                <button
-                  :aria-pressed="flexibleAlt ? 'true' : 'false'"
-                  @click="toggleFlexible"
-                  title="toggle alternatives"
-                  :style="{
-                    width: '32px',
-                    height: '32px',
-                    borderRadius: '9999px',
-                    border: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: flexibleAlt ? '#efcab6' : '#e5e7eb',
-                    color: flexibleAlt ? '#7a3e2d' : '#374151',
-                  }"
-                >
-                  {{ flexibleAlt ? "✓" : "•" }}
-                </button>
               </div>
 
               <div class="sidebar-actions">
@@ -1107,6 +1075,8 @@
 
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watchEffect } from "vue";
+import downArrowIcon from "../images/arrows/down-arrow.svg";
+import upArrowIcon from "../images/arrows/up-arrow.svg";
 // DEBUG LOGGING: Uncomment for troubleshooting price/detail mapping
 // (Letakkan di bawah semua computed agar tidak ReferenceError)
 
@@ -1180,13 +1150,13 @@ function getModalImages() {
   const imgs = getGalleryImages(selectedCabin.value);
   return imgs.length
     ? imgs
-    : [selectedCabin.value.image || "/src/images/komodo.jpg"];
+    : [selectedCabin.value.image || "/src/images/cabin.jpg"];
 }
 
 function getModalImage() {
   const imgs = getModalImages();
   const idx = modalImageIndex.value % (imgs.length || 1);
-  return imgs[idx] || "/src/images/komodo.jpg";
+  return imgs[idx] || "/src/images/cabin.jpg";
 }
 
 function prevModalImage() {
@@ -1229,10 +1199,6 @@ import "../styles/pages/results.css";
 
 const DEFAULT_CURRENCY = "Rp";
 
-const downArrowIcon =
-  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
-const upArrowIcon =
-  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>';
 const rightArrowIcon =
   'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
 
@@ -1252,8 +1218,6 @@ const selectedCabin = ref(null);
 const cabinQuantity = ref(1);
 const modalGuests = ref(2);
 const enquirySubmitting = ref(false);
-
-const flexibleAlt = ref(true);
 
 // Sort By state
 const sortBy = ref("recommended");
@@ -1519,7 +1483,7 @@ const availabilityResults = computed(() => {
       hasAvailability,
       availableSlots: Math.floor(avg),
       totalSlots: daysCount > 0 ? Math.floor(totalSlots / daysCount) : 0,
-      image: "/src/images/komodo.jpg",
+      image: "/src/images/cabin.jpg",
       availableCabinsCount: startCabinsCount,
       dateFrom: sc.dateFrom,
     });
@@ -1574,7 +1538,7 @@ const cabinCards = computed(() =>
     ship: r.ship,
     date: r.date,
     capacity: r.capacity,
-    image: r.image || "/src/images/komodo.jpg",
+    image: r.image || "/src/images/cabin.jpg",
   }))
 );
 
@@ -1735,7 +1699,7 @@ const allStartDateCabins = computed(() => {
       const mergedAvailable =
         detailAvailable != null ? detailAvailable : available;
       const mergedImage =
-        getCabinImage(detail) || getCabinImage(cb) || "/src/images/komodo.jpg";
+        getCabinImage(detail) || getCabinImage(cb) || "/src/images/cabin.jpg";
       const existing = map.get(key);
       const value = {
         key,
@@ -1782,75 +1746,22 @@ const allStartDateCabins = computed(() => {
 });
 
 const displayItems = computed(() => {
-  // Priority 1: Standard Results (Exact Match)
-  if (allStartDateCabins.value.length > 0) {
-    return allStartDateCabins.value.map((item) => ({
-      id: item.key,
-      uniqueKey: item.key,
-      title: item.cabinName,
-      subtitle: formatShipName(item.operatorLabel),
-      image: item.image,
-      prices: [{ label: "Start from", value: item.price || "Rp3,650,000" }],
-      availabilityCount: item.availableText,
-      date: formatDate(item.date),
-      availabilityType: "standard", // Green box
-      availabilityTitle: "Great news, we have availability!",
-      availabilityText:
-        "Select the result that best suits you from the list below and it will be added to the itinerary summary on the right.",
-      originalItem: item,
-      isGallery: true,
-    }));
-  }
-
-  // Priority 2: Alternative Results (Specific Cabins on other ships/dates)
-  if (flexibleAlt.value && cabinCards.value.length > 0) {
-    return cabinCards.value.map((item, idx) => ({
-      id: item.ship + ":" + item.cabinName,
-      uniqueKey: item.ship + ":" + item.cabinName + idx,
-      title: item.cabinName,
-      subtitle: formatShipName(item.ship),
-      image: item.image,
-      prices: item.price
-        ? [{ label: "Start from", value: item.price }]
-        : [{ label: "Price on request", value: "" }],
-      availabilityCount: item.date ? formatDate(item.date) : "Available",
-      date: formatDate(item.date),
-      availabilityType: "standard", // Use standard/success style even for alternatives if they are specific results
-      availabilityTitle: "Great news, we have availability!",
-      availabilityText:
-        "Select the result that best suits you from the list below and it will be added to the itinerary summary on the right.",
-      originalItem: item, // Note: Action buttons logic relies on item structure, might need adaptation
-      isGallery: false, // Alternative results currently implemented as single image in refactor, can be upgraded
-    }));
-  }
-
-  // Priority 3: General Availability (Aggregated by Ship)
-  if (flexibleAlt.value && availabilityResults.value.length > 0) {
-    return availabilityResults.value.map((result) => {
-      const isSuccess = result.hasAvailability;
-      return {
-        id: result.lodge,
-        uniqueKey: result.lodge,
-        title: result.lodge,
-        subtitle: displayDestinations.value,
-        image: result.image,
-        prices: [], // General availability might not have specific price ready
-        availabilityCount: `${result.availableCabinsCount} available`,
-        date: formatDate(result.dateFrom),
-        availabilityType: isSuccess ? "standard" : "alternative",
-        availabilityTitle: isSuccess
-          ? "Great news, we have availability!"
-          : "Alternative options are available",
-        availabilityText: isSuccess
-          ? "Select the result that best suits you from the list below and it will be added to the itinerary summary on the right."
-          : "Unfortunately, there isn't availability for your selected dates. However, the following alternate options may suit your requirements.",
-        originalItem: result,
-        isGallery: true, // has next/prev methods working for lodges
-      };
-    });
-  }
-
-  return [];
+  return allStartDateCabins.value.map((item) => ({
+    id: item.key,
+    uniqueKey: item.key,
+    title: item.cabinName,
+    subtitle: formatShipName(item.operatorLabel),
+    image: item.image,
+    prices: [{ label: "Start from", value: item.price || "Rp3,650,000" }],
+    availabilityCount: item.availableText,
+    date: formatDate(item.date),
+    availabilityType: "standard", // Green box
+    availabilityTitle: "Great news, we have availability!",
+    availabilityText:
+      "Select the result that best suits you from the list below and it will be added to the itinerary summary on the right.",
+    originalItem: item,
+    isGallery: true,
+  }));
 });
 
 // Sorted display items based on sortBy selection
@@ -2151,9 +2062,6 @@ async function checkAvailability() {
 
 const applyFilters = () => checkAvailability();
 const loadResults = () => checkAvailability();
-const toggleFlexible = () => {
-  flexibleAlt.value = !flexibleAlt.value;
-};
 
 function applySidebarChanges() {
   try {
@@ -2455,7 +2363,7 @@ function onImgError(evt, original) {
     img.setAttribute("data-try", String(tried + 1));
     img.src = candidates[tried + 1];
   } else {
-    img.src = "/src/images/komodo.jpg";
+    img.src = "/src/images/cabin.jpg";
   }
 }
 

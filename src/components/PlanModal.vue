@@ -1092,8 +1092,9 @@ function selectDate(day) {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 600;
-  color: black;
+  color: var(--ocean-900, #223f62);
   font-family: var(--font-serif, serif);
+  font-weight: 200;
 
   flex: 1;
   /* ambil ruang sisa */
@@ -1110,7 +1111,7 @@ function selectDate(day) {
   border: none;
   font-size: 1.1rem;
   cursor: pointer;
-  color: black;
+  color: var(--ocean-900, #223f62);
   padding: 0.5rem 0.75rem;
   margin-right: 30px;
   border-radius: 0.25rem;
