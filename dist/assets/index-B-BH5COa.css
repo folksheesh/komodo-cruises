@@ -1395,9 +1395,9 @@
     gap: 4px;
     transition: opacity .2s ease;
     white-space: nowrap;
-    text-decoration: none;
     flex-shrink: 0;
-    margin-left: 3px
+    margin-left: 3px;
+ 
 }
 
 .cabin-details-btn:hover {

@@ -1189,7 +1189,7 @@ function selectDate(day) {
   padding: 1rem 2rem;
   font-size: 1.1rem;
   font-weight: 500;
-  border-radius: 7px;
+  /* border-radius: 7px; */
 }
 
 .modal-body .bottom-bar .link-muted {

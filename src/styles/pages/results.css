@@ -60,7 +60,7 @@
 .results-title {
   font-family: var(--font-serif, serif);
   color: #2d4059;
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: lighter;
   padding: 2rem 0;
 }
@@ -353,16 +353,26 @@
 }
 
 /* Cabin Badge */
+/* Cabin Badge */
 .cabin-badge {
   display: inline-block;
-  padding: 0.35rem 0.75rem;
-  background: #2d4059;
-  color: white;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  padding: 0.75rem 1.5rem;
+  background: white;
+  color: #2d4059;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   border-radius: 0;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.cabin-badge:hover,
+.cabin-badge.active {
+  background: #e5e5e5;
+  border-color: #1f2937;
 }
 
 /* Cabin Specs Row */
@@ -386,6 +396,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem 2rem;
   margin: 0.5rem 0;
+  font-weight: 200;
 }
 
 .overview-list {
@@ -435,7 +446,8 @@
   gap: 4px;
   transition: opacity 0.2s ease;
   white-space: nowrap;
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 3px;
   flex-shrink: 0;
   margin-left: 3px;
 }
@@ -467,7 +479,7 @@
 .cabin-divider {
   height: 1px;
   background: #e5e7eb;
-  margin: 0;
+  margin-top: 0.5rem;
 }
 
 /* Availability Box */
@@ -494,7 +506,6 @@
 
 /* Cabin Info Section */
 .cabin-info-section {
-  padding-top: 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -913,8 +924,8 @@
 /* Itinerary Sidebar */
 .itinerary-sidebar {
   background: white;
-  padding: 2rem;
-  border: 1px solid #eee;
+  padding: 2.5rem 2rem;
+  border: 1px solid #e5e7eb;
   width: 100%;
   box-sizing: border-box;
 }
@@ -923,16 +934,18 @@
   font-family: var(--font-serif, 'Playfair Display', serif);
   font-size: 1.75rem;
   font-weight: 400;
+  font-style: italic;
   color: #2d4059;
-  margin: 0 0 1rem 0;
+  margin: 0 0 1.25rem 0;
   line-height: 1.2;
 }
 
 .itinerary-description {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: #6b7280;
-  line-height: 1.6;
+  line-height: 1.7;
   margin: 0 0 1.5rem 0;
+  font-weight: 300;
 }
 
 .itinerary-divider {
@@ -942,16 +955,17 @@
 }
 
 .itinerary-empty {
-  font-size: 0.95rem;
-  color: #6b7280;
-  padding: 2rem 0;
+  font-size: 0.9rem;
+  color: #9ca3af;
+  padding: 1.5rem 0;
   text-align: left;
+  font-style: italic;
 }
 
 .itinerary-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 2rem 0;
+  margin: 0 0 1.5rem 0;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -961,6 +975,13 @@
   padding: 0;
   border: none;
   background: none;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.itinerary-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .itinerary-item-header {
@@ -972,43 +993,53 @@
 
 .itinerary-lodge-name {
   font-family: var(--font-serif, 'Playfair Display', serif);
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 400;
   color: #2d4059;
   margin: 0;
   flex: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .itinerary-remove-btn {
   background: #2d4059;
   border: none;
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
   flex-shrink: 0;
   padding: 0;
 }
 
 .itinerary-remove-btn:hover {
   background: #1e2a3d;
+  transform: scale(1.05);
 }
 
 .itinerary-remove-btn .remove-icon {
   color: white;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 300;
   line-height: 1;
 }
 
 .itinerary-cabin-name {
-  font-size: 0.95rem;
-  color: #2d4059;
-  font-weight: 500;
+  font-size: 0.9rem;
+  color: #4b5563;
+  font-weight: 400;
+  margin-bottom: 0.35rem;
+}
+
+.itinerary-guests {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 400;
   margin-bottom: 0.25rem;
 }
 
@@ -1016,56 +1047,67 @@
   font-size: 0.85rem;
   color: #6b7280;
   margin-bottom: 0.25rem;
+  font-weight: 300;
 }
 
 .itinerary-dates {
   font-size: 0.85rem;
   color: #6b7280;
+  font-weight: 300;
 }
 
+/* Total Section - Premium Look */
 .itinerary-total {
   border-top: 1px solid #e5e7eb;
-  margin: 1.5rem 0;
-  padding-top: 1rem;
+  margin: 0.5rem 0 1.5rem 0;
+  padding-top: 1.5rem;
 }
 
 .itinerary-total-row {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .itinerary-total-label {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #6b7280;
+  line-height: 1.4;
+  max-width: 140px;
 }
 
 .itinerary-total-amount {
+  font-family: var(--font-serif, 'Playfair Display', serif);
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 400;
   color: #2d4059;
+  text-align: right;
+  line-height: 1.2;
 }
 
 .itinerary-total-note {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #9ca3af;
   margin: 0 0 0.35rem 0;
+  line-height: 1.5;
 }
 
 .btn-send-enquiry {
   width: 100%;
-  padding: 0.875rem 1.5rem;
+  padding: 1rem 1.5rem;
   background: #2d4059;
   color: white;
   border: none;
-  border-radius: 4px;
-  font-size: 0.95rem;
+  border-radius: 0;
+  font-size: 0.9rem;
   font-weight: 500;
+  letter-spacing: 0.05em;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.3s ease;
   margin-bottom: 1.5rem;
+  text-transform: none;
 }
 
 .btn-send-enquiry:hover {
@@ -1077,14 +1119,16 @@
   align-items: center;
   color: #2d4059;
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+  letter-spacing: 0.02em;
 }
 
 .link-speak-with-us:hover {
   color: #1e2a3d;
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .sidebar-section h3 {
@@ -1238,7 +1282,7 @@
 
 .btn-primary {
   padding: .625rem 1rem;
-  border-radius: .5rem;
+  /* border-radius: .5rem; */
   background: #2d4059;
   color: #fff;
   border: none;
@@ -1827,7 +1871,6 @@
   background: #2d4059;
   color: white;
   border: none;
-  border-radius: 4px;
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
@@ -2578,7 +2621,6 @@
   background: #2d4059;
   color: white;
   padding: 1.5rem 2rem;
-  border-radius: 8px 8px 0 0;
 }
 
 .guest-modal-title {
@@ -2594,6 +2636,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  border-radius: 0px;
 }
 
 .guest-modal-description {
@@ -2802,5 +2845,168 @@
 
   100% {
     transform: translateX(100%);
+  }
+}
+
+/* =========================================
+   CABIN DETAIL MODAL REDESIGN (PIXEL PERFECT)
+   ========================================= */
+
+.modal-content-redesigned {
+  border-radius: 0;
+  /* Boxy look per image */
+  max-width: 900px;
+  /* Wider to match layout */
+  background: #fdfdfd;
+  /* Off-white/warm white background */
+}
+
+.modal-body-redesigned {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 3rem;
+  gap: 3rem;
+}
+
+.modal-info-left {
+  padding-right: 1rem;
+}
+
+/* 1. Main Heading */
+.modal-cabin-name {
+  font-family: var(--font-body, sans-serif);
+  /* Clean sans-serif */
+  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: 300;
+  /* Light weight */
+  letter-spacing: 0.02em;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.1;
+}
+
+/* 2. Subtitle */
+.modal-cabin-subtitle {
+  font-family: var(--font-serif, serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #4a4a4a;
+  margin: 0 0 1.5rem 0;
+  font-style: normal;
+}
+
+/* 3. Specs Row */
+.modal-cabin-specs {
+  font-family: "Inter", sans-serif;
+  /* Explicit sans */
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #666;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 4. Quote */
+.modal-cabin-quote {
+  font-family: var(--font-serif, serif);
+  font-size: 1.35rem;
+  /* Large readable size */
+  line-height: 1.5;
+  color: #111;
+  margin: 0 0 2.5rem 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-style: normal;
+  /* Not italic in the image, just serif */
+}
+
+/* 5. Section Titles */
+.modal-section-title {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin: 0 0 1rem 0;
+  color: #1a1a1a;
+  border: none;
+}
+
+/* 6. Lists with Diamond Bullets */
+.modal-overview-grid,
+.modal-amenities-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.modal-overview-list,
+.modal-amenities-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-overview-list li,
+.modal-amenities-list li {
+  position: relative;
+  padding-left: 1.25rem;
+  font-family: "Inter", sans-serif;
+  font-size: 0.85rem;
+  color: #4b4b4b;
+  margin-bottom: 0.6rem;
+  line-height: 1.5;
+}
+
+.modal-overview-list li::before,
+.modal-amenities-list li::before {
+  content: "◆";
+  /* Diamond bullet */
+  position: absolute;
+  left: 0;
+  top: 0.35em;
+  font-size: 0.5rem;
+  color: #000;
+}
+
+/* Modal Right Side (Image) */
+.modal-image-right {
+  position: relative;
+  height: 100%;
+  min-height: 400px;
+}
+
+.modal-cabin-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* border-radius: 0; Boxy per design */
+}
+
+/* Close Button Position */
+.modal-close-details {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #000;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-body-redesigned {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+    gap: 1.5rem;
   }
 }

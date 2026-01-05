@@ -156,7 +156,7 @@
                   <div class="cabin-header">
                     <div class="cabin-title-group">
                       <h3 class="cabin-name">{{ item.title }}</h3>
-                      <span class="cabin-badge">{{
+                      <span class="cabin-badge active">{{
                         getCabinType(item.originalItem)
                       }}</span>
                     </div>
