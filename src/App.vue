@@ -97,6 +97,7 @@ onUnmounted(() => {
           'home-nav': $route.path === '/',
           scrolled: isScrolled,
           'nav-light-theme': inDarkSection,
+          'navbar-result': $route.path === '/results',
         },
       ]"
     >
@@ -116,31 +117,7 @@ onUnmounted(() => {
           <span class="close-icon">âœ•</span>
         </router-link>
       </nav>
-      <nav class="nav-inner" v-else-if="$route.path === '/results'">
-        <div class="nav-left">
-          <span class="brand-text">Komodo Cruises</span>
-        </div>
-        <div class="nav-right">
-          <router-link to="/" class="home-link">
-            Back to Home
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              class="logout-icon"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-              <polyline points="16 17 21 12 16 7"></polyline>
-              <line x1="21" y1="12" x2="9" y2="12"></line>
-            </svg>
-          </router-link>
-        </div>
-      </nav>
+
       <nav class="nav-inner" v-else>
         <!-- LEFT: Menu Trigger & Language -->
         <div class="nav-left">
@@ -219,7 +196,7 @@ onUnmounted(() => {
           </span>
 
           <router-link
-            v-if="$route.path !== '/'"
+            v-if="$route.path !== '/' && $route.path !== '/results'"
             to="/plan"
             class="btn-book-pill"
           >

@@ -82,6 +82,119 @@
   font-weight: 500;
 }
 
+/* Results Controls Bar */
+.results-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.results-controls-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.results-count {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.results-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.sort-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sort-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #374151;
+  letter-spacing: 0.5px;
+}
+
+.sort-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  color: #2d4059;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  font-weight: 500;
+}
+
+.sort-btn:hover {
+  color: #1e2a3d;
+}
+
+.sort-caret {
+  width: 14px;
+  height: 14px;
+}
+
+.sort-dropdown-panel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+  z-index: 100;
+}
+
+.sort-option {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  color: #374151;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.sort-option:hover {
+  background: #f3f4f6;
+}
+
+.sort-option.active {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #2d4059;
+}
+
+@media (max-width: 640px) {
+  .results-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .results-controls-right {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
 /* Lodge Cards / Cabin Cards */
 .lodge-results {
   display: flex;
@@ -234,8 +347,63 @@
   font-size: 2rem;
   font-weight: 400;
   color: #2d4059;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.75rem 0;
   line-height: 1.2;
+}
+
+/* Cabin Badge */
+.cabin-badge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  background: #2d4059;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 0;
+}
+
+/* Cabin Specs Row */
+.cabin-specs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #374151;
+  margin-top: 0.5rem;
+}
+
+.specs-divider {
+  color: #d1d5db;
+}
+
+/* Cabin Overview (Two Column) */
+.cabin-overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 2rem;
+  margin: 0.5rem 0;
+}
+
+.overview-list {
+  list-style: disc;
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.overview-list li {
+  font-size: 0.85rem;
+  color: #374151;
+  line-height: 1.6;
+  margin-bottom: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .cabin-overview {
+    grid-template-columns: 1fr;
+  }
 }
 
 .cabin-location {
@@ -440,6 +608,25 @@
 .btn-add-to-itinerary.in-itinerary:hover .btn-icon {
   background: #1e2a3d;
 }
+
+/* Reserve Now Button */
+.btn-reserve-now {
+  padding: 0.875rem 2rem;
+  background: #2d4059;
+  color: white;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-reserve-now:hover {
+  background: #1e2a3d;
+}
+
 
 /* Responsive */
 @media (max-width: 968px) {
@@ -1632,6 +1819,204 @@
 
 .modal-book-btn:hover {
   background: #1e2a3d;
+}
+
+/* ===== REDESIGNED MODAL STYLES ===== */
+.modal-content-redesigned {
+  max-width: 1000px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body-redesigned {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Info Section - Left */
+.modal-info-left {
+  padding: 2rem;
+  overflow-y: auto;
+  max-height: 70vh;
+  order: 1;
+}
+
+/* Image Section - Right */
+.modal-image-right {
+  position: relative;
+  order: 2;
+  min-height: 400px;
+}
+
+.modal-cabin-header {
+  margin-bottom: 0.5rem;
+}
+
+.modal-cabin-subtitle {
+  font-size: 1rem;
+  color: #6b7280;
+  margin: 0.25rem 0 0 0;
+  font-weight: 400;
+}
+
+.modal-cabin-specs {
+  font-size: 0.9rem;
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
+.modal-cabin-quote {
+  font-style: italic;
+  font-size: 1rem;
+  color: #374151;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+  padding: 0;
+  border: none;
+}
+
+/* OVERVIEW Section */
+.modal-overview-section {
+  margin-bottom: 1.5rem;
+}
+
+.modal-section-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2d4059;
+  letter-spacing: 0.5px;
+  margin: 0 0 0.75rem 0;
+}
+
+.modal-overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 2rem;
+}
+
+.modal-overview-list {
+  list-style: disc;
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.modal-overview-list li {
+  font-size: 0.85rem;
+  color: #374151;
+  line-height: 1.5;
+  margin-bottom: 0.25rem;
+}
+
+/* AMENITIES Section */
+.modal-amenities-section {
+  margin-bottom: 1rem;
+}
+
+.modal-amenities-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 2rem;
+}
+
+.modal-amenities-list {
+  list-style: disc;
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.modal-amenities-list li {
+  font-size: 0.85rem;
+  color: #374151;
+  line-height: 1.5;
+  margin-bottom: 0.25rem;
+}
+
+/* Image Indicator */
+.modal-image-indicator {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2d4059;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.indicator-count {
+  font-weight: 400;
+  color: #6b7280;
+}
+
+/* Bottom Action Section */
+.modal-bottom-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.modal-price-display {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.modal-bottom-section .price-amount {
+  font-size: 1.5rem;
+}
+
+.modal-bottom-section .price-note {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.modal-bottom-section .modal-book-btn {
+  width: auto;
+  padding: 0.75rem 2rem;
+}
+
+/* Modal Responsive */
+@media (max-width: 768px) {
+  .modal-body-redesigned {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-image-right {
+    order: 1;
+    min-height: 250px;
+    max-height: 300px;
+  }
+
+  .modal-info-left {
+    order: 2;
+    max-height: none;
+    padding: 1.5rem;
+  }
+
+  .modal-overview-grid,
+  .modal-amenities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-bottom-section {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .modal-bottom-section .modal-book-btn {
+    width: 100%;
+  }
 }
 
 /* Enquiry Modal Overlay - Full Screen */

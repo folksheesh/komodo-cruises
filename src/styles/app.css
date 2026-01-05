@@ -186,6 +186,22 @@ body:has(.hero-section) .nav-container.scrolled,
   color: white;
 }
 
+/* Results Navbar Style (White, Shadowed, Blue Logo) */
+.navbar-result {
+  background: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12) !important;
+  border-bottom: 2px solid #f0f0f0 !important;
+  position: relative;
+  z-index: 1000;
+  /* Ensure it stays above content */
+}
+
+.navbar-result .brand-chip {
+  color: var(--ocean-900) !important;
+  /* Blue color for logo */
+}
+
+
 /* Results nav */
 .brand-text {
   font-family: var(--font-sans);
@@ -370,13 +386,59 @@ body:has(.hero-section):not(:has(.scrolled)) .brand-chip {
 
 
 /* Brand styling */
-.brand { font-family: var(--font-serif); font-size: 2rem; color: var(--ocean-900); font-weight: 500; }
-.nav-lang-wrapper { position: relative; margin-left: 1rem; display: flex; align-items: center; cursor: pointer; }
-.lang-dropdown { position: absolute; top: 120%; left: 50%; transform: translateX(-50%); background: white; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); padding: 0.5rem 0; min-width: 140px; z-index: 9999; margin-top: 0; }
+.brand {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--ocean-900);
+  font-weight: 500;
+}
+
+.nav-lang-wrapper {
+  position: relative;
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 0;
+  min-width: 140px;
+  z-index: 9999;
+  margin-top: 0;
+}
+
 /* Triangle arrow */
-.lang-dropdown::before { content: ''; position: absolute; top: -6px; left: 50%; margin-left: -6px; border-width: 0 6px 6px; border-style: solid; border-color: transparent transparent white; }
-.lang-option { padding: 0.6rem 1rem; cursor: pointer; font-size: 0.9rem; color: #223f62; transition: background 0.15s; text-align: center; }
-.lang-option:hover { background: #f0f4f8; }
+.lang-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  margin-left: -6px;
+  border-width: 0 6px 6px;
+  border-style: solid;
+  border-color: transparent transparent white;
+}
+
+.lang-option {
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #223f62;
+  transition: background 0.15s;
+  text-align: center;
+}
+
+.lang-option:hover {
+  background: #f0f4f8;
+}
 
 /* ===== ENHANCED MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
@@ -401,7 +463,13 @@ body:has(.hero-section):not(:has(.scrolled)) .brand-chip {
     gap: 0.75rem;
   }
 
-  .nav-lang, .nav-lang-wrapper, .nav-text-item, .nav-search, .nav-label { display: none !important; }
+  .nav-lang,
+  .nav-lang-wrapper,
+  .nav-text-item,
+  .nav-search,
+  .nav-label {
+    display: none !important;
+  }
 
   .nav-menu {
     margin-left: 0;
@@ -461,6 +529,7 @@ body:has(.hero-section):not(:has(.scrolled)) .brand-chip {
 
 /* FINAL MOBILE TWEAKS */
 @media (max-width: 768px) {
+
   /* Center Logo Absolutely */
   .nav-center {
     position: absolute !important;
@@ -470,34 +539,41 @@ body:has(.hero-section):not(:has(.scrolled)) .brand-chip {
     flex: unset !important;
     z-index: 10;
   }
-  
+
   /* Show Plan Trip Link */
   .nav-plan-item {
     display: block !important;
     font-size: 0.7rem;
     white-space: nowrap;
-    border: 1px solid currentColor; /* Optional: make it look like small pill or just text? User asked for 'Plan your trip' text. */
+    border: 1px solid currentColor;
+    /* Optional: make it look like small pill or just text? User asked for 'Plan your trip' text. */
     /* If nav-text-item has styles, use them. Just force display. */
     border: none;
     letter-spacing: 0.5px;
   }
-  
+
   /* Ensure nav-container works with abs center */
   .nav-inner {
     position: relative;
   }
-  
+
   /* Ensure Nav Right is on right */
   .nav-right {
-    margin-left: auto; /* Push to right if flex logic fails due to center being abs */
-    z-index: 20; /* Above center */
+    margin-left: auto;
+    /* Push to right if flex logic fails due to center being abs */
+    z-index: 20;
+    /* Above center */
   }
 }
 
 
 /* Mobile adjustments for Title and Text */
 @media (max-width: 768px) {
-  .desktop-only { display: none !important; }
-  .brand-chip { font-size: 0.9rem !important; }
-}
+  .desktop-only {
+    display: none !important;
+  }
 
+  .brand-chip {
+    font-size: 0.9rem !important;
+  }
+}
