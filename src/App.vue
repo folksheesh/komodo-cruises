@@ -234,7 +234,11 @@ onUnmounted(() => {
     </header>
     <router-view />
     <footer
-      v-if="!$route.meta.planHeader && $route.path !== '/'"
+      v-if="
+        !$route.meta.planHeader &&
+        $route.path !== '/' &&
+        $route.path !== '/results'
+      "
       class="site-footer mt-16"
     >
       <div class="footer-inner container text-sm">

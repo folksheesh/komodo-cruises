@@ -6,8 +6,7 @@
       <p class="activities-description">
         From underwater adventures to peaceful sunsets, our carefully curated
         activities invite you to discover the magic of Indonesia's hidden
-        treasures. Every moment is designed to awaken your senses and create
-        lasting memories.
+        treasures.
       </p>
       <button class="activities-cta">Explore activities</button>
     </div>
@@ -16,6 +15,8 @@
     <div class="activities-slider">
       <div
         class="activities-track"
+        ref="trackRef"
+        @scroll="onScroll"
         :style="{ transform: `translateX(-${trackOffset}px)` }"
       >
         <div
@@ -42,13 +43,15 @@
       <button
         v-for="(_, index) in activities"
         :key="index"
-        v-show="index <= maxIndex"
         class="activity-dot"
         :class="{ active: index === currentIndex }"
-        @click="goTo(index)"
+        @click="scrollToSlide(index)"
         :aria-label="`Go to ${activities[index].title}`"
       ></button>
     </div>
+
+    <!-- Mobile-only CTA -->
+    <button class="activities-cta mobile-only">Explore activities</button>
 
     <!-- Navigation Arrows -->
     <button
@@ -87,7 +90,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from "vue";
+import { ref, computed, onMounted, onUnmounted, nextTick } from "vue";
 
 import activitySnorkeling from "../images/activity-snorkeling.png";
 import activityRelaxing from "../images/activity-relaxing.png";
@@ -139,27 +142,23 @@ const currentIndex = ref(0);
 const windowWidth = ref(
   typeof window !== "undefined" ? window.innerWidth : 1200
 );
+const trackRef = ref(null);
 
 const slideWidth = computed(() => {
   if (windowWidth.value <= 768) {
-    // Mobile: Full width for single image display
     return windowWidth.value;
   }
   return windowWidth.value * 0.35; // Each slide is 35% of viewport on desktop
 });
 
 const trackOffset = computed(() => {
+  // Disable JS transform on mobile to allow native scroll
+  if (windowWidth.value <= 768) return 0;
   return currentIndex.value * slideWidth.value;
 });
 
 const maxIndex = computed(() => {
   if (windowWidth.value <= 768) return activities.length - 1;
-  // On desktop, we want to stop before the empty space appears
-  // Container is 65vw, Slide is 35vw + 1rem gap
-  // Total width needed = length * slideWidth
-  // Max Offset = TotalWidth - ContainerWidth
-
-  // Simplified: Stop 1 slide early because 2 fit on screen
   return activities.length - 2;
 });
 
@@ -179,8 +178,27 @@ function goTo(index) {
   currentIndex.value = Math.min(index, maxIndex.value);
 }
 
+function scrollToSlide(index) {
+  if (windowWidth.value <= 768 && trackRef.value) {
+    const w = windowWidth.value;
+    trackRef.value.scrollTo({ left: index * w, behavior: "smooth" });
+  } else {
+    goTo(index);
+  }
+}
+
 function handleResize() {
   windowWidth.value = window.innerWidth;
+}
+
+function onScroll(e) {
+  if (windowWidth.value <= 768) {
+    const scrollLeft = e.target.scrollLeft;
+    const w = windowWidth.value;
+    // Calculate index based on scroll position
+    const idx = Math.round(scrollLeft / w);
+    currentIndex.value = idx;
+  }
 }
 
 onMounted(() => {
@@ -250,6 +268,10 @@ onUnmounted(() => {
 .activities-cta:hover {
   background: #fff;
   color: #1e3a5f;
+}
+
+.mobile-only {
+  display: none;
 }
 
 /* Right Slider */
@@ -382,20 +404,27 @@ onUnmounted(() => {
   right: 2rem;
 }
 
+.activities-nav svg {
+  width: 20px;
+  height: 20px;
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   .activities-carousel {
     flex-direction: column;
-    height: 100vh;
+    height: auto;
+    min-height: auto;
   }
 
   .activities-content {
     position: relative;
     width: 100%;
     height: auto;
-    padding: 2rem 2rem 1.5rem;
+    padding: 2rem 2rem 1rem;
     text-align: center;
     background: #1e3a5f;
+    z-index: 30;
   }
 
   .activities-heading {
@@ -405,11 +434,26 @@ onUnmounted(() => {
   .activities-description {
     font-size: 0.95rem;
     max-width: 100%;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
+    margin-bottom: 1.5rem !important;
   }
 
-  .activities-cta {
-    margin: 0 auto;
+  /* Hide original CTA on mobile */
+  .activities-content .activities-cta {
+    display: none;
+  }
+
+  .mobile-only {
+    display: inline-block;
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 40;
+    margin-top: 0;
+    font-size: 0.8rem;
+    padding: 0.8rem 1.5rem;
+    white-space: nowrap;
   }
 
   .activities-slider {
@@ -417,42 +461,54 @@ onUnmounted(() => {
     width: 100%;
     height: auto;
     flex: 1;
-    padding: 1rem 0 2.5rem 0 !important;
+    padding: 0 0 9rem 0 !important;
     overflow: hidden;
   }
 
   .activities-track {
     padding-left: 0;
-    height: auto; /* Let content define height */
+    height: 100%;
     display: flex;
-    align-items: flex-start;
-    gap: 0; /* Remove gap for pixel-perfect sliding */
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .activities-track::-webkit-scrollbar {
+    display: none;
   }
 
   .activity-slide {
     width: 100vw;
     margin-right: 0;
-    height: auto;
+    height: auto; /* Let image decide height */
     flex-shrink: 0;
     padding: 0 1.5rem;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    scroll-snap-align: center;
+    position: relative;
   }
 
   .activity-slide .activity-image {
     border-radius: 0;
-    height: 50vh;
+    height: 45vh; /* Reduced height */
     width: 100%;
     object-fit: cover;
   }
 
   .activity-info {
-    position: static;
-    background: transparent;
-    padding: 1rem 0.5rem 0; /* Gap between image and text */
-    text-align: center;
-    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 1.5rem;
+    right: 1.5rem;
+    padding: 1.5rem 1rem;
   }
 
   .activity-title {
@@ -466,39 +522,14 @@ onUnmounted(() => {
   .activities-dots {
     left: 50%;
     transform: translateX(-50%);
-    bottom: 0.5rem;
-    margin-bottom: 0px;
+    bottom: 7.5rem;
+    margin-bottom: 0;
+    padding-bottom: 0px;
+    width: 100%;
   }
 
   .activities-nav {
-    width: 36px;
-    height: 36px;
-    top: 50%; /* Center relative to the container, not track */
-    transform: translateY(-50%);
-    margin-top: -1rem; /* Adjust for padding/dots */
-    z-index: 30; /* Ensure on top */
-  }
-
-  /* Position buttons exactly at the vertical center of the 50vh image */
-  /* Top padding (1rem) + Half image height (25vh) */
-  .activities-nav {
-    top: calc(1rem + 25vh);
-    bottom: auto;
-    transform: translateY(-50%);
-    margin: 0;
-  }
-
-  .activities-nav-left {
-    left: 2rem;
-  }
-
-  .activities-nav-right {
-    right: 2rem;
-  }
-
-  .activities-nav svg {
-    width: 16px;
-    height: 16px;
+    display: none !important;
   }
 }
 </style>

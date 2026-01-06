@@ -7,7 +7,7 @@
           <div class="modal-header">
             <div class="modal-header-content">
               <h2 class="modal-title">Plan your trip</h2>
-              <button class="modal-close" @click="closeModal">Close ✕</button>
+              <button class="modal-close" @click="closeModal">Close <span class="close-x">✕</span></button>
             </div>
           </div>
 
@@ -1108,6 +1108,11 @@ function selectDate(day) {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.close-x {
+  font-size: 1.1rem;
+  align-items: center;
 }
 
 /* Tombol Close tetap di kanan, tanpa trik ms-auto */

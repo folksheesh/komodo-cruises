@@ -504,7 +504,7 @@ onUnmounted(() => {
   }
 
   .filter-btn {
-    font-size: 0.8rem;
+    font-size: 1rem;
     margin-right: 0.75rem;
   }
 
