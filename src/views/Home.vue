@@ -67,15 +67,12 @@
     <div class="komodo-content">
       <div class="komodo-text">
         <h2 class="komodo-heading">
-          From calm waters to soulful treks with ancient Komodo dragons, a
-          golden thread throughout every Komodo Cruises experience is a deep
+          A golden thread throughout every Komodo Cruises experience is a deep
           reverence for the wild and its power to heal.
         </h2>
         <p class="komodo-paragraph">
-          Our phinisi vessels and curated voyages across the Komodo Islands have
-          been intentionally designed to offer guests the freedom to reflect and
-          feel their senses awaken, inviting in wonder and a wholeness that
-          comes from truly leaning into nature.
+          Our phinisi vessels and curated voyages are designed to offer guests
+          the freedom to reflect, inviting in wonder and wholeness.
         </p>
       </div>
       <div class="komodo-media" ref="mediaRef1">
@@ -105,13 +102,12 @@
     <div class="komodo-content reverse">
       <div class="komodo-text">
         <h2 class="komodo-heading">
-          Dedicated to environmentally conscious hospitality, sustainable
-          conservation, and collaborating with local communities since 2015.
+          Dedicated to environmentally conscious hospitality and sustainable
+          conservation since 2015.
         </h2>
         <p class="komodo-paragraph">
-          The Komodo Cruises experience is an invitation to share in our love
-          and care for the natural world, to be part of something meaningful,
-          far-reaching, and much bigger than ourselves.
+          Join us in our love for the natural world, to be part of something
+          meaningful and bigger than ourselves.
         </p>
       </div>
       <div class="komodo-media" ref="mediaRef2">
@@ -134,12 +130,8 @@
           Komodo Cruises means "Place of Dragons" in local lore.
         </p>
         <p class="komodo-paragraph">
-          Our people are an integral of the Komodo Cruises experience, sharing
-          their passion for Indonesia's natural spaces and rich cultures through
-          stories and experiences designed to bring you closer to both. In doing
-          so, we hope to show you the incredible diversity and inspiration that
-          can be found here, and remind you that you always have a home to come
-          back to in Komodo.
+          Our people share their passion for Indonesia's natural spaces and rich
+          cultures, bringing you closer to both through stories and experiences.
         </p>
       </div>
       <div class="komodo-media" ref="mediaRef3">
@@ -159,14 +151,12 @@
       <div class="komodo-text">
         <p class="komodo-subheading">A legacy unfolds</p>
         <h2 class="komodo-heading">
-          Komodo Cruises started in 2015 with a simple wooden boat and a deep
-          passion for the ocean.
+          It started in 2015 with a simple wooden boat and a deep passion for
+          the ocean.
         </h2>
         <p class="komodo-paragraph">
-          This was the start of a legacy that has unfolded over decades – and
-          the origin of a brand inspired by family values and an abiding sense
-          of purpose that offers guests profound wildlife encounters in
-          Indonesia.
+          A legacy unfolded over decades, inspired by family values and a
+          purpose to offer profound wildlife encounters.
         </p>
         <div style="margin-top: 1.5rem">
           <button

@@ -65,12 +65,12 @@
 
 @media (max-width: 640px) {
   .results-container {
-    padding: 1rem 0.75rem;
+    padding: 1.5rem !important;
   }
 
   .results-title {
-    font-size: 1.75rem;
-    padding: 1rem 0;
+    font-size: 2rem !important;
+    padding: 1rem 0 !important;
   }
 }
 
@@ -106,6 +106,7 @@
   margin: 1rem 0;
   font-size: 1rem;
   font-weight: 500;
+  margin-top: 1.5rem !important;
 }
 
 /* Results Controls Bar */
@@ -242,13 +243,13 @@
 
 @media (max-width: 640px) {
   .results-controls {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
   }
 
   .results-controls-right {
-    width: 100%;
     justify-content: flex-end;
   }
 }
@@ -2388,6 +2389,16 @@ div.modal-content.modal-content-redesigned {
     grid-template-columns: 1fr;
   }
 
+  .success-message p,
+  .partial-message p,
+  .no-availability p {
+    color: #2d4059;
+    margin: 0.5rem 0;
+    line-height: 1.6;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
   .modal-image-right {
     order: 1;
     min-height: 250px;
@@ -3647,7 +3658,7 @@ div.modal-content.modal-content-redesigned {
   }
 
   .hf-brand {
-    text-align: center;
+    text-align: left;
   }
 
   .hf-logo {
@@ -3663,7 +3674,7 @@ div.modal-content.modal-content-redesigned {
   .hf-links {
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 0.5rem;
   }
 
@@ -3690,12 +3701,12 @@ div.modal-content.modal-content-redesigned {
 
   .hf-contact-title {
     font-size: 1.1rem;
-    text-align: center;
+    text-align: left;
     margin-bottom: 1rem;
   }
 
   .hf-contact-phone {
-    justify-content: center;
+    justify-content: flex-start;
     margin-bottom: 0.75rem;
   }
 
@@ -3723,5 +3734,37 @@ div.modal-content.modal-content-redesigned {
 
   .hf-copyright {
     font-size: 0.85rem;
+  }
+}
+
+/* Simple Loader */
+.simple-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 70vh;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: #888;
+  font-weight: 200;
+  background: #fff;
+  animation: loaderPulse 2s infinite ease-in-out;
+}
+
+@keyframes loaderPulse {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0.4;
+    transform: scale(0.98);
   }
 }

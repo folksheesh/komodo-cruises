@@ -506,7 +506,7 @@
 	}
 
 	.hf-brand {
-		text-align: center;
+		text-align: left;
 	}
 
 	.hf-logo {
@@ -522,7 +522,7 @@
 	.hf-links {
 		flex-direction: row;
 		flex-wrap: wrap;
-		justify-content: center;
+		justify-content: flex-start;
 		gap: 0.5rem;
 	}
 
@@ -549,12 +549,12 @@
 
 	.hf-contact-title {
 		font-size: 1.1rem;
-		text-align: center;
+		text-align: left;
 		margin-bottom: 1rem;
 	}
 
 	.hf-contact-phone {
-		justify-content: center;
+		justify-content: flex-start;
 		margin-bottom: 0.75rem;
 	}
 

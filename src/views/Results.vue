@@ -1,13 +1,11 @@
 ﻿<template>
   <div class="results-wrap">
-    <div class="results-container">
+    <div v-if="loading" class="simple-loader">Loading</div>
+
+    <div v-else class="results-container">
       <div class="results-layout">
         <div class="results-main">
-          <div v-if="loading" class="loading-state">
-            <p class="loading-text">Loading</p>
-          </div>
-
-          <div v-else-if="error" class="error-state">
+          <div v-if="error" class="error-state">
             <p class="error-message">{{ error }}</p>
             <button @click="loadResults" class="btn-primary">Try Again</button>
           </div>
@@ -441,7 +439,9 @@
                       :key="s.id"
                       @click="toggleShip(s.id)"
                     >
-                      <div class="list-text result-list-text">{{ s.label }}</div>
+                      <div class="list-text result-list-text">
+                        {{ s.label }}
+                      </div>
                       <input
                         class="check"
                         type="checkbox"
