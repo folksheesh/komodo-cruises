@@ -99,7 +99,7 @@
             <div v-if="sortedDisplayItems.length" class="lodge-results">
               <div
                 class="cabin-card"
-                v-for="item in sortedDisplayItems"
+                v-for="item in paginatedItems"
                 :key="item.uniqueKey"
               >
                 <!-- Image Section -->
@@ -317,6 +317,37 @@
                   </div>
                 </div>
               </div>
+            </div>
+
+            <!-- Pagination -->
+            <div v-if="totalPages > 1" class="pagination">
+              <button
+                class="pagination-btn"
+                @click="prevPage"
+                :disabled="currentPage === 1"
+              >
+                ‹ Previous
+              </button>
+
+              <div class="pagination-pages">
+                <button
+                  v-for="page in totalPages"
+                  :key="page"
+                  class="pagination-page"
+                  :class="{ active: currentPage === page }"
+                  @click="goToPage(page)"
+                >
+                  {{ page }}
+                </button>
+              </div>
+
+              <button
+                class="pagination-btn"
+                @click="nextPage"
+                :disabled="currentPage === totalPages"
+              >
+                Next ›
+              </button>
             </div>
 
             <div v-else-if="flexibleAlt" class="no-results">
@@ -1224,7 +1255,14 @@
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref, watchEffect } from "vue";
+import {
+  computed,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+  watchEffect,
+} from "vue";
 import { useRouter } from "vue-router";
 import downArrowIcon from "../images/arrows/down-arrow.svg";
 import upArrowIcon from "../images/arrows/up-arrow.svg";
@@ -2062,6 +2100,57 @@ const sortedDisplayItems = computed(() => {
   }
   // 'recommended' keeps original order
   return items;
+});
+
+// --- PAGINATION ---
+const currentPage = ref(1);
+const isMobile = ref(false);
+
+// Check if mobile on mount and resize
+function checkMobile() {
+  isMobile.value = window.innerWidth < 768;
+}
+
+onMounted(() => {
+  checkMobile();
+  window.addEventListener("resize", checkMobile);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", checkMobile);
+});
+
+const itemsPerPage = computed(() => (isMobile.value ? 5 : 10));
+
+const totalPages = computed(() => {
+  return Math.ceil(sortedDisplayItems.value.length / itemsPerPage.value);
+});
+
+const paginatedItems = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage.value;
+  const end = start + itemsPerPage.value;
+  return sortedDisplayItems.value.slice(start, end);
+});
+
+function goToPage(page) {
+  if (page >= 1 && page <= totalPages.value) {
+    currentPage.value = page;
+    // Scroll to top of results
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+function nextPage() {
+  goToPage(currentPage.value + 1);
+}
+
+function prevPage() {
+  goToPage(currentPage.value - 1);
+}
+
+// Reset page when sortBy changes
+watch(sortBy, () => {
+  currentPage.value = 1;
 });
 
 const maxGuestsForPendingItem = computed(() => {

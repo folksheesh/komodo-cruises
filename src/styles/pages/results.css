@@ -3655,10 +3655,12 @@ div.modal-content.modal-content-redesigned {
   .hf-top {
     gap: 2rem;
     padding-bottom: 2rem;
+    padding: 1rem;
   }
 
   .hf-brand {
     text-align: left;
+    margin-bottom: 1rem;
   }
 
   .hf-logo {
@@ -3671,31 +3673,44 @@ div.modal-content.modal-content-redesigned {
   }
 
   /* Links as horizontal pills on mobile */
+  /* Links: clean vertical list (desktop-like) */
+  /* Links: clean vertical list (desktop-like) but 3 columns */
   .hf-links {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem 0.25rem;
+    /* Tighter gap for 3 cols */
+    padding-left: 0;
   }
 
   .hf-links a {
     font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-    background: none;
-    border-radius: 20px;
-    min-height: 40px;
-    display: flex;
-    align-items: center;
+    /* Slightly smaller for 3 cols */
+    padding: 0;
+    margin: 0;
+    background: none !important;
+    border-radius: 0;
+    min-height: auto;
+    display: inline-block;
+    color: #e8eef6;
+  }
+
+  .hf-links a::before {
+    content: "- ";
+    opacity: 0.7;
+    margin-right: 2px;
   }
 
   .hf-links a:hover {
-    background: rgba(255, 255, 255, .15);
+    background: none;
+    text-decoration: underline;
+    opacity: 0.8;
   }
 
   /* Contact Section - Card style on mobile */
   .hf-contact {
 
-    padding: 1.25rem;
+    padding: 0;
     border-radius: 12px;
   }
 
@@ -3725,8 +3740,8 @@ div.modal-content.modal-content-redesigned {
 
   .hf-bottom {
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     gap: 0.5rem;
     padding-top: 1.5rem;
     font-size: 0.8rem;
@@ -3766,5 +3781,91 @@ div.modal-content.modal-content-redesigned {
   100% {
     opacity: 0.4;
     transform: scale(0.98);
+  }
+}
+
+/* ===== PAGINATION ===== */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 1rem 0;
+}
+
+.pagination-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem 1.25rem;
+  background: transparent;
+  border: 1px solid #d1d5db;
+  border-radius: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #2d4059;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: #f3f4f6;
+  border-color: #2d4059;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pagination-page {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination-page:hover {
+  background: #f3f4f6;
+  border-color: #2d4059;
+}
+
+.pagination-page.active {
+  background: #2d4059;
+  border-color: #2d4059;
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .pagination {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .pagination-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .pagination-page {
+    width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
   }
 }
