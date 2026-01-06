@@ -288,7 +288,7 @@
                     </div>
                   </div>
 
-                  <div class="cabin-divider"></div>
+                  <!-- <div class="cabin-divider"></div> -->
 
                   <!-- Info Section -->
                   <div class="cabin-info-section">
@@ -392,7 +392,7 @@
                     :key="d"
                     @click="toggleDestination(d)"
                   >
-                    <div class="list-text">{{ d }}</div>
+                    <div class="list-text result-list-text">{{ d }}</div>
                     <input
                       class="check"
                       type="checkbox"
@@ -441,7 +441,7 @@
                       :key="s.id"
                       @click="toggleShip(s.id)"
                     >
-                      <div class="list-text">{{ s.label }}</div>
+                      <div class="list-text result-list-text">{{ s.label }}</div>
                       <input
                         class="check"
                         type="checkbox"
@@ -532,7 +532,11 @@
                     />
                   </span>
                 </button>
-                <div v-if="openDates" class="dropdown-panel" @click.stop>
+                <div
+                  v-if="openDates"
+                  class="dropdown-panel date-dropdown-panel"
+                  @click.stop
+                >
                   <div class="custom-calendar">
                     <div class="calendar-header">
                       <h4 class="calendar-title">{{ currentMonthYear }}</h4>
@@ -585,10 +589,6 @@
                         </button>
                       </div>
                     </div>
-                  </div>
-                  <div class="dropdown-footer" @click="nextDropdown('dates')">
-                    <span>Next</span>
-                    <span style="font-size: 1.1rem">›</span>
                   </div>
                 </div>
               </div>
@@ -1143,13 +1143,92 @@
         </div>
       </div>
     </div>
+
+    <!-- Results footer (same as home footer) -->
+    <footer class="home-footer">
+      <div class="home-footer-inner container">
+        <!-- Top row: Brand + Links -->
+        <div class="hf-top">
+          <div class="hf-brand">
+            <div class="hf-logo">KOMODO CRUISES</div>
+            <div class="hf-copy">Rare journeys across the Komodo Islands.</div>
+          </div>
+          <nav class="hf-links">
+            <a href="#" @click.prevent="openPlanModal">Plan your trip</a>
+            <a href="#">Experiences</a>
+            <a href="#">Our story</a>
+            <a href="#">Contact</a>
+          </nav>
+          <div class="hf-contact">
+            <div class="hf-contact-title">Contact Us</div>
+            <div class="hf-contact-phone">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                />
+              </svg>
+              <a href="tel:+6285282296450">+62 852-8229-6450</a>
+            </div>
+            <div class="hf-contact-address">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span
+                >Graha Permata Pancoran, Jl. KH. Guru Amin Blok A5, Pancoran,
+                Jakarta Selatan 12780</span
+              >
+            </div>
+          </div>
+        </div>
+        <!-- Bottom row: Copyright -->
+        <div class="hf-bottom">
+          <div class="hf-copyright">
+            © {{ new Date().getFullYear() }} Komodo Cruises | PT CANARD MONEY
+            INDONESIA
+          </div>
+          <div class="hf-disclaimer">
+            All voyages subject to weather and park regulations.
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
+
+  <!-- Plan Modal -->
+  <PlanModal
+    :isOpen="isPlanModalOpen"
+    @close="closePlanModal"
+    @navigate-to-results="navigateToResults"
+  />
 </template>
 
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watchEffect } from "vue";
+import { useRouter } from "vue-router";
 import downArrowIcon from "../images/arrows/down-arrow.svg";
 import upArrowIcon from "../images/arrows/up-arrow.svg";
+import PlanModal from "../components/PlanModal.vue";
 // DEBUG LOGGING: Uncomment for troubleshooting price/detail mapping
 // (Letakkan di bawah semua computed agar tidak ReferenceError)
 
@@ -1270,6 +1349,7 @@ import {
 } from "../services/xenditService";
 import "../styles/pages/results.css";
 
+const router = useRouter();
 const DEFAULT_CURRENCY = "Rp";
 
 const rightArrowIcon =
@@ -1277,6 +1357,7 @@ const rightArrowIcon =
 
 const loading = ref(true);
 const error = ref("");
+const isPlanModalOpen = ref(false);
 const searchCriteria = ref(null);
 const shipAvailability = ref({});
 const availabilityData = ref([]);
@@ -3018,6 +3099,19 @@ function removeFromItinerary(item) {
   } catch (e) {
     console.error("Failed to remove from itinerary", e);
   }
+}
+
+function openPlanModal() {
+  isPlanModalOpen.value = true;
+}
+
+function closePlanModal() {
+  isPlanModalOpen.value = false;
+}
+
+function navigateToResults() {
+  isPlanModalOpen.value = false;
+  router.push("/results");
 }
 
 function loadItinerary() {

@@ -141,14 +141,6 @@
           can be found here, and remind you that you always have a home to come
           back to in Komodo.
         </p>
-        <p class="komodo-paragraph">
-          When the world's wildest places are yours to explore, meaningful bonds
-          and memorable moments come naturally. Discover such a bond in this
-          episode of the
-          <a href="#" class="komodo-link">Voyage Conversations Podcast</a>
-          – where local photographers and marine biologists recount their
-          experience at Komodo National Park.
-        </p>
       </div>
       <div class="komodo-media" ref="mediaRef3">
         <img

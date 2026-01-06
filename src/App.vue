@@ -1,11 +1,12 @@
 ﻿<script setup>
 import { ref, onMounted, onUnmounted } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import SearchModal from "./components/SearchModal.vue";
 import MenuModal from "./components/MenuModal.vue";
 import PlanModal from "./components/PlanModal.vue";
 
 const router = useRouter();
+const route = useRoute();
 const isScrolled = ref(false);
 const searchOpen = ref(false);
 const menuOpen = ref(false);
@@ -58,7 +59,11 @@ const openSearchFromMenu = () => {
 };
 
 const openPlanModal = () => {
-  planOpen.value = true;
+  if (route.path === "/results") {
+    router.push("/find-reservation");
+  } else {
+    planOpen.value = true;
+  }
 };
 
 const handlePlanNavigate = () => {
@@ -97,7 +102,8 @@ onUnmounted(() => {
           'home-nav': $route.path === '/',
           scrolled: isScrolled,
           'nav-light-theme': inDarkSection,
-          'navbar-result': $route.path === '/results',
+          'navbar-result':
+            $route.path === '/results' || $route.path === '/find-reservation',
         },
       ]"
     >
@@ -177,7 +183,12 @@ onUnmounted(() => {
         <!-- RIGHT: Login, Search, Book -->
         <div class="nav-right">
           <button class="nav-text-item nav-plan-item" @click="openPlanModal">
-            PLAN <span class="desktop-only">YOUR</span> TRIP
+            <template v-if="$route.path === '/results'">
+              FIND RESERVATION
+            </template>
+            <template v-else>
+              PLAN <span class="desktop-only">YOUR</span> TRIP
+            </template>
           </button>
           <span class="nav-text-item">LOGIN</span>
 
@@ -196,7 +207,11 @@ onUnmounted(() => {
           </span>
 
           <router-link
-            v-if="$route.path !== '/' && $route.path !== '/results'"
+            v-if="
+              $route.path !== '/' &&
+              $route.path !== '/results' &&
+              $route.path !== '/find-reservation'
+            "
             to="/plan"
             class="btn-book-pill"
           >

@@ -902,7 +902,7 @@ function selectDate(day) {
   align-items: flex-start;
   justify-content: space-between;
   padding: 1.5rem 0;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   width: 100%;
 }
 
@@ -1074,7 +1074,7 @@ function selectDate(day) {
   border-bottom: 1px solid rgba(34, 63, 98, 0.15);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   z-index: 10;
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 2rem !important;
   width: 100%;
   display: flex;
   align-items: center;
@@ -1118,7 +1118,7 @@ function selectDate(day) {
   cursor: pointer;
   color: var(--ocean-900, #223f62);
   padding: 0.5rem 0.75rem;
-  margin-right: 30px;
+  margin-right: 30px !important;
   border-radius: 0.25rem;
   text-decoration: none;
   text-underline-offset: 3px;

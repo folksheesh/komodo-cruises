@@ -13,29 +13,49 @@
 
 .results-layout {
   display: grid;
-  grid-template-columns: 1fr minmax(300px, 360px);
-  /* Flexible sidebar width */
-  gap: 2rem;
+  grid-template-columns: 1fr minmax(350px, 400px);
+  /* Wider sidebar to fit fixed dropdowns */
+  gap: 2.5rem;
   align-items: start;
 }
 
-@media (max-width: 1024px) {
+/* Large screens override */
+@media (max-width: 1400px) {
   .results-layout {
-    grid-template-columns: 1fr 300px;
+    grid-template-columns: 1fr minmax(340px, 380px);
+    gap: 2rem;
+  }
+}
+
+/* Medium-large screens - still fit dropdown */
+@media (max-width: 1200px) {
+  .results-layout {
+    grid-template-columns: 1fr 340px;
     gap: 1.5rem;
   }
 }
 
-@media (max-width: 768px) {
+/* Medium screens - Sidebar shrinking starts here, dropdown might pop out */
+@media (max-width: 1024px) {
+  .results-layout {
+    grid-template-columns: 1fr 280px;
+    gap: 1.25rem;
+  }
+}
+
+/* Tablet landscape - stack layout for better readability */
+@media (max-width: 900px) {
   .results-layout {
     grid-template-columns: 1fr;
     display: flex;
     flex-direction: column;
   }
+}
 
+@media (max-width: 768px) {
   .results-container {
-    padding: 1rem max(1rem, 15vw);
-    /* Maintain significantly increased responsive padding on mobile */
+    padding: 1rem max(1rem, 5vw);
+    /* Reduced padding on tablet for more content space */
   }
 }
 
@@ -55,6 +75,8 @@
   background: #ffffff;
   border-radius: 8px;
   overflow: hidden;
+  min-width: 0;
+  /* Allow proper shrinking in grid layout to prevent content cutoff */
 }
 
 .results-title {
@@ -242,8 +264,33 @@
   border-radius: 0;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  min-width: 0;
+  /* Prevent overflow in grid */
 }
 
+/* Medium-large screens - smaller image column */
+@media (max-width: 1200px) {
+  .cabin-card {
+    grid-template-columns: 280px 1fr;
+  }
+}
+
+/* Medium screens - even smaller image */
+@media (max-width: 1024px) {
+  .cabin-card {
+    grid-template-columns: 240px 1fr;
+  }
+
+  .cabin-content {
+    padding: 1.5rem;
+  }
+
+  .cabin-name {
+    font-size: 1.5rem;
+  }
+}
+
+/* Smaller screens - stack layout */
 @media (max-width: 968px) {
   .cabin-card {
     grid-template-columns: 1fr;
@@ -517,6 +564,10 @@
   padding-right: 0.5rem;
   margin-left: -0.5rem;
   margin-right: -0.5rem;
+}
+
+.result-list-text{
+	font-size: 1rem !important;
 }
 
 .trip-primary.active {
@@ -1041,15 +1092,58 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  min-width: 0;
+  /* Allow sidebar to shrink properly */
 }
 
-/* Mobile Sidebar - Move below cabin cards */
-@media (max-width: 768px) {
-  .results-layout {
-    display: flex;
-    flex-direction: column;
+/* Medium screens - Sidebar responsive adjustments */
+@media (max-width: 1200px) {
+  .sidebar-container {
+    gap: 1.25rem;
   }
 
+  .check-availability-section {
+    padding: 1.25rem;
+  }
+
+  .section-title-sidebar {
+    font-size: 1.5rem;
+  }
+
+  .itinerary-sidebar {
+    padding: 2rem 1.5rem;
+  }
+
+  .itinerary-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* Smaller medium screens - More compact sidebar */
+@media (max-width: 1024px) {
+  .sidebar-container {
+    gap: 1rem;
+  }
+
+  .check-availability-section {
+    padding: 1rem;
+  }
+
+  .section-title-sidebar {
+    font-size: 1.35rem;
+  }
+
+  .itinerary-sidebar {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .itinerary-title {
+    font-size: 1.35rem;
+  }
+}
+
+/* Tablet landscape and below - Sidebar stacks below cabin cards */
+@media (max-width: 900px) {
   .results-main {
     order: 1;
   }
@@ -1065,11 +1159,30 @@
     overflow: visible;
     border-radius: 0;
     transform: none;
+    width: 100%;
   }
 
   .itinerary-sidebar,
   .check-availability-section {
+    padding: 1.5rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .itinerary-title,
+  .section-title-sidebar {
+    font-size: 1.5rem;
+  }
+}
+
+/* Mobile - Further adjustments */
+@media (max-width: 768px) {
+
+  .itinerary-sidebar,
+  .check-availability-section {
     padding: 1.25rem;
+    max-width: none;
   }
 
   .itinerary-title,
@@ -3229,4 +3342,372 @@ div.modal-content.modal-content-redesigned {
     padding: 1.5rem;
     gap: 1.5rem;
   }
+}
+
+/* Fix Dropdown Sizing to prevent shrinking */
+.sidebar-container .dropdown-panel {
+  min-width: 340px !important;
+  /* Force fixed width to prevent squashing */
+  width: auto !important;
+  max-width: 90vw;
+  z-index: 1050;
+}
+
+.sidebar-container .custom-calendar {
+  min-width: 320px;
+}
+
+/* Ensure responsive adjustments don't verify strict width on mobile if needed */
+@media (max-width: 480px) {
+  .sidebar-container .dropdown-panel {
+    min-width: 280px !important;
+    width: 100% !important;
+  }
+
+  .sidebar-container .custom-calendar {
+    min-width: 100%;
+  }
+}
+
+/* Clean Date Dropdown */
+.sidebar-container .date-dropdown-panel {
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.sidebar-container .custom-calendar {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e5e7eb;
+}
+/* Force Calendar Full Width */
+.sidebar-container .date-dropdown-panel {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+.sidebar-container .custom-calendar {
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+}
+
+/* Make Calendar Square & Proportional */
+.sidebar-container .calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-top: 1rem;
+}
+
+.sidebar-container .calendar-day {
+  aspect-ratio: 1 / 1;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  height: auto !important;
+  padding: 0 !important;
+  font-size: 0.95rem;
+  border-radius: 4px;
+}
+
+/* Fix Calendar Gap for Connected Ranges */
+.sidebar-container .calendar-days {
+  gap: 0 !important; /* Remove gap so ranges connect */
+}
+
+.sidebar-container .calendar-day {
+  border-radius: 0; /* Remove border radius for connected look, or use specific logic for ends */
+  margin: 0 !important;
+}
+
+/* Restore rounded corners only for selection ends */
+.sidebar-container .calendar-day.range-start {
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+.sidebar-container .calendar-day.range-end {
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+/* Single selected day or hover */
+.sidebar-container .calendar-day:not(.in-range):not(.range-start):not(.range-end):hover {
+  border-radius: 50%;
+}
+
+/* Make Calendar Square (No Rounded Corners) */
+.sidebar-container .calendar-day,
+.sidebar-container .calendar-day.range-start,
+.sidebar-container .calendar-day.range-end,
+.sidebar-container .calendar-day:hover {
+  border-radius: 0 !important;
+}
+
+/* Make All Dropdowns Fit Parent Width */
+.sidebar-container .dropdown-panel {
+  width: 100% !important;
+  min-width: 100% !important; /* Ensure it's at least as wide as the button */
+  max-width: none !important;
+}
+
+/* Ensure sorting dropdown still has reasonable width */
+.sort-dropdown-panel {
+  min-width: 200px !important;
+  width: max-content !important;
+}
+
+/* Mobile Stacked Layout Adjustments */
+@media (max-width: 900px) {
+  /* Make sidebar sections full width fluid matching main content */
+  .itinerary-sidebar,
+  .check-availability-section {
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Calendar Dropdown Exception for Mobile/Wide Buttons */
+  /* Prevent calendar from stretching too wide on mobile stacked layout */
+  .sidebar-container .date-dropdown-panel {
+    width: auto !important;
+    min-width: 300px !important;
+    max-width: 100% !important;
+  }
+
+  .sidebar-container .custom-calendar {
+    width: auto !important;
+    min-width: 0 !important;
+  }
+}
+
+/* Force Normal Calendar Size on Mobile/Stacked */
+@media (max-width: 900px) {
+  .sidebar-container .date-dropdown-panel {
+    width: 350px !important; /* Fixed normal width */
+    max-width: 100% !important;
+    min-width: 300px !important;
+  }
+
+  .sidebar-container .custom-calendar {
+    width: 100% !important;
+  }
+}
+/* ---- Results page footer (shared with home) ---- */
+.home-footer {
+	background: var(--ocean-900);
+	color: #fff;
+	margin-top: 0;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}
+
+.home-footer-inner {
+	display: flex;
+	flex-direction: column;
+	padding: 3rem var(--edge-pad) 2rem;
+}
+
+/* Top row with 3-column grid */
+.hf-top {
+	display: grid;
+	grid-template-columns: 1.5fr 1fr 1.5fr;
+	gap: 3rem;
+	align-items: start;
+	padding-bottom: 2.5rem;
+	border-bottom: 1px solid rgba(255, 255, 255, .12);
+}
+
+.hf-logo {
+	font-family: var(--font-sans);
+	font-weight: 600;
+	font-size: clamp(1.5rem, 2.6vw, 2rem);
+	margin-bottom: .5rem;
+}
+
+.hf-copy {
+	color: #c5d4e8;
+	opacity: .9;
+	line-height: 1.6;
+	font-size: .95rem;
+}
+
+.hf-links {
+	display: flex;
+	flex-direction: column;
+	gap: .6rem;
+}
+
+.hf-links a {
+	color: #e8eef6;
+	text-decoration: none;
+	font-weight: 500;
+	line-height: 1.5;
+	transition: opacity .2s;
+}
+
+.hf-links a:hover {
+	opacity: .75;
+	text-decoration: underline;
+}
+
+.hf-contact {
+	color: #e8eef6;
+}
+
+.hf-contact-title {
+	font-family: var(--font-serif);
+	font-weight: 500;
+	font-size: 1.15rem;
+	margin-bottom: .75rem;
+}
+
+.hf-contact-phone,
+.hf-contact-address {
+	display: flex;
+	align-items: flex-start;
+	gap: .6rem;
+	margin-bottom: .5rem;
+}
+
+.hf-contact-phone svg,
+.hf-contact-address svg {
+	flex-shrink: 0;
+	margin-top: 3px;
+	opacity: .8;
+}
+
+.hf-contact-phone a {
+	color: #e8eef6;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+.hf-contact-phone a:hover {
+	text-decoration: underline;
+}
+
+.hf-contact-address span {
+	font-size: .9rem;
+	line-height: 1.55;
+	color: #c5d4e8;
+}
+
+/* Bottom row */
+.hf-bottom {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-top: 1.5rem;
+	font-size: .85rem;
+	color: #a8bdd4;
+}
+
+.hf-copyright {
+	font-weight: 500;
+}
+
+.hf-disclaimer {
+	opacity: .8;
+}
+
+@media (max-width: 900px) {
+	.hf-top {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+}
+
+/* ===== FOOTER MOBILE POLISH ===== */
+@media (max-width: 640px) {
+	.home-footer-inner {
+		padding: 2.5rem 1.25rem 2rem;
+	}
+
+	.hf-top {
+		gap: 2rem;
+		padding-bottom: 2rem;
+	}
+
+	.hf-brand {
+		text-align: center;
+	}
+
+	.hf-logo {
+		font-size: 1.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.hf-copy {
+		font-size: 0.95rem;
+	}
+
+	/* Links as horizontal pills on mobile */
+	.hf-links {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.5rem;
+	}
+
+	.hf-links a {
+		font-size: 0.9rem;
+		padding: 0.5rem 1rem;
+		background: none;
+		border-radius: 20px;
+		min-height: 40px;
+		display: flex;
+		align-items: center;
+	}
+
+	.hf-links a:hover {
+		background: rgba(255, 255, 255, .15);
+	}
+
+	/* Contact Section - Card style on mobile */
+	.hf-contact {
+
+		padding: 1.25rem;
+		border-radius: 12px;
+	}
+
+	.hf-contact-title {
+		font-size: 1.1rem;
+		text-align: center;
+		margin-bottom: 1rem;
+	}
+
+	.hf-contact-phone {
+		justify-content: center;
+		margin-bottom: 0.75rem;
+	}
+
+	.hf-contact-phone a {
+		font-size: 1.05rem;
+	}
+
+	.hf-contact-address {
+		justify-content: flex-start;
+	}
+
+	.hf-contact-address span {
+		font-size: 0.85rem;
+		line-height: 1.6;
+	}
+
+	.hf-bottom {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 0.5rem;
+		padding-top: 1.5rem;
+		font-size: 0.8rem;
+	}
+
+	.hf-copyright {
+		font-size: 0.85rem;
+	}
 }
