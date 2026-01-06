@@ -454,7 +454,7 @@ body:has(.hero-section):not(:has(.scrolled)) .brand-chip {
     padding: 0 1.125rem;
   }
 
-  .logo-singita {
+  .logo-komodo {
     font-size: 1.6rem;
     margin-right: 1rem;
   }

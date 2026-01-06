@@ -147,6 +147,37 @@
   height: 14px;
 }
 
+.calendar-day.past {
+  color: #ccc !important;
+}
+
+.calendar-day:disabled {
+  cursor: not-allowed;
+}
+
+/* Middle date(s) - All dates in range get light blue background with white text */
+.calendar-day.in-range {
+  background: rgba(106, 140, 175, 0.7) !important;
+  color: white !important;
+  font-weight: 500;
+  border-radius: 0;
+}
+
+/* Selected date (first click) - show dark blue immediately */
+.calendar-day.selected {
+  background: #254f7d !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+/* Override for range-start and range-end to use dark blue */
+.calendar-day.in-range.range-start,
+.calendar-day.in-range.range-end {
+  background: #254f7d !important;
+  color: white !important;
+  font-weight: 600;
+}
+
 .sort-dropdown-panel {
   position: absolute;
   top: 100%;
@@ -344,7 +375,7 @@
 }
 
 .cabin-name {
-  font-family: var(--font-serif, 'Playfair Display', serif);
+  font-family: var(--font-serif);
   font-size: 2rem;
   font-weight: 400;
   color: #2d4059;
@@ -461,6 +492,186 @@
   height: 22px;
   font-weight: 400;
   margin-left: 4px
+}
+
+/* Trips Selection Section - Luxury Dropdown Style */
+.trips-section {
+  margin: 1.5rem 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Primary Trip - Always Visible */
+.trip-primary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.trip-primary:hover {
+  background: #fafbfc;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+
+.trip-primary.active {
+  background: #f8fafc;
+}
+
+.trip-primary-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.trip-primary-date {
+  font-family: var(--font-serif, 'Playfair Display', serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #2d4059;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.trip-primary-rooms {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 400;
+}
+
+.trip-selected-indicator {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2d4059;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* More Dates Toggle Button */
+.more-dates-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1rem 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #e2e8f0;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2d4059;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s ease;
+}
+
+.more-dates-toggle:hover {
+  color: #1a2a3a;
+  background: #fafbfc;
+}
+
+.toggle-arrow {
+  font-size: 0.65rem;
+  transition: transform 0.3s ease;
+}
+
+.toggle-arrow.expanded {
+  transform: rotate(180deg);
+}
+
+/* Expandable Dates List */
+.more-dates-list {
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Alternative Trip Options */
+.trip-option-alt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.trip-option-alt:last-child {
+  border-bottom: none;
+}
+
+.trip-option-alt:hover {
+  background: #fafbfc;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+
+.trip-option-alt.active {
+  background: #f8fafc;
+}
+
+.trip-alt-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.trip-alt-date {
+  font-family: var(--font-serif, 'Playfair Display', serif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: #2d4059;
+}
+
+.trip-alt-rooms {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.trip-select-action {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2d4059;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.2s ease;
+}
+
+.trip-option-alt:hover .trip-select-action {
+  color: #1a2a3a;
 }
 
 .caret-icon {
@@ -934,7 +1145,6 @@
   font-family: var(--font-serif, 'Playfair Display', serif);
   font-size: 1.75rem;
   font-weight: 400;
-  font-style: italic;
   color: #2d4059;
   margin: 0 0 1.25rem 0;
   line-height: 1.2;
@@ -959,7 +1169,6 @@
   color: #9ca3af;
   padding: 1.5rem 0;
   text-align: left;
-  font-style: italic;
 }
 
 .itinerary-list {
@@ -1465,7 +1674,7 @@
 .section-title {
   font-family: var(--font-serif, serif);
   font-size: 1.5rem;
-  color: #1f2937;
+  color: var(--ocean-900);
   margin: 0 0 1rem;
 }
 
@@ -1508,8 +1717,8 @@
 
 .modal-close-details {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  /* top: 1rem; */
+  /* right: 1rem; */
   background: white;
   border: none;
   width: 32px;
@@ -1565,12 +1774,11 @@
   .modal-info-section {
     order: 2;
     padding: 1.25rem;
-    gap: 1rem;
+    /* gap: 1rem; */
   }
 
   .modal-cabin-image {
-    min-height: 250px;
-    max-height: 300px;
+    aspect-ratio: 8 / 6;
   }
 
   .modal-gallery-nav {
@@ -1595,8 +1803,7 @@
   }
 
   .modal-cabin-image {
-    min-height: 200px;
-    max-height: 250px;
+    aspect-ratio: 8 / 6;
   }
 
   .modal-info-section {
@@ -1611,8 +1818,8 @@
 
 .modal-cabin-image {
   width: 100%;
-  height: 100%;
-  min-height: 400px;
+  height: auto;
+  aspect-ratio: 8 / 6 !important;
   object-fit: cover;
   display: block;
 }
@@ -1649,10 +1856,9 @@
 }
 
 .modal-info-section {
-  padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  /* gap: 1.5rem; */
 }
 
 .modal-cabin-name {
@@ -1742,7 +1948,6 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 }
 
 /* Cabin Quantity Selector */
@@ -1882,8 +2087,9 @@
 }
 
 /* ===== REDESIGNED MODAL STYLES ===== */
-.modal-content-redesigned {
-  max-width: 1000px;
+div.modal-content.modal-content-redesigned {
+  max-width: 1200px !important;
+  width: 95% !important;
   max-height: 90vh;
   overflow: hidden;
   display: flex;
@@ -1892,14 +2098,14 @@
 
 .modal-body-redesigned {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 35% 65%;
   flex: 1;
   overflow: hidden;
 }
 
 /* Info Section - Left */
 .modal-info-left {
-  padding: 2rem;
+  padding: 1rem;
   overflow-y: auto;
   max-height: 70vh;
   order: 1;
@@ -1909,7 +2115,19 @@
 .modal-image-right {
   position: relative;
   order: 2;
-  min-height: 400px;
+  background: #f5f5f5;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-image-right .modal-cabin-image {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 8 / 6 !important;
+  object-fit: cover;
+  display: block;
 }
 
 .modal-cabin-header {
@@ -1932,6 +2150,7 @@
 .modal-cabin-quote {
   font-style: italic;
   font-size: 1rem;
+  font-weight: 200;
   color: #374151;
   line-height: 1.6;
   margin: 0 0 1.5rem 0;
@@ -2038,6 +2257,7 @@
 .modal-bottom-section .price-note {
   font-size: 0.75rem;
   color: #9ca3af;
+  margin-left: 1px;
 }
 
 .modal-bottom-section .modal-book-btn {
@@ -2648,7 +2868,7 @@
 
 .guest-counter-section {
   background: #f9fafb;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   padding: 1.5rem;
   border: 1px solid #e5e7eb;
 }
@@ -2992,8 +3212,8 @@
 /* Close Button Position */
 .modal-close-details {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 5px;
+  right: 5px;
   background: transparent;
   border: none;
   font-size: 1.5rem;

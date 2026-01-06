@@ -62,23 +62,23 @@
   <!-- Destinations Carousel -->
   <DestinationCarousel />
 
-  <!-- Singita Section 1: Text Left, Image Right with Video Play Button -->
-  <section class="singita-section">
-    <div class="singita-content">
-      <div class="singita-text">
-        <h2 class="singita-heading">
+  <!-- Komodo Cruises Section 1: Text Left, Image Right with Video Play Button -->
+  <section class="komodo-section">
+    <div class="komodo-content">
+      <div class="komodo-text">
+        <h2 class="komodo-heading">
           From calm waters to soulful treks with ancient Komodo dragons, a
           golden thread throughout every Komodo Cruises experience is a deep
           reverence for the wild and its power to heal.
         </h2>
-        <p class="singita-paragraph">
+        <p class="komodo-paragraph">
           Our phinisi vessels and curated voyages across the Komodo Islands have
           been intentionally designed to offer guests the freedom to reflect and
           feel their senses awaken, inviting in wonder and a wholeness that
           comes from truly leaning into nature.
         </p>
       </div>
-      <div class="singita-media" ref="mediaRef1">
+      <div class="komodo-media" ref="mediaRef1">
         <img
           :src="homeLandscapeImg"
           alt="Komodo landscape"
@@ -100,21 +100,21 @@
     </div>
   </section>
 
-  <!-- Singita Section 2: Image Left, Text Right -->
-  <section class="singita-section section-alt">
-    <div class="singita-content reverse">
-      <div class="singita-text">
-        <h2 class="singita-heading">
+  <!-- Komodo Cruises Section 2: Image Left, Text Right -->
+  <section class="komodo-section section-alt">
+    <div class="komodo-content reverse">
+      <div class="komodo-text">
+        <h2 class="komodo-heading">
           Dedicated to environmentally conscious hospitality, sustainable
           conservation, and collaborating with local communities since 2015.
         </h2>
-        <p class="singita-paragraph">
+        <p class="komodo-paragraph">
           The Komodo Cruises experience is an invitation to share in our love
           and care for the natural world, to be part of something meaningful,
           far-reaching, and much bigger than ourselves.
         </p>
       </div>
-      <div class="singita-media" ref="mediaRef2">
+      <div class="komodo-media" ref="mediaRef2">
         <img
           :src="homeConservationImg"
           alt="Conservation efforts"
@@ -125,15 +125,15 @@
     </div>
   </section>
 
-  <!-- Singita Section 3: Text Left, Image Right -->
-  <section class="singita-section">
-    <div class="singita-content">
-      <div class="singita-text">
-        <h2 class="singita-heading">Telling Komodo's stories.</h2>
-        <p class="singita-subheading">
+  <!-- Komodo Cruises Section 3: Text Left, Image Right -->
+  <section class="komodo-section">
+    <div class="komodo-content">
+      <div class="komodo-text">
+        <h2 class="komodo-heading">Telling Komodo's stories.</h2>
+        <p class="komodo-subheading">
           Komodo Cruises means "Place of Dragons" in local lore.
         </p>
-        <p class="singita-paragraph">
+        <p class="komodo-paragraph">
           Our people are an integral of the Komodo Cruises experience, sharing
           their passion for Indonesia's natural spaces and rich cultures through
           stories and experiences designed to bring you closer to both. In doing
@@ -141,16 +141,16 @@
           can be found here, and remind you that you always have a home to come
           back to in Komodo.
         </p>
-        <p class="singita-paragraph">
+        <p class="komodo-paragraph">
           When the world's wildest places are yours to explore, meaningful bonds
           and memorable moments come naturally. Discover such a bond in this
           episode of the
-          <a href="#" class="singita-link">Voyage Conversations Podcast</a>
+          <a href="#" class="komodo-link">Voyage Conversations Podcast</a>
           – where local photographers and marine biologists recount their
           experience at Komodo National Park.
         </p>
       </div>
-      <div class="singita-media" ref="mediaRef3">
+      <div class="komodo-media" ref="mediaRef3">
         <img
           :src="homeCultureImg"
           alt="Komodo stories"
@@ -161,16 +161,16 @@
     </div>
   </section>
 
-  <!-- Singita Section 4: Image Left, Text Right (Legacy) -->
-  <section class="singita-section section-alt">
-    <div class="singita-content reverse">
-      <div class="singita-text">
-        <p class="singita-subheading">A legacy unfolds</p>
-        <h2 class="singita-heading">
+  <!-- Komodo Cruises Section 4: Image Left, Text Right (Legacy) -->
+  <section class="komodo-section section-alt">
+    <div class="komodo-content reverse">
+      <div class="komodo-text">
+        <p class="komodo-subheading">A legacy unfolds</p>
+        <h2 class="komodo-heading">
           Komodo Cruises started in 2015 with a simple wooden boat and a deep
           passion for the ocean.
         </h2>
-        <p class="singita-paragraph">
+        <p class="komodo-paragraph">
           This was the start of a legacy that has unfolded over decades – and
           the origin of a brand inspired by family values and an abiding sense
           of purpose that offers guests profound wildlife encounters in
@@ -193,7 +193,7 @@
           </button>
         </div>
       </div>
-      <div class="singita-media" ref="mediaRef4">
+      <div class="komodo-media" ref="mediaRef4">
         <img
           :src="homeLegacyImg"
           alt="Our story"

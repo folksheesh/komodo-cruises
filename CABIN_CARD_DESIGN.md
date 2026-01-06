@@ -1,4 +1,4 @@
-# Cabin Card Design - Singita Style
+# Cabin Card Design - Komodo Cruises Style
 
 ## Struktur Card Baru
 

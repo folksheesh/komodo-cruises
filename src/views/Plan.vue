@@ -94,19 +94,15 @@
       <!-- Step 3: Dates -->
       <div v-else-if="step === 3">
         <h3 class="step-title">Dates</h3>
-        <p class="results-note">Select the start date for your trip:</p>
+        <p class="results-note">Select your travel dates:</p>
         <p class="results-note text-sm">
-          Trips start only on Mondays and Fridays.
+          Click to select start date, then click again to select end date.
         </p>
 
-        <div class="date-input-section">
-          <label class="date-label">Start Date:</label>
-          <input
-            type="date"
-            class="input date-input"
-            v-model="dateFrom"
-            :min="minDate"
-          />
+        <div class="date-range-display">
+          <span class="date-value">{{ dateFrom || "Start date" }}</span>
+          <span class="date-arrow">→</span>
+          <span class="date-value">{{ dateTo || "End date" }}</span>
         </div>
 
         <div class="custom-calendar">
@@ -140,8 +136,10 @@
                   'other-month': !day.isCurrentMonth,
                   selected: day.isSelected,
                   disabled: !day.isSelectable,
-                  monday: day.isMonday,
-                  friday: day.isFriday,
+                  past: day.isPast,
+                  'in-range': day.isInRange,
+                  'range-start': day.isRangeStart,
+                  'range-end': day.isRangeEnd,
                 }"
                 :disabled="!day.isSelectable"
                 @click="selectDate(day)"
@@ -357,10 +355,31 @@ const calendarDays = computed(() => {
   ) {
     const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, 5 = Friday
     const isCurrentMonth = date.getMonth() === currentMonth.value;
-    const isSelectable =
-      isCurrentMonth && date >= today && (dayOfWeek === 1 || dayOfWeek === 5); // Monday or Friday only
+
+    // Normalize date for comparison to ignore time
+    const dDate = new Date(date);
+    dDate.setHours(0, 0, 0, 0);
+    const dToday = new Date(today);
+    dToday.setHours(0, 0, 0, 0);
+
+    const isPast = dDate < dToday;
+    const isSelectable = isCurrentMonth && !isPast; // All future dates are selectable
 
     const dateString = date.toISOString().split("T")[0];
+
+    // Check if in range
+    let isInRange = false;
+    let isRangeStart = false;
+    let isRangeEnd = false;
+    if (dateFrom.value && dateTo.value && isCurrentMonth) {
+      const fromDate = new Date(dateFrom.value + "T00:00:00");
+      const toDate = new Date(dateTo.value + "T00:00:00");
+      if (dDate >= fromDate && dDate <= toDate) {
+        isInRange = true;
+        if (dDate.getTime() === fromDate.getTime()) isRangeStart = true;
+        if (dDate.getTime() === toDate.getTime()) isRangeEnd = true;
+      }
+    }
 
     days.push({
       key: date.getTime(),
@@ -368,9 +387,11 @@ const calendarDays = computed(() => {
       fullDate: dateString,
       isCurrentMonth,
       isSelectable,
-      isSelected: dateFrom.value === dateString,
-      isMonday: dayOfWeek === 1,
-      isFriday: dayOfWeek === 5,
+      isPast,
+      isSelected: dateFrom.value === dateString || dateTo.value === dateString,
+      isInRange,
+      isRangeStart,
+      isRangeEnd,
     });
   }
 
@@ -474,12 +495,24 @@ function nextMonth() {
 }
 
 function selectDate(day) {
-  if (day.isSelectable) {
+  if (!day.isSelectable) return;
+
+  // If no start date, or if both dates are set, start fresh
+  if (!dateFrom.value || (dateFrom.value && dateTo.value)) {
     dateFrom.value = day.fullDate;
-    // For trips, we can automatically set end date (e.g., 3 days later)
-    const endDate = new Date(day.fullDate);
-    endDate.setDate(endDate.getDate() + 3); // 3-day trip example
-    dateTo.value = endDate.toISOString().split("T")[0];
+    dateTo.value = "";
+  } else {
+    // Start date exists, set end date
+    const startDate = new Date(dateFrom.value + "T00:00:00");
+    const clickedDate = new Date(day.fullDate + "T00:00:00");
+
+    if (clickedDate < startDate) {
+      // If clicked date is before start, swap them
+      dateTo.value = dateFrom.value;
+      dateFrom.value = day.fullDate;
+    } else {
+      dateTo.value = day.fullDate;
+    }
   }
 }
 

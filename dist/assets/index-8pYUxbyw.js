@@ -3198,7 +3198,7 @@ const fo = { class: "results-wrap" },
                                             "Your preferred travel dates are available!"
                                           ),
                                           F(
-                                            " We have a team of Singita Journey Designers who are ready to plan your trip. Simply select the results that suit your preferences best and submit your enquiry. "
+                                            " We have a team of Komodo Cruises Journey Designers who are ready to plan your trip. Simply select the results that suit your preferences best and submit your enquiry. "
                                           ),
                                         ],
                                         -1
@@ -3233,7 +3233,7 @@ const fo = { class: "results-wrap" },
                                           e(
                                             "strong",
                                             null,
-                                            "Your preferred dates are unfortunately not available, but there is availability at other Singita lodges or on alternate dates."
+                                            "Your preferred dates are unfortunately not available, but there is availability at other Komodo Cruises lodges or on alternate dates."
                                           ),
                                         ],
                                         -1
@@ -3241,7 +3241,7 @@ const fo = { class: "results-wrap" },
                                       e(
                                         "p",
                                         null,
-                                        "We have a team of Singita Journey Designers who are ready to plan your trip. Simply select the results that suit your preferences best and submit your enquiry.",
+                                        "We have a team of Komodo Cruises Journey Designers who are ready to plan your trip. Simply select the results that suit your preferences best and submit your enquiry.",
                                         -1
                                       ),
                                       e(
@@ -4520,7 +4520,7 @@ const fo = { class: "results-wrap" },
                         (t[77] = e(
                           "p",
                           { class: "itinerary-description" },
-                          "This is a summary of the accommodation you have selected. After submitting your booking request, a Singita Journey Designer will make contact to book and confirm your trip.",
+                          "This is a summary of the accommodation you have selected. After submitting your booking request, a Komodo Cruises Journey Designer will make contact to book and confirm your trip.",
                           -1
                         )),
                       t[78] ||
@@ -5369,7 +5369,7 @@ const fo = { class: "results-wrap" },
                                     (t[104] = e(
                                       "span",
                                       null,
-                                      "Sign up to receive news and blog posts from Singita",
+                                      "Sign up to receive news and blog posts from Komodo Cruises",
                                       -1
                                     )),
                                 ]),
@@ -5449,7 +5449,7 @@ const fo = { class: "results-wrap" },
                             (t[113] = e(
                               "p",
                               { class: "summary-description" },
-                              "This is a summary of the accommodation you've selected. One of our Singita Journey Designers will contact you shortly to plan your trip.",
+                              "This is a summary of the accommodation you've selected. One of our Komodo Cruises Journey Designers will contact you shortly to plan your trip.",
                               -1
                             )),
                           e("div", Di, [

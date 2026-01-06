@@ -215,17 +215,19 @@
                 <!-- Step 3: Dates -->
                 <div v-else-if="step === 3">
                   <h3 class="step-title">Dates</h3>
-                  <p class="results-note">
-                    Select the dates which will suit you:
+                  <p class="results-note">Select your travel dates:</p>
+                  <p class="results-note text-sm">
+                    Click to select start date, then click again to select end
+                    date.
                   </p>
 
                   <!-- Date Range Display Box -->
                   <div class="date-range-display">
                     <span class="date-value">{{
-                      dateFrom || "Select start date"
+                      dateFrom || "Start date"
                     }}</span>
                     <span class="date-arrow">→</span>
-                    <span class="date-value">{{ dateTo || "" }}</span>
+                    <span class="date-value">{{ dateTo || "End date" }}</span>
                   </div>
 
                   <div class="custom-calendar">
@@ -269,11 +271,9 @@
                             'other-month': !day.isCurrentMonth,
                             selected: day.isSelected,
                             disabled: !day.isSelectable,
-                            monday: day.isMonday,
-                            friday: day.isFriday,
+                            past: day.isPast,
                             'in-range': day.isInRange,
                             'range-start': day.isRangeStart,
-                            'range-middle': day.isRangeMiddle,
                             'range-end': day.isRangeEnd,
                           }"
                           :disabled="!day.isSelectable"
@@ -567,24 +567,22 @@ const calendarDays = computed(() => {
   const endDate = new Date(lastDay);
   endDate.setDate(endDate.getDate() + (6 - lastDay.getDay()));
 
-  // Calculate date range for highlighting (startDate + 2 days)
-  let rangeStartDate = null;
-  let rangeEndDate = null;
-  if (dateFrom.value) {
-    rangeStartDate = parseDateString(dateFrom.value);
-    rangeEndDate = new Date(rangeStartDate);
-    rangeEndDate.setDate(rangeEndDate.getDate() + 2);
-  }
-
   for (
     let date = new Date(startDate);
     date <= endDate;
     date.setDate(date.getDate() + 1)
   ) {
-    const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, 5 = Friday
+    const dayOfWeek = date.getDay();
     const isCurrentMonth = date.getMonth() === currentMonth.value;
-    const isSelectable =
-      isCurrentMonth && date >= today && (dayOfWeek === 1 || dayOfWeek === 5); // Monday or Friday only
+
+    // Normalize date for comparison to ignore time
+    const dDate = new Date(date);
+    dDate.setHours(0, 0, 0, 0);
+    const dToday = new Date(today);
+    dToday.setHours(0, 0, 0, 0);
+
+    const isPast = dDate < dToday;
+    const isSelectable = isCurrentMonth && !isPast; // All future dates are selectable
 
     // Use utility function for consistent date formatting
     const dateString = formatDateToString(date);
@@ -592,19 +590,14 @@ const calendarDays = computed(() => {
     // Check if in range
     let isInRange = false;
     let isRangeStart = false;
-    let isRangeMiddle = false;
     let isRangeEnd = false;
-    if (rangeStartDate && rangeEndDate && isCurrentMonth) {
-      const currentDate = new Date(date);
-      if (currentDate >= rangeStartDate && currentDate <= rangeEndDate) {
+    if (dateFrom.value && dateTo.value && isCurrentMonth) {
+      const fromDate = parseDateString(dateFrom.value);
+      const toDate = parseDateString(dateTo.value);
+      if (dDate >= fromDate && dDate <= toDate) {
         isInRange = true;
-        if (currentDate.getTime() === rangeStartDate.getTime()) {
-          isRangeStart = true;
-        } else if (currentDate.getTime() === rangeEndDate.getTime()) {
-          isRangeEnd = true;
-        } else {
-          isRangeMiddle = true;
-        }
+        if (dDate.getTime() === fromDate.getTime()) isRangeStart = true;
+        if (dDate.getTime() === toDate.getTime()) isRangeEnd = true;
       }
     }
 
@@ -614,12 +607,10 @@ const calendarDays = computed(() => {
       fullDate: dateString,
       isCurrentMonth,
       isSelectable,
-      isSelected: dateFrom.value === dateString,
-      isMonday: dayOfWeek === 1,
-      isFriday: dayOfWeek === 5,
+      isPast,
+      isSelected: dateFrom.value === dateString || dateTo.value === dateString,
       isInRange,
       isRangeStart,
-      isRangeMiddle,
       isRangeEnd,
     });
   }
@@ -859,10 +850,24 @@ function nextMonth() {
 }
 
 function selectDate(day) {
-  if (day.isSelectable) {
+  if (!day.isSelectable) return;
+
+  // If no start date, or if both dates are set, start fresh
+  if (!dateFrom.value || (dateFrom.value && dateTo.value)) {
     dateFrom.value = day.fullDate;
-    // For 3 days 2 nights trip, end date is start + 2 days
-    dateTo.value = addDaysToDateString(day.fullDate, 2);
+    dateTo.value = "";
+  } else {
+    // Start date exists, set end date
+    const startDate = parseDateString(dateFrom.value);
+    const clickedDate = parseDateString(day.fullDate);
+
+    if (clickedDate < startDate) {
+      // If clicked date is before start, swap them
+      dateTo.value = dateFrom.value;
+      dateFrom.value = day.fullDate;
+    } else {
+      dateTo.value = day.fullDate;
+    }
   }
 }
 

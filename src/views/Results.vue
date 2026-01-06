@@ -18,9 +18,9 @@
               <div v-if="allStartDateCabins.length" class="success-message">
                 <p>
                   <strong>Your preferred travel dates are available!</strong>
-                  We have a team of Singita Journey Designers who are ready to
-                  plan your trip. Simply select the results that suit your
-                  preferences best and submit your enquiry.
+                  We have a team of Komodo Cruises Journey Designers who are
+                  ready to plan your trip. Simply select the results that suit
+                  your preferences best and submit your enquiry.
                 </p>
                 <p class="results-note-muted">
                   <span class="semibold">Note:</span> These results indicate
@@ -32,14 +32,14 @@
                 <p>
                   <strong
                     >Your preferred dates are unfortunately not available, but
-                    there is availability at other Singita lodges or on
+                    there is availability at other Komodo Cruises lodges or on
                     alternate dates.</strong
                   >
                 </p>
                 <p>
-                  We have a team of Singita Journey Designers who are ready to
-                  plan your trip. Simply select the results that suit your
-                  preferences best and submit your enquiry.
+                  We have a team of Komodo Cruises Journey Designers who are
+                  ready to plan your trip. Simply select the results that suit
+                  your preferences best and submit your enquiry.
                 </p>
                 <p class="results-note-muted">
                   <span class="semibold">Note:</span> These results indicate
@@ -176,6 +176,12 @@
                     <span>{{
                       getCabinSize(item.originalItem) || "Private cabin"
                     }}</span>
+                    <template v-if="getCabinTripDays(item.originalItem)">
+                      <span class="specs-divider">|</span>
+                      <span
+                        >{{ getCabinTripDays(item.originalItem) }} Days</span
+                      >
+                    </template>
                   </div>
 
                   <!-- Overview Section (Two Column) -->
@@ -216,6 +222,72 @@
                     ROOM DETAILS
                   </button>
 
+                  <!-- Trip Dates Section (Luxury Dropdown Style) -->
+                  <div
+                    v-if="item.trips && item.trips.length > 0"
+                    class="trips-section"
+                  >
+                    <!-- Primary Trip - Shows selected trip or first trip -->
+                    <div class="trip-primary">
+                      <div class="trip-primary-info">
+                        <span class="trip-primary-date">{{
+                          formatTripDateRange(
+                            getDisplayTrip(item).date,
+                            getDisplayTrip(item).tripDays
+                          )
+                        }}</span>
+                        <span class="trip-primary-rooms"
+                          >{{ getDisplayTrip(item).available || 1 }} room{{
+                            (getDisplayTrip(item).available || 1) > 1 ? "s" : ""
+                          }}
+                          available</span
+                        >
+                      </div>
+                    </div>
+
+                    <!-- More Dates Toggle (Only if more than 1 trip) -->
+                    <button
+                      v-if="item.trips.length > 1"
+                      class="more-dates-toggle"
+                      @click.stop="toggleMoreDates(item.uniqueKey)"
+                    >
+                      <span>MORE DATES</span>
+                      <span
+                        class="toggle-arrow"
+                        :class="{ expanded: expandedTrips[item.uniqueKey] }"
+                        >▼</span
+                      >
+                    </button>
+
+                    <!-- Expandable Dates List -->
+                    <div
+                      v-if="
+                        item.trips.length > 1 && expandedTrips[item.uniqueKey]
+                      "
+                      class="more-dates-list"
+                    >
+                      <div
+                        v-for="(trip, tIdx) in getOtherTrips(item)"
+                        :key="tIdx"
+                        class="trip-option-alt"
+                        @click="selectTrip(item, trip)"
+                      >
+                        <div class="trip-alt-info">
+                          <span class="trip-alt-date">{{
+                            formatTripDateRange(trip.date, trip.tripDays)
+                          }}</span>
+                          <span class="trip-alt-rooms"
+                            >{{ trip.available || 1 }} room{{
+                              (trip.available || 1) > 1 ? "s" : ""
+                            }}
+                            available</span
+                          >
+                        </div>
+                        <span class="trip-select-action">Select</span>
+                      </div>
+                    </div>
+                  </div>
+
                   <div class="cabin-divider"></div>
 
                   <!-- Info Section -->
@@ -239,7 +311,7 @@
                     <div class="cabin-info-right">
                       <button
                         class="btn-reserve-now"
-                        @click="toggleItinerary(item.originalItem)"
+                        @click="reserveWithSelectedTrip(item)"
                       >
                         RESERVE NOW
                       </button>
@@ -448,8 +520,8 @@
                 >
                   <span>{{
                     formDateFrom
-                      ? `${formDateFrom} → ${getEndDate(formDateFrom)}`
-                      : "Select date"
+                      ? `${formDateFrom} → ${formDateTo || "..."}`
+                      : "Select dates"
                   }}</span>
                   <span class="caret">
                     <img
@@ -500,11 +572,9 @@
                             'other-month': !day.isCurrentMonth,
                             selected: day.isSelected,
                             disabled: !day.isSelectable,
-                            monday: day.isMonday,
-                            friday: day.isFriday,
+                            past: day.isPast,
                             'in-range': day.isInRange,
                             'range-start': day.isRangeStart,
-                            'range-middle': day.isRangeMiddle,
                             'range-end': day.isRangeEnd,
                           }"
                           :disabled="!day.isSelectable"
@@ -535,8 +605,8 @@
             <h3 class="itinerary-title">Your Itinerary</h3>
             <p class="itinerary-description">
               This is a summary of the accommodation you have selected. After
-              submitting your booking request, a Singita Journey Designer will
-              make contact to book and confirm your trip.
+              submitting your booking request, a Komodo Cruises Journey Designer
+              will make contact to book and confirm your trip.
             </p>
 
             <div class="itinerary-divider"></div>
@@ -968,7 +1038,8 @@
                 <label class="checkbox-label">
                   <input type="checkbox" v-model="enquiryForm.subscribeNews" />
                   <span
-                    >Sign up to receive news and blog posts from Singita</span
+                    >Sign up to receive news and blog posts from Komodo
+                    Cruises</span
                   >
                 </label>
 
@@ -1010,8 +1081,8 @@
             <h3 class="summary-title">Your Itinerary</h3>
             <p class="summary-description">
               This is a summary of the accommodation you've selected. One of our
-              Singita Journey Designers will contact you shortly to plan your
-              trip.
+              Komodo Cruises Journey Designers will contact you shortly to plan
+              your trip.
             </p>
             <div class="summary-items">
               <div
@@ -1220,6 +1291,9 @@ const selectedCabin = ref(null);
 const cabinQuantity = ref(1);
 const modalGuests = ref(2);
 const enquirySubmitting = ref(false);
+const selectedTripKey = ref(""); // Track selected trip for reservation
+const selectedRoomQuantities = ref({}); // Track room quantities per trip: { [tripKey]: quantity }
+const expandedTrips = ref({}); // Track which cabin's "More Dates" is expanded
 
 // Sort By state
 const sortBy = ref("recommended");
@@ -1239,6 +1313,7 @@ const formDestinations = ref([]);
 const formShipIds = ref([]);
 const savedShipPairs = ref([]);
 const formDateFrom = ref("");
+const formDateTo = ref("");
 const adults = ref(2);
 const children = ref(0);
 const age3_9 = ref(0);
@@ -1354,15 +1429,6 @@ const calendarDays = computed(() => {
   const endDate = new Date(lastDay);
   endDate.setDate(endDate.getDate() + (6 - lastDay.getDay()));
 
-  // Calculate date range for highlighting (startDate + 2 days)
-  let rangeStartDate = null;
-  let rangeEndDate = null;
-  if (formDateFrom.value) {
-    rangeStartDate = new Date(formDateFrom.value + "T00:00:00");
-    rangeEndDate = new Date(rangeStartDate);
-    rangeEndDate.setDate(rangeEndDate.getDate() + 2);
-  }
-
   for (
     let date = new Date(startDate);
     date <= endDate;
@@ -1370,26 +1436,27 @@ const calendarDays = computed(() => {
   ) {
     const dayOfWeek = date.getDay();
     const isCurrentMonth = date.getMonth() === currentMonth.value;
-    const isSelectable =
-      isCurrentMonth && date >= today && (dayOfWeek === 1 || dayOfWeek === 5);
+    // Normalize date for comparison to ignore time
+    const dDate = new Date(date);
+    dDate.setHours(0, 0, 0, 0);
+    const dToday = new Date(today);
+    dToday.setHours(0, 0, 0, 0);
+
+    const isPast = dDate < dToday;
+    const isSelectable = isCurrentMonth && !isPast; // All future dates are selectable
     const dateString = formatDateToString(date);
 
     // Check if in range
     let isInRange = false;
     let isRangeStart = false;
-    let isRangeMiddle = false;
     let isRangeEnd = false;
-    if (rangeStartDate && rangeEndDate && isCurrentMonth) {
-      const currentDate = new Date(date);
-      if (currentDate >= rangeStartDate && currentDate <= rangeEndDate) {
+    if (formDateFrom.value && formDateTo.value && isCurrentMonth) {
+      const fromDate = new Date(formDateFrom.value + "T00:00:00");
+      const toDate = new Date(formDateTo.value + "T00:00:00");
+      if (dDate >= fromDate && dDate <= toDate) {
         isInRange = true;
-        if (currentDate.getTime() === rangeStartDate.getTime()) {
-          isRangeStart = true;
-        } else if (currentDate.getTime() === rangeEndDate.getTime()) {
-          isRangeEnd = true;
-        } else {
-          isRangeMiddle = true;
-        }
+        if (dDate.getTime() === fromDate.getTime()) isRangeStart = true;
+        if (dDate.getTime() === toDate.getTime()) isRangeEnd = true;
       }
     }
 
@@ -1399,12 +1466,11 @@ const calendarDays = computed(() => {
       fullDate: dateString,
       isCurrentMonth,
       isSelectable,
-      isSelected: formDateFrom.value === dateString,
-      isMonday: dayOfWeek === 1,
-      isFriday: dayOfWeek === 5,
+      isPast,
+      isSelected:
+        formDateFrom.value === dateString || formDateTo.value === dateString,
       isInRange,
       isRangeStart,
-      isRangeMiddle,
       isRangeEnd,
     });
   }
@@ -1435,8 +1501,24 @@ function prevMonth() {
 }
 
 function selectDateSidebar(day) {
-  if (day.isSelectable) {
+  if (!day.isSelectable) return;
+
+  // If no start date, or if both dates are set, start fresh
+  if (!formDateFrom.value || (formDateFrom.value && formDateTo.value)) {
     formDateFrom.value = day.fullDate;
+    formDateTo.value = "";
+  } else {
+    // Start date exists, set end date
+    const startDate = new Date(formDateFrom.value + "T00:00:00");
+    const clickedDate = new Date(day.fullDate + "T00:00:00");
+
+    if (clickedDate < startDate) {
+      // If clicked date is before start, swap them
+      formDateTo.value = formDateFrom.value;
+      formDateFrom.value = day.fullDate;
+    } else {
+      formDateTo.value = day.fullDate;
+    }
   }
 }
 
@@ -1690,10 +1772,16 @@ const allStartDateCabins = computed(() => {
           ? String(cb.id).trim().toLowerCase()
           : null;
       const cabinKey = normalizeCabinName(name);
+
+      // Get start_date from cabin data for key uniqueness
+      const cabinDate =
+        typeof cb !== "string" ? cb.start_date || cb.date || "" : "";
+
+      // Include date in key so same cabin on different dates are treated as separate entries
       const key =
         id ||
-        `${normalizeName(shipName)}|${cabinKey}` ||
-        `${normalizeName(operatorLabel)}|${cabinKey}`;
+        `${normalizeName(shipName)}|${cabinKey}|${cabinDate}` ||
+        `${normalizeName(operatorLabel)}|${cabinKey}|${cabinDate}`;
       const detail = detailMap.get(`${normalizeName(shipName)}|${cabinKey}`);
       const mergedPrice = getCabinPrice(detail) || price;
       const mergedCapacity = getCabinCapacityText(detail) || capacityText;
@@ -1702,6 +1790,18 @@ const allStartDateCabins = computed(() => {
         detailAvailable != null ? detailAvailable : available;
       const mergedImage =
         getCabinImage(detail) || getCabinImage(cb) || "/src/images/cabin.jpg";
+
+      // Extract trip_days from raw API data or detail
+      const rawTripDays =
+        typeof cb !== "string" ? cb.trip_days || cb.days : null;
+      const detailTripDays = detail ? detail.trip_days || detail.days : null;
+      const tripDays = rawTripDays || detailTripDays || null;
+
+      // Extract start_date from raw API data (if available) or use user's dateFrom
+      const rawStartDate =
+        typeof cb !== "string" ? cb.start_date || cb.date : null;
+      const cabinStartDate = rawStartDate || sc.dateFrom;
+
       const existing = map.get(key);
       const value = {
         key,
@@ -1715,7 +1815,8 @@ const allStartDateCabins = computed(() => {
             : "Available",
         price: mergedPrice,
         capacityText: mergedCapacity,
-        date: sc.dateFrom,
+        date: cabinStartDate,
+        tripDays: tripDays,
         image: mergedImage,
         raw: cb,
         detail,
@@ -1744,26 +1845,122 @@ const allStartDateCabins = computed(() => {
       (a.cabinName || "").localeCompare(b.cabinName || "")
   );
 
+  // Filter by date range if user selected both start and end dates
+  const userDateFrom = sc.dateFrom;
+  const userDateTo = sc.dateTo;
+
+  if (userDateFrom && userDateTo) {
+    const filteredItems = items.filter((item) => {
+      const tripDays = getCabinTripDays(item);
+      if (!tripDays) return true; // Show cabin if no trip_days data
+      return tripOverlapsWithRange(
+        item.date,
+        tripDays,
+        userDateFrom,
+        userDateTo
+      );
+    });
+    return filteredItems;
+  }
+
   return items;
 });
 
 const displayItems = computed(() => {
-  return allStartDateCabins.value.map((item) => ({
-    id: item.key,
-    uniqueKey: item.key,
-    title: item.cabinName,
-    subtitle: formatShipName(item.operatorLabel),
-    image: item.image,
-    prices: [{ label: "Start from", value: item.price || "Rp3,650,000" }],
-    availabilityCount: item.availableText,
-    date: formatDate(item.date),
-    availabilityType: "standard", // Green box
-    availabilityTitle: "Great news, we have availability!",
-    availabilityText:
-      "Select the result that best suits you from the list below and it will be added to the itinerary summary on the right.",
-    originalItem: item,
-    isGallery: true,
-  }));
+  const cabins = allStartDateCabins.value;
+
+  // Group cabins by shipName + cabinName (consolidate duplicates)
+  const groupedMap = new Map();
+
+  for (const item of cabins) {
+    const groupKey = `${item.shipName || item.operatorLabel}|${item.cabinName}`;
+
+    if (!groupedMap.has(groupKey)) {
+      // First occurrence - create new group
+      groupedMap.set(groupKey, {
+        ...item,
+        trips: [],
+        totalAvailable: 0,
+      });
+    }
+
+    const group = groupedMap.get(groupKey);
+
+    const tripDateStr = item.date || "";
+    const tripDays = Number(item.tripDays || getCabinTripDays(item)) || 3;
+
+    if (!tripDateStr) continue;
+
+    // Check if this date falls within an existing trip's range
+    const currentDate = new Date(tripDateStr + "T00:00:00");
+    let isWithinExistingTrip = false;
+
+    for (const existingTrip of group.trips) {
+      const existingStart = new Date(existingTrip.date + "T00:00:00");
+      const existingDays = Number(existingTrip.tripDays) || 3;
+      const existingEnd = new Date(existingStart);
+      existingEnd.setDate(existingEnd.getDate() + existingDays - 1);
+
+      // Check if current date is within this existing trip's range
+      if (currentDate >= existingStart && currentDate <= existingEnd) {
+        isWithinExistingTrip = true;
+        break;
+      }
+    }
+
+    if (!isWithinExistingTrip) {
+      // Add this trip to the trips array
+      const tripInfo = {
+        date: item.date,
+        tripDays: tripDays,
+        available: item.available || 1,
+        key: item.key,
+        originalItem: item,
+      };
+
+      group.trips.push(tripInfo);
+      group.totalAvailable += tripInfo.available || 1;
+
+      // Use best price (lowest)
+      if (
+        item.price &&
+        (!group.price ||
+          parsePriceToNumber(item.price) < parsePriceToNumber(group.price))
+      ) {
+        group.price = item.price;
+      }
+    }
+  }
+
+  // Convert grouped map to display items array
+  return Array.from(groupedMap.values()).map((group) => {
+    // Sort trips by date
+    const sortedTrips = group.trips.sort(
+      (a, b) => new Date(a.date) - new Date(b.date)
+    );
+
+    return {
+      id: group.key,
+      uniqueKey: `${group.shipName}|${group.cabinName}`,
+      title: group.cabinName,
+      subtitle: formatShipName(group.operatorLabel),
+      image: group.image,
+      prices: [{ label: "Start from", value: group.price || "Rp3,650,000" }],
+      availabilityCount:
+        group.totalAvailable > 1
+          ? `${group.totalAvailable} rooms available`
+          : group.availableText,
+      tripsCount: sortedTrips.length,
+      trips: sortedTrips,
+      date: formatDate(sortedTrips[0]?.date),
+      availabilityType: "standard",
+      availabilityTitle: "Great news, we have availability!",
+      availabilityText:
+        "Select the result that best suits you from the list below and it will be added to the itinerary summary on the right.",
+      originalItem: group,
+      isGallery: true,
+    };
+  });
 });
 
 // Sorted display items based on sortBy selection
@@ -1854,6 +2051,31 @@ function formatDate(dateString) {
   });
 }
 
+function formatTripDateRange(startDate, tripDays) {
+  if (!startDate) return "";
+  const start = new Date(startDate + "T00:00:00");
+  const days = Number(tripDays) || 1;
+
+  if (days <= 1) {
+    return formatDate(startDate);
+  }
+
+  const end = new Date(start);
+  end.setDate(end.getDate() + days - 1);
+
+  const startFormatted = start.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+  const endFormatted = end.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  return `${startFormatted} - ${endFormatted}`;
+}
+
 function getEndDate(startDateString) {
   if (!startDateString) return "";
   return addDaysToDateString(startDateString, 2);
@@ -1863,6 +2085,84 @@ function formatShipName(shipName) {
   if (!shipName) return "";
   const firstWord = shipName.trim().split(/[\s(]+/)[0];
   return firstWord.charAt(0).toUpperCase() + firstWord.slice(1).toLowerCase();
+}
+
+function selectTrip(cabinItem, trip) {
+  selectedTripKey.value = trip.key;
+  // Update the cabin item with selected trip info for reservation
+  if (cabinItem.originalItem) {
+    cabinItem.originalItem.selectedTrip = trip;
+  }
+  // Initialize quantity to 1 if not set
+  if (!selectedRoomQuantities.value[trip.key]) {
+    selectedRoomQuantities.value[trip.key] = 1;
+  }
+}
+
+function toggleMoreDates(cabinKey) {
+  expandedTrips.value[cabinKey] = !expandedTrips.value[cabinKey];
+}
+
+// Get the currently selected trip for display (or first trip if none selected)
+function getDisplayTrip(item) {
+  if (!item.trips || item.trips.length === 0) return null;
+  // Find selected trip from this cabin's trips
+  const selectedTrip = item.trips.find(
+    (trip) => trip.key === selectedTripKey.value
+  );
+  return selectedTrip || item.trips[0];
+}
+
+// Get all trips except the currently displayed one (for MORE DATES dropdown)
+function getOtherTrips(item) {
+  if (!item.trips || item.trips.length <= 1) return [];
+  const displayTrip = getDisplayTrip(item);
+  return item.trips.filter((trip) => trip.key !== displayTrip.key);
+}
+
+// Reserve with the currently selected trip date
+function reserveWithSelectedTrip(item) {
+  const selectedTrip = getDisplayTrip(item);
+  if (!selectedTrip) {
+    console.warn("No trip selected");
+    return;
+  }
+
+  // Create cabin info with the selected trip's date
+  const cabinInfo = {
+    ...item.originalItem,
+    date: selectedTrip.date,
+    tripDays: selectedTrip.tripDays,
+    available: selectedTrip.available,
+    selectedTrip: selectedTrip,
+  };
+
+  // Call the existing itinerary toggle function
+  if (typeof toggleItinerary === "function") {
+    toggleItinerary(cabinInfo);
+  } else {
+    // Fallback: add to itinerary directly
+    addToItinerary(cabinInfo);
+  }
+}
+
+function getSelectedQty(trip) {
+  return selectedRoomQuantities.value[trip.key] || 1;
+}
+
+function increaseRoomQty(trip) {
+  const max = trip.available || 1;
+  const current = selectedRoomQuantities.value[trip.key] || 1;
+  if (current < max) {
+    selectedRoomQuantities.value[trip.key] = current + 1;
+  }
+}
+
+function decreaseRoomQty(trip) {
+  const current = selectedRoomQuantities.value[trip.key] || 1;
+  if (current > 1) {
+    selectedRoomQuantities.value[trip.key] = current - 1;
+  }
 }
 
 async function loadShipsList() {
@@ -2035,18 +2335,65 @@ async function checkAvailability() {
     shipAvailability.value = perShip;
     availabilityData.value = Object.values(perShip).flat();
 
+    // Fetch availability for ALL dates in range and combine
     if (sc?.dateFrom) {
       try {
-        let global = await getAvailability(sc.dateFrom).catch(() => null);
-        if (!global || !global.operators || global.operators.length === 0) {
-          global = await getAvailability(
-            sc.dateFrom,
-            "Cruise Schedule - Normalized"
-          ).catch(() => null);
+        const allDates = generateDateRange(
+          sc.dateFrom,
+          sc.dateTo || sc.dateFrom
+        );
+        const allAvailabilityPromises = allDates.map(async (date) => {
+          let dayData = await getAvailability(date).catch(() => null);
+          if (
+            !dayData ||
+            !dayData.operators ||
+            dayData.operators.length === 0
+          ) {
+            dayData = await getAvailability(
+              date,
+              "Cruise Schedule - Normalized"
+            ).catch(() => null);
+          }
+          return { date, data: dayData };
+        });
+
+        const allResults = await Promise.all(allAvailabilityPromises);
+
+        // Combine all operators and cabins from all dates
+        const combinedOperatorsMap = new Map();
+        for (const { date, data } of allResults) {
+          if (!data || !data.operators) continue;
+          for (const op of data.operators) {
+            const opKey = op.operator;
+            if (!combinedOperatorsMap.has(opKey)) {
+              combinedOperatorsMap.set(opKey, { operator: opKey, cabins: [] });
+            }
+            const existing = combinedOperatorsMap.get(opKey);
+            // Add cabins with their actual date
+            for (const cabin of op.cabins || []) {
+              // Add date info to cabin if it's an object
+              const cabinWithDate =
+                typeof cabin === "string"
+                  ? { name: cabin, start_date: date }
+                  : { ...cabin, start_date: cabin.start_date || date };
+              existing.cabins.push(cabinWithDate);
+            }
+          }
         }
-        globalStartAvailability.value = global || null;
+
+        // Create combined availability object
+        const combinedAvailability = {
+          ok: true,
+          operators: Array.from(combinedOperatorsMap.values()),
+          total: Array.from(combinedOperatorsMap.values()).reduce(
+            (sum, op) => sum + op.cabins.length,
+            0
+          ),
+        };
+
+        globalStartAvailability.value = combinedAvailability;
       } catch (e) {
-        console.debug("[Results] global start availability error", e);
+        console.debug("[Results] global availability error", e);
       }
     }
 
@@ -2081,9 +2428,7 @@ function applySidebarChanges() {
       ship: labels[0] || "",
       lodges: labels.slice(),
       dateFrom: formDateFrom.value,
-      dateTo: formDateFrom.value
-        ? addDaysToDateString(formDateFrom.value, 2)
-        : "",
+      dateTo: formDateTo.value || formDateFrom.value,
       adults: guestsTotal.value,
       children: 0,
       age3_9: 0,
@@ -2146,6 +2491,7 @@ onMounted(async () => {
         sheet: savedSheets[idx] || "",
       }));
       formDateFrom.value = sc.dateFrom || "";
+      formDateTo.value = sc.dateTo || "";
       adults.value = sc.adults ?? adults.value;
       children.value = sc.children ?? children.value;
       age3_9.value = sc.age3_9 ?? age3_9.value;
@@ -2272,6 +2618,41 @@ function getCabinSize(item) {
   if (detail.size) return detail.size;
   if (detail.area) return detail.area;
   return "Private cabin";
+}
+
+function getCabinTripDays(item) {
+  if (!item) return "";
+  // First check if tripDays is directly on the item (from allStartDateCabins)
+  if (item.tripDays) return item.tripDays;
+  const detail = item.detail || item;
+  // Check for trip_days or similar fields
+  if (detail.trip_days) return detail.trip_days;
+  if (detail.days) return detail.days;
+  // Also check raw data if available
+  if (item.raw && typeof item.raw !== "string") {
+    if (item.raw.trip_days) return item.raw.trip_days;
+    if (item.raw.days) return item.raw.days;
+  }
+  return "";
+}
+
+function calculateTripEndDate(startDate, tripDays) {
+  if (!startDate || !tripDays) return null;
+  const start = new Date(startDate + "T00:00:00");
+  const end = new Date(start);
+  end.setDate(end.getDate() + (Number(tripDays) - 1));
+  return end;
+}
+
+function tripOverlapsWithRange(tripStart, tripDays, rangeStart, rangeEnd) {
+  if (!tripStart || !tripDays || !rangeStart || !rangeEnd) return true;
+  const tripStartDate = new Date(tripStart + "T00:00:00");
+  const tripEndDate = calculateTripEndDate(tripStart, tripDays);
+  const rangeStartDate = new Date(rangeStart + "T00:00:00");
+  const rangeEndDate = new Date(rangeEnd + "T00:00:00");
+
+  // Check overlap: trip overlaps if tripStart <= rangeEnd AND tripEnd >= rangeStart
+  return tripStartDate <= rangeEndDate && tripEndDate >= rangeStartDate;
 }
 
 function getCabinOverview(item) {

@@ -4559,7 +4559,7 @@ body:has(.hero-section) .nav-overlay,
     padding: 1rem var(--edge-pad)
 }
 
-.logo-singita {
+.logo-komodo {
     font-size: 2.2rem;
     color: #c99b7b;
     font-weight: 400;
@@ -4702,7 +4702,7 @@ body:has(.hero-section) .btn-plan,
         padding: 1rem var(--edge-pad)
     }
 
-    .logo-singita {
+    .logo-komodo {
         font-size: 1.6rem;
         margin-right: 1rem
     }
@@ -4731,7 +4731,7 @@ body:has(.hero-section) .btn-plan,
         padding: .75rem
     }
 
-    .logo-singita {
+    .logo-komodo {
         font-size: 1.4rem;
         margin-right: .5rem
     }

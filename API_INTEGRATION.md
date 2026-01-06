@@ -127,7 +127,7 @@ GET https://script.google.com/macros/s/.../exec?resource=availability&date=2025-
   operators: [{
     operator: "Sabi Sand",
     total: 8,
-    cabins: ["Ebony (4)", "Boulders (2)", "Singita Villa (2)"]
+    cabins: ["Ebony (4)", "Boulders (2)", "Komodo Cruises Villa (2)"]
   }]
 }
 ```

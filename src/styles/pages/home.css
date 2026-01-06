@@ -14,6 +14,10 @@
 	overflow: hidden;
 }
 
+.list-text{
+	font-size: 1.2rem;
+}
+
 .hero-bg-video {
 	position: absolute;
 	top: 0;
@@ -61,7 +65,7 @@
 	background: none;
 	border: none;
 	cursor: pointer;
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .hero-cta:hover {
@@ -98,8 +102,8 @@
 	height: 20px;
 }
 
-/* ===== SINGITA-STYLE SPLIT SECTIONS ===== */
-.singita-section {
+/* ===== KOMODO-STYLE SPLIT SECTIONS ===== */
+.komodo-section {
 	min-height: auto;
 	padding: 10vh 0;
 	display: flex;
@@ -107,11 +111,11 @@
 	background: #fbfaf5;
 }
 
-.singita-section.section-alt {
+.komodo-section.section-alt {
 	background: #fbfaf5;
 }
 
-.singita-content {
+.komodo-content {
 	display: grid;
 	grid-template-columns: 1.3fr 1fr;
 	width: 100%;
@@ -119,16 +123,16 @@
 	gap: 0;
 }
 
-.singita-content.reverse {
+.komodo-content.reverse {
 	direction: rtl;
 }
 
-.singita-content.reverse>* {
+.komodo-content.reverse>* {
 	direction: ltr;
 }
 
 /* Text Content */
-.singita-text {
+.komodo-text {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -137,7 +141,7 @@
 	background: inherit;
 }
 
-.singita-heading {
+.komodo-heading {
 	font-family: var(--font-serif);
 	font-size: clamp(1.75rem, 2.8vw, 2.5rem);
 	font-weight: 300;
@@ -147,7 +151,7 @@
 	letter-spacing: -0.01em;
 }
 
-.singita-heading-small {
+.komodo-heading-small {
 	font-family: var(--font-serif);
 	font-size: clamp(1.5rem, 2.2vw, 2rem);
 	font-weight: 300;
@@ -156,14 +160,14 @@
 	margin: 0 0 1rem;
 }
 
-.singita-subheading {
+.komodo-subheading {
 	font-size: 0.95rem;
 	color: #555;
 	margin: 0 0 1.5rem;
 	line-height: 1.6;
 }
 
-.singita-paragraph {
+.komodo-paragraph {
 	font-size: clamp(1rem, 1.2vw, 1.25rem);
 	line-height: 1.75;
 	color: #444;
@@ -171,23 +175,23 @@
 	font-weight: 200;
 }
 
-.singita-paragraph:last-child {
+.komodo-paragraph:last-child {
 	margin-bottom: 0;
 }
 
-.singita-link {
+.komodo-link {
 	color: #1a1a1a;
 	text-decoration: underline;
 	text-underline-offset: 3px;
 	transition: opacity 0.2s;
 }
 
-.singita-link:hover {
+.komodo-link:hover {
 	opacity: 0.7;
 }
 
 /* Media/Image Side */
-.singita-media {
+.komodo-media {
 	position: relative;
 	overflow: hidden;
 	height: 100%;
@@ -195,7 +199,7 @@
 	min-height: 60vh;
 }
 
-.singita-media img {
+.komodo-media img {
 	/* Parallax setup */
 	width: 100%;
 	height: 120%;
@@ -239,25 +243,25 @@
 
 /* ===== RESPONSIVE - TABLET ===== */
 @media (max-width: 1024px) {
-	.singita-section {
+	.komodo-section {
 		min-height: auto;
 	}
 
-	.singita-content {
+	.komodo-content {
 		grid-template-columns: 1fr;
 		min-height: auto;
 	}
 
-	.singita-content.reverse {
+	.komodo-content.reverse {
 		direction: ltr;
 	}
 
-	.singita-text {
+	.komodo-text {
 		padding: clamp(2.5rem, 6vw, 4rem);
 		order: 2;
 	}
 
-	.singita-media {
+	.komodo-media {
 		min-height: 50vh;
 		order: 1;
 		margin-top: 2rem;
@@ -268,7 +272,7 @@
 		overflow: hidden;
 	}
 
-	.singita-heading {
+	.komodo-heading {
 		font-size: clamp(1.5rem, 5vw, 2rem);
 	}
 }
@@ -277,7 +281,7 @@
 @media (max-width: 640px) {
 
 	/* Hero Section Mobile */
-	.singita-section {
+	.komodo-section {
 		padding: 1rem 0;
 	}
 
@@ -311,20 +315,20 @@
 		background: none
 	}
 
-	/* Singita Sections Mobile */
-	.singita-content {
+	/* Komodo Sections Mobile */
+	.komodo-content {
 		display: flex;
 		flex-direction: column;
 		gap: 0;
 		padding-bottom: 1rem;
 	}
 
-	.singita-text {
+	.komodo-text {
 		padding: 2.5rem 1.5rem 1rem;
 		order: 1;
 	}
 
-	.singita-media {
+	.komodo-media {
 		min-height: 40vh;
 		order: 2;
 		margin: 1rem 0 2rem;
@@ -339,22 +343,22 @@
 	}
 
 	/* Alternate alignment for even sections if feasible, or just keep simple */
-	.singita-section:nth-of-type(even) .singita-media {
+	.komodo-section:nth-of-type(even) .komodo-media {
 		margin-left: auto;
 		margin-right: 0;
 	}
 
-	.singita-heading {
+	.komodo-heading {
 		font-size: 1.8rem;
 		line-height: 1.4;
 		margin-bottom: 1.5rem;
 	}
 
-	.singita-heading-small {
+	.komodo-heading-small {
 		font-size: 1.3rem;
 	}
 
-	.singita-paragraph {
+	.komodo-paragraph {
 		font-size: 1.1rem;
 	}
 
