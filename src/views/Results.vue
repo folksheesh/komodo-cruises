@@ -170,10 +170,6 @@
                     <span>{{
                       getCabinBedType(item.originalItem) || "1 King"
                     }}</span>
-                    <span class="specs-divider">|</span>
-                    <span>{{
-                      getCabinSize(item.originalItem) || "Private cabin"
-                    }}</span>
                     <template v-if="getCabinTripDays(item.originalItem)">
                       <span class="specs-divider">|</span>
                       <span
@@ -299,7 +295,7 @@
                           <p class="price-main">
                             <span class="price-label">From</span>
                             <span class="price-value"
-                              >IDR {{ price.value }}</span
+                              >IDR {{ formatRupiah(price.value) }}</span
                             >
                           </p>
                           <p class="price-sub">per person, per night</p>
@@ -3058,6 +3054,21 @@ function normalizeName(name) {
     .replace(/[^a-z0-9]+/g, " ")
     .trim()
     .replace(/\s+/g, " ");
+}
+
+function formatRupiah(value) {
+  if (!value && value !== 0) return "0";
+  const str = String(value);
+  // Remove non-numeric chars except dot (for potential decimals)
+  const numericString = str.replace(/[^0-9.]/g, "");
+  if (!numericString) return "0";
+
+  const num = parseFloat(numericString);
+  // Use en-US locale for comma separator (e.g. 1,676,788)
+  return num.toLocaleString("en-US", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  });
 }
 
 function normalizeCabinName(name) {
