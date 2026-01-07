@@ -1901,7 +1901,27 @@ const allStartDateCabins = computed(() => {
         id ||
         `${normalizeName(shipName)}|${cabinKey}|${cabinDate}` ||
         `${normalizeName(operatorLabel)}|${cabinKey}|${cabinDate}`;
-      const detail = detailMap.get(`${normalizeName(shipName)}|${cabinKey}`);
+      // Try multiple keys to find detail mapping
+      let detail = detailMap.get(`${normalizeName(shipName)}|${cabinKey}`);
+      if (!detail && operatorLabel) {
+        detail = detailMap.get(`${normalizeName(operatorLabel)}|${cabinKey}`);
+      }
+      // Fallback: scan by cabin name only (first match)
+      if (!detail) {
+        for (const [dk, dv] of detailMap.entries()) {
+          if (dk.endsWith(`|${cabinKey}`)) {
+            detail = dv;
+            break;
+          }
+        }
+      }
+      // Try canonical label match
+      if (!detail) {
+        const canonKey = `${normalizeName(shipName)}|${canonicalizeCabinLabel(
+          name
+        )}`;
+        detail = detailMap.get(canonKey);
+      }
       const mergedPrice = getCabinPrice(detail) || price;
       const mergedCapacity = getCabinCapacityText(detail) || capacityText;
       const detailAvailable = getCabinAvailable(detail);
@@ -2061,7 +2081,7 @@ const displayItems = computed(() => {
     return {
       id: group.key,
       uniqueKey: `${group.shipName}|${group.cabinName}`,
-      title: group.cabinName,
+      title: getPreferredCabinName(group),
       subtitle: formatShipName(group.operatorLabel),
       image: group.image,
       prices: [{ label: "Start from", value: group.price || "Rp3,650,000" }],
@@ -2371,19 +2391,46 @@ async function loadShipsList() {
 
 async function loadDetailCabins() {
   try {
-    // Fetch from resource=cabindetail (API endpoint khusus detail cabin)
-    const url =
-      "https://script.google.com/macros/s/AKfycbwvfIHPdbGq7cVlbX6g1IPoBdE2xIqYD9fZJclMlq9AYAFGa--e3eGV15HbYfrj2z4vLw/exec?resource=cabindetail";
+    // Use local API endpoint for cabin details
+    const baseUrl = import.meta.env.DEV
+      ? "http://localhost:8787"
+      : "https://your-worker.your-account.workers.dev";
+    const url = `${baseUrl}/?resource=cabindetail`;
     const res = await fetch(url).then((r) => r.json());
     const map = new Map();
     if (res && Array.isArray(res.data)) {
       res.data.forEach((cb) => {
-        const baseName = getCabinBaseName(cb);
         const shipName = cb.operator || cb.shipName || "";
-        const key = `${normalizeName(shipName)}|${normalizeCabinName(
+
+        // Key by NAME CABIN (base) -> detail
+        const baseName = getCabinBaseName(cb); // prefers cabin_name, falls back api_name
+        const keyBase = `${normalizeName(shipName)}|${normalizeCabinName(
           baseName
         )}`;
-        if (key.trim()) map.set(key, cb);
+        if (keyBase.trim()) map.set(keyBase, cb);
+
+        // Also key by NAME CABIN API for robust linking
+        const apiName = (cb.api_name || "").toString().trim();
+        if (apiName) {
+          const keyApi = `${normalizeName(shipName)}|${normalizeCabinName(
+            apiName
+          )}`;
+          if (keyApi.trim()) map.set(keyApi, cb);
+        }
+
+        // Canonical keys to match variants (e.g., "Master Padar" ↔ "Padar")
+        const canonBase = canonicalizeCabinLabel(baseName);
+        if (canonBase) {
+          const canonKey = `${normalizeName(shipName)}|${canonBase}`;
+          map.set(canonKey, cb);
+        }
+        if (apiName) {
+          const canonApi = canonicalizeCabinLabel(apiName);
+          if (canonApi) {
+            const canonApiKey = `${normalizeName(shipName)}|${canonApi}`;
+            map.set(canonApiKey, cb);
+          }
+        }
       });
     }
     detailCabinMap.value = map;
@@ -2804,6 +2851,53 @@ function getCabinTripDays(item) {
     if (item.raw.days) return item.raw.days;
   }
   return "";
+}
+
+// Convert a cabin label to a canonical token string for fuzzy matching
+function canonicalizeCabinLabel(label) {
+  if (!label) return "";
+  let s = String(label).toLowerCase();
+  // Strip parentheses content
+  s = s.replace(/\([^)]*\)/g, " ");
+  // Replace separators
+  s = s.replace(/[\-–—_/]+/g, " ");
+  // Remove common adjectives and non-distinct words
+  const stopwords = new Set([
+    "master",
+    "vip",
+    "suite",
+    "deluxe",
+    "superior",
+    "private",
+    "ocean",
+    "sea",
+    "view",
+    "balcony",
+    "bathtub",
+    "room",
+    "cabin",
+    "deck",
+    "upperdeck",
+    "maindeck",
+    "lowerdeck",
+  ]);
+  const tokens = s
+    .split(/\s+/)
+    .map((t) => t.trim())
+    .filter((t) => t && !stopwords.has(t))
+    .map((t) => t.replace(/[^a-z0-9]/g, ""))
+    .filter(Boolean);
+  if (!tokens.length) return "";
+  // Sort for consistency
+  return tokens.sort().join(" ");
+}
+
+// Prefer human-friendly cabin name from detail API if present
+function getPreferredCabinName(item) {
+  const d = item && (item.detail || item);
+  const name = d?.cabin_name || d?.api_name;
+  if (name && String(name).trim()) return String(name).trim();
+  return item?.cabinName || "";
 }
 
 function calculateTripEndDate(startDate, tripDays) {

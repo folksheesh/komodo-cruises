@@ -1,4 +1,7 @@
- const BASE_URL = "https://script.google.com/macros/s/AKfycbwvfIHPdbGq7cVlbX6g1IPoBdE2xIqYD9fZJclMlq9AYAFGa--e3eGV15HbYfrj2z4vLw/exec";
+// Use local API during development, switch to production URL when deployed
+const BASE_URL = import.meta.env.DEV 
+  ? "http://localhost:8787" 
+  : "https://your-worker.your-account.workers.dev";
 
 // Types
 export type CabinItem =
@@ -73,7 +76,7 @@ export async function getCabins(sheet?: string): Promise<CabinsResponse> {
     return cabinsCache.get(cacheKey)!;
   }
   
-  const url = buildUrl({ resource: 'cabins', sheet });
+  const url = buildUrl({ resource: 'cabins' });
   const response = await fetch(url);
   const data = await handleResponse<CabinsResponse>(response);
   
@@ -95,7 +98,7 @@ export async function getAvailability(date: string, sheet?: string): Promise<Ava
     return availabilityInflight.get(cacheKey)!;
   }
 
-  const url = buildUrl({ resource: 'availability', date, sheet });
+  const url = buildUrl({ resource: 'availability', date });
   const promise = fetch(url)
     .then(resp => handleResponse<AvailabilityResponse>(resp))
     .then(data => {

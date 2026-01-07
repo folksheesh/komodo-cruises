@@ -163,6 +163,7 @@
   /* padding: 0.5rem 0; */
   font-weight: 500;
   border-bottom: 1px solid black;
+  transition: all 0.2s ease;
 }
 
 .sort-btn:hover {
@@ -172,6 +173,7 @@
 .sort-caret {
   width: 14px;
   height: 14px;
+  transition: transform 0.2s ease;
 }
 
 .calendar-day.past {
@@ -208,14 +210,39 @@
 .sort-dropdown-panel {
   position: absolute;
   top: 100%;
-  right: 0;
   margin-top: 0.5rem;
   background: white;
   border: 1px solid #e5e7eb;
-  border-radius: 4px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   min-width: 160px;
-  z-index: 100;
+  z-index: 999999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+  z-index: 999999;
+  transform-origin: top;
+}
+
+/* Dropdown Slide Transition (Enter & Leave) */
+.dropdown-slide-enter-active,
+.dropdown-slide-leave-active {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdown-slide-enter-from,
+.dropdown-slide-leave-to {
+  transform: scaleY(0);
+  opacity: 0;
+}
+
+.dropdown-slide-enter-to,
+.dropdown-slide-leave-from {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+/* Global Dropdown Panel Transition */
+.dropdown-panel {
+  transform-origin: top;
 }
 
 .sort-option {
@@ -228,11 +255,12 @@
   font-size: 0.9rem;
   color: #374151;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .sort-option:hover {
   background: #f3f4f6;
+  color: #2d4059;
 }
 
 .sort-option.active {
@@ -371,7 +399,54 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Smooth Slide Transitions - Like Home Carousel */
+.slide-right-enter-active,
+.slide-left-enter-active {
+  transition: transform 2.0s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.slide-right-leave-active,
+.slide-left-leave-active {
+  transition: transform 2.0s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Slide Right (Next) */
+.slide-right-enter-from {
+  transform: translateX(100%);
+}
+
+.slide-right-enter-to {
+  transform: translateX(0);
+}
+
+.slide-right-leave-from {
+  transform: translateX(0);
+}
+
+.slide-right-leave-to {
+  transform: translateX(-100%);
+}
+
+/* Slide Left (Previous) */
+.slide-left-enter-from {
+  transform: translateX(-100%);
+}
+
+.slide-left-enter-to {
+  transform: translateX(0);
+}
+
+.slide-left-leave-from {
+  transform: translateX(0);
+}
+
+.slide-left-leave-to {
+  transform: translateX(100%);
 }
 
 .gallery-nav {
@@ -390,12 +465,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s ease;
+  transition: all 0.3s ease;
   z-index: 2;
 }
 
 .gallery-nav:hover {
-  background: rgba(221, 221, 221, 0.95);
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-50%) scale(1.1);
 }
 
 .gallery-prev {
