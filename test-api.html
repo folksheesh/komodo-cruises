@@ -52,16 +52,12 @@
     </div>
 
     <script>
-        const API_URL = 'https://ff8b64b78031.ngrok-free.app';
+        const API_URL = 'http://localhost:8787';
 
         async function fetchAPI(params) {
             const url = new URL(API_URL);
             Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
-            const response = await fetch(url, {
-                headers: {
-                    'ngrok-skip-browser-warning': 'true'
-                }
-            });
+            const response = await fetch(url);
             return response.json();
         }
 

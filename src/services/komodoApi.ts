@@ -1,5 +1,7 @@
-// Use ngrok URL for API endpoint
-const BASE_URL = "https://ff8b64b78031.ngrok-free.app";
+// Use local API during development, switch to production URL when deployed
+const BASE_URL = import.meta.env.DEV 
+  ? "http://localhost:8787" 
+  : "https://your-worker.your-account.workers.dev";
 
 // Types
 export type CabinItem =
@@ -61,9 +63,7 @@ export async function getOperators(): Promise<OperatorsResponse> {
   if (operatorsCache) return operatorsCache;
 
   const url = buildUrl({ resource: 'operators' });
-  const response = await fetch(url, {
-    headers: { 'ngrok-skip-browser-warning': 'true' }
-  });
+  const response = await fetch(url);
   const data = await handleResponse<OperatorsResponse>(response);
   operatorsCache = data;
   return data;
@@ -77,9 +77,7 @@ export async function getCabins(sheet?: string): Promise<CabinsResponse> {
   }
   
   const url = buildUrl({ resource: 'cabins' });
-  const response = await fetch(url, {
-    headers: { 'ngrok-skip-browser-warning': 'true' }
-  });
+  const response = await fetch(url);
   const data = await handleResponse<CabinsResponse>(response);
   
   cabinsCache.set(cacheKey, data);
@@ -101,9 +99,7 @@ export async function getAvailability(date: string, sheet?: string): Promise<Ava
   }
 
   const url = buildUrl({ resource: 'availability', date });
-  const promise = fetch(url, {
-    headers: { 'ngrok-skip-browser-warning': 'true' }
-  })
+  const promise = fetch(url)
     .then(resp => handleResponse<AvailabilityResponse>(resp))
     .then(data => {
       availabilityCache.set(cacheKey, data);
