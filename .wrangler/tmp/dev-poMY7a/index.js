@@ -52,7 +52,9 @@ var index_default = {
       if (resource === "cabindetail") {
         const details = await loadCabinDetailCached(env);
         if (cabinName) {
-          const found = details.find((c) => c.cabin_name?.toUpperCase() === cabinName.toUpperCase());
+          const found = details.find(
+            (c) => c.cabin_name?.toUpperCase() === cabinName.toUpperCase()
+          );
           if (!found) return jsonErr(`Cabin '${cabinName}' not found`);
           return jsonOk({ data: found });
         }
@@ -82,7 +84,9 @@ var index_default = {
         const cabinNorm = normalizeCabinName(cabinName);
         const matches = [];
         res.operators.forEach((op) => {
-          const found = op.cabins.find((c) => c.name.toUpperCase() === cabinNorm.toUpperCase());
+          const found = op.cabins.find(
+            (c) => c.name.toUpperCase() === cabinNorm.toUpperCase()
+          );
           if (found && found.available >= guests) {
             matches.push({ operator: op.operator, available: found.available });
           }
@@ -97,11 +101,15 @@ var index_default = {
 };
 async function loadSheetDataCached(sheetName, env) {
   const cacheKey = `sheet-data-${sheetName}`;
-  const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}?includeGridData=true&ranges=${encodeURIComponent(sheetName)}&fields=sheets(data(rowData(values(formattedValue,userEnteredFormat(backgroundColor)))))&key=${GOOGLE_API_KEY}`;
+  const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}?includeGridData=true&ranges=${encodeURIComponent(
+    sheetName
+  )}&fields=sheets(data(rowData(values(formattedValue,userEnteredFormat(backgroundColor)))))&key=${GOOGLE_API_KEY}`;
   const resp = await fetch(apiUrl);
   if (!resp.ok) {
     const errorText = await resp.text();
-    throw new Error(`Gagal fetch Google Sheets API (${resp.status}): ${errorText}`);
+    throw new Error(
+      `Gagal fetch Google Sheets API (${resp.status}): ${errorText}`
+    );
   }
   const json = await resp.json();
   if (!json.sheets || !json.sheets[0]) throw new Error("Sheet not found");
@@ -127,7 +135,9 @@ async function loadSheetDataCached(sheetName, env) {
 }
 __name(loadSheetDataCached, "loadSheetDataCached");
 async function loadCabinDetailCached(env) {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${encodeURIComponent(CABIN_DETAIL_SHEET)}?key=${GOOGLE_API_KEY}`;
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${encodeURIComponent(
+    CABIN_DETAIL_SHEET
+  )}?key=${GOOGLE_API_KEY}`;
   const resp = await fetch(url);
   if (!resp.ok) {
     const errorText = await resp.text();
@@ -154,7 +164,8 @@ async function loadCabinDetailCached(env) {
     const baseCap = Number(obj["base capacity"] || 0);
     const extraCap = Number(obj["extra pax capacity"] || 0);
     let capacity = baseCap + extraCap;
-    if (!capacity) capacity = Number(obj["total capacity"] || obj["capacity"] || 0);
+    if (!capacity)
+      capacity = Number(obj["total capacity"] || obj["capacity"] || 0);
     const priceRaw = obj["price"] || obj["komodo cruises-pricing"] || "";
     const price = Number((priceRaw || "").toString().replace(/[^\d]/g, "")) || 0;
     const trip_days = Number(obj["trip (days)"] || obj["days"] || 0);
@@ -309,7 +320,7 @@ function corsHeaders() {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type"
+    "Access-Control-Allow-Headers": "Content-Type, ngrok-skip-browser-warning"
   };
 }
 __name(corsHeaders, "corsHeaders");

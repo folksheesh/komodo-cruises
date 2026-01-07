@@ -2387,12 +2387,12 @@ async function loadShipsList() {
 
 async function loadDetailCabins() {
   try {
-    // Use local API endpoint for cabin details
-    const baseUrl = import.meta.env.DEV
-      ? "http://localhost:8787"
-      : "https://your-worker.your-account.workers.dev";
+    // Use ngrok URL for API endpoint
+    const baseUrl = "https://ff8b64b78031.ngrok-free.app";
     const url = `${baseUrl}/?resource=cabindetail`;
-    const res = await fetch(url).then((r) => r.json());
+    const res = await fetch(url, {
+      headers: { "ngrok-skip-browser-warning": "true" },
+    }).then((r) => r.json());
     const map = new Map();
     if (res && Array.isArray(res.data)) {
       res.data.forEach((cb) => {
