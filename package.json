@@ -13,7 +13,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-  "@vueuse/core": "^11.4.0",
+  "@vueuse/core": "^11.3.0",
   "resend": "^6.5.2",
   "vue": "^3.4.29",
   "vue-router": "^4.3.2",
