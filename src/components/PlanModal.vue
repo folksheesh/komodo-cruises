@@ -1171,8 +1171,9 @@ function selectDate(day) {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  max-width: 620px;
-  margin: 0 auto;
+  /* Responsive padding: min 1rem, preferred 5vw, max 6rem */
+  padding-left: clamp(1rem, 5vw, 6rem);
+  padding-right: clamp(1rem, 5vw, 6rem);
 }
 
 /* Title fleksibel (biar nggak nabrak tombol) */
@@ -1206,7 +1207,6 @@ function selectDate(day) {
   cursor: pointer;
   color: var(--ocean-900, #223f62);
   padding: 0.5rem 0.75rem;
-  margin-right: 30px !important;
   border-radius: 0.25rem;
   text-decoration: none;
   text-underline-offset: 3px;
