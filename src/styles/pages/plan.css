@@ -786,6 +786,7 @@
 
 .btn-primary:hover {
   filter: brightness(0.97);
+
 }
 
 .input {
@@ -837,5 +838,167 @@
 
   to {
     transform: translateY(6px);
+  }
+}
+
+/* ===== MULTI-CABIN ACCORDION STYLES ===== */
+.cabins-container {
+  margin-top: 1rem;
+}
+
+.cabin-accordion {
+  border: 1px solid var(--ocean-15a);
+  margin-bottom: 0.75rem;
+  background: #fff;
+}
+
+.cabin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.cabin-header:hover {
+  background: rgba(34, 63, 98, 0.03);
+}
+
+.cabin-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cabin-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--ocean-900);
+  letter-spacing: 0.5px;
+}
+
+.cabin-summary {
+  color: var(--ocean-70a);
+  font-size: 0.9rem;
+}
+
+.cabin-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cabin-remove-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s;
+}
+
+.cabin-remove-btn:hover {
+  color: #dc2626;
+}
+
+.cabin-chevron {
+  color: var(--ocean-70a);
+  transition: transform 0.2s ease;
+}
+
+.cabin-chevron.expanded {
+  transform: rotate(180deg);
+}
+
+.cabin-body {
+  padding: 0 1.25rem 1.25rem;
+  border-top: 1px solid var(--ocean-15a);
+}
+
+.cabin-note {
+  font-size: 0.8rem;
+  color: var(--ocean-70a);
+  margin-top: 0.5rem;
+  text-align: right;
+}
+
+/* Add Cabin Button */
+.btn-add-cabin {
+  width: 100%;
+  padding: 1rem;
+  background: transparent;
+  border: 2px dashed var(--ocean-15a);
+  color: var(--ocean-900);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-bottom: 1rem;
+}
+
+.btn-add-cabin:hover {
+  border-color: var(--ocean-900);
+  background: rgba(34, 63, 98, 0.03);
+}
+
+/* Total Summary */
+.cabins-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-top: 1px solid var(--ocean-15a);
+  font-size: 1rem;
+  color: var(--ocean-900);
+}
+
+.cabins-total .total-value {
+  font-weight: 600;
+}
+
+/* Accordion Animation */
+.accordion-enter-active,
+.accordion-leave-active {
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+.accordion-enter-from,
+.accordion-leave-to {
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.accordion-enter-to,
+.accordion-leave-from {
+  opacity: 1;
+  max-height: 300px;
+}
+
+/* Mobile responsive for cabin accordion */
+@media (max-width: 640px) {
+  .cabin-header {
+    padding: 0.875rem 1rem;
+  }
+
+  .cabin-header-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .cabin-body {
+    padding: 0 1rem 1rem;
+  }
+
+  .btn-add-cabin {
+    padding: 0.875rem;
+    font-size: 0.9rem;
   }
 }

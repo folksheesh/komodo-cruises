@@ -5,8 +5,18 @@
       <div class="success-animation">
         <div class="checkmark-circle">
           <svg class="checkmark" viewBox="0 0 52 52">
-            <circle class="checkmark-circle-bg" cx="26" cy="26" r="25" fill="none"/>
-            <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            <circle
+              class="checkmark-circle-bg"
+              cx="26"
+              cy="26"
+              r="25"
+              fill="none"
+            />
+            <path
+              class="checkmark-check"
+              fill="none"
+              d="M14.1 27.2l7.1 7.2 16.7-16.8"
+            />
           </svg>
         </div>
       </div>
@@ -14,15 +24,22 @@
       <!-- Main Content -->
       <div class="success-content">
         <h1 class="success-title">Thank You for Your Purchase!</h1>
-        <p class="success-subtitle">Your payment has been successfully processed</p>
+        <p class="success-subtitle">
+          Your payment has been successfully processed
+        </p>
 
         <!-- Booking Summary Card -->
         <div class="booking-card">
           <div class="booking-header">
             <div class="booking-badge">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                <polyline points="22 4 12 14.01 9 11.01"/>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
               </svg>
               <span>Booking Confirmed</span>
             </div>
@@ -36,9 +53,14 @@
             <!-- Customer Info -->
             <div class="detail-section">
               <h3 class="section-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                  <circle cx="12" cy="7" r="4"/>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
                 </svg>
                 Guest Information
               </h3>
@@ -61,8 +83,15 @@
             <!-- Trip Info -->
             <div class="detail-section">
               <h3 class="section-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                  />
                 </svg>
                 Trip Details
               </h3>
@@ -93,27 +122,45 @@
             <!-- Payment Info -->
             <div class="detail-section payment-section">
               <h3 class="section-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
-                  <line x1="1" y1="10" x2="23" y2="10"/>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                  <line x1="1" y1="10" x2="23" y2="10" />
                 </svg>
                 Payment Summary
               </h3>
               <div class="payment-breakdown">
                 <div class="payment-row">
-                  <span>{{ bookingData.cabinName }} × {{ bookingData.guests }}</span>
-                  <span>{{ formatCurrency(bookingData.pricePerCabin) }} × {{ bookingData.guests }}</span>
+                  <span
+                    >{{ bookingData.cabinName }} ×
+                    {{ bookingData.guests }}</span
+                  >
+                  <span
+                    >{{ formatCurrency(bookingData.pricePerCabin) }} ×
+                    {{ bookingData.guests }}</span
+                  >
                 </div>
                 <div class="payment-divider"></div>
                 <div class="payment-row total">
                   <span>Total Paid</span>
-                  <span class="total-amount">{{ formatCurrency(bookingData.totalAmount) }}</span>
+                  <span class="total-amount">{{
+                    formatCurrency(bookingData.totalAmount)
+                  }}</span>
                 </div>
               </div>
               <div class="payment-status">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                  <polyline points="22 4 12 14.01 9 11.01"/>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
                 </svg>
                 <span>Payment Successful</span>
               </div>
@@ -124,15 +171,28 @@
         <!-- Email Notice -->
         <div class="email-notice">
           <div class="email-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              />
+              <polyline points="22,6 12,13 2,6" />
             </svg>
           </div>
           <div class="email-content">
             <h4>Check Your Email</h4>
-            <p>A detailed receipt and booking confirmation has been sent to <strong>{{ bookingData.email }}</strong></p>
-            <p class="email-hint">Don't forget to check your spam folder if you don't see it within a few minutes.</p>
+            <p>
+              A detailed receipt and booking confirmation has been sent to
+              <strong>{{ bookingData.email }}</strong>
+            </p>
+            <p class="email-hint">
+              Don't forget to check your spam folder if you don't see it within
+              a few minutes.
+            </p>
           </div>
           <div class="email-status" :class="emailStatus">
             <span v-if="emailStatus === 'sending'">Sending...</span>
@@ -149,21 +209,29 @@
               <div class="step-number">1</div>
               <div class="step-content">
                 <strong>Email Confirmation</strong>
-                <p>Check your inbox for your booking receipt and trip details</p>
+                <p>
+                  Check your inbox for your booking receipt and trip details
+                </p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">2</div>
               <div class="step-content">
                 <strong>Journey Designer Contact</strong>
-                <p>Our team will reach out within 24 hours to finalize your itinerary</p>
+                <p>
+                  Our team will reach out within 24 hours to finalize your
+                  itinerary
+                </p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">3</div>
               <div class="step-content">
                 <strong>Prepare for Adventure</strong>
-                <p>Get your travel documents ready and pack for an unforgettable trip!</p>
+                <p>
+                  Get your travel documents ready and pack for an unforgettable
+                  trip!
+                </p>
               </div>
             </div>
           </div>
@@ -172,9 +240,14 @@
         <!-- Action Buttons -->
         <div class="action-buttons">
           <router-link to="/" class="btn-primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-              <polyline points="9 22 9 12 15 12 15 22"/>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
             </svg>
             Back to Home
           </router-link>
@@ -186,7 +259,9 @@
         <!-- Support -->
         <div class="support-info">
           <p>Need help? Contact our support team at</p>
-          <a href="mailto:support@komodocruises.com">support@komodocruises.com</a>
+          <a href="mailto:support@komodocruises.com"
+            >support@komodocruises.com</a
+          >
         </div>
       </div>
     </div>
@@ -194,110 +269,119 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted } from "vue";
 
-const emailStatus = ref('sending')
+const emailStatus = ref("sending");
 
 const bookingData = reactive({
-  bookingId: 'KC2025001',
-  customerName: 'Guest',
-  email: 'guest@email.com',
-  phone: '-',
-  shipName: 'Komodo Cruise',
-  cabinName: '-',
-  itinerary: '-',
-  travelDate: 'To be confirmed',
+  bookingId: "KC2025001",
+  customerName: "Guest",
+  email: "guest@email.com",
+  phone: "-",
+  shipName: "Komodo Cruise",
+  cabinName: "-",
+  itinerary: "-",
+  travelDate: "To be confirmed",
   guests: 2,
   pricePerCabin: 0,
-  totalAmount: 0
-})
+  totalAmount: 0,
+});
 
 const formatCurrency = (amount) => {
-  if (!amount) return 'Rp 0'
-  return new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
-    minimumFractionDigits: 0
-  }).format(amount)
-}
+  if (!amount) return "Rp 0";
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+  })
+    .format(amount)
+    .replace("IDR", "Rp");
+};
 
 const sendConfirmationEmail = async () => {
   try {
-    emailStatus.value = 'sending'
-    
-    const response = await fetch('https://komodo-cruises-production-0c52.up.railway.app/api/send-confirmation-email', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        customerName: bookingData.customerName,
-        customerEmail: bookingData.email,
-        customerPhone: bookingData.phone,
-        bookingId: bookingData.bookingId,
-        shipName: bookingData.shipName,
-        cabinName: bookingData.cabinName,
-        itinerary: bookingData.itinerary,
-        travelDate: bookingData.travelDate,
-        guests: bookingData.guests,
-        pricePerCabin: bookingData.pricePerCabin,
-        totalAmount: bookingData.totalAmount
-      })
-    })
+    emailStatus.value = "sending";
 
-    const result = await response.json()
-    
+    const response = await fetch(
+      "https://komodo-cruises-production-0c52.up.railway.app/api/send-confirmation-email",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customerName: bookingData.customerName,
+          customerEmail: bookingData.email,
+          customerPhone: bookingData.phone,
+          bookingId: bookingData.bookingId,
+          shipName: bookingData.shipName,
+          cabinName: bookingData.cabinName,
+          itinerary: bookingData.itinerary,
+          travelDate: bookingData.travelDate,
+          guests: bookingData.guests,
+          pricePerCabin: bookingData.pricePerCabin,
+          totalAmount: bookingData.totalAmount,
+        }),
+      }
+    );
+
+    const result = await response.json();
+
     if (result.success) {
-      emailStatus.value = 'sent'
+      emailStatus.value = "sent";
     } else {
-      emailStatus.value = 'failed'
+      emailStatus.value = "failed";
     }
   } catch (error) {
-    console.error('Failed to send email:', error)
-    emailStatus.value = 'failed'
+    console.error("Failed to send email:", error);
+    emailStatus.value = "failed";
   }
-}
+};
 
 onMounted(async () => {
   // Load booking data from localStorage
   try {
-    const lastEnquiry = localStorage.getItem('komodo_last_enquiry')
+    const lastEnquiry = localStorage.getItem("komodo_last_enquiry");
     if (lastEnquiry) {
-      const data = JSON.parse(lastEnquiry)
-      
+      const data = JSON.parse(lastEnquiry);
+
       if (data.form) {
-        bookingData.customerName = `${data.form.title || ''} ${data.form.firstName || ''} ${data.form.lastName || ''}`.trim() || 'Guest'
-        bookingData.email = data.form.email || 'guest@email.com'
-        bookingData.phone = data.form.phone || '-'
+        bookingData.customerName =
+          `${data.form.title || ""} ${data.form.firstName || ""} ${
+            data.form.lastName || ""
+          }`.trim() || "Guest";
+        bookingData.email = data.form.email || "guest@email.com";
+        bookingData.phone = data.form.phone || "-";
       }
-      
+
       if (data.itinerary && data.itinerary.length > 0) {
-        const item = data.itinerary[0]
-        bookingData.shipName = item.ship || 'Komodo Cruise'
-        bookingData.cabinName = item.cabin || '-'
-        bookingData.itinerary = item.itinerary || '-'
-        bookingData.travelDate = item.date || 'To be confirmed'
-        bookingData.guests = item.guests || 2
-        bookingData.pricePerCabin = item.pricePerCabin || 0
+        const item = data.itinerary[0];
+        bookingData.shipName = item.ship || "Komodo Cruise";
+        bookingData.cabinName = item.cabin || "-";
+        bookingData.itinerary = item.itinerary || "-";
+        bookingData.travelDate = item.date || "To be confirmed";
+        bookingData.guests = item.guests || 2;
+        bookingData.pricePerCabin = item.pricePerCabin || 0;
       }
-      
-      bookingData.totalAmount = data.amount || 0
-      bookingData.bookingId = data.invoiceId ? `KC${Date.now().toString().slice(-8)}` : 'KC2025001'
+
+      bookingData.totalAmount = data.amount || 0;
+      bookingData.bookingId = data.invoiceId
+        ? `KC${Date.now().toString().slice(-8)}`
+        : "KC2025001";
     }
 
     // Clear itinerary after loading data
-    localStorage.removeItem('komodo_itinerary')
-    
+    localStorage.removeItem("komodo_itinerary");
+
     // Send confirmation email
-    if (bookingData.email && bookingData.email !== 'guest@email.com') {
-      await sendConfirmationEmail()
+    if (bookingData.email && bookingData.email !== "guest@email.com") {
+      await sendConfirmationEmail();
     } else {
-      emailStatus.value = 'sent' // Skip if no valid email
+      emailStatus.value = "sent"; // Skip if no valid email
     }
-    
   } catch (error) {
-    console.error('Error loading booking data:', error)
-    emailStatus.value = 'failed'
+    console.error("Error loading booking data:", error);
+    emailStatus.value = "failed";
   }
-})
+});
 </script>
 
 <style scoped>
@@ -332,7 +416,8 @@ onMounted(async () => {
   stroke-width: 2;
   stroke: #10b981;
   stroke-miterlimit: 10;
-  animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+  animation: fill 0.4s ease-in-out 0.4s forwards,
+    scale 0.3s ease-in-out 0.9s both;
 }
 
 .checkmark-circle-bg {
@@ -355,16 +440,25 @@ onMounted(async () => {
 }
 
 @keyframes stroke {
-  100% { stroke-dashoffset: 0; }
+  100% {
+    stroke-dashoffset: 0;
+  }
 }
 
 @keyframes scale {
-  0%, 100% { transform: none; }
-  50% { transform: scale3d(1.1, 1.1, 1); }
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
 }
 
 @keyframes fill {
-  100% { box-shadow: inset 0 0 0 100px #dcfce7; }
+  100% {
+    box-shadow: inset 0 0 0 100px #dcfce7;
+  }
 }
 
 /* Content */
@@ -376,7 +470,7 @@ onMounted(async () => {
 }
 
 .success-title {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-family: "Cormorant Garamond", "Playfair Display", serif;
   font-size: 32px;
   font-weight: 600;
   color: #1a365d;
@@ -429,7 +523,7 @@ onMounted(async () => {
 .booking-id .label {
   display: block;
   font-size: 12px;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 2px;
 }
 
@@ -629,7 +723,7 @@ onMounted(async () => {
 }
 
 .whats-next h3 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Cormorant Garamond", serif;
   font-size: 20px;
   color: #1a365d;
   margin: 0 0 20px;
@@ -684,7 +778,8 @@ onMounted(async () => {
   margin-bottom: 24px;
 }
 
-.btn-primary, .btn-secondary {
+.btn-primary,
+.btn-secondary {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -750,28 +845,28 @@ onMounted(async () => {
   .success-content {
     padding: 24px;
   }
-  
+
   .success-title {
     font-size: 24px;
   }
-  
+
   .booking-header {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .detail-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .action-buttons {
     flex-direction: column;
   }
-  
+
   .email-notice {
     flex-direction: column;
   }
-  
+
   .email-status {
     align-self: flex-start;
   }

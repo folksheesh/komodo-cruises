@@ -7,7 +7,9 @@
           <div class="modal-header">
             <div class="modal-header-content">
               <h2 class="modal-title">Plan your trip</h2>
-              <button class="modal-close" @click="closeModal">Close <span class="close-x">✕</span></button>
+              <button class="modal-close" @click="closeModal">
+                Close <span class="close-x">✕</span>
+              </button>
             </div>
           </div>
 
@@ -287,114 +289,157 @@
                   </div>
                 </div>
 
-                <!-- Step 4: Guests -->
+                <!-- Step 4: Guests (Multi-Cabin) -->
                 <div v-else-if="step === 4">
-                  <h3 class="step-title">Guests</h3>
+                  <h3 class="step-title">Cabins & Guests</h3>
                   <p class="results-note">
-                    Please indicate how many adults will need to be
-                    accommodated.
-                  </p>
-                  <p class="results-note">
-                    If your booking includes children, please enquire directly
-                    on the next step.
-                  </p>
-                  <p class="results-note">
-                    View our child policy for each lodge here.
+                    Configure the number of guests per cabin. Maximum 4 cabins,
+                    4 guests per cabin.
                   </p>
 
-                  <div class="counters">
-                    <div class="counter-row">
-                      <div class="counter-text">
-                        <div class="semibold">Adults</div>
-                        <div class="muted text-sm">Ages 17+</div>
+                  <div class="cabins-container">
+                    <!-- Cabin Accordion Items -->
+                    <div
+                      v-for="(cabin, idx) in cabins"
+                      :key="cabin.id"
+                      class="cabin-accordion"
+                    >
+                      <!-- Cabin Header -->
+                      <div class="cabin-header" @click="toggleCabinExpand(idx)">
+                        <div class="cabin-header-left">
+                          <span class="cabin-title">CABIN {{ idx + 1 }}</span>
+                          <span class="cabin-summary">
+                            {{ cabin.adults + cabin.children }} guest{{
+                              cabin.adults + cabin.children !== 1 ? "s" : ""
+                            }}
+                          </span>
+                        </div>
+                        <div class="cabin-header-right">
+                          <button
+                            v-if="cabins.length > 1"
+                            type="button"
+                            class="cabin-remove-btn"
+                            @click.stop="removeCabin(idx)"
+                            title="Remove cabin"
+                          >
+                            <svg
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <path
+                                d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"
+                              />
+                            </svg>
+                          </button>
+                          <svg
+                            class="cabin-chevron"
+                            :class="{ expanded: cabin.expanded }"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                          >
+                            <polyline points="6 9 12 15 18 9" />
+                          </svg>
+                        </div>
                       </div>
-                      <div class="counter-ctrls">
-                        <button
-                          type="button"
-                          class="btn-icon"
-                          @click="dec('adults')"
-                        >
-                          −
-                        </button>
-                        <span class="count">{{ adults }}</span>
-                        <button
-                          type="button"
-                          class="btn-icon"
-                          @click="inc('adults')"
-                        >
-                          +
-                        </button>
-                      </div>
+
+                      <!-- Cabin Body (Collapsible) -->
+                      <transition name="accordion">
+                        <div v-if="cabin.expanded" class="cabin-body">
+                          <!-- Adults Counter -->
+                          <div class="counter-row">
+                            <div class="counter-text">
+                              <div class="semibold">Adults</div>
+                              <div class="muted text-sm">Ages 17+</div>
+                            </div>
+                            <div class="counter-ctrls">
+                              <button
+                                type="button"
+                                class="btn-icon"
+                                :disabled="cabin.adults <= 1"
+                                @click="decCabinGuest(idx, 'adults')"
+                              >
+                                −
+                              </button>
+                              <span class="count">{{ cabin.adults }}</span>
+                              <button
+                                type="button"
+                                class="btn-icon"
+                                :disabled="
+                                  cabin.adults + cabin.children >=
+                                  MAX_GUESTS_PER_CABIN
+                                "
+                                @click="incCabinGuest(idx, 'adults')"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+
+                          <!-- Children Counter -->
+                          <div class="counter-row">
+                            <div class="counter-text">
+                              <div class="semibold">Children</div>
+                              <div class="muted text-sm">Ages 3 - 16</div>
+                            </div>
+                            <div class="counter-ctrls">
+                              <button
+                                type="button"
+                                class="btn-icon"
+                                :disabled="cabin.children <= 0"
+                                @click="decCabinGuest(idx, 'children')"
+                              >
+                                −
+                              </button>
+                              <span class="count">{{ cabin.children }}</span>
+                              <button
+                                type="button"
+                                class="btn-icon"
+                                :disabled="
+                                  cabin.adults + cabin.children >=
+                                  MAX_GUESTS_PER_CABIN
+                                "
+                                @click="incCabinGuest(idx, 'children')"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+
+                          <div class="cabin-note">
+                            Max {{ MAX_GUESTS_PER_CABIN }} guests per cabin
+                          </div>
+                        </div>
+                      </transition>
                     </div>
 
-                    <div class="counter-row">
-                      <div class="counter-text">
-                        <div class="semibold">Children</div>
-                        <div class="muted text-sm">Ages 10 - 16</div>
-                      </div>
-                      <div class="counter-ctrls">
-                        <button
-                          type="button"
-                          class="btn-icon"
-                          @click="dec('children')"
-                        >
-                          −
-                        </button>
-                        <span class="count">{{ children }}</span>
-                        <button
-                          type="button"
-                          class="btn-icon"
-                          @click="inc('children')"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
+                    <!-- Add Cabin Button -->
+                    <button
+                      v-if="canAddCabin"
+                      type="button"
+                      class="btn-add-cabin"
+                      @click="addCabin"
+                    >
+                      + Add Another Cabin
+                    </button>
 
-                    <div class="counter-row">
-                      <div class="counter-text">
-                        <div class="semibold">Ages 3 - 9</div>
-                      </div>
-                      <div class="counter-ctrls">
-                        <button
-                          type="button"
-                          class="btn-icon"
-                          @click="dec('age3_9')"
-                        >
-                          −
-                        </button>
-                        <span class="count">{{ age3_9 }}</span>
-                        <button
-                          type="button"
-                          class="btn-icon"
-                          @click="inc('age3_9')"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-
-                    <div class="counter-row">
-                      <div class="counter-text">
-                        <div class="semibold">Ages 0 - 2</div>
-                      </div>
-                      <div class="counter-ctrls">
-                        <button
-                          type="button"
-                          class="btn-icon"
-                          @click="dec('age0_2')"
-                        >
-                          −
-                        </button>
-                        <span class="count">{{ age0_2 }}</span>
-                        <button
-                          type="button"
-                          class="btn-icon"
-                          @click="inc('age0_2')"
-                        >
-                          +
-                        </button>
-                      </div>
+                    <!-- Total Summary -->
+                    <div class="cabins-total">
+                      <span>Total:</span>
+                      <span class="total-value">
+                        {{ cabins.length }} cabin{{
+                          cabins.length !== 1 ? "s" : ""
+                        }}, {{ totalGuests }} guest{{
+                          totalGuests !== 1 ? "s" : ""
+                        }}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -513,10 +558,19 @@ const selectedShipIds = ref([]);
 
 const dateFrom = ref("");
 const dateTo = ref(""); // Keep for compatibility but not used in UI
-const adults = ref(2);
-const children = ref(0);
-const age3_9 = ref(0);
-const age0_2 = ref(0);
+
+// Cabin-based guest management
+const MAX_CABINS = 4;
+const MAX_GUESTS_PER_CABIN = 4;
+
+const cabins = ref([{ id: 1, adults: 2, children: 0, expanded: true }]);
+
+// Computed: total guests across all cabins
+const totalGuests = computed(() =>
+  cabins.value.reduce((sum, c) => sum + c.adults + c.children, 0)
+);
+
+const canAddCabin = computed(() => cabins.value.length < MAX_CABINS);
 
 // Toast state
 const toastVisible = ref(false);
@@ -719,11 +773,19 @@ function goResults() {
     lodges: selectedLabels.slice(),
     dateFrom: dateFrom.value,
     dateTo: dateTo.value,
-    adults: adults.value,
-    children: children.value,
-    age3_9: age3_9.value,
-    age0_2: age0_2.value,
-    totalGuests: adults.value + children.value + age3_9.value + age0_2.value,
+    // Multi-cabin data
+    cabins: cabins.value.map((c) => ({
+      adults: c.adults,
+      children: c.children,
+      total: c.adults + c.children,
+    })),
+    totalCabins: cabins.value.length,
+    totalGuests: totalGuests.value,
+    // Legacy fields for backward compatibility
+    adults: cabins.value.reduce((s, c) => s + c.adults, 0),
+    children: cabins.value.reduce((s, c) => s + c.children, 0),
+    age3_9: 0,
+    age0_2: 0,
     timestamp: Date.now(),
   };
 
@@ -807,18 +869,39 @@ function normalizeConfigShips(list) {
     : [];
 }
 
-function inc(which) {
-  if (which === "adults") adults.value++;
-  else if (which === "children") children.value++;
-  else if (which === "age3_9") age3_9.value++;
-  else if (which === "age0_2") age0_2.value++;
+function addCabin() {
+  if (canAddCabin.value) {
+    cabins.value.push({
+      id: Date.now(),
+      adults: 2,
+      children: 0,
+      expanded: true,
+    });
+  }
 }
 
-function dec(which) {
-  if (which === "adults" && adults.value > 0) adults.value--;
-  else if (which === "children" && children.value > 0) children.value--;
-  else if (which === "age3_9" && age3_9.value > 0) age3_9.value--;
-  else if (which === "age0_2" && age0_2.value > 0) age0_2.value--;
+function removeCabin(index) {
+  if (cabins.value.length > 1) {
+    cabins.value.splice(index, 1);
+  }
+}
+
+function toggleCabinExpand(index) {
+  cabins.value[index].expanded = !cabins.value[index].expanded;
+}
+
+function incCabinGuest(index, type) {
+  const cabin = cabins.value[index];
+  const total = cabin.adults + cabin.children;
+  if (total < MAX_GUESTS_PER_CABIN) {
+    cabin[type]++;
+  }
+}
+
+function decCabinGuest(index, type) {
+  const cabin = cabins.value[index];
+  if (type === "adults" && cabin.adults > 1) cabin.adults--;
+  if (type === "children" && cabin.children > 0) cabin.children--;
 }
 
 function toast(msg) {

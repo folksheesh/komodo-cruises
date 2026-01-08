@@ -91,275 +91,383 @@
               <div class="results-controls-right">
                 <span class="results-count"
                   >{{ sortedDisplayItems.length }}
-                  {{ sortedDisplayItems.length === 1 ? "Room" : "Rooms" }}</span
+                  {{
+                    sortedDisplayItems.length === 1 ? "Cabin" : "Cabins"
+                  }}</span
                 >
               </div>
             </div>
 
-            <div v-if="sortedDisplayItems.length" class="lodge-results">
-              <div
-                class="cabin-card"
-                v-for="item in paginatedItems"
-                :key="item.uniqueKey"
-              >
-                <!-- Image Section -->
+            <!-- Ship Selection Step (when multiple ships selected) -->
+            <div v-show="needsShipSelection" class="ship-selection-container">
+              <div class="ship-selection-header">
+                <h3 class="ship-selection-title">Select a Ship</h3>
+                <p class="ship-selection-subtitle">
+                  You selected {{ shipsFromCriteria.length }} ships. Please
+                  choose one to view available cabins.
+                </p>
+              </div>
+              <div class="ship-selection-grid">
                 <div
-                  class="cabin-image"
-                  style="position: relative; overflow: hidden"
+                  v-for="ship in availableShipsForSelection"
+                  :key="ship.name"
+                  class="ship-selection-card"
+                  :class="{ 'no-availability': !ship.hasAvailability }"
+                  @click="ship.hasAvailability && selectShipForView(ship.name)"
                 >
-                  <transition
-                    :name="
-                      item.isGallery && getGalleryDirection(item.id) === 'left'
-                        ? 'slide-left'
-                        : 'slide-right'
-                    "
-                    mode="out-in"
-                  >
-                    <img
-                      :src="
-                        item.isGallery
-                          ? getGalleryImages(item.originalItem)[
-                              getGalleryIndex(item.id)
-                            ] || '/src/images/cabin.jpg'
-                          : item.image || '/src/images/cabin.jpg'
-                      "
-                      :alt="item.title"
-                      referrerpolicy="no-referrer"
-                      decoding="async"
-                      loading="lazy"
-                      @error="onImgError($event, item.image)"
-                      :key="item.isGallery ? getGalleryIndex(item.id) : 0"
-                    />
-                  </transition>
-                  <template v-if="item.isGallery">
-                    <button
-                      class="gallery-nav gallery-prev"
-                      @click="prevImage(item.id)"
-                      aria-label="Previous image"
+                  <div class="ship-card-content">
+                    <h4 class="ship-card-name">{{ ship.name }}</h4>
+                    <div class="ship-card-info" v-if="ship.hasAvailability">
+                      <span
+                        >{{ ship.cabinsCount }} cabin{{
+                          ship.cabinsCount !== 1 ? "s" : ""
+                        }}
+                        available</span
+                      >
+                      <span class="ship-card-capacity"
+                        >Up to {{ ship.totalCapacity }} guests</span
+                      >
+                    </div>
+                    <div class="ship-card-info" v-else>
+                      <span class="no-availability-text"
+                        >No availability for selected dates</span
+                      >
+                    </div>
+                  </div>
+                  <div class="ship-card-arrow" v-if="ship.hasAvailability">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
                     >
-                      &lsaquo;
-                    </button>
-                    <button
-                      class="gallery-nav gallery-next"
-                      @click="nextImage(item.id)"
-                      aria-label="Next image"
-                    >
-                      &rsaquo;
-                    </button>
-                  </template>
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </div>
                 </div>
+              </div>
+            </div>
 
-                <!-- Content Section -->
-                <div class="cabin-content">
-                  <div class="cabin-header">
+            <!-- Cabin Results (when single ship or ship already selected) -->
+            <div v-show="!needsShipSelection" class="cabin-results-section">
+              <!-- Back button when viewing specific ship from multi-ship selection -->
+              <div
+                v-if="selectedShipForView && shipsFromCriteria.length > 1"
+                class="back-to-ships-bar"
+              >
+                <button class="btn-back-ships" @click="backToShipSelection">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polyline points="15 18 9 12 15 6" />
+                  </svg>
+                  Back to Ships
+                </button>
+                <span class="viewing-ship-label"
+                  >Viewing: <strong>{{ selectedShipForView }}</strong></span
+                >
+              </div>
+
+              <div v-if="sortedDisplayItems.length" class="lodge-results">
+                <div
+                  class="cabin-card"
+                  v-for="item in paginatedItems"
+                  :key="item.uniqueKey"
+                >
+                  <!-- Image Section -->
+                  <div
+                    class="cabin-image"
+                    style="position: relative; overflow: hidden"
+                  >
+                    <transition
+                      :name="
+                        item.isGallery &&
+                        getGalleryDirection(item.id) === 'left'
+                          ? 'slide-left'
+                          : 'slide-right'
+                      "
+                      mode="out-in"
+                    >
+                      <img
+                        :src="
+                          item.isGallery
+                            ? getGalleryImages(item.originalItem)[
+                                getGalleryIndex(item.id)
+                              ] || '/src/images/cabin.jpg'
+                            : item.image || '/src/images/cabin.jpg'
+                        "
+                        :alt="item.title"
+                        referrerpolicy="no-referrer"
+                        decoding="async"
+                        loading="lazy"
+                        @error="onImgError($event, item.image)"
+                        :key="item.isGallery ? getGalleryIndex(item.id) : 0"
+                      />
+                    </transition>
+                    <template v-if="item.isGallery">
+                      <button
+                        class="gallery-nav gallery-prev"
+                        @click="prevImage(item.id)"
+                        aria-label="Previous image"
+                      >
+                        &lsaquo;
+                      </button>
+                      <button
+                        class="gallery-nav gallery-next"
+                        @click="nextImage(item.id)"
+                        aria-label="Next image"
+                      >
+                        &rsaquo;
+                      </button>
+                    </template>
+                  </div>
+
+                  <!-- Content Section -->
+                  <div class="cabin-content">
+                    <!-- <div class="cabin-header"> -->
                     <div class="cabin-title-group">
                       <h3 class="cabin-name">{{ item.title }}</h3>
                       <span class="cabin-badge active">{{
                         getCabinType(item.originalItem)
                       }}</span>
+                      <!-- </div> -->
                     </div>
-                  </div>
 
-                  <!-- Specs Row -->
-                  <div class="cabin-specs">
-                    <span
-                      >Sleeps
-                      {{ getCabinCapacity(item.originalItem) || 2 }}</span
-                    >
-                    <span class="specs-divider">|</span>
-                    <span>{{
-                      getCabinBedType(item.originalItem) || "1 King"
-                    }}</span>
-                    <span class="specs-divider">|</span>
-                    <span>{{
-                      getCabinSize(item.originalItem) || "Private cabin"
-                    }}</span>
-                    <template v-if="getCabinTripDays(item.originalItem)">
+                    <!-- Specs Row -->
+                    <div class="cabin-specs">
+                      <span
+                        >Sleeps
+                        {{ getCabinCapacity(item.originalItem) || 2 }}</span
+                      >
                       <span class="specs-divider">|</span>
-                      <span
-                        >{{ getCabinTripDays(item.originalItem) }} Days</span
-                      >
-                    </template>
-                  </div>
-
-                  <!-- Overview Section (Two Column) -->
-                  <div class="cabin-overview">
-                    <ul class="overview-list">
-                      <li
-                        v-for="(feature, fIdx) in getCabinOverview(
-                          item.originalItem
-                        ).slice(0, 3)"
-                        :key="fIdx"
-                      >
-                        {{ feature }}
-                      </li>
-                    </ul>
-                    <ul
-                      class="overview-list"
-                      v-if="getCabinOverview(item.originalItem).length > 3"
-                    >
-                      <li
-                        v-for="(feature, fIdx) in getCabinOverview(
-                          item.originalItem
-                        ).slice(3, 6)"
-                        :key="fIdx + 3"
-                      >
-                        {{ feature }}
-                      </li>
-                    </ul>
-                  </div>
-
-                  <!-- ROOM DETAILS Button -->
-                  <button
-                    class="cabin-details-btn"
-                    @click="
-                      item.availabilityType === 'standard' &&
-                        viewCabinDetails(item.originalItem)
-                    "
-                  >
-                    ROOM DETAILS
-                  </button>
-
-                  <!-- Trip Dates Section (Luxury Dropdown Style) -->
-                  <div
-                    v-if="item.trips && item.trips.length > 0"
-                    class="trips-section"
-                  >
-                    <!-- Primary Trip - Shows selected trip or first trip -->
-                    <div class="trip-primary">
-                      <div class="trip-primary-info">
-                        <span class="trip-primary-date">{{
-                          formatTripDateRange(
-                            getDisplayTrip(item).date,
-                            getDisplayTrip(item).tripDays
-                          )
-                        }}</span>
-                        <span class="trip-primary-rooms"
-                          >{{ getDisplayTrip(item).available || 1 }} room{{
-                            (getDisplayTrip(item).available || 1) > 1 ? "s" : ""
-                          }}
-                          available</span
+                      <span>{{
+                        getCabinBedType(item.originalItem) || "1 King"
+                      }}</span>
+                      <template v-if="getCabinTripDays(item.originalItem)">
+                        <span class="specs-divider">|</span>
+                        <span
+                          >{{ getCabinTripDays(item.originalItem) }} Days</span
                         >
-                      </div>
+                      </template>
                     </div>
 
-                    <!-- More Dates Toggle (Only if more than 1 trip) -->
-                    <button
-                      v-if="item.trips.length > 1"
-                      class="more-dates-toggle"
-                      @click.stop="toggleMoreDates(item.uniqueKey)"
-                    >
-                      <span>MORE DATES</span>
-                      <span
-                        class="toggle-arrow"
-                        :class="{ expanded: expandedTrips[item.uniqueKey] }"
-                        >▼</span
+                    <!-- Overview Section (Two Column) -->
+                    <div class="cabin-overview">
+                      <ul class="overview-list">
+                        <li
+                          v-for="(feature, fIdx) in getCabinOverview(
+                            item.originalItem
+                          ).slice(0, 3)"
+                          :key="fIdx"
+                        >
+                          {{ feature }}
+                        </li>
+                      </ul>
+                      <ul
+                        class="overview-list"
+                        v-if="getCabinOverview(item.originalItem).length > 3"
                       >
+                        <li
+                          v-for="(feature, fIdx) in getCabinOverview(
+                            item.originalItem
+                          ).slice(3, 6)"
+                          :key="fIdx + 3"
+                        >
+                          {{ feature }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <!-- ROOM DETAILS Button -->
+                    <button
+                      class="cabin-details-btn"
+                      @click="
+                        item.availabilityType === 'standard' &&
+                          viewCabinDetails(item.originalItem)
+                      "
+                    >
+                      CABIN DETAILS
                     </button>
 
-                    <!-- Expandable Dates List -->
+                    <!-- Trip Dates Section (Luxury Dropdown Style) -->
                     <div
-                      v-if="
-                        item.trips.length > 1 && expandedTrips[item.uniqueKey]
-                      "
-                      class="more-dates-list"
+                      v-if="item.trips && item.trips.length > 0"
+                      class="trips-section"
                     >
-                      <div
-                        v-for="(trip, tIdx) in getOtherTrips(item)"
-                        :key="tIdx"
-                        class="trip-option-alt"
-                        @click="selectTrip(item, trip)"
-                      >
-                        <div class="trip-alt-info">
-                          <span class="trip-alt-date">{{
-                            formatTripDateRange(trip.date, trip.tripDays)
+                      <!-- Primary Trip - Shows selected trip or first trip -->
+                      <div class="trip-primary">
+                        <div class="trip-primary-info">
+                          <span class="trip-primary-date">{{
+                            formatTripDateRange(
+                              getDisplayTrip(item).date,
+                              getDisplayTrip(item).tripDays
+                            )
                           }}</span>
-                          <span class="trip-alt-rooms"
-                            >{{ trip.available || 1 }} room{{
-                              (trip.available || 1) > 1 ? "s" : ""
+                          <span class="trip-primary-rooms"
+                            >{{ getDisplayTrip(item).available || 1 }} cabin{{
+                              (getDisplayTrip(item).available || 1) > 1
+                                ? "s"
+                                : ""
                             }}
                             available</span
                           >
                         </div>
-                        <span class="trip-select-action">Select</span>
+                      </div>
+
+                      <!-- More Dates Toggle (Only if more than 1 trip) -->
+                      <button
+                        v-if="item.trips.length > 1"
+                        class="more-dates-toggle"
+                        @click.stop="toggleMoreDates(item.uniqueKey)"
+                      >
+                        <span>MORE DATES</span>
+                        <span
+                          class="toggle-arrow"
+                          :class="{ expanded: expandedTrips[item.uniqueKey] }"
+                          >▼</span
+                        >
+                      </button>
+
+                      <!-- Expandable Dates List -->
+                      <div
+                        v-if="
+                          item.trips.length > 1 && expandedTrips[item.uniqueKey]
+                        "
+                        class="more-dates-list"
+                      >
+                        <div
+                          v-for="(trip, tIdx) in getOtherTrips(item)"
+                          :key="tIdx"
+                          :class="[
+                            'trip-option-alt',
+                            isTripInItinerary(item, trip)
+                              ? 'trip-reserved'
+                              : '',
+                          ]"
+                          @click="
+                            !isTripInItinerary(item, trip) &&
+                              selectTrip(item, trip)
+                          "
+                        >
+                          <div class="trip-alt-info">
+                            <span class="trip-alt-date">{{
+                              formatTripDateRange(trip.date, trip.tripDays)
+                            }}</span>
+                            <span class="trip-alt-rooms"
+                              >{{ trip.available || 1 }} cabin{{
+                                (trip.available || 1) > 1 ? "s" : ""
+                              }}
+                              available</span
+                            >
+                          </div>
+                          <span
+                            v-if="isTripInItinerary(item, trip)"
+                            class="trip-reserved-label"
+                          >
+                            <span class="reserved-check-small">✓</span> Reserved
+                          </span>
+                          <span v-else class="trip-select-action">Select</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <!-- <div class="cabin-divider"></div> -->
+                    <!-- <div class="cabin-divider"></div> -->
 
-                  <!-- Info Section -->
-                  <div class="cabin-info-section">
-                    <div class="cabin-info-left">
-                      <template
-                        v-for="(price, pIdx) in item.prices"
-                        :key="pIdx"
-                      >
-                        <div class="price-display">
-                          <p class="price-main">
-                            <span class="price-label">From</span>
-                            <span class="price-value"
-                              >IDR {{ price.value }}</span
-                            >
-                          </p>
-                          <p class="price-sub">per person, per night</p>
-                        </div>
-                      </template>
-                    </div>
-                    <div class="cabin-info-right">
-                      <button
-                        class="btn-reserve-now"
-                        @click="reserveWithSelectedTrip(item)"
-                      >
-                        RESERVE NOW
-                      </button>
+                    <!-- Info Section -->
+                    <div class="cabin-info-section">
+                      <div class="cabin-info-left">
+                        <template
+                          v-for="(price, pIdx) in item.prices"
+                          :key="pIdx"
+                        >
+                          <div class="price-display">
+                            <p class="price-main">
+                              <span class="price-label">From</span>
+                              <span class="price-value">{{
+                                formatPrice(price.value)
+                              }}</span>
+                            </p>
+                            <p class="price-sub">per person, per night</p>
+                          </div>
+                        </template>
+                      </div>
+                      <div class="cabin-info-right">
+                        <button
+                          :class="[
+                            'btn-reserve-now',
+                            isTripInItinerary(item, getDisplayTrip(item))
+                              ? 'btn-reserved'
+                              : '',
+                          ]"
+                          @click="reserveWithSelectedTrip(item)"
+                        >
+                          <template
+                            v-if="isTripInItinerary(item, getDisplayTrip(item))"
+                          >
+                            <span class="reserved-check">✓</span> RESERVED
+                          </template>
+                          <template v-else> RESERVE NOW </template>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Pagination -->
-            <div v-if="totalPages > 1" class="pagination">
-              <button
-                class="pagination-btn"
-                @click="prevPage"
-                :disabled="currentPage === 1"
-              >
-                ‹ Previous
-              </button>
-
-              <div class="pagination-pages">
+              <!-- Pagination -->
+              <div v-if="totalPages > 1" class="pagination">
                 <button
-                  v-for="page in totalPages"
-                  :key="page"
-                  class="pagination-page"
-                  :class="{ active: currentPage === page }"
-                  @click="goToPage(page)"
+                  class="pagination-btn"
+                  @click="prevPage"
+                  :disabled="currentPage === 1"
                 >
-                  {{ page }}
+                  ‹ Previous
+                </button>
+
+                <div class="pagination-pages">
+                  <button
+                    v-for="page in totalPages"
+                    :key="page"
+                    class="pagination-page"
+                    :class="{ active: currentPage === page }"
+                    @click="goToPage(page)"
+                  >
+                    {{ page }}
+                  </button>
+                </div>
+
+                <button
+                  class="pagination-btn"
+                  @click="nextPage"
+                  :disabled="currentPage === totalPages"
+                >
+                  Next ›
                 </button>
               </div>
 
-              <button
-                class="pagination-btn"
-                @click="nextPage"
-                :disabled="currentPage === totalPages"
+              <div
+                v-if="flexibleAlt && !sortedDisplayItems.length"
+                class="no-results"
               >
-                Next ›
-              </button>
-            </div>
-
-            <div v-else-if="flexibleAlt" class="no-results">
-              <p>No alternative options found for your criteria.</p>
-              <button @click="applyFilters" class="btn-primary">
-                Search Again
-              </button>
+                <p>No alternative options found for your criteria.</p>
+                <button @click="applyFilters" class="btn-primary">
+                  Search Again
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="sidebar-container">
+        <!-- Sidebar Section - Rebuilt with proper sticky architecture -->
+        <div class="sidebar-section-wrapper">
+          <!-- Check Availability Section (non-sticky) -->
           <div class="sidebar-section check-availability-section">
             <h3 class="section-title-sidebar">Check Availability</h3>
 
@@ -430,10 +538,10 @@
                       @click.stop
                     />
                   </div>
-                  <div class="dropdown-footer" @click="nextDropdown('regions')">
+                  <!-- <div class="dropdown-footer" @click="nextDropdown('regions')">
                     <span>Next</span>
                     <span style="font-size: 1.1rem">&rsaquo;</span>
-                  </div>
+                  </div> -->
                 </div>
               </div>
 
@@ -485,15 +593,15 @@
                       No ships found from API.
                     </div>
                   </template>
-                  <div class="dropdown-footer" @click="nextDropdown('ships')">
+                  <!-- <div class="dropdown-footer" @click="nextDropdown('ships')">
                     <span>Next</span>
                     <span style="font-size: 1.1rem">&rsaquo;</span>
-                  </div>
+                  </div> -->
                 </div>
               </div>
 
               <div class="list dropdown" ref="guestsDropdown">
-                <div class="list-heading">Guests</div>
+                <div class="list-heading">Cabins & Guests</div>
                 <button
                   type="button"
                   :class="[
@@ -505,7 +613,13 @@
                   @click.stop="toggleDropdown('guests')"
                   :aria-expanded="openGuests ? 'true' : 'false'"
                 >
-                  <span>{{ guestsTotal }} Guests</span>
+                  <span
+                    >{{ cabins.length }} Cabin{{
+                      cabins.length !== 1 ? "s" : ""
+                    }}, {{ guestsTotal }} Guest{{
+                      guestsTotal !== 1 ? "s" : ""
+                    }}</span
+                  >
                   <span class="caret">
                     <img
                       :src="openGuests ? upArrowIcon : downArrowIcon"
@@ -515,24 +629,148 @@
                     />
                   </span>
                 </button>
-                <div v-if="openGuests" class="dropdown-panel" @click.stop>
-                  <div class="dropdown-group-title">Guests</div>
-                  <div class="simple-guests">
-                    <div class="simple-guests-label">Guests</div>
-                    <div class="simple-guests-ctrls">
-                      <button type="button" class="btn-icon" @click="decGuests">
-                        −
-                      </button>
-                      <span class="count">{{ guestsTotal }}</span>
-                      <button type="button" class="btn-icon" @click="incGuests">
-                        +
-                      </button>
+                <div
+                  v-if="openGuests"
+                  class="dropdown-panel cabin-dropdown-panel"
+                  @click.stop
+                >
+                  <div class="dropdown-group-title">Cabins & Guests</div>
+
+                  <!-- Cabin Accordion Items -->
+                  <div class="cabins-container-sidebar">
+                    <div
+                      v-for="(cabin, idx) in cabins"
+                      :key="cabin.id"
+                      class="cabin-accordion-sidebar"
+                    >
+                      <!-- Cabin Header (static, not clickable) -->
+                      <div class="cabin-header-sidebar-static">
+                        <div class="cabin-header-left-sidebar">
+                          <span class="cabin-title-sidebar"
+                            >CABIN {{ idx + 1 }}</span
+                          >
+                          <span class="cabin-summary-sidebar">
+                            {{ cabin.adults + cabin.children }} guest{{
+                              cabin.adults + cabin.children !== 1 ? "s" : ""
+                            }}
+                          </span>
+                        </div>
+                        <div class="cabin-header-right-sidebar">
+                          <button
+                            v-if="cabins.length > 1"
+                            type="button"
+                            class="cabin-remove-btn-sidebar"
+                            @click.stop="removeCabin(idx)"
+                            title="Remove cabin"
+                          >
+                            <svg
+                              width="14"
+                              height="14"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <path
+                                d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"
+                              />
+                            </svg>
+                          </button>
+                          <button
+                            type="button"
+                            class="cabin-toggle-btn-sidebar"
+                            @click.stop="toggleCabinExpand(idx)"
+                          >
+                            <svg
+                              class="cabin-chevron-sidebar"
+                              :class="{ expanded: cabin.expanded }"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+
+                      <!-- Cabin Body -->
+                      <div v-if="cabin.expanded" class="cabin-body-sidebar">
+                        <div class="counter-row-sidebar">
+                          <span class="counter-label-sidebar">Adults</span>
+                          <div class="counter-ctrls-sidebar">
+                            <button
+                              type="button"
+                              class="btn-icon-sm"
+                              :disabled="cabin.adults <= 1"
+                              @click="decCabinGuest(idx, 'adults')"
+                            >
+                              −
+                            </button>
+                            <span class="count-sidebar">{{
+                              cabin.adults
+                            }}</span>
+                            <button
+                              type="button"
+                              class="btn-icon-sm"
+                              :disabled="
+                                cabin.adults + cabin.children >=
+                                MAX_GUESTS_PER_CABIN
+                              "
+                              @click="incCabinGuest(idx, 'adults')"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                        <div class="counter-row-sidebar">
+                          <span class="counter-label-sidebar">Children</span>
+                          <div class="counter-ctrls-sidebar">
+                            <button
+                              type="button"
+                              class="btn-icon-sm"
+                              :disabled="cabin.children <= 0"
+                              @click="decCabinGuest(idx, 'children')"
+                            >
+                              −
+                            </button>
+                            <span class="count-sidebar">{{
+                              cabin.children
+                            }}</span>
+                            <button
+                              type="button"
+                              class="btn-icon-sm"
+                              :disabled="
+                                cabin.adults + cabin.children >=
+                                MAX_GUESTS_PER_CABIN
+                              "
+                              @click="incCabinGuest(idx, 'children')"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+
+                    <!-- Add Cabin Button -->
+                    <button
+                      v-if="canAddCabin"
+                      type="button"
+                      class="btn-add-cabin-sidebar"
+                      @click="addCabin"
+                    >
+                      + Add Another Cabin
+                    </button>
                   </div>
-                  <div class="dropdown-footer" @click="nextDropdown('guests')">
+
+                  <!-- <div class="dropdown-footer" @click="nextDropdown('guests')">
                     <span>Next</span>
                     <span style="font-size: 1.1rem">&rsaquo;</span>
-                  </div>
+                  </div> -->
                 </div>
               </div>
 
@@ -632,89 +870,186 @@
             </template>
           </div>
 
-          <div v-if="!loading" class="itinerary-sidebar">
-            <h3 class="itinerary-title">Your Itinerary</h3>
-            <p class="itinerary-description">
-              This is a summary of the accommodation you have selected. After
-              submitting your booking request, a Komodo Cruises Journey Designer
-              will make contact to book and confirm your trip.
-            </p>
+          <!-- Sidebar Track - Stretches to full height of results-content -->
+          <div v-if="!loading" class="sidebar-track">
+            <!-- Itinerary Sticky - The ONLY sticky element -->
+            <div class="itinerary-sticky">
+              <h3 class="itinerary-title">Your Itinerary</h3>
+              <p class="itinerary-description">
+                This is a summary of the accommodation you have selected. After
+                submitting your booking request, a Komodo Cruises Journey
+                Designer will make contact to book and confirm your trip.
+              </p>
 
-            <div class="itinerary-divider"></div>
+              <div class="itinerary-divider"></div>
 
-            <div v-if="itineraryItems.length === 0" class="itinerary-empty">
-              You haven't selected any options yet.
-            </div>
-
-            <ul v-else class="itinerary-list">
-              <li
-                v-for="(it, idx) in itineraryItems"
-                :key="it.addedAt"
-                class="itinerary-item"
-              >
-                <div class="itinerary-item-header">
-                  <h4 class="itinerary-lodge-name">{{ it.ship }}</h4>
-                  <button
-                    class="itinerary-remove-btn"
-                    @click="removeItemByIndex(idx)"
-                    aria-label="Remove item"
-                  >
-                    <span class="remove-icon">✕</span>
-                  </button>
-                </div>
-                <div class="itinerary-cabin-name">{{ it.cabin }}</div>
-                <div class="itinerary-guests">
-                  {{ it.guests || 2 }} Guest{{
-                    (it.guests || 2) > 1 ? "s" : ""
-                  }}
-                </div>
-                <div class="itinerary-price">
-                  from {{ it.price || "ZAR 49 205" }} per adult, per night
-                </div>
-                <div class="itinerary-dates">
-                  {{ formatDate(it.date) }} →
-                  {{ formatDate(getEndDate(it.date)) }}
-                </div>
-              </li>
-            </ul>
-
-            <div v-if="itineraryTotals.hasPrice" class="itinerary-total">
-              <div class="itinerary-total-row">
-                <span class="itinerary-total-label"
-                  >Estimated total (per night, all guests)</span
-                >
-                <span class="itinerary-total-amount">{{
-                  itineraryTotals.formattedTotal
-                }}</span>
+              <div v-if="itineraryItems.length === 0" class="itinerary-empty">
+                You haven't selected any options yet.
               </div>
-              <p class="itinerary-total-note">
-                Includes {{ itineraryTotals.pricedCount }} of
-                {{ itineraryItems.length }} selections. Final amounts are
-                confirmed by our Journey Designers.
-              </p>
-              <p
-                v-if="itineraryTotals.missingCount"
-                class="itinerary-total-note"
-              >
-                {{ itineraryTotals.missingCount }} selection{{
-                  itineraryTotals.missingCount > 1 ? "s" : ""
-                }}
-                doesn't have live pricing and is excluded from this estimate.
-              </p>
-            </div>
-            <p v-else-if="itineraryItems.length" class="itinerary-total-note">
-              Pricing for the selected cabins will be confirmed by our Journey
-              Designers.
-            </p>
-            <button
-              v-if="itineraryItems.length"
-              class="btn-send-enquiry"
-              @click="openEnquiryModal"
-            >
-              Send Availability Enquiry
-            </button>
 
-            <a href="#" class="link-speak-with-us">Speak with us &rsaquo;</a>
+              <ul v-else class="itinerary-list">
+                <li
+                  v-for="(it, idx) in itineraryItems"
+                  :key="it.addedAt"
+                  class="itinerary-item"
+                >
+                  <!-- Header: Room Type + Cabin Name + Remove Button -->
+                  <div class="itinerary-header">
+                    <div>
+                      <div class="itinerary-type">CABIN</div>
+                      <div class="itinerary-cabin-name">{{ it.cabin }}</div>
+                    </div>
+                    <button
+                      class="itinerary-remove-btn-top"
+                      @click="removeItemByIndex(idx)"
+                      title="Remove from itinerary"
+                    >
+                      <svg
+                        class="action-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <!-- Date Row -->
+                  <div class="itinerary-info-row">
+                    <svg
+                      class="itinerary-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    >
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    <span class="itinerary-info-text">
+                      <strong>{{ formatDate(it.date) }}</strong> –
+                      <strong>{{ formatDate(getEndDate(it.date)) }}</strong>
+                    </span>
+                  </div>
+
+                  <!-- Ship Name Row -->
+                  <div class="itinerary-info-row">
+                    <svg
+                      class="itinerary-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    >
+                      <path d="M3 15h18l-1.5 6h-15L3 15z" />
+                      <rect x="5" y="8" width="14" height="7" rx="1" />
+                      <path d="M8 8V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3" />
+                      <line x1="2" y1="15" x2="22" y2="15" />
+                    </svg>
+                    <span class="itinerary-info-text">{{ it.ship }}</span>
+                  </div>
+
+                  <!-- Guests Row -->
+                  <div class="itinerary-info-row guest-row-editable">
+                    <div class="guest-info-wrap">
+                      <svg
+                        class="itinerary-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                      <span class="itinerary-info-text">
+                        {{ it.guests || 2 }} adult{{
+                          (it.guests || 2) > 1 ? "s" : ""
+                        }}
+                      </span>
+                    </div>
+                    <button
+                      class="btn-edit-item"
+                      @click.stop="openEditGuest(it, idx)"
+                      title="Edit Guests"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path
+                          d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
+                        ></path>
+                        <path
+                          d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <!-- Price Row -->
+                  <div class="itinerary-price-row">
+                    <div class="itinerary-price-left">
+                      <svg
+                        class="itinerary-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <rect x="2" y="6" width="20" height="12" rx="2" />
+                        <circle cx="12" cy="12" r="2" />
+                        <path d="M6 12h.01M18 12h.01" />
+                      </svg>
+                      <span class="itinerary-price-label">{{ it.cabin }}</span>
+                    </div>
+                    <span class="itinerary-price-value">{{
+                      formatPrice(it.price)
+                    }}</span>
+                  </div>
+                </li>
+              </ul>
+
+              <div v-if="itineraryTotals.hasPrice" class="itinerary-total">
+                <div class="itinerary-total-row">
+                  <span class="itinerary-total-label-simple">EST. TOTAL</span>
+                  <div class="itinerary-total-right">
+                    <span class="itinerary-total-amount">{{
+                      itineraryTotals.formattedTotal
+                    }}</span>
+                    <span class="itinerary-tax-note">(Tax Included)</span>
+                  </div>
+                </div>
+              </div>
+              <p v-else-if="itineraryItems.length" class="itinerary-total-note">
+                Pricing for the selected cabins will be confirmed by our Journey
+                Designers.
+              </p>
+              <button
+                v-if="itineraryItems.length"
+                class="btn-send-enquiry"
+                @click="openEnquiryModal"
+              >
+                Send Availability Enquiry
+              </button>
+
+              <a href="#" class="link-speak-with-us">
+                Speak with us
+                <img src="/src/images/arrows/right-arrow.svg" alt="" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -894,7 +1229,7 @@
 
           <div class="guest-counter-section">
             <div class="guest-counter-row">
-              <div class="guest-counter-label">Number of Cabins</div>
+              <div class="guest-counter-label">Guests</div>
               <div class="guest-counter-controls">
                 <button
                   type="button"
@@ -924,11 +1259,12 @@
           </div>
 
           <div class="guest-modal-actions">
-            <button class="btn-cancel-guest" @click="closeGuestModal">
-              Cancel
-            </button>
             <button class="btn-submit-guest" @click="submitGuestSelection">
-              Add to Itinerary
+              {{
+                editingItineraryIndex !== null
+                  ? "Update Itinerary"
+                  : "Add to Itinerary"
+              }}
             </button>
           </div>
         </div>
@@ -1361,6 +1697,26 @@ function nextModalImage() {
   modalImageIndex.value = (modalImageIndex.value + 1) % total;
 }
 
+// Helper for price formatting
+// Helper for price formatting
+const formatPrice = (value) => {
+  if (value === null || value === undefined) return "Price on request";
+  const num =
+    typeof value === "string"
+      ? parseFloat(value.replace(/[^0-9.-]+/g, ""))
+      : value;
+  if (isNaN(num)) return value;
+  // Gunakan en-US agar pemisah ribuan adalah koma (,)
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  })
+    .format(num)
+    .replace("IDR", "Rp");
+};
+
 // ...existing code...
 
 // --- DEBUG LOGGING: PASTE INI DI PALING BAWAH FILE ---
@@ -1403,6 +1759,7 @@ const globalStartAvailability = ref(null);
 
 const itineraryItems = ref([]);
 const pendingItineraryItem = ref(null);
+const editingItineraryIndex = ref(null);
 const showCabinModal = ref(false);
 const showGuestModal = ref(false);
 const showEnquiryModal = ref(false);
@@ -1411,6 +1768,7 @@ const cabinQuantity = ref(1);
 const modalGuests = ref(2);
 const enquirySubmitting = ref(false);
 const selectedTripKey = ref(""); // Track selected trip for reservation
+const selectedShipForView = ref(null); // Track which ship to show cabins for (null = show ship selection)
 const selectedRoomQuantities = ref({}); // Track room quantities per trip: { [tripKey]: quantity }
 const expandedTrips = ref({}); // Track which cabin's "More Dates" is expanded
 
@@ -1433,11 +1791,17 @@ const formShipIds = ref([]);
 const savedShipPairs = ref([]);
 const formDateFrom = ref("");
 const formDateTo = ref("");
-const adults = ref(2);
-const children = ref(0);
-const age3_9 = ref(0);
-const age0_2 = ref(0);
-const guestsTotal = ref(2);
+
+// Multi-cabin guest management
+const MAX_CABINS = 4;
+const MAX_GUESTS_PER_CABIN = 4;
+const cabins = ref([{ id: 1, adults: 2, children: 0, expanded: true }]);
+
+const guestsTotal = computed(() =>
+  cabins.value.reduce((sum, c) => sum + c.adults + c.children, 0)
+);
+const canAddCabin = computed(() => cabins.value.length < MAX_CABINS);
+
 const detailCabinMap = ref(new Map());
 
 const openRegions = ref(false);
@@ -1511,12 +1875,40 @@ function toggleShip(id) {
   else formShipIds.value.push(id);
 }
 
-function incGuests() {
-  guestsTotal.value = Math.min(16, (guestsTotal.value || 0) + 1);
+// Cabin management functions
+function addCabin() {
+  if (canAddCabin.value) {
+    cabins.value.push({
+      id: Date.now(),
+      adults: 2,
+      children: 0,
+      expanded: true,
+    });
+  }
 }
 
-function decGuests() {
-  guestsTotal.value = Math.max(1, (guestsTotal.value || 1) - 1);
+function removeCabin(index) {
+  if (cabins.value.length > 1) {
+    cabins.value.splice(index, 1);
+  }
+}
+
+function toggleCabinExpand(index) {
+  cabins.value[index].expanded = !cabins.value[index].expanded;
+}
+
+function incCabinGuest(index, type) {
+  const cabin = cabins.value[index];
+  const total = cabin.adults + cabin.children;
+  if (total < MAX_GUESTS_PER_CABIN) {
+    cabin[type]++;
+  }
+}
+
+function decCabinGuest(index, type) {
+  const cabin = cabins.value[index];
+  if (type === "adults" && cabin.adults > 1) cabin.adults--;
+  if (type === "children" && cabin.children > 0) cabin.children--;
 }
 
 const minDate = computed(() => getTodayString());
@@ -1864,6 +2256,77 @@ const selectedShipMatchers = computed(() => {
   return Array.from(set);
 });
 
+// Get list of ships from search criteria
+const shipsFromCriteria = computed(() => {
+  const sc = searchCriteria.value;
+  if (!sc) return [];
+  return sc.ships && sc.ships.length ? sc.ships : sc.lodges || [];
+});
+
+// Check if we need to show ship selection step
+const needsShipSelection = computed(() => {
+  return shipsFromCriteria.value.length > 1 && !selectedShipForView.value;
+});
+
+// Get available ships with availability info
+const availableShipsForSelection = computed(() => {
+  const sc = searchCriteria.value;
+  const g = globalStartAvailability.value;
+  if (!sc || !g || !Array.isArray(g.operators)) return [];
+
+  const ships = shipsFromCriteria.value;
+  const result = [];
+
+  for (const shipName of ships) {
+    // Find matching operator in availability data
+    const matchingOp = g.operators.find((op) => {
+      const opName = normalizeName(op.operator || "");
+      const targetName = normalizeName(shipName);
+      return (
+        opName === targetName ||
+        opName.includes(targetName) ||
+        targetName.includes(opName)
+      );
+    });
+
+    if (matchingOp) {
+      const totalCabins = (matchingOp.cabins || []).length;
+      const totalCapacity = (matchingOp.cabins || []).reduce((sum, cab) => {
+        const cap = extractCapacityNumber(cab);
+        return sum + (cap || 4);
+      }, 0);
+
+      result.push({
+        name: shipName,
+        operator: matchingOp.operator,
+        cabinsCount: totalCabins,
+        totalCapacity: totalCapacity,
+        hasAvailability: totalCabins > 0,
+      });
+    } else {
+      result.push({
+        name: shipName,
+        operator: shipName,
+        cabinsCount: 0,
+        totalCapacity: 0,
+        hasAvailability: false,
+      });
+    }
+  }
+
+  return result;
+});
+
+// Function to select a ship for viewing
+function selectShipForView(shipName) {
+  selectedShipForView.value = shipName;
+}
+
+// Function to go back to ship selection
+function backToShipSelection() {
+  selectedShipForView.value = null;
+}
+
 const allStartDateCabins = computed(() => {
   const sc = searchCriteria.value;
   const g = globalStartAvailability.value;
@@ -1886,6 +2349,19 @@ const allStartDateCabins = computed(() => {
         !matchesSelectedShip(shipName, selectedMatchers)
       )
         continue;
+
+      // Filter by selectedShipForView when viewing specific ship from multi-selection
+      if (selectedShipForView.value) {
+        const viewingShipNorm = normalizeName(selectedShipForView.value);
+        const currentShipNorm = normalizeName(shipName);
+        if (
+          !currentShipNorm.includes(viewingShipNorm) &&
+          !viewingShipNorm.includes(currentShipNorm)
+        ) {
+          continue;
+        }
+      }
+
       const id =
         typeof cb !== "string" && cb?.id
           ? String(cb.id).trim().toLowerCase()
@@ -2087,7 +2563,7 @@ const displayItems = computed(() => {
       prices: [{ label: "Start from", value: group.price || "Rp3,650,000" }],
       availabilityCount:
         group.totalAvailable > 1
-          ? `${group.totalAvailable} rooms available`
+          ? `${group.totalAvailable} cabins available`
           : group.availableText,
       tripsCount: sortedTrips.length,
       trips: sortedTrips,
@@ -2223,9 +2699,7 @@ const itineraryTotals = computed(() => {
   return {
     hasPrice,
     total,
-    formattedTotal: hasPrice
-      ? formatTotalAmount(total, detectedCurrency || DEFAULT_CURRENCY)
-      : "",
+    formattedTotal: hasPrice ? formatPrice(total) : "",
     pricedCount,
     missingCount: items.length - pricedCount,
   };
@@ -2321,6 +2795,7 @@ function reserveWithSelectedTrip(item) {
   // Create cabin info with the selected trip's date
   const cabinInfo = {
     ...item.originalItem,
+    title: item.title, // Pass the processed title (e.g., from getPreferredCabinName)
     date: selectedTrip.date,
     tripDays: selectedTrip.tripDays,
     available: selectedTrip.available,
@@ -2328,12 +2803,7 @@ function reserveWithSelectedTrip(item) {
   };
 
   // Call the existing itinerary toggle function
-  if (typeof toggleItinerary === "function") {
-    toggleItinerary(cabinInfo);
-  } else {
-    // Fallback: add to itinerary directly
-    addToItinerary(cabinInfo);
-  }
+  toggleItinerary(cabinInfo);
 }
 
 function getSelectedQty(trip) {
@@ -2646,11 +3116,19 @@ function applySidebarChanges() {
       lodges: labels.slice(),
       dateFrom: formDateFrom.value,
       dateTo: formDateTo.value || formDateFrom.value,
-      adults: guestsTotal.value,
-      children: 0,
+      // Multi-cabin data
+      cabins: cabins.value.map((c) => ({
+        adults: c.adults,
+        children: c.children,
+        total: c.adults + c.children,
+      })),
+      totalCabins: cabins.value.length,
+      totalGuests: guestsTotal.value,
+      // Legacy fields
+      adults: cabins.value.reduce((s, c) => s + c.adults, 0),
+      children: cabins.value.reduce((s, c) => s + c.children, 0),
       age3_9: 0,
       age0_2: 0,
-      totalGuests: guestsTotal.value,
       timestamp: Date.now(),
     };
     savedShipPairs.value = selectedEntries.map((s) => ({
@@ -2691,6 +3169,9 @@ onBeforeUnmount(() => {
 });
 
 onMounted(async () => {
+  // Load itinerary from localStorage first
+  loadItinerary();
+
   try {
     const saved = localStorage.getItem("komodo_search_criteria");
     if (saved) {
@@ -2709,13 +3190,26 @@ onMounted(async () => {
       }));
       formDateFrom.value = sc.dateFrom || "";
       formDateTo.value = sc.dateTo || "";
-      adults.value = sc.adults ?? adults.value;
-      children.value = sc.children ?? children.value;
-      age3_9.value = sc.age3_9 ?? age3_9.value;
-      age0_2.value = sc.age0_2 ?? age0_2.value;
-      guestsTotal.value =
-        sc.totalGuests ??
-        adults.value + children.value + age3_9.value + age0_2.value;
+
+      // Load cabins from localStorage if available
+      if (Array.isArray(sc.cabins) && sc.cabins.length > 0) {
+        cabins.value = sc.cabins.map((c, idx) => ({
+          id: idx + 1,
+          adults: c.adults || 2,
+          children: c.children || 0,
+          expanded: idx === 0, // Only first cabin expanded by default
+        }));
+      } else {
+        // Fallback: create single cabin from total guests
+        cabins.value = [
+          {
+            id: 1,
+            adults: sc.totalGuests || sc.adults || 2,
+            children: 0,
+            expanded: true,
+          },
+        ];
+      }
       if (formDateFrom.value) {
         const d = new Date(formDateFrom.value);
         currentMonth.value = d.getMonth();
@@ -3196,6 +3690,7 @@ function closeGuestModal() {
   showGuestModal.value = false;
   pendingItineraryItem.value = null;
   modalGuests.value = 2;
+  editingItineraryIndex.value = null;
   restorePageScroll();
 }
 
@@ -3209,18 +3704,65 @@ function decrementModalGuests() {
 }
 
 function submitGuestSelection() {
-  if (pendingItineraryItem.value) {
+  if (editingItineraryIndex.value !== null) {
+    updateItineraryGuest(editingItineraryIndex.value, modalGuests.value);
+    closeGuestModal();
+  } else if (pendingItineraryItem.value) {
     addToItinerary(pendingItineraryItem.value, modalGuests.value);
     closeGuestModal();
+  }
+}
+
+function openEditGuest(item, index) {
+  pendingItineraryItem.value = {
+    cabinName: item.cabin,
+    shipName: item.ship,
+    date: item.date,
+    capacityText: item.capacity || "4 guests",
+    availableText: item.capacity ? `${item.capacity} capacity` : "Available",
+  };
+  editingItineraryIndex.value = index;
+  modalGuests.value = item.guests || 2;
+  showGuestModal.value = true;
+  lockPageScroll();
+}
+
+function updateItineraryGuest(index, guests) {
+  try {
+    const key = "komodo_itinerary";
+    const current = JSON.parse(localStorage.getItem(key) || "[]");
+    if (current[index]) {
+      current[index].guests = guests;
+      localStorage.setItem(key, JSON.stringify(current));
+      loadItinerary();
+    }
+  } catch (e) {
+    console.error("Failed to update itinerary", e);
   }
 }
 
 function isInItinerary(item) {
   return itineraryItems.value.some(
     (it) =>
-      it.cabin === item.cabinName &&
+      it.cabin === (item.title || item.cabinName) &&
       it.ship === item.shipName &&
       it.date === item.date
+  );
+}
+
+// Check if a specific trip from a display item is already in the itinerary
+function isTripInItinerary(displayItem, trip) {
+  if (!displayItem || !trip) return false;
+  const originalItem = displayItem.originalItem;
+  if (!originalItem) return false;
+
+  const targetName = displayItem.title || originalItem.cabinName;
+
+  return itineraryItems.value.some(
+    (it) =>
+      it.cabin === targetName &&
+      it.ship === originalItem.shipName &&
+      it.date === trip.date
   );
 }
 
@@ -3229,7 +3771,16 @@ function toggleItinerary(item) {
     removeFromItinerary(item);
   } else {
     pendingItineraryItem.value = item;
-    modalGuests.value = searchCriteria.value?.totalGuests || 2;
+    const requested = Number(searchCriteria.value?.totalGuests || 2);
+
+    // Try to extract capacity from item directly or its originalItem
+    let capNum = extractCapacityNumber(item);
+    if (!capNum && item.originalItem) {
+      capNum = extractCapacityNumber(item.originalItem);
+    }
+
+    const capacity = capNum || 10;
+    modalGuests.value = Math.min(requested, capacity);
     showGuestModal.value = true;
     lockPageScroll();
   }
@@ -3239,9 +3790,10 @@ function addToItinerary(item, guests = 2) {
   try {
     const key = "komodo_itinerary";
     const current = JSON.parse(localStorage.getItem(key) || "[]");
+    const targetName = item.title || item.cabinName;
     const exists = current.some(
       (it) =>
-        it.cabin === item.cabinName &&
+        it.cabin === targetName &&
         it.ship === item.shipName &&
         it.date === item.date
     );
@@ -3249,7 +3801,7 @@ function addToItinerary(item, guests = 2) {
     const entry = {
       operator: item.operatorLabel,
       ship: item.shipName,
-      cabin: item.cabinName,
+      cabin: targetName,
       date: item.date,
       price: item.price || null,
       capacity: item.capacityText || null,
@@ -3269,10 +3821,11 @@ function removeFromItinerary(item) {
   try {
     const key = "komodo_itinerary";
     const current = JSON.parse(localStorage.getItem(key) || "[]");
+    const targetName = item.title || item.cabinName;
     const filtered = current.filter(
       (it) =>
         !(
-          it.cabin === item.cabinName &&
+          it.cabin === targetName &&
           it.ship === item.shipName &&
           it.date === item.date
         )
