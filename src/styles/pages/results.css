@@ -43,9 +43,9 @@
    and the Sidebar Track (sticky container)
    ===================================================== */
 .sidebar-section-wrapper {
-  flex: 0 0 minmax(350px, 400px);
-  width: minmax(350px, 400px);
-  min-width: 350px;
+  flex: 0 0 360px;
+  width: 360px;
+  min-width: 320px;
   max-width: 400px;
   display: flex;
   flex-direction: column;
@@ -69,6 +69,8 @@
   /* NO overflow property - this breaks sticky */
   /* NO height: 100vh or similar constraints */
   /* NO transform or filter */
+  width: 100%;
+  min-width: 100%;
 }
 
 /* =====================================================
@@ -84,7 +86,8 @@
   background: white;
   padding: 2.5rem 2rem;
   border: 1px solid #e5e7eb;
-  width: 100%;
+  width: 100% !important;
+  max-width: none !important;
   box-sizing: border-box;
   z-index: 20;
   /* NO overflow property */
@@ -593,7 +596,6 @@
   align-items: flex-start;
   gap: 1.5rem;
   cursor: default;
-  padding: 0;
 }
 
 .cabin-title-group {
@@ -980,7 +982,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .cabin-info-left {
@@ -1763,8 +1766,9 @@
   font-size: 1.75rem;
   font-weight: 100;
   color: #2d4059;
-  margin: 0 0 1rem 0;
+  padding: 0 0 1rem 0;
   line-height: 1.2;
+  border-bottom: 1px solid var(--ocean-15a);
 }
 
 .filter-group {
@@ -3702,28 +3706,22 @@ div.modal-content.modal-content-redesigned {
 }
 
 /* Clean Date Dropdown */
-.sidebar-container .date-dropdown-panel {
+/* Clean Date Dropdown */
+.date-dropdown-panel {
   padding: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
+  width: 100% !important;
+  min-width: 0 !important;
 }
 
-.sidebar-container .custom-calendar {
+.date-dropdown-panel .custom-calendar {
   background: white;
   padding: 1.5rem;
   border-radius: 4px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   border: 1px solid #e5e7eb;
-}
-
-/* Force Calendar Full Width */
-.sidebar-container .date-dropdown-panel {
-  width: 100% !important;
-  min-width: 0 !important;
-}
-
-.sidebar-container .custom-calendar {
   width: 100% !important;
   max-width: none !important;
   min-width: 0 !important;
@@ -3812,28 +3810,29 @@ div.modal-content.modal-content-redesigned {
 
   /* Calendar Dropdown Exception for Mobile/Wide Buttons */
   /* Prevent calendar from stretching too wide on mobile stacked layout */
-  .sidebar-container .date-dropdown-panel {
+  .date-dropdown-panel {
     width: auto !important;
     min-width: 300px !important;
     max-width: 100% !important;
   }
 
-  .sidebar-container .custom-calendar {
+  .date-dropdown-panel .custom-calendar {
     width: auto !important;
     min-width: 0 !important;
   }
 }
 
 /* Force Normal Calendar Size on Mobile/Stacked */
+/* Force Normal Calendar Size on Mobile/Stacked */
 @media (max-width: 900px) {
-  .sidebar-container .date-dropdown-panel {
+  .date-dropdown-panel {
     width: 350px !important;
     /* Fixed normal width */
     max-width: 100% !important;
     min-width: 300px !important;
   }
 
-  .sidebar-container .custom-calendar {
+  .date-dropdown-panel .custom-calendar {
     width: 100% !important;
   }
 }
@@ -4545,5 +4544,29 @@ div.modal-content.modal-content-redesigned {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+  }
+}
+
+/* Responsive Button Fixes for Cabin Card */
+.btn-reserve-now {
+  white-space: nowrap;
+  min-width: fit-content;
+}
+
+@media (max-width: 1350px) and (min-width: 900px) {
+
+  /* Adjust gap and sizing for medium desktop screens where space is tight */
+  .cabin-info-section {
+    gap: 0.75rem;
+  }
+
+  .btn-reserve-now {
+    padding: 0.75rem 1rem !important;
+    /* Force smaller padding */
+    font-size: 0.85rem !important;
+  }
+
+  .price-value {
+    font-size: 1.35rem;
   }
 }

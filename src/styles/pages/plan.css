@@ -82,8 +82,7 @@
 }
 
 .list {
-  border-top: 1px solid var(--ocean-15a);
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .list-heading {
@@ -91,6 +90,7 @@
   font-weight: 900;
   font-size: 1.1rem;
   padding: 1rem 0 .5rem;
+  border: none !important;
 }
 
 .list-row {
@@ -277,7 +277,7 @@
 
 /* Custom Calendar Container */
 .custom-calendar {
-  margin-top: 0.5rem;
+  /* margin-top: 0.5rem; */
   border: 1px solid var(--ocean-15a);
   padding: 1.25rem;
   background: #fff;

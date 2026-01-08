@@ -2651,10 +2651,16 @@ watch(sortBy, () => {
 
 const maxGuestsForPendingItem = computed(() => {
   const item = pendingItineraryItem.value || {};
+
+  // Try using the robust extractor first (handles obj properties and strings)
+  const extracted = extractCapacityNumber(item);
+  if (extracted) return extracted;
+
   const capacityFromText = getMaxCapacityFromText(item.capacityText);
   if (capacityFromText) return capacityFromText;
-  if (item.available && item.available > 0) return item.available * 4;
-  return 16;
+
+  // Fallback defaults
+  return 4;
 });
 
 const itineraryTotals = computed(() => {
@@ -3535,7 +3541,13 @@ function extractCapacityNumber(item) {
     }
     return null;
   }
-  const capStr = (item.capacity || item.capacity_lock || "").toString();
+  const capStr = (
+    item.capacity ||
+    item.max_guests ||
+    item.sleeps ||
+    item.capacity_lock ||
+    ""
+  ).toString();
 
   if (capStr) {
     const nums = (capStr.match(/\d+/g) || []).map((n) => parseInt(n, 10));
@@ -3779,7 +3791,12 @@ function toggleItinerary(item) {
       capNum = extractCapacityNumber(item.originalItem);
     }
 
-    const capacity = capNum || 10;
+    // Also try text parsing if numeric extraction failed (matches computed logic)
+    if (!capNum && item.capacityText) {
+      capNum = getMaxCapacityFromText(item.capacityText);
+    }
+
+    const capacity = capNum || 4; // Default to 4 (standard cabin) instead of 10
     modalGuests.value = Math.min(requested, capacity);
     showGuestModal.value = true;
     lockPageScroll();

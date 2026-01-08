@@ -308,13 +308,13 @@
                       <div class="cabin-header" @click="toggleCabinExpand(idx)">
                         <div class="cabin-header-left">
                           <span class="cabin-title">CABIN {{ idx + 1 }}</span>
+                        </div>
+                        <div class="cabin-header-right">
                           <span class="cabin-summary">
                             {{ cabin.adults + cabin.children }} guest{{
                               cabin.adults + cabin.children !== 1 ? "s" : ""
                             }}
                           </span>
-                        </div>
-                        <div class="cabin-header-right">
                           <button
                             v-if="cabins.length > 1"
                             type="button"
@@ -1074,7 +1074,7 @@ function selectDate(day) {
 
 .wizard-label {
   margin-top: 0.5rem;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: #6b7280;
   font-weight: 500;
   text-align: center;
@@ -1171,8 +1171,8 @@ function selectDate(day) {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-left: 150px;
-  margin-right: 150px;
+  max-width: 620px;
+  margin: 0 auto;
 }
 
 /* Title fleksibel (biar nggak nabrak tombol) */
@@ -1244,7 +1244,7 @@ function selectDate(day) {
 
 .modal-body .plan-content {
   background: white;
-  max-width: 750px;
+  max-width: 620px;
   margin: 0 auto;
   padding: 2.5rem 2rem;
   padding-bottom: 4rem;
@@ -1419,6 +1419,36 @@ function selectDate(day) {
 .toast-slide-enter-from,
 .toast-slide-leave-to {
   opacity: 0;
+  opacity: 0;
   transform: translateX(-50%) translateY(-40px);
+}
+
+/* ===== Aesthetic Refinements for "Messy" Layout ===== */
+.cabin-accordion {
+  border-radius: 8px;
+  overflow: hidden; /* Ensure children don't overflow rounded corners */
+  border: 1px solid var(--ocean-15a); /* Ensure border is visible */
+}
+
+.cabin-header {
+  background-color: #f8fafc; /* Subtle gray background to distinguish header */
+}
+
+.cabin-summary {
+  margin-right: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.btn-add-cabin {
+  width: 100%;
+  border-radius: 8px;
+  border-style: dashed;
+}
+
+/* Better vertical rhythm inside modal */
+.modal-body .plan-content {
+  display: flex;
+  flex-direction: column;
 }
 </style>
