@@ -1,6 +1,6 @@
 // Use local API during development, switch to production URL when deployed
 const BASE_URL = import.meta.env.DEV 
-  ? "http://localhost:8787" 
+  ? "http://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/" 
   : "https://your-worker.your-account.workers.dev";
 
 // Types

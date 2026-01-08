@@ -2869,7 +2869,7 @@ async function loadDetailCabins() {
   try {
     // Use local API endpoint for cabin details
     const baseUrl = import.meta.env.DEV
-      ? "http://localhost:8787"
+      ? "http://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/"
       : "https://your-worker.your-account.workers.dev";
     const url = `${baseUrl}/?resource=cabindetail`;
     const res = await fetch(url).then((r) => r.json());
