@@ -112,22 +112,10 @@
             <h2 class="results-title">Your Search Results</h2>
             <div class="results-intro">
               <div
-                v-if="sortedDisplayItems.length === 0"
-                class="no-availability"
-              >
-                <p class="desktop-only">
-                  <strong>No results found.</strong>
-                  We could not find any availability matching your search.
-                  Please try adjusting your filters.
-                </p>
-                <p class="mobile-only">
-                  <strong>No results found.</strong>
-                  Please try adjusting your filters.
-                </p>
-              </div>
-
-              <div
-                v-else-if="allStartDateCabins.length"
+                v-if="
+                  allStartDateCabins.length &&
+                  (needsShipSelection || sortedDisplayItems.length > 0)
+                "
                 class="success-message"
               >
                 <p class="desktop-only">
@@ -236,8 +224,7 @@
                   v-for="ship in availableShipsForSelection"
                   :key="ship.name"
                   class="ship-selection-card"
-                  :class="{ 'no-availability': !ship.hasAvailability }"
-                  @click="ship.hasAvailability && selectShipForView(ship.name)"
+                  @click="selectShipForView(ship.name)"
                 >
                   <div class="ship-card-content">
                     <h4 class="ship-card-name">{{ ship.name }}</h4>
@@ -258,7 +245,7 @@
                       >
                     </div>
                   </div>
-                  <div class="ship-card-arrow" v-if="ship.hasAvailability">
+                  <div class="ship-card-arrow">
                     <svg
                       width="20"
                       height="20"
@@ -297,6 +284,23 @@
                 <span class="viewing-ship-label"
                   >Viewing: <strong>{{ selectedShipForView }}</strong></span
                 >
+              </div>
+
+              <div
+                v-if="sortedDisplayItems.length === 0"
+                class="no-availability"
+              >
+                <div class="desktop-only">
+                  <p><strong>No results found.</strong></p>
+                  <p>
+                    We could not find any availability matching your search.
+                    Please try adjusting your filters.
+                  </p>
+                </div>
+                <div class="mobile-only">
+                  <p><strong>No results found.</strong></p>
+                  <p>Please try adjusting your filters.</p>
+                </div>
               </div>
 
               <div v-if="sortedDisplayItems.length" class="lodge-results">
@@ -2991,11 +2995,13 @@ const minCapacity = computed(() => {
 const selectedCabinDetail = computed(() => {
   const item = selectedCabin.value;
   if (!item) return null;
-  if (item.detail) return item.detail;
+  // Unwrap display item if using originalItem pattern
+  const source = item.originalItem || item;
+  if (source.detail) return source.detail;
   const map = detailCabinMap.value || new Map();
   const key = `${normalizeName(
-    item.shipName || item.operatorLabel || ""
-  )}|${normalizeCabinName(item.cabinName)}`;
+    source.shipName || source.operatorLabel || ""
+  )}|${normalizeCabinName(source.cabinName)}`;
   return map.get(key) || null;
 });
 
@@ -3117,13 +3123,15 @@ const needsShipSelection = computed(() => {
 const availableShipsForSelection = computed(() => {
   const sc = searchCriteria.value;
   const g = globalStartAvailability.value;
+  const durations = formTripDurations.value || [];
+  const detailMap = detailCabinMap.value || new Map();
+
   if (!sc || !g || !Array.isArray(g.operators)) return [];
 
   const ships = shipsFromCriteria.value;
   const result = [];
 
   for (const shipName of ships) {
-    // Find matching operator in availability data
     const matchingOp = g.operators.find((op) => {
       const opName = normalizeName(op.operator || "");
       const targetName = normalizeName(shipName);
@@ -3135,19 +3143,88 @@ const availableShipsForSelection = computed(() => {
     });
 
     if (matchingOp) {
-      const totalCabins = (matchingOp.cabins || []).length;
-      const totalCapacity = (matchingOp.cabins || []).reduce((sum, cab) => {
-        const cap = extractCapacityNumber(cab);
-        return sum + (cap || 4);
-      }, 0);
+      // Filter cabins based on duration and availability
+      const validCabins = (matchingOp.cabins || []).filter((cb) => {
+        const available = getCabinAvailable(cb);
+        if (available != null && available <= 0) return false;
 
-      result.push({
-        name: shipName,
-        operator: matchingOp.operator,
-        cabinsCount: totalCabins,
-        totalCapacity: totalCapacity,
-        hasAvailability: totalCabins > 0,
+        if (durations.length > 0) {
+          let d = 0;
+          // Strategy 1: Direct properties
+          if (cb.trip_days) d = parseInt(cb.trip_days, 10);
+          else if (cb.days) d = parseInt(cb.days, 10);
+          else if (cb.raw) {
+            if (cb.raw.trip_days) d = parseInt(cb.raw.trip_days, 10);
+            else if (cb.raw.days) d = parseInt(cb.raw.days, 10);
+          }
+
+          // Strategy 2: Extensive Detail Map Lookup matching allStartDateCabins logic
+          if (!d) {
+            const baseName = getCabinBaseName(cb);
+            const cabinKey = normalizeCabinName(baseName);
+            const shipNorm = normalizeName(shipName);
+            const opNorm = normalizeName(matchingOp.operator || "");
+
+            let detail = detailMap.get(`${shipNorm}|${cabinKey}`);
+
+            if (!detail && opNorm) {
+              detail = detailMap.get(`${opNorm}|${cabinKey}`);
+            }
+
+            // Fallback: scan by cabin name only
+            if (!detail) {
+              const suffix = `|${cabinKey}`;
+              for (const [dk, dv] of detailMap.entries()) {
+                if (dk.endsWith(suffix)) {
+                  detail = dv;
+                  break;
+                }
+              }
+            }
+
+            // Fallback: canonical
+            if (!detail) {
+              const canon = canonicalizeCabinLabel(baseName);
+              if (canon) {
+                detail = detailMap.get(`${shipNorm}|${canon}`);
+              }
+            }
+
+            if (detail) {
+              d = parseInt(detail.trip_days || detail.days || 0, 10);
+            }
+          }
+
+          // Strict filter: Must have known duration AND match
+          if (!d || !durations.includes(d)) return false;
+        }
+        return true;
       });
+
+      const totalCabins = validCabins.length;
+
+      if (totalCabins > 0) {
+        const totalCapacity = validCabins.reduce((sum, cab) => {
+          const cap = extractCapacityNumber(cab);
+          return sum + (cap || 4);
+        }, 0);
+
+        result.push({
+          name: shipName,
+          operator: matchingOp.operator,
+          cabinsCount: totalCabins,
+          totalCapacity: totalCapacity,
+          hasAvailability: true,
+        });
+      } else {
+        result.push({
+          name: shipName,
+          operator: matchingOp.operator,
+          cabinsCount: 0,
+          totalCapacity: 0,
+          hasAvailability: false,
+        });
+      }
     } else {
       result.push({
         name: shipName,
@@ -3478,6 +3555,7 @@ const displayItems = computed(() => {
       if (sortedTrips.length === 0) return null;
 
       return {
+        ...group,
         id: group.key,
         uniqueKey: `${group.shipName}|${group.cabinName}`,
         title: getPreferredCabinName(group),
