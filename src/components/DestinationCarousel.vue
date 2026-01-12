@@ -18,7 +18,12 @@
       </button>
 
       <!-- Slides Track - Infinite Loop -->
-      <div class="carousel-viewport">
+      <div
+        class="carousel-viewport"
+        @touchstart="handleTouchStart"
+        @touchmove="handleTouchMove"
+        @touchend="handleTouchEnd"
+      >
         <div
           class="carousel-track"
           :style="{
@@ -206,6 +211,35 @@ function goTo(index) {
 
 function handleResize() {
   windowWidth.value = window.innerWidth;
+}
+
+// Touch/Swipe handling for mobile
+const touchStartX = ref(0);
+const touchEndX = ref(0);
+const MIN_SWIPE_DISTANCE = 50;
+
+function handleTouchStart(e) {
+  touchStartX.value = e.changedTouches[0].screenX;
+}
+
+function handleTouchMove(e) {
+  touchEndX.value = e.changedTouches[0].screenX;
+}
+
+function handleTouchEnd() {
+  const distance = touchStartX.value - touchEndX.value;
+  const isLeftSwipe = distance > MIN_SWIPE_DISTANCE;
+  const isRightSwipe = distance < -MIN_SWIPE_DISTANCE;
+
+  if (isLeftSwipe) {
+    next();
+  } else if (isRightSwipe) {
+    prev();
+  }
+
+  // Reset
+  touchStartX.value = 0;
+  touchEndX.value = 0;
 }
 
 onMounted(() => {

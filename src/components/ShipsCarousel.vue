@@ -50,7 +50,12 @@
         </button>
 
         <!-- Slides Track -->
-        <div class="ships-viewport">
+        <div
+          class="ships-viewport"
+          @touchstart="handleTouchStart"
+          @touchmove="handleTouchMove"
+          @touchend="handleTouchEnd"
+        >
           <Transition name="slide-up" mode="out-in">
             <div class="ships-track-wrapper" :key="activeFilter">
               <div
@@ -234,6 +239,35 @@ function prevSlide() {
 
 function handleResize() {
   windowWidth.value = window.innerWidth;
+}
+
+// Touch/Swipe handling for mobile
+const touchStartX = ref(0);
+const touchEndX = ref(0);
+const MIN_SWIPE_DISTANCE = 50;
+
+function handleTouchStart(e) {
+  touchStartX.value = e.changedTouches[0].screenX;
+}
+
+function handleTouchMove(e) {
+  touchEndX.value = e.changedTouches[0].screenX;
+}
+
+function handleTouchEnd() {
+  const distance = touchStartX.value - touchEndX.value;
+  const isLeftSwipe = distance > MIN_SWIPE_DISTANCE;
+  const isRightSwipe = distance < -MIN_SWIPE_DISTANCE;
+
+  if (isLeftSwipe) {
+    nextSlide();
+  } else if (isRightSwipe) {
+    prevSlide();
+  }
+
+  // Reset
+  touchStartX.value = 0;
+  touchEndX.value = 0;
 }
 
 onMounted(() => {

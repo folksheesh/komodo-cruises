@@ -17,6 +17,9 @@
         class="activities-track"
         ref="trackRef"
         @scroll="onScroll"
+        @touchstart="handleTouchStart"
+        @touchmove="handleTouchMove"
+        @touchend="handleTouchEnd"
         :style="{ transform: `translateX(-${trackOffset}px)` }"
       >
         <div
@@ -189,6 +192,43 @@ function scrollToSlide(index) {
 
 function handleResize() {
   windowWidth.value = window.innerWidth;
+}
+
+// Touch/Swipe handling for desktop (mobile already uses native scroll)
+const touchStartX = ref(0);
+const touchEndX = ref(0);
+const MIN_SWIPE_DISTANCE = 50;
+
+function handleTouchStart(e) {
+  // Only handle on desktop
+  if (windowWidth.value > 768) {
+    touchStartX.value = e.changedTouches[0].screenX;
+  }
+}
+
+function handleTouchMove(e) {
+  if (windowWidth.value > 768) {
+    touchEndX.value = e.changedTouches[0].screenX;
+  }
+}
+
+function handleTouchEnd() {
+  // Only handle on desktop
+  if (windowWidth.value > 768) {
+    const distance = touchStartX.value - touchEndX.value;
+    const isLeftSwipe = distance > MIN_SWIPE_DISTANCE;
+    const isRightSwipe = distance < -MIN_SWIPE_DISTANCE;
+
+    if (isLeftSwipe) {
+      next();
+    } else if (isRightSwipe) {
+      prev();
+    }
+
+    // Reset
+    touchStartX.value = 0;
+    touchEndX.value = 0;
+  }
 }
 
 function onScroll(e) {

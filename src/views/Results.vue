@@ -718,7 +718,12 @@
                   @click.stop="toggleDropdown('guests')"
                   :aria-expanded="openGuests ? 'true' : 'false'"
                 >
-                  <span
+                  <span v-if="formIsFlexible"
+                    >Flexible: {{ formFlexibleGuests }} Guest{{
+                      formFlexibleGuests !== 1 ? "s" : ""
+                    }}</span
+                  >
+                  <span v-else
                     >{{ cabins.length }} Cabin{{
                       cabins.length !== 1 ? "s" : ""
                     }}, {{ guestsTotal }} Guest{{
@@ -739,10 +744,56 @@
                   class="dropdown-panel cabin-dropdown-panel"
                   @click.stop
                 >
-                  <div class="dropdown-group-title">Cabins & Guests</div>
+                  <!-- Sidebar Pill Toggle -->
+                  <div class="sidebar-pill-container">
+                    <button
+                      type="button"
+                      class="sidebar-pill-btn"
+                      :class="{ active: formIsFlexible }"
+                      @click="formIsFlexible = true"
+                    >
+                      Flexible
+                    </button>
+                    <button
+                      type="button"
+                      class="sidebar-pill-btn"
+                      :class="{ active: !formIsFlexible }"
+                      @click="formIsFlexible = false"
+                    >
+                      Structured
+                    </button>
+                  </div>
 
-                  <!-- Cabin Accordion Items -->
-                  <div class="cabins-container-sidebar">
+                  <!-- Flexible Mode Content -->
+                  <div v-if="formIsFlexible" class="sidebar-flexible-content">
+                    <div class="sidebar-counter-row">
+                      <span class="label">Total Guests</span>
+                      <div class="ctrls">
+                        <button
+                          type="button"
+                          class="btn-ctrl"
+                          :disabled="formFlexibleGuests <= 1"
+                          @click="formFlexibleGuests--"
+                        >
+                          −
+                        </button>
+                        <span class="val">{{ formFlexibleGuests }}</span>
+                        <button
+                          type="button"
+                          class="btn-ctrl"
+                          @click="formFlexibleGuests++"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <p class="sidebar-note">
+                      We will automatically find the best cabin combination for
+                      your group.
+                    </p>
+                  </div>
+
+                  <div v-else class="cabins-container-sidebar">
                     <div
                       v-for="(cabin, idx) in cabins"
                       :key="cabin.id"
@@ -1002,8 +1053,6 @@
                 </button>
 
                 <div v-if="openDuration" class="dropdown-panel" @click.stop>
-                  <div class="dropdown-group-title">Trip Duration</div>
-
                   <!-- Any duration option -->
                   <div class="list-row" @click="toggleTripDuration(0)">
                     <div class="list-text result-list-text">Any duration</div>
@@ -1877,6 +1926,7 @@
           </div>
 
           <!-- Cabins & Guests -->
+          <!-- Cabins & Guests (Mobile - Synced with Desktop Sidebar) -->
           <div class="modal-field-group">
             <div class="modal-field-label">Cabins & Guests</div>
             <button
@@ -1884,7 +1934,12 @@
               class="modal-field-btn"
               @click="mobileOpenGuests = !mobileOpenGuests"
             >
-              <span
+              <span v-if="formIsFlexible"
+                >Flexible: {{ formFlexibleGuests }} Guest{{
+                  formFlexibleGuests !== 1 ? "s" : ""
+                }}</span
+              >
+              <span v-else
                 >{{ cabins.length }} Cabin{{ cabins.length !== 1 ? "s" : "" }},
                 {{ guestsTotal }} Guest{{ guestsTotal !== 1 ? "s" : "" }}</span
               >
@@ -1897,81 +1952,185 @@
             <div
               v-if="mobileOpenGuests"
               class="modal-field-dropdown cabin-panel"
+              style="padding: 1rem"
             >
-              <div
-                v-for="(cabin, idx) in cabins"
-                :key="cabin.id"
-                class="modal-cabin-item"
-              >
-                <div class="modal-cabin-header-row">
-                  <span class="modal-cabin-label">CABIN {{ idx + 1 }}</span>
-                  <span class="modal-cabin-guests-text"
-                    >{{ cabin.adults + cabin.children }} guest{{
-                      cabin.adults + cabin.children !== 1 ? "s" : ""
-                    }}</span
-                  >
-                  <button
-                    v-if="cabins.length > 1"
-                    type="button"
-                    class="modal-cabin-remove"
-                    @click.stop="removeCabin(idx)"
-                  >
-                    ×
-                  </button>
-                </div>
-                <div class="modal-counter-row">
-                  <span>Adults</span>
-                  <div class="modal-counter-controls">
-                    <button
-                      type="button"
-                      :disabled="cabin.adults <= 1"
-                      @click="decCabinGuest(idx, 'adults')"
-                    >
-                      −
-                    </button>
-                    <span>{{ cabin.adults }}</span>
-                    <button
-                      type="button"
-                      :disabled="
-                        cabin.adults + cabin.children >= MAX_GUESTS_PER_CABIN
-                      "
-                      @click="incCabinGuest(idx, 'adults')"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-                <div class="modal-counter-row">
-                  <span>Children</span>
-                  <div class="modal-counter-controls">
-                    <button
-                      type="button"
-                      :disabled="cabin.children <= 0"
-                      @click="decCabinGuest(idx, 'children')"
-                    >
-                      −
-                    </button>
-                    <span>{{ cabin.children }}</span>
-                    <button
-                      type="button"
-                      :disabled="
-                        cabin.adults + cabin.children >= MAX_GUESTS_PER_CABIN
-                      "
-                      @click="incCabinGuest(idx, 'children')"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
+              <!-- Reuse Desktop Sidebar Content -->
+
+              <!-- Sidebar Pill Toggle -->
+              <div class="sidebar-pill-container">
+                <button
+                  type="button"
+                  class="sidebar-pill-btn"
+                  :class="{ active: formIsFlexible }"
+                  @click="formIsFlexible = true"
+                >
+                  Flexible
+                </button>
+                <button
+                  type="button"
+                  class="sidebar-pill-btn"
+                  :class="{ active: !formIsFlexible }"
+                  @click="formIsFlexible = false"
+                >
+                  Structured
+                </button>
               </div>
-              <button
-                v-if="canAddCabin"
-                type="button"
-                class="modal-add-cabin-btn"
-                @click="addCabin"
-              >
-                + Add Another Cabin
-              </button>
+
+              <!-- Flexible Mode Content -->
+              <div v-if="formIsFlexible" class="sidebar-flexible-content">
+                <div class="sidebar-counter-row">
+                  <span class="label">Total Guests</span>
+                  <div class="ctrls">
+                    <button
+                      type="button"
+                      class="btn-ctrl"
+                      :disabled="formFlexibleGuests <= 1"
+                      @click="formFlexibleGuests--"
+                    >
+                      −
+                    </button>
+                    <span class="val">{{ formFlexibleGuests }}</span>
+                    <button
+                      type="button"
+                      class="btn-ctrl"
+                      @click="formFlexibleGuests++"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <p class="sidebar-note">
+                  We will automatically find the best cabin combination for your
+                  group.
+                </p>
+              </div>
+
+              <!-- Structured Mode (Desktop Accordion Style) -->
+              <div v-else class="cabins-container-sidebar">
+                <div
+                  v-for="(cabin, idx) in cabins"
+                  :key="cabin.id"
+                  class="cabin-accordion-sidebar"
+                >
+                  <!-- Cabin Header (static) -->
+                  <div class="cabin-header-sidebar-static">
+                    <div class="cabin-header-left-sidebar">
+                      <span class="cabin-title-sidebar"
+                        >CABIN {{ idx + 1 }}</span
+                      >
+                      <span class="cabin-summary-sidebar">
+                        {{ cabin.adults + cabin.children }} guest{{
+                          cabin.adults + cabin.children !== 1 ? "s" : ""
+                        }}
+                      </span>
+                    </div>
+                    <div class="cabin-header-right-sidebar">
+                      <button
+                        v-if="cabins.length > 1"
+                        type="button"
+                        class="cabin-remove-btn-sidebar"
+                        @click.stop="removeCabin(idx)"
+                        title="Remove cabin"
+                      >
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <path
+                            d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"
+                          />
+                        </svg>
+                      </button>
+                      <button
+                        type="button"
+                        class="cabin-toggle-btn-sidebar"
+                        @click.stop="toggleCabinExpand(idx)"
+                      >
+                        <svg
+                          class="cabin-chevron-sidebar"
+                          :class="{ expanded: cabin.expanded }"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Cabin Body -->
+                  <div v-if="cabin.expanded" class="cabin-body-sidebar">
+                    <div class="counter-row-sidebar">
+                      <span class="counter-label-sidebar">Adults</span>
+                      <div class="counter-ctrls-sidebar">
+                        <button
+                          type="button"
+                          class="btn-icon-sm"
+                          :disabled="cabin.adults <= 1"
+                          @click="decCabinGuest(idx, 'adults')"
+                        >
+                          −
+                        </button>
+                        <span class="count-sidebar">{{ cabin.adults }}</span>
+                        <button
+                          type="button"
+                          class="btn-icon-sm"
+                          :disabled="
+                            cabin.adults + cabin.children >=
+                            MAX_GUESTS_PER_CABIN
+                          "
+                          @click="incCabinGuest(idx, 'adults')"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <div class="counter-row-sidebar">
+                      <span class="counter-label-sidebar">Children</span>
+                      <div class="counter-ctrls-sidebar">
+                        <button
+                          type="button"
+                          class="btn-icon-sm"
+                          :disabled="cabin.children <= 0"
+                          @click="decCabinGuest(idx, 'children')"
+                        >
+                          −
+                        </button>
+                        <span class="count-sidebar">{{ cabin.children }}</span>
+                        <button
+                          type="button"
+                          class="btn-icon-sm"
+                          :disabled="
+                            cabin.adults + cabin.children >=
+                            MAX_GUESTS_PER_CABIN
+                          "
+                          @click="incCabinGuest(idx, 'children')"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Add Cabin Button -->
+                <button
+                  v-if="canAddCabin"
+                  type="button"
+                  class="btn-add-cabin-sidebar"
+                  @click="addCabin"
+                >
+                  + Add Another Cabin
+                </button>
+              </div>
             </div>
           </div>
 
@@ -2056,6 +2215,61 @@
               </div>
             </div>
           </div>
+
+          <!-- Trip Duration -->
+          <div class="modal-field-group">
+            <div class="modal-field-label">Trip Duration</div>
+            <button
+              type="button"
+              class="modal-field-btn"
+              @click="mobileOpenDuration = !mobileOpenDuration"
+            >
+              <span>{{
+                formTripDurations.length === 0
+                  ? "Any duration"
+                  : formTripDurations.length === 1
+                  ? `${formTripDurations[0]} ${
+                      formTripDurations[0] === 1 ? "day" : "days"
+                    }`
+                  : `${formTripDurations.length} selected`
+              }}</span>
+              <img
+                :src="mobileOpenDuration ? upArrowIcon : downArrowIcon"
+                alt=""
+                class="caret-icon"
+              />
+            </button>
+            <div v-if="mobileOpenDuration" class="modal-field-dropdown">
+              <!-- Any duration option -->
+              <div class="list-row" @click="toggleTripDuration(0)">
+                <div class="list-text result-list-text">Any duration</div>
+                <input
+                  class="check"
+                  type="checkbox"
+                  :checked="formTripDurations.length === 0"
+                  @click.stop
+                />
+              </div>
+
+              <!-- Specific duration options -->
+              <div
+                v-for="d in availableDurations"
+                :key="d"
+                class="list-row"
+                @click="toggleTripDuration(d)"
+              >
+                <div class="list-text result-list-text">
+                  {{ d }} {{ d === 1 ? "day" : "days" }}
+                </div>
+                <input
+                  class="check"
+                  type="checkbox"
+                  :checked="formTripDurations.includes(d)"
+                  @click.stop
+                />
+              </div>
+            </div>
+          </div>
         </div>
         <div class="mobile-filter-modal-footer">
           <button class="btn-apply-modal" @click="applyFiltersAndCloseModal">
@@ -2100,6 +2314,7 @@ const mobileOpenDestinations = ref(false);
 const mobileOpenShips = ref(false);
 const mobileOpenGuests = ref(false);
 const mobileOpenDates = ref(false);
+const mobileOpenDuration = ref(false);
 
 // Lock body scroll when mobile modal is open
 watch(showMobileFilterModal, (val) => {
@@ -2110,12 +2325,32 @@ watch(showMobileFilterModal, (val) => {
   }
 });
 
+function applyFilters() {
+  if (!searchCriteria.value) {
+    searchCriteria.value = {};
+  }
+
+  // Update criteria fields from form state
+  searchCriteria.value.destinations = [...formDestinations.value];
+  searchCriteria.value.ships = [...formShipIds.value];
+  searchCriteria.value.dateFrom = formDateFrom.value;
+  searchCriteria.value.dateTo = formDateTo.value;
+  searchCriteria.value.totalGuests = guestsTotal.value;
+
+  // Reset pagination
+  currentPage.value = 1;
+
+  // Re-trigger availability check
+  checkAvailability();
+}
+
 function applyFiltersAndCloseModal() {
   // Close all dropdowns first
   mobileOpenDestinations.value = false;
   mobileOpenShips.value = false;
   mobileOpenGuests.value = false;
   mobileOpenDates.value = false;
+  mobileOpenDuration.value = false;
   // Close modal
   showMobileFilterModal.value = false;
   // Apply filters (trigger loadResults)
@@ -2273,6 +2508,16 @@ const formatPrice = (value) => {
 // --- DEBUG LOGGING: PASTE INI DI PALING BAWAH FILE ---
 // (Aman: watchEffect dijalankan setelah mounted)
 onMounted(() => {
+  window.addEventListener("resize", () => {
+    if (
+      window.innerWidth >= 640 &&
+      typeof showMobileFilterModal !== "undefined" &&
+      showMobileFilterModal.value
+    ) {
+      showMobileFilterModal.value = false;
+    }
+  });
+
   watchEffect(() => {
     try {
       console.log("DEBUG selectedCabinDetail", selectedCabinDetail.value);
@@ -2352,8 +2597,13 @@ const MAX_CABINS = 4;
 const MAX_GUESTS_PER_CABIN = 4;
 const cabins = ref([{ id: 1, adults: 2, children: 0, expanded: true }]);
 
+const formIsFlexible = ref(true);
+const formFlexibleGuests = ref(2);
+
 const guestsTotal = computed(() =>
-  cabins.value.reduce((sum, c) => sum + c.adults + c.children, 0)
+  formIsFlexible.value
+    ? formFlexibleGuests.value
+    : cabins.value.reduce((sum, c) => sum + c.adults + c.children, 0)
 );
 const canAddCabin = computed(() => cabins.value.length < MAX_CABINS);
 
@@ -3086,6 +3336,39 @@ const allStartDateCabins = computed(() => {
 
 const displayItems = computed(() => {
   const cabins = allStartDateCabins.value;
+  const sc = searchCriteria.value || {};
+  const isFlexible = sc.isFlexible;
+  const targetGuests = isFlexible
+    ? sc.flexibleGuests || 0
+    : sc.totalGuests || 0;
+  const requestedCabins = sc.cabins || [];
+
+  // 1. Pre-calculate Ship Total Capacity per Date
+  // Key: shipName-normalized|date
+  const shipDateCapacity = {};
+
+  for (const item of cabins) {
+    if (!item.date) continue;
+    const sName = normalizeName(item.shipName || item.operatorLabel || "");
+    const key = `${sName}|${item.date}`;
+
+    // Estimate capacity: try various fields
+    // Default to 2 if unknown (safe fallback or aggressive?)
+    let cap = 2;
+    if (typeof extractCapacityNumber === "function") {
+      cap = extractCapacityNumber(item) || 2;
+    } else {
+      // Fallback inline logic
+      const txt = item.capacityText || "";
+      const match = txt.match(/(\d+)/);
+      if (match) cap = parseInt(match[1]);
+    }
+
+    // Total capacity for this cabin type = cap * available_count
+    const avail = typeof item.available === "number" ? item.available : 1;
+
+    shipDateCapacity[key] = (shipDateCapacity[key] || 0) + cap * avail;
+  }
 
   // Group cabins by shipName + cabinName (consolidate duplicates)
   const groupedMap = new Map();
@@ -3108,6 +3391,42 @@ const displayItems = computed(() => {
     const tripDays = Number(item.tripDays || getCabinTripDays(item)) || 3;
 
     if (!tripDateStr) continue;
+
+    // --- FILTERING LOGIC ---
+
+    // 1. Ship Validity Check (Total Capacity)
+    const sName = normalizeName(item.shipName || item.operatorLabel || "");
+    const capKey = `${sName}|${tripDateStr}`;
+    const totalShipCap = shipDateCapacity[capKey] || 0;
+
+    // If ship capacity on this date is less than target, skip current trip/item
+    if (targetGuests > 0 && totalShipCap < targetGuests) {
+      continue;
+    }
+
+    // 2. Cabin Validity Check (Strict Mode Only)
+    // "tampilkan hanya kamar yang match dengan permintaan tersebut"
+    if (!isFlexible && requestedCabins.length > 0) {
+      let cap = 2;
+      if (typeof extractCapacityNumber === "function") {
+        cap = extractCapacityNumber(item) || 2;
+      } else {
+        const txt = item.capacityText || "";
+        const match = txt.match(/(\d+)/);
+        if (match) cap = parseInt(match[1]);
+      }
+
+      // Does this cabin fit ANY of the requested room configurations?
+      // (Assuming checking individual fit is what's implied by "cocok dengan minimal satu kamar")
+      const fitsAny = requestedCabins.some(
+        (req) => cap >= (req.total || req.adults + req.children)
+      );
+      if (!fitsAny) {
+        continue;
+      }
+    }
+
+    // --- END FILTERING ---
 
     // Check if this date falls within an existing trip's range
     const currentDate = new Date(tripDateStr + "T00:00:00");
@@ -3151,34 +3470,44 @@ const displayItems = computed(() => {
   }
 
   // Convert grouped map to display items array
-  return Array.from(groupedMap.values()).map((group) => {
-    // Sort trips by date
-    const sortedTrips = group.trips.sort(
-      (a, b) => new Date(a.date) - new Date(b.date)
-    );
+  return Array.from(groupedMap.values())
+    .map((group) => {
+      // Sort trips by date
+      const sortedTrips = group.trips.sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+      );
 
-    return {
-      id: group.key,
-      uniqueKey: `${group.shipName}|${group.cabinName}`,
-      title: getPreferredCabinName(group),
-      subtitle: formatShipName(group.operatorLabel),
-      image: group.image,
-      prices: [{ label: "Start from", value: group.price || "Rp3,650,000" }],
-      availabilityCount:
-        group.totalAvailable > 1
-          ? `${group.totalAvailable} cabins available`
-          : group.availableText,
-      tripsCount: sortedTrips.length,
-      trips: sortedTrips,
-      date: formatDate(sortedTrips[0]?.date),
-      availabilityType: "standard",
-      availabilityTitle: "Great news, we have availability!",
-      availabilityText:
-        "Select the result that best suits you from the list below and it will be added to the itinerary summary on the right.",
-      originalItem: group,
-      isGallery: true,
-    };
-  });
+      // If no trips survived filtering (e.g. ship capacity valid for some dates but not others?)
+      // The loop above skips invalid dates. So if sortedTrips is empty, we handle it?
+      // Actually map() keeps the group even if trips is empty?
+      // No, group initialized with trips=[], we push validation passed trips.
+      // If trips is empty, we should filter out the group.
+
+      if (sortedTrips.length === 0) return null;
+
+      return {
+        id: group.key,
+        uniqueKey: `${group.shipName}|${group.cabinName}`,
+        title: getPreferredCabinName(group),
+        subtitle: formatShipName(group.operatorLabel),
+        image: group.image,
+        prices: [{ label: "Start from", value: group.price || "Rp3,650,000" }],
+        availabilityCount:
+          group.totalAvailable > 1
+            ? `${group.totalAvailable} cabins available`
+            : group.availableText,
+        tripsCount: sortedTrips.length,
+        trips: sortedTrips,
+        date: formatDate(sortedTrips[0]?.date),
+        availabilityType: "standard",
+        availabilityTitle: "Great news, we have availability!",
+        availabilityText:
+          "Select the result that best suits you from the list below and it will be added to the itinerary summary on the right.",
+        originalItem: group,
+        isGallery: true,
+      };
+    })
+    .filter((item) => item !== null);
 });
 
 // Sorted display items based on sortBy selection and trip duration filter
@@ -3752,7 +4081,6 @@ async function checkAvailability() {
   }
 }
 
-const applyFilters = () => checkAvailability();
 const loadResults = () => checkAvailability();
 
 function applySidebarChanges() {
@@ -3774,16 +4102,27 @@ function applySidebarChanges() {
       dateTo: formDateTo.value || formDateFrom.value,
       tripDurations: formTripDurations.value, // Save trip durations
       // Multi-cabin data
-      cabins: cabins.value.map((c) => ({
-        adults: c.adults,
-        children: c.children,
-        total: c.adults + c.children,
-      })),
-      totalCabins: cabins.value.length,
+      cabins: formIsFlexible.value
+        ? []
+        : cabins.value.map((c) => ({
+            adults: c.adults,
+            children: c.children,
+            total: c.adults + c.children,
+          })),
+      totalCabins: formIsFlexible.value ? 0 : cabins.value.length,
       totalGuests: guestsTotal.value,
+
+      // Flexible fields
+      isFlexible: formIsFlexible.value,
+      flexibleGuests: formIsFlexible.value ? formFlexibleGuests.value : 0,
+
       // Legacy fields
-      adults: cabins.value.reduce((s, c) => s + c.adults, 0),
-      children: cabins.value.reduce((s, c) => s + c.children, 0),
+      adults: formIsFlexible.value
+        ? formFlexibleGuests.value
+        : cabins.value.reduce((s, c) => s + c.adults, 0),
+      children: formIsFlexible.value
+        ? 0
+        : cabins.value.reduce((s, c) => s + c.children, 0),
       age3_9: 0,
       age0_2: 0,
       timestamp: Date.now(),
@@ -3854,6 +4193,10 @@ onMounted(async () => {
         : sc.destination
         ? [sc.destination]
         : [];
+
+      // Load flexible state
+      formIsFlexible.value = !!sc.isFlexible;
+      formFlexibleGuests.value = sc.flexibleGuests || 2;
       const savedLabels = Array.isArray(sc.ships) ? sc.ships : [];
       const savedSheets = Array.isArray(sc.shipSheets) ? sc.shipSheets : [];
       savedShipPairs.value = savedLabels.map((label, idx) => ({
@@ -4803,5 +5146,200 @@ loadItinerary();
 .slide-left-leave-from {
   transform: translateX(0);
   opacity: 1;
+}
+
+/* Sidebar Toggle Styles */
+/* Sidebar Pill Toggle Styles */
+.sidebar-pill-container {
+  display: flex;
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+}
+.sidebar-pill-btn {
+  flex: 1;
+  padding: 8px 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.sidebar-pill-btn:hover {
+  color: #334155;
+}
+.sidebar-pill-btn.active {
+  background: white;
+  color: #0f172a;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  font-weight: 600;
+}
+
+.sidebar-flexible-content {
+  padding: 0.5rem 0.25rem;
+}
+.sidebar-counter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+.sidebar-counter-row .label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #334155;
+  font-family: "Outfit", sans-serif;
+}
+.sidebar-counter-row .ctrls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  padding: 3px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+.btn-ctrl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: #f8fafc;
+  border-radius: 4px;
+  color: #334155;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: background 0.2s;
+}
+.btn-ctrl:hover:not(:disabled) {
+  background: #e2e8f0;
+}
+.btn-ctrl:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.sidebar-counter-row .val {
+  font-weight: 600;
+  min-width: 24px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+.sidebar-note {
+  font-size: 0.8rem;
+  color: #64748b;
+  text-align: center;
+  margin-top: 0.75rem;
+  line-height: 1.5;
+  border-top: 1px dashed #e2e8f0;
+  padding-top: 0.75rem;
+}
+/* Sidebar Pill Toggle Styles */
+.sidebar-pill-container {
+  display: flex;
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+}
+.sidebar-pill-btn {
+  flex: 1;
+  padding: 8px 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.sidebar-pill-btn:hover {
+  color: #334155;
+}
+.sidebar-pill-btn.active {
+  background: white;
+  color: #0f172a;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  font-weight: 600;
+}
+
+.sidebar-flexible-content {
+  padding: 0.5rem 0.25rem;
+}
+.sidebar-counter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+.sidebar-counter-row .label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #334155;
+  font-family: "Outfit", sans-serif;
+}
+.sidebar-counter-row .ctrls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  padding: 0;
+  border: none;
+}
+.btn-ctrl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  border-radius: 50%;
+  color: #334155;
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: all 0.2s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.btn-ctrl:hover:not(:disabled) {
+  border-color: #cbd5e1;
+  color: #0f172a;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.btn-ctrl:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #f8fafc;
+  border-color: #f1f5f9;
+  box-shadow: none;
+  transform: none;
+}
+.sidebar-counter-row .val {
+  font-weight: 600;
+  min-width: 24px;
+  text-align: center;
+  font-size: 1rem;
+  color: #0f172a;
+}
+.sidebar-note {
+  font-size: 0.8rem;
+  color: #64748b;
+  text-align: center;
+  margin-top: 0.75rem;
+  line-height: 1.5;
+  border-top: 1px dashed #e2e8f0;
+  padding-top: 0.75rem;
 }
 </style>

@@ -233,48 +233,67 @@
                   </div>
 
                   <!-- Trip Duration Selector -->
-                  <p class="results-note">Trip Duration:</p>
-                  <div
-                    class="date-range-display trip-duration-selector"
-                    @click.stop="showDurationDropdown = !showDurationDropdown"
-                  >
-                    <span class="date-value">
-                      {{
-                        selectedTripDuration === 0
-                          ? "Any duration"
-                          : `${selectedTripDuration} ${
-                              selectedTripDuration === 1 ? "day" : "days"
-                            }`
-                      }}
-                    </span>
-                    <span class="caret">▼</span>
-
-                    <!-- Dropdown Menu -->
+                  <div class="trip-duration-section">
+                    <span class="trip-duration-label">Trip Duration:</span>
                     <div
-                      v-if="showDurationDropdown"
-                      class="custom-dropdown-menu"
+                      class="trip-duration-dropdown"
+                      @click.stop="showDurationDropdown = !showDurationDropdown"
                     >
-                      <div
-                        class="dropdown-item"
-                        :class="{ active: selectedTripDuration === 0 }"
-                        @click.stop="
-                          selectedTripDuration = 0;
-                          showDurationDropdown = false;
+                      <span class="trip-duration-value">
+                        {{
+                          selectedTripDurations.length === 0
+                            ? "Any duration"
+                            : selectedTripDurations.length === 1
+                            ? `${selectedTripDurations[0]} ${
+                                selectedTripDurations[0] === 1 ? "day" : "days"
+                              }`
+                            : `${selectedTripDurations.length} selected`
+                        }}
+                      </span>
+                      <img
+                        :src="
+                          showDurationDropdown ? upArrowIcon : downArrowIcon
                         "
-                      >
-                        Any duration
-                      </div>
+                        alt=""
+                        class="caret-icon"
+                      />
+                      <!-- Arrow icon dropdown -->
+
+                      <!-- Dropdown Menu -->
                       <div
-                        v-for="d in availableDurations"
-                        :key="d"
-                        class="dropdown-item"
-                        :class="{ active: selectedTripDuration === d }"
-                        @click.stop="
-                          selectedTripDuration = d;
-                          showDurationDropdown = false;
-                        "
+                        v-if="showDurationDropdown"
+                        class="custom-dropdown-menu trip-duration-menu"
                       >
-                        {{ d }} {{ d === 1 ? "day" : "days" }}
+                        <!-- Any duration option -->
+                        <div
+                          class="list-row"
+                          @click.stop="toggleTripDuration(0)"
+                        >
+                          <div class="list-text">Any duration</div>
+                          <input
+                            class="check"
+                            type="checkbox"
+                            :checked="selectedTripDurations.length === 0"
+                            @click.stop
+                          />
+                        </div>
+                        <!-- Specific duration options -->
+                        <div
+                          v-for="d in availableDurations"
+                          :key="d"
+                          class="list-row"
+                          @click.stop="toggleTripDuration(d)"
+                        >
+                          <div class="list-text">
+                            {{ d }} {{ d === 1 ? "day" : "days" }}
+                          </div>
+                          <input
+                            class="check"
+                            type="checkbox"
+                            :checked="selectedTripDurations.includes(d)"
+                            @click.stop
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -339,12 +358,71 @@
                 <!-- Step 4: Guests (Multi-Cabin) -->
                 <div v-else-if="step === 4">
                   <h3 class="step-title">Cabins & Guests</h3>
-                  <p class="results-note">
-                    Configure the number of guests per cabin. Maximum 4 cabins,
-                    4 guests per cabin.
-                  </p>
 
-                  <div class="cabins-container">
+                  <!-- Booking Mode Segmented Toggle -->
+                  <div class="mode-toggle-container">
+                    <div class="mode-toggle">
+                      <button
+                        type="button"
+                        class="mode-btn"
+                        :class="{ active: isFlexibleBooking }"
+                        @click="isFlexibleBooking = true"
+                      >
+                        Flexible
+                      </button>
+                      <button
+                        type="button"
+                        class="mode-btn"
+                        :class="{ active: !isFlexibleBooking }"
+                        @click="isFlexibleBooking = false"
+                      >
+                        Room Allocation
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="text-center mb-6">
+                    <p class="results-note" v-if="!isFlexibleBooking">
+                      Configure guests for each cabin individually.
+                    </p>
+                    <p class="results-note" v-else>
+                      Set total guests only. You can choose specific rooms
+                      later.
+                    </p>
+                  </div>
+
+                  <!-- Flexible Mode -->
+                  <div v-if="isFlexibleBooking" class="flexible-guest-card">
+                    <div class="counter-row">
+                      <div class="counter-text">
+                        <div class="counter-title">Total Guests</div>
+                        <div class="counter-subtitle">
+                          We will find the best cabin combination for you
+                        </div>
+                      </div>
+                      <div class="counter-ctrls">
+                        <button
+                          type="button"
+                          class="btn-icon"
+                          :disabled="flexibleGuests <= 1"
+                          @click="flexibleGuests--"
+                        >
+                          −
+                        </button>
+                        <span class="count-display">{{ flexibleGuests }}</span>
+                        <button
+                          type="button"
+                          class="btn-icon"
+                          @click="flexibleGuests++"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Structured Mode (Existing) -->
+                  <div v-else class="cabins-container">
                     <!-- Cabin Accordion Items -->
                     <div
                       v-for="(cabin, idx) in cabins"
@@ -578,6 +656,8 @@ import {
 } from "../utils/dateUtils";
 import LeftArrow from "../images/arrows/left-arrow.svg";
 import RightArrow from "../images/arrows/right-arrow.svg";
+import downArrowIcon from "../images/arrows/down-arrow.svg";
+import upArrowIcon from "../images/arrows/up-arrow.svg";
 import "../styles/pages/plan.css";
 
 const props = defineProps({
@@ -606,14 +686,32 @@ const selectedShipIds = ref([]);
 const dateFrom = ref("");
 const dateTo = ref(""); // Keep for compatibility but not used in UI
 
-// Trip duration
+// Trip duration (multi-select)
 const MAX_TRIP_DURATION = 14; // Maximum days for a trip
-const selectedTripDuration = ref(0);
+const selectedTripDurations = ref([]); // Array for multi-select
 const showDurationDropdown = ref(false);
+
+// Toggle trip duration (multi-select style like Check Availability)
+function toggleTripDuration(duration) {
+  if (duration === 0) {
+    // "Any duration" - clear all selections
+    selectedTripDurations.value = [];
+  } else {
+    const idx = selectedTripDurations.value.indexOf(duration);
+    if (idx >= 0) {
+      selectedTripDurations.value.splice(idx, 1);
+    } else {
+      selectedTripDurations.value.push(duration);
+    }
+  }
+}
 
 // Cabin-based guest management
 const MAX_CABINS = 4;
 const MAX_GUESTS_PER_CABIN = 4;
+
+const isFlexibleBooking = ref(true); // Default Flexible
+const flexibleGuests = ref(2);
 
 const cabins = ref([{ id: 1, adults: 2, children: 0, expanded: true }]);
 
@@ -637,6 +735,65 @@ const closeDropdown = () => {
 // Calendar state
 const currentMonth = ref(new Date().getMonth());
 const currentYear = ref(new Date().getFullYear());
+
+// ... (skipping some parts) ...
+
+function goResults() {
+  // Save search criteria to localStorage for Results page
+  // Map selected sheets back to labels for display
+  const selectedEntries = shipsList.value.filter((s) =>
+    selectedShipIds.value.includes(s.id)
+  );
+  const selectedLabels = selectedEntries.map((s) => s.label);
+  const selectedSheets = selectedEntries.map((s) => s.sheet);
+
+  const searchCriteria = {
+    region: REGION_NAME,
+    destination: selectedDestinations.value[0] || "", // backward-compat single
+    destinations: selectedDestinations.value.slice(),
+    ships: selectedLabels, // display labels
+    shipSheets: selectedSheets,
+    // backward-compat
+    ship: selectedLabels[0] || "",
+    lodges: selectedLabels.slice(),
+    dateFrom: dateFrom.value,
+    dateTo: dateTo.value,
+    tripDurations: selectedTripDurations.value.slice(), // Array of selected durations (empty = any)
+
+    // Flexible Booking
+    isFlexible: isFlexibleBooking.value,
+    flexibleGuests: isFlexibleBooking.value ? flexibleGuests.value : 0,
+
+    // Multi-cabin data
+    cabins: isFlexibleBooking.value
+      ? [] // No specific cabin structure in flexible mode
+      : cabins.value.map((c) => ({
+          adults: c.adults,
+          children: c.children,
+          total: c.adults + c.children,
+        })),
+    totalCabins: isFlexibleBooking.value ? 0 : cabins.value.length,
+    totalGuests: isFlexibleBooking.value
+      ? flexibleGuests.value
+      : totalGuests.value,
+    // Legacy fields for backward compatibility
+    adults: isFlexibleBooking.value
+      ? flexibleGuests.value
+      : cabins.value.reduce((s, c) => s + c.adults, 0),
+    children: isFlexibleBooking.value
+      ? 0
+      : cabins.value.reduce((s, c) => s + c.children, 0),
+    age3_9: 0,
+    age0_2: 0,
+    timestamp: Date.now(),
+  };
+
+  localStorage.setItem(
+    "komodo_search_criteria",
+    JSON.stringify(searchCriteria)
+  );
+  emit("navigate-to-results");
+}
 
 const labels = ["Destinations", "Ships", "Dates", "Guests", "Submit"];
 const prevLabel = computed(() => labels[step.value - 2] || "");
@@ -842,50 +999,6 @@ function checkAvailability() {
 
 function enquireNow() {
   goResults();
-}
-
-function goResults() {
-  // Save search criteria to localStorage for Results page
-  // Map selected sheets back to labels for display
-  const selectedEntries = shipsList.value.filter((s) =>
-    selectedShipIds.value.includes(s.id)
-  );
-  const selectedLabels = selectedEntries.map((s) => s.label);
-  const selectedSheets = selectedEntries.map((s) => s.sheet);
-
-  const searchCriteria = {
-    region: REGION_NAME,
-    destination: selectedDestinations.value[0] || "", // backward-compat single
-    destinations: selectedDestinations.value.slice(),
-    ships: selectedLabels, // display labels
-    shipSheets: selectedSheets,
-    // backward-compat
-    ship: selectedLabels[0] || "",
-    lodges: selectedLabels.slice(),
-    dateFrom: dateFrom.value,
-    dateTo: dateTo.value,
-    tripDuration: selectedTripDuration.value, // Lama trip yang dipilih (0 = any)
-    // Multi-cabin data
-    cabins: cabins.value.map((c) => ({
-      adults: c.adults,
-      children: c.children,
-      total: c.adults + c.children,
-    })),
-    totalCabins: cabins.value.length,
-    totalGuests: totalGuests.value,
-    // Legacy fields for backward compatibility
-    adults: cabins.value.reduce((s, c) => s + c.adults, 0),
-    children: cabins.value.reduce((s, c) => s + c.children, 0),
-    age3_9: 0,
-    age0_2: 0,
-    timestamp: Date.now(),
-  };
-
-  localStorage.setItem(
-    "komodo_search_criteria",
-    JSON.stringify(searchCriteria)
-  );
-  emit("navigate-to-results");
 }
 
 async function loadShips() {
@@ -1557,6 +1670,81 @@ function selectDate(day) {
   padding: 0.75rem 1rem;
   transition: all 0.2s;
   /* Match date-range-display minimal aesthetic */
+}
+
+/* ===== BOOKING MODE TOGGLE (PILL) ===== */
+.mode-toggle-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+.mode-toggle {
+  display: flex;
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 99px;
+  border: 1px solid #e2e8f0;
+}
+.mode-btn {
+  padding: 8px 24px;
+  border-radius: 99px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #64748b;
+  transition: all 0.2s ease;
+  min-width: 130px;
+}
+.mode-btn:hover {
+  color: #1e293b;
+}
+.mode-btn.active {
+  background: white;
+  color: #0f172a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+}
+
+/* Flexible Guest Card (Luxury Card Style) */
+.flexible-guest-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  max-width: 450px;
+  margin: 0 auto;
+}
+.flexible-guest-card .counter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.counter-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e293b;
+  font-family: "Outfit", sans-serif;
+}
+.counter-subtitle {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+.count-display {
+  font-size: 1.25rem;
+  font-weight: 600;
+  min-width: 40px;
+  text-align: center;
+  color: #1e293b;
+}
+.text-center {
+  text-align: center;
+}
+.mb-6 {
+  margin-bottom: 1.5rem;
 }
 
 .trip-duration-selector:hover {

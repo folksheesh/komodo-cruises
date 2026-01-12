@@ -87,7 +87,7 @@
 
 .list-heading {
   color: #2d4059;
-  font-weight: 900;
+  font-weight: 500;
   font-size: 1.1rem;
   padding: 1rem 0 .5rem;
   border: none !important;
@@ -261,8 +261,10 @@
   margin-bottom: 1rem;
   font-size: 0.95rem;
   color: var(--ocean-900);
-  width: fit-content;
+  width: 320px;
+  max-width: 320px;
 }
+
 
 .date-range-display .date-value {
   font-weight: 500;
@@ -650,8 +652,8 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, .12), 0 2px 4px rgba(0, 0, 0, .06);
   z-index: 60;
   padding: 0.75rem 1.5rem;
-  /* max-height: 340px;  Removed to allow full content visibility */
-  /* overflow: auto;     Removed to prevent internal scroll */
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .dropdown-panel .list-row {
@@ -1001,4 +1003,86 @@
     padding: 0.875rem;
     font-size: 0.9rem;
   }
+}
+
+/* Trip Duration Section - Vertical layout like other fields */
+.trip-duration-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.trip-duration-label {
+  font-size: 0.95rem;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 400;
+}
+
+.trip-duration-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  cursor: pointer;
+  width: 320px;
+  max-width: 320px;
+}
+
+.trip-duration-dropdown:hover {
+  border-color: var(--ocean-900, #2d4059);
+}
+
+.trip-duration-value {
+  font-size: 0.95rem;
+  color: var(--ocean-900, #2d4059);
+  font-family: var(--font-sans);
+}
+
+.trip-duration-dropdown .caret-icon {
+  width: 12px;
+  height: 12px;
+  margin-left: auto;
+  opacity: 0.6;
+}
+
+.trip-duration-menu {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  right: auto;
+  min-width: 200px;
+  max-height: 280px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+}
+
+.trip-duration-menu .list-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.trip-duration-menu .list-row:last-child {
+  border-bottom: none;
+}
+
+.trip-duration-menu .list-row:hover {
+  background: rgba(34, 63, 98, 0.04);
+}
+
+.trip-duration-menu .list-text {
+  font-size: 0.9rem;
+  color: var(--ocean-900, #2d4059);
 }
