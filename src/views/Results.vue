@@ -111,7 +111,25 @@
           <div v-else>
             <h2 class="results-title">Your Search Results</h2>
             <div class="results-intro">
-              <div v-if="allStartDateCabins.length" class="success-message">
+              <div
+                v-if="sortedDisplayItems.length === 0"
+                class="no-availability"
+              >
+                <p class="desktop-only">
+                  <strong>No results found.</strong>
+                  We could not find any availability matching your search.
+                  Please try adjusting your filters.
+                </p>
+                <p class="mobile-only">
+                  <strong>No results found.</strong>
+                  Please try adjusting your filters.
+                </p>
+              </div>
+
+              <div
+                v-else-if="allStartDateCabins.length"
+                class="success-message"
+              >
                 <p class="desktop-only">
                   <strong>Your preferred travel dates are available!</strong>
                   We have a team of Komodo Cruises Journey Designers who are

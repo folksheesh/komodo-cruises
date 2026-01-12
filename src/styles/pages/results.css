@@ -4521,6 +4521,30 @@ div.modal-content.modal-content-redesigned {
   font-style: italic;
 }
 
+/* Added style for empty state message block */
+.no-availability {
+  padding: 3rem 1.5rem;
+  background: #f9fafb;
+  border: 1px dashed #d1d5db;
+  border-radius: 8px;
+  text-align: center;
+  color: #6b7280;
+  margin: 1rem 0 2rem;
+}
+
+.no-availability p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.no-availability strong {
+  display: block;
+  color: #2d4059;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
 .ship-card-arrow {
   color: #2d4059;
   margin-left: 1rem;
@@ -4686,9 +4710,8 @@ div.modal-content.modal-content-redesigned {
     display: none !important;
   }
 
-  /* Hide Results Title and Intro and Itinerary on Mobile */
+  /* Hide Results Title and Itinerary on Mobile - Intro MUST be visible for status messages */
   .results-title,
-  .results-intro,
   .sidebar-track {
     display: none !important;
   }
