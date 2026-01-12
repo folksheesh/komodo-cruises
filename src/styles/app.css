@@ -201,6 +201,12 @@ body:has(.hero-section) .nav-container.scrolled,
   /* Blue color for logo */
 }
 
+@media (max-width: 768px) {
+  .navbar-result {
+    box-shadow: none !important;
+  }
+}
+
 
 /* Results nav */
 .brand-text {
@@ -577,20 +583,23 @@ body:has(.hero-section):not(:has(.scrolled)) .brand-chip {
     font-size: 0.9rem !important;
   }
 }
+
 /* Mobile Plan Mode Navbar Fix */
 @media (max-width: 640px) {
   .nav-inner.plan-mode {
     padding: 1.25rem 1.5rem !important;
     justify-content: space-between !important;
   }
-  
+
   .nav-inner.plan-mode .brand {
     font-size: 1.35rem !important;
   }
 
   .nav-inner.plan-mode .link-close {
     font-size: 0.95rem !important;
-    padding: 0.5rem; /* Touch target size */
-    margin-right: -0.5rem; /* Align visual right */
+    padding: 0.5rem;
+    /* Touch target size */
+    margin-right: -0.5rem;
+    /* Align visual right */
   }
 }

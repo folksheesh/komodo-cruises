@@ -182,13 +182,15 @@ onUnmounted(() => {
 
         <!-- RIGHT: Login, Search, Book -->
         <div class="nav-right">
-          <button class="nav-text-item nav-plan-item" @click="openPlanModal">
+          <button
+            class="nav-text-item nav-plan-item"
+            @click="openPlanModal"
+            style="white-space: nowrap"
+          >
             <template v-if="$route.path === '/results'">
               FIND RESERVATION
             </template>
-            <template v-else>
-              PLAN <span class="desktop-only">YOUR</span> TRIP
-            </template>
+            <template v-else> PLAN YOUR TRIP </template>
           </button>
           <span class="nav-text-item">LOGIN</span>
 

@@ -17,23 +17,25 @@
         <img src="/src/images/arrows/left-arrow.svg" alt="Previous" />
       </button>
 
-      <!-- Slides Track -->
+      <!-- Slides Track - Infinite Loop -->
       <div class="carousel-viewport">
         <div
           class="carousel-track"
           :style="{
             transform: `translateX(-${trackOffset}px)`,
-            paddingLeft: trackPadding,
           }"
         >
           <div
-            v-for="(dest, index) in destinations"
-            :key="index"
+            v-for="(slide, index) in extendedSlides"
+            :key="slide.virtualKey"
             class="carousel-slide"
-            :class="{ 'active-slide': index === currentIndex }"
+            :class="{
+              'active-slide': isActiveSlide(index),
+              'side-slide': isSideSlide(index),
+            }"
             :style="{ width: `${slideWidth}px`, marginRight: `${slideGap}px` }"
           >
-            <img :src="dest.image" :alt="dest.title" class="slide-image" />
+            <img :src="slide.image" :alt="slide.title" class="slide-image" />
           </div>
         </div>
       </div>
@@ -65,10 +67,10 @@
     <!-- Dot indicators (mobile only) -->
     <div class="carousel-dots">
       <button
-        v-for="(_, i) in destinations"
+        v-for="(_, i) in originalDestinations"
         :key="i"
         class="carousel-dot"
-        :class="{ active: i === currentIndex }"
+        :class="{ active: i === realIndex }"
         @click="goTo(i)"
         :aria-label="`Go to slide ${i + 1}`"
       ></button>
@@ -83,7 +85,7 @@ import komodoImg from "../images/dest-komodo.png";
 import labuanBajoImg from "../images/dest-labuan-bajo.png";
 import togeanImg from "../images/dest-togean.png";
 
-const destinations = [
+const originalDestinations = [
   {
     location: "INDONESIA",
     title: "Komodo National Park",
@@ -113,18 +115,50 @@ const destinations = [
   },
 ];
 
-const currentIndex = ref(0);
+const totalOriginal = originalDestinations.length; // 3
+
+// Create an EXTREMELY large buffer - 101 sets = 303 slides
+// User can click 100+ times in either direction without ever reaching the edge
+// This eliminates the need for any "jump" logic entirely
+const NUM_SETS = 101;
+const extendedSlides = computed(() => {
+  const slides = [];
+  for (let set = 0; set < NUM_SETS; set++) {
+    originalDestinations.forEach((dest, idx) => {
+      slides.push({
+        ...dest,
+        virtualKey: `set${set}-${idx}`,
+        originalIndex: idx,
+      });
+    });
+  }
+  return slides;
+});
+
+// Start in the middle of our extended slides
+const centerPosition = Math.floor(NUM_SETS / 2) * totalOriginal; // Position 150 (middle of 303)
+const currentPosition = ref(centerPosition);
+
 const windowWidth = ref(
   typeof window !== "undefined" ? window.innerWidth : 1200
 );
 
-const currentDestination = computed(() => destinations[currentIndex.value]);
+// Get the real index (0, 1, or 2) for display purposes
+const realIndex = computed(() => {
+  return (
+    ((currentPosition.value % totalOriginal) + totalOriginal) % totalOriginal
+  );
+});
+
+const currentDestination = computed(
+  () => originalDestinations[realIndex.value]
+);
 
 // Responsive slide dimensions
 const slideWidth = computed(() => {
   if (windowWidth.value <= 480) return windowWidth.value * 0.765;
   if (windowWidth.value <= 768) return windowWidth.value * 0.675;
-  return Math.min(windowWidth.value * 0.5, 750); // Smaller on desktop
+  return Math.min(windowWidth.value * 0.5, 750);
 });
 
 const slideGap = computed(() => {
@@ -132,29 +166,42 @@ const slideGap = computed(() => {
   return 20;
 });
 
+// Calculate the offset to center the active slide
 const trackOffset = computed(() => {
-  return currentIndex.value * (slideWidth.value + slideGap.value);
+  const slideFullWidth = slideWidth.value + slideGap.value;
+  const viewportCenter = windowWidth.value / 2;
+  const slideCenter = slideWidth.value / 2;
+  const activeSlideStart = currentPosition.value * slideFullWidth;
+  return activeSlideStart - viewportCenter + slideCenter;
 });
 
-const trackPadding = computed(() => {
-  // On mobile, align to left with small padding; on desktop, center the first slide
-  if (windowWidth.value <= 480) {
-    return "1.5rem";
-  }
-  return `calc(50% - ${slideWidth.value / 2}px)`;
-});
+// Check if slide at given position is active
+function isActiveSlide(index) {
+  return index === currentPosition.value;
+}
 
+// Check if slide at given position is a side slide
+function isSideSlide(index) {
+  return (
+    index === currentPosition.value - 1 || index === currentPosition.value + 1
+  );
+}
+
+// Simple navigation - no reset needed with such a large buffer
 function next() {
-  currentIndex.value = (currentIndex.value + 1) % destinations.length;
+  currentPosition.value++;
 }
 
 function prev() {
-  currentIndex.value =
-    (currentIndex.value - 1 + destinations.length) % destinations.length;
+  currentPosition.value--;
 }
 
 function goTo(index) {
-  currentIndex.value = index;
+  const currentReal = realIndex.value;
+  const diff = index - currentReal;
+  if (diff !== 0) {
+    currentPosition.value += diff;
+  }
 }
 
 function handleResize() {
@@ -226,7 +273,7 @@ onUnmounted(() => {
 
 .carousel-track {
   display: flex;
-  transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1);
   width: max-content;
 }
 
@@ -236,13 +283,25 @@ onUnmounted(() => {
   overflow: hidden;
   opacity: 0.4;
   transform: scale(0.95);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .carousel-slide.active-slide {
   opacity: 1;
   transform: scale(1);
   z-index: 5;
+}
+
+/* Side slides - slides next to active one */
+.carousel-slide.side-slide {
+  opacity: 0.5;
+  transform: scale(0.9);
+  z-index: 3;
+}
+
+/* Disable transition when jumping back to center */
+.carousel-track.no-transition {
+  transition: none !important;
 }
 
 .slide-image {

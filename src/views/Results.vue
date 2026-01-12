@@ -3,6 +3,104 @@
     <div v-if="loading" class="simple-loader">Loading</div>
 
     <div v-else class="results-container">
+      <!-- Mobile Filter Summary Bar (display-only, mobile only) -->
+      <div class="mobile-filter-summary">
+        <div class="filter-summary-content">
+          <!-- Row 1: Guests & Dates -->
+          <div class="filter-summary-row">
+            <div class="filter-summary-item">
+              <svg
+                class="filter-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+              <span
+                >{{ cabins.length }} cabin{{ cabins.length !== 1 ? "s" : "" }},
+                {{ guestsTotal }} guest{{ guestsTotal !== 1 ? "s" : "" }}</span
+              >
+            </div>
+            <div class="filter-summary-item">
+              <svg
+                class="filter-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+              <span>{{ formatFilterDateRange(formDateFrom, formDateTo) }}</span>
+            </div>
+          </div>
+          <!-- Row 2: Destination & Ships -->
+          <!-- <div class="filter-summary-row">
+            <div class="filter-summary-item">
+              <svg
+                class="filter-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span
+                >{{ formDestinations.length }} destination{{
+                  formDestinations.length !== 1 ? "s" : ""
+                }}</span
+              >
+            </div>
+            <div class="filter-summary-item">
+              <svg
+                class="filter-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path d="M3 15h18l-1.5 6h-15L3 15z" />
+                <rect x="5" y="8" width="14" height="7" rx="1" />
+                <path d="M8 8V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3" />
+                <line x1="2" y1="15" x2="22" y2="15" />
+              </svg>
+              <span
+                >{{ formShipIds.length }} ship{{
+                  formShipIds.length !== 1 ? "s" : ""
+                }}</span
+              >
+            </div>
+          </div> -->
+        </div>
+        <button
+          class="filter-edit-btn"
+          @click="showMobileFilterModal = true"
+          aria-label="Edit filters"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
+            ></path>
+            <path
+              d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
       <div class="results-layout">
         <div class="results-main">
           <div v-if="error" class="error-state">
@@ -14,32 +112,40 @@
             <h2 class="results-title">Your Search Results</h2>
             <div class="results-intro">
               <div v-if="allStartDateCabins.length" class="success-message">
-                <p>
+                <p class="desktop-only">
                   <strong>Your preferred travel dates are available!</strong>
                   We have a team of Komodo Cruises Journey Designers who are
                   ready to plan your trip. Simply select the results that suit
                   your preferences best and submit your enquiry.
                 </p>
-                <p class="results-note-muted">
+                <p class="mobile-only">
+                  <strong>Your preferred dates are available!</strong>
+                  Select results below and submit your enquiry.
+                </p>
+                <p class="results-note-muted desktop-only">
                   <span class="semibold">Note:</span> These results indicate
                   availability and do not guarantee a booking.
                 </p>
               </div>
 
               <div v-else-if="!flexibleAlt" class="no-availability">
-                <p>
+                <p class="desktop-only">
                   <strong
                     >Your preferred dates are unfortunately not available, but
                     there is availability at other Komodo Cruises lodges or on
                     alternate dates.</strong
                   >
                 </p>
-                <p>
+                <p class="desktop-only">
                   We have a team of Komodo Cruises Journey Designers who are
                   ready to plan your trip. Simply select the results that suit
                   your preferences best and submit your enquiry.
                 </p>
-                <p class="results-note-muted">
+                <p class="mobile-only">
+                  <strong>Dates not available.</strong>
+                  Check alternatives below and submit enquiry.
+                </p>
+                <p class="results-note-muted desktop-only">
                   <span class="semibold">Note:</span> These results indicate
                   availability and do not guarantee a booking.
                 </p>
@@ -193,7 +299,6 @@
                           ? 'slide-left'
                           : 'slide-right'
                       "
-                      mode="out-in"
                     >
                       <img
                         :src="
@@ -857,6 +962,104 @@
                           {{ day.date }}
                         </button>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Trip Duration Filter -->
+              <!-- Trip Duration Filter -->
+              <div class="list dropdown" ref="durationDropdown">
+                <div class="list-heading">Trip Duration</div>
+                <button
+                  type="button"
+                  :class="[
+                    'select-summary',
+                    openDuration || hoverDuration ? 'is-filled' : '',
+                  ]"
+                  @mouseenter="hoverDuration = true"
+                  @mouseleave="hoverDuration = false"
+                  @click.stop="toggleDropdown('duration')"
+                  :aria-expanded="openDuration ? 'true' : 'false'"
+                >
+                  <span>{{
+                    formTripDurations.length === 0
+                      ? "Any duration"
+                      : formTripDurations.length === 1
+                      ? `${formTripDurations[0]} ${
+                          formTripDurations[0] === 1 ? "day" : "days"
+                        }`
+                      : `${formTripDurations.length} selected`
+                  }}</span>
+                  <span class="caret">
+                    <img
+                      :src="openDuration ? upArrowIcon : downArrowIcon"
+                      alt=""
+                      aria-hidden="true"
+                      class="caret-icon"
+                    />
+                  </span>
+                </button>
+
+                <div v-if="openDuration" class="dropdown-panel" @click.stop>
+                  <div class="dropdown-group-title">Trip Duration</div>
+
+                  <!-- Any duration option -->
+                  <div class="list-row" @click="toggleTripDuration(0)">
+                    <div class="list-text result-list-text">Any duration</div>
+                    <div
+                      class="check radio-check"
+                      :class="{ checked: formTripDurations.length === 0 }"
+                    >
+                      <svg
+                        v-if="formTripDurations.length === 0"
+                        width="10"
+                        height="8"
+                        viewBox="0 0 10 8"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M1 4L3.5 6.5L9 1"
+                          stroke="white"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <!-- Specific duration options -->
+                  <div
+                    v-for="d in availableDurations"
+                    :key="d"
+                    class="list-row"
+                    @click="toggleTripDuration(d)"
+                  >
+                    <div class="list-text result-list-text">
+                      {{ d }} {{ d === 1 ? "day" : "days" }}
+                    </div>
+                    <div
+                      class="check radio-check"
+                      :class="{ checked: formTripDurations.includes(d) }"
+                    >
+                      <svg
+                        v-if="formTripDurations.includes(d)"
+                        width="10"
+                        height="8"
+                        viewBox="0 0 10 8"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M1 4L3.5 6.5L9 1"
+                          stroke="white"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
                     </div>
                   </div>
                 </div>
@@ -1582,6 +1785,287 @@
     </footer>
   </div>
 
+  <!-- Mobile Filter Modal (fullscreen) -->
+  <Teleport to="body">
+    <div
+      v-if="showMobileFilterModal"
+      class="mobile-filter-modal-overlay"
+      @click.self="showMobileFilterModal = false"
+    >
+      <div class="mobile-filter-modal">
+        <div class="mobile-filter-modal-header">
+          <h3>Check Availability</h3>
+          <button
+            class="modal-close-btn"
+            @click="showMobileFilterModal = false"
+          >
+            <span>Close</span> ✕
+          </button>
+        </div>
+        <div class="mobile-filter-modal-body">
+          <!-- Destinations -->
+          <div class="modal-field-group">
+            <div class="modal-field-label">Destinations</div>
+            <button
+              type="button"
+              class="modal-field-btn"
+              @click="mobileOpenDestinations = !mobileOpenDestinations"
+            >
+              <span>Destinations: {{ formDestinations.length }}</span>
+              <img
+                :src="mobileOpenDestinations ? upArrowIcon : downArrowIcon"
+                alt=""
+                class="caret-icon"
+              />
+            </button>
+            <div v-if="mobileOpenDestinations" class="modal-field-dropdown">
+              <div class="dropdown-group-title">{{ REGION_NAME }}</div>
+              <div
+                class="list-row"
+                v-for="d in DESTINATIONS"
+                :key="d"
+                @click="toggleDestination(d)"
+              >
+                <div class="list-text result-list-text">{{ d }}</div>
+                <input
+                  class="check"
+                  type="checkbox"
+                  :value="d"
+                  v-model="formDestinations"
+                  @click.stop
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Ships -->
+          <div class="modal-field-group">
+            <div class="modal-field-label">Ships</div>
+            <button
+              type="button"
+              class="modal-field-btn"
+              @click="mobileOpenShips = !mobileOpenShips"
+            >
+              <span>Ships: {{ formShipIds.length }}</span>
+              <img
+                :src="mobileOpenShips ? upArrowIcon : downArrowIcon"
+                alt=""
+                class="caret-icon"
+              />
+            </button>
+            <div v-if="mobileOpenShips" class="modal-field-dropdown">
+              <div class="dropdown-group-title">{{ shipsGroupTitle }}</div>
+              <div v-if="shipsLoading" class="muted">Loading ships...</div>
+              <template v-else>
+                <div
+                  class="list-row"
+                  v-for="s in shipsList"
+                  :key="s.id"
+                  @click="toggleShip(s.id)"
+                >
+                  <div class="list-text result-list-text">{{ s.label }}</div>
+                  <input
+                    class="check"
+                    type="checkbox"
+                    :value="s.id"
+                    v-model="formShipIds"
+                    @click.stop
+                  />
+                </div>
+              </template>
+            </div>
+          </div>
+
+          <!-- Cabins & Guests -->
+          <div class="modal-field-group">
+            <div class="modal-field-label">Cabins & Guests</div>
+            <button
+              type="button"
+              class="modal-field-btn"
+              @click="mobileOpenGuests = !mobileOpenGuests"
+            >
+              <span
+                >{{ cabins.length }} Cabin{{ cabins.length !== 1 ? "s" : "" }},
+                {{ guestsTotal }} Guest{{ guestsTotal !== 1 ? "s" : "" }}</span
+              >
+              <img
+                :src="mobileOpenGuests ? upArrowIcon : downArrowIcon"
+                alt=""
+                class="caret-icon"
+              />
+            </button>
+            <div
+              v-if="mobileOpenGuests"
+              class="modal-field-dropdown cabin-panel"
+            >
+              <div
+                v-for="(cabin, idx) in cabins"
+                :key="cabin.id"
+                class="modal-cabin-item"
+              >
+                <div class="modal-cabin-header-row">
+                  <span class="modal-cabin-label">CABIN {{ idx + 1 }}</span>
+                  <span class="modal-cabin-guests-text"
+                    >{{ cabin.adults + cabin.children }} guest{{
+                      cabin.adults + cabin.children !== 1 ? "s" : ""
+                    }}</span
+                  >
+                  <button
+                    v-if="cabins.length > 1"
+                    type="button"
+                    class="modal-cabin-remove"
+                    @click.stop="removeCabin(idx)"
+                  >
+                    ×
+                  </button>
+                </div>
+                <div class="modal-counter-row">
+                  <span>Adults</span>
+                  <div class="modal-counter-controls">
+                    <button
+                      type="button"
+                      :disabled="cabin.adults <= 1"
+                      @click="decCabinGuest(idx, 'adults')"
+                    >
+                      −
+                    </button>
+                    <span>{{ cabin.adults }}</span>
+                    <button
+                      type="button"
+                      :disabled="
+                        cabin.adults + cabin.children >= MAX_GUESTS_PER_CABIN
+                      "
+                      @click="incCabinGuest(idx, 'adults')"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <div class="modal-counter-row">
+                  <span>Children</span>
+                  <div class="modal-counter-controls">
+                    <button
+                      type="button"
+                      :disabled="cabin.children <= 0"
+                      @click="decCabinGuest(idx, 'children')"
+                    >
+                      −
+                    </button>
+                    <span>{{ cabin.children }}</span>
+                    <button
+                      type="button"
+                      :disabled="
+                        cabin.adults + cabin.children >= MAX_GUESTS_PER_CABIN
+                      "
+                      @click="incCabinGuest(idx, 'children')"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <button
+                v-if="canAddCabin"
+                type="button"
+                class="modal-add-cabin-btn"
+                @click="addCabin"
+              >
+                + Add Another Cabin
+              </button>
+            </div>
+          </div>
+
+          <!-- Dates -->
+          <div class="modal-field-group">
+            <div class="modal-field-label">Dates</div>
+            <button
+              type="button"
+              class="modal-field-btn"
+              @click="mobileOpenDates = !mobileOpenDates"
+            >
+              <span>{{
+                formDateFrom
+                  ? `${formDateFrom} → ${formDateTo || "..."}`
+                  : "Select dates"
+              }}</span>
+              <img
+                :src="mobileOpenDates ? upArrowIcon : downArrowIcon"
+                alt=""
+                class="caret-icon"
+              />
+            </button>
+            <div
+              v-if="mobileOpenDates"
+              class="modal-field-dropdown dates-panel"
+            >
+              <div
+                class="custom-calendar"
+                style="max-width: 100%; box-shadow: none; border: none"
+              >
+                <div class="calendar-header">
+                  <h4 class="calendar-title">{{ currentMonthYear }}</h4>
+                  <div class="calendar-nav-group">
+                    <button
+                      class="calendar-nav"
+                      @click="prevMonth"
+                      type="button"
+                    >
+                      ‹
+                    </button>
+                    <button
+                      class="calendar-nav"
+                      @click="nextMonth"
+                      type="button"
+                    >
+                      ›
+                    </button>
+                  </div>
+                </div>
+                <div class="calendar-grid">
+                  <div class="calendar-weekdays">
+                    <div class="weekday">Su</div>
+                    <div class="weekday">Mo</div>
+                    <div class="weekday">Tu</div>
+                    <div class="weekday">We</div>
+                    <div class="weekday">Th</div>
+                    <div class="weekday">Fr</div>
+                    <div class="weekday">Sa</div>
+                  </div>
+                  <div class="calendar-days">
+                    <button
+                      v-for="day in calendarDays"
+                      :key="day.key"
+                      class="calendar-day"
+                      :class="{
+                        'other-month': !day.isCurrentMonth,
+                        selected: day.isSelected,
+                        disabled: !day.isSelectable,
+                        past: day.isPast,
+                        'in-range': day.isInRange,
+                        'range-start': day.isRangeStart,
+                        'range-end': day.isRangeEnd,
+                      }"
+                      :disabled="!day.isSelectable"
+                      @click="selectDateSidebar(day)"
+                      type="button"
+                    >
+                      {{ day.date }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mobile-filter-modal-footer">
+          <button class="btn-apply-modal" @click="applyFiltersAndCloseModal">
+            Apply
+          </button>
+        </div>
+      </div>
+    </div>
+  </Teleport>
+
   <!-- Plan Modal -->
   <PlanModal
     :isOpen="isPlanModalOpen"
@@ -1609,6 +2093,73 @@ import PlanModal from "../components/PlanModal.vue";
 // --- IMAGE GALLERY STATE ---
 const galleryIndexes = ref({}); // { [cabinKey]: index }
 const galleryDirections = ref({}); // { [cabinKey]: 'left' | 'right' }
+
+// --- MOBILE FILTER MODAL STATE ---
+const showMobileFilterModal = ref(false);
+const mobileOpenDestinations = ref(false);
+const mobileOpenShips = ref(false);
+const mobileOpenGuests = ref(false);
+const mobileOpenDates = ref(false);
+
+// Lock body scroll when mobile modal is open
+watch(showMobileFilterModal, (val) => {
+  if (val) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+});
+
+function applyFiltersAndCloseModal() {
+  // Close all dropdowns first
+  mobileOpenDestinations.value = false;
+  mobileOpenShips.value = false;
+  mobileOpenGuests.value = false;
+  mobileOpenDates.value = false;
+  // Close modal
+  showMobileFilterModal.value = false;
+  // Apply filters (trigger loadResults)
+  applyFilters();
+}
+
+// Format date range for mobile filter summary bar: "Jan 9 - Jan 22 2026"
+function formatFilterDateRange(from, to) {
+  if (!from) return "Select dates";
+
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const fromDate = new Date(from);
+  const fromMonth = months[fromDate.getMonth()];
+  const fromDay = fromDate.getDate();
+
+  if (!to) return `${fromMonth} ${fromDay}`;
+
+  const toDate = new Date(to);
+  const toMonth = months[toDate.getMonth()];
+  const toDay = toDate.getDate();
+  const toYear = toDate.getFullYear();
+
+  // If same month, still show: "Jan 9 - Jan 13 2026"
+  if (fromMonth === toMonth && fromDate.getFullYear() === toYear) {
+    return `${fromMonth} ${fromDay} - ${toMonth} ${toDay} ${toYear}`;
+  }
+
+  // Different months: "Dec 31 - Jan 2 2027"
+  return `${fromMonth} ${fromDay} - ${toMonth} ${toDay} ${toYear}`;
+}
 
 function getCabinImages(obj) {
   if (!obj || typeof obj === "string") return [];
@@ -1791,6 +2342,10 @@ const formShipIds = ref([]);
 const savedShipPairs = ref([]);
 const formDateFrom = ref("");
 const formDateTo = ref("");
+const formTripDurations = ref([]); // Empty array = Any duration
+
+// Trip duration options - only for display filtering, does NOT affect cabin detail integration
+const MAX_TRIP_DURATION = 14;
 
 // Multi-cabin guest management
 const MAX_CABINS = 4;
@@ -1802,21 +2357,45 @@ const guestsTotal = computed(() =>
 );
 const canAddCabin = computed(() => cabins.value.length < MAX_CABINS);
 
+// Trip duration computed - only for display filtering, NOT for cabin detail integration
+const maxAllowedDuration = computed(() => {
+  if (!formDateFrom.value || !formDateTo.value) {
+    return MAX_TRIP_DURATION;
+  }
+  const fromDate = new Date(formDateFrom.value + "T00:00:00");
+  const toDate = new Date(formDateTo.value + "T00:00:00");
+  const diffTime = toDate.getTime() - fromDate.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+  return Math.min(diffDays, MAX_TRIP_DURATION);
+});
+
+const availableDurations = computed(() => {
+  const max = maxAllowedDuration.value;
+  const durations = [];
+  for (let i = 1; i <= max; i++) {
+    durations.push(i);
+  }
+  return durations;
+});
+
 const detailCabinMap = ref(new Map());
 
 const openRegions = ref(false);
 const openShips = ref(false);
 const openGuests = ref(false);
 const openDates = ref(false);
+const openDuration = ref(false);
 const hoverShips = ref(false);
 const hoverRegions = ref(false);
 const hoverGuests = ref(false);
 const hoverDates = ref(false);
+const hoverDuration = ref(false);
 
 const destDropdown = ref(null);
 const shipsDropdown = ref(null);
 const guestsDropdown = ref(null);
 const datesDropdown = ref(null);
+const durationDropdown = ref(null);
 const sortDropdownRef = ref(null);
 
 const currentMonth = ref(new Date().getMonth());
@@ -1827,21 +2406,45 @@ function closeAllDropdowns() {
   openShips.value = false;
   openGuests.value = false;
   openDates.value = false;
+  openDuration.value = false;
 }
 
 function toggleDropdown(which) {
   if (which === "regions") {
     openRegions.value = !openRegions.value;
-    openShips.value = openGuests.value = openDates.value = false;
+    openShips.value =
+      openGuests.value =
+      openDates.value =
+      openDuration.value =
+        false;
   } else if (which === "ships") {
     openShips.value = !openShips.value;
-    openRegions.value = openGuests.value = openDates.value = false;
+    openRegions.value =
+      openGuests.value =
+      openDates.value =
+      openDuration.value =
+        false;
   } else if (which === "guests") {
     openGuests.value = !openGuests.value;
-    openRegions.value = openShips.value = openDates.value = false;
+    openRegions.value =
+      openShips.value =
+      openDates.value =
+      openDuration.value =
+        false;
   } else if (which === "dates") {
     openDates.value = !openDates.value;
-    openRegions.value = openShips.value = openGuests.value = false;
+    openRegions.value =
+      openShips.value =
+      openGuests.value =
+      openDuration.value =
+        false;
+  } else if (which === "duration") {
+    openDuration.value = !openDuration.value;
+    openRegions.value =
+      openShips.value =
+      openGuests.value =
+      openDates.value =
+        false;
   }
 }
 
@@ -2578,9 +3181,38 @@ const displayItems = computed(() => {
   });
 });
 
-// Sorted display items based on sortBy selection
+// Sorted display items based on sortBy selection and trip duration filter
+// NOTE: This filtering only affects DISPLAY, NOT cabin detail integration
 const sortedDisplayItems = computed(() => {
-  const items = [...displayItems.value];
+  let items = [...displayItems.value];
+
+  // Filter by trip duration if selected (formTripDurations array is not empty)
+  // This only filters what is displayed, not the underlying cabin data
+  if (formTripDurations.value.length > 0) {
+    items = items
+      .map((item) => {
+        // Filter trips within this cabin to only those matching the duration(s)
+        const filteredTrips = (item.trips || []).filter((trip) => {
+          const tripDays = Number(trip.tripDays) || 0;
+          return formTripDurations.value.includes(tripDays);
+        });
+
+        // If no matching trips, exclude this cabin from display
+        if (filteredTrips.length === 0) {
+          return null;
+        }
+
+        // Return cabin with filtered trips for display
+        return {
+          ...item,
+          trips: filteredTrips,
+          tripsCount: filteredTrips.length,
+        };
+      })
+      .filter((item) => item !== null);
+  }
+
+  // Apply sorting
   if (sortBy.value === "price_low") {
     items.sort((a, b) => {
       const priceA = parsePriceToNumber(a.prices?.[0]?.value || "0");
@@ -2647,6 +3279,24 @@ function prevPage() {
 // Reset page when sortBy changes
 watch(sortBy, () => {
   currentPage.value = 1;
+});
+
+// Reset page when trip duration filter changes
+watch(
+  formTripDurations,
+  () => {
+    currentPage.value = 1;
+  },
+  { deep: true }
+);
+
+// Auto-reset trip duration if exceeds max allowed (only affects display filter)
+watch(maxAllowedDuration, (newMax) => {
+  // Filter out any selected durations that exceed the new max
+  const validDurations = formTripDurations.value.filter((d) => d <= newMax);
+  if (validDurations.length !== formTripDurations.value.length) {
+    formTripDurations.value = validDurations;
+  }
 });
 
 const maxGuestsForPendingItem = computed(() => {
@@ -3122,6 +3772,7 @@ function applySidebarChanges() {
       lodges: labels.slice(),
       dateFrom: formDateFrom.value,
       dateTo: formDateTo.value || formDateFrom.value,
+      tripDurations: formTripDurations.value, // Save trip durations
       // Multi-cabin data
       cabins: cabins.value.map((c) => ({
         adults: c.adults,
@@ -3155,12 +3806,27 @@ function applySidebarChanges() {
   }
 }
 
+function toggleTripDuration(duration) {
+  if (duration === 0) {
+    // If selecting "Any", clear specific selections
+    formTripDurations.value = [];
+  } else {
+    const index = formTripDurations.value.indexOf(duration);
+    if (index === -1) {
+      formTripDurations.value.push(duration);
+    } else {
+      formTripDurations.value.splice(index, 1);
+    }
+  }
+}
+
 function isClickInsideAny(target) {
   const els = [
     destDropdown.value,
     shipsDropdown.value,
     guestsDropdown.value,
     datesDropdown.value,
+    durationDropdown.value,
   ];
   return els.some((el) => el && (el === target || el.contains(target)));
 }
@@ -3196,6 +3862,17 @@ onMounted(async () => {
       }));
       formDateFrom.value = sc.dateFrom || "";
       formDateTo.value = sc.dateTo || "";
+
+      // Load trip duration filter (multi-select support with backward compatibility)
+      if (Array.isArray(sc.tripDurations)) {
+        formTripDurations.value = sc.tripDurations;
+      } else if (sc.tripDuration) {
+        // Legacy support
+        formTripDurations.value =
+          Number(sc.tripDuration) > 0 ? [Number(sc.tripDuration)] : [];
+      } else {
+        formTripDurations.value = [];
+      }
 
       // Load cabins from localStorage if available
       if (Array.isArray(sc.cabins) && sc.cabins.length > 0) {

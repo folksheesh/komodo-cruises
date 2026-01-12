@@ -223,6 +223,7 @@ onUnmounted(() => {
   font-size: clamp(2rem, 4vw, 3.5rem);
   color: #fff;
   outline: none;
+  font-weight: 200;
 }
 
 .search-input::placeholder {

@@ -232,6 +232,53 @@
                     <span class="date-value">{{ dateTo || "End date" }}</span>
                   </div>
 
+                  <!-- Trip Duration Selector -->
+                  <p class="results-note">Trip Duration:</p>
+                  <div
+                    class="date-range-display trip-duration-selector"
+                    @click.stop="showDurationDropdown = !showDurationDropdown"
+                  >
+                    <span class="date-value">
+                      {{
+                        selectedTripDuration === 0
+                          ? "Any duration"
+                          : `${selectedTripDuration} ${
+                              selectedTripDuration === 1 ? "day" : "days"
+                            }`
+                      }}
+                    </span>
+                    <span class="caret">▼</span>
+
+                    <!-- Dropdown Menu -->
+                    <div
+                      v-if="showDurationDropdown"
+                      class="custom-dropdown-menu"
+                    >
+                      <div
+                        class="dropdown-item"
+                        :class="{ active: selectedTripDuration === 0 }"
+                        @click.stop="
+                          selectedTripDuration = 0;
+                          showDurationDropdown = false;
+                        "
+                      >
+                        Any duration
+                      </div>
+                      <div
+                        v-for="d in availableDurations"
+                        :key="d"
+                        class="dropdown-item"
+                        :class="{ active: selectedTripDuration === d }"
+                        @click.stop="
+                          selectedTripDuration = d;
+                          showDurationDropdown = false;
+                        "
+                      >
+                        {{ d }} {{ d === 1 ? "day" : "days" }}
+                      </div>
+                    </div>
+                  </div>
+
                   <div class="custom-calendar">
                     <div class="calendar-header">
                       <h4 class="calendar-title">{{ currentMonthYear }}</h4>
@@ -559,6 +606,11 @@ const selectedShipIds = ref([]);
 const dateFrom = ref("");
 const dateTo = ref(""); // Keep for compatibility but not used in UI
 
+// Trip duration
+const MAX_TRIP_DURATION = 14; // Maximum days for a trip
+const selectedTripDuration = ref(0);
+const showDurationDropdown = ref(false);
+
 // Cabin-based guest management
 const MAX_CABINS = 4;
 const MAX_GUESTS_PER_CABIN = 4;
@@ -576,6 +628,11 @@ const canAddCabin = computed(() => cabins.value.length < MAX_CABINS);
 const toastVisible = ref(false);
 const toastMessage = ref("");
 let toastTimeout = null;
+
+// Close dropdown on click outside
+const closeDropdown = () => {
+  showDurationDropdown.value = false;
+};
 
 // Calendar state
 const currentMonth = ref(new Date().getMonth());
@@ -672,6 +729,31 @@ const calendarDays = computed(() => {
   return days;
 });
 
+/** Trip duration - dibatasi oleh rentang tanggal yang dipilih */
+const maxAllowedDuration = computed(() => {
+  // Jika belum ada dateTo, gunakan MAX_TRIP_DURATION
+  if (!dateFrom.value || !dateTo.value) {
+    return MAX_TRIP_DURATION;
+  }
+
+  const fromDate = parseDateString(dateFrom.value);
+  const toDate = parseDateString(dateTo.value);
+  const diffTime = toDate.getTime() - fromDate.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // +1 karena inklusif
+
+  // Batasi maksimal sesuai rentang tanggal, tapi tidak lebih dari MAX_TRIP_DURATION
+  return Math.min(diffDays, MAX_TRIP_DURATION);
+});
+
+const availableDurations = computed(() => {
+  const max = maxAllowedDuration.value;
+  const durations = [];
+  for (let i = 1; i <= max; i++) {
+    durations.push(i);
+  }
+  return durations;
+});
+
 /** Guards untuk step navigation */
 const canGoStep2 = computed(() => selectedDestinations.value.length > 0);
 const canGoStep3 = computed(
@@ -689,6 +771,13 @@ const canGoStep4 = computed(
 watch(selectedDestinations, () => {
   // reset ship saat ganti destinasi
   selectedShipIds.value = [];
+});
+
+// Auto-reset trip duration jika melebihi max yang diizinkan
+watch(maxAllowedDuration, (newMax) => {
+  if (selectedTripDuration.value > newMax) {
+    selectedTripDuration.value = newMax;
+  }
 });
 
 // Watch modal open/close untuk handle body scrollbar
@@ -713,11 +802,13 @@ watch(
 
 onMounted(() => {
   loadShips();
+  document.addEventListener("click", closeDropdown);
 });
 
 // Cleanup: pastikan scrollbar kembali saat component unmount
 onUnmounted(() => {
   restorePageScroll();
+  document.removeEventListener("click", closeDropdown);
 });
 
 /** ===== Actions ===== */
@@ -773,6 +864,7 @@ function goResults() {
     lodges: selectedLabels.slice(),
     dateFrom: dateFrom.value,
     dateTo: dateTo.value,
+    tripDuration: selectedTripDuration.value, // Lama trip yang dipilih (0 = any)
     // Multi-cabin data
     cabins: cabins.value.map((c) => ({
       adults: c.adults,
@@ -1450,5 +1542,64 @@ function selectDate(day) {
 .modal-body .plan-content {
   display: flex;
   flex-direction: column;
+}
+
+/* ===== TRIP DURATION DROPDOWN (CUSTOM) ===== */
+.trip-duration-selector {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Spread label and caret */
+  cursor: pointer;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  transition: all 0.2s;
+  /* Match date-range-display minimal aesthetic */
+}
+
+.trip-duration-selector:hover {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.custom-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  margin-top: 4px;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 50;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.dropdown-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  color: #374151;
+  font-size: 0.95rem;
+}
+
+.dropdown-item:hover {
+  background-color: #f3f4f6;
+}
+
+.dropdown-item.active {
+  background-color: #e5e7eb;
+  font-weight: 600;
+  color: #111827;
+}
+
+.trip-duration-selector .caret {
+  font-size: 0.7rem;
+  color: #6b7280;
 }
 </style>
