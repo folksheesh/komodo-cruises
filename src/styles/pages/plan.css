@@ -1041,6 +1041,7 @@
   font-size: 0.95rem;
   color: var(--ocean-900, #2d4059);
   font-family: var(--font-sans);
+  font-weight: 500;
 }
 
 .trip-duration-dropdown .caret-icon {
@@ -1062,14 +1063,14 @@
   border: 1px solid #e5e5e5;
   border-radius: 4px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  z-index: 100;
+  z-index: 10;
 }
 
 .trip-duration-menu .list-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 1rem !important;
   cursor: pointer;
   border-bottom: 1px solid #f0f0f0;
 }
@@ -1083,6 +1084,6 @@
 }
 
 .trip-duration-menu .list-text {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--ocean-900, #2d4059);
 }

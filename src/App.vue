@@ -116,7 +116,10 @@ onUnmounted(() => {
             color: var(--ocean-900);
           "
         >
-          <div class="brand">Plan your trip</div>
+          <div class="brand">
+            <span class="desktop-only">Plan your trip</span>
+            <span class="mobile-only">Plan trip</span>
+          </div>
         </div>
         <router-link class="link-close close-btn-style" to="/">
           <span class="btn-text">Close</span>
@@ -190,7 +193,10 @@ onUnmounted(() => {
             <template v-if="$route.path === '/results'">
               FIND RESERVATION
             </template>
-            <template v-else> PLAN YOUR TRIP </template>
+            <template v-else>
+              <span class="desktop-only">PLAN YOUR TRIP</span>
+              <span class="mobile-only">PLAN TRIP</span>
+            </template>
           </button>
           <span class="nav-text-item">LOGIN</span>
 

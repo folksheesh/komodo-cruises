@@ -274,6 +274,7 @@
                             class="check"
                             type="checkbox"
                             :checked="selectedTripDurations.length === 0"
+                            @change="toggleTripDuration(0)"
                             @click.stop
                           />
                         </div>
@@ -291,6 +292,7 @@
                             class="check"
                             type="checkbox"
                             :checked="selectedTripDurations.includes(d)"
+                            @change="toggleTripDuration(d)"
                             @click.stop
                           />
                         </div>
@@ -646,6 +648,7 @@ import {
   onUnmounted,
   defineProps,
   defineEmits,
+  nextTick,
 } from "vue";
 import { getOperators } from "../services/komodoApi";
 import {
@@ -932,9 +935,15 @@ watch(selectedDestinations, () => {
 
 // Auto-reset trip duration jika melebihi max yang diizinkan
 watch(maxAllowedDuration, (newMax) => {
-  if (selectedTripDuration.value > newMax) {
-    selectedTripDuration.value = newMax;
-  }
+  // Use nextTick to avoid interference with date selection rendering cycle
+  nextTick(() => {
+    // Filter out any selected durations that exceed the new max
+    if (selectedTripDurations.value.length > 0) {
+      selectedTripDurations.value = selectedTripDurations.value.filter(
+        (d) => d <= newMax
+      );
+    }
+  });
 });
 
 // Watch modal open/close untuk handle body scrollbar

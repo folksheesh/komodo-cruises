@@ -1056,27 +1056,13 @@
                   <!-- Any duration option -->
                   <div class="list-row" @click="toggleTripDuration(0)">
                     <div class="list-text result-list-text">Any duration</div>
-                    <div
-                      class="check radio-check"
-                      :class="{ checked: formTripDurations.length === 0 }"
-                    >
-                      <svg
-                        v-if="formTripDurations.length === 0"
-                        width="10"
-                        height="8"
-                        viewBox="0 0 10 8"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M1 4L3.5 6.5L9 1"
-                          stroke="white"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                    </div>
+                    <input
+                      class="check"
+                      type="checkbox"
+                      :checked="formTripDurations.length === 0"
+                      @change="toggleTripDuration(0)"
+                      @click.stop
+                    />
                   </div>
 
                   <!-- Specific duration options -->
@@ -1089,27 +1075,13 @@
                     <div class="list-text result-list-text">
                       {{ d }} {{ d === 1 ? "day" : "days" }}
                     </div>
-                    <div
-                      class="check radio-check"
-                      :class="{ checked: formTripDurations.includes(d) }"
-                    >
-                      <svg
-                        v-if="formTripDurations.includes(d)"
-                        width="10"
-                        height="8"
-                        viewBox="0 0 10 8"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M1 4L3.5 6.5L9 1"
-                          stroke="white"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                    </div>
+                    <input
+                      class="check"
+                      type="checkbox"
+                      :checked="formTripDurations.includes(d)"
+                      @change="toggleTripDuration(d)"
+                      @click.stop
+                    />
                   </div>
                 </div>
               </div>
@@ -2247,6 +2219,7 @@
                   class="check"
                   type="checkbox"
                   :checked="formTripDurations.length === 0"
+                  @change="toggleTripDuration(0)"
                   @click.stop
                 />
               </div>
@@ -2265,6 +2238,7 @@
                   class="check"
                   type="checkbox"
                   :checked="formTripDurations.includes(d)"
+                  @change="toggleTripDuration(d)"
                   @click.stop
                 />
               </div>

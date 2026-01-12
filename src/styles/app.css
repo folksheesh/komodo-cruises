@@ -579,8 +579,23 @@ body:has(.hero-section):not(:has(.scrolled)) .brand-chip {
     display: none !important;
   }
 
+  .mobile-only {
+    display: inline !important;
+  }
+
   .brand-chip {
     font-size: 0.9rem !important;
+  }
+}
+
+/* Desktop - hide mobile-only */
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+
+  .desktop-only {
+    display: inline !important;
   }
 }
 
