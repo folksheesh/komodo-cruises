@@ -4496,6 +4496,36 @@ div.modal-content.modal-content-redesigned {
   flex: 1;
 }
 
+/* Ship Image Column */
+.ship-img-col {
+  flex-shrink: 0;
+  width: 120px;
+  height: 80px;
+  margin-right: 1.25rem;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #f3f4f6;
+}
+
+.ship-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ship-desc-sm {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 0.25rem 0 0.5rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .ship-card-name {
   font-size: 1.1rem;
   font-weight: 600;
@@ -5169,4 +5199,144 @@ body:has(.mobile-filter-modal-overlay) {
 
 .list-row:hover .radio-check.checked {
   border-color: #2d4059;
+}
+
+/* ===== Sidebar Trip Duration Range Styles ===== */
+.sidebar-duration {
+  margin-top: 0.5rem;
+}
+
+.sidebar-duration .duration-counter-row {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.sidebar-duration .duration-counter-row:last-of-type {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.sidebar-duration .counter-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #2d4059;
+}
+
+.sidebar-duration .count-display {
+  min-width: 1.75rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d4059;
+}
+
+.sidebar-duration .btn-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 2px solid rgba(45, 64, 89, 0.4);
+  background: #fff;
+  color: #2d4059;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.sidebar-duration .btn-icon:hover:not(:disabled) {
+  border-color: #2d4059;
+  background: rgba(45, 64, 89, 0.05);
+}
+
+.sidebar-duration .btn-icon:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ===== Mobile Filter Modal Trip Duration Range Styles ===== */
+.mobile-duration {
+  margin-top: 0.5rem;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem 1rem;
+}
+
+.mobile-duration .duration-counter-row {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mobile-duration .duration-counter-row:last-of-type {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mobile-duration .counter-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #2d4059;
+}
+
+.mobile-duration .count-display {
+  min-width: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d4059;
+}
+
+.mobile-duration .btn-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 2px solid rgba(45, 64, 89, 0.4);
+  background: #fff;
+  color: #2d4059;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.mobile-duration .btn-icon:hover:not(:disabled) {
+  border-color: #2d4059;
+  background: rgba(45, 64, 89, 0.05);
+}
+
+.mobile-duration .btn-icon:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ===== Duration Reset Button Styles ===== */
+.duration-reset-row {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.btn-reset-duration {
+  width: 100%;
+  padding: 0.625rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2d4059;
+  background: #fff;
+  border: 2px solid rgba(45, 64, 89, 0.3);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.btn-reset-duration:hover:not(:disabled) {
+  background: rgba(45, 64, 89, 0.05);
+  border-color: #2d4059;
+}
+
+.btn-reset-duration:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }

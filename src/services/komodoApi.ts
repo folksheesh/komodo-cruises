@@ -21,6 +21,16 @@ export type AvailabilityResponse = { ok: true; date: string; total: number; oper
 export type OperatorItem = { operator: string; sourceSheet: string };
 export type OperatorsResponse = { ok: true; resource: 'operators'; total: number; operators: OperatorItem[] };
 
+export type ShipDetail = {
+  id: string; // From ID column
+  name: string; // From NAME BOAT
+  description: string; // From DESCRIPTION
+  mainImage: string; // From MAIN DISPLAY
+  images: string[]; // From PICTURE_1, PICTURE_2, etc. (normalized)
+  specs: Record<string, string>; // Dynamic columns like WIFI, STARLINK, etc.
+};
+export type ShipDetailsResponse = { ok: true; resource: 'shipdetail'; ships: ShipDetail[] };
+
 // Utility functions
 function buildUrl(params: Record<string, string | undefined>): string {
   const url = new URL(BASE_URL);
@@ -57,6 +67,7 @@ const availabilityCache = new Map<string, AvailabilityResponse>();
 const availabilityInflight = new Map<string, Promise<AvailabilityResponse>>();
 // In-memory cache for operators
 let operatorsCache: OperatorsResponse | null = null;
+const shipDetailsCache = new Map<string, ShipDetailsResponse>();
 
 // API functions
 export async function getOperators(): Promise<OperatorsResponse> {
@@ -76,12 +87,132 @@ export async function getCabins(sheet?: string): Promise<CabinsResponse> {
     return cabinsCache.get(cacheKey)!;
   }
   
-  const url = buildUrl({ resource: 'cabins' });
+  const url = buildUrl({ resource: 'cabins', sheet });
   const response = await fetch(url);
   const data = await handleResponse<CabinsResponse>(response);
   
   cabinsCache.set(cacheKey, data);
   return data;
+}
+
+// Helper to get direct GDrive link
+function getDirectGDriveLink(url: string): string {
+  if (!url) return '';
+  // Try to extract ID
+  const idMatch = url.match(/[-\w]{25,}/);
+  if (idMatch) {
+      return `https://lh3.googleusercontent.com/d/${idMatch[0]}`;
+  }
+  return url;
+}
+
+
+
+export async function getShipDetails(sheet: string = "Ship Detail"): Promise<ShipDetailsResponse> {
+  // Check memory cache first
+  const cacheKey = `shipdetail|${sheet}`;
+  if (shipDetailsCache.has(cacheKey)) {
+    return shipDetailsCache.get(cacheKey)!;
+  }
+
+  // Check localStorage cache (persistent across refreshes)
+  const CACHE_duration = 60 * 60 * 1000; // 1 hour
+  const stored = localStorage.getItem(cacheKey);
+  if (stored) {
+    try {
+      const { timestamp, data } = JSON.parse(stored);
+      if (Date.now() - timestamp < CACHE_duration) {
+        shipDetailsCache.set(cacheKey, data); // Hydrate memory cache
+        return data;
+      }
+    } catch (e) {
+      localStorage.removeItem(cacheKey);
+    }
+  }
+
+  // Use 'cabins' resource as a generic sheet reader
+  const url = buildUrl({ resource: 'cabins', sheet });
+  const response = await fetch(url);
+  
+  // We expect a CabinsResponse structure but we'll map it to ShipDetails
+  const data = await handleResponse<CabinsResponse>(response);
+
+  const ships: ShipDetail[] = [];
+  
+  if (data.operators) {
+      const safeGetValue = (row: any, key: string): string => {
+          // Try exact match
+          if (row[key]) return row[key];
+          // Try lowercase/formatted match
+          const normalizedKey = key.toLowerCase().replace(/\s+/g, '');
+          const foundKey = Object.keys(row).find(k => k.toLowerCase().replace(/\s+/g, '') === normalizedKey);
+          return foundKey ? row[foundKey] : '';
+      };
+
+      data.operators.forEach(op => {
+          op.cabins.forEach(row => {
+               if (typeof row === 'object') {
+                   // Map row columns to ShipDetail using robust lookup
+                   const name = safeGetValue(row, 'NAME BOAT') || row.name || '';
+                   if (!name) return; // Skip invalid rows
+
+                   const id = safeGetValue(row, 'ID') || name.replace(/\s+/g, '_').toUpperCase();
+                   
+                   // Collect images
+                   const images: string[] = [];
+                   // Check for PICTURE_1 to PICTURE_20
+                   for (let i = 1; i <= 20; i++) {
+                       const val = safeGetValue(row, `PICTURE_${i}`);
+                       if (val) images.push(getDirectGDriveLink(val));
+                   }
+
+                   // Map specs (dynamic)
+                   const specs: Record<string, string> = {};
+                   const knownKeys = ['ID', 'NAME BOAT', 'DESCRIPTION', 'MAIN DISPLAY'];
+                   // We want to avoid polluting specs with normalized keys if possible, 
+                   // but for now let's just grab what isn't a known structural key.
+                   // Actually, safer to just iterate keys present in row.
+                   Object.keys(row).forEach(k => {
+                        const val = row[k];
+                        // normalization check
+                        const normK = k.toUpperCase();
+                        if (!knownKeys.includes(normK) && !normK.startsWith('PICTURE')) {
+                            specs[k] = val;
+                        }
+                   });
+
+                   const mainDisplayVal = safeGetValue(row, 'MAIN DISPLAY');
+                   const mainImage = mainDisplayVal ? getDirectGDriveLink(mainDisplayVal) : (images.length ? images[0] : '');
+
+                   ships.push({
+                       id,
+                       name,
+                       description: safeGetValue(row, 'DESCRIPTION'),
+                       mainImage,
+                       images,
+                       specs
+                   });
+               }
+          });
+      });
+  }
+
+  const result: ShipDetailsResponse = { ok: true, resource: 'shipdetail', ships };
+  
+  // Save to memory cache
+  shipDetailsCache.set(cacheKey, result);
+  
+  // Save to localStorage cache
+  try {
+    localStorage.setItem(cacheKey, JSON.stringify({
+      timestamp: Date.now(),
+      data: result
+    }));
+  } catch (e) {
+    console.warn("Quota exceeded or storage disabled", e); 
+  }
+  
+  return result;
 }
 
 export async function getAvailability(date: string, sheet?: string): Promise<AvailabilityResponse> {

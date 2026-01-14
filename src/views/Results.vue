@@ -226,8 +226,20 @@
                   class="ship-selection-card"
                   @click="selectShipForView(ship.name)"
                 >
+                  <div class="ship-img-col">
+                    <img
+                      :src="ship.image || '/src/images/placeholder-ship.jpg'"
+                      :alt="ship.name"
+                      class="ship-thumbnail"
+                      referrerpolicy="no-referrer"
+                      @error="$event.target.src = '/src/images/cabin.jpg'"
+                    />
+                  </div>
                   <div class="ship-card-content">
                     <h4 class="ship-card-name">{{ ship.name }}</h4>
+                    <p class="ship-desc-sm" v-if="ship.description">
+                      {{ ship.description }}
+                    </p>
                     <div class="ship-card-info" v-if="ship.hasAvailability">
                       <span
                         >{{ ship.cabinsCount }} cabin{{
@@ -1040,70 +1052,102 @@
                 </div>
               </div>
 
-              <!-- Trip Duration Filter -->
-              <!-- Trip Duration Filter -->
-              <div class="list dropdown" ref="durationDropdown">
-                <div class="list-heading">Trip Duration</div>
+              <!-- Trip Duration Range Filter -->
+              <div
+                class="list dropdown"
+                :class="{ active: openDuration }"
+                @mouseenter="hoverDuration = true"
+                @mouseleave="hoverDuration = false"
+                ref="durationDropdown"
+              >
+                <div class="list-heading" @click="toggleDropdown('duration')">
+                  Trip Duration
+                </div>
                 <button
                   type="button"
-                  :class="[
-                    'select-summary',
-                    openDuration || hoverDuration ? 'is-filled' : '',
-                  ]"
-                  @mouseenter="hoverDuration = true"
-                  @mouseleave="hoverDuration = false"
-                  @click.stop="toggleDropdown('duration')"
-                  :aria-expanded="openDuration ? 'true' : 'false'"
+                  class="select-summary"
+                  :class="{ 'is-filled': openDuration || hoverDuration }"
+                  @click="toggleDropdown('duration')"
                 >
-                  <span>{{
-                    formTripDurations.length === 0
-                      ? "Any duration"
-                      : formTripDurations.length === 1
-                      ? `${formTripDurations[0]} ${
-                          formTripDurations[0] === 1 ? "day" : "days"
-                        }`
-                      : `${formTripDurations.length} selected`
-                  }}</span>
+                  <span>{{ displayTripDuration }}</span>
                   <span class="caret">
                     <img
                       :src="openDuration ? upArrowIcon : downArrowIcon"
-                      alt=""
-                      aria-hidden="true"
                       class="caret-icon"
                     />
                   </span>
                 </button>
 
-                <div v-if="openDuration" class="dropdown-panel" @click.stop>
-                  <!-- Any duration option -->
-                  <div class="list-row" @click="toggleTripDuration(0)">
-                    <div class="list-text result-list-text">Any duration</div>
-                    <input
-                      class="check"
-                      type="checkbox"
-                      :checked="formTripDurations.length === 0"
-                      @change="toggleTripDuration(0)"
-                      @click.stop
-                    />
-                  </div>
-
-                  <!-- Specific duration options -->
-                  <div
-                    v-for="d in availableDurations"
-                    :key="d"
-                    class="list-row"
-                    @click="toggleTripDuration(d)"
-                  >
-                    <div class="list-text result-list-text">
-                      {{ d }} {{ d === 1 ? "day" : "days" }}
+                <div v-if="openDuration" class="custom-dropdown-menu">
+                  <div class="trip-duration-range-content sidebar-duration">
+                    <!-- Min Duration -->
+                    <div class="counter-row duration-counter-row">
+                      <div class="counter-text">
+                        <div class="counter-title">Min</div>
+                      </div>
+                      <div class="counter-ctrls">
+                        <button
+                          type="button"
+                          class="btn-icon"
+                          :disabled="formMinTripDuration <= 1"
+                          @click.stop="decrementFormMinDuration"
+                        >
+                          −
+                        </button>
+                        <span class="count-display">{{
+                          formMinTripDuration
+                        }}</span>
+                        <button
+                          type="button"
+                          class="btn-icon"
+                          :disabled="formMinTripDuration >= formMaxTripDuration"
+                          @click.stop="incrementFormMinDuration"
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
-                    <input
-                      class="check"
-                      type="checkbox"
-                      :checked="formTripDurations.includes(d)"
-                      @change="toggleTripDuration(d)"
-                      @click.stop
-                    />
+                    <!-- Max Duration -->
+                    <div class="counter-row duration-counter-row">
+                      <div class="counter-text">
+                        <div class="counter-title">Max</div>
+                      </div>
+                      <div class="counter-ctrls">
+                        <button
+                          type="button"
+                          class="btn-icon"
+                          :disabled="formMaxTripDuration <= formMinTripDuration"
+                          @click.stop="decrementFormMaxDuration"
+                        >
+                          −
+                        </button>
+                        <span class="count-display">{{
+                          formMaxTripDuration
+                        }}</span>
+                        <button
+                          type="button"
+                          class="btn-icon"
+                          :disabled="formMaxTripDuration >= MAX_TRIP_DURATION"
+                          @click.stop="incrementFormMaxDuration"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <!-- Reset Button -->
+                    <div class="duration-reset-row">
+                      <button
+                        type="button"
+                        class="btn-reset-duration"
+                        @click.stop="resetTripDuration"
+                        :disabled="
+                          formMinTripDuration === 1 &&
+                          formMaxTripDuration === MAX_TRIP_DURATION
+                        "
+                      >
+                        Reset to Any Duration
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2210,59 +2254,73 @@
             </div>
           </div>
 
-          <!-- Trip Duration -->
+          <!-- Trip Duration Range -->
           <div class="modal-field-group">
             <div class="modal-field-label">Trip Duration</div>
-            <button
-              type="button"
-              class="modal-field-btn"
-              @click="mobileOpenDuration = !mobileOpenDuration"
-            >
-              <span>{{
-                formTripDurations.length === 0
-                  ? "Any duration"
-                  : formTripDurations.length === 1
-                  ? `${formTripDurations[0]} ${
-                      formTripDurations[0] === 1 ? "day" : "days"
-                    }`
-                  : `${formTripDurations.length} selected`
-              }}</span>
-              <img
-                :src="mobileOpenDuration ? upArrowIcon : downArrowIcon"
-                alt=""
-                class="caret-icon"
-              />
-            </button>
-            <div v-if="mobileOpenDuration" class="modal-field-dropdown">
-              <!-- Any duration option -->
-              <div class="list-row" @click="toggleTripDuration(0)">
-                <div class="list-text result-list-text">Any duration</div>
-                <input
-                  class="check"
-                  type="checkbox"
-                  :checked="formTripDurations.length === 0"
-                  @change="toggleTripDuration(0)"
-                  @click.stop
-                />
-              </div>
-
-              <!-- Specific duration options -->
-              <div
-                v-for="d in availableDurations"
-                :key="d"
-                class="list-row"
-                @click="toggleTripDuration(d)"
-              >
-                <div class="list-text result-list-text">
-                  {{ d }} {{ d === 1 ? "day" : "days" }}
+            <div class="trip-duration-range-content mobile-duration">
+              <!-- Min Duration -->
+              <div class="counter-row duration-counter-row">
+                <div class="counter-text">
+                  <div class="counter-title">Min</div>
                 </div>
-                <input
-                  class="check"
-                  type="checkbox"
-                  :checked="formTripDurations.includes(d)"
-                  @change="toggleTripDuration(d)"
-                  @click.stop
-                />
+                <div class="counter-ctrls">
+                  <button
+                    type="button"
+                    class="btn-icon"
+                    :disabled="formMinTripDuration <= 1"
+                    @click="decrementFormMinDuration"
+                  >
+                    −
+                  </button>
+                  <span class="count-display">{{ formMinTripDuration }}</span>
+                  <button
+                    type="button"
+                    class="btn-icon"
+                    :disabled="formMinTripDuration >= formMaxTripDuration"
+                    @click="incrementFormMinDuration"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <!-- Max Duration -->
+              <div class="counter-row duration-counter-row">
+                <div class="counter-text">
+                  <div class="counter-title">Max</div>
+                </div>
+                <div class="counter-ctrls">
+                  <button
+                    type="button"
+                    class="btn-icon"
+                    :disabled="formMaxTripDuration <= formMinTripDuration"
+                    @click="decrementFormMaxDuration"
+                  >
+                    −
+                  </button>
+                  <span class="count-display">{{ formMaxTripDuration }}</span>
+                  <button
+                    type="button"
+                    class="btn-icon"
+                    :disabled="formMaxTripDuration >= MAX_TRIP_DURATION"
+                    @click="incrementFormMaxDuration"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <!-- Reset Button -->
+              <div class="duration-reset-row">
+                <button
+                  type="button"
+                  class="btn-reset-duration"
+                  @click="resetTripDuration"
+                  :disabled="
+                    formMinTripDuration === 1 &&
+                    formMaxTripDuration === MAX_TRIP_DURATION
+                  "
+                >
+                  Reset to Any Duration
+                </button>
               </div>
             </div>
           </div>
@@ -2527,6 +2585,7 @@ import {
   getAvailability,
   getCabins,
   getOperators,
+  getShipDetails,
 } from "../services/komodoApi";
 import {
   createXenditInvoice,
@@ -2548,6 +2607,7 @@ const searchCriteria = ref(null);
 const shipAvailability = ref({});
 const availabilityData = ref([]);
 const globalStartAvailability = ref(null);
+const shipDetailsMap = ref(new Map()); // Store detailed ship info (images, etc.)
 
 const itineraryItems = ref([]);
 const pendingItineraryItem = ref(null);
@@ -2575,6 +2635,75 @@ const SORT_OPTIONS = [
 
 const REGION_NAME = "Nusa Tenggara Timur";
 const DESTINATIONS = ["Komodo National Park", "Labuan Bajo"];
+// Static ship images configuration (from Ship Detail sheet)
+// Maps operator/ship name to their main display image URL
+// Format: Google Drive URLs converted to lh3.googleusercontent.com for direct display
+
+// Helper to convert Google Drive share URL to direct image URL
+function convertGDriveUrl(url) {
+  if (!url) return "";
+  // Extract file ID from various Google Drive URL formats
+  const match = url.match(/[-\w]{25,}/);
+  if (match) {
+    return `https://lh3.googleusercontent.com/d/${match[0]}`;
+  }
+  return url;
+}
+
+// Ship images from "Ship Detail" sheet - synced with operators list
+const SHIP_IMAGES = {
+  // Active operators (from ?resource=operators)
+  "SEMESTA VOYAGES": convertGDriveUrl(
+    "https://drive.google.com/file/d/1semesta_placeholder"
+  ),
+  "AKASSA CRUISE": convertGDriveUrl(
+    "https://drive.google.com/file/d/1akassa_placeholder"
+  ),
+  "DERYA LIVEABOARD": convertGDriveUrl(
+    "https://drive.google.com/file/d/1derya_placeholder"
+  ),
+  "GIONA LIVEABOARD": convertGDriveUrl(
+    "https://drive.google.com/file/d/1giona_placeholder"
+  ),
+
+  // Additional ships from Ship Detail sheet (for future use)
+  "DURYA LIVEABOARD": convertGDriveUrl(""),
+  "BARAKATI LIVEABOARD": convertGDriveUrl(""),
+  "ELBARIK CRUISE": convertGDriveUrl(""),
+  "ANGELICA LIVEBOARD": convertGDriveUrl(""),
+  "NAVILA LIVEBOARD": convertGDriveUrl(""),
+  KAMBIOLA: convertGDriveUrl(""),
+  "LAMBORAJO 2": convertGDriveUrl(""),
+  YUMANA: convertGDriveUrl(""),
+  SBVANREL: convertGDriveUrl(""),
+  "RAFFLES CRUISE": convertGDriveUrl(""),
+  "VINCA VOYAGE": convertGDriveUrl(""),
+  "AMORE BOAT": convertGDriveUrl(""),
+  "KUMAMBA 02": convertGDriveUrl(""),
+  "MAREE GALLERY": convertGDriveUrl(""),
+  "SORA GALLERY": convertGDriveUrl(""),
+  TARA: convertGDriveUrl(""),
+};
+
+// Fallback function to get ship image - tries multiple matching strategies
+function getShipImage(shipName) {
+  if (!shipName) return "";
+  const normalized = shipName.toUpperCase().trim();
+
+  // Check direct match
+  if (SHIP_IMAGES[normalized]) return SHIP_IMAGES[normalized];
+
+  // Check partial match (handles variations like "DERYA" vs "DURYA")
+  for (const [key, url] of Object.entries(SHIP_IMAGES)) {
+    const normKey = key.toUpperCase().trim();
+    if (normKey.includes(normalized) || normalized.includes(normKey)) {
+      return url;
+    }
+  }
+
+  return "";
+}
+
 const SHIPS_CONFIG = [];
 const shipsList = ref([]);
 const shipsLoading = ref(false);
@@ -2583,10 +2712,11 @@ const formShipIds = ref([]);
 const savedShipPairs = ref([]);
 const formDateFrom = ref("");
 const formDateTo = ref("");
-const formTripDurations = ref([]); // Empty array = Any duration
+const formMinTripDuration = ref(1); // Min trip duration
+const formMaxTripDuration = ref(30); // Max trip duration
 
 // Trip duration options - only for display filtering, does NOT affect cabin detail integration
-const MAX_TRIP_DURATION = 14;
+const MAX_TRIP_DURATION = 30;
 
 // Multi-cabin guest management
 const MAX_CABINS = 4;
@@ -2594,6 +2724,7 @@ const MAX_GUESTS_PER_CABIN = 4;
 const cabins = ref([{ id: 1, adults: 2, children: 0, expanded: true }]);
 
 const formIsFlexible = ref(true);
+const flexibleAlt = ref(false); // Used in template for no-result state
 const formFlexibleGuests = ref(2);
 
 const guestsTotal = computed(() =>
@@ -2622,6 +2753,18 @@ const availableDurations = computed(() => {
     durations.push(i);
   }
   return durations;
+});
+
+const displayTripDuration = computed(() => {
+  const min = formMinTripDuration.value;
+  const max = formMaxTripDuration.value;
+  if (min === 1 && max === MAX_TRIP_DURATION) {
+    return "Any duration";
+  }
+  if (min === max) {
+    return `${min} ${min === 1 ? "day" : "days"}`;
+  }
+  return `${min} - ${max} days`;
 });
 
 const detailCabinMap = ref(new Map());
@@ -2758,6 +2901,36 @@ function decCabinGuest(index, type) {
   const cabin = cabins.value[index];
   if (type === "adults" && cabin.adults > 1) cabin.adults--;
   if (type === "children" && cabin.children > 0) cabin.children--;
+}
+
+// Trip Duration increment/decrement functions
+function decrementFormMinDuration() {
+  if (formMinTripDuration.value > 1) {
+    formMinTripDuration.value--;
+  }
+}
+
+function incrementFormMinDuration() {
+  if (formMinTripDuration.value < formMaxTripDuration.value) {
+    formMinTripDuration.value++;
+  }
+}
+
+function decrementFormMaxDuration() {
+  if (formMaxTripDuration.value > formMinTripDuration.value) {
+    formMaxTripDuration.value--;
+  }
+}
+
+function incrementFormMaxDuration() {
+  if (formMaxTripDuration.value < MAX_TRIP_DURATION) {
+    formMaxTripDuration.value++;
+  }
+}
+
+function resetTripDuration() {
+  formMinTripDuration.value = 1;
+  formMaxTripDuration.value = MAX_TRIP_DURATION;
 }
 
 const minDate = computed(() => getTodayString());
@@ -3123,7 +3296,8 @@ const needsShipSelection = computed(() => {
 const availableShipsForSelection = computed(() => {
   const sc = searchCriteria.value;
   const g = globalStartAvailability.value;
-  const durations = formTripDurations.value || [];
+  const minDur = formMinTripDuration.value;
+  const maxDur = formMaxTripDuration.value;
   const detailMap = detailCabinMap.value || new Map();
 
   if (!sc || !g || !Array.isArray(g.operators)) return [];
@@ -3148,7 +3322,8 @@ const availableShipsForSelection = computed(() => {
         const available = getCabinAvailable(cb);
         if (available != null && available <= 0) return false;
 
-        if (durations.length > 0) {
+        // Only filter by duration if not using default full range
+        if (minDur > 1 || maxDur < MAX_TRIP_DURATION) {
           let d = 0;
           // Strategy 1: Direct properties
           if (cb.trip_days) d = parseInt(cb.trip_days, 10);
@@ -3195,13 +3370,37 @@ const availableShipsForSelection = computed(() => {
             }
           }
 
-          // Strict filter: Must have known duration AND match
-          if (!d || !durations.includes(d)) return false;
+          // Only filter if duration is KNOWN and outside range
+          // If duration is unknown (d=0), include the cabin anyway
+          if (d > 0 && (d < minDur || d > maxDur)) return false;
         }
         return true;
       });
 
       const totalCabins = validCabins.length;
+
+      // Lookup ship details (image, desc) from shipDetailsMap
+      let shipDetail = null;
+      const normShipName = shipName.toLowerCase().replace(/\s+/g, "").trim();
+      const shipMap = shipDetailsMap.value || new Map();
+
+      // Try direct lookup first (most efficient)
+      shipDetail = shipMap.get(normShipName) || shipMap.get(shipName);
+
+      // Fallback to iteration if not found
+      if (!shipDetail) {
+        for (const [key, detail] of shipMap.entries()) {
+          const normKey = String(key).toLowerCase().replace(/\s+/g, "").trim();
+          if (
+            normKey === normShipName ||
+            normKey.includes(normShipName) ||
+            normShipName.includes(normKey)
+          ) {
+            shipDetail = detail;
+            break;
+          }
+        }
+      }
 
       if (totalCabins > 0) {
         const totalCapacity = validCabins.reduce((sum, cab) => {
@@ -3215,6 +3414,8 @@ const availableShipsForSelection = computed(() => {
           cabinsCount: totalCabins,
           totalCapacity: totalCapacity,
           hasAvailability: true,
+          image: shipDetail?.mainImage || getShipImage(shipName) || "",
+          description: shipDetail?.description || "",
         });
       } else {
         result.push({
@@ -3223,15 +3424,41 @@ const availableShipsForSelection = computed(() => {
           cabinsCount: 0,
           totalCapacity: 0,
           hasAvailability: false,
+          image: shipDetail?.mainImage || getShipImage(shipName) || "",
+          description: shipDetail?.description || "",
         });
       }
     } else {
+      // Lookup ship details even if no operator match
+      let shipDetail = null;
+      const normShipName = shipName.toLowerCase().replace(/\s+/g, "").trim();
+      const shipMap = shipDetailsMap.value || new Map();
+
+      // Try direct lookup first
+      shipDetail = shipMap.get(normShipName) || shipMap.get(shipName);
+
+      // Fallback to iteration
+      if (!shipDetail) {
+        for (const [key, detail] of shipMap.entries()) {
+          const normKey = String(key).toLowerCase().replace(/\s+/g, "").trim();
+          if (
+            normKey === normShipName ||
+            normKey.includes(normShipName) ||
+            normShipName.includes(normKey)
+          ) {
+            shipDetail = detail;
+            break;
+          }
+        }
+      }
       result.push({
         name: shipName,
         operator: shipName,
         cabinsCount: 0,
         totalCapacity: 0,
         hasAvailability: false,
+        image: shipDetail?.mainImage || getShipImage(shipName) || "",
+        description: shipDetail?.description || "",
       });
     }
   }
@@ -3585,15 +3812,18 @@ const displayItems = computed(() => {
 const sortedDisplayItems = computed(() => {
   let items = [...displayItems.value];
 
-  // Filter by trip duration if selected (formTripDurations array is not empty)
+  // Filter by trip duration if selected (range is not default)
   // This only filters what is displayed, not the underlying cabin data
-  if (formTripDurations.value.length > 0) {
+  const minDur = formMinTripDuration.value;
+  const maxDur = formMaxTripDuration.value;
+
+  if (minDur > 1 || maxDur < MAX_TRIP_DURATION) {
     items = items
       .map((item) => {
         // Filter trips within this cabin to only those matching the duration(s)
         const filteredTrips = (item.trips || []).filter((trip) => {
           const tripDays = Number(trip.tripDays) || 0;
-          return formTripDurations.value.includes(tripDays);
+          return tripDays >= minDur && tripDays <= maxDur;
         });
 
         // If no matching trips, exclude this cabin from display
@@ -3681,20 +3911,19 @@ watch(sortBy, () => {
 });
 
 // Reset page when trip duration filter changes
-watch(
-  formTripDurations,
-  () => {
-    currentPage.value = 1;
-  },
-  { deep: true }
-);
+watch([formMinTripDuration, formMaxTripDuration], () => {
+  currentPage.value = 1;
+});
 
-// Auto-reset trip duration if exceeds max allowed (only affects display filter)
+// Auto-clamp trip duration if exceeds max allowed
 watch(maxAllowedDuration, (newMax) => {
-  // Filter out any selected durations that exceed the new max
-  const validDurations = formTripDurations.value.filter((d) => d <= newMax);
-  if (validDurations.length !== formTripDurations.value.length) {
-    formTripDurations.value = validDurations;
+  // Clamp maxTripDuration if it exceeds newMax
+  if (formMaxTripDuration.value > newMax) {
+    formMaxTripDuration.value = newMax;
+  }
+  // Clamp minTripDuration if it exceeds maxTripDuration
+  if (formMinTripDuration.value > formMaxTripDuration.value) {
+    formMinTripDuration.value = formMaxTripDuration.value;
   }
 });
 
@@ -3988,7 +4217,31 @@ async function checkAvailability() {
       return globalCabinsPromise;
     };
 
+    // Load ship details in parallel (non-blocking)
+    getShipDetails()
+      .then((shipDetailsData) => {
+        if (shipDetailsData && shipDetailsData.ships) {
+          const newMap = new Map(shipDetailsMap.value);
+          shipDetailsData.ships.forEach((ship) => {
+            // Store by multiple keys for robust matching
+            newMap.set(ship.id, ship);
+            newMap.set(ship.name, ship);
+            // Also store by normalized name for case-insensitive matching
+            const normalizedName = ship.name
+              .toLowerCase()
+              .replace(/\s+/g, "")
+              .trim();
+            newMap.set(normalizedName, ship);
+          });
+          shipDetailsMap.value = newMap; // Trigger reactivity
+          console.log("Ship details map updated:", newMap.size, "entries");
+        }
+      })
+      .catch((err) => console.warn("Failed to load ship details:", err));
+
     const allowedBySheet = {};
+
+    // Critical availability checks only
     await Promise.all(
       sheets.map(async (sheet, i) => {
         const label = labels[i] || sheet;
@@ -4170,7 +4423,8 @@ function applySidebarChanges() {
       lodges: labels.slice(),
       dateFrom: formDateFrom.value,
       dateTo: formDateTo.value || formDateFrom.value,
-      tripDurations: formTripDurations.value, // Save trip durations
+      minTripDuration: formMinTripDuration.value, // Save min trip duration
+      maxTripDuration: formMaxTripDuration.value, // Save max trip duration
       // Multi-cabin data
       cabins: formIsFlexible.value
         ? []
@@ -4276,15 +4530,16 @@ onMounted(async () => {
       formDateFrom.value = sc.dateFrom || "";
       formDateTo.value = sc.dateTo || "";
 
-      // Load trip duration filter (multi-select support with backward compatibility)
-      if (Array.isArray(sc.tripDurations)) {
-        formTripDurations.value = sc.tripDurations;
-      } else if (sc.tripDuration) {
-        // Legacy support
-        formTripDurations.value =
-          Number(sc.tripDuration) > 0 ? [Number(sc.tripDuration)] : [];
+      // Load trip duration filter (min/max range)
+      if (sc.minTripDuration !== undefined) {
+        formMinTripDuration.value = sc.minTripDuration;
       } else {
-        formTripDurations.value = [];
+        formMinTripDuration.value = 1;
+      }
+      if (sc.maxTripDuration !== undefined) {
+        formMaxTripDuration.value = sc.maxTripDuration;
+      } else {
+        formMaxTripDuration.value = MAX_TRIP_DURATION;
       }
 
       // Load cabins from localStorage if available
@@ -4312,32 +4567,20 @@ onMounted(async () => {
         currentYear.value = d.getFullYear();
       }
     }
-    // Run API calls in parallel for faster loading
+    // Start loading detail cabins in background (non-blocking)
+    loadDetailCabins().catch((err) =>
+      console.warn("Failed to load details background:", err)
+    );
+
+    // Run critical API calls in parallel
     await Promise.all([
-      loadDetailCabins(),
+      // loadDetailCabins(), // Moved to background
       loadShipsList(),
       checkAvailability(),
     ]);
   } catch (err) {
     console.error("Failed to load search criteria:", err);
     error.value = "Failed to load search criteria";
-  }
-
-  // DEBUG: log semua key di detailCabinMap
-  setTimeout(() => {
-    console.log(
-      "DEBUG all detailCabinMap keys:",
-      Array.from(detailCabinMap.value.keys())
-    );
-  }, 2000);
-});
-// DEBUG: log key yang dicari setiap kali selectedCabin berubah
-watchEffect(() => {
-  if (selectedCabin.value) {
-    const key = `${normalizeName(
-      selectedCabin.value.shipName || selectedCabin.value.operatorLabel || ""
-    )}|${normalizeCabinName(selectedCabin.value.cabinName)}`;
-    console.log("DEBUG selectedCabin key:", key);
   }
 });
 

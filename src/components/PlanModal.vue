@@ -197,8 +197,26 @@
                       Loading ships...
                     </div>
                     <template v-else>
-                      <div class="list-row" v-for="s in shipsList" :key="s.id">
-                        <div class="list-text">{{ s.label }}</div>
+                      <div
+                        class="list-row"
+                        v-for="s in shipsList"
+                        :key="s.id"
+                        :class="{ 'has-details': !!s.image }"
+                      >
+                        <div class="ship-info">
+                          <img
+                            v-if="s.image"
+                            :src="s.image"
+                            :alt="s.label"
+                            class="ship-thumbnail"
+                          />
+                          <div class="ship-details-text">
+                            <div class="list-text">{{ s.label }}</div>
+                            <div v-if="s.description" class="ship-desc">
+                              {{ s.description }}
+                            </div>
+                          </div>
+                        </div>
                         <input
                           class="check"
                           type="checkbox"
@@ -218,10 +236,6 @@
                 <div v-else-if="step === 3">
                   <h3 class="step-title">Dates</h3>
                   <p class="results-note">Select your travel dates:</p>
-                  <p class="results-note text-sm">
-                    Click to select start date, then click again to select end
-                    date.
-                  </p>
 
                   <!-- Date Range Display Box -->
                   <div class="date-range-display">
@@ -232,73 +246,113 @@
                     <span class="date-value">{{ dateTo || "End date" }}</span>
                   </div>
 
-                  <!-- Trip Duration Selector -->
+                  <!-- Trip Duration Dropdown Section -->
                   <div class="trip-duration-section">
-                    <span class="trip-duration-label">Trip Duration:</span>
-                    <div
-                      class="trip-duration-dropdown"
-                      @click.stop="showDurationDropdown = !showDurationDropdown"
-                    >
-                      <span class="trip-duration-value">
-                        {{
-                          selectedTripDurations.length === 0
-                            ? "Any duration"
-                            : selectedTripDurations.length === 1
-                            ? `${selectedTripDurations[0]} ${
-                                selectedTripDurations[0] === 1 ? "day" : "days"
-                              }`
-                            : `${selectedTripDurations.length} selected`
-                        }}
-                      </span>
-                      <img
-                        :src="
-                          showDurationDropdown ? upArrowIcon : downArrowIcon
-                        "
-                        alt=""
-                        class="caret-icon"
-                      />
-                      <!-- Arrow icon dropdown -->
-
-                      <!-- Dropdown Menu -->
+                    <span class="trip-duration-label">Trip Duration</span>
+                    <div class="trip-duration-dropdown-wrapper">
+                      <!-- Dropdown Header -->
+                      <button
+                        type="button"
+                        class="trip-duration-dropdown"
+                        :class="{ open: showDurationDropdown }"
+                        @click="showDurationDropdown = !showDurationDropdown"
+                      >
+                        <span class="trip-duration-value">{{
+                          displayTripDuration
+                        }}</span>
+                        <img
+                          :src="
+                            showDurationDropdown ? upArrowIcon : downArrowIcon
+                          "
+                          alt=""
+                          class="caret-icon"
+                        />
+                      </button>
+                      <!-- Dropdown Content with Min/Max Controls -->
                       <div
                         v-if="showDurationDropdown"
-                        class="custom-dropdown-menu trip-duration-menu"
+                        class="trip-duration-menu"
                       >
-                        <!-- Any duration option -->
-                        <div
-                          class="list-row"
-                          @click.stop="toggleTripDuration(0)"
-                        >
-                          <div class="list-text">Any duration</div>
-                          <input
-                            class="check"
-                            type="checkbox"
-                            :checked="selectedTripDurations.length === 0"
-                            @change="toggleTripDuration(0)"
-                            @click.stop
-                          />
-                        </div>
-                        <!-- Specific duration options -->
-                        <div
-                          v-for="d in availableDurations"
-                          :key="d"
-                          class="list-row"
-                          @click.stop="toggleTripDuration(d)"
-                        >
-                          <div class="list-text">
-                            {{ d }} {{ d === 1 ? "day" : "days" }}
+                        <!-- Min Duration Row -->
+                        <div class="counter-row duration-counter-row">
+                          <div class="counter-text">
+                            <div class="counter-title">Min</div>
                           </div>
-                          <input
-                            class="check"
-                            type="checkbox"
-                            :checked="selectedTripDurations.includes(d)"
-                            @change="toggleTripDuration(d)"
-                            @click.stop
-                          />
+                          <div class="counter-ctrls">
+                            <button
+                              type="button"
+                              class="btn-icon"
+                              :disabled="minTripDuration <= 1"
+                              @click.stop="decrementMinDuration"
+                            >
+                              −
+                            </button>
+                            <span class="count-display">{{
+                              minTripDuration
+                            }}</span>
+                            <button
+                              type="button"
+                              class="btn-icon"
+                              :disabled="minTripDuration >= maxTripDuration"
+                              @click.stop="incrementMinDuration"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                        <!-- Max Duration Row -->
+                        <div class="counter-row duration-counter-row">
+                          <div class="counter-text">
+                            <div class="counter-title">Max</div>
+                          </div>
+                          <div class="counter-ctrls">
+                            <button
+                              type="button"
+                              class="btn-icon"
+                              :disabled="maxTripDuration <= minTripDuration"
+                              @click.stop="decrementMaxDuration"
+                            >
+                              −
+                            </button>
+                            <span class="count-display">{{
+                              maxTripDuration
+                            }}</span>
+                            <button
+                              type="button"
+                              class="btn-icon"
+                              :disabled="maxTripDuration >= MAX_TRIP_DURATION"
+                              @click.stop="incrementMaxDuration"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+
+                        <!-- Reset Button -->
+                        <div
+                          class="trip-duration-reset"
+                          v-if="
+                            minTripDuration > 1 ||
+                            maxTripDuration < MAX_TRIP_DURATION
+                          "
+                        >
+                          <button
+                            type="button"
+                            class="btn-text-reset"
+                            @click.stop="resetTripDuration"
+                          >
+                            Reset to any duration
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
+
+                  <!-- Instruction text above calendar -->
+                  <p class="results-note text-sm calendar-instruction">
+                    Click to select start date, then click again to select end
+                    date.
+                  </p>
 
                   <div class="custom-calendar">
                     <div class="calendar-header">
@@ -650,7 +704,7 @@ import {
   defineEmits,
   nextTick,
 } from "vue";
-import { getOperators } from "../services/komodoApi";
+import { getOperators, getShipDetails } from "../services/komodoApi";
 import {
   formatDateToString,
   addDaysToDateString,
@@ -689,24 +743,79 @@ const selectedShipIds = ref([]);
 const dateFrom = ref("");
 const dateTo = ref(""); // Keep for compatibility but not used in UI
 
-// Trip duration (multi-select)
-const MAX_TRIP_DURATION = 14; // Maximum days for a trip
-const selectedTripDurations = ref([]); // Array for multi-select
+// Trip duration (min/max range)
+const MAX_TRIP_DURATION = 30; // Maximum days for a trip
+const minTripDuration = ref(1); // Minimum trip duration
+const maxTripDuration = ref(30); // Maximum trip duration
+
+// Increment/decrement functions for trip duration
+function decrementMinDuration() {
+  if (minTripDuration.value > 1) {
+    minTripDuration.value--;
+  }
+}
+
+function incrementMinDuration() {
+  if (minTripDuration.value < maxTripDuration.value) {
+    minTripDuration.value++;
+  }
+}
+
+function decrementMaxDuration() {
+  if (maxTripDuration.value > minTripDuration.value) {
+    maxTripDuration.value--;
+  }
+}
+
+function incrementMaxDuration() {
+  if (maxTripDuration.value < MAX_TRIP_DURATION) {
+    maxTripDuration.value++;
+  }
+}
+
+// Duration dropdown state
 const showDurationDropdown = ref(false);
 
-// Toggle trip duration (multi-select style like Check Availability)
-function toggleTripDuration(duration) {
-  if (duration === 0) {
-    // "Any duration" - clear all selections
-    selectedTripDurations.value = [];
-  } else {
-    const idx = selectedTripDurations.value.indexOf(duration);
-    if (idx >= 0) {
-      selectedTripDurations.value.splice(idx, 1);
-    } else {
-      selectedTripDurations.value.push(duration);
-    }
+// Duration options (1 to MAX_TRIP_DURATION)
+const durationOptions = computed(() => {
+  const options = [];
+  for (let i = 1; i <= MAX_TRIP_DURATION; i++) {
+    options.push(i);
   }
+  return options;
+});
+
+// Display text for selected duration
+const displayTripDuration = computed(() => {
+  if (
+    minTripDuration.value === 1 &&
+    maxTripDuration.value === MAX_TRIP_DURATION
+  ) {
+    return "Any duration";
+  }
+  if (minTripDuration.value === maxTripDuration.value) {
+    return `${minTripDuration.value} ${
+      minTripDuration.value === 1 ? "day" : "days"
+    }`;
+  }
+  return `${minTripDuration.value} - ${maxTripDuration.value} days`;
+});
+
+// Function to select a duration option
+function selectDurationOption(option) {
+  if (option === "any") {
+    minTripDuration.value = 1;
+    maxTripDuration.value = MAX_TRIP_DURATION;
+  } else {
+    minTripDuration.value = option;
+    maxTripDuration.value = option;
+  }
+  showDurationDropdown.value = false;
+}
+
+function resetTripDuration() {
+  minTripDuration.value = 1;
+  maxTripDuration.value = MAX_TRIP_DURATION;
 }
 
 // Cabin-based guest management
@@ -729,11 +838,6 @@ const canAddCabin = computed(() => cabins.value.length < MAX_CABINS);
 const toastVisible = ref(false);
 const toastMessage = ref("");
 let toastTimeout = null;
-
-// Close dropdown on click outside
-const closeDropdown = () => {
-  showDurationDropdown.value = false;
-};
 
 // Calendar state
 const currentMonth = ref(new Date().getMonth());
@@ -761,7 +865,8 @@ function goResults() {
     lodges: selectedLabels.slice(),
     dateFrom: dateFrom.value,
     dateTo: dateTo.value,
-    tripDurations: selectedTripDurations.value.slice(), // Array of selected durations (empty = any)
+    minTripDuration: minTripDuration.value, // Min days for trip
+    maxTripDuration: maxTripDuration.value, // Max days for trip
 
     // Flexible Booking
     isFlexible: isFlexibleBooking.value,
@@ -933,15 +1038,17 @@ watch(selectedDestinations, () => {
   selectedShipIds.value = [];
 });
 
-// Auto-reset trip duration jika melebihi max yang diizinkan
+// Auto-clamp trip duration if it exceeds max allowed
 watch(maxAllowedDuration, (newMax) => {
   // Use nextTick to avoid interference with date selection rendering cycle
   nextTick(() => {
-    // Filter out any selected durations that exceed the new max
-    if (selectedTripDurations.value.length > 0) {
-      selectedTripDurations.value = selectedTripDurations.value.filter(
-        (d) => d <= newMax
-      );
+    // Clamp maxTripDuration if it exceeds newMax
+    if (maxTripDuration.value > newMax) {
+      maxTripDuration.value = newMax;
+    }
+    // Clamp minTripDuration if it exceeds maxTripDuration
+    if (minTripDuration.value > maxTripDuration.value) {
+      minTripDuration.value = maxTripDuration.value;
     }
   });
 });
@@ -968,13 +1075,12 @@ watch(
 
 onMounted(() => {
   loadShips();
-  document.addEventListener("click", closeDropdown);
+  // Fixed: removed closeDropdown listener
 });
 
 // Cleanup: pastikan scrollbar kembali saat component unmount
 onUnmounted(() => {
   restorePageScroll();
-  document.removeEventListener("click", closeDropdown);
 });
 
 /** ===== Actions ===== */
@@ -1013,23 +1119,64 @@ function enquireNow() {
 async function loadShips() {
   shipsLoading.value = true;
   try {
-    const res = await getOperators();
-    const normalized = (res.operators || [])
+    // Try to get operators and ship details
+    // If details fail (quota exceeded), we still want operators
+    let opsRes, detailsRes;
+
+    try {
+      [opsRes, detailsRes] = await Promise.all([
+        getOperators(),
+        getShipDetails().catch((e) => {
+          console.warn(
+            "Failed to load ship details (likely quota exceeded):",
+            e
+          );
+          return null; // Return null so Promise.all continues
+        }),
+      ]);
+    } catch (e) {
+      console.warn("Critical failure loading operators:", e);
+      // Fallback if even operators fail
+      shipsList.value = normalizeConfigShips(SHIPS_CONFIG);
+      return;
+    }
+
+    // Create map of details for easy lookup
+    const detailsMap = {};
+    if (detailsRes?.ships) {
+      detailsRes.ships.forEach((s) => {
+        // Normalize name for matching: removing extra spaces and case-insensitive
+        const key = s.name ? s.name.toLowerCase().trim() : "";
+        if (key) detailsMap[key] = s;
+      });
+    }
+
+    const normalized = (opsRes?.operators || [])
       .map((op) => {
         const label = op.operator?.trim() || "";
         const sheet = op.sourceSheet?.trim() || label;
+
+        // Match with details
+        const key = label.toLowerCase().trim();
+        const detail = detailsMap[key];
+
         return {
           id: `${label}__${sheet}`,
           label,
           sheet,
+          // Add details if found
+          image: detail?.mainImage || "",
+          description: detail?.description || "",
+          specs: detail?.specs || {},
         };
       })
       .filter((s) => s.label && s.sheet);
+
     shipsList.value = normalized.length
       ? normalized
       : normalizeConfigShips(SHIPS_CONFIG);
   } catch (e) {
-    console.warn("Failed to load operators:", e);
+    console.warn("Failed to load operators/details:", e);
     shipsList.value = normalizeConfigShips(SHIPS_CONFIG);
   } finally {
     shipsLoading.value = false;
@@ -1732,10 +1879,10 @@ function selectDate(day) {
   justify-content: space-between;
 }
 .counter-title {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 200;
   color: #1e293b;
-  font-family: "Outfit", sans-serif;
+  font-family: var(--font-sans);
 }
 .counter-subtitle {
   font-size: 0.85rem;
