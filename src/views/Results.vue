@@ -2686,18 +2686,37 @@ const SHIP_IMAGES = {
 };
 
 // Fallback function to get ship image - tries multiple matching strategies
+// Fallback function to get ship image - tries multiple matching strategies
 function getShipImage(shipName) {
   if (!shipName) return "";
   const normalized = shipName.toUpperCase().trim();
 
-  // Check direct match
-  if (SHIP_IMAGES[normalized]) return SHIP_IMAGES[normalized];
+  // 1. Check direct/partial match in static config
+  let staticUrl = SHIP_IMAGES[normalized];
+  if (!staticUrl) {
+    for (const [key, url] of Object.entries(SHIP_IMAGES)) {
+      const normKey = key.toUpperCase().trim();
+      if (normKey.includes(normalized) || normalized.includes(normKey)) {
+        staticUrl = url;
+        break;
+      }
+    }
+  }
 
-  // Check partial match (handles variations like "DERYA" vs "DURYA")
-  for (const [key, url] of Object.entries(SHIP_IMAGES)) {
-    const normKey = key.toUpperCase().trim();
-    if (normKey.includes(normalized) || normalized.includes(normKey)) {
-      return url;
+  // Return static URL if it exists and isn't a placeholder
+  if (staticUrl && !staticUrl.includes("placeholder")) {
+    return staticUrl;
+  }
+
+  // 2. Fallback: Find any cabin image for this ship from detailCabinMap
+  if (detailCabinMap.value && detailCabinMap.value.size > 0) {
+    const normShip = normalizeName(shipName);
+    for (const [key, val] of detailCabinMap.value.entries()) {
+      // Key format: shipName|cabinName or |cabinName
+      // We look for keys starting with the ship name
+      if (key.startsWith(`${normShip}|`) && val?.image_main) {
+        return convertGDriveUrl(val.image_main);
+      }
     }
   }
 
@@ -3408,23 +3427,57 @@ const availableShipsForSelection = computed(() => {
           return sum + (cap || 4);
         }, 0);
 
+        // Determine ship image
+        let finalImage = shipDetail?.mainImage || getShipImage(shipName);
+
+        // Fallback: Try to get image from the first cabin that has one
+        if (!finalImage && validCabins.length > 0) {
+          for (const cab of validCabins) {
+            const baseName = getCabinBaseName(cab);
+            const cabinKey = normalizeCabinName(baseName);
+            // Try lookup with empty ship prefix since operator is Unknown
+            let det = detailMap.get(`|${cabinKey}`);
+
+            // Also try with ship name prefix if needed
+            if (!det) det = detailMap.get(`${normShipName}|${cabinKey}`);
+
+            // Fallback lookup
+            if (!det) {
+              for (const [dk, dv] of detailMap.entries()) {
+                if (dk.endsWith(`|${cabinKey}`)) {
+                  det = dv;
+                  break;
+                }
+              }
+            }
+
+            if (det && det.image_main) {
+              finalImage = convertGDriveUrl(det.image_main);
+              break;
+            }
+          }
+        }
+
         result.push({
           name: shipName,
           operator: matchingOp.operator,
           cabinsCount: totalCabins,
           totalCapacity: totalCapacity,
           hasAvailability: true,
-          image: shipDetail?.mainImage || getShipImage(shipName) || "",
+          image: finalImage || "",
           description: shipDetail?.description || "",
         });
       } else {
+        // Even if no cabins available, try to get image
+        const finalImage = shipDetail?.mainImage || getShipImage(shipName);
+
         result.push({
           name: shipName,
           operator: matchingOp.operator,
           cabinsCount: 0,
           totalCapacity: 0,
           hasAvailability: false,
-          image: shipDetail?.mainImage || getShipImage(shipName) || "",
+          image: finalImage || "",
           description: shipDetail?.description || "",
         });
       }
@@ -3531,6 +3584,10 @@ const allStartDateCabins = computed(() => {
       if (!detail && operatorLabel) {
         detail = detailMap.get(`${normalizeName(operatorLabel)}|${cabinKey}`);
       }
+      // Try cabin-only key (for "Unknown" operator case)
+      if (!detail) {
+        detail = detailMap.get(`|${cabinKey}`);
+      }
       // Fallback: scan by cabin name only (first match)
       if (!detail) {
         for (const [dk, dv] of detailMap.entries()) {
@@ -3546,6 +3603,13 @@ const allStartDateCabins = computed(() => {
           name
         )}`;
         detail = detailMap.get(canonKey);
+      }
+      // Also try cabin-only canonical key
+      if (!detail) {
+        const canonOnly = canonicalizeCabinLabel(name);
+        if (canonOnly) {
+          detail = detailMap.get(`|${canonOnly}`);
+        }
       }
       const mergedPrice = getCabinPrice(detail) || price;
       const mergedCapacity = getCabinCapacityText(detail) || capacityText;
@@ -4177,16 +4241,29 @@ async function loadDetailCabins() {
         if (canonBase) {
           const canonKey = `${normalizeName(shipName)}|${canonBase}`;
           map.set(canonKey, cb);
+          // Also store by cabin name only (fallback for "Unknown" operator)
+          map.set(`|${canonBase}`, cb);
         }
         if (apiName) {
           const canonApi = canonicalizeCabinLabel(apiName);
           if (canonApi) {
             const canonApiKey = `${normalizeName(shipName)}|${canonApi}`;
             map.set(canonApiKey, cb);
+            // Also store by cabin name only
+            map.set(`|${canonApi}`, cb);
           }
+        }
+
+        // CRITICAL: Also store by just cabin name for matching when operator is "Unknown"
+        if (baseName) {
+          map.set(`|${normalizeCabinName(baseName)}`, cb);
+        }
+        if (apiName) {
+          map.set(`|${normalizeCabinName(apiName)}`, cb);
         }
       });
     }
+    console.log("DetailCabinMap loaded:", map.size, "entries");
     detailCabinMap.value = map;
   } catch (e) {
     console.warn("Failed to load cabindetail API", e);
