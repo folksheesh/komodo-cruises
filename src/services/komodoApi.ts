@@ -1,7 +1,7 @@
 // Use local API during development, switch to production URL when deployed
 const BASE_URL = import.meta.env.DEV 
-  ? "http://127.0.0.1:8787" 
-  : "http://127.0.0.1:8787";
+  ? "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/" 
+  : "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/";
 
 // Types
 export type CabinItem =

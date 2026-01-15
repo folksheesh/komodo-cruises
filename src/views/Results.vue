@@ -4192,7 +4192,7 @@ async function loadDetailCabins() {
   try {
     // Use local API endpoint for cabin details
     const baseUrl = import.meta.env.DEV
-      ? "http://127.0.0.1:8787"
+      ? "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/"
       : "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io";
     const url = `${baseUrl}/?resource=cabindetail`;
     const res = await fetch(url).then((r) => r.json());
@@ -4282,7 +4282,7 @@ async function loadDetailCabins() {
 async function loadShipDetails() {
   try {
     const baseUrl = import.meta.env.DEV
-      ? "http://127.0.0.1:8787"
+      ? "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/"
       : "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io";
     const url = `${baseUrl}/?resource=shipdetail`;
     const res = await fetch(url).then((r) => r.json());

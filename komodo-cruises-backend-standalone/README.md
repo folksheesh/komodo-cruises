@@ -1,0 +1,94 @@
+# Komodo Cruises Backend API
+
+Backend API untuk Komodo Cruises booking system.
+
+## Features
+
+- ✅ Cabin Detail API
+- ✅ Ship Detail API
+- ✅ Availability API
+- ✅ Search API
+- ✅ In-memory caching (5 menit)
+
+## Tech Stack
+
+- Node.js 20+
+- Express.js
+- Google Sheets API
+
+## Environment Variables
+
+| Variable         | Description           | Default     |
+| ---------------- | --------------------- | ----------- |
+| `PORT`           | Server port           | `3000`      |
+| `GOOGLE_API_KEY` | Google Sheets API Key | (hardcoded) |
+| `SPREADSHEET_ID` | Google Sheets ID      | (hardcoded) |
+
+## Local Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server (with auto-reload)
+npm run dev
+
+# Run production server
+npm start
+```
+
+## API Endpoints
+
+### Health Check
+
+```
+GET /health
+```
+
+### Cabin Detail
+
+```
+GET /?resource=cabindetail
+GET /?resource=cabindetail&name=Padar
+```
+
+### Ship Detail
+
+```
+GET /?resource=shipdetail
+```
+
+### Operators
+
+```
+GET /?resource=operators
+```
+
+### Cabins List
+
+```
+GET /?resource=cabins
+GET /?resource=cabins&sheet=SEMESTA%20VOYAGES%20(Normalized)
+```
+
+### Availability
+
+```
+GET /?resource=availability&date=2026-03-15
+GET /?resource=availability&date=2026-03-15&sheet=SEMESTA%20VOYAGES%20(Normalized)
+```
+
+### Search
+
+```
+GET /?resource=search&date=2026-03-15&name=Padar&guests=2
+```
+
+## Coolify Deployment
+
+1. Push ke repository Git
+2. Di Coolify, create new service → Docker
+3. Set environment variables jika perlu
+4. Deploy!
+
+Port default: `3000`

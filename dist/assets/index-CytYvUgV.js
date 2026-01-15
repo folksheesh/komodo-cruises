@@ -781,7 +781,7 @@ const vt = (S, b) => {
     },
   },
   vo = vt(uo, [["__scopeId", "data-v-d4e9a465"]]),
-  po = "http://127.0.0.1:8787";
+  po = "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/";
 function fs(S) {
   const b = new URL(po),
     f = new URLSearchParams();
@@ -6230,7 +6230,7 @@ const sc = { class: "results-wrap" },
       async function gn() {
         try {
           const a = await fetch(
-              "http://127.0.0.1:8787?resource=cabindetail"
+              "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/?resource=cabindetail"
             ).then((n) => n.json()),
             r = new Map(),
             u = new Set();
@@ -6297,7 +6297,7 @@ const sc = { class: "results-wrap" },
       async function ca() {
         try {
           const a = await fetch(
-              "http://127.0.0.1:8787?resource=shipdetail"
+              "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/?resource=shipdetail"
             ).then((u) => u.json()),
             r = new Map();
           a &&
