@@ -60,6 +60,41 @@ async function handleResponse<T>(response: Response): Promise<T> {
   return data as T;
 }
 
+// Retry helper with exponential backoff for handling quota limits
+async function retryWithBackoff<T>(
+  fn: () => Promise<T>,
+  maxRetries: number = 3,
+  initialDelayMs: number = 100
+): Promise<T> {
+  let lastError: Error | null = null;
+  
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error as Error;
+      
+      // Check if it's a quota error (429) or server error (5xx)
+      const isRetryable = 
+        lastError.message.includes('429') || 
+        lastError.message.includes('500') ||
+        lastError.message.includes('503') ||
+        lastError.message.includes('504');
+      
+      if (!isRetryable || attempt === maxRetries) {
+        throw error;
+      }
+      
+      // Wait before retrying with exponential backoff
+      const delayMs = initialDelayMs * Math.pow(2, attempt);
+      console.warn(`API request failed (attempt ${attempt + 1}), retrying in ${delayMs}ms...`, lastError.message);
+      await new Promise(resolve => setTimeout(resolve, delayMs));
+    }
+  }
+  
+  throw lastError || new Error('Unknown error');
+}
+
 // In-memory cache for getCabins
 const cabinsCache = new Map<string, CabinsResponse>();
 // In-memory cache and in-flight map for getAvailability
@@ -166,8 +201,11 @@ export async function getAvailability(date: string, sheet?: string): Promise<Ava
   }
 
   const url = buildUrl({ resource: 'availability', date });
-  const promise = fetch(url)
-    .then(resp => handleResponse<AvailabilityResponse>(resp))
+  const promise = retryWithBackoff(
+    () => fetch(url).then(resp => handleResponse<AvailabilityResponse>(resp)),
+    3,  // max retries
+    200 // initial delay
+  )
     .then(data => {
       availabilityCache.set(cacheKey, data);
       availabilityInflight.delete(cacheKey);
@@ -175,6 +213,7 @@ export async function getAvailability(date: string, sheet?: string): Promise<Ava
     })
     .catch(err => {
       availabilityInflight.delete(cacheKey);
+      console.error(`Failed to get availability for ${date}:`, err);
       throw err;
     });
   availabilityInflight.set(cacheKey, promise);

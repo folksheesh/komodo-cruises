@@ -134,7 +134,10 @@
                 </p>
               </div>
 
-              <div v-else-if="!flexibleAlt" class="no-availability">
+              <div
+                v-else-if="!flexibleAlt && sortedDisplayItems.length > 0"
+                class="no-availability"
+              >
                 <p class="desktop-only">
                   <strong
                     >Your preferred dates are unfortunately not available, but
@@ -2689,13 +2692,13 @@ const SHIP_IMAGES = {
 // Fallback function to get ship image - tries multiple matching strategies
 function getShipImage(shipName) {
   if (!shipName) return "";
-  
+
   // Coba ambil dari shipDetailsMap terlebih dahulu
   const shipDetail = getShipDetailByName(shipName);
   if (shipDetail && shipDetail.mainImage) {
     return shipDetail.mainImage;
   }
-  
+
   // Fallback ke static SHIP_IMAGES
   const normalized = shipName.toUpperCase().trim();
 
@@ -2716,29 +2719,39 @@ function getShipImage(shipName) {
 // Helper function untuk mencari ship detail berdasarkan nama
 function getShipDetailByName(shipName) {
   if (!shipName) return null;
-  
+
   const normalized = shipName.toUpperCase().trim();
-  
-  // Debug: log what we're searching for
-  console.log(`Searching for ship: "${shipName}" -> normalized: "${normalized}"`);
-  console.log(`Map has ${shipDetailsMap.value.size} entries:`, Array.from(shipDetailsMap.value.keys()));
-  
+  // Normalize name: remove trailing S for plural handling (VOYAGES -> VOYAGE)
+  const normalizedBase = normalized
+    .replace(/S$/i, "")
+    .replace(/LIVEABOARD/i, "LIVEBOARD")
+    .replace(/LIVEBOARD/i, "LIVEABOARD");
+
   // Cari exact match
   if (shipDetailsMap.value.has(normalized)) {
-    const found = shipDetailsMap.value.get(normalized);
-    console.log(`Found exact match for ${normalized}:`, found);
-    return found;
+    return shipDetailsMap.value.get(normalized);
   }
-  
-  // Cari partial match
+
+  // Cari partial match dengan fuzzy logic
   for (const [key, detail] of shipDetailsMap.value.entries()) {
-    if (key.includes(normalized) || normalized.includes(key)) {
-      console.log(`Found partial match: "${key}" matches "${normalized}"`);
+    const keyBase = key
+      .replace(/S$/i, "")
+      .replace(/LIVEABOARD/i, "LIVEBOARD")
+      .replace(/LIVEBOARD/i, "LIVEABOARD");
+
+    // Check various match conditions
+    if (
+      key.includes(normalized) ||
+      normalized.includes(key) ||
+      keyBase.includes(normalizedBase) ||
+      normalizedBase.includes(keyBase) ||
+      // Match first word (e.g., "SEMESTA" matches "SEMESTA VOYAGES" and "SEMESTA VOYAGE")
+      key.split(" ")[0] === normalized.split(" ")[0]
+    ) {
       return detail;
     }
   }
-  
-  console.log(`No match found for ${normalized}`);
+
   return null;
 }
 
@@ -3324,8 +3337,17 @@ const shipsFromCriteria = computed(() => {
 });
 
 // Check if we need to show ship selection step
+// Only show if multiple ships selected AND at least one ship has availability
 const needsShipSelection = computed(() => {
-  return shipsFromCriteria.value.length > 1 && !selectedShipForView.value;
+  // First check basic conditions
+  if (shipsFromCriteria.value.length <= 1 || selectedShipForView.value) {
+    return false;
+  }
+  // Check if any ships have availability (filter out unavailable ships)
+  const availableCount = availableShipsForSelection.value.filter(
+    (s) => s.hasAvailability
+  ).length;
+  return availableCount > 0;
 });
 
 // Get available ships with availability info
@@ -3415,28 +3437,8 @@ const availableShipsForSelection = computed(() => {
 
       const totalCabins = validCabins.length;
 
-      // Lookup ship details (image, desc) from shipDetailsMap
-      let shipDetail = null;
-      const normShipName = shipName.toLowerCase().replace(/\s+/g, "").trim();
-      const shipMap = shipDetailsMap.value || new Map();
-
-      // Try direct lookup first (most efficient)
-      shipDetail = shipMap.get(normShipName) || shipMap.get(shipName);
-
-      // Fallback to iteration if not found
-      if (!shipDetail) {
-        for (const [key, detail] of shipMap.entries()) {
-          const normKey = String(key).toLowerCase().replace(/\s+/g, "").trim();
-          if (
-            normKey === normShipName ||
-            normKey.includes(normShipName) ||
-            normShipName.includes(normKey)
-          ) {
-            shipDetail = detail;
-            break;
-          }
-        }
-      }
+      // Lookup ship details (image, desc) using consistent helper function
+      const shipDetail = getShipDetailByName(shipName);
 
       if (totalCabins > 0) {
         const totalCapacity = validCabins.reduce((sum, cab) => {
@@ -3465,9 +3467,9 @@ const availableShipsForSelection = computed(() => {
         });
       }
     } else {
-      // Lookup ship details even if no operator match - use getShipDetailByName for consistency
+      // Lookup ship details even if no operator match
       const shipDetail = getShipDetailByName(shipName);
-      
+
       result.push({
         name: shipName,
         operator: shipName,
@@ -3480,10 +3482,11 @@ const availableShipsForSelection = computed(() => {
     }
   }
 
-  return result;
+  // STRICT FILTERING: Only return ships with actual availability
+  return result.filter((ship) => ship.hasAvailability);
 });
 
-// Function to select a ship for viewing
+// Function to select a ship for viewing// Function to select a ship for viewing
 function selectShipForView(shipName) {
   selectedShipForView.value = shipName;
 }
@@ -3543,11 +3546,36 @@ const allStartDateCabins = computed(() => {
         id ||
         `${normalizeName(shipName)}|${cabinKey}|${cabinDate}` ||
         `${normalizeName(operatorLabel)}|${cabinKey}|${cabinDate}`;
+
       // Try multiple keys to find detail mapping
-      let detail = detailMap.get(`${normalizeName(shipName)}|${cabinKey}`);
-      if (!detail && operatorLabel) {
-        detail = detailMap.get(`${normalizeName(operatorLabel)}|${cabinKey}`);
+      const searchKey1 = `${normalizeName(shipName)}|${cabinKey}`;
+      const searchKey2 = operatorLabel
+        ? `${normalizeName(operatorLabel)}|${cabinKey}`
+        : null;
+
+      let detail = detailMap.get(searchKey1);
+      if (!detail && searchKey2) {
+        detail = detailMap.get(searchKey2);
       }
+
+      // Debug logging for first few cabins
+      if (!detail && detailMap.size > 0) {
+        const debugIndex = Math.floor(Math.random() * 100);
+        if (debugIndex < 5) {
+          // Only log 5% of misses to avoid spam
+          console.log("Cabin detail NOT found:", {
+            shipName,
+            operatorLabel,
+            cabinKey,
+            searchKey1,
+            searchKey2,
+            availableKeys: Array.from(detailMap.keys())
+              .filter((k) => k.includes(cabinKey))
+              .slice(0, 3),
+          });
+        }
+      }
+
       // Fallback: scan by cabin name only (first match)
       if (!detail) {
         for (const [dk, dv] of detailMap.entries()) {
@@ -4164,47 +4192,87 @@ async function loadDetailCabins() {
   try {
     // Use local API endpoint for cabin details
     const baseUrl = import.meta.env.DEV
-      ? "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io"
+      ? "http://127.0.0.1:8787"
       : "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io";
     const url = `${baseUrl}/?resource=cabindetail`;
     const res = await fetch(url).then((r) => r.json());
     const map = new Map();
+
+    // Track unique ship names from cabin detail API
+    const shipNamesFromAPI = new Set();
+
     if (res && Array.isArray(res.data)) {
       res.data.forEach((cb) => {
         const shipName = cb.operator || cb.shipName || "";
+        shipNamesFromAPI.add(shipName); // Track original name from API
+
+        // Create multiple normalized ship name variants for better matching
+        const shipVariants = new Set();
+        shipVariants.add(normalizeName(shipName)); // e.g., "semesta voyage"
+        shipVariants.add(
+          normalizeName(
+            shipName.replace(/\s+(cruise|liveaboard|voyages?|boat)s?$/i, "")
+          )
+        ); // e.g., "semesta"
+
+        // Also add uppercase variant
+        const upperShip = shipName.toUpperCase().trim();
+        shipVariants.add(normalizeName(upperShip));
+        shipVariants.add(
+          normalizeName(
+            upperShip.replace(/\s+(CRUISE|LIVEABOARD|VOYAGES?|BOAT)S?$/i, "")
+          )
+        );
 
         // Key by NAME CABIN (base) -> detail
         const baseName = getCabinBaseName(cb); // prefers cabin_name, falls back api_name
-        const keyBase = `${normalizeName(shipName)}|${normalizeCabinName(
-          baseName
-        )}`;
-        if (keyBase.trim()) map.set(keyBase, cb);
+        const cabinKey = normalizeCabinName(baseName);
+
+        // Create keys with all ship variants
+        shipVariants.forEach((variant) => {
+          if (variant.trim()) {
+            const keyBase = `${variant}|${cabinKey}`;
+            map.set(keyBase, cb);
+          }
+        });
 
         // Also key by NAME CABIN API for robust linking
         const apiName = (cb.api_name || "").toString().trim();
         if (apiName) {
-          const keyApi = `${normalizeName(shipName)}|${normalizeCabinName(
-            apiName
-          )}`;
-          if (keyApi.trim()) map.set(keyApi, cb);
+          const apiCabinKey = normalizeCabinName(apiName);
+          shipVariants.forEach((variant) => {
+            if (variant.trim()) {
+              const keyApi = `${variant}|${apiCabinKey}`;
+              map.set(keyApi, cb);
+            }
+          });
         }
 
         // Canonical keys to match variants (e.g., "Master Padar" ↔ "Padar")
         const canonBase = canonicalizeCabinLabel(baseName);
         if (canonBase) {
-          const canonKey = `${normalizeName(shipName)}|${canonBase}`;
-          map.set(canonKey, cb);
+          shipVariants.forEach((variant) => {
+            const canonKey = `${variant}|${canonBase}`;
+            map.set(canonKey, cb);
+          });
         }
         if (apiName) {
           const canonApi = canonicalizeCabinLabel(apiName);
           if (canonApi) {
-            const canonApiKey = `${normalizeName(shipName)}|${canonApi}`;
-            map.set(canonApiKey, cb);
+            shipVariants.forEach((variant) => {
+              const canonApiKey = `${variant}|${canonApi}`;
+              map.set(canonApiKey, cb);
+            });
           }
         }
       });
     }
     detailCabinMap.value = map;
+    console.log(`Loaded ${map.size} cabin details from API`, {
+      sampleKeys: Array.from(map.keys()).slice(0, 10),
+      totalEntries: map.size,
+      uniqueShipNames: Array.from(shipNamesFromAPI).sort(),
+    });
   } catch (e) {
     console.warn("Failed to load cabindetail API", e);
   }
@@ -4218,7 +4286,7 @@ async function loadShipDetails() {
       : "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io";
     const url = `${baseUrl}/?resource=shipdetail`;
     const res = await fetch(url).then((r) => r.json());
-    
+
     const map = new Map();
     if (res && res.ok && Array.isArray(res.ships)) {
       res.ships.forEach((ship) => {
@@ -4227,14 +4295,17 @@ async function loadShipDetails() {
           // Transform image_main to mainImage for consistency
           const transformed = {
             ...ship,
-            mainImage: ship.image_main || ship.mainImage || ""
+            mainImage: ship.image_main || ship.mainImage || "",
           };
           map.set(normalized, transformed);
         }
       });
     }
     shipDetailsMap.value = map;
-    console.log(`Loaded ${map.size} ship details from API`, Array.from(map.keys()));
+    console.log(
+      `Loaded ${map.size} ship details from API`,
+      Array.from(map.keys())
+    );
   } catch (e) {
     console.warn("Failed to load shipdetail API", e);
   }
@@ -4247,12 +4318,60 @@ async function checkAvailability() {
   shipAvailability.value = {};
   availabilityData.value = [];
   globalStartAvailability.value = null;
+
   try {
     const sc = searchCriteria.value;
     const dates = generateDateRange(sc.dateFrom, sc.dateTo);
     const labels = sc.ships && sc.ships.length ? sc.ships : sc.lodges || [];
     const sheets =
       sc.shipSheets && sc.shipSheets.length ? sc.shipSheets : labels;
+
+    // CRITICAL: Load both ship AND cabin details FIRST, in parallel
+    // These are needed for proper data enrichment and display
+    console.log("[Results] Starting data load with", dates.length, "dates");
+
+    await Promise.all([
+      // Load ship details (with fallback if fails)
+      (async () => {
+        try {
+          const shipDetailsData = await getShipDetails();
+          if (shipDetailsData && shipDetailsData.ships) {
+            const newMap = new Map();
+            shipDetailsData.ships.forEach((ship) => {
+              const normalized = (ship.name || "").toUpperCase().trim();
+              if (normalized) {
+                newMap.set(normalized, {
+                  ...ship,
+                  mainImage: ship.image_main || ship.mainImage || "",
+                });
+              }
+            });
+            shipDetailsMap.value = newMap;
+            console.log(
+              "[Results] Ship details loaded:",
+              newMap.size,
+              "entries"
+            );
+          }
+        } catch (err) {
+          console.warn(
+            "[Results] Failed to load ship details, continuing without:",
+            err
+          );
+        }
+      })(),
+      // Load cabin details (with fallback if fails)
+      (async () => {
+        try {
+          await loadDetailCabins();
+        } catch (err) {
+          console.warn(
+            "[Results] Failed to load cabin details, continuing without:",
+            err
+          );
+        }
+      })(),
+    ]);
 
     let globalCabinsPromise = null;
     const getGlobalCabinsOnce = () => {
@@ -4264,31 +4383,9 @@ async function checkAvailability() {
       return globalCabinsPromise;
     };
 
-    // Load ship details in parallel (non-blocking)
-    getShipDetails()
-      .then((shipDetailsData) => {
-        if (shipDetailsData && shipDetailsData.ships) {
-          const newMap = new Map(shipDetailsMap.value);
-          shipDetailsData.ships.forEach((ship) => {
-            // Store by multiple keys for robust matching
-            newMap.set(ship.id, ship);
-            newMap.set(ship.name, ship);
-            // Also store by normalized name for case-insensitive matching
-            const normalizedName = ship.name
-              .toLowerCase()
-              .replace(/\s+/g, "")
-              .trim();
-            newMap.set(normalizedName, ship);
-          });
-          shipDetailsMap.value = newMap; // Trigger reactivity
-          console.log("Ship details map updated:", newMap.size, "entries");
-        }
-      })
-      .catch((err) => console.warn("Failed to load ship details:", err));
-
     const allowedBySheet = {};
 
-    // Critical availability checks only
+    // Get allowed cabins for each sheet
     await Promise.all(
       sheets.map(async (sheet, i) => {
         const label = labels[i] || sheet;
@@ -4298,7 +4395,9 @@ async function checkAvailability() {
           if (Array.isArray(cab?.allCabins)) {
             allowed = cab.allCabins.map((c) => String(c).split(" (")[0].trim());
           }
-        } catch {}
+        } catch (err) {
+          console.warn(`Failed to get cabins for sheet ${sheet}:`, err);
+        }
         if (allowed.length === 0) {
           try {
             const globalCab = await getGlobalCabinsOnce();
@@ -4311,7 +4410,9 @@ async function checkAvailability() {
                 allowed = op.cabins.map((c) => String(c).split(" (")[0].trim());
               }
             }
-          } catch {}
+          } catch (err) {
+            console.warn(`Failed to get global cabins for ${label}:`, err);
+          }
         }
         allowedBySheet[sheet] = Array.from(
           new Set(allowed.map(normalizeCabinName))
@@ -4323,25 +4424,46 @@ async function checkAvailability() {
       sheets.map(async (sheet, i) => {
         const label = labels[i] || sheet;
         const allowed = allowedBySheet[sheet] || [];
+
+        // Fetch all dates for this sheet with proper error handling
         const primaryPromises = dates.map((date) =>
-          getAvailability(date, sheet).catch(() => null)
+          getAvailability(date, sheet).catch((err) => {
+            console.warn(
+              `Failed to get availability for ${date} on ${sheet}:`,
+              err
+            );
+            return null;
+          })
         );
+
         const primaryDays = await Promise.all(primaryPromises);
+
+        // Identify which dates failed
         const needFallbackIdx = primaryDays
           .map((day, idx) =>
             !day || !day.operators || day.operators.length === 0 ? idx : -1
           )
           .filter((idx) => idx >= 0);
+
+        // Fetch fallback data for failed dates
         let fallbackDays = [];
         if (needFallbackIdx.length) {
           const fbPromises = needFallbackIdx.map((idx) =>
             getAvailability(dates[idx], "Cruise Schedule - Normalized").catch(
-              () => null
+              (err) => {
+                console.warn(
+                  `Failed to get fallback availability for ${dates[idx]}:`,
+                  err
+                );
+                return null;
+              }
             )
           );
           const fbResults = await Promise.all(fbPromises);
-          fallbackDays = fbResults;
+          fallbackDays = fbResults.filter((d) => d !== null);
         }
+
+        // Build results with fallback logic
         const perShipResults = [];
         for (let idx = 0; idx < dates.length; idx++) {
           const day =
@@ -4349,15 +4471,17 @@ async function checkAvailability() {
             primaryDays[idx].operators &&
             primaryDays[idx].operators.length
               ? primaryDays[idx]
-              : needFallbackIdx.includes(idx)
+              : needFallbackIdx.includes(idx) && fallbackDays.length > 0
               ? fallbackDays[needFallbackIdx.indexOf(idx)]
               : null;
+
           if (day) {
             const allCabins =
               day.operators?.flatMap((op) => op.cabins || []) || [];
             const filtered = allowed.length
               ? allCabins.filter((c) => allowed.includes(normalizeCabinName(c)))
               : allCabins;
+
             perShipResults.push({
               ...day,
               operators: [
@@ -4385,16 +4509,32 @@ async function checkAvailability() {
           sc.dateTo || sc.dateFrom
         );
         const allAvailabilityPromises = allDates.map(async (date) => {
-          let dayData = await getAvailability(date).catch(() => null);
+          let dayData = null;
+          try {
+            dayData = await getAvailability(date);
+          } catch (err) {
+            console.warn(
+              `Failed primary availability fetch for ${date}, trying fallback:`,
+              err
+            );
+          }
+
           if (
             !dayData ||
             !dayData.operators ||
             dayData.operators.length === 0
           ) {
-            dayData = await getAvailability(
-              date,
-              "Cruise Schedule - Normalized"
-            ).catch(() => null);
+            try {
+              dayData = await getAvailability(
+                date,
+                "Cruise Schedule - Normalized"
+              );
+            } catch (err) {
+              console.warn(
+                `Failed fallback availability fetch for ${date}:`,
+                err
+              );
+            }
           }
           return { date, data: dayData };
         });
@@ -4434,6 +4574,11 @@ async function checkAvailability() {
         };
 
         globalStartAvailability.value = combinedAvailability;
+        console.log(
+          "[Results] Loaded global availability:",
+          combinedAvailability.total,
+          "total cabins"
+        );
       } catch (e) {
         console.debug("[Results] global availability error", e);
       }
@@ -4445,9 +4590,10 @@ async function checkAvailability() {
     }
   } catch (err) {
     error.value = `Failed to check availability: ${err.message}`;
-    console.error("Availability check error:", err);
+    console.error("[Results] Availability check error:", err);
   } finally {
     loading.value = false;
+    console.log("[Results] Availability check complete");
   }
 }
 
@@ -4618,7 +4764,7 @@ onMounted(async () => {
     loadDetailCabins().catch((err) =>
       console.warn("Failed to load details background:", err)
     );
-    
+
     // Start loading ship details in background (non-blocking)
     loadShipDetails().catch((err) =>
       console.warn("Failed to load ship details background:", err)

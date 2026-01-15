@@ -4443,68 +4443,102 @@ div.modal-content.modal-content-redesigned {
 
 /* ===== SHIP SELECTION STEP STYLES ===== */
 .ship-selection-container {
-  padding: 2rem 0;
+  padding: 1.5rem 0 2rem;
 }
 
 .ship-selection-header {
   margin-bottom: 2rem;
+  text-align: left;
 }
 
 .ship-selection-title {
   font-family: 'Playfair Display', serif;
   font-size: 1.75rem;
-  font-weight: 500;
+  font-weight: 400;
   color: #2d4059;
   margin: 0 0 0.5rem;
+  letter-spacing: 0.02em;
 }
 
 .ship-selection-subtitle {
   color: #6b7280;
-  font-size: 1rem;
+  font-size: 0.95rem;
   margin: 0;
+  line-height: 1.5;
 }
 
 .ship-selection-grid {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
+/* Luxury Ship Selection Card - Premium Redesign */
 .ship-selection-card {
-  background: #fff;
+  background: #ffffff;
   border: 1px solid #e5e7eb;
-  padding: 1.5rem;
+  border-radius: 12px;
+  padding: 0;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: stretch;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 2px 12px rgba(45, 64, 89, 0.06);
 }
 
-.ship-selection-card:hover:not(.no-availability) {
-  border-color: #2d4059;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+.ship-selection-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 2px;
+  background: linear-gradient(135deg, transparent 0%, transparent 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: all 0.4s ease;
+  pointer-events: none;
 }
+
+
 
 .ship-selection-card.no-availability {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
   background: #f9fafb;
+  filter: grayscale(0.4);
 }
 
-.ship-card-content {
-  flex: 1;
+.ship-selection-card.no-availability:hover {
+  transform: none;
+  box-shadow: 0 2px 12px rgba(45, 64, 89, 0.06);
 }
 
-/* Ship Image Column */
+/* Ship Image Column - Premium Aspect Ratio */
 .ship-img-col {
   flex-shrink: 0;
-  width: 120px;
-  height: 80px;
-  margin-right: 1.25rem;
+  width: 220px;
+  height: auto;
+  min-height: 180px;
   overflow: hidden;
-  border-radius: 4px;
-  background: #f3f4f6;
+  background: linear-gradient(135deg, #f5f3f0 0%, #e8e4df 100%);
+  position: relative;
+}
+
+.ship-img-col::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right,
+      transparent 0%,
+      transparent 60%,
+      rgba(255, 255, 255, 0.5) 100%);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .ship-thumbnail {
@@ -4512,43 +4546,110 @@ div.modal-content.modal-content-redesigned {
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  max-height: 190px;
+}
+
+
+
+/* Ship Content - Better Typography & Spacing */
+.ship-card-content {
+  flex: 1;
+  padding: 1.75rem 1.5rem 1.75rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 180px;
+  position: relative;
+}
+
+.ship-card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #2d4059;
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.01em;
+  transition: color 0.35s ease;
+  line-height: 1.2;
+}
+
+.ship-selection-card:hover:not(.no-availability) .ship-card-name {
+  color: #1a2536;
 }
 
 .ship-desc-sm {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #6b7280;
-  margin: 0.25rem 0 0.5rem;
-  line-height: 1.4;
+  margin: 0 0 1rem;
+  line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  font-style: normal;
 }
 
-.ship-card-name {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #2d4059;
-  margin: 0 0 0.5rem;
-}
-
+/* Ship Info Badges - Premium Style */
 .ship-card-info {
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  font-size: 0.9rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: #5a6b7d;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.ship-card-info span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  background: linear-gradient(135deg, #f8f6f4 0%, #f3f0ed 100%);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #4a5568;
+  border: 1px solid #e8e4df;
+  transition: all 0.3s ease;
+}
+
+.ship-card-info span::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  background: linear-gradient(135deg, #c99b7b 0%, #d4af8c 100%);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+
+
+.ship-card-capacity {
+  font-size: 0.8rem;
   color: #6b7280;
 }
 
-.ship-card-capacity {
-  font-size: 0.85rem;
-  color: #9ca3af;
+.ship-card-capacity::before {
+  background: linear-gradient(135deg, #9ca3af 0%, #a1a9b5 100%) !important;
 }
 
 .no-availability-text {
   color: #9ca3af;
   font-style: italic;
+  font-size: 0.85rem;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.no-availability-text::before {
+  display: none !important;
 }
 
 /* Added style for empty state message block */
@@ -4575,10 +4676,39 @@ div.modal-content.modal-content-redesigned {
   margin-bottom: 0.5rem;
 }
 
+/* Ship Card Arrow - Premium Circle Button */
 .ship-card-arrow {
   color: #2d4059;
-  margin-left: 1rem;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+  position: relative;
+  flex-shrink: 0;
 }
+
+.ship-card-arrow::before {
+  content: '';
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #f8f6f4 0%, #f0ede9 100%);
+  border-radius: 50%;
+  border: 1px solid #e5e0da;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.ship-card-arrow svg {
+  position: relative;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  transition: all 0.4s ease;
+  stroke-width: 2.5;
+}
+
+
 
 /* Back to Ships Bar */
 .back-to-ships-bar {
@@ -4618,12 +4748,95 @@ div.modal-content.modal-content-redesigned {
 }
 
 @media (max-width: 640px) {
+  .ship-selection-container {
+    padding: 1rem 0 1.5rem;
+  }
+
+  .ship-selection-header {
+    margin-bottom: 1.25rem;
+  }
+
+  .ship-selection-title {
+    font-size: 1.5rem;
+  }
+
+  .ship-selection-subtitle {
+    font-size: 0.875rem;
+  }
+
   .ship-selection-grid {
-    grid-template-columns: 1fr;
+    gap: 0.875rem;
   }
 
   .ship-selection-card {
+    flex-direction: column;
+    padding: 0;
+    border-radius: 14px;
+  }
+
+  .ship-selection-card::before {
+    border-radius: 14px;
+  }
+
+  .ship-img-col {
+    width: 100%;
+    height: 200px;
+    min-height: 200px;
+  }
+
+  .ship-card-content {
+    padding: 1.25rem 1.25rem 1rem;
+    min-height: auto;
+  }
+
+  .ship-card-name {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .ship-desc-sm {
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .ship-card-info {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+  }
+
+  .ship-card-info span {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.75rem;
+  }
+
+  .ship-card-arrow {
+    display: none;
+  }
+
+  .ship-selection-card::after {
+    content: 'View Cabins →';
+    display: block;
+    width: 100%;
     padding: 1rem;
+    text-align: center;
+    background: linear-gradient(135deg, #2d4059 0%, #374b6a 100%);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+  }
+
+  .ship-selection-card:active:not(.no-availability)::after {
+    background: linear-gradient(135deg, #c99b7b 0%, #d4af8c 100%);
+  }
+
+  .ship-selection-card.no-availability::after {
+    content: 'Not Available';
+    background: #9ca3af;
   }
 
   .back-to-ships-bar {

@@ -204,12 +204,12 @@
                         :class="{ 'has-details': !!s.image }"
                       >
                         <div class="ship-info">
-                          <img
+                          <!-- <img
                             v-if="s.image"
                             :src="s.image"
                             :alt="s.label"
                             class="ship-thumbnail"
-                          />
+                          /> -->
                           <div class="ship-details-text">
                             <div class="list-text">{{ s.label }}</div>
                             <div v-if="s.description" class="ship-desc">

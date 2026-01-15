@@ -1,7 +1,7 @@
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
-// .wrangler/tmp/bundle-fj4bSn/checked-fetch.js
+// .wrangler/tmp/bundle-laAhf6/checked-fetch.js
 var urls = /* @__PURE__ */ new Set();
 function checkURL(request, init) {
   const url = request instanceof URL ? request : new URL(
@@ -73,9 +73,16 @@ var index_default = {
           const shipJson = await shipResp.json();
           const shipRows = shipJson.values || [];
           if (shipRows.length < 2) {
-            return jsonOk({ ok: true, total: 0, resource: "shipdetail", ships: [] });
+            return jsonOk({
+              ok: true,
+              total: 0,
+              resource: "shipdetail",
+              ships: []
+            });
           }
-          const headers = shipRows[0].map((h) => (h || "").toLowerCase().trim());
+          const headers = shipRows[0].map(
+            (h) => (h || "").toLowerCase().trim()
+          );
           const ships = [];
           for (let i = 1; i < shipRows.length; i++) {
             const row = shipRows[i] || [];
@@ -112,7 +119,12 @@ var index_default = {
               images
             });
           }
-          return jsonOk({ ok: true, total: ships.length, resource: "shipdetail", ships });
+          return jsonOk({
+            ok: true,
+            total: ships.length,
+            resource: "shipdetail",
+            ships
+          });
         } catch (err) {
           return jsonErr(`shipdetail error: ${err.message}`);
         }
@@ -168,7 +180,9 @@ async function loadSheetDataCached(sheetName, env) {
       console.log(`[Cache HIT] ${sheetName} (age: ${Math.round(age / 1e3)}s)`);
       return cached.data;
     } else {
-      console.log(`[Cache EXPIRED] ${sheetName} (age: ${Math.round(age / 1e3)}s)`);
+      console.log(
+        `[Cache EXPIRED] ${sheetName} (age: ${Math.round(age / 1e3)}s)`
+      );
       sheetCache.delete(cacheKey);
     }
   }
@@ -208,7 +222,9 @@ async function loadSheetDataCached(sheetName, env) {
     data: result,
     timestamp: Date.now()
   });
-  console.log(`[Cache STORED] ${sheetName} - valid for ${CACHE_TTL_MS / 1e3}s`);
+  console.log(
+    `[Cache STORED] ${sheetName} - valid for ${CACHE_TTL_MS / 1e3}s`
+  );
   return result;
 }
 __name(loadSheetDataCached, "loadSheetDataCached");
@@ -221,7 +237,9 @@ async function loadCabinDetailCached(env) {
       console.log(`[Cache HIT] Cabin Detail (age: ${Math.round(age / 1e3)}s)`);
       return cached.data;
     } else {
-      console.log(`[Cache EXPIRED] Cabin Detail (age: ${Math.round(age / 1e3)}s)`);
+      console.log(
+        `[Cache EXPIRED] Cabin Detail (age: ${Math.round(age / 1e3)}s)`
+      );
       sheetCache.delete(cacheKey);
     }
   }
@@ -281,7 +299,9 @@ async function loadCabinDetailCached(env) {
     data: list,
     timestamp: Date.now()
   });
-  console.log(`[Cache STORED] Cabin Detail - ${list.length} entries, valid for ${CACHE_TTL_MS / 1e3}s`);
+  console.log(
+    `[Cache STORED] Cabin Detail - ${list.length} entries, valid for ${CACHE_TTL_MS / 1e3}s`
+  );
   return list;
 }
 __name(loadCabinDetailCached, "loadCabinDetailCached");
@@ -478,7 +498,7 @@ var jsonError = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx)
 }, "jsonError");
 var middleware_miniflare3_json_error_default = jsonError;
 
-// .wrangler/tmp/bundle-fj4bSn/middleware-insertion-facade.js
+// .wrangler/tmp/bundle-laAhf6/middleware-insertion-facade.js
 var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
   middleware_ensure_req_body_drained_default,
   middleware_miniflare3_json_error_default
@@ -510,7 +530,7 @@ function __facade_invoke__(request, env, ctx, dispatch, finalMiddleware) {
 }
 __name(__facade_invoke__, "__facade_invoke__");
 
-// .wrangler/tmp/bundle-fj4bSn/middleware-loader.entry.ts
+// .wrangler/tmp/bundle-laAhf6/middleware-loader.entry.ts
 var __Facade_ScheduledController__ = class ___Facade_ScheduledController__ {
   constructor(scheduledTime, cron, noRetry) {
     this.scheduledTime = scheduledTime;
