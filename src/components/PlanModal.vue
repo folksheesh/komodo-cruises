@@ -212,9 +212,6 @@
                           /> -->
                           <div class="ship-details-text">
                             <div class="list-text">{{ s.label }}</div>
-                            <div v-if="s.description" class="ship-desc">
-                              {{ s.description }}
-                            </div>
                           </div>
                         </div>
                         <input
