@@ -2607,6 +2607,7 @@ const searchCriteria = ref(null);
 const shipAvailability = ref({});
 const availabilityData = ref([]);
 const globalStartAvailability = ref(null);
+const detailCabinMap = ref(new Map()); // Store detailed cabin info
 const shipDetailsMap = ref(new Map()); // Store detailed ship info (images, etc.)
 
 const itineraryItems = ref([]);
@@ -2686,41 +2687,59 @@ const SHIP_IMAGES = {
 };
 
 // Fallback function to get ship image - tries multiple matching strategies
-// Fallback function to get ship image - tries multiple matching strategies
 function getShipImage(shipName) {
   if (!shipName) return "";
+  
+  // Coba ambil dari shipDetailsMap terlebih dahulu
+  const shipDetail = getShipDetailByName(shipName);
+  if (shipDetail && shipDetail.mainImage) {
+    return shipDetail.mainImage;
+  }
+  
+  // Fallback ke static SHIP_IMAGES
   const normalized = shipName.toUpperCase().trim();
 
-  // 1. Check direct/partial match in static config
-  let staticUrl = SHIP_IMAGES[normalized];
-  if (!staticUrl) {
-    for (const [key, url] of Object.entries(SHIP_IMAGES)) {
-      const normKey = key.toUpperCase().trim();
-      if (normKey.includes(normalized) || normalized.includes(normKey)) {
-        staticUrl = url;
-        break;
-      }
-    }
-  }
+  // Check direct match
+  if (SHIP_IMAGES[normalized]) return SHIP_IMAGES[normalized];
 
-  // Return static URL if it exists and isn't a placeholder
-  if (staticUrl && !staticUrl.includes("placeholder")) {
-    return staticUrl;
-  }
-
-  // 2. Fallback: Find any cabin image for this ship from detailCabinMap
-  if (detailCabinMap.value && detailCabinMap.value.size > 0) {
-    const normShip = normalizeName(shipName);
-    for (const [key, val] of detailCabinMap.value.entries()) {
-      // Key format: shipName|cabinName or |cabinName
-      // We look for keys starting with the ship name
-      if (key.startsWith(`${normShip}|`) && val?.image_main) {
-        return convertGDriveUrl(val.image_main);
-      }
+  // Check partial match (handles variations like "DERYA" vs "DURYA")
+  for (const [key, url] of Object.entries(SHIP_IMAGES)) {
+    const normKey = key.toUpperCase().trim();
+    if (normKey.includes(normalized) || normalized.includes(normKey)) {
+      return url;
     }
   }
 
   return "";
+}
+
+// Helper function untuk mencari ship detail berdasarkan nama
+function getShipDetailByName(shipName) {
+  if (!shipName) return null;
+  
+  const normalized = shipName.toUpperCase().trim();
+  
+  // Debug: log what we're searching for
+  console.log(`Searching for ship: "${shipName}" -> normalized: "${normalized}"`);
+  console.log(`Map has ${shipDetailsMap.value.size} entries:`, Array.from(shipDetailsMap.value.keys()));
+  
+  // Cari exact match
+  if (shipDetailsMap.value.has(normalized)) {
+    const found = shipDetailsMap.value.get(normalized);
+    console.log(`Found exact match for ${normalized}:`, found);
+    return found;
+  }
+  
+  // Cari partial match
+  for (const [key, detail] of shipDetailsMap.value.entries()) {
+    if (key.includes(normalized) || normalized.includes(key)) {
+      console.log(`Found partial match: "${key}" matches "${normalized}"`);
+      return detail;
+    }
+  }
+  
+  console.log(`No match found for ${normalized}`);
+  return null;
 }
 
 const SHIPS_CONFIG = [];
@@ -2785,8 +2804,6 @@ const displayTripDuration = computed(() => {
   }
   return `${min} - ${max} days`;
 });
-
-const detailCabinMap = ref(new Map());
 
 const openRegions = ref(false);
 const openShips = ref(false);
@@ -3427,83 +3444,30 @@ const availableShipsForSelection = computed(() => {
           return sum + (cap || 4);
         }, 0);
 
-        // Determine ship image
-        let finalImage = shipDetail?.mainImage || getShipImage(shipName);
-
-        // Fallback: Try to get image from the first cabin that has one
-        if (!finalImage && validCabins.length > 0) {
-          for (const cab of validCabins) {
-            const baseName = getCabinBaseName(cab);
-            const cabinKey = normalizeCabinName(baseName);
-            // Try lookup with empty ship prefix since operator is Unknown
-            let det = detailMap.get(`|${cabinKey}`);
-
-            // Also try with ship name prefix if needed
-            if (!det) det = detailMap.get(`${normShipName}|${cabinKey}`);
-
-            // Fallback lookup
-            if (!det) {
-              for (const [dk, dv] of detailMap.entries()) {
-                if (dk.endsWith(`|${cabinKey}`)) {
-                  det = dv;
-                  break;
-                }
-              }
-            }
-
-            if (det && det.image_main) {
-              finalImage = convertGDriveUrl(det.image_main);
-              break;
-            }
-          }
-        }
-
         result.push({
           name: shipName,
           operator: matchingOp.operator,
           cabinsCount: totalCabins,
           totalCapacity: totalCapacity,
           hasAvailability: true,
-          image: finalImage || "",
+          image: shipDetail?.mainImage || getShipImage(shipName) || "",
           description: shipDetail?.description || "",
         });
       } else {
-        // Even if no cabins available, try to get image
-        const finalImage = shipDetail?.mainImage || getShipImage(shipName);
-
         result.push({
           name: shipName,
           operator: matchingOp.operator,
           cabinsCount: 0,
           totalCapacity: 0,
           hasAvailability: false,
-          image: finalImage || "",
+          image: shipDetail?.mainImage || getShipImage(shipName) || "",
           description: shipDetail?.description || "",
         });
       }
     } else {
-      // Lookup ship details even if no operator match
-      let shipDetail = null;
-      const normShipName = shipName.toLowerCase().replace(/\s+/g, "").trim();
-      const shipMap = shipDetailsMap.value || new Map();
-
-      // Try direct lookup first
-      shipDetail = shipMap.get(normShipName) || shipMap.get(shipName);
-
-      // Fallback to iteration
-      if (!shipDetail) {
-        for (const [key, detail] of shipMap.entries()) {
-          const normKey = String(key).toLowerCase().replace(/\s+/g, "").trim();
-          if (
-            normKey === normShipName ||
-            normKey.includes(normShipName) ||
-            normShipName.includes(normKey)
-          ) {
-            shipDetail = detail;
-            break;
-          }
-        }
-      }
+      // Lookup ship details even if no operator match - use getShipDetailByName for consistency
+      const shipDetail = getShipDetailByName(shipName);
+      
       result.push({
         name: shipName,
         operator: shipName,
@@ -3584,10 +3548,6 @@ const allStartDateCabins = computed(() => {
       if (!detail && operatorLabel) {
         detail = detailMap.get(`${normalizeName(operatorLabel)}|${cabinKey}`);
       }
-      // Try cabin-only key (for "Unknown" operator case)
-      if (!detail) {
-        detail = detailMap.get(`|${cabinKey}`);
-      }
       // Fallback: scan by cabin name only (first match)
       if (!detail) {
         for (const [dk, dv] of detailMap.entries()) {
@@ -3603,13 +3563,6 @@ const allStartDateCabins = computed(() => {
           name
         )}`;
         detail = detailMap.get(canonKey);
-      }
-      // Also try cabin-only canonical key
-      if (!detail) {
-        const canonOnly = canonicalizeCabinLabel(name);
-        if (canonOnly) {
-          detail = detailMap.get(`|${canonOnly}`);
-        }
       }
       const mergedPrice = getCabinPrice(detail) || price;
       const mergedCapacity = getCabinCapacityText(detail) || capacityText;
@@ -4241,32 +4194,49 @@ async function loadDetailCabins() {
         if (canonBase) {
           const canonKey = `${normalizeName(shipName)}|${canonBase}`;
           map.set(canonKey, cb);
-          // Also store by cabin name only (fallback for "Unknown" operator)
-          map.set(`|${canonBase}`, cb);
         }
         if (apiName) {
           const canonApi = canonicalizeCabinLabel(apiName);
           if (canonApi) {
             const canonApiKey = `${normalizeName(shipName)}|${canonApi}`;
             map.set(canonApiKey, cb);
-            // Also store by cabin name only
-            map.set(`|${canonApi}`, cb);
           }
-        }
-
-        // CRITICAL: Also store by just cabin name for matching when operator is "Unknown"
-        if (baseName) {
-          map.set(`|${normalizeCabinName(baseName)}`, cb);
-        }
-        if (apiName) {
-          map.set(`|${normalizeCabinName(apiName)}`, cb);
         }
       });
     }
-    console.log("DetailCabinMap loaded:", map.size, "entries");
     detailCabinMap.value = map;
   } catch (e) {
     console.warn("Failed to load cabindetail API", e);
+  }
+}
+
+// Load ship details from shipdetail API
+async function loadShipDetails() {
+  try {
+    const baseUrl = import.meta.env.DEV
+      ? "http://127.0.0.1:8787"
+      : "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io";
+    const url = `${baseUrl}/?resource=shipdetail`;
+    const res = await fetch(url).then((r) => r.json());
+    
+    const map = new Map();
+    if (res && res.ok && Array.isArray(res.ships)) {
+      res.ships.forEach((ship) => {
+        const normalized = (ship.name || "").toUpperCase().trim();
+        if (normalized) {
+          // Transform image_main to mainImage for consistency
+          const transformed = {
+            ...ship,
+            mainImage: ship.image_main || ship.mainImage || ""
+          };
+          map.set(normalized, transformed);
+        }
+      });
+    }
+    shipDetailsMap.value = map;
+    console.log(`Loaded ${map.size} ship details from API`, Array.from(map.keys()));
+  } catch (e) {
+    console.warn("Failed to load shipdetail API", e);
   }
 }
 
@@ -4647,6 +4617,11 @@ onMounted(async () => {
     // Start loading detail cabins in background (non-blocking)
     loadDetailCabins().catch((err) =>
       console.warn("Failed to load details background:", err)
+    );
+    
+    // Start loading ship details in background (non-blocking)
+    loadShipDetails().catch((err) =>
+      console.warn("Failed to load ship details background:", err)
     );
 
     // Run critical API calls in parallel

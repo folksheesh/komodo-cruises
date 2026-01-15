@@ -5,6 +5,7 @@ const GOOGLE_API_KEY = "AIzaSyCaBu5hbQiZQbt8wl10bJzM08jFVuGeSuI";
 const SPREADSHEET_ID = "1FqMYrf_uVoL_lU2WuoFj_59rXPHttuAqDI_mxnVN42I"; // Dest Sheet ID
 const SHEET_NAME = "2026 OT (Normalized)";
 const CABIN_DETAIL_SHEET = "Cabin Detail";
+const SHIP_DETAIL_SHEET = "Ship Detail";
 
 const OT2026 = [
   "SEMESTA VOYAGES",
@@ -22,7 +23,7 @@ export default {
     }
 
     // 1. Parsing Parameter
-    const resource = (url.searchParams.get("resource") || "").toLowerCase();
+    const resource = (url.searchParams.get("resource") || "").toLowerCase().trim();
     const date = url.searchParams.get("date");
     const cabinName = url.searchParams.get("name");
     const guests = parseInt(url.searchParams.get("guests") || "1", 10);
@@ -43,6 +44,91 @@ export default {
         return jsonOk({ total: details.length, data: details });
       }
 
+      // === API: Ship Detail ===
+      if (resource === "shipdetail") {
+        try {
+          // Fetch dari sheet "Ship Detail"
+          const shipDetailUrl = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${encodeURIComponent(
+            SHIP_DETAIL_SHEET
+          )}?key=${GOOGLE_API_KEY}`;
+          
+          const shipResp = await fetch(shipDetailUrl);
+          if (!shipResp.ok) {
+            return jsonErr(`Gagal fetch Ship Detail: ${shipResp.status}`);
+          }
+          
+          const shipJson = await shipResp.json();
+          const shipRows = shipJson.values || [];
+          
+          if (shipRows.length < 2) {
+            return jsonOk({ ok: true, total: 0, resource: "shipdetail", ships: [] });
+          }
+          
+          // Parse header
+          const headers = shipRows[0].map((h) => (h || "").toLowerCase().trim());
+          
+          const ships = [];
+          
+          for (let i = 1; i < shipRows.length; i++) {
+            const row = shipRows[i] || [];
+            
+            // Build object dengan key lowercase
+            const obj = {};
+            headers.forEach((h, idx) => {
+              const v = (row[idx] || "").toString().trim();
+              if (h) obj[h] = v;
+            });
+            
+            // Ambil ship name dari kolom NAME BOAT atau OP NAME
+            const shipName = obj["name boat"] || obj["op name"] || obj["operator"] || "";
+            
+            if (!shipName) continue; // Skip jika tidak ada nama ship
+            
+            // Ambil description
+            const description = obj["description"] || "";
+            
+            // Ambil main image dari MAIN DISPLAY
+            let mainImage = obj["main display"] || "";
+            
+            // Transform Google Drive URL ke direct image link
+            if (mainImage && mainImage.includes("drive.google.com")) {
+              mainImage = convertGoogleDriveUrl(mainImage);
+            }
+            
+            // Collect images dari PICTURE_1, PICTURE_2, dst
+            const images = [];
+            
+            // Tambah main display ke images jika ada
+            if (mainImage) {
+              images.push(mainImage);
+            }
+            
+            // Loop untuk PICTURE_1 sampai PICTURE_20
+            for (let j = 1; j <= 20; j++) {
+              const picKey = `picture_${j}`;
+              let picUrl = obj[picKey];
+              if (picUrl && picUrl.includes("drive.google.com")) {
+                picUrl = convertGoogleDriveUrl(picUrl);
+                if (!images.includes(picUrl)) {
+                  images.push(picUrl);
+                }
+              }
+            }
+            
+            ships.push({
+              name: shipName,
+              description: description,
+              image_main: mainImage,
+              images: images,
+            });
+          }
+          
+          return jsonOk({ ok: true, total: ships.length, resource: "shipdetail", ships });
+        } catch (err) {
+          return jsonErr(`shipdetail error: ${err.message}`);
+        }
+      }
+
       // === API: Operators ===
       if (resource === "operators") {
         return jsonOk({
@@ -54,18 +140,18 @@ export default {
         });
       }
 
-      // === Fetch Main Data (Normalized) ===
-      // Kita fetch data "Values" dan "Colors" sekaligus
-      const sheetData = await loadSheetDataCached(SHEET_NAME, env);
-
       // === API: Cabins List ===
       if (resource === "cabins") {
+        const sheetData = await loadSheetDataCached(SHEET_NAME, env);
         const allCabins = listCabinsAll(sheetData);
         return jsonOk({ cabins: allCabins });
       }
 
-      // Validasi Date untuk Availability
+      // Validasi Date untuk Availability & Search
       if (!date) return jsonErr("Missing ?date=YYYY-MM-DD");
+
+      // === Fetch Main Data (Normalized) untuk availability/search ===
+      const sheetData = await loadSheetDataCached(SHEET_NAME, env);
 
       // Proses Logika Utama
       const res = summarizeOT2026ByDate(sheetData, date);
@@ -391,6 +477,31 @@ function normalizeCabinName(txt) {
     .trim();
   if (!clean) return null;
   return clean.charAt(0).toUpperCase() + clean.slice(1).toLowerCase();
+}
+
+// Helper function to convert Google Drive URL to direct image link
+function convertGoogleDriveUrl(url) {
+  if (!url) return "";
+  
+  // Extract file ID from various Google Drive URL formats
+  // Format 1: https://drive.google.com/file/d/FILE_ID/view
+  // Format 2: https://drive.google.com/open?id=FILE_ID
+  let fileId = null;
+  
+  const match1 = url.match(/\/file\/d\/([^\/]+)/);
+  if (match1) {
+    fileId = match1[1];
+  } else {
+    const match2 = url.match(/[?&]id=([^&]+)/);
+    if (match2) {
+      fileId = match2[1];
+    }
+  }
+  
+  if (!fileId) return url; // Return original if can't extract ID
+  
+  // Convert to direct image link
+  return `https://lh3.googleusercontent.com/d/${fileId}`;
 }
 
 function jsonOk(obj) {

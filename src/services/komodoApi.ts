@@ -108,96 +108,32 @@ function getDirectGDriveLink(url: string): string {
 
 
 
-export async function getShipDetails(sheet: string = "Ship Detail"): Promise<ShipDetailsResponse> {
-  // Check memory cache first
-  const cacheKey = `shipdetail|${sheet}`;
+export async function getShipDetails(): Promise<ShipDetailsResponse> {
+  const cacheKey = `shipdetail`;
   if (shipDetailsCache.has(cacheKey)) {
     return shipDetailsCache.get(cacheKey)!;
   }
 
-  // Check localStorage cache (persistent across refreshes)
-  const CACHE_duration = 60 * 60 * 1000; // 1 hour
-  const stored = localStorage.getItem(cacheKey);
-  if (stored) {
-    try {
-      const { timestamp, data } = JSON.parse(stored);
-      if (Date.now() - timestamp < CACHE_duration) {
-        shipDetailsCache.set(cacheKey, data); // Hydrate memory cache
-        return data;
-      }
-    } catch (e) {
-      localStorage.removeItem(cacheKey);
-    }
-  }
-
-  // Use 'cabins' resource as a generic sheet reader
-  const url = buildUrl({ resource: 'cabins', sheet });
+  // Fetch dari API backend
+  const url = buildUrl({ resource: 'shipdetail' });
   const response = await fetch(url);
+  const rawData: any = await handleResponse<any>(response);
   
-  // We expect a CabinsResponse structure but we'll map it to ShipDetails
-  const data = await handleResponse<CabinsResponse>(response);
-
-  const ships: ShipDetail[] = [];
+  // Transform response - backend uses image_main, frontend expects mainImage
+  const ships: ShipDetail[] = (rawData.ships || []).map((ship: any) => ({
+    id: ship.id || '',
+    name: ship.name || '',
+    description: ship.description || '',
+    mainImage: ship.image_main || '', // Transform ke mainImage
+    images: ship.images || [],
+    specs: ship.specs || {}
+  }));
   
-  if (data.operators) {
-      const safeGetValue = (row: any, key: string): string => {
-          // Try exact match
-          if (row[key]) return row[key];
-          // Try lowercase/formatted match
-          const normalizedKey = key.toLowerCase().replace(/\s+/g, '');
-          const foundKey = Object.keys(row).find(k => k.toLowerCase().replace(/\s+/g, '') === normalizedKey);
-          return foundKey ? row[foundKey] : '';
-      };
-
-      data.operators.forEach(op => {
-          op.cabins.forEach(row => {
-               if (typeof row === 'object') {
-                   // Map row columns to ShipDetail using robust lookup
-                   const name = safeGetValue(row, 'NAME BOAT') || row.name || '';
-                   if (!name) return; // Skip invalid rows
-
-                   const id = safeGetValue(row, 'ID') || name.replace(/\s+/g, '_').toUpperCase();
-                   
-                   // Collect images
-                   const images: string[] = [];
-                   // Check for PICTURE_1 to PICTURE_20
-                   for (let i = 1; i <= 20; i++) {
-                       const val = safeGetValue(row, `PICTURE_${i}`);
-                       if (val) images.push(getDirectGDriveLink(val));
-                   }
-
-                   // Map specs (dynamic)
-                   const specs: Record<string, string> = {};
-                   const knownKeys = ['ID', 'NAME BOAT', 'DESCRIPTION', 'MAIN DISPLAY'];
-                   // We want to avoid polluting specs with normalized keys if possible, 
-                   // but for now let's just grab what isn't a known structural key.
-                   // Actually, safer to just iterate keys present in row.
-                   Object.keys(row).forEach(k => {
-                        const val = row[k];
-                        // normalization check
-                        const normK = k.toUpperCase();
-                        if (!knownKeys.includes(normK) && !normK.startsWith('PICTURE')) {
-                            specs[k] = val;
-                        }
-                   });
-
-                   const mainDisplayVal = safeGetValue(row, 'MAIN DISPLAY');
-                   const mainImage = mainDisplayVal ? getDirectGDriveLink(mainDisplayVal) : (images.length ? images[0] : '');
-
-                   ships.push({
-                       id,
-                       name,
-                       description: safeGetValue(row, 'DESCRIPTION'),
-                       mainImage,
-                       images,
-                       specs
-                   });
-               }
-          });
-      });
-  }
-
-  const result: ShipDetailsResponse = { ok: true, resource: 'shipdetail', ships };
+  const result: ShipDetailsResponse = { 
+    ok: true, 
+    resource: 'shipdetail', 
+    ships 
+  };
   
   // Save to memory cache
   shipDetailsCache.set(cacheKey, result);

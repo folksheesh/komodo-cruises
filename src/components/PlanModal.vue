@@ -191,7 +191,7 @@
                   <p class="results-note">Please select one or more ships:</p>
 
                   <div class="list">
-                    <div class="list-heading">Available Ships</div>
+                    <!-- <div class="list-heading">Available Ships</div> -->
 
                     <div v-if="shipsLoading" class="muted">
                       Loading ships...

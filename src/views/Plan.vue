@@ -75,7 +75,7 @@
         <p class="results-note">Please select a ship:</p>
 
         <div class="list">
-          <div class="list-heading">Available Ships</div>
+          <!-- <div class="list-heading">Available Ships</div> -->
 
           <div class="list-row" v-for="s in SHIPS" :key="s">
             <div class="list-text">{{ s }}</div>

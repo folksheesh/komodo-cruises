@@ -1,7 +1,7 @@
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
-// .wrangler/tmp/bundle-3eyUZR/checked-fetch.js
+// .wrangler/tmp/bundle-fj4bSn/checked-fetch.js
 var urls = /* @__PURE__ */ new Set();
 function checkURL(request, init) {
   const url = request instanceof URL ? request : new URL(
@@ -32,6 +32,7 @@ var GOOGLE_API_KEY = "AIzaSyCaBu5hbQiZQbt8wl10bJzM08jFVuGeSuI";
 var SPREADSHEET_ID = "1FqMYrf_uVoL_lU2WuoFj_59rXPHttuAqDI_mxnVN42I";
 var SHEET_NAME = "2026 OT (Normalized)";
 var CABIN_DETAIL_SHEET = "Cabin Detail";
+var SHIP_DETAIL_SHEET = "Ship Detail";
 var OT2026 = [
   "SEMESTA VOYAGES",
   "AKASSA CRUISE",
@@ -44,7 +45,7 @@ var index_default = {
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204, headers: corsHeaders() });
     }
-    const resource = (url.searchParams.get("resource") || "").toLowerCase();
+    const resource = (url.searchParams.get("resource") || "").toLowerCase().trim();
     const date = url.searchParams.get("date");
     const cabinName = url.searchParams.get("name");
     const guests = parseInt(url.searchParams.get("guests") || "1", 10);
@@ -60,6 +61,62 @@ var index_default = {
         }
         return jsonOk({ total: details.length, data: details });
       }
+      if (resource === "shipdetail") {
+        try {
+          const shipDetailUrl = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${encodeURIComponent(
+            SHIP_DETAIL_SHEET
+          )}?key=${GOOGLE_API_KEY}`;
+          const shipResp = await fetch(shipDetailUrl);
+          if (!shipResp.ok) {
+            return jsonErr(`Gagal fetch Ship Detail: ${shipResp.status}`);
+          }
+          const shipJson = await shipResp.json();
+          const shipRows = shipJson.values || [];
+          if (shipRows.length < 2) {
+            return jsonOk({ ok: true, total: 0, resource: "shipdetail", ships: [] });
+          }
+          const headers = shipRows[0].map((h) => (h || "").toLowerCase().trim());
+          const ships = [];
+          for (let i = 1; i < shipRows.length; i++) {
+            const row = shipRows[i] || [];
+            const obj = {};
+            headers.forEach((h, idx) => {
+              const v = (row[idx] || "").toString().trim();
+              if (h) obj[h] = v;
+            });
+            const shipName = obj["name boat"] || obj["op name"] || obj["operator"] || "";
+            if (!shipName) continue;
+            const description = obj["description"] || "";
+            let mainImage = obj["main display"] || "";
+            if (mainImage && mainImage.includes("drive.google.com")) {
+              mainImage = convertGoogleDriveUrl(mainImage);
+            }
+            const images = [];
+            if (mainImage) {
+              images.push(mainImage);
+            }
+            for (let j = 1; j <= 20; j++) {
+              const picKey = `picture_${j}`;
+              let picUrl = obj[picKey];
+              if (picUrl && picUrl.includes("drive.google.com")) {
+                picUrl = convertGoogleDriveUrl(picUrl);
+                if (!images.includes(picUrl)) {
+                  images.push(picUrl);
+                }
+              }
+            }
+            ships.push({
+              name: shipName,
+              description,
+              image_main: mainImage,
+              images
+            });
+          }
+          return jsonOk({ ok: true, total: ships.length, resource: "shipdetail", ships });
+        } catch (err) {
+          return jsonErr(`shipdetail error: ${err.message}`);
+        }
+      }
       if (resource === "operators") {
         return jsonOk({
           total: OT2026.length,
@@ -69,12 +126,13 @@ var index_default = {
           }))
         });
       }
-      const sheetData = await loadSheetDataCached(SHEET_NAME, env);
       if (resource === "cabins") {
-        const allCabins = listCabinsAll(sheetData);
+        const sheetData2 = await loadSheetDataCached(SHEET_NAME, env);
+        const allCabins = listCabinsAll(sheetData2);
         return jsonOk({ cabins: allCabins });
       }
       if (!date) return jsonErr("Missing ?date=YYYY-MM-DD");
+      const sheetData = await loadSheetDataCached(SHEET_NAME, env);
       const res = summarizeOT2026ByDate(sheetData, date);
       if (resource === "availability") {
         return jsonOk({ date, ...res });
@@ -303,6 +361,22 @@ function normalizeCabinName(txt) {
   return clean.charAt(0).toUpperCase() + clean.slice(1).toLowerCase();
 }
 __name(normalizeCabinName, "normalizeCabinName");
+function convertGoogleDriveUrl(url) {
+  if (!url) return "";
+  let fileId = null;
+  const match1 = url.match(/\/file\/d\/([^\/]+)/);
+  if (match1) {
+    fileId = match1[1];
+  } else {
+    const match2 = url.match(/[?&]id=([^&]+)/);
+    if (match2) {
+      fileId = match2[1];
+    }
+  }
+  if (!fileId) return url;
+  return `https://lh3.googleusercontent.com/d/${fileId}`;
+}
+__name(convertGoogleDriveUrl, "convertGoogleDriveUrl");
 function jsonOk(obj) {
   return new Response(JSON.stringify({ ok: true, ...obj }, null, 2), {
     headers: corsHeaders()
@@ -325,7 +399,7 @@ function corsHeaders() {
 }
 __name(corsHeaders, "corsHeaders");
 
-// ../../../AppData/Roaming/npm/node_modules/wrangler/templates/middleware/middleware-ensure-req-body-drained.ts
+// ../../../../AppData/Roaming/npm/node_modules/wrangler/templates/middleware/middleware-ensure-req-body-drained.ts
 var drainBody = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx) => {
   try {
     return await middlewareCtx.next(request, env);
@@ -343,7 +417,7 @@ var drainBody = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx)
 }, "drainBody");
 var middleware_ensure_req_body_drained_default = drainBody;
 
-// ../../../AppData/Roaming/npm/node_modules/wrangler/templates/middleware/middleware-miniflare3-json-error.ts
+// ../../../../AppData/Roaming/npm/node_modules/wrangler/templates/middleware/middleware-miniflare3-json-error.ts
 function reduceError(e) {
   return {
     name: e?.name,
@@ -366,14 +440,14 @@ var jsonError = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx)
 }, "jsonError");
 var middleware_miniflare3_json_error_default = jsonError;
 
-// .wrangler/tmp/bundle-3eyUZR/middleware-insertion-facade.js
+// .wrangler/tmp/bundle-fj4bSn/middleware-insertion-facade.js
 var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
   middleware_ensure_req_body_drained_default,
   middleware_miniflare3_json_error_default
 ];
 var middleware_insertion_facade_default = index_default;
 
-// ../../../AppData/Roaming/npm/node_modules/wrangler/templates/middleware/common.ts
+// ../../../../AppData/Roaming/npm/node_modules/wrangler/templates/middleware/common.ts
 var __facade_middleware__ = [];
 function __facade_register__(...args) {
   __facade_middleware__.push(...args.flat());
@@ -398,7 +472,7 @@ function __facade_invoke__(request, env, ctx, dispatch, finalMiddleware) {
 }
 __name(__facade_invoke__, "__facade_invoke__");
 
-// .wrangler/tmp/bundle-3eyUZR/middleware-loader.entry.ts
+// .wrangler/tmp/bundle-fj4bSn/middleware-loader.entry.ts
 var __Facade_ScheduledController__ = class ___Facade_ScheduledController__ {
   constructor(scheduledTime, cron, noRetry) {
     this.scheduledTime = scheduledTime;
