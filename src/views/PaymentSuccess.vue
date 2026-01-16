@@ -303,7 +303,7 @@ const sendConfirmationEmail = async () => {
     emailStatus.value = "sending";
 
     const response = await fetch(
-      "https://komodo-cruises-production-0c52.up.railway.app/api/send-confirmation-email",
+      "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/api/send-confirmation-email",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
