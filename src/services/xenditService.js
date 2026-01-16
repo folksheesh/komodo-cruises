@@ -1,5 +1,11 @@
 // Xendit Payment Service
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://komodo-cruises-production-0c52.up.railway.app';
+// Use Wrangler dev server (localhost:8787) for local testing
+// Fallback to Coolify-hosted backend for production
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.DEV
+    ? "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io"
+    : "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io");
 
 /**
  * Create a Xendit invoice for payment
@@ -15,9 +21,9 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://komodo-cruises-pro
 export async function createXenditInvoice(paymentData) {
   try {
     const response = await fetch(`${API_BASE_URL}/api/create-invoice`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         amount: paymentData.amount,
@@ -26,20 +32,24 @@ export async function createXenditInvoice(paymentData) {
         customerName: paymentData.customerName,
         customerPhone: paymentData.customerPhone,
         items: paymentData.items,
-        successRedirectUrl: paymentData.successRedirectUrl || `${window.location.origin}/payment-success`,
-        failureRedirectUrl: paymentData.failureRedirectUrl || `${window.location.origin}/payment-failed`
-      })
+        successRedirectUrl:
+          paymentData.successRedirectUrl ||
+          `${window.location.origin}/payment-success`,
+        failureRedirectUrl:
+          paymentData.failureRedirectUrl ||
+          `${window.location.origin}/payment-failed`,
+      }),
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.message || 'Failed to create invoice');
+      throw new Error(data.message || "Failed to create invoice");
     }
 
     return data;
   } catch (error) {
-    console.error('Error creating Xendit invoice:', error);
+    console.error("Error creating Xendit invoice:", error);
     throw error;
   }
 }
@@ -55,12 +65,12 @@ export async function getInvoiceStatus(invoiceId) {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.message || 'Failed to fetch invoice');
+      throw new Error(data.message || "Failed to fetch invoice");
     }
 
     return data;
   } catch (error) {
-    console.error('Error fetching invoice status:', error);
+    console.error("Error fetching invoice status:", error);
     throw error;
   }
 }
@@ -73,7 +83,7 @@ export function redirectToPayment(invoiceUrl) {
   if (invoiceUrl) {
     window.location.href = invoiceUrl;
   } else {
-    throw new Error('Invoice URL is required');
+    throw new Error("Invoice URL is required");
   }
 }
 
@@ -83,11 +93,11 @@ export function redirectToPayment(invoiceUrl) {
  * @returns {string} Formatted currency string
  */
 export function formatToIDR(amount) {
-  return new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
     minimumFractionDigits: 0,
-    maximumFractionDigits: 0
+    maximumFractionDigits: 0,
   }).format(amount);
 }
 
@@ -98,13 +108,13 @@ export function formatToIDR(amount) {
  */
 export function parsePriceToNumber(priceString) {
   if (!priceString) return 0;
-  if (typeof priceString === 'number') return priceString;
-  
+  if (typeof priceString === "number") return priceString;
+
   // Remove currency symbols and text, keep only numbers
   const numericString = String(priceString)
-    .replace(/[^\d.,]/g, '')
-    .replace(/\./g, '')
-    .replace(/,/g, '');
-  
+    .replace(/[^\d.,]/g, "")
+    .replace(/\./g, "")
+    .replace(/,/g, "");
+
   return parseInt(numericString) || 0;
 }

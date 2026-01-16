@@ -14,13 +14,197 @@ const OT2026 = [
   "GIONA LIVEABOARD",
 ];
 
+// Xendit Payment Configuration
+const XENDIT_SECRET_KEY =
+  "xnd_development_dGXj21II2TZ60PFab6N5UDTu3SQZzC5qJpkPfoW7eoSaz2Hwvz0sw4dnD5EhM6g";
+const XENDIT_AUTH = btoa(XENDIT_SECRET_KEY + ":");
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    const pathname = url.pathname;
+
     // CORS preflight support
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204, headers: corsHeaders() });
     }
+
+    // ========================================
+    // PAYMENT API ROUTES (Path-based routing)
+    // ========================================
+
+    // POST /api/create-invoice - Create Xendit Invoice
+    if (pathname === "/api/create-invoice" && request.method === "POST") {
+      try {
+        const body = await request.json();
+        const {
+          externalId,
+          amount,
+          payerEmail,
+          description,
+          customerName,
+          customerPhone,
+          items,
+          successRedirectUrl,
+          failureRedirectUrl,
+        } = body;
+
+        console.log("Received create-invoice request:", body);
+
+        // Validate required fields
+        if (!amount || !payerEmail || !description) {
+          return jsonErr(
+            `Missing required fields: ${!amount ? "amount " : ""}${
+              !payerEmail ? "payerEmail " : ""
+            }${!description ? "description" : ""}`.trim()
+          );
+        }
+
+        // Generate external ID if not provided
+        const invoiceExternalId =
+          externalId ||
+          `INV-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
+        // Prepare invoice data for Xendit API
+        const invoiceData = {
+          external_id: invoiceExternalId,
+          amount: Number(amount),
+          payer_email: payerEmail,
+          description: description,
+          currency: "IDR",
+          invoice_duration: 86400,
+          success_redirect_url:
+            successRedirectUrl || "https://komodocruises.com/payment-success",
+          failure_redirect_url:
+            failureRedirectUrl || "https://komodocruises.com/payment-failed",
+        };
+
+        // Add customer if provided
+        if (customerName || customerPhone) {
+          invoiceData.customer = {
+            given_names: customerName || "Customer",
+            email: payerEmail,
+          };
+          if (customerPhone) {
+            invoiceData.customer.mobile_number = customerPhone;
+          }
+        }
+
+        // Add items if provided
+        if (items && items.length > 0) {
+          invoiceData.items = items.map((item) => ({
+            name: item.name,
+            quantity: item.quantity || 1,
+            price: item.price,
+            category: item.category || "Cruise Booking",
+          }));
+        }
+
+        console.log(
+          "Creating Xendit invoice with data:",
+          JSON.stringify(invoiceData, null, 2)
+        );
+
+        // Call Xendit API
+        const response = await fetch("https://api.xendit.co/v2/invoices", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Basic ${XENDIT_AUTH}`,
+          },
+          body: JSON.stringify(invoiceData),
+        });
+
+        const responseData = await response.json();
+        console.log("Xendit API response:", responseData);
+
+        if (!response.ok) {
+          console.error("Xendit API error:", responseData);
+          return new Response(
+            JSON.stringify({
+              success: false,
+              message: responseData.message || "Failed to create invoice",
+              errorCode: responseData.error_code,
+            }),
+            { status: response.status, headers: corsHeaders() }
+          );
+        }
+
+        return new Response(
+          JSON.stringify({
+            success: true,
+            invoiceId: responseData.id,
+            invoiceUrl: responseData.invoice_url,
+            externalId: responseData.external_id,
+            status: responseData.status,
+            amount: responseData.amount,
+            expiryDate: responseData.expiry_date,
+          }),
+          { headers: corsHeaders() }
+        );
+      } catch (error) {
+        console.error("Error creating Xendit invoice:", error);
+        return new Response(
+          JSON.stringify({
+            success: false,
+            message: "Internal server error while creating invoice",
+            error: error.message,
+          }),
+          { status: 500, headers: corsHeaders() }
+        );
+      }
+    }
+
+    // GET /api/invoice/:invoiceId - Get Invoice Status
+    if (pathname.startsWith("/api/invoice/") && request.method === "GET") {
+      try {
+        const invoiceId = pathname.replace("/api/invoice/", "");
+
+        const response = await fetch(
+          `https://api.xendit.co/v2/invoices/${invoiceId}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Basic ${XENDIT_AUTH}`,
+            },
+          }
+        );
+
+        const responseData = await response.json();
+
+        if (!response.ok) {
+          return new Response(
+            JSON.stringify({
+              success: false,
+              message: responseData.message || "Failed to fetch invoice",
+            }),
+            { status: response.status, headers: corsHeaders() }
+          );
+        }
+
+        return new Response(
+          JSON.stringify({
+            success: true,
+            invoice: responseData,
+          }),
+          { headers: corsHeaders() }
+        );
+      } catch (error) {
+        console.error("Error fetching invoice:", error);
+        return new Response(
+          JSON.stringify({
+            success: false,
+            message: "Internal server error",
+            error: error.message,
+          }),
+          { status: 500, headers: corsHeaders() }
+        );
+      }
+    }
+
+    // ========================================
+    // EXISTING API ROUTES (Query param-based)
+    // ========================================
 
     // 1. Parsing Parameter
     const resource = (url.searchParams.get("resource") || "")
@@ -598,7 +782,7 @@ function corsHeaders() {
   return {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
   };
 }
