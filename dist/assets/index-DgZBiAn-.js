@@ -1,1 +1,13812 @@
-import{r as m,w as rt,n as Fn,o as Qe,a as wt,c as Yt,b as o,d as Me,e as i,f as M,g as e,h as Q,i as B,j,T as xt,k as x,l as ke,m as zn,F as K,p as se,q as be,t as r,v as yt,u as he,s as Gs,x as Wa,y as Wt,z as Ht,A as Pe,B as Ha,C as Nn,D as Mn,E as ds,G as kt,H as En,I as Ya,J as Ja,K as ja,L as Xa}from"./vendor-CwPUEyTs.js";(function(){const b=document.createElement("link").relList;if(b&&b.supports&&b.supports("modulepreload"))return;for(const h of document.querySelectorAll('link[rel="modulepreload"]'))C(h);new MutationObserver(h=>{for(const g of h)if(g.type==="childList")for(const v of g.addedNodes)v.tagName==="LINK"&&v.rel==="modulepreload"&&C(v)}).observe(document,{childList:!0,subtree:!0});function f(h){const g={};return h.integrity&&(g.integrity=h.integrity),h.referrerPolicy&&(g.referrerPolicy=h.referrerPolicy),h.crossOrigin==="use-credentials"?g.credentials="include":h.crossOrigin==="anonymous"?g.credentials="omit":g.credentials="same-origin",g}function C(h){if(h.ep)return;h.ep=!0;const g=f(h);fetch(h.href,g)}})();const vt=(S,b)=>{const f=S.__vccOpts||S;for(const[C,h]of b)f[C]=h;return f},Qa={key:0,class:"search-modal-fixed"},Za={class:"modal-top"},eo={class:"modal-controls"},to={class:"search-modal-inner"},so={class:"search-container"},no={class:"input-wrapper"},ao={class:"categories-container"},oo={__name:"SearchModal",props:{isOpen:Boolean},emits:["close"],setup(S,{emit:b}){const f=S,C=b,h=m(null),g=m(null),v=X=>{g.value===X?g.value=null:g.value=X};rt(()=>f.isOpen,X=>{X?(document.body.style.overflow="hidden",Fn(()=>{var T;(T=h.value)==null||T.focus()})):(document.body.style.overflow="",g.value=null)});const E=X=>{X.key==="Escape"&&f.isOpen&&C("close")};return Qe(()=>{window.addEventListener("keydown",E)}),wt(()=>{window.removeEventListener("keydown",E),document.body.style.overflow=""}),(X,T)=>(o(),Yt(xt,{name:"fade"},{default:Me(()=>[S.isOpen?(o(),i("div",Qa,[e("div",Za,[T[6]||(T[6]=e("div",{class:"modal-logo"},"Komodo Cruises",-1)),e("div",eo,[e("button",{class:"close-btn",onClick:T[0]||(T[0]=oe=>X.$emit("close"))},[...T[5]||(T[5]=[e("span",{class:"btn-text"},"Close Search",-1),Q(),e("span",{class:"close-icon"},"✕",-1)])])])]),e("div",to,[e("div",so,[e("div",no,[e("input",{type:"text",placeholder:"Search...",class:"search-input",ref_key:"searchInput",ref:h},null,512),T[7]||(T[7]=e("button",{class:"search-submit"},[e("svg",{xmlns:"http://www.w3.org/2000/svg",width:"24",height:"24",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2","stroke-linecap":"round","stroke-linejoin":"round"},[e("circle",{cx:"11",cy:"11",r:"8"}),e("line",{x1:"21",y1:"21",x2:"16.65",y2:"16.65"})])],-1))])]),e("div",ao,[T[11]||(T[11]=e("p",{class:"categories-label"},"Refine your search",-1)),e("div",{class:B(["categories-list",{"has-selection":g.value}])},[e("a",{href:"#",class:B(["category-link",{"is-selected":g.value==="Destinations"}]),onClick:T[1]||(T[1]=j(oe=>v("Destinations"),["prevent"]))},"Destinations",2),T[8]||(T[8]=e("span",{class:"separator"},"•",-1)),e("a",{href:"#",class:B(["category-link",{"is-selected":g.value==="Ships"}]),onClick:T[2]||(T[2]=j(oe=>v("Ships"),["prevent"]))},"Ships",2),T[9]||(T[9]=e("span",{class:"separator"},"•",-1)),e("a",{href:"#",class:B(["category-link",{"is-selected":g.value==="Cabins"}]),onClick:T[3]||(T[3]=j(oe=>v("Cabins"),["prevent"]))},"Cabins",2),T[10]||(T[10]=e("span",{class:"separator"},"•",-1)),e("a",{href:"#",class:B(["category-link",{"is-selected":g.value==="Blog"}]),onClick:T[4]||(T[4]=j(oe=>v("Blog"),["prevent"]))},"Blog",2)],2)])])])):M("",!0)]),_:1}))}},io=vt(oo,[["__scopeId","data-v-c3c0dc80"]]),lo={key:0,class:"menu-modal-fixed"},ro={class:"modal-top"},co={class:"modal-controls"},uo={__name:"MenuModal",props:{isOpen:Boolean},emits:["close","open-search"],setup(S,{emit:b}){const f=S,C=b;rt(()=>f.isOpen,g=>{g?document.body.style.overflow="hidden":document.body.style.overflow=""});const h=g=>{g.key==="Escape"&&f.isOpen&&C("close")};return Qe(()=>{window.addEventListener("keydown",h)}),wt(()=>{window.removeEventListener("keydown",h),document.body.style.overflow=""}),(g,v)=>(o(),Yt(xt,{name:"fade"},{default:Me(()=>[S.isOpen?(o(),i("div",lo,[e("div",ro,[v[4]||(v[4]=e("div",{class:"modal-logo"},"Komodo Cruises",-1)),e("div",co,[e("button",{class:"control-btn",onClick:v[0]||(v[0]=E=>g.$emit("open-search"))},[...v[2]||(v[2]=[e("svg",{width:"18",height:"18",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2",class:"icon"},[e("circle",{cx:"11",cy:"11",r:"8"}),e("line",{x1:"21",y1:"21",x2:"16.65",y2:"16.65"})],-1),e("span",{class:"btn-text"},"Search",-1)])]),e("button",{class:"control-btn",onClick:v[1]||(v[1]=E=>g.$emit("close"))},[...v[3]||(v[3]=[e("span",{class:"btn-text"},"Close",-1),Q(),e("span",{class:"close-icon"},"✕",-1)])])])]),v[5]||(v[5]=e("div",{class:"menu-content-container"},[e("div",{class:"col-left"},[e("nav",{class:"main-nav"},[e("a",{href:"#",class:"main-link"},"Our Collection"),e("a",{href:"#",class:"main-link"},"Villa Collection"),e("a",{href:"#",class:"main-link"},"Conservation"),e("a",{href:"#",class:"main-link"},"Wildlife"),e("a",{href:"#",class:"main-link"},"About Komodo")]),e("div",{class:"social-icons"},[e("a",{href:"#",class:"social-link"},[e("svg",{width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2","stroke-linecap":"round","stroke-linejoin":"round"},[e("rect",{x:"2",y:"2",width:"20",height:"20",rx:"5",ry:"5"}),e("path",{d:"M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"}),e("line",{x1:"17.5",y1:"6.5",x2:"17.51",y2:"6.5"})])]),e("a",{href:"#",class:"social-link"},[e("svg",{width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2","stroke-linecap":"round","stroke-linejoin":"round"},[e("path",{d:"M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"})])]),e("a",{href:"#",class:"social-link"},[e("svg",{width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2","stroke-linecap":"round","stroke-linejoin":"round"},[e("path",{d:"M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"})])]),e("a",{href:"#",class:"social-link"},[e("svg",{width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2","stroke-linecap":"round","stroke-linejoin":"round"},[e("path",{d:"M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"}),e("rect",{x:"2",y:"9",width:"4",height:"12"}),e("circle",{cx:"4",cy:"4",r:"2"})])]),e("a",{href:"#",class:"social-link"},[e("svg",{width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2","stroke-linecap":"round","stroke-linejoin":"round"},[e("path",{d:"M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"}),e("polygon",{points:"9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"})])])])]),e("div",{class:"col-right"},[e("div",{class:"secondary-nav-grid"},[e("div",{class:"sec-col"},[e("a",{href:"#",class:"sec-link"},"Photos & Videos"),e("a",{href:"#",class:"sec-link"},"Blog"),e("a",{href:"#",class:"sec-link"},"Indonesia Is..."),e("a",{href:"#",class:"sec-link"},"Magazine"),e("a",{href:"#",class:"sec-link"},"Rates"),e("a",{href:"#",class:"sec-link"},"Exclusive Offers"),e("a",{href:"#",class:"sec-link"},"Press Room"),e("a",{href:"#",class:"sec-link"},"Careers")]),e("div",{class:"sec-col"},[e("a",{href:"#",class:"sec-link icon-link"},[e("svg",{class:"nav-icon",width:"16",height:"16",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2","stroke-linecap":"round","stroke-linejoin":"round"},[e("path",{d:"M4 19.5A2.5 2.5 0 0 1 6.5 17H20"}),e("path",{d:"M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"})]),Q(" Resource Library ")]),e("a",{href:"#",class:"sec-link icon-link"},[e("svg",{class:"nav-icon",width:"16",height:"16",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2","stroke-linecap":"round","stroke-linejoin":"round"},[e("path",{d:"M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"}),e("polyline",{points:"10 17 15 12 10 7"}),e("line",{x1:"15",y1:"12",x2:"3",y2:"12"})]),Q(" Trade Login & Rates ")]),e("a",{href:"#",class:"sec-link icon-link"},[e("svg",{class:"nav-icon",width:"16",height:"16",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2","stroke-linecap":"round","stroke-linejoin":"round"},[e("path",{d:"M20 7h-9"}),e("path",{d:"M14 17H5"}),e("circle",{cx:"17",cy:"17",r:"3"}),e("circle",{cx:"7",cy:"7",r:"3"})]),Q(" Suppliers ")])])]),e("div",{class:"contact-info"},[e("p",{class:"contact-email"},"E. enquiries@komodocruises.com"),e("p",{class:"contact-phone"},"T. +62 (0) 21 683 3424"),e("a",{href:"#",class:"view-contact"},"View all contact information ›")])])],-1))])):M("",!0)]),_:1}))}},vo=vt(uo,[["__scopeId","data-v-d4e9a465"]]),po="https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/";function fs(S){const b=new URL(po),f=new URLSearchParams;for(const[C,h]of Object.entries(S))h!==void 0&&f.set(C,h);return b.search=f.toString(),b.toString()}async function hs(S){if(!S.ok)throw new Error(`HTTP ${S.status}: ${S.statusText}`);const b=await S.json();if((b==null?void 0:b.ok)===!1)throw new Error(b.error||"API error");return b}async function mo(S,b=3,f=100){let C=null;for(let h=0;h<=b;h++)try{return await S()}catch(g){if(C=g,!(C.message.includes("429")||C.message.includes("500")||C.message.includes("503")||C.message.includes("504"))||h===b)throw g;const E=f*Math.pow(2,h);console.warn(`API request failed (attempt ${h+1}), retrying in ${E}ms...`,C.message),await new Promise(X=>setTimeout(X,E))}throw C||new Error("Unknown error")}const Bs=new Map,Fs=new Map,Kt=new Map;let zs=null;const Us=new Map;async function Un(){if(zs)return zs;const S=fs({resource:"operators"}),b=await fetch(S),f=await hs(b);return zs=f,f}async function Rn(S){const b=`cabins|${S||""}`;if(Bs.has(b))return Bs.get(b);const f=fs({resource:"cabins",sheet:S}),C=await fetch(f),h=await hs(C);return Bs.set(b,h),h}async function Gn(){const S="shipdetail";if(Us.has(S))return Us.get(S);const b=fs({resource:"shipdetail"}),f=await fetch(b),g={ok:!0,resource:"shipdetail",ships:((await hs(f)).ships||[]).map(v=>({id:v.id||"",name:v.name||"",description:v.description||"",mainImage:v.image_main||"",images:v.images||[],specs:v.specs||{}}))};Us.set(S,g);try{localStorage.setItem(S,JSON.stringify({timestamp:Date.now(),data:g}))}catch(v){console.warn("Quota exceeded or storage disabled",v)}return g}async function vs(S,b){if(!/^\d{4}-\d{2}-\d{2}$/.test(S))throw new Error("Date must be in YYYY-MM-DD format");const f=`${S}|${b||""}`;if(Fs.has(f))return Fs.get(f);if(Kt.has(f))return Kt.get(f);const C=fs({resource:"availability",date:S}),h=mo(()=>fetch(C).then(g=>hs(g)),3,200).then(g=>(Fs.set(f,g),Kt.delete(f),g)).catch(g=>{throw Kt.delete(f),console.error(`Failed to get availability for ${S}:`,g),g});return Kt.set(f,h),h}function Vn(S){const b=S.getFullYear(),f=String(S.getMonth()+1).padStart(2,"0"),C=String(S.getDate()).padStart(2,"0");return`${b}-${f}-${C}`}function Pt(S){return new Date(S+"T00:00:00")}function fo(){return Vn(new Date)}const Kn=""+new URL("left-arrow-CTppQl_n.svg",import.meta.url).href,Vs=""+new URL("right-arrow-BeSe4_f_.svg",import.meta.url).href,at=""+new URL("down-arrow-BfUnB_1G.svg",import.meta.url).href,ot=""+new URL("up-arrow-CozmStYp.svg",import.meta.url).href,ho={key:0,class:"modal-overlay"},go={class:"modal-container"},bo={class:"modal-body"},yo={class:"plan-wrap plan-page"},ko={class:"plan-content"},wo={class:"wizard-progress"},_o={class:"wizard-circle"},Co={key:0,class:"wizard-check",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"3"},$o={key:1},So={class:"wizard-circle"},xo={key:0,class:"wizard-check",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"3"},Do={key:1},Ao={class:"wizard-circle"},To={key:0,class:"wizard-check",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"3"},Io={key:1},No={class:"wizard-circle"},Mo={key:0,class:"wizard-check",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"3"},Eo={key:1},Ro={class:"wizard-circle"},Po={key:0,class:"wizard-check",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"3"},Oo={key:1},Lo={key:0},Bo={class:"list"},Fo={class:"list-text"},zo=["value","aria-label"],Uo={key:1},Go={class:"list"},Vo={key:0,class:"muted"},Ko={class:"ship-info"},qo={class:"ship-details-text"},Wo={class:"list-text"},Ho=["value","aria-label"],Yo={key:0,class:"muted"},Jo={key:2},jo={class:"date-range-display"},Xo={class:"date-value"},Qo={class:"date-value"},Zo={class:"trip-duration-section"},ei={class:"trip-duration-dropdown-wrapper"},ti={class:"trip-duration-value"},si=["src"],ni={key:0,class:"trip-duration-menu"},ai={class:"counter-row duration-counter-row"},oi={class:"counter-ctrls"},ii=["disabled"],li={class:"count-display"},ri=["disabled"],ci={class:"counter-row duration-counter-row"},ui={class:"counter-ctrls"},di=["disabled"],vi={class:"count-display"},pi=["disabled"],mi={key:0,class:"trip-duration-reset"},fi={class:"custom-calendar"},hi={class:"calendar-header"},gi={class:"calendar-title"},bi={class:"calendar-grid"},yi={class:"calendar-days"},ki=["disabled","onClick"],wi={key:3},_i={class:"mode-toggle-container"},Ci={class:"mode-toggle"},$i={class:"text-center mb-6"},Si={key:0,class:"results-note"},xi={key:1,class:"results-note"},Di={key:0,class:"flexible-guest-card"},Ai={class:"counter-row"},Ti={class:"counter-ctrls"},Ii=["disabled"],Ni={class:"count-display"},Mi={key:1,class:"cabins-container"},Ei=["onClick"],Ri={class:"cabin-header-left"},Pi={class:"cabin-title"},Oi={class:"cabin-header-right"},Li={class:"cabin-summary"},Bi=["onClick"],Fi={key:0,class:"cabin-body"},zi={class:"counter-row"},Ui={class:"counter-ctrls"},Gi=["disabled","onClick"],Vi={class:"count"},Ki=["disabled","onClick"],qi={class:"counter-row"},Wi={class:"counter-ctrls"},Hi=["disabled","onClick"],Yi={class:"count"},Ji=["disabled","onClick"],ji={class:"cabins-total"},Xi={class:"total-value"},Qi={key:4},Zi={class:"bottom-bar"},el={class:"nav-inner-footer"},tl=["src"],sl=["src"],nl={key:0,class:"toast-notification"},al={class:"toast-message"},ol="Nusa Tenggara Timur",bt=30,il=4,ps=4,ll={__name:"PlanModal",props:{isOpen:Boolean},emits:["close","navigate-to-results"],setup(S,{emit:b}){const f=S,C=b,h=m(1),g=["Komodo National Park","Labuan Bajo"],v=[],E=m([]),X=m(!1),T=m([]),oe=m([]),te=m(""),Z=m(""),q=m(1),W=m(30);function Se(){q.value>1&&q.value--}function Ce(){q.value<W.value&&q.value++}function ie(){W.value>q.value&&W.value--}function O(){W.value<bt&&W.value++}const H=m(!1);x(()=>{const I=[];for(let c=1;c<=bt;c++)I.push(c);return I});const le=x(()=>q.value===1&&W.value===bt?"Any duration":q.value===W.value?`${q.value} ${q.value===1?"day":"days"}`:`${q.value} - ${W.value} days`);function ve(){q.value=1,W.value=bt}const F=m(!0),G=m(2),w=m([{id:1,adults:2,children:0,expanded:!0}]),ge=x(()=>w.value.reduce((I,c)=>I+c.adults+c.children,0)),fe=x(()=>w.value.length<il),xe=m(!1),qe=m("");let me=null;const Te=m(new Date().getMonth()),Ze=m(new Date().getFullYear());function ne(){const I=E.value.filter(D=>oe.value.includes(D.id)),c=I.map(D=>D.label),k=I.map(D=>D.sheet),P={region:ol,destination:T.value[0]||"",destinations:T.value.slice(),ships:c,shipSheets:k,ship:c[0]||"",lodges:c.slice(),dateFrom:te.value,dateTo:Z.value,minTripDuration:q.value,maxTripDuration:W.value,isFlexible:F.value,flexibleGuests:F.value?G.value:0,cabins:F.value?[]:w.value.map(D=>({adults:D.adults,children:D.children,total:D.adults+D.children})),totalCabins:F.value?0:w.value.length,totalGuests:F.value?G.value:ge.value,adults:F.value?G.value:w.value.reduce((D,Y)=>D+Y.adults,0),children:F.value?0:w.value.reduce((D,Y)=>D+Y.children,0),age3_9:0,age0_2:0,timestamp:Date.now()};localStorage.setItem("komodo_search_criteria",JSON.stringify(P)),C("navigate-to-results")}const y=["Destinations","Ships","Dates","Guests","Submit"],Ie=x(()=>y[h.value-2]||""),R=x(()=>h.value<5?y[h.value-1]:"Submit");x(()=>fo());const De=x(()=>`${["January","February","March","April","May","June","July","August","September","October","November","December"][Te.value]} ${Ze.value}`),et=x(()=>{const I=new Date(Ze.value,Te.value,1),c=new Date(Ze.value,Te.value+1,0),k=new Date(I),P=new Date;k.setDate(k.getDate()-k.getDay());const D=[],Y=new Date(c);Y.setDate(Y.getDate()+(6-c.getDay()));for(let ce=new Date(k);ce<=Y;ce.setDate(ce.getDate()+1)){ce.getDay();const mt=ce.getMonth()===Te.value,ue=new Date(ce);ue.setHours(0,0,0,0);const Be=new Date(P);Be.setHours(0,0,0,0);const ut=ue<Be,jt=mt&&!ut,zt=Vn(ce);let Fe=!1,ze=!1,Ue=!1;if(te.value&&Z.value&&mt){const Ge=Pt(te.value),Ve=Pt(Z.value);ue>=Ge&&ue<=Ve&&(Fe=!0,ue.getTime()===Ge.getTime()&&(ze=!0),ue.getTime()===Ve.getTime()&&(Ue=!0))}D.push({key:ce.getTime(),date:ce.getDate(),fullDate:zt,isCurrentMonth:mt,isSelectable:jt,isPast:ut,isSelected:te.value===zt||Z.value===zt,isInRange:Fe,isRangeStart:ze,isRangeEnd:Ue})}return D}),Ee=x(()=>{if(!te.value||!Z.value)return bt;const I=Pt(te.value),k=Pt(Z.value).getTime()-I.getTime(),P=Math.ceil(k/(1e3*60*60*24))+1;return Math.min(P,bt)});x(()=>{const I=Ee.value,c=[];for(let k=1;k<=I;k++)c.push(k);return c});const tt=x(()=>T.value.length>0),We=x(()=>T.value.length>0&&oe.value.length>0),pe=x(()=>T.value.length>0&&oe.value.length>0&&!!te.value);rt(T,()=>{oe.value=[]}),rt(Ee,I=>{Fn(()=>{W.value>I&&(W.value=I),q.value>W.value&&(q.value=W.value)})});const He={bodyOverflow:"",htmlOverflow:"",bodyPadding:"",htmlPadding:""};rt(()=>f.isOpen,I=>{I?pt():Lt()},{immediate:!0}),Qe(()=>{st()}),wt(()=>{Lt()});function Re(){C("close")}function Le(I){h.value=I}function _t(){if(h.value===1&&T.value.length===0)return nt("Please select at least one destination first.");if(h.value===2&&oe.value.length===0)return nt("Please select at least one ship first.");if(h.value===3&&!te.value)return nt("Please select a start date first.");h.value<5?h.value++:ne()}function je(){h.value>1&&h.value--}function Ct(){ne()}function ct(){ne()}async function st(){X.value=!0;try{let I,c;try{[I,c]=await Promise.all([Un(),Gn().catch(D=>(console.warn("Failed to load ship details (likely quota exceeded):",D),null))])}catch(D){console.warn("Critical failure loading operators:",D),E.value=Dt(v);return}const k={};c!=null&&c.ships&&c.ships.forEach(D=>{const Y=D.name?D.name.toLowerCase().trim():"";Y&&(k[Y]=D)});const P=((I==null?void 0:I.operators)||[]).map(D=>{var Be,ut;const Y=((Be=D.operator)==null?void 0:Be.trim())||"",ce=((ut=D.sourceSheet)==null?void 0:ut.trim())||Y,mt=Y.toLowerCase().trim(),ue=k[mt];return{id:`${Y}__${ce}`,label:Y,sheet:ce,image:(ue==null?void 0:ue.mainImage)||"",description:(ue==null?void 0:ue.description)||"",specs:(ue==null?void 0:ue.specs)||{}}}).filter(D=>D.label&&D.sheet);E.value=P.length?P:Dt(v)}catch(I){console.warn("Failed to load operators/details:",I),E.value=Dt(v)}finally{X.value=!1}}function pt(){const I=document.body,c=document.documentElement;if(!I||!c)return;const k=window.innerWidth-c.clientWidth;if(He.bodyOverflow=I.style.overflow,He.htmlOverflow=c.style.overflow,He.bodyPadding=I.style.paddingRight,He.htmlPadding=c.style.paddingRight,k>0){const P=`${k}px`;I.style.paddingRight=P,c.style.paddingRight=P}I.style.overflow="hidden",c.style.overflow="hidden"}function Lt(){const I=document.body,c=document.documentElement;!I||!c||(I.style.overflow=He.bodyOverflow,c.style.overflow=He.htmlOverflow,I.style.paddingRight=He.bodyPadding,c.style.paddingRight=He.htmlPadding)}function Dt(I){return Array.isArray(I)?I.map(c=>{var D,Y;const k=((D=c.label)==null?void 0:D.trim())||"",P=((Y=c.sheet)==null?void 0:Y.trim())||k;return{id:c.id||`${k}__${P}`,label:k,sheet:P}}).filter(c=>c.label&&c.sheet):[]}function we(){fe.value&&w.value.push({id:Date.now(),adults:2,children:0,expanded:!0})}function Bt(I){w.value.length>1&&w.value.splice(I,1)}function Ft(I){w.value[I].expanded=!w.value[I].expanded}function At(I,c){const k=w.value[I];k.adults+k.children<ps&&k[c]++}function Jt(I,c){const k=w.value[I];c==="adults"&&k.adults>1&&k.adults--,c==="children"&&k.children>0&&k.children--}function nt(I){qe.value=I,xe.value=!0,me&&clearTimeout(me),me=setTimeout(()=>{xe.value=!1},3e3)}function Tt(){Te.value===0?(Te.value=11,Ze.value--):Te.value--}function Ne(){Te.value===11?(Te.value=0,Ze.value++):Te.value++}function Oe(I){if(I.isSelectable)if(!te.value||te.value&&Z.value)te.value=I.fullDate,Z.value="";else{const c=Pt(te.value);Pt(I.fullDate)<c?(Z.value=te.value,te.value=I.fullDate):Z.value=I.fullDate}}return(I,c)=>(o(),Yt(zn,{to:"body"},[ke(xt,{name:"modal-fade"},{default:Me(()=>[S.isOpen?(o(),i("div",ho,[e("div",go,[e("div",{class:"modal-header"},[e("div",{class:"modal-header-content"},[c[13]||(c[13]=e("h2",{class:"modal-title"},"Plan your trip",-1)),e("button",{class:"modal-close",onClick:Re},[...c[12]||(c[12]=[Q(" Close ",-1),e("span",{class:"close-x"},"✕",-1)])])])]),e("div",bo,[e("section",yo,[e("div",ko,[e("div",wo,[e("div",{class:B(["wizard-step",{completed:h.value>1,active:h.value===1}]),onClick:c[0]||(c[0]=k=>Le(1))},[e("div",_o,[h.value>1?(o(),i("svg",Co,[...c[14]||(c[14]=[e("polyline",{points:"20 6 9 17 4 12"},null,-1)])])):(o(),i("span",$o,"1"))]),c[15]||(c[15]=e("span",{class:"wizard-label"},"Destinations",-1))],2),e("div",{class:B(["wizard-line",{completed:h.value>1}])},null,2),e("div",{class:B(["wizard-step",{completed:h.value>2,active:h.value===2,disabled:!tt.value}]),onClick:c[1]||(c[1]=k=>tt.value&&Le(2))},[e("div",So,[h.value>2?(o(),i("svg",xo,[...c[16]||(c[16]=[e("polyline",{points:"20 6 9 17 4 12"},null,-1)])])):(o(),i("span",Do,"2"))]),c[17]||(c[17]=e("span",{class:"wizard-label"},"Ships",-1))],2),e("div",{class:B(["wizard-line",{completed:h.value>2}])},null,2),e("div",{class:B(["wizard-step",{completed:h.value>3,active:h.value===3,disabled:!We.value}]),onClick:c[2]||(c[2]=k=>We.value&&Le(3))},[e("div",Ao,[h.value>3?(o(),i("svg",To,[...c[18]||(c[18]=[e("polyline",{points:"20 6 9 17 4 12"},null,-1)])])):(o(),i("span",Io,"3"))]),c[19]||(c[19]=e("span",{class:"wizard-label"},"Dates",-1))],2),e("div",{class:B(["wizard-line",{completed:h.value>3}])},null,2),e("div",{class:B(["wizard-step",{completed:h.value>4,active:h.value===4,disabled:!pe.value}]),onClick:c[3]||(c[3]=k=>pe.value&&Le(4))},[e("div",No,[h.value>4?(o(),i("svg",Mo,[...c[20]||(c[20]=[e("polyline",{points:"20 6 9 17 4 12"},null,-1)])])):(o(),i("span",Eo,"4"))]),c[21]||(c[21]=e("span",{class:"wizard-label"},"Guests",-1))],2),e("div",{class:B(["wizard-line",{completed:h.value>4}])},null,2),e("div",{class:B(["wizard-step",{completed:h.value===5,active:h.value===5,disabled:!pe.value}]),onClick:c[4]||(c[4]=k=>pe.value&&Le(5))},[e("div",Ro,[h.value===5?(o(),i("svg",Po,[...c[22]||(c[22]=[e("polyline",{points:"20 6 9 17 4 12"},null,-1)])])):(o(),i("span",Oo,"5"))]),c[23]||(c[23]=e("span",{class:"wizard-label"},"Submit",-1))],2)]),h.value===1?(o(),i("div",Lo,[c[25]||(c[25]=e("h3",{class:"step-title"},"Destinations",-1)),c[26]||(c[26]=e("p",{class:"results-note"}," Select the destinations you're interested in: ",-1)),e("div",Bo,[c[24]||(c[24]=e("div",{class:"list-heading"},"Nusa Tenggara Timur",-1)),(o(),i(K,null,se(g,k=>e("div",{class:"list-row",key:k},[e("div",Fo,r(k),1),be(e("input",{class:"check",type:"checkbox",value:k,"onUpdate:modelValue":c[5]||(c[5]=P=>T.value=P),"aria-label":`Destination ${k}`},null,8,zo),[[yt,T.value]])])),64))])])):h.value===2?(o(),i("div",Uo,[c[27]||(c[27]=e("h3",{class:"step-title"},"Ships",-1)),c[28]||(c[28]=e("p",{class:"results-note"},"Please select one or more ships:",-1)),e("div",Go,[X.value?(o(),i("div",Vo," Loading ships... ")):(o(),i(K,{key:1},[(o(!0),i(K,null,se(E.value,k=>(o(),i("div",{class:B(["list-row",{"has-details":!!k.image}]),key:k.id},[e("div",Ko,[e("div",qo,[e("div",Wo,r(k.label),1)])]),be(e("input",{class:"check",type:"checkbox",value:k.id,"onUpdate:modelValue":c[6]||(c[6]=P=>oe.value=P),"aria-label":`Ship ${k.label}`},null,8,Ho),[[yt,oe.value]])],2))),128)),E.value.length===0?(o(),i("div",Yo," No ships found from API. ")):M("",!0)],64))])])):h.value===3?(o(),i("div",Jo,[c[34]||(c[34]=e("h3",{class:"step-title"},"Dates",-1)),c[35]||(c[35]=e("p",{class:"results-note"},"Select your travel dates:",-1)),e("div",jo,[e("span",Xo,r(te.value||"Start date"),1),c[29]||(c[29]=e("span",{class:"date-arrow"},"→",-1)),e("span",Qo,r(Z.value||"End date"),1)]),e("div",Zo,[c[32]||(c[32]=e("span",{class:"trip-duration-label"},"Trip Duration",-1)),e("div",ei,[e("button",{type:"button",class:B(["trip-duration-dropdown",{open:H.value}]),onClick:c[7]||(c[7]=k=>H.value=!H.value)},[e("span",ti,r(le.value),1),e("img",{src:H.value?he(ot):he(at),alt:"",class:"caret-icon"},null,8,si)],2),H.value?(o(),i("div",ni,[e("div",ai,[c[30]||(c[30]=e("div",{class:"counter-text"},[e("div",{class:"counter-title"},"Min")],-1)),e("div",oi,[e("button",{type:"button",class:"btn-icon",disabled:q.value<=1,onClick:j(Se,["stop"])}," − ",8,ii),e("span",li,r(q.value),1),e("button",{type:"button",class:"btn-icon",disabled:q.value>=W.value,onClick:j(Ce,["stop"])}," + ",8,ri)])]),e("div",ci,[c[31]||(c[31]=e("div",{class:"counter-text"},[e("div",{class:"counter-title"},"Max")],-1)),e("div",ui,[e("button",{type:"button",class:"btn-icon",disabled:W.value<=q.value,onClick:j(ie,["stop"])}," − ",8,di),e("span",vi,r(W.value),1),e("button",{type:"button",class:"btn-icon",disabled:W.value>=bt,onClick:j(O,["stop"])}," + ",8,pi)])]),q.value>1||W.value<bt?(o(),i("div",mi,[e("button",{type:"button",class:"btn-text-reset",onClick:j(ve,["stop"])}," Reset to any duration ")])):M("",!0)])):M("",!0)])]),c[36]||(c[36]=e("p",{class:"results-note text-sm calendar-instruction"}," Click to select start date, then click again to select end date. ",-1)),e("div",fi,[e("div",hi,[e("h4",gi,r(De.value),1),e("div",{class:"calendar-nav-group"},[e("button",{class:"calendar-nav",onClick:Tt,type:"button"}," ‹ "),e("button",{class:"calendar-nav",onClick:Ne,type:"button"}," › ")])]),e("div",bi,[c[33]||(c[33]=e("div",{class:"calendar-weekdays"},[e("div",{class:"weekday"},"Su"),e("div",{class:"weekday"},"Mo"),e("div",{class:"weekday"},"Tu"),e("div",{class:"weekday"},"We"),e("div",{class:"weekday"},"Th"),e("div",{class:"weekday"},"Fr"),e("div",{class:"weekday"},"Sa")],-1)),e("div",yi,[(o(!0),i(K,null,se(et.value,k=>(o(),i("button",{key:k.key,class:B(["calendar-day",{"other-month":!k.isCurrentMonth,selected:k.isSelected,disabled:!k.isSelectable,past:k.isPast,"in-range":k.isInRange,"range-start":k.isRangeStart,"range-end":k.isRangeEnd}]),disabled:!k.isSelectable,onClick:P=>Oe(k),type:"button"},r(k.date),11,ki))),128))])])])])):h.value===4?(o(),i("div",wi,[c[43]||(c[43]=e("h3",{class:"step-title"},"Cabins & Guests",-1)),e("div",_i,[e("div",Ci,[e("button",{type:"button",class:B(["mode-btn",{active:F.value}]),onClick:c[8]||(c[8]=k=>F.value=!0)}," Flexible ",2),e("button",{type:"button",class:B(["mode-btn",{active:!F.value}]),onClick:c[9]||(c[9]=k=>F.value=!1)}," Room Allocation ",2)])]),e("div",$i,[F.value?(o(),i("p",xi," Set total guests only. You can choose specific rooms later. ")):(o(),i("p",Si," Configure guests for each cabin individually. "))]),F.value?(o(),i("div",Di,[e("div",Ai,[c[37]||(c[37]=e("div",{class:"counter-text"},[e("div",{class:"counter-title"},"Total Guests"),e("div",{class:"counter-subtitle"}," We will find the best cabin combination for you ")],-1)),e("div",Ti,[e("button",{type:"button",class:"btn-icon",disabled:G.value<=1,onClick:c[10]||(c[10]=k=>G.value--)}," − ",8,Ii),e("span",Ni,r(G.value),1),e("button",{type:"button",class:"btn-icon",onClick:c[11]||(c[11]=k=>G.value++)}," + ")])])])):(o(),i("div",Mi,[(o(!0),i(K,null,se(w.value,(k,P)=>(o(),i("div",{key:k.id,class:"cabin-accordion"},[e("div",{class:"cabin-header",onClick:D=>Ft(P)},[e("div",Ri,[e("span",Pi,"CABIN "+r(P+1),1)]),e("div",Oi,[e("span",Li,r(k.adults+k.children)+" guest"+r(k.adults+k.children!==1?"s":""),1),w.value.length>1?(o(),i("button",{key:0,type:"button",class:"cabin-remove-btn",onClick:j(D=>Bt(P),["stop"]),title:"Remove cabin"},[...c[38]||(c[38]=[e("svg",{width:"16",height:"16",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("path",{d:"M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"})],-1)])],8,Bi)):M("",!0),(o(),i("svg",{class:B(["cabin-chevron",{expanded:k.expanded}]),width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[...c[39]||(c[39]=[e("polyline",{points:"6 9 12 15 18 9"},null,-1)])],2))])],8,Ei),ke(xt,{name:"accordion"},{default:Me(()=>[k.expanded?(o(),i("div",Fi,[e("div",zi,[c[40]||(c[40]=e("div",{class:"counter-text"},[e("div",{class:"semibold"},"Adults"),e("div",{class:"muted text-sm"},"Ages 17+")],-1)),e("div",Ui,[e("button",{type:"button",class:"btn-icon",disabled:k.adults<=1,onClick:D=>Jt(P,"adults")}," − ",8,Gi),e("span",Vi,r(k.adults),1),e("button",{type:"button",class:"btn-icon",disabled:k.adults+k.children>=ps,onClick:D=>At(P,"adults")}," + ",8,Ki)])]),e("div",qi,[c[41]||(c[41]=e("div",{class:"counter-text"},[e("div",{class:"semibold"},"Children"),e("div",{class:"muted text-sm"},"Ages 3 - 16")],-1)),e("div",Wi,[e("button",{type:"button",class:"btn-icon",disabled:k.children<=0,onClick:D=>Jt(P,"children")}," − ",8,Hi),e("span",Yi,r(k.children),1),e("button",{type:"button",class:"btn-icon",disabled:k.adults+k.children>=ps,onClick:D=>At(P,"children")}," + ",8,Ji)])]),e("div",{class:"cabin-note"}," Max "+r(ps)+" guests per cabin ")])):M("",!0)]),_:2},1024)]))),128)),fe.value?(o(),i("button",{key:0,type:"button",class:"btn-add-cabin",onClick:we}," + Add Another Cabin ")):M("",!0),e("div",ji,[c[42]||(c[42]=e("span",null,"Total:",-1)),e("span",Xi,r(w.value.length)+" cabin"+r(w.value.length!==1?"s":"")+", "+r(ge.value)+" guest"+r(ge.value!==1?"s":""),1)])]))])):(o(),i("div",Qi,[c[44]||(c[44]=e("h3",{class:"step-title"},"Check Availability",-1)),c[45]||(c[45]=e("p",{class:"results-note"}," To see if we have availability for your preferred criteria, please click the button below. ",-1)),e("div",{class:"mt-4"},[e("button",{class:"btn-primary",onClick:Ct}," Check now ")]),c[46]||(c[46]=e("div",{class:"section-divider",style:{margin:"1.5rem 0"}},null,-1)),c[47]||(c[47]=e("h4",{class:"section-title"}," Speak with a Komodo Cruises Travel Advisor ",-1)),c[48]||(c[48]=e("p",{class:"results-note"}," Need some help to plan your trip? Enquire below to contact one of our Komodo Cruises Travel Advisors. ",-1)),e("div",{class:"mt-4"},[e("button",{class:"btn-primary",onClick:ct}," Enquire now ")])])),e("div",Zi,[e("div",el,[h.value>1?(o(),i("button",{key:0,class:"link-muted text-icon-btn",onClick:je},[e("img",{src:he(Kn),alt:"Previous",class:"nav-arrow"},null,8,tl),Q(" "+r(Ie.value),1)])):M("",!0),e("button",{class:"btn-primary text-icon-btn",onClick:_t},[Q(r(R.value)+" ",1),e("img",{src:he(Vs),alt:"Next",class:"nav-arrow white-filter"},null,8,sl)])])])])])])])])):M("",!0)]),_:1}),ke(xt,{name:"toast-slide"},{default:Me(()=>[xe.value?(o(),i("div",nl,[c[49]||(c[49]=e("span",{class:"toast-icon"},"⚠️",-1)),e("span",al,r(qe.value),1)])):M("",!0)]),_:1})]))}},Ks=vt(ll,[["__scopeId","data-v-5ae5e789"]]),rl={key:0,class:"nav-inner plan-mode"},cl={key:1,class:"nav-inner"},ul={class:"nav-left"},dl={class:"nav-lang"},vl={width:"10",height:"6",viewBox:"0 0 10 6",fill:"none",stroke:"currentColor","stroke-width":"1.2",style:{"margin-right":"6px"}},pl={key:0,class:"lang-dropdown"},ml=["onClick"],fl={class:"nav-center"},hl={class:"nav-right"},gl={width:"16",height:"16",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"1.5",style:{"margin-left":"8px"}},bl={key:0,class:"site-footer mt-16"},yl={class:"footer-inner container text-sm"},kl={__name:"App",setup(S){const b=Gs(),f=Wa(),C=m(!1),h=m(!1),g=m(!1),v=m(!1),E=m(!1),X=m("EN"),T=m(!1),oe=[{code:"EN",label:"English"},{code:"ID",label:"Indonesia"},{code:"ZH",label:"Chinese"},{code:"ES",label:"Spanish"},{code:"FR",label:"French"}],te=()=>{T.value=!T.value},Z=ie=>{X.value=ie.code,T.value=!1},q=()=>{C.value=window.scrollY>window.innerHeight*.8;const ie=document.querySelectorAll('[data-nav-theme="light"]');let O=!1;ie.forEach(H=>{const le=H.getBoundingClientRect();le.top<=80&&le.bottom>=80&&(O=!0)}),E.value=O},W=()=>{g.value=!1,setTimeout(()=>{h.value=!0},300)},Se=()=>{f.path==="/results"?b.push("/find-reservation"):v.value=!0},Ce=()=>{v.value=!1,b.push("/results")};return Qe(()=>{window.addEventListener("scroll",q)}),wt(()=>{window.removeEventListener("scroll",q)}),(ie,O)=>{const H=Wt("router-link"),le=Wt("router-view");return o(),i("div",null,[ke(io,{isOpen:h.value,onClose:O[0]||(O[0]=ve=>h.value=!1)},null,8,["isOpen"]),ke(Ks,{isOpen:v.value,onClose:O[1]||(O[1]=ve=>v.value=!1),onNavigateToResults:Ce},null,8,["isOpen"]),ke(vo,{isOpen:g.value,onClose:O[2]||(O[2]=ve=>g.value=!1),onOpenSearch:W},null,8,["isOpen"]),e("header",{class:B(["nav-container",{"nav-overlay":ie.$route.path==="/","home-nav":ie.$route.path==="/",scrolled:C.value,"nav-light-theme":E.value,"navbar-result":ie.$route.path==="/results"||ie.$route.path==="/find-reservation"}])},[ie.$route.meta.planHeader?(o(),i("nav",rl,[O[6]||(O[6]=e("div",{style:{display:"flex","align-items":"center",gap:"0.75rem",color:"var(--ocean-900)"}},[e("div",{class:"brand"},[e("span",{class:"desktop-only"},"Plan your trip"),e("span",{class:"mobile-only"},"Plan trip")])],-1)),ke(H,{class:"link-close close-btn-style",to:"/"},{default:Me(()=>[...O[5]||(O[5]=[e("span",{class:"btn-text"},"Close",-1),e("span",{class:"close-icon"},"âœ•",-1)])]),_:1})])):(o(),i("nav",cl,[e("div",ul,[e("span",{class:"nav-menu",onClick:O[3]||(O[3]=ve=>g.value=!0),title:"Menu"},[...O[7]||(O[7]=[e("svg",{width:"24",height:"24",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"1.2"},[e("line",{x1:"3",y1:"12",x2:"21",y2:"12"}),e("line",{x1:"3",y1:"6",x2:"21",y2:"6"}),e("line",{x1:"3",y1:"18",x2:"21",y2:"18"})],-1)])]),e("div",{class:"nav-lang-wrapper",onClick:te,title:"Select Language"},[e("span",dl,[(o(),i("svg",vl,[...O[8]||(O[8]=[e("path",{d:"M1 1L5 5L9 1"},null,-1)])])),Q(" "+r(X.value),1)]),T.value?(o(),i("div",pl,[(o(),i(K,null,se(oe,ve=>e("div",{key:ve.code,class:"lang-option",onClick:j(F=>Z(ve),["stop"])},r(ve.label),9,ml)),64))])):M("",!0)])]),e("div",fl,[ke(H,{to:"/",class:"brand-link"},{default:Me(()=>[...O[9]||(O[9]=[e("span",{class:"brand-chip"},"KOMODO CRUISES",-1)])]),_:1})]),e("div",hl,[e("button",{class:"nav-text-item nav-plan-item",onClick:Se,style:{"white-space":"nowrap"}},[ie.$route.path==="/results"?(o(),i(K,{key:0},[Q(" FIND RESERVATION ")],64)):(o(),i(K,{key:1},[O[10]||(O[10]=e("span",{class:"desktop-only"},"PLAN YOUR TRIP",-1)),O[11]||(O[11]=e("span",{class:"mobile-only"},"PLAN TRIP",-1))],64))]),O[15]||(O[15]=e("span",{class:"nav-text-item"},"LOGIN",-1)),e("span",{class:"nav-search",onClick:O[4]||(O[4]=ve=>h.value=!0),title:"Search"},[...O[12]||(O[12]=[e("svg",{width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"1.2"},[e("circle",{cx:"11",cy:"11",r:"8"}),e("line",{x1:"21",y1:"21",x2:"16.65",y2:"16.65"})],-1)])]),ie.$route.path!=="/"&&ie.$route.path!=="/results"&&ie.$route.path!=="/find-reservation"?(o(),Yt(H,{key:0,to:"/plan",class:"btn-book-pill"},{default:Me(()=>[O[14]||(O[14]=Q(" BOOK NOW ",-1)),(o(),i("svg",gl,[...O[13]||(O[13]=[e("path",{d:"M2 20h20M12 4v12m0 0l-4-4m4 4l4-4"},null,-1)])]))]),_:1})):M("",!0)])]))],2),ke(le),!ie.$route.meta.planHeader&&ie.$route.path!=="/"&&ie.$route.path!=="/results"?(o(),i("footer",bl,[e("div",yl," Â© "+r(new Date().getFullYear())+" Komodo Cruises ",1)])):M("",!0)])}}},wl=""+new URL("Komodo-siX32_CS.mp4",import.meta.url).href,_l=""+new URL("dest-komodo-BZfQdiBM.png",import.meta.url).href,Cl=""+new URL("dest-labuan-bajo-H07b2mBM.png",import.meta.url).href,$l=""+new URL("dest-togean-DN15mR21.png",import.meta.url).href,Sl={class:"destination-carousel"},xl={class:"carousel-container"},Dl=["src","alt"],Al={class:"carousel-content"},Tl={class:"carousel-content-left"},Il={class:"carousel-location"},Nl={class:"carousel-title"},Ml={class:"carousel-content-right"},El={class:"carousel-description"},Rl=["href"],Pl={class:"carousel-dots"},Ol=["onClick","aria-label"],Pn=101,On=50,Ll={__name:"DestinationCarousel",setup(S){const b=[{location:"INDONESIA",title:"Komodo National Park",description:"Home to the legendary Komodo dragons and pristine marine life. Discover ancient wilderness and untouched natural beauty.",ctaText:"EXPLORE THE PARK",ctaLink:"#",image:_l},{location:"INDONESIA",title:"Labuan Bajo",description:"Gateway to the Komodo Islands with stunning sunsets and vibrant culture. Experience the perfect blend of adventure and relaxation.",ctaText:"DISCOVER LABUAN BAJO",ctaLink:"#",image:Cl},{location:"INDONESIA",title:"Togean Islands",description:"Remote paradise with crystal-clear waters and untouched coral reefs. A hidden gem for those seeking true escape.",ctaText:"VISIT TOGEAN",ctaLink:"#",image:$l}],f=b.length,C=x(()=>{const G=[];for(let w=0;w<Pn;w++)b.forEach((ge,fe)=>{G.push({...ge,virtualKey:`set${w}-${fe}`,originalIndex:fe})});return G}),h=Math.floor(Pn/2)*f,g=m(h),v=m(typeof window<"u"?window.innerWidth:1200),E=x(()=>(g.value%f+f)%f),X=x(()=>b[E.value]),T=x(()=>v.value<=480?v.value*.765:v.value<=768?v.value*.675:Math.min(v.value*.5,750)),oe=x(()=>v.value<=768?10:20),te=x(()=>{const G=T.value+oe.value,w=v.value/2,ge=T.value/2;return g.value*G-w+ge});function Z(G){return G===g.value}function q(G){return G===g.value-1||G===g.value+1}function W(){g.value++}function Se(){g.value--}function Ce(G){const w=E.value,ge=G-w;ge!==0&&(g.value+=ge)}function ie(){v.value=window.innerWidth}const O=m(0),H=m(0);function le(G){O.value=G.changedTouches[0].screenX}function ve(G){H.value=G.changedTouches[0].screenX}function F(){const G=O.value-H.value,w=G>On,ge=G<-On;w?W():ge&&Se(),O.value=0,H.value=0}return Qe(()=>{window.addEventListener("resize",ie)}),wt(()=>{window.removeEventListener("resize",ie)}),(G,w)=>(o(),i("section",Sl,[w[3]||(w[3]=e("h2",{class:"carousel-heading"}," Destinations. Where our passion meets your purpose. ",-1)),w[4]||(w[4]=e("p",{class:"carousel-subheading"},[e("a",{href:"#"},[Q("WHERE NEXT: VIEW ALL DESTINATIONS "),e("span",null,"→")])],-1)),e("div",xl,[e("button",{class:"carousel-nav carousel-nav-left",onClick:Se,"aria-label":"Previous destination"},[...w[0]||(w[0]=[e("img",{src:Kn,alt:"Previous"},null,-1)])]),e("div",{class:"carousel-viewport",onTouchstart:le,onTouchmove:ve,onTouchend:F},[e("div",{class:"carousel-track",style:Ht({transform:`translateX(-${te.value}px)`})},[(o(!0),i(K,null,se(C.value,(ge,fe)=>(o(),i("div",{key:ge.virtualKey,class:B(["carousel-slide",{"active-slide":Z(fe),"side-slide":q(fe)}]),style:Ht({width:`${T.value}px`,marginRight:`${oe.value}px`})},[e("img",{src:ge.image,alt:ge.title,class:"slide-image"},null,8,Dl)],6))),128))],4)],32),e("button",{class:"carousel-nav carousel-nav-right",onClick:W,"aria-label":"Next destination"},[...w[1]||(w[1]=[e("img",{src:Vs,alt:"Next"},null,-1)])])]),e("div",Al,[e("div",Tl,[e("span",Il,r(X.value.location),1),e("h3",Nl,r(X.value.title),1)]),e("div",Ml,[e("p",El,r(X.value.description),1),e("a",{href:X.value.ctaLink,class:"carousel-cta"},[Q(r(X.value.ctaText)+" ",1),w[2]||(w[2]=e("span",null,"→",-1))],8,Rl)])]),e("div",Pl,[(o(),i(K,null,se(b,(ge,fe)=>e("button",{key:fe,class:B(["carousel-dot",{active:fe===E.value}]),onClick:xe=>Ce(fe),"aria-label":`Go to slide ${fe+1}`},null,10,Ol)),64))])]))}},Bl=vt(Ll,[["__scopeId","data-v-9920d604"]]),Fl=""+new URL("ship-phinisi-voyager-D5TceIuH.png",import.meta.url).href,zl=""+new URL("ship-ocean-explorer-Yg5A13gl.png",import.meta.url).href,Ul=""+new URL("ship-coral-queen-DLsN9IeK.png",import.meta.url).href,Gl=""+new URL("ship-sunset-cruiser-B6Je6v6A.png",import.meta.url).href,Vl=""+new URL("ship-island-hopper-zr6jDabx.png",import.meta.url).href,Kl=""+new URL("ship-reef-dancer-w9AhwkP8.png",import.meta.url).href,ql={class:"ships-carousel"},Wl={class:"ships-container"},Hl={class:"ships-filters"},Yl=["onClick"],Jl={class:"ships-slider-wrapper"},jl={class:"ships-slider-container"},Xl=["disabled"],Ql={class:"ship-image-wrapper"},Zl=["src","alt"],er={class:"ship-info"},tr={class:"ship-location"},sr={class:"ship-name"},nr=["disabled"],Ln=50,ar={__name:"ShipsCarousel",setup(S){const b=[{id:"all",name:"All"},{id:"komodo",name:"Komodo"},{id:"labuan-bajo",name:"Labuan Bajo"},{id:"togean",name:"Togean"}],f=[{id:1,name:"Phinisi Voyager",destination:"komodo",locationName:"Komodo National Park",image:Fl},{id:2,name:"Ocean Explorer",destination:"komodo",locationName:"Komodo National Park",image:zl},{id:3,name:"Coral Queen",destination:"labuan-bajo",locationName:"Labuan Bajo",image:Ul},{id:4,name:"Sunset Cruiser",destination:"labuan-bajo",locationName:"Labuan Bajo",image:Gl},{id:5,name:"Island Hopper",destination:"togean",locationName:"Togean Islands",image:Vl},{id:6,name:"Reef Dancer",destination:"togean",locationName:"Togean Islands",image:Kl}],C=m("all"),h=m(0),g=m(typeof window<"u"?window.innerWidth:1200),v=x(()=>C.value==="all"?f:f.filter(F=>F.destination===C.value)),E=x(()=>{if(g.value<=640)return g.value*.75;if(g.value<=900)return 300;const F=Math.min(g.value-80,1400),G=32*2;return(F-G)/3}),X=x(()=>g.value<=640?16:32),T=x(()=>h.value*(E.value+X.value)),oe=x(()=>g.value<=640?1:g.value<=900?2:3),te=x(()=>v.value.length>oe.value),Z=x(()=>Math.max(0,v.value.length-oe.value));function q(F){C.value=F,h.value=0}function W(){h.value<Z.value&&h.value++}function Se(){h.value>0&&h.value--}function Ce(){g.value=window.innerWidth}const ie=m(0),O=m(0);function H(F){ie.value=F.changedTouches[0].screenX}function le(F){O.value=F.changedTouches[0].screenX}function ve(){const F=ie.value-O.value,G=F>Ln,w=F<-Ln;G?W():w&&Se(),ie.value=0,O.value=0}return Qe(()=>{window.addEventListener("resize",Ce)}),wt(()=>{window.removeEventListener("resize",Ce)}),(F,G)=>(o(),i("section",ql,[e("div",Wl,[G[0]||(G[0]=e("div",{class:"ships-header"},[e("h2",{class:"ships-heading"},"Explore our fleet collection"),e("p",{class:"ships-description"}," Our fleet of luxury vessels are designed for intimate journeys through Indonesia's most spectacular waters. Each ship offers unique experiences, from traditional phinisi craftsmanship to modern expedition yachts, ensuring unforgettable adventures across the archipelago. ")],-1)),e("div",Hl,[(o(),i(K,null,se(b,w=>e("button",{key:w.id,class:B(["filter-btn",{active:C.value===w.id}]),onClick:ge=>q(w.id)},r(w.name),11,Yl)),64))])]),e("div",Jl,[e("div",jl,[te.value?(o(),i("button",{key:0,class:"ships-nav ships-nav-left",onClick:Se,disabled:h.value===0,"aria-label":"Previous ships"},[...G[1]||(G[1]=[e("svg",{width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("polyline",{points:"15 18 9 12 15 6"})],-1)])],8,Xl)):M("",!0),e("div",{class:"ships-viewport",onTouchstart:H,onTouchmove:le,onTouchend:ve},[ke(xt,{name:"slide-up",mode:"out-in"},{default:Me(()=>[(o(),i("div",{class:"ships-track-wrapper",key:C.value},[e("div",{class:"ships-track",style:Ht({transform:`translateX(-${T.value}px)`})},[(o(!0),i(K,null,se(v.value,w=>(o(),i("div",{key:w.id,class:"ship-card",style:Ht({width:`${E.value}px`,marginRight:`${X.value}px`})},[e("div",Ql,[e("img",{src:w.image,alt:w.name,class:"ship-image"},null,8,Zl)]),e("div",er,[e("span",tr,r(w.locationName),1),e("h3",sr,r(w.name),1)])],4))),128))],4)]))]),_:1})],32),te.value?(o(),i("button",{key:1,class:"ships-nav ships-nav-right",onClick:W,disabled:h.value>=Z.value,"aria-label":"Next ships"},[...G[2]||(G[2]=[e("svg",{width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("polyline",{points:"9 18 15 12 9 6"})],-1)])],8,nr)):M("",!0)])])]))}},or=vt(ar,[["__scopeId","data-v-82c1bf13"]]),ir=""+new URL("activity-snorkeling-B8hwZN3L.png",import.meta.url).href,lr=""+new URL("activity-relaxing-DX-9w-xF.png",import.meta.url).href,rr=""+new URL("activity-hiking-chrel6lc.png",import.meta.url).href,cr=""+new URL("activity-community-B7vG2Gb2.png",import.meta.url).href,ur=""+new URL("activity-wildlife-CZn9_LiH.png",import.meta.url).href,dr=""+new URL("activity-beach-oc9adSOS.png",import.meta.url).href,vr=""+new URL("activity-stargazing-BA4hSomZ.png",import.meta.url).href,pr={class:"activities-carousel","data-nav-theme":"light"},mr={class:"activities-slider"},fr=["src","alt"],hr={class:"activity-info"},gr={class:"activity-title"},br={class:"activity-desc"},yr={class:"activities-dots"},kr=["onClick","aria-label"],wr=["disabled"],_r=["disabled"],Bn=50,Cr={__name:"ActivitiesCarousel",setup(S){const b=[{title:"Snorkeling & Diving",description:"Explore vibrant coral reefs and marine life",image:ir},{title:"Relaxing & Sunbathing",description:"Unwind on pristine decks and secluded beaches",image:lr},{title:"Hiking & Viewpoints",description:"Trek to breathtaking panoramic vistas",image:rr},{title:"Local Community Immersion",description:"Connect with authentic Indonesian culture",image:cr},{title:"Wildlife Spotting",description:"Encounter Komodo dragons in their habitat",image:ur},{title:"Beach Exploration",description:"Discover hidden coves and pristine shores",image:dr},{title:"Stargazing",description:"Marvel at the Milky Way from open waters",image:vr}],f=m(0),C=m(typeof window<"u"?window.innerWidth:1200),h=m(null),g=x(()=>C.value<=768?C.value:C.value*.35),v=x(()=>C.value<=768?0:f.value*g.value),E=x(()=>C.value<=768?b.length-1:b.length-2);function X(){f.value<E.value&&f.value++}function T(){f.value>0&&f.value--}function oe(H){f.value=Math.min(H,E.value)}function te(H){if(C.value<=768&&h.value){const le=C.value;h.value.scrollTo({left:H*le,behavior:"smooth"})}else oe(H)}function Z(){C.value=window.innerWidth}const q=m(0),W=m(0);function Se(H){C.value>768&&(q.value=H.changedTouches[0].screenX)}function Ce(H){C.value>768&&(W.value=H.changedTouches[0].screenX)}function ie(){if(C.value>768){const H=q.value-W.value,le=H>Bn,ve=H<-Bn;le?X():ve&&T(),q.value=0,W.value=0}}function O(H){if(C.value<=768){const le=H.target.scrollLeft,ve=C.value,F=Math.round(le/ve);f.value=F}}return Qe(()=>{window.addEventListener("resize",Z)}),wt(()=>{window.removeEventListener("resize",Z)}),(H,le)=>(o(),i("section",pr,[le[2]||(le[2]=e("div",{class:"activities-content"},[e("h2",{class:"activities-heading"},"What to experience?"),e("p",{class:"activities-description"}," From underwater adventures to peaceful sunsets, our carefully curated activities invite you to discover the magic of Indonesia's hidden treasures. "),e("button",{class:"activities-cta"},"Explore activities")],-1)),e("div",mr,[e("div",{class:"activities-track",ref_key:"trackRef",ref:h,onScroll:O,onTouchstart:Se,onTouchmove:Ce,onTouchend:ie,style:Ht({transform:`translateX(-${v.value}px)`})},[(o(),i(K,null,se(b,(ve,F)=>e("div",{key:F,class:B(["activity-slide",{active:F===f.value}])},[e("img",{src:ve.image,alt:ve.title,class:"activity-image"},null,8,fr),e("div",hr,[e("h3",gr,r(ve.title),1),e("p",br,r(ve.description),1)])],2)),64))],36)]),e("div",yr,[(o(),i(K,null,se(b,(ve,F)=>e("button",{key:F,class:B(["activity-dot",{active:F===f.value}]),onClick:G=>te(F),"aria-label":`Go to ${b[F].title}`},null,10,kr)),64))]),le[3]||(le[3]=e("button",{class:"activities-cta mobile-only"},"Explore activities",-1)),e("button",{class:"activities-nav activities-nav-left",onClick:T,disabled:f.value===0},[...le[0]||(le[0]=[e("svg",{width:"24",height:"24",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("polyline",{points:"15 18 9 12 15 6"})],-1)])],8,wr),e("button",{class:"activities-nav activities-nav-right",onClick:X,disabled:f.value>=E.value},[...le[1]||(le[1]=[e("svg",{width:"24",height:"24",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("polyline",{points:"9 18 15 12 9 6"})],-1)])],8,_r)]))}},$r=vt(Cr,[["__scopeId","data-v-9abd6fc3"]]),Sr=""+new URL("home-landscape-wPTuluZw.png",import.meta.url).href,xr=""+new URL("home-conservation-DjIfDkiI.png",import.meta.url).href,Dr=""+new URL("home-culture-DX4UewC_.png",import.meta.url).href,Ar=""+new URL("home-legacy-Dkg62GSZ.png",import.meta.url).href,Tr=["muted"],Ir=["aria-label"],Nr={key:0,xmlns:"http://www.w3.org/2000/svg",width:"24",height:"24",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2","stroke-linecap":"round","stroke-linejoin":"round"},Mr={key:1,xmlns:"http://www.w3.org/2000/svg",width:"24",height:"24",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2","stroke-linecap":"round","stroke-linejoin":"round"},Er={class:"komodo-section"},Rr={class:"komodo-content"},Pr=["src"],Or={class:"komodo-section section-alt"},Lr={class:"komodo-content reverse"},Br=["src"],Fr={class:"komodo-section"},zr={class:"komodo-content"},Ur=["src"],Gr={class:"komodo-section section-alt"},Vr={class:"komodo-content reverse"},Kr=["src"],qr={class:"home-footer"},Wr={class:"home-footer-inner container"},Hr={class:"hf-top"},Yr={class:"hf-links"},Jr={class:"hf-bottom"},jr={class:"hf-copyright"},Xr={__name:"Home",setup(S){const b=Gs(),f=m(!1),C=m(!0),h=m(null),g=m(null),v=m(null),E=m(null),X=m(null),T=m(null),oe=m(null),te=m(null),Z=m(null),q=m(null);let W=null;function Se(){[{container:v.value,img:E.value},{container:X.value,img:T.value},{container:oe.value,img:te.value},{container:Z.value,img:q.value}].forEach(w=>{if(!w.container||!w.img)return;const ge=w.container.getBoundingClientRect(),fe=window.innerHeight;if(ge.top<fe&&ge.bottom>0){const xe=fe/2-(ge.top+ge.height/2),qe=.15;w.img.style.transform=`translateY(${xe*qe}px)`}})}let Ce=!1;function ie(){Ce||(window.requestAnimationFrame(()=>{Se(),Ce=!1}),Ce=!0)}function O(){C.value=!C.value,!C.value&&h.value&&h.value.play().catch(()=>{})}function H(G){G.forEach(w=>{!w.isIntersecting&&!C.value&&(C.value=!0)})}Qe(()=>{W=new IntersectionObserver(H,{threshold:.1}),g.value&&W.observe(g.value),window.addEventListener("scroll",ie),Se()}),wt(()=>{window.removeEventListener("scroll",ie),W&&W.disconnect()});function le(){f.value=!0}function ve(){f.value=!1}function F(){f.value=!1,b.push("/results")}return(G,w)=>(o(),i(K,null,[e("section",{class:"hero-section",ref_key:"heroSectionRef",ref:g},[e("video",{class:"hero-bg-video",autoplay:"",muted:C.value,loop:"",playsinline:"",ref_key:"heroVideo",ref:h},[...w[0]||(w[0]=[e("source",{src:wl,type:"video/mp4"},null,-1)])],8,Tr),w[3]||(w[3]=e("div",null,[e("h1",{class:"hero-title"},"Shores of Wonder"),e("p",{class:"hero-sub"}," Embark on an exclusive voyage through the Komodo Islands. ")],-1)),e("button",{class:"hero-sound-control",onClick:O,"aria-label":C.value?"Unmute":"Mute"},[C.value?(o(),i("svg",Nr,[...w[1]||(w[1]=[e("path",{d:"M11 5L6 9H2v6h4l5 4V5z"},null,-1),e("line",{x1:"23",y1:"9",x2:"17",y2:"15"},null,-1),e("line",{x1:"17",y1:"9",x2:"23",y2:"15"},null,-1)])])):(o(),i("svg",Mr,[...w[2]||(w[2]=[e("path",{d:"M11 5L6 9H2v6h4l5 4V5z"},null,-1),e("path",{d:"M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"},null,-1)])]))],8,Ir)],512),ke(Bl),e("section",Er,[e("div",Rr,[w[5]||(w[5]=e("div",{class:"komodo-text"},[e("h2",{class:"komodo-heading"}," A golden thread throughout every Komodo Cruises experience is a deep reverence for the wild and its power to heal. "),e("p",{class:"komodo-paragraph"}," Our phinisi vessels and curated voyages are designed to offer guests the freedom to reflect, inviting in wonder and wholeness. ")],-1)),e("div",{class:"komodo-media",ref_key:"mediaRef1",ref:v},[e("img",{src:he(Sr),alt:"Komodo landscape",loading:"lazy",ref_key:"imgRef1",ref:E},null,8,Pr),w[4]||(w[4]=e("button",{class:"play-button","aria-label":"Play video"},[e("svg",{xmlns:"http://www.w3.org/2000/svg",width:"24",height:"24",viewBox:"0 0 24 24",fill:"white"},[e("polygon",{points:"5,3 19,12 5,21"})])],-1))],512)])]),e("section",Or,[e("div",Lr,[w[6]||(w[6]=e("div",{class:"komodo-text"},[e("h2",{class:"komodo-heading"}," Dedicated to environmentally conscious hospitality and sustainable conservation since 2015. "),e("p",{class:"komodo-paragraph"}," Join us in our love for the natural world, to be part of something meaningful and bigger than ourselves. ")],-1)),e("div",{class:"komodo-media",ref_key:"mediaRef2",ref:X},[e("img",{src:he(xr),alt:"Conservation efforts",loading:"lazy",ref_key:"imgRef2",ref:T},null,8,Br)],512)])]),e("section",Fr,[e("div",zr,[w[7]||(w[7]=e("div",{class:"komodo-text"},[e("h2",{class:"komodo-heading"},"Telling Komodo's stories."),e("p",{class:"komodo-subheading"},' Komodo Cruises means "Place of Dragons" in local lore. '),e("p",{class:"komodo-paragraph"}," Our people share their passion for Indonesia's natural spaces and rich cultures, bringing you closer to both through stories and experiences. ")],-1)),e("div",{class:"komodo-media",ref_key:"mediaRef3",ref:oe},[e("img",{src:he(Dr),alt:"Komodo stories",loading:"lazy",ref_key:"imgRef3",ref:te},null,8,Ur)],512)])]),e("section",Gr,[e("div",Vr,[w[8]||(w[8]=Pe('<div class="komodo-text"><p class="komodo-subheading">A legacy unfolds</p><h2 class="komodo-heading"> It started in 2015 with a simple wooden boat and a deep passion for the ocean. </h2><p class="komodo-paragraph"> A legacy unfolded over decades, inspired by family values and a purpose to offer profound wildlife encounters. </p><div style="margin-top:1.5rem;"><button class="hero-cta" style="color:#333;border:1px solid rgba(0, 0, 0, 0.2);background:transparent;padding:0.8rem 2rem;font-size:0.95rem;text-transform:uppercase;letter-spacing:0.05em;"> Our Story </button></div></div>',1)),e("div",{class:"komodo-media",ref_key:"mediaRef4",ref:Z},[e("img",{src:he(Ar),alt:"Our story",loading:"lazy",ref_key:"imgRef4",ref:q},null,8,Kr)],512)])]),ke($r),ke(or),e("footer",qr,[e("div",Wr,[e("div",Hr,[w[12]||(w[12]=e("div",{class:"hf-brand"},[e("div",{class:"hf-logo"},"KOMODO CRUISES"),e("div",{class:"hf-copy"},"Rare journeys across the Komodo Islands.")],-1)),e("nav",Yr,[e("a",{href:"#",onClick:j(le,["prevent"])},"Plan your trip"),w[9]||(w[9]=e("a",{href:"#"},"Experiences",-1)),w[10]||(w[10]=e("a",{href:"#"},"Our story",-1)),w[11]||(w[11]=e("a",{href:"#"},"Contact",-1))]),w[13]||(w[13]=Pe('<div class="hf-contact"><div class="hf-contact-title">Contact Us</div><div class="hf-contact-phone"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><a href="tel:+6285282296450">+62 852-8229-6450</a></div><div class="hf-contact-address"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg><span>Graha Permata Pancoran, Jl. KH. Guru Amin Blok A5, Pancoran, Jakarta Selatan 12780</span></div></div>',1))]),e("div",Jr,[e("div",jr," © "+r(new Date().getFullYear())+" Komodo Cruises | PT CANARD MONEY INDONESIA ",1),w[14]||(w[14]=e("div",{class:"hf-disclaimer"}," All voyages subject to weather and park regulations. ",-1))])])]),ke(Ks,{isOpen:f.value,onClose:ve,onNavigateToResults:F},null,8,["isOpen"])],64))}},Qr="https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io";async function Zr(S){try{const b=await fetch(`${Qr}/api/create-invoice`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({amount:S.amount,payerEmail:S.payerEmail,description:S.description,customerName:S.customerName,customerPhone:S.customerPhone,items:S.items,successRedirectUrl:S.successRedirectUrl||`${window.location.origin}/payment-success`,failureRedirectUrl:S.failureRedirectUrl||`${window.location.origin}/payment-failed`})}),f=await b.json();if(!b.ok)throw new Error(f.message||"Failed to create invoice");return f}catch(b){throw console.error("Error creating Xendit invoice:",b),b}}function ec(S){if(S)window.location.href=S;else throw new Error("Invoice URL is required")}function St(S){if(!S)return 0;if(typeof S=="number")return S;const b=String(S).replace(/[^\d.,]/g,"").replace(/\./g,"").replace(/,/g,"");return parseInt(b)||0}const tc={class:"results-wrap"},sc={key:0,class:"simple-loader"},nc={key:1,class:"results-container"},ac={class:"mobile-filter-summary"},oc={class:"filter-summary-content"},ic={class:"filter-summary-row"},lc={class:"filter-summary-item"},rc={class:"filter-summary-item"},cc={class:"results-layout"},uc={class:"results-main"},dc={key:0,class:"error-state"},vc={class:"error-message"},pc={key:1},mc={class:"results-intro"},fc={key:0,class:"success-message"},hc={key:1,class:"no-availability"},gc={key:0,class:"results-controls"},bc={class:"results-controls-left"},yc=["aria-expanded"],kc=["src"],wc=["onClick"],_c={class:"results-controls-right"},Cc={class:"results-count"},$c={class:"ship-selection-container"},Sc={class:"ship-selection-header"},xc={class:"ship-selection-subtitle"},Dc={class:"ship-selection-grid"},Ac=["onClick"],Tc={class:"ship-img-col"},Ic=["src","alt"],Nc={class:"ship-card-content"},Mc={class:"ship-card-name"},Ec={key:0,class:"ship-desc-sm"},Rc={key:1,class:"ship-card-info"},Pc={class:"ship-card-capacity"},Oc={key:2,class:"ship-card-info"},Lc={class:"cabin-results-section"},Bc={key:0,class:"back-to-ships-bar"},Fc={class:"viewing-ship-label"},zc={key:1,class:"no-availability"},Uc={key:2,class:"lodge-results"},Gc={class:"cabin-image",style:{position:"relative",overflow:"hidden"}},Vc=["src","alt","onError"],Kc=["onClick"],qc=["onClick"],Wc={class:"cabin-content"},Hc={class:"cabin-title-group"},Yc={class:"cabin-name"},Jc={class:"cabin-badge active"},jc={class:"cabin-specs"},Xc={class:"cabin-overview"},Qc={class:"overview-list"},Zc={key:0,class:"overview-list"},eu=["onClick"],tu={key:0,class:"trips-section"},su={class:"trip-primary"},nu={class:"trip-primary-info"},au={class:"trip-primary-date"},ou={class:"trip-primary-rooms"},iu=["onClick"],lu={key:1,class:"more-dates-list"},ru=["onClick"],cu={class:"trip-alt-info"},uu={class:"trip-alt-date"},du={class:"trip-alt-rooms"},vu={key:0,class:"trip-reserved-label"},pu={key:1,class:"trip-select-action"},mu={class:"cabin-info-section"},fu={class:"cabin-info-left"},hu={class:"price-main"},gu={class:"price-value"},bu={class:"cabin-info-right"},yu=["onClick"],ku={key:3,class:"pagination"},wu=["disabled"],_u={class:"pagination-pages"},Cu=["onClick"],$u=["disabled"],Su={key:4,class:"no-results"},xu={class:"sidebar-section-wrapper"},Du={class:"sidebar-section check-availability-section"},Au={key:0,class:"sidebar-skeleton"},Tu=["aria-expanded"],Iu={class:"caret"},Nu=["src"],Mu=["onClick"],Eu={class:"list-text result-list-text"},Ru=["value"],Pu=["aria-expanded"],Ou={class:"caret"},Lu=["src"],Bu={class:"dropdown-group-title"},Fu={key:0,class:"muted"},zu=["onClick"],Uu={class:"list-text result-list-text"},Gu=["value"],Vu={key:0,class:"muted"},Ku=["aria-expanded"],qu={key:0},Wu={key:1},Hu={class:"caret"},Yu=["src"],Ju={class:"sidebar-pill-container"},ju={key:0,class:"sidebar-flexible-content"},Xu={class:"sidebar-counter-row"},Qu={class:"ctrls"},Zu=["disabled"],ed={class:"val"},td={key:1,class:"cabins-container-sidebar"},sd={class:"cabin-header-sidebar-static"},nd={class:"cabin-header-left-sidebar"},ad={class:"cabin-title-sidebar"},od={class:"cabin-summary-sidebar"},id={class:"cabin-header-right-sidebar"},ld=["onClick"],rd=["onClick"],cd={key:0,class:"cabin-body-sidebar"},ud={class:"counter-row-sidebar"},dd={class:"counter-ctrls-sidebar"},vd=["disabled","onClick"],pd={class:"count-sidebar"},md=["disabled","onClick"],fd={class:"counter-row-sidebar"},hd={class:"counter-ctrls-sidebar"},gd=["disabled","onClick"],bd={class:"count-sidebar"},yd=["disabled","onClick"],kd=["aria-expanded"],wd={class:"caret"},_d=["src"],Cd={class:"custom-calendar"},$d={class:"calendar-header"},Sd={class:"calendar-title"},xd={class:"calendar-grid"},Dd={class:"calendar-days"},Ad=["disabled","onClick"],Td={class:"caret"},Id=["src"],Nd={key:0,class:"custom-dropdown-menu"},Md={class:"trip-duration-range-content sidebar-duration"},Ed={class:"counter-row duration-counter-row"},Rd={class:"counter-ctrls"},Pd=["disabled"],Od={class:"count-display"},Ld=["disabled"],Bd={class:"counter-row duration-counter-row"},Fd={class:"counter-ctrls"},zd=["disabled"],Ud={class:"count-display"},Gd=["disabled"],Vd={class:"duration-reset-row"},Kd=["disabled"],qd={key:0,class:"sidebar-track"},Wd={class:"itinerary-sticky"},Hd={key:0,class:"itinerary-empty"},Yd={key:1,class:"itinerary-list"},Jd={class:"itinerary-header"},jd={class:"itinerary-cabin-name"},Xd=["onClick"],Qd={class:"itinerary-info-row"},Zd={class:"itinerary-info-text"},ev={class:"itinerary-info-row"},tv={class:"itinerary-info-text"},sv={class:"itinerary-info-row guest-row-editable"},nv={class:"guest-info-wrap"},av={class:"itinerary-info-text"},ov=["onClick"],iv={class:"itinerary-price-row"},lv={class:"itinerary-price-left"},rv={class:"itinerary-price-label"},cv={class:"itinerary-price-value"},uv={key:2,class:"itinerary-total"},dv={class:"itinerary-total-row"},vv={class:"itinerary-total-right"},pv={class:"itinerary-total-amount"},mv={key:3,class:"itinerary-total-note"},fv={class:"modal-body modal-body-redesigned"},hv={class:"modal-info-section modal-info-left"},gv={class:"modal-cabin-header"},bv={class:"modal-cabin-name"},yv={class:"modal-cabin-specs"},kv={class:"modal-cabin-quote"},wv={class:"modal-overview-section"},_v={class:"modal-overview-grid"},Cv={class:"modal-overview-list"},$v={key:0,class:"modal-overview-list"},Sv={class:"modal-amenities-section"},xv={class:"modal-amenities-grid"},Dv={class:"modal-amenities-list"},Av={key:0,class:"modal-amenities-list"},Tv={class:"modal-image-section modal-image-right"},Iv=["src","alt"],Nv={class:"modal-image-indicator"},Mv={class:"indicator-count"},Ev={class:"modal-bottom-section"},Rv={class:"modal-rate-info"},Pv={class:"modal-price-display"},Ov={class:"price-amount"},Lv={key:0,class:"price-label"},Bv={class:"guest-modal-body"},Fv={class:"guest-counter-section"},zv={class:"guest-counter-row"},Uv={class:"guest-counter-controls"},Gv=["disabled"],Vv={class:"guest-counter-value"},Kv=["disabled"],qv={class:"guest-available-note"},Wv={key:0},Hv={class:"guest-modal-actions"},Yv={key:4,class:"enquiry-modal-overlay"},Jv={class:"enquiry-modal-content"},jv={class:"enquiry-modal-body"},Xv={class:"enquiry-form-section"},Qv={class:"form-row"},Zv={class:"form-group form-group-small"},ep={class:"form-group"},tp={class:"form-group"},sp={class:"form-row"},np={class:"form-group"},ap={class:"phone-input"},op={class:"form-group"},ip={class:"form-row"},lp={class:"form-group"},rp={class:"form-group"},cp={class:"form-group"},up={class:"form-group"},dp={class:"form-checkboxes"},vp={class:"checkbox-label"},pp={class:"checkbox-label"},mp=["disabled"],fp={class:"enquiry-summary-section"},hp={class:"summary-items"},gp={class:"summary-item-header"},bp={class:"summary-lodge-name"},yp={class:"summary-item-details"},kp={class:"summary-cabin"},wp={class:"summary-guests"},_p={class:"summary-dates"},Cp={key:0,class:"summary-pricing"},$p={class:"pricing-row"},Sp={class:"pricing-value"},xp={class:"pricing-row"},Dp={class:"pricing-label"},Ap={class:"pricing-value"},Tp={key:0,class:"enquiry-total-section"},Ip={class:"enquiry-total"},Np={class:"enquiry-total-row"},Mp={class:"enquiry-total-amount"},Ep={key:1,class:"enquiry-pricing-note"},Rp={class:"home-footer"},Pp={class:"home-footer-inner container"},Op={class:"hf-top"},Lp={class:"hf-links"},Bp={class:"hf-bottom"},Fp={class:"hf-copyright"},zp={class:"mobile-filter-modal"},Up={class:"mobile-filter-modal-header"},Gp={class:"mobile-filter-modal-body"},Vp={class:"modal-field-group"},Kp=["src"],qp={key:0,class:"modal-field-dropdown"},Wp=["onClick"],Hp={class:"list-text result-list-text"},Yp=["value"],Jp={class:"modal-field-group"},jp=["src"],Xp={key:0,class:"modal-field-dropdown"},Qp={class:"dropdown-group-title"},Zp={key:0,class:"muted"},e1=["onClick"],t1={class:"list-text result-list-text"},s1=["value"],n1={class:"modal-field-group"},a1={key:0},o1={key:1},i1=["src"],l1={key:0,class:"modal-field-dropdown cabin-panel",style:{padding:"1rem"}},r1={class:"sidebar-pill-container"},c1={key:0,class:"sidebar-flexible-content"},u1={class:"sidebar-counter-row"},d1={class:"ctrls"},v1=["disabled"],p1={class:"val"},m1={key:1,class:"cabins-container-sidebar"},f1={class:"cabin-header-sidebar-static"},h1={class:"cabin-header-left-sidebar"},g1={class:"cabin-title-sidebar"},b1={class:"cabin-summary-sidebar"},y1={class:"cabin-header-right-sidebar"},k1=["onClick"],w1=["onClick"],_1={key:0,class:"cabin-body-sidebar"},C1={class:"counter-row-sidebar"},$1={class:"counter-ctrls-sidebar"},S1=["disabled","onClick"],x1={class:"count-sidebar"},D1=["disabled","onClick"],A1={class:"counter-row-sidebar"},T1={class:"counter-ctrls-sidebar"},I1=["disabled","onClick"],N1={class:"count-sidebar"},M1=["disabled","onClick"],E1={class:"modal-field-group"},R1=["src"],P1={key:0,class:"modal-field-dropdown dates-panel"},O1={class:"custom-calendar",style:{"max-width":"100%","box-shadow":"none",border:"none"}},L1={class:"calendar-header"},B1={class:"calendar-title"},F1={class:"calendar-grid"},z1={class:"calendar-days"},U1=["disabled","onClick"],G1={class:"modal-field-group"},V1={class:"trip-duration-range-content mobile-duration"},K1={class:"counter-row duration-counter-row"},q1={class:"counter-ctrls"},W1=["disabled"],H1={class:"count-display"},Y1=["disabled"],J1={class:"counter-row duration-counter-row"},j1={class:"counter-ctrls"},X1=["disabled"],Q1={class:"count-display"},Z1=["disabled"],em={class:"duration-reset-row"},tm=["disabled"],Ot="Rp",ms="Nusa Tenggara Timur",Xe=30,sm=4,qt=4,nm={__name:"Results",setup(S){const b=m({}),f=m({}),C=m(!1),h=m(!1),g=m(!1),v=m(!1),E=m(!1),X=m(!1);rt(C,s=>{s?document.body.style.overflow="hidden":document.body.style.overflow=""});function T(){me.value||(me.value={}),me.value.destinations=[...Ne.value],me.value.ships=[...Oe.value],me.value.dateFrom=c.value,me.value.dateTo=k.value,me.value.totalGuests=Be.value,lt.value=1,ns()}function oe(){h.value=!1,g.value=!1,v.value=!1,E.value=!1,X.value=!1,C.value=!1,T()}function te(s,t){if(!s)return"Select dates";const a=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],l=new Date(s),u=a[l.getMonth()],n=l.getDate();if(!t)return`${u} ${n}`;const d=new Date(t),p=a[d.getMonth()],N=d.getDate(),_=d.getFullYear();return u===p&&l.getFullYear()===_?`${u} ${n} - ${p} ${N} ${_}`:`${u} ${n} - ${p} ${N} ${_}`}function Z(s){if(!s||typeof s=="string")return[];const t=[];s.image_main&&t.push(s.image_main),Array.isArray(s.images)&&t.push(...s.images);for(let a=1;a<=10;a++){const l=`image_${a}`;s[l]&&t.push(s[l])}return t.filter(a=>!!a&&String(a).trim().length>0).map(_n)}function q(s){const t=Z(s.detail)||[];return t.length?t:Z(s.raw)||[]}function W(s){return b.value[s]||0}function Se(s){return f.value[s]||"right"}function Ce(s,t,a,l){a>0?(b.value[s]=(t+a)%a,f.value[s]=l):(b.value[s]=0,f.value[s]="right")}function ie(s){const t=es.value.find(l=>l.key===s);if(!t)return;const a=q(t);Ce(s,W(s)-1,a.length,"left")}function O(s){const t=es.value.find(l=>l.key===s);if(!t)return;const a=q(t);Ce(s,W(s)+1,a.length,"right")}const H=m(0);function le(){if(!pe.value)return[];const s=q(pe.value);return s.length?s:[pe.value.image||"/src/images/cabin.jpg"]}function ve(){const s=le(),t=H.value%(s.length||1);return s[t]||"/src/images/cabin.jpg"}function F(){const t=le().length||1;H.value=(H.value-1+t)%t}function G(){const t=le().length||1;H.value=(H.value+1)%t}const w=s=>{if(s==null)return"Price on request";const t=typeof s=="string"?parseFloat(s.replace(/[^0-9.-]+/g,"")):s;return isNaN(t)?s:new Intl.NumberFormat("en-US",{style:"currency",currency:"IDR",minimumFractionDigits:0,maximumFractionDigits:0}).format(t).replace("IDR","Rp")};Qe(()=>{window.addEventListener("resize",()=>{window.innerWidth>=640&&typeof C<"u"&&C.value&&(C.value=!1)}),Ha(()=>{try{console.log("DEBUG selectedCabinDetail",Ut.value),console.log("DEBUG selectedCabinPriceText",_s.value)}catch(s){console.warn("DEBUG watchEffect error:",s)}})});const ge=Gs(),fe=m(!0),xe=m(""),qe=m(!1),me=m(null),Te=m({}),Ze=m([]),ne=m(null),y=m(new Map),Ie=m(new Map),R=m([]),De=m(null),et=m(null),Ee=m(!1),tt=m(!1),We=m(!1),pe=m(null),He=m(1),Re=m(2),Le=m(!1),_t=m(""),je=m(null),Ct=m({}),ct=m({}),st=m("recommended"),pt=m(!1),Lt=[{value:"recommended",label:"Recommended"},{value:"price_low",label:"Lowest Price"},{value:"price_high",label:"Highest Price"}],Dt=["Komodo National Park","Labuan Bajo"];function we(s){if(!s)return"";const t=s.match(/[-\w]{25,}/);return t?`https://lh3.googleusercontent.com/d/${t[0]}`:s}const Bt={"SEMESTA VOYAGES":we("https://drive.google.com/file/d/1semesta_placeholder"),"AKASSA CRUISE":we("https://drive.google.com/file/d/1akassa_placeholder"),"DERYA LIVEABOARD":we("https://drive.google.com/file/d/1derya_placeholder"),"GIONA LIVEABOARD":we("https://drive.google.com/file/d/1giona_placeholder"),"DURYA LIVEABOARD":we(""),"BARAKATI LIVEABOARD":we(""),"ELBARIK CRUISE":we(""),"ANGELICA LIVEBOARD":we(""),"NAVILA LIVEBOARD":we(""),KAMBIOLA:we(""),"LAMBORAJO 2":we(""),YUMANA:we(""),SBVANREL:we(""),"RAFFLES CRUISE":we(""),"VINCA VOYAGE":we(""),"AMORE BOAT":we(""),"KUMAMBA 02":we(""),"MAREE GALLERY":we(""),"SORA GALLERY":we(""),TARA:we("")};function Ft(s){if(!s)return"";const t=At(s);if(t&&t.mainImage)return t.mainImage;const a=s.toUpperCase().trim();if(Bt[a])return Bt[a];for(const[l,u]of Object.entries(Bt)){const n=l.toUpperCase().trim();if(n.includes(a)||a.includes(n))return u}return""}function At(s){if(!s)return null;const t=s.toUpperCase().trim(),a=t.replace(/S$/i,"").replace(/LIVEABOARD/i,"LIVEBOARD").replace(/LIVEBOARD/i,"LIVEABOARD");if(Ie.value.has(t))return Ie.value.get(t);for(const[l,u]of Ie.value.entries()){const n=l.replace(/S$/i,"").replace(/LIVEABOARD/i,"LIVEBOARD").replace(/LIVEBOARD/i,"LIVEABOARD");if(l.includes(t)||t.includes(l)||n.includes(a)||a.includes(n)||l.split(" ")[0]===t.split(" ")[0])return u}return null}const Jt=[],nt=m([]),Tt=m(!1),Ne=m([]),Oe=m([]),I=m([]),c=m(""),k=m(""),P=m(1),D=m(30),Y=m([{id:1,adults:2,children:0,expanded:!0}]),ce=m(!0),mt=m(!1),ue=m(2),Be=x(()=>ce.value?ue.value:Y.value.reduce((s,t)=>s+t.adults+t.children,0)),ut=x(()=>Y.value.length<sm),jt=x(()=>{if(!c.value||!k.value)return Xe;const s=new Date(c.value+"T00:00:00"),a=new Date(k.value+"T00:00:00").getTime()-s.getTime(),l=Math.ceil(a/(1e3*60*60*24))+1;return Math.min(l,Xe)});x(()=>{const s=jt.value,t=[];for(let a=1;a<=s;a++)t.push(a);return t});const zt=x(()=>{const s=P.value,t=D.value;return s===1&&t===Xe?"Any duration":s===t?`${s} ${s===1?"day":"days"}`:`${s} - ${t} days`}),Fe=m(!1),ze=m(!1),Ue=m(!1),Ge=m(!1),Ve=m(!1),gs=m(!1),bs=m(!1),ys=m(!1),ks=m(!1),ws=m(!1),qs=m(null),Ws=m(null),Hs=m(null),Ys=m(null),Js=m(null),qn=m(null),ft=m(new Date().getMonth()),$t=m(new Date().getFullYear());function Wn(){Fe.value=!1,ze.value=!1,Ue.value=!1,Ge.value=!1,Ve.value=!1}function It(s){s==="regions"?(Fe.value=!Fe.value,ze.value=Ue.value=Ge.value=Ve.value=!1):s==="ships"?(ze.value=!ze.value,Fe.value=Ue.value=Ge.value=Ve.value=!1):s==="guests"?(Ue.value=!Ue.value,Fe.value=ze.value=Ge.value=Ve.value=!1):s==="dates"?(Ge.value=!Ge.value,Fe.value=ze.value=Ue.value=Ve.value=!1):s==="duration"&&(Ve.value=!Ve.value,Fe.value=ze.value=Ue.value=Ge.value=!1)}function js(s){const t=Ne.value.indexOf(s);t>=0?Ne.value.splice(t,1):Ne.value.push(s)}function Xs(s){const t=Oe.value.indexOf(s);t>=0?Oe.value.splice(t,1):Oe.value.push(s)}function Qs(){ut.value&&Y.value.push({id:Date.now(),adults:2,children:0,expanded:!0})}function Zs(s){Y.value.length>1&&Y.value.splice(s,1)}function en(s){Y.value[s].expanded=!Y.value[s].expanded}function Xt(s,t){const a=Y.value[s];a.adults+a.children<qt&&a[t]++}function Qt(s,t){const a=Y.value[s];t==="adults"&&a.adults>1&&a.adults--,t==="children"&&a.children>0&&a.children--}function tn(){P.value>1&&P.value--}function sn(){P.value<D.value&&P.value++}function nn(){D.value>P.value&&D.value--}function an(){D.value<Xe&&D.value++}function on(){P.value=1,D.value=Xe}x(()=>Fa());const ln=x(()=>`${["January","February","March","April","May","June","July","August","September","October","November","December"][ft.value]} ${$t.value}`),rn=x(()=>{const s=new Date($t.value,ft.value,1),t=new Date($t.value,ft.value+1,0),a=new Date(s),l=new Date;a.setDate(a.getDate()-a.getDay());const u=[],n=new Date(t);n.setDate(n.getDate()+(6-t.getDay()));for(let d=new Date(a);d<=n;d.setDate(d.getDate()+1)){d.getDay();const p=d.getMonth()===ft.value,N=new Date(d);N.setHours(0,0,0,0);const _=new Date(l);_.setHours(0,0,0,0);const A=N<_,$=p&&!A,U=us(d);let V=!1,L=!1,J=!1;if(c.value&&k.value&&p){const re=new Date(c.value+"T00:00:00"),ae=new Date(k.value+"T00:00:00");N>=re&&N<=ae&&(V=!0,N.getTime()===re.getTime()&&(L=!0),N.getTime()===ae.getTime()&&(J=!0))}u.push({key:d.getTime(),date:d.getDate(),fullDate:U,isCurrentMonth:p,isSelectable:$,isPast:A,isSelected:c.value===U||k.value===U,isInRange:V,isRangeStart:L,isRangeEnd:J})}return u});function cn(s){let t=ft.value+s,a=$t.value;t>11&&(t=0,a+=1),t<0&&(t=11,a-=1),ft.value=t,$t.value=a}function un(){cn(1)}function dn(){cn(-1)}function vn(s){if(s.isSelectable)if(!c.value||c.value&&k.value)c.value=s.fullDate,k.value="";else{const t=new Date(c.value+"T00:00:00");new Date(s.fullDate+"T00:00:00")<t?(k.value=c.value,c.value=s.fullDate):k.value=s.fullDate}}const pn=x(()=>{if(Ne.value.length)return Ne.value[0];const s=me.value;return Array.isArray(s==null?void 0:s.destinations)&&s.destinations.length?s.destinations[0]:ms});x(()=>{var l,u,n;const s=me.value;if(!s)return[];const t=s.ships&&s.ships.length?s.ships:s.lodges||[],a=[];for(const d of t){const p=Te.value[d]||[];let N=0,_=0;for(const ae of p){const z=(((l=ae==null?void 0:ae.operators)==null?void 0:l.flatMap(de=>de.cabins||[]))||[]).reduce((de,Ke)=>{const Je=String(Ke).match(/\((\d+)\)/);return de+(Je?parseInt(Je[1],10):0)},0);N+=z,_+=z}const A=p.length,$=A>0?N/A:0,U=$>=(s.totalGuests||0),V=Math.max(1,s.totalGuests||(s.adults||0)+(s.children||0)),L=p.find(ae=>(ae==null?void 0:ae.date)===s.dateFrom)||p[0],re=(((n=(u=L==null?void 0:L.operators)==null?void 0:u[0])==null?void 0:n.cabins)||[]).reduce((ae,_e)=>{const z=String(_e).match(/\((\d+)\)/),de=z?parseInt(z[1],10):0;return ae+(de>=V?1:0)},0);a.push({lodge:d,hasAvailability:U,availableSlots:Math.floor($),totalSlots:A>0?Math.floor(_/A):0,image:"/src/images/cabin.jpg",availableCabinsCount:re,dateFrom:s.dateFrom})}return a});const Hn=x(()=>{const s=me.value;if(!s)return[];const t=s.ships&&s.ships.length?s.ships:s.lodges||[],a=s.dateFrom,l=Math.max(1,s.totalGuests||(s.adults||0)+(s.children||0)),u=[],n=new Set;for(const d of t){const p=Te.value[d]||[],N=p.find(A=>(A==null?void 0:A.date)===a)||p[0],_=((N==null?void 0:N.operators)||[]).flatMap(A=>A.cabins||[]);for(const A of _){const $=as(A),U=dt(A),V=typeof A=="string"?"":Ns(A);if(U==null||U>=l){const J=(typeof A!="string"&&(A!=null&&A.id)?String(A.id).trim().toLowerCase():null)||`${ye(d)}|${gt($)}`;if(n.has(J))continue;n.add(J),u.push({ship:d,cabinName:$,capacity:U,date:a,image:V})}}}return u});x(()=>Hn.value.map(s=>({cabinName:s.cabinName,ship:s.ship,date:s.date,capacity:s.capacity,image:s.image||"/src/images/cabin.jpg"}))),x(()=>{const s=me.value;return s?Math.max(1,s.totalGuests||(s.adults||0)+(s.children||0)):1});const Ut=x(()=>{const s=pe.value;if(!s)return null;const t=s.originalItem||s;if(t.detail)return t.detail;const a=y.value||new Map,l=`${ye(t.shipName||t.operatorLabel||"")}|${gt(t.cabinName)}`;return a.get(l)||null}),Yn=x(()=>{const s=Ut.value;return((s==null?void 0:s.description)||(s==null?void 0:s.desc)||"").trim()||"If you are desperate for a vacation, bring your friends or family and step away from it all."}),_s=x(()=>{const s=Ut.value,t=s&&(typeof s.price=="number"?s.price:os(s))||os(pe.value);if(t==null)return"";const a=Es(t,Ot);return a?Sn(a.amount,a.currency):""}),Jn=x(()=>{var a,l;const s=Ut.value;return s!=null&&s.capacity?s.capacity:Ms((a=pe.value)==null?void 0:a.capacityText)||((l=pe.value)==null?void 0:l.capacity)||""}),Cs=x(()=>{var d;const s=Ut.value,t=s&&typeof s=="object"&&s.facilities?s.facilities:null,a={wifi:"Wi-Fi",starlink:"Starlink",jacuzzi:"Jacuzzi",indoor_jacuzzi:"Indoor jacuzzi",outdoor_jacuzzi:"Outdoor jacuzzi",indoor_lounge:"Indoor lounge",outdoor_lounge:"Outdoor lounge",sundeck:"Sundeck",seaview:"Sea view",balcony:"Balcony",private_bathroom:"Private bathroom",shower:"Shower",bathtub:"Bathtub",outdoor_bathtub:"Outdoor bathtub",king_bed:"King bed",bar:"Bar",hammock:"Hammock",smart_tv:"Smart TV",ac:"Air conditioning"},l=[];if(t)for(const[p,N]of Object.entries(a))t[p]&&l.push(N);if(l.length)return l;const u=[];return s&&(s.facility_text&&u.push(s.facility_text),s.facilities_text&&u.push(s.facilities_text),s.api_name&&u.push(s.api_name),s.description&&u.push(s.description)),(d=pe.value)!=null&&d.capacityText&&u.push(pe.value.capacityText),wa(u.join(" "))});x(()=>{const s=me.value;return s?Array.isArray(s.destinations)&&s.destinations.length?s.destinations.join(", "):s.destination||"":""});const jn=x(()=>{const s=me.value;if(!s)return[];const t=s.ships&&s.ships.length?s.ships:s.lodges||[],a=s.shipSheets&&s.shipSheets.length?s.shipSheets:[],l=new Set,u=n=>{const d=ye(String(n).replace(/normalized/gi,"").replace(/cruise schedule/gi,""));if(!d)return;l.add(d);const p=d.split(" ")[0];p&&l.add(p)};return t.forEach(u),a.forEach(u),Array.from(l)}),Zt=x(()=>{const s=me.value;return s?s.ships&&s.ships.length?s.ships:s.lodges||[]:[]}),$s=x(()=>Zt.value.length<=1||je.value?!1:mn.value.filter(t=>t.hasAvailability).length>0),mn=x(()=>{const s=me.value,t=ne.value,a=P.value,l=D.value,u=y.value||new Map;if(!s||!t||!Array.isArray(t.operators))return[];const n=Zt.value,d=[];for(const p of n){const N=t.operators.find(_=>{const A=ye(_.operator||""),$=ye(p);return A===$||A.includes($)||$.includes(A)});if(N){const _=(N.cabins||[]).filter(U=>{const V=Ts(U);if(V!=null&&V<=0)return!1;if(a>1||l<Xe){let L=0;if(U.trip_days?L=parseInt(U.trip_days,10):U.days?L=parseInt(U.days,10):U.raw&&(U.raw.trip_days?L=parseInt(U.raw.trip_days,10):U.raw.days&&(L=parseInt(U.raw.days,10))),!L){const J=as(U),re=gt(J),ae=ye(p),_e=ye(N.operator||"");let z=u.get(`${ae}|${re}`);if(!z&&_e&&(z=u.get(`${_e}|${re}`)),!z){const de=`|${re}`;for(const[Ke,Je]of u.entries())if(Ke.endsWith(de)){z=Je;break}}if(!z){const de=ls(J);de&&(z=u.get(`${ae}|${de}`))}z&&(L=parseInt(z.trip_days||z.days||0,10))}if(L>0&&(L<a||L>l))return!1}return!0}),A=_.length,$=At(p);if(A>0){const U=_.reduce((V,L)=>{const J=dt(L);return V+(J||4)},0);d.push({name:p,operator:N.operator,cabinsCount:A,totalCapacity:U,hasAvailability:!0,image:($==null?void 0:$.mainImage)||Ft(p)||"",description:($==null?void 0:$.description)||""})}else d.push({name:p,operator:N.operator,cabinsCount:0,totalCapacity:0,hasAvailability:!1,image:($==null?void 0:$.mainImage)||Ft(p)||"",description:($==null?void 0:$.description)||""})}else{const _=At(p);d.push({name:p,operator:p,cabinsCount:0,totalCapacity:0,hasAvailability:!1,image:(_==null?void 0:_.mainImage)||Ft(p)||"",description:(_==null?void 0:_.description)||""})}}return d.filter(p=>p.hasAvailability)});function Xn(s){je.value=s}function Qn(){je.value=null}const es=x(()=>{const s=me.value,t=ne.value;if(!s||!t||!Array.isArray(t.operators))return[];const a=jn.value,l=y.value||new Map,u=new Map;for(const N of t.operators){const _=N.operator,A=N.cabins||[];for(const $ of A){const U=Ts($);if(U!=null&&U<=0)continue;const V=as($),L=kn($),J=os($),re=pa($,_);if(a.length&&!ka(re,a))continue;if(je.value){const Ae=ye(je.value),Rt=ye(re);if(!Rt.includes(Ae)&&!Ae.includes(Rt))continue}const ae=typeof $!="string"&&($!=null&&$.id)?String($.id).trim().toLowerCase():null,_e=gt(V),z=typeof $!="string"&&($.start_date||$.date)||"",de=ae||`${ye(re)}|${_e}|${z}`||`${ye(_)}|${_e}|${z}`,Ke=`${ye(re)}|${_e}`,Je=_?`${ye(_)}|${_e}`:null;let $e=l.get(Ke);if(!$e&&Je&&($e=l.get(Je)),!$e&&l.size>0&&Math.floor(Math.random()*100)<5&&console.log("Cabin detail NOT found:",{shipName:re,operatorLabel:_,cabinKey:_e,searchKey1:Ke,searchKey2:Je,availableKeys:Array.from(l.keys()).filter(Rt=>Rt.includes(_e)).slice(0,3)}),!$e){for(const[Ae,Rt]of l.entries())if(Ae.endsWith(`|${_e}`)){$e=Rt;break}}if(!$e){const Ae=`${ye(re)}|${ls(V)}`;$e=l.get(Ae)}const Os=os($e)||J,Ls=kn($e)||L,Tn=Ts($e),Vt=Tn??U,za=Ns($e)||Ns($)||"/src/images/cabin.jpg",Ua=typeof $!="string"?$.trip_days||$.days:null,Ga=$e?$e.trip_days||$e.days:null,Va=Ua||Ga||null,Ka=(typeof $!="string"?$.start_date||$.date:null)||s.dateFrom,In=u.get(de),qa={key:de,operatorLabel:_,shipName:re,cabinName:V,available:Vt,availableText:Vt!=null?`${Vt} available`:"Available",price:Os,capacityText:Ls,date:Ka,tripDays:Va,image:za,raw:$,detail:$e};if(!In)u.set(de,qa);else{const Ae={...In};Ae.available==null&&Vt!=null&&(Ae.available=Vt),!Ae.price&&Os&&(Ae.price=Os),!Ae.capacityText&&Ls&&(Ae.capacityText=Ls),Ae.availableText=Ae.available!=null?`${Ae.available} available`:"Available",u.set(de,Ae)}}}const n=Array.from(u.values());n.sort((N,_)=>(N.operatorLabel||"").localeCompare(_.operatorLabel||"")||(N.cabinName||"").localeCompare(_.cabinName||""));const d=s.dateFrom,p=s.dateTo;return d&&p?n.filter(_=>{const A=is(_);return A?ba(_.date,A,d,p):!0}):n}),Zn=x(()=>{const s=es.value,t=me.value||{},a=t.isFlexible,l=a?t.flexibleGuests||0:t.totalGuests||0,u=t.cabins||[],n={};for(const p of s){if(!p.date)continue;const _=`${ye(p.shipName||p.operatorLabel||"")}|${p.date}`;let A=2;if(typeof dt=="function")A=dt(p)||2;else{const V=(p.capacityText||"").match(/(\d+)/);V&&(A=parseInt(V[1]))}const $=typeof p.available=="number"?p.available:1;n[_]=(n[_]||0)+A*$}const d=new Map;for(const p of s){const N=`${p.shipName||p.operatorLabel}|${p.cabinName}`;d.has(N)||d.set(N,{...p,trips:[],totalAvailable:0});const _=d.get(N),A=p.date||"",$=Number(p.tripDays||is(p))||3;if(!A)continue;const V=`${ye(p.shipName||p.operatorLabel||"")}|${A}`,L=n[V]||0;if(l>0&&L<l)continue;if(!a&&u.length>0){let ae=2;if(typeof dt=="function")ae=dt(p)||2;else{const de=(p.capacityText||"").match(/(\d+)/);de&&(ae=parseInt(de[1]))}if(!u.some(z=>ae>=(z.total||z.adults+z.children)))continue}const J=new Date(A+"T00:00:00");let re=!1;for(const ae of _.trips){const _e=new Date(ae.date+"T00:00:00"),z=Number(ae.tripDays)||3,de=new Date(_e);if(de.setDate(de.getDate()+z-1),J>=_e&&J<=de){re=!0;break}}if(!re){const ae={date:p.date,tripDays:$,available:p.available||1,key:p.key,originalItem:p};_.trips.push(ae),_.totalAvailable+=ae.available||1,p.price&&(!_.price||St(p.price)<St(_.price))&&(_.price=p.price)}}return Array.from(d.values()).map(p=>{var _;const N=p.trips.sort((A,$)=>new Date(A.date)-new Date($.date));return N.length===0?null:{...p,id:p.key,uniqueKey:`${p.shipName}|${p.cabinName}`,title:ha(p),subtitle:na(p.operatorLabel),image:p.image,prices:[{label:"Start from",value:p.price||"Rp3,650,000"}],availabilityCount:p.totalAvailable>1?`${p.totalAvailable} cabins available`:p.availableText,tripsCount:N.length,trips:N,date:Nt((_=N[0])==null?void 0:_.date),availabilityType:"standard",availabilityTitle:"Great news, we have availability!",availabilityText:"Select the result that best suits you from the list below and it will be added to the itinerary summary on the right.",originalItem:p,isGallery:!0}}).filter(p=>p!==null)}),it=x(()=>{let s=[...Zn.value];const t=P.value,a=D.value;return(t>1||a<Xe)&&(s=s.map(l=>{const u=(l.trips||[]).filter(n=>{const d=Number(n.tripDays)||0;return d>=t&&d<=a});return u.length===0?null:{...l,trips:u,tripsCount:u.length}}).filter(l=>l!==null)),st.value==="price_low"?s.sort((l,u)=>{var p,N,_,A;const n=St(((N=(p=l.prices)==null?void 0:p[0])==null?void 0:N.value)||"0"),d=St(((A=(_=u.prices)==null?void 0:_[0])==null?void 0:A.value)||"0");return n-d}):st.value==="price_high"&&s.sort((l,u)=>{var p,N,_,A;const n=St(((N=(p=l.prices)==null?void 0:p[0])==null?void 0:N.value)||"0");return St(((A=(_=u.prices)==null?void 0:_[0])==null?void 0:A.value)||"0")-n}),s}),lt=m(1),fn=m(!1);function Ss(){fn.value=window.innerWidth<768}Qe(()=>{Ss(),window.addEventListener("resize",Ss)}),Nn(()=>{window.removeEventListener("resize",Ss)});const xs=x(()=>fn.value?5:10),ts=x(()=>Math.ceil(it.value.length/xs.value)),ea=x(()=>{const s=(lt.value-1)*xs.value,t=s+xs.value;return it.value.slice(s,t)});function Ds(s){s>=1&&s<=ts.value&&(lt.value=s,window.scrollTo({top:0,behavior:"smooth"}))}function ta(){Ds(lt.value+1)}function sa(){Ds(lt.value-1)}rt(st,()=>{lt.value=1}),rt([P,D],()=>{lt.value=1}),rt(jt,s=>{D.value>s&&(D.value=s),P.value>D.value&&(P.value=D.value)});const As=x(()=>{const s=De.value||{},t=dt(s);if(t)return t;const a=Ms(s.capacityText);return a||4}),ss=x(()=>{const s=R.value||[];if(!s.length)return{hasPrice:!1,total:0,formattedTotal:"",pricedCount:0,missingCount:0};let t="",a=0,l=0;for(const n of s){const d=Es(n==null?void 0:n.price,t||Ot);if(!d||(t||(t=d.currency),t&&d.currency&&t!==d.currency))continue;const p=Number((n==null?void 0:n.guests)||2),N=Number(d.amount)*(Number.isFinite(p)?p:2);a+=N,l++}const u=l>0;return{hasPrice:u,total:a,formattedTotal:u?w(a):"",pricedCount:l,missingCount:s.length-l}});function Nt(s){return s?new Date(s).toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"}):""}function hn(s,t){if(!s)return"";const a=new Date(s+"T00:00:00"),l=Number(t)||1;if(l<=1)return Nt(s);const u=new Date(a);u.setDate(u.getDate()+l-1);const n=a.toLocaleDateString("en-US",{month:"short",day:"numeric"}),d=u.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});return`${n} - ${d}`}function gn(s){return s?Ba(s,2):""}function na(s){if(!s)return"";const t=s.trim().split(/[\s(]+/)[0];return t.charAt(0).toUpperCase()+t.slice(1).toLowerCase()}function aa(s,t){_t.value=t.key,s.originalItem&&(s.originalItem.selectedTrip=t),Ct.value[t.key]||(Ct.value[t.key]=1)}function oa(s){ct.value[s]=!ct.value[s]}function ht(s){return!s.trips||s.trips.length===0?null:s.trips.find(a=>a.key===_t.value)||s.trips[0]}function ia(s){if(!s.trips||s.trips.length<=1)return[];const t=ht(s);return s.trips.filter(a=>a.key!==t.key)}function la(s){const t=ht(s);if(!t){console.warn("No trip selected");return}const a={...s.originalItem,title:s.title,date:t.date,tripDays:t.tripDays,available:t.available,selectedTrip:t};Dn(a)}async function ra(){Tt.value=!0;try{const s=await Un();if(nt.value=(s.operators||[]).map(t=>{var u,n;const a=((u=t.operator)==null?void 0:u.trim())||"",l=((n=t.sourceSheet)==null?void 0:n.trim())||a;return{id:`${a}__${l}`,label:a,sheet:l}}).filter(t=>t.label&&t.sheet),!Oe.value.length&&I.value.length){const t=[];for(const a of I.value){const l=nt.value.find(u=>u.label===a.label&&u.sheet===(a.sheet||u.sheet));l&&t.push(l.id)}Oe.value=t}}catch(s){console.warn("Failed to load operators:",s),nt.value=Jt.map(t=>({id:t.id||`${t.label||""}__${t.sheet||""}`,label:t.label,sheet:t.sheet||t.label}))}finally{Tt.value=!1}}async function bn(){try{const a=await fetch("https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/?resource=cabindetail").then(n=>n.json()),l=new Map,u=new Set;a&&Array.isArray(a.data)&&a.data.forEach(n=>{const d=n.operator||n.shipName||"";u.add(d);const p=new Set;p.add(ye(d)),p.add(ye(d.replace(/\s+(cruise|liveaboard|voyages?|boat)s?$/i,"")));const N=d.toUpperCase().trim();p.add(ye(N)),p.add(ye(N.replace(/\s+(CRUISE|LIVEABOARD|VOYAGES?|BOAT)S?$/i,"")));const _=as(n),A=gt(_);p.forEach(V=>{if(V.trim()){const L=`${V}|${A}`;l.set(L,n)}});const $=(n.api_name||"").toString().trim();if($){const V=gt($);p.forEach(L=>{if(L.trim()){const J=`${L}|${V}`;l.set(J,n)}})}const U=ls(_);if(U&&p.forEach(V=>{const L=`${V}|${U}`;l.set(L,n)}),$){const V=ls($);V&&p.forEach(L=>{const J=`${L}|${V}`;l.set(J,n)})}}),y.value=l,console.log(`Loaded ${l.size} cabin details from API`,{sampleKeys:Array.from(l.keys()).slice(0,10),totalEntries:l.size,uniqueShipNames:Array.from(u).sort()})}catch(s){console.warn("Failed to load cabindetail API",s)}}async function ca(){try{const a=await fetch("https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/?resource=shipdetail").then(u=>u.json()),l=new Map;a&&a.ok&&Array.isArray(a.ships)&&a.ships.forEach(u=>{const n=(u.name||"").toUpperCase().trim();if(n){const d={...u,mainImage:u.image_main||u.mainImage||""};l.set(n,d)}}),Ie.value=l,console.log(`Loaded ${l.size} ship details from API`,Array.from(l.keys()))}catch(s){console.warn("Failed to load shipdetail API",s)}}async function ns(){if(me.value){fe.value=!0,xe.value="",Te.value={},Ze.value=[],ne.value=null;try{const s=me.value,t=An(s.dateFrom,s.dateTo),a=s.ships&&s.ships.length?s.ships:s.lodges||[],l=s.shipSheets&&s.shipSheets.length?s.shipSheets:a;console.log("[Results] Starting data load with",t.length,"dates"),await Promise.all([(async()=>{try{const _=await Gn();if(_&&_.ships){const A=new Map;_.ships.forEach($=>{const U=($.name||"").toUpperCase().trim();U&&A.set(U,{...$,mainImage:$.image_main||$.mainImage||""})}),Ie.value=A,console.log("[Results] Ship details loaded:",A.size,"entries")}}catch(_){console.warn("[Results] Failed to load ship details, continuing without:",_)}})(),(async()=>{try{await bn()}catch(_){console.warn("[Results] Failed to load cabin details, continuing without:",_)}})()]);let u=null;const n=()=>(u||(u=Rn("Cruise Schedule - Normalized").catch(()=>null)),u),d={};await Promise.all(l.map(async(_,A)=>{const $=a[A]||_;let U=[];try{const V=await Rn(_);Array.isArray(V==null?void 0:V.allCabins)&&(U=V.allCabins.map(L=>String(L).split(" (")[0].trim()))}catch(V){console.warn(`Failed to get cabins for sheet ${_}:`,V)}if(U.length===0)try{const V=await n();if(V){const L=ye($),J=(V.operators||[]).find(re=>ye(re.operator)===L);J&&Array.isArray(J.cabins)&&(U=J.cabins.map(re=>String(re).split(" (")[0].trim()))}}catch(V){console.warn(`Failed to get global cabins for ${$}:`,V)}d[_]=Array.from(new Set(U.map(gt)))}));const p=await Promise.all(l.map(async(_,A)=>{var _e;const $=a[A]||_,U=d[_]||[],V=t.map(z=>vs(z,_).catch(de=>(console.warn(`Failed to get availability for ${z} on ${_}:`,de),null))),L=await Promise.all(V),J=L.map((z,de)=>!z||!z.operators||z.operators.length===0?de:-1).filter(z=>z>=0);let re=[];if(J.length){const z=J.map(Ke=>vs(t[Ke],"Cruise Schedule - Normalized").catch(Je=>(console.warn(`Failed to get fallback availability for ${t[Ke]}:`,Je),null)));re=(await Promise.all(z)).filter(Ke=>Ke!==null)}const ae=[];for(let z=0;z<t.length;z++){const de=L[z]&&L[z].operators&&L[z].operators.length?L[z]:J.includes(z)&&re.length>0?re[J.indexOf(z)]:null;if(de){const Ke=((_e=de.operators)==null?void 0:_e.flatMap($e=>$e.cabins||[]))||[],Je=U.length?Ke.filter($e=>U.includes(gt($e))):Ke;ae.push({...de,operators:[{operator:$,total:Je.length,cabins:Je}]})}}return[$,ae]})),N={};for(const[_,A]of p)N[_]=A;if(Te.value=N,Ze.value=Object.values(N).flat(),s!=null&&s.dateFrom)try{const A=An(s.dateFrom,s.dateTo||s.dateFrom).map(async L=>{let J=null;try{J=await vs(L)}catch(re){console.warn(`Failed primary availability fetch for ${L}, trying fallback:`,re)}if(!J||!J.operators||J.operators.length===0)try{J=await vs(L,"Cruise Schedule - Normalized")}catch(re){console.warn(`Failed fallback availability fetch for ${L}:`,re)}return{date:L,data:J}}),$=await Promise.all(A),U=new Map;for(const{date:L,data:J}of $)if(!(!J||!J.operators))for(const re of J.operators){const ae=re.operator;U.has(ae)||U.set(ae,{operator:ae,cabins:[]});const _e=U.get(ae);for(const z of re.cabins||[]){const de=typeof z=="string"?{name:z,start_date:L}:{...z,start_date:z.start_date||L};_e.cabins.push(de)}}const V={ok:!0,operators:Array.from(U.values()),total:Array.from(U.values()).reduce((L,J)=>L+J.cabins.length,0)};ne.value=V,console.log("[Results] Loaded global availability:",V.total,"total cabins")}catch(_){console.debug("[Results] global availability error",_)}Ze.value.length===0&&(xe.value="No availability data found for the selected dates and ships.")}catch(s){xe.value=`Failed to check availability: ${s.message}`,console.error("[Results] Availability check error:",s)}finally{fe.value=!1,console.log("[Results] Availability check complete")}}}const ua=()=>ns();function da(){try{const s=nt.value.filter(u=>Oe.value.includes(u.id)),t=s.map(u=>u.label),a=s.map(u=>u.sheet),l={region:ms,destination:Ne.value[0]||"",destinations:Ne.value.slice(),ships:t,shipSheets:a,ship:t[0]||"",lodges:t.slice(),dateFrom:c.value,dateTo:k.value||c.value,minTripDuration:P.value,maxTripDuration:D.value,cabins:ce.value?[]:Y.value.map(u=>({adults:u.adults,children:u.children,total:u.adults+u.children})),totalCabins:ce.value?0:Y.value.length,totalGuests:Be.value,isFlexible:ce.value,flexibleGuests:ce.value?ue.value:0,adults:ce.value?ue.value:Y.value.reduce((u,n)=>u+n.adults,0),children:ce.value?0:Y.value.reduce((u,n)=>u+n.children,0),age3_9:0,age0_2:0,timestamp:Date.now()};if(I.value=s.map(u=>({label:u.label,sheet:u.sheet})),localStorage.setItem("komodo_search_criteria",JSON.stringify(l)),me.value=l,c.value){const u=new Date(c.value);ft.value=u.getMonth(),$t.value=u.getFullYear()}ns()}catch(s){console.error("Failed to apply sidebar changes",s),alert("Failed to apply changes")}}function va(s){return[qs.value,Ws.value,Hs.value,Ys.value,Js.value].some(a=>a&&(a===s||a.contains(s)))}function yn(s){va(s.target)||Wn()}document.addEventListener("click",yn),Nn(()=>{document.removeEventListener("click",yn)}),Qe(async()=>{Et();try{const s=localStorage.getItem("komodo_search_criteria");if(s){me.value=JSON.parse(s);const t=me.value||{};Ne.value=Array.isArray(t.destinations)?t.destinations.slice():t.destination?[t.destination]:[],ce.value=!!t.isFlexible,ue.value=t.flexibleGuests||2;const a=Array.isArray(t.ships)?t.ships:[],l=Array.isArray(t.shipSheets)?t.shipSheets:[];if(I.value=a.map((u,n)=>({label:u,sheet:l[n]||""})),c.value=t.dateFrom||"",k.value=t.dateTo||"",t.minTripDuration!==void 0?P.value=t.minTripDuration:P.value=1,t.maxTripDuration!==void 0?D.value=t.maxTripDuration:D.value=Xe,Array.isArray(t.cabins)&&t.cabins.length>0?Y.value=t.cabins.map((u,n)=>({id:n+1,adults:u.adults||2,children:u.children||0,expanded:n===0})):Y.value=[{id:1,adults:t.totalGuests||t.adults||2,children:0,expanded:!0}],c.value){const u=new Date(c.value);ft.value=u.getMonth(),$t.value=u.getFullYear()}}bn().catch(t=>console.warn("Failed to load details background:",t)),ca().catch(t=>console.warn("Failed to load ship details background:",t)),await Promise.all([ra(),ns()])}catch(s){console.error("Failed to load search criteria:",s),xe.value="Failed to load search criteria"}});function as(s){if(!s)return"";if(typeof s=="string")return s.split(" (")[0].trim();const t=(s.name||s["cabin name"]||s.cabin_name||s.api_name||"").toString();return t?t.split("(")[0].trim():""}function Ts(s){return!s||typeof s=="string"?null:typeof s.available=="number"?s.available:null}function kn(s){if(!s)return"";if(typeof s=="string"){const t=s.match(/\(([^)]+)\)$/);return t?t[1]:""}return typeof s.capacity=="number"?`${s.capacity} pax`:s.capacity?s.capacity:s.capacity_lock||""}function os(s){return!s||typeof s=="string"?"":s.price_lock||s.price||""}function pa(s,t){return s&&typeof s!="string"&&s.shipname?s.shipname:(t||"").replace(/\([^)]*\)/g,"").trim()}function Is(s){if(!s)return"CABIN";const t=s.detail||s;if(t.cabin_type||t.type)return(t.cabin_type||t.type).toUpperCase();const a=s.cabinName||s.name||"";return a.toLowerCase().includes("deluxe")?"DELUXE":a.toLowerCase().includes("suite")?"SUITE":a.toLowerCase().includes("master")?"MASTER":a.toLowerCase().includes("vip")?"VIP":"CABIN"}function ma(s){if(!s)return 2;const t=s.detail||s;if(typeof t.capacity=="number")return t.capacity;const l=(t.capacityText||s.capacityText||"").match(/(\d+)/);return l?parseInt(l[1],10):2}function wn(s){if(!s)return"1 King";const t=s.detail||s;if(t.bed_type)return t.bed_type;const a=t.facilities||{};return a.king_bed?"1 King":a.twin_bed?"2 Twins":"1 King or 2 Twins"}function fa(s){if(!s)return"Private cabin";const t=s.detail||s;return t.size?t.size:t.area?t.area:"Private cabin"}function is(s){if(!s)return"";if(s.tripDays)return s.tripDays;const t=s.detail||s;if(t.trip_days)return t.trip_days;if(t.days)return t.days;if(s.raw&&typeof s.raw!="string"){if(s.raw.trip_days)return s.raw.trip_days;if(s.raw.days)return s.raw.days}return""}function ls(s){if(!s)return"";let t=String(s).toLowerCase();t=t.replace(/\([^)]*\)/g," "),t=t.replace(/[\-–—_/]+/g," ");const a=new Set(["master","vip","suite","deluxe","superior","private","ocean","sea","view","balcony","bathtub","room","cabin","deck","upperdeck","maindeck","lowerdeck"]),l=t.split(/\s+/).map(u=>u.trim()).filter(u=>u&&!a.has(u)).map(u=>u.replace(/[^a-z0-9]/g,"")).filter(Boolean);return l.length?l.sort().join(" "):""}function ha(s){const t=s&&(s.detail||s),a=(t==null?void 0:t.cabin_name)||(t==null?void 0:t.api_name);return a&&String(a).trim()?String(a).trim():(s==null?void 0:s.cabinName)||""}function ga(s,t){if(!s||!t)return null;const a=new Date(s+"T00:00:00"),l=new Date(a);return l.setDate(l.getDate()+(Number(t)-1)),l}function ba(s,t,a,l){if(!s||!t||!a||!l)return!0;const u=new Date(s+"T00:00:00"),n=ga(s,t),d=new Date(a+"T00:00:00"),p=new Date(l+"T00:00:00");return u<=p&&n>=d}function Mt(s){if(!s)return["Private bathroom","Air conditioning","Sea view","Daily housekeeping","Private bathroom","Air conditioning"];const t=s.detail||s,a=[],l=t.facilities||{},u={wifi:"Complimentary Wi-Fi",starlink:"Starlink Internet",ac:"Air conditioning",private_bathroom:"Private bathroom",shower:"Walk-in shower",bathtub:"Bathtub",seaview:"Sea view",balcony:"Private balcony",sundeck:"Sundeck access",jacuzzi:"Jacuzzi",indoor_jacuzzi:"Indoor jacuzzi",outdoor_jacuzzi:"Outdoor jacuzzi",bar:"Mini bar",smart_tv:"Smart TV",king_bed:"King-size bed"};for(const[n,d]of Object.entries(u))if(l[n]&&a.push(d),a.length>=8)break;return a.length===0&&a.push("All cabins are non-smoking","Private bathroom","Air conditioning","Daily housekeeping","Private bathroom","Air conditioning"),a}function _n(s){if(!s)return"";try{const t=String(s),a=Cn(t);return a?`https://lh3.googleusercontent.com/d/${a}=w1600`:t}catch{return s}}function Cn(s){if(!s)return"";const t=String(s).match(/\/d\/([^/?#]+)/),a=String(s).match(/[?&]id=([^&]+)/);return t&&t[1]||a&&a[1]||""}function ya(s){const t=[],a=String(s||""),l=Cn(a);return a&&t.push(a),l&&(t.push(`https://lh3.googleusercontent.com/d/${l}=w1600`),t.push(`https://drive.google.com/uc?export=view&id=${l}`),t.push(`https://drive.google.com/uc?export=download&id=${l}`),t.push(`https://drive.google.com/thumbnail?id=${l}&sz=w1600`)),Array.from(new Set(t))}function $n(s,t){const a=s==null?void 0:s.target;if(!a)return;const l=parseInt(a.getAttribute("data-try")||"0",10),u=ya(t);l<u.length-1?(a.setAttribute("data-try",String(l+1)),a.src=u[l+1]):a.src="/src/images/cabin.jpg"}function Ns(s){if(!s||typeof s=="string")return"";const t=[];s.image_main&&t.push(s.image_main),Array.isArray(s.images)&&t.push(...s.images);for(let l=1;l<=10;l++){const u=`image_${l}`;s[u]&&t.push(s[u])}const a=t.find(l=>!!l&&String(l).trim().length>0)||"";return a?_n(a):""}function dt(s){if(typeof s=="string"){const a=s.match(/\(([^)]+)\)$/);if(a&&a[1]){const l=(a[1].match(/\d+/g)||[]).map(u=>parseInt(u,10));if(l.length)return Math.max(...l)}return null}const t=(s.capacity||s.max_guests||s.sleeps||s.capacity_lock||"").toString();if(t){const a=(t.match(/\d+/g)||[]).map(l=>parseInt(l,10));if(a.length)return Math.max(...a)}return null}function ye(s){return s?String(s).replace(/\([^)]*\)/g," ").toLowerCase().replace(/[^a-z0-9]+/g," ").trim().replace(/\s+/g," "):""}function gt(s){if(!s)return"";let t=String(s);t=t.replace(/\([^)]*\)$/,"").trim();const a=t.split(/[-–—]/);return t=a[a.length-1],t.toLowerCase().replace(/[^a-z0-9]+/g," ").trim().replace(/\s+/g," ")}function ka(s,t){const a=ye(s);return t.some(l=>a.includes(l)||l.includes(a))}function wa(s){if(!s)return[];const t=[],a=s.match(/\(([^)]+)\)/g);a&&a.forEach(d=>t.push(d.replace(/[()]/g," "))),t.push(s);const u=t.join(" | ").split(/[+|,\/]/).map(d=>d.replace(/\b(pax|guests?)\b/gi,"").trim()).filter(Boolean).filter(d=>!/^\d+(\s*-\s*\d+)?$/.test(d)).map(d=>d.split(" ").map(p=>p?p[0].toUpperCase()+p.slice(1).toLowerCase():"").filter(Boolean).join(" ")),n=[];for(const d of u){const p=d.toLowerCase();n.some(N=>N.toLowerCase()===p)||n.push(d)}return n}function Ms(s){if(!s)return null;const a=String(s).match(/\d+/g);if(!a||a.length===0)return null;const l=a.map(u=>parseInt(u,10));return Math.max(...l)}function Es(s,t=Ot){var N,_;if(s==null)return null;if(typeof s=="number"&&!Number.isNaN(s))return{amount:s,currency:t};const a=String(s).trim();if(!a)return null;const l=a.match(/([^\d]*)([\d.,\s]+)/);if(!l)return null;let u=((N=l[1])==null?void 0:N.replace(/from/gi,"").trim())||t,n=(_=l[2])==null?void 0:_.trim();if(!n)return null;n=n.replace(/[\s,]/g,""),(n.match(/\./g)||[]).length>1&&(n=n.replace(/\./g,""));const p=parseFloat(n);return Number.isNaN(p)?null:{amount:p,currency:u}}function Sn(s,t=Ot){return Number.isFinite(s)?`${t||Ot} ${Math.round(s).toLocaleString("en-US")}`:""}function _a(s){if(!(s!=null&&s.price))return"";const t=Es(s.price,Ot);if(!t)return"";const a=Number((s==null?void 0:s.guests)||2),l=t.amount*(Number.isFinite(a)?a:2);return Sn(l,t.currency)}function Ca(s){pe.value=s,Ee.value=!0,cs()}function Rs(){Ee.value=!1,pe.value=null,He.value=1,Ps()}function $a(){We.value=!0,cs()}function Sa(){We.value=!1,Ps()}function rs(){tt.value=!1,De.value=null,Re.value=2,et.value=null,Ps()}function xa(){const s=As.value;Re.value=Math.min(s,Re.value+1)}function Da(){Re.value=Math.max(1,Re.value-1)}function Aa(){et.value!==null?(Ia(et.value,Re.value),rs()):De.value&&(Na(De.value,Re.value),rs())}function Ta(s,t){De.value={cabinName:s.cabin,shipName:s.ship,date:s.date,capacityText:s.capacity||"4 guests",availableText:s.capacity?`${s.capacity} capacity`:"Available"},et.value=t,Re.value=s.guests||2,tt.value=!0,cs()}function Ia(s,t){try{const a="komodo_itinerary",l=JSON.parse(localStorage.getItem(a)||"[]");l[s]&&(l[s].guests=t,localStorage.setItem(a,JSON.stringify(l)),Et())}catch(a){console.error("Failed to update itinerary",a)}}function xn(s){return R.value.some(t=>t.cabin===(s.title||s.cabinName)&&t.ship===s.shipName&&t.date===s.date)}function Gt(s,t){if(!s||!t)return!1;const a=s.originalItem;if(!a)return!1;const l=s.title||a.cabinName;return R.value.some(u=>u.cabin===l&&u.ship===a.shipName&&u.date===t.date)}function Dn(s){var t;if(xn(s))Ma(s);else{De.value=s;const a=Number(((t=me.value)==null?void 0:t.totalGuests)||2);let l=dt(s);!l&&s.originalItem&&(l=dt(s.originalItem)),!l&&s.capacityText&&(l=Ms(s.capacityText));const u=l||4;Re.value=Math.min(a,u),tt.value=!0,cs()}}function Na(s,t=2){try{const a="komodo_itinerary",l=JSON.parse(localStorage.getItem(a)||"[]"),u=s.title||s.cabinName;if(l.some(p=>p.cabin===u&&p.ship===s.shipName&&p.date===s.date))return;const d={operator:s.operatorLabel,ship:s.shipName,cabin:u,date:s.date,price:s.price||null,capacity:s.capacityText||null,guests:t,qty:1,addedAt:Date.now()};l.push(d),localStorage.setItem(a,JSON.stringify(l)),Et()}catch(a){console.error("Failed to add to itinerary",a)}}function Ma(s){try{const t="komodo_itinerary",a=JSON.parse(localStorage.getItem(t)||"[]"),l=s.title||s.cabinName,u=a.filter(n=>!(n.cabin===l&&n.ship===s.shipName&&n.date===s.date));localStorage.setItem(t,JSON.stringify(u)),Et()}catch(t){console.error("Failed to remove from itinerary",t)}}function Ea(){qe.value=!0}function Ra(){qe.value=!1}function Pa(){qe.value=!1,ge.push("/results")}function Et(){try{const t=JSON.parse(localStorage.getItem("komodo_itinerary")||"[]");R.value=Array.isArray(t)?t:[]}catch{R.value=[]}}function Oa(s){try{const t="komodo_itinerary",a=JSON.parse(localStorage.getItem(t)||"[]");a.splice(s,1),localStorage.setItem(t,JSON.stringify(a)),Et()}catch(t){console.error("Failed to remove item",t)}}const Ye={count:0,bodyOverflow:"",htmlOverflow:"",bodyPadding:"",htmlPadding:""};function cs(){const s=document.body,t=document.documentElement;if(!(!s||!t)){if(Ye.count===0){const a=window.innerWidth-t.clientWidth;if(Ye.bodyOverflow=s.style.overflow,Ye.htmlOverflow=t.style.overflow,Ye.bodyPadding=s.style.paddingRight,Ye.htmlPadding=t.style.paddingRight,a>0){const l=`${a}px`;s.style.paddingRight=l,t.style.paddingRight=l}s.style.overflow="hidden",t.style.overflow="hidden"}Ye.count++}}function Ps(){const s=document.body,t=document.documentElement;!s||!t||Ye.count!==0&&(Ye.count--,!(Ye.count>0)&&(s.style.overflow=Ye.bodyOverflow,t.style.overflow=Ye.htmlOverflow,s.style.paddingRight=Ye.bodyPadding,t.style.paddingRight=Ye.htmlPadding))}const ee=m({title:"",firstName:"",lastName:"",phoneCountry:"+62",phoneNumber:"",country:"",email:"",confirmEmail:"",userType:"",notes:"",subscribeNews:!1,consentData:!1});async function La(){if(!ee.value.firstName||!ee.value.lastName){alert("Please enter your first and last name");return}if(!ee.value.email||ee.value.email!==ee.value.confirmEmail){alert("Please ensure email addresses match");return}if(!ee.value.consentData){alert("Please consent to data collection to proceed");return}if(!R.value.length){alert("Please add at least one cabin to your itinerary");return}let s=0;const t=[];for(const a of R.value){const l=St(a.price),u=Number(a.guests||2),n=l*u;s+=n,t.push({name:`${a.ship} - ${a.cabin}`,quantity:u,price:l,category:"Cruise Cabin"})}s<=0&&(s=1e6,t.push({name:"Komodo Cruise Booking",quantity:1,price:s,category:"Cruise Booking"})),Le.value=!0;try{const l=`Komodo Cruise Booking: ${R.value.map(n=>`${n.ship} - ${n.cabin}`).join(", ")}`,u=await Zr({amount:s,payerEmail:ee.value.email,description:l,customerName:`${ee.value.title?ee.value.title+" ":""}${ee.value.firstName} ${ee.value.lastName}`,customerPhone:ee.value.phoneCountry+ee.value.phoneNumber,items:t});if(localStorage.setItem("komodo_last_enquiry",JSON.stringify({form:ee.value,itinerary:R.value,invoiceId:u.invoiceId,invoiceUrl:u.invoiceUrl,amount:s,createdAt:new Date().toISOString()})),u.invoiceUrl)ec(u.invoiceUrl);else throw new Error("No invoice URL received")}catch(a){console.error("Failed to create payment:",a),alert(`Failed to process payment: ${a.message}. Please try again.`)}finally{Le.value=!1}}function An(s,t){if(!s||!t)return s?[s]:[];const a=new Date(s),l=new Date(t),u=[];for(let n=new Date(a);n<=l;n.setDate(n.getDate()+1))u.push(us(n));return u}function Ba(s,t){const a=new Date(s);return a.setDate(a.getDate()+t),us(a)}function us(s){const t=s.getFullYear(),a=String(s.getMonth()+1).padStart(2,"0"),l=String(s.getDate()).padStart(2,"0");return`${t}-${a}-${l}`}function Fa(){return us(new Date)}return Et(),(s,t)=>{var a,l,u;return o(),i(K,null,[e("div",tc,[fe.value?(o(),i("div",sc,"Loading")):(o(),i("div",nc,[e("div",ac,[e("div",oc,[e("div",ic,[e("div",lc,[t[62]||(t[62]=e("svg",{class:"filter-icon",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"1.5"},[e("path",{d:"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"}),e("circle",{cx:"12",cy:"7",r:"4"})],-1)),e("span",null,r(Y.value.length)+" cabin"+r(Y.value.length!==1?"s":"")+", "+r(Be.value)+" guest"+r(Be.value!==1?"s":""),1)]),e("div",rc,[t[63]||(t[63]=Pe('<svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>',1)),e("span",null,r(te(c.value,k.value)),1)])])]),e("button",{class:"filter-edit-btn",onClick:t[0]||(t[0]=n=>C.value=!0),"aria-label":"Edit filters"},[...t[64]||(t[64]=[e("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("path",{d:"M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"}),e("path",{d:"M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"})],-1)])])]),e("div",cc,[e("div",uc,[xe.value?(o(),i("div",dc,[e("p",vc,r(xe.value),1),e("button",{onClick:ua,class:"btn-primary"},"Try Again")])):(o(),i("div",pc,[t[83]||(t[83]=e("h2",{class:"results-title"},"Your Search Results",-1)),e("div",mc,[es.value.length&&($s.value||it.value.length>0)?(o(),i("div",fc,[...t[65]||(t[65]=[e("p",{class:"desktop-only"},[e("strong",null,"Your preferred travel dates are available!"),Q(" We have a team of Komodo Cruises Journey Designers who are ready to plan your trip. Simply select the results that suit your preferences best and submit your enquiry. ")],-1),e("p",{class:"mobile-only"},[e("strong",null,"Your preferred dates are available!"),Q(" Select results below and submit your enquiry. ")],-1),e("p",{class:"results-note-muted desktop-only"},[e("span",{class:"semibold"},"Note:"),Q(" These results indicate availability and do not guarantee a booking. ")],-1)])])):!mt.value&&it.value.length>0?(o(),i("div",hc,[...t[66]||(t[66]=[Pe('<p class="desktop-only"><strong>Your preferred dates are unfortunately not available, but there is availability at other Komodo Cruises lodges or on alternate dates.</strong></p><p class="desktop-only"> We have a team of Komodo Cruises Journey Designers who are ready to plan your trip. Simply select the results that suit your preferences best and submit your enquiry. </p><p class="mobile-only"><strong>Dates not available.</strong> Check alternatives below and submit enquiry. </p><p class="results-note-muted desktop-only"><span class="semibold">Note:</span> These results indicate availability and do not guarantee a booking. </p>',4)])])):M("",!0)]),it.value.length?(o(),i("div",gc,[e("div",bc,[e("div",{class:"sort-dropdown",ref_key:"sortDropdownRef",ref:qn},[t[67]||(t[67]=e("span",{class:"sort-label"},"SORT BY",-1)),e("button",{type:"button",class:"sort-btn",onClick:t[1]||(t[1]=n=>pt.value=!pt.value),"aria-expanded":pt.value},[e("span",null,r(((a=Lt.find(n=>n.value===st.value))==null?void 0:a.label)||"Recommended"),1),e("img",{src:pt.value?he(ot):he(at),alt:"",class:"sort-caret"},null,8,kc)],8,yc),pt.value?(o(),i("div",{key:0,class:"sort-dropdown-panel",onClick:t[2]||(t[2]=j(()=>{},["stop"]))},[(o(),i(K,null,se(Lt,n=>e("button",{key:n.value,class:B(["sort-option",{active:st.value===n.value}]),onClick:d=>{st.value=n.value,pt.value=!1}},r(n.label),11,wc)),64))])):M("",!0)],512)]),e("div",_c,[e("span",Cc,r(it.value.length)+" "+r(it.value.length===1?"Cabin":"Cabins"),1)])])):M("",!0),be(e("div",$c,[e("div",Sc,[t[68]||(t[68]=e("h3",{class:"ship-selection-title"},"Select a Ship",-1)),e("p",xc," You selected "+r(Zt.value.length)+" ships. Please choose one to view available cabins. ",1)]),e("div",Dc,[(o(!0),i(K,null,se(mn.value,n=>(o(),i("div",{key:n.name,class:"ship-selection-card",onClick:d=>Xn(n.name)},[e("div",Tc,[e("img",{src:n.image||"/src/images/placeholder-ship.jpg",alt:n.name,class:"ship-thumbnail",referrerpolicy:"no-referrer",onError:t[3]||(t[3]=d=>d.target.src="/src/images/cabin.jpg")},null,40,Ic)]),e("div",Nc,[e("h4",Mc,r(n.name),1),n.description?(o(),i("p",Ec,r(n.description),1)):M("",!0),n.hasAvailability?(o(),i("div",Rc,[e("span",null,r(n.cabinsCount)+" cabin"+r(n.cabinsCount!==1?"s":"")+" available",1),e("span",Pc,"Up to "+r(n.totalCapacity)+" guests",1)])):(o(),i("div",Oc,[...t[69]||(t[69]=[e("span",{class:"no-availability-text"},"No availability for selected dates",-1)])]))]),t[70]||(t[70]=e("div",{class:"ship-card-arrow"},[e("svg",{width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("polyline",{points:"9 18 15 12 9 6"})])],-1))],8,Ac))),128))])],512),[[Mn,$s.value]]),be(e("div",Lc,[je.value&&Zt.value.length>1?(o(),i("div",Bc,[e("button",{class:"btn-back-ships",onClick:Qn},[...t[71]||(t[71]=[e("svg",{width:"16",height:"16",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("polyline",{points:"15 18 9 12 15 6"})],-1),Q(" Back to Ships ",-1)])]),e("span",Fc,[t[72]||(t[72]=Q("Viewing: ",-1)),e("strong",null,r(je.value),1)])])):M("",!0),it.value.length===0?(o(),i("div",zc,[...t[73]||(t[73]=[e("div",{class:"desktop-only"},[e("p",null,[e("strong",null,"No results found.")]),e("p",null," We could not find any availability matching your search. Please try adjusting your filters. ")],-1),e("div",{class:"mobile-only"},[e("p",null,[e("strong",null,"No results found.")]),e("p",null,"Please try adjusting your filters.")],-1)])])):M("",!0),it.value.length?(o(),i("div",Uc,[(o(!0),i(K,null,se(ea.value,n=>(o(),i("div",{class:"cabin-card",key:n.uniqueKey},[e("div",Gc,[ke(xt,{name:n.isGallery&&Se(n.id)==="left"?"slide-left":"slide-right"},{default:Me(()=>[(o(),i("img",{src:n.isGallery?q(n.originalItem)[W(n.id)]||"/src/images/cabin.jpg":n.image||"/src/images/cabin.jpg",alt:n.title,referrerpolicy:"no-referrer",decoding:"async",loading:"lazy",onError:d=>$n(d,n.image),key:n.isGallery?W(n.id):0},null,40,Vc))]),_:2},1032,["name"]),n.isGallery?(o(),i(K,{key:0},[e("button",{class:"gallery-nav gallery-prev",onClick:d=>ie(n.id),"aria-label":"Previous image"}," ‹ ",8,Kc),e("button",{class:"gallery-nav gallery-next",onClick:d=>O(n.id),"aria-label":"Next image"}," › ",8,qc)],64)):M("",!0)]),e("div",Wc,[e("div",Hc,[e("h3",Yc,r(n.title),1),e("span",Jc,r(Is(n.originalItem)),1)]),e("div",jc,[e("span",null,"Sleeps "+r(ma(n.originalItem)||2),1),t[75]||(t[75]=e("span",{class:"specs-divider"},"|",-1)),e("span",null,r(wn(n.originalItem)||"1 King"),1),is(n.originalItem)?(o(),i(K,{key:0},[t[74]||(t[74]=e("span",{class:"specs-divider"},"|",-1)),e("span",null,r(is(n.originalItem))+" Days",1)],64)):M("",!0)]),e("div",Xc,[e("ul",Qc,[(o(!0),i(K,null,se(Mt(n.originalItem).slice(0,3),(d,p)=>(o(),i("li",{key:p},r(d),1))),128))]),Mt(n.originalItem).length>3?(o(),i("ul",Zc,[(o(!0),i(K,null,se(Mt(n.originalItem).slice(3,6),(d,p)=>(o(),i("li",{key:p+3},r(d),1))),128))])):M("",!0)]),e("button",{class:"cabin-details-btn",onClick:d=>n.availabilityType==="standard"&&Ca(n.originalItem)}," CABIN DETAILS ",8,eu),n.trips&&n.trips.length>0?(o(),i("div",tu,[e("div",su,[e("div",nu,[e("span",au,r(hn(ht(n).date,ht(n).tripDays)),1),e("span",ou,r(ht(n).available||1)+" cabin"+r((ht(n).available||1)>1?"s":"")+" available",1)])]),n.trips.length>1?(o(),i("button",{key:0,class:"more-dates-toggle",onClick:j(d=>oa(n.uniqueKey),["stop"])},[t[76]||(t[76]=e("span",null,"MORE DATES",-1)),e("span",{class:B(["toggle-arrow",{expanded:ct.value[n.uniqueKey]}])},"▼",2)],8,iu)):M("",!0),n.trips.length>1&&ct.value[n.uniqueKey]?(o(),i("div",lu,[(o(!0),i(K,null,se(ia(n),(d,p)=>(o(),i("div",{key:p,class:B(["trip-option-alt",Gt(n,d)?"trip-reserved":""]),onClick:N=>!Gt(n,d)&&aa(n,d)},[e("div",cu,[e("span",uu,r(hn(d.date,d.tripDays)),1),e("span",du,r(d.available||1)+" cabin"+r((d.available||1)>1?"s":"")+" available",1)]),Gt(n,d)?(o(),i("span",vu,[...t[77]||(t[77]=[e("span",{class:"reserved-check-small"},"✓",-1),Q(" Reserved ",-1)])])):(o(),i("span",pu,"Select"))],10,ru))),128))])):M("",!0)])):M("",!0),e("div",mu,[e("div",fu,[(o(!0),i(K,null,se(n.prices,(d,p)=>(o(),i("div",{key:p,class:"price-display"},[e("p",hu,[t[78]||(t[78]=e("span",{class:"price-label"},"From",-1)),e("span",gu,r(w(d.value)),1)]),t[79]||(t[79]=e("p",{class:"price-sub"},"per person, per night",-1))]))),128))]),e("div",bu,[e("button",{class:B(["btn-reserve-now",Gt(n,ht(n))?"btn-reserved":""]),onClick:d=>la(n)},[Gt(n,ht(n))?(o(),i(K,{key:0},[t[80]||(t[80]=e("span",{class:"reserved-check"},"✓",-1)),t[81]||(t[81]=Q(" RESERVED ",-1))],64)):(o(),i(K,{key:1},[Q(" RESERVE NOW ")],64))],10,yu)])])])]))),128))])):M("",!0),ts.value>1?(o(),i("div",ku,[e("button",{class:"pagination-btn",onClick:sa,disabled:lt.value===1}," ‹ Previous ",8,wu),e("div",_u,[(o(!0),i(K,null,se(ts.value,n=>(o(),i("button",{key:n,class:B(["pagination-page",{active:lt.value===n}]),onClick:d=>Ds(n)},r(n),11,Cu))),128))]),e("button",{class:"pagination-btn",onClick:ta,disabled:lt.value===ts.value}," Next › ",8,$u)])):M("",!0),mt.value&&!it.value.length?(o(),i("div",Su,[t[82]||(t[82]=e("p",null,"No alternative options found for your criteria.",-1)),e("button",{onClick:T,class:"btn-primary"}," Search Again ")])):M("",!0)],512),[[Mn,!$s.value]])]))]),e("div",xu,[e("div",Du,[t[98]||(t[98]=e("h3",{class:"section-title-sidebar"},"Check Availability",-1)),fe.value?(o(),i("div",Au,[...t[84]||(t[84]=[Pe('<div class="skeleton-group"><div class="skeleton-label"></div><div class="skeleton-input"></div></div><div class="skeleton-group"><div class="skeleton-label"></div><div class="skeleton-input"></div></div><div class="skeleton-group"><div class="skeleton-label"></div><div class="skeleton-input"></div></div><div class="skeleton-group"><div class="skeleton-label"></div><div class="skeleton-input"></div></div><div class="skeleton-toggle"><div class="skeleton-text-lg"></div><div class="skeleton-circle"></div></div><div class="skeleton-btn"></div>',6)])])):(o(),i(K,{key:1},[e("div",{class:"list dropdown",ref_key:"destDropdown",ref:qs},[t[85]||(t[85]=e("div",{class:"list-heading"},"Destinations",-1)),e("button",{type:"button",class:B(["select-summary",Fe.value||bs.value?"is-filled":""]),onMouseenter:t[4]||(t[4]=n=>bs.value=!0),onMouseleave:t[5]||(t[5]=n=>bs.value=!1),onClick:t[6]||(t[6]=j(n=>It("regions"),["stop"])),"aria-expanded":Fe.value?"true":"false"},[e("span",null,"Destinations: "+r(Ne.value.length),1),e("span",Iu,[e("img",{src:Fe.value?he(ot):he(at),alt:"","aria-hidden":"true",class:"caret-icon"},null,8,Nu)])],42,Tu),Fe.value?(o(),i("div",{key:0,class:"dropdown-panel",onClick:t[9]||(t[9]=j(()=>{},["stop"]))},[e("div",{class:"dropdown-group-title"},r(ms)),(o(),i(K,null,se(Dt,n=>e("div",{class:"list-row",key:n,onClick:d=>js(n)},[e("div",Eu,r(n),1),be(e("input",{class:"check",type:"checkbox",value:n,"onUpdate:modelValue":t[7]||(t[7]=d=>Ne.value=d),onClick:t[8]||(t[8]=j(()=>{},["stop"]))},null,8,Ru),[[yt,Ne.value]])],8,Mu)),64))])):M("",!0)],512),e("div",{class:"list dropdown",ref_key:"shipsDropdown",ref:Ws},[t[86]||(t[86]=e("div",{class:"list-heading"},"Ships",-1)),e("button",{type:"button",class:B(["select-summary",ze.value||gs.value?"is-filled":""]),onMouseenter:t[10]||(t[10]=n=>gs.value=!0),onMouseleave:t[11]||(t[11]=n=>gs.value=!1),onClick:t[12]||(t[12]=j(n=>It("ships"),["stop"])),"aria-expanded":ze.value?"true":"false"},[e("span",null,"Ships: "+r(Oe.value.length),1),e("span",Ou,[e("img",{src:ze.value?he(ot):he(at),alt:"","aria-hidden":"true",class:"caret-icon"},null,8,Lu)])],42,Pu),ze.value?(o(),i("div",{key:0,class:"dropdown-panel",onClick:t[15]||(t[15]=j(()=>{},["stop"]))},[e("div",Bu,r(pn.value),1),Tt.value?(o(),i("div",Fu,"Loading ships...")):(o(),i(K,{key:1},[(o(!0),i(K,null,se(nt.value,n=>(o(),i("div",{class:"list-row",key:n.id,onClick:d=>Xs(n.id)},[e("div",Uu,r(n.label),1),be(e("input",{class:"check",type:"checkbox",value:n.id,"onUpdate:modelValue":t[13]||(t[13]=d=>Oe.value=d),onClick:t[14]||(t[14]=j(()=>{},["stop"]))},null,8,Gu),[[yt,Oe.value]])],8,zu))),128)),nt.value.length===0?(o(),i("div",Vu," No ships found from API. ")):M("",!0)],64))])):M("",!0)],512),e("div",{class:"list dropdown",ref_key:"guestsDropdown",ref:Hs},[t[93]||(t[93]=e("div",{class:"list-heading"},"Cabins & Guests",-1)),e("button",{type:"button",class:B(["select-summary",Ue.value||ys.value?"is-filled":""]),onMouseenter:t[16]||(t[16]=n=>ys.value=!0),onMouseleave:t[17]||(t[17]=n=>ys.value=!1),onClick:t[18]||(t[18]=j(n=>It("guests"),["stop"])),"aria-expanded":Ue.value?"true":"false"},[ce.value?(o(),i("span",qu,"Flexible: "+r(ue.value)+" Guest"+r(ue.value!==1?"s":""),1)):(o(),i("span",Wu,r(Y.value.length)+" Cabin"+r(Y.value.length!==1?"s":"")+", "+r(Be.value)+" Guest"+r(Be.value!==1?"s":""),1)),e("span",Hu,[e("img",{src:Ue.value?he(ot):he(at),alt:"","aria-hidden":"true",class:"caret-icon"},null,8,Yu)])],42,Ku),Ue.value?(o(),i("div",{key:0,class:"dropdown-panel cabin-dropdown-panel",onClick:t[23]||(t[23]=j(()=>{},["stop"]))},[e("div",Ju,[e("button",{type:"button",class:B(["sidebar-pill-btn",{active:ce.value}]),onClick:t[19]||(t[19]=n=>ce.value=!0)}," Flexible ",2),e("button",{type:"button",class:B(["sidebar-pill-btn",{active:!ce.value}]),onClick:t[20]||(t[20]=n=>ce.value=!1)}," Structured ",2)]),ce.value?(o(),i("div",ju,[e("div",Xu,[t[87]||(t[87]=e("span",{class:"label"},"Total Guests",-1)),e("div",Qu,[e("button",{type:"button",class:"btn-ctrl",disabled:ue.value<=1,onClick:t[21]||(t[21]=n=>ue.value--)}," − ",8,Zu),e("span",ed,r(ue.value),1),e("button",{type:"button",class:"btn-ctrl",onClick:t[22]||(t[22]=n=>ue.value++)}," + ")])]),t[88]||(t[88]=e("p",{class:"sidebar-note"}," We will automatically find the best cabin combination for your group. ",-1))])):(o(),i("div",td,[(o(!0),i(K,null,se(Y.value,(n,d)=>(o(),i("div",{key:n.id,class:"cabin-accordion-sidebar"},[e("div",sd,[e("div",nd,[e("span",ad,"CABIN "+r(d+1),1),e("span",od,r(n.adults+n.children)+" guest"+r(n.adults+n.children!==1?"s":""),1)]),e("div",id,[Y.value.length>1?(o(),i("button",{key:0,type:"button",class:"cabin-remove-btn-sidebar",onClick:j(p=>Zs(d),["stop"]),title:"Remove cabin"},[...t[89]||(t[89]=[e("svg",{width:"14",height:"14",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("path",{d:"M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"})],-1)])],8,ld)):M("",!0),e("button",{type:"button",class:"cabin-toggle-btn-sidebar",onClick:j(p=>en(d),["stop"])},[(o(),i("svg",{class:B(["cabin-chevron-sidebar",{expanded:n.expanded}]),width:"16",height:"16",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[...t[90]||(t[90]=[e("polyline",{points:"6 9 12 15 18 9"},null,-1)])],2))],8,rd)])]),n.expanded?(o(),i("div",cd,[e("div",ud,[t[91]||(t[91]=e("span",{class:"counter-label-sidebar"},"Adults",-1)),e("div",dd,[e("button",{type:"button",class:"btn-icon-sm",disabled:n.adults<=1,onClick:p=>Qt(d,"adults")}," − ",8,vd),e("span",pd,r(n.adults),1),e("button",{type:"button",class:"btn-icon-sm",disabled:n.adults+n.children>=qt,onClick:p=>Xt(d,"adults")}," + ",8,md)])]),e("div",fd,[t[92]||(t[92]=e("span",{class:"counter-label-sidebar"},"Children",-1)),e("div",hd,[e("button",{type:"button",class:"btn-icon-sm",disabled:n.children<=0,onClick:p=>Qt(d,"children")}," − ",8,gd),e("span",bd,r(n.children),1),e("button",{type:"button",class:"btn-icon-sm",disabled:n.adults+n.children>=qt,onClick:p=>Xt(d,"children")}," + ",8,yd)])])])):M("",!0)]))),128)),ut.value?(o(),i("button",{key:0,type:"button",class:"btn-add-cabin-sidebar",onClick:Qs}," + Add Another Cabin ")):M("",!0)]))])):M("",!0)],512),e("div",{class:"list dropdown",ref_key:"datesDropdown",ref:Ys},[t[95]||(t[95]=e("div",{class:"list-heading"},"Dates",-1)),e("button",{type:"button",class:B(["select-summary",Ge.value||ks.value?"is-filled":""]),onMouseenter:t[24]||(t[24]=n=>ks.value=!0),onMouseleave:t[25]||(t[25]=n=>ks.value=!1),onClick:t[26]||(t[26]=j(n=>It("dates"),["stop"])),"aria-expanded":Ge.value?"true":"false"},[e("span",null,r(c.value?`${c.value} → ${k.value||"..."}`:"Select dates"),1),e("span",wd,[e("img",{src:Ge.value?he(ot):he(at),alt:"","aria-hidden":"true",class:"caret-icon"},null,8,_d)])],42,kd),Ge.value?(o(),i("div",{key:0,class:"dropdown-panel date-dropdown-panel",onClick:t[27]||(t[27]=j(()=>{},["stop"]))},[e("div",Cd,[e("div",$d,[e("h4",Sd,r(ln.value),1),e("div",{class:"calendar-nav-group"},[e("button",{class:"calendar-nav",onClick:dn,type:"button"}," ‹ "),e("button",{class:"calendar-nav",onClick:un,type:"button"}," › ")])]),e("div",xd,[t[94]||(t[94]=Pe('<div class="calendar-weekdays"><div class="weekday">Su</div><div class="weekday">Mo</div><div class="weekday">Tu</div><div class="weekday">We</div><div class="weekday">Th</div><div class="weekday">Fr</div><div class="weekday">Sa</div></div>',1)),e("div",Dd,[(o(!0),i(K,null,se(rn.value,n=>(o(),i("button",{key:n.key,class:B(["calendar-day",{"other-month":!n.isCurrentMonth,selected:n.isSelected,disabled:!n.isSelectable,past:n.isPast,"in-range":n.isInRange,"range-start":n.isRangeStart,"range-end":n.isRangeEnd}]),disabled:!n.isSelectable,onClick:d=>vn(n),type:"button"},r(n.date),11,Ad))),128))])])])])):M("",!0)],512),e("div",{class:B(["list dropdown",{active:Ve.value}]),onMouseenter:t[30]||(t[30]=n=>ws.value=!0),onMouseleave:t[31]||(t[31]=n=>ws.value=!1),ref_key:"durationDropdown",ref:Js},[e("div",{class:"list-heading",onClick:t[28]||(t[28]=n=>It("duration"))}," Trip Duration "),e("button",{type:"button",class:B(["select-summary",{"is-filled":Ve.value||ws.value}]),onClick:t[29]||(t[29]=n=>It("duration"))},[e("span",null,r(zt.value),1),e("span",Td,[e("img",{src:Ve.value?he(ot):he(at),class:"caret-icon"},null,8,Id)])],2),Ve.value?(o(),i("div",Nd,[e("div",Md,[e("div",Ed,[t[96]||(t[96]=e("div",{class:"counter-text"},[e("div",{class:"counter-title"},"Min")],-1)),e("div",Rd,[e("button",{type:"button",class:"btn-icon",disabled:P.value<=1,onClick:j(tn,["stop"])}," − ",8,Pd),e("span",Od,r(P.value),1),e("button",{type:"button",class:"btn-icon",disabled:P.value>=D.value,onClick:j(sn,["stop"])}," + ",8,Ld)])]),e("div",Bd,[t[97]||(t[97]=e("div",{class:"counter-text"},[e("div",{class:"counter-title"},"Max")],-1)),e("div",Fd,[e("button",{type:"button",class:"btn-icon",disabled:D.value<=P.value,onClick:j(nn,["stop"])}," − ",8,zd),e("span",Ud,r(D.value),1),e("button",{type:"button",class:"btn-icon",disabled:D.value>=Xe,onClick:j(an,["stop"])}," + ",8,Gd)])]),e("div",Vd,[e("button",{type:"button",class:"btn-reset-duration",onClick:j(on,["stop"]),disabled:P.value===1&&D.value===Xe}," Reset to Any Duration ",8,Kd)])])])):M("",!0)],34),e("div",{class:"sidebar-actions"},[e("button",{class:"btn-primary",onClick:da}," Apply ")])],64))]),fe.value?M("",!0):(o(),i("div",qd,[e("div",Wd,[t[109]||(t[109]=e("h3",{class:"itinerary-title"},"Your Itinerary",-1)),t[110]||(t[110]=e("p",{class:"itinerary-description"}," This is a summary of the accommodation you have selected. After submitting your booking request, a Komodo Cruises Journey Designer will make contact to book and confirm your trip. ",-1)),t[111]||(t[111]=e("div",{class:"itinerary-divider"},null,-1)),R.value.length===0?(o(),i("div",Hd," You haven't selected any options yet. ")):(o(),i("ul",Yd,[(o(!0),i(K,null,se(R.value,(n,d)=>(o(),i("li",{key:n.addedAt,class:"itinerary-item"},[e("div",Jd,[e("div",null,[t[99]||(t[99]=e("div",{class:"itinerary-type"},"CABIN",-1)),e("div",jd,r(n.cabin),1)]),e("button",{class:"itinerary-remove-btn-top",onClick:p=>Oa(d),title:"Remove from itinerary"},[...t[100]||(t[100]=[e("svg",{class:"action-icon",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"1.5"},[e("line",{x1:"18",y1:"6",x2:"6",y2:"18"}),e("line",{x1:"6",y1:"6",x2:"18",y2:"18"})],-1)])],8,Xd)]),e("div",Qd,[t[102]||(t[102]=Pe('<svg class="itinerary-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>',1)),e("span",Zd,[e("strong",null,r(Nt(n.date)),1),t[101]||(t[101]=Q(" – ",-1)),e("strong",null,r(Nt(gn(n.date))),1)])]),e("div",ev,[t[103]||(t[103]=Pe('<svg class="itinerary-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 15h18l-1.5 6h-15L3 15z"></path><rect x="5" y="8" width="14" height="7" rx="1"></rect><path d="M8 8V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3"></path><line x1="2" y1="15" x2="22" y2="15"></line></svg>',1)),e("span",tv,r(n.ship),1)]),e("div",sv,[e("div",nv,[t[104]||(t[104]=e("svg",{class:"itinerary-icon",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"1.5"},[e("path",{d:"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"}),e("circle",{cx:"12",cy:"7",r:"4"})],-1)),e("span",av,r(n.guests||2)+" adult"+r((n.guests||2)>1?"s":""),1)]),e("button",{class:"btn-edit-item",onClick:j(p=>Ta(n,d),["stop"]),title:"Edit Guests"},[...t[105]||(t[105]=[e("svg",{xmlns:"http://www.w3.org/2000/svg",width:"14",height:"14",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2","stroke-linecap":"round","stroke-linejoin":"round"},[e("path",{d:"M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"}),e("path",{d:"M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"})],-1)])],8,ov)]),e("div",iv,[e("div",lv,[t[106]||(t[106]=e("svg",{class:"itinerary-icon",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"1.5"},[e("rect",{x:"2",y:"6",width:"20",height:"12",rx:"2"}),e("circle",{cx:"12",cy:"12",r:"2"}),e("path",{d:"M6 12h.01M18 12h.01"})],-1)),e("span",rv,r(n.cabin),1)]),e("span",cv,r(w(n.price)),1)])]))),128))])),ss.value.hasPrice?(o(),i("div",uv,[e("div",dv,[t[108]||(t[108]=e("span",{class:"itinerary-total-label-simple"},"EST. TOTAL",-1)),e("div",vv,[e("span",pv,r(ss.value.formattedTotal),1),t[107]||(t[107]=e("span",{class:"itinerary-tax-note"},"(Tax Included)",-1))])])])):R.value.length?(o(),i("p",mv," Pricing for the selected cabins will be confirmed by our Journey Designers. ")):M("",!0),R.value.length?(o(),i("button",{key:4,class:"btn-send-enquiry",onClick:$a}," Send Availability Enquiry ")):M("",!0),t[112]||(t[112]=e("a",{href:"#",class:"link-speak-with-us"},[Q(" Speak with us "),e("img",{src:Vs,alt:""})],-1))])]))])])])),Ee.value&&pe.value?(o(),i("div",{key:2,class:"modal-overlay",onClick:Rs},[e("div",{class:"modal-content modal-content-redesigned",onClick:t[34]||(t[34]=j(()=>{},["stop"]))},[e("button",{class:"modal-close-details",onClick:Rs},"✕"),e("div",fv,[e("div",hv,[e("div",gv,[e("h2",bv,r(Is(pe.value)),1),t[113]||(t[113]=e("p",{class:"modal-cabin-subtitle"},"Room",-1))]),e("div",yv," Sleeps "+r(Jn.value||2)+" | "+r(wn(pe.value))+" | "+r(fa(pe.value)),1),e("blockquote",kv,' "'+r(Yn.value)+'" ',1),e("div",wv,[t[114]||(t[114]=e("h3",{class:"modal-section-title"},"OVERVIEW",-1)),e("div",_v,[e("ul",Cv,[(o(!0),i(K,null,se(Mt(pe.value).slice(0,4),(n,d)=>(o(),i("li",{key:d},r(n),1))),128))]),Mt(pe.value).length>4?(o(),i("ul",$v,[(o(!0),i(K,null,se(Mt(pe.value).slice(4,8),(n,d)=>(o(),i("li",{key:d+4},r(n),1))),128))])):M("",!0)])]),e("div",Sv,[t[115]||(t[115]=e("h3",{class:"modal-section-title"},"AMENITIES & FEATURES",-1)),e("div",xv,[e("ul",Dv,[(o(!0),i(K,null,se(Cs.value.slice(0,3),(n,d)=>(o(),i("li",{key:d},r(n),1))),128))]),Cs.value.length>3?(o(),i("ul",Av,[(o(!0),i(K,null,se(Cs.value.slice(3,6),(n,d)=>(o(),i("li",{key:d+3},r(n),1))),128))])):M("",!0)])])]),e("div",Tv,[(o(),i("img",{src:ve(),alt:pe.value.cabinName,referrerpolicy:"no-referrer",class:"modal-cabin-image",key:H.value,onError:t[32]||(t[32]=n=>$n(n,pe.value.image))},null,40,Iv)),e("button",{class:"modal-gallery-nav modal-gallery-prev",onClick:F,"aria-label":"Previous"}," ‹ "),e("button",{class:"modal-gallery-nav modal-gallery-next",onClick:G,"aria-label":"Next"}," › "),e("div",Nv,[Q(r(Is(pe.value))+" ",1),e("span",Mv,r(H.value+1)+" of "+r(le().length||1),1)])])]),e("div",Ev,[e("div",Rv,[e("div",Pv,[e("span",Ov,r(_s.value||"Price on request"),1),_s.value?(o(),i("span",Lv,"/Night")):M("",!0)]),t[116]||(t[116]=e("span",{class:"price-note"},"Excluding taxes and fees",-1))]),e("button",{class:"modal-book-btn",onClick:t[33]||(t[33]=n=>{Dn(pe.value),Rs()})},r(xn(pe.value)?"Remove from itinerary":"RESERVE NOW"),1)])])])):M("",!0),tt.value?(o(),i("div",{key:3,class:"guest-modal-overlay",onClick:rs},[e("div",{class:"guest-modal-content",onClick:t[35]||(t[35]=j(()=>{},["stop"]))},[e("button",{class:"guest-modal-close",onClick:rs},"✕"),t[119]||(t[119]=e("div",{class:"guest-modal-header"},[e("h3",{class:"guest-modal-title"},"Number of Guests")],-1)),e("div",Bv,[t[118]||(t[118]=e("p",{class:"guest-modal-description"}," Please indicate how many guests will be accommodated: ",-1)),e("div",Fv,[e("div",zv,[t[117]||(t[117]=e("div",{class:"guest-counter-label"},"Guests",-1)),e("div",Uv,[e("button",{type:"button",class:"guest-counter-btn",onClick:Da,disabled:Re.value<=1}," − ",8,Gv),e("span",Vv,r(Re.value),1),e("button",{type:"button",class:"guest-counter-btn",onClick:xa,disabled:Re.value>=As.value}," + ",8,Kv)])]),e("div",qv,[Q(r(((l=De.value)==null?void 0:l.availableText)||"1 available")+" ",1),(u=De.value)!=null&&u.capacityText?(o(),i("span",Wv," • Max "+r(As.value)+" guests",1)):M("",!0)])]),e("div",Hv,[e("button",{class:"btn-submit-guest",onClick:Aa},r(et.value!==null?"Update Itinerary":"Add to Itinerary"),1)])])])])):M("",!0),We.value?(o(),i("div",Yv,[e("div",Jv,[e("div",{class:"enquiry-modal-header"},[t[120]||(t[120]=e("h2",{class:"enquiry-modal-title"},"Plan your Trip",-1)),e("button",{class:"enquiry-modal-close",onClick:Sa}," Close ✕ ")]),e("div",jv,[e("div",Xv,[t[138]||(t[138]=e("p",{class:"enquiry-intro"}," Please complete the form below and one of our Journey Designers will contact you shortly to plan your trip. ",-1)),e("form",{class:"enquiry-form",onSubmit:j(La,["prevent"])},[e("div",Qv,[e("div",Zv,[t[122]||(t[122]=e("label",{class:"form-label"},"Title",-1)),be(e("select",{class:"form-control","onUpdate:modelValue":t[36]||(t[36]=n=>ee.value.title=n)},[...t[121]||(t[121]=[Pe('<option value="">Select</option><option value="Mr">Mr</option><option value="Mrs">Mrs</option><option value="Ms">Ms</option><option value="Dr">Dr</option>',5)])],512),[[ds,ee.value.title]])]),e("div",ep,[t[123]||(t[123]=e("label",{class:"form-label"},"First Name",-1)),be(e("input",{type:"text",class:"form-control","onUpdate:modelValue":t[37]||(t[37]=n=>ee.value.firstName=n),required:""},null,512),[[kt,ee.value.firstName]])]),e("div",tp,[t[124]||(t[124]=e("label",{class:"form-label"},"Last Name",-1)),be(e("input",{type:"text",class:"form-control","onUpdate:modelValue":t[38]||(t[38]=n=>ee.value.lastName=n),required:""},null,512),[[kt,ee.value.lastName]])])]),e("div",sp,[e("div",np,[t[126]||(t[126]=e("label",{class:"form-label"},"Contact Number",-1)),e("div",ap,[be(e("select",{class:"phone-country","onUpdate:modelValue":t[39]||(t[39]=n=>ee.value.phoneCountry=n)},[...t[125]||(t[125]=[Pe('<option value="+62">🇮🇩 +62</option><option value="+1">🇺🇸 +1</option><option value="+44">🇬🇧 +44</option><option value="+61">🇦🇺 +61</option><option value="+65">🇸🇬 +65</option><option value="+60">🇲🇾 +60</option>',6)])],512),[[ds,ee.value.phoneCountry]]),be(e("input",{type:"tel",class:"form-control","onUpdate:modelValue":t[40]||(t[40]=n=>ee.value.phoneNumber=n),placeholder:"812345678"},null,512),[[kt,ee.value.phoneNumber]])])]),e("div",op,[t[128]||(t[128]=e("label",{class:"form-label"},"Country",-1)),be(e("select",{class:"form-control","onUpdate:modelValue":t[41]||(t[41]=n=>ee.value.country=n)},[...t[127]||(t[127]=[Pe('<option value="">Select Country</option><option value="Indonesia">Indonesia</option><option value="United States">United States</option><option value="United Kingdom">United Kingdom</option><option value="Australia">Australia</option><option value="Singapore">Singapore</option><option value="Malaysia">Malaysia</option>',7)])],512),[[ds,ee.value.country]])])]),e("div",ip,[e("div",lp,[t[129]||(t[129]=e("label",{class:"form-label"},"Email",-1)),be(e("input",{type:"email",class:"form-control","onUpdate:modelValue":t[42]||(t[42]=n=>ee.value.email=n),required:""},null,512),[[kt,ee.value.email]])]),e("div",rp,[t[130]||(t[130]=e("label",{class:"form-label"},"Confirm Email Address",-1)),be(e("input",{type:"email",class:"form-control","onUpdate:modelValue":t[43]||(t[43]=n=>ee.value.confirmEmail=n),required:""},null,512),[[kt,ee.value.confirmEmail]])])]),e("div",cp,[t[132]||(t[132]=e("label",{class:"form-label"},"I am a:",-1)),be(e("select",{class:"form-control","onUpdate:modelValue":t[44]||(t[44]=n=>ee.value.userType=n)},[...t[131]||(t[131]=[e("option",{value:""},"Select",-1),e("option",{value:"guest"},"Guest",-1),e("option",{value:"agent"},"Travel Agent",-1)])],512),[[ds,ee.value.userType]])]),e("div",up,[t[133]||(t[133]=e("label",{class:"form-label"},"Is there anything else you'd like to let us know?",-1)),be(e("textarea",{class:"form-control form-textarea",rows:"4","onUpdate:modelValue":t[45]||(t[45]=n=>ee.value.notes=n)},null,512),[[kt,ee.value.notes]])]),e("div",dp,[e("label",vp,[be(e("input",{type:"checkbox","onUpdate:modelValue":t[46]||(t[46]=n=>ee.value.subscribeNews=n)},null,512),[[yt,ee.value.subscribeNews]]),t[134]||(t[134]=e("span",null,"Sign up to receive news and blog posts from Komodo Cruises",-1))]),e("label",pp,[be(e("input",{type:"checkbox","onUpdate:modelValue":t[47]||(t[47]=n=>ee.value.consentData=n),required:""},null,512),[[yt,ee.value.consentData]]),t[135]||(t[135]=e("span",null,"I consent to my submitted data being collected and stored",-1))])]),t[136]||(t[136]=e("p",{class:"form-note"},[e("strong",null,"PLEASE NOTE:"),Q(" These results indicate availability and do not guarantee a booking. One of our Journey Designers will contact you shortly to plan your trip. ")],-1)),e("button",{type:"submit",class:"btn-submit-enquiry",disabled:Le.value},r(Le.value?"PROCESSING...":"PROCEED TO PAYMENT"),9,mp),t[137]||(t[137]=e("p",{class:"form-recaptcha"}," This form is protected by reCAPTCHA Enterprise and the Google Privacy Policy and Terms of Service apply. ",-1))],32)]),e("div",fp,[t[142]||(t[142]=e("h3",{class:"summary-title"},"Your Itinerary",-1)),t[143]||(t[143]=e("p",{class:"summary-description"}," This is a summary of the accommodation you've selected. One of our Komodo Cruises Journey Designers will contact you shortly to plan your trip. ",-1)),e("div",hp,[(o(!0),i(K,null,se(R.value,(n,d)=>(o(),i("div",{key:d,class:"summary-item"},[e("div",gp,[e("h4",bp,r(n.ship),1)]),e("div",yp,[e("p",kp,r(n.cabin),1),e("p",wp,r(n.guests||2)+" Guest"+r((n.guests||2)>1?"s":""),1),e("p",_p,r(Nt(n.date))+" → "+r(Nt(gn(n.date))),1)]),n.price?(o(),i("div",Cp,[e("div",$p,[t[139]||(t[139]=e("span",{class:"pricing-label"},"Price per cabin",-1)),e("span",Sp,r(n.price),1)]),e("div",xp,[e("span",Dp,"× "+r(n.guests||2)+" guest"+r((n.guests||2)>1?"s":""),1),e("span",Ap,r(_a(n)),1)])])):M("",!0)]))),128))]),ss.value.hasPrice?(o(),i("div",Tp,[t[141]||(t[141]=e("div",{class:"enquiry-total-divider"},null,-1)),e("div",Ip,[e("div",Np,[t[140]||(t[140]=e("span",{class:"enquiry-total-label"},"Total Price",-1)),e("span",Mp,r(ss.value.formattedTotal),1)])])])):R.value.length?(o(),i("p",Ep," Pricing for the selected cabins will be confirmed by our Journey Designers. ")):M("",!0)])])])])):M("",!0),e("footer",Rp,[e("div",Pp,[e("div",Op,[t[147]||(t[147]=e("div",{class:"hf-brand"},[e("div",{class:"hf-logo"},"KOMODO CRUISES"),e("div",{class:"hf-copy"},"Rare journeys across the Komodo Islands.")],-1)),e("nav",Lp,[e("a",{href:"#",onClick:j(Ea,["prevent"])},"Plan your trip"),t[144]||(t[144]=e("a",{href:"#"},"Experiences",-1)),t[145]||(t[145]=e("a",{href:"#"},"Our story",-1)),t[146]||(t[146]=e("a",{href:"#"},"Contact",-1))]),t[148]||(t[148]=Pe('<div class="hf-contact"><div class="hf-contact-title">Contact Us</div><div class="hf-contact-phone"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><a href="tel:+6285282296450">+62 852-8229-6450</a></div><div class="hf-contact-address"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg><span>Graha Permata Pancoran, Jl. KH. Guru Amin Blok A5, Pancoran, Jakarta Selatan 12780</span></div></div>',1))]),e("div",Bp,[e("div",Fp," © "+r(new Date().getFullYear())+" Komodo Cruises | PT CANARD MONEY INDONESIA ",1),t[149]||(t[149]=e("div",{class:"hf-disclaimer"}," All voyages subject to weather and park regulations. ",-1))])])])]),(o(),Yt(zn,{to:"body"},[C.value?(o(),i("div",{key:0,class:"mobile-filter-modal-overlay",onClick:t[61]||(t[61]=j(n=>C.value=!1,["self"]))},[e("div",zp,[e("div",Up,[t[151]||(t[151]=e("h3",null,"Check Availability",-1)),e("button",{class:"modal-close-btn",onClick:t[48]||(t[48]=n=>C.value=!1)},[...t[150]||(t[150]=[e("span",null,"Close",-1),Q(" ✕ ",-1)])])]),e("div",Gp,[e("div",Vp,[t[152]||(t[152]=e("div",{class:"modal-field-label"},"Destinations",-1)),e("button",{type:"button",class:"modal-field-btn",onClick:t[49]||(t[49]=n=>h.value=!h.value)},[e("span",null,"Destinations: "+r(Ne.value.length),1),e("img",{src:h.value?he(ot):he(at),alt:"",class:"caret-icon"},null,8,Kp)]),h.value?(o(),i("div",qp,[e("div",{class:"dropdown-group-title"},r(ms)),(o(),i(K,null,se(Dt,n=>e("div",{class:"list-row",key:n,onClick:d=>js(n)},[e("div",Hp,r(n),1),be(e("input",{class:"check",type:"checkbox",value:n,"onUpdate:modelValue":t[50]||(t[50]=d=>Ne.value=d),onClick:t[51]||(t[51]=j(()=>{},["stop"]))},null,8,Yp),[[yt,Ne.value]])],8,Wp)),64))])):M("",!0)]),e("div",Jp,[t[153]||(t[153]=e("div",{class:"modal-field-label"},"Ships",-1)),e("button",{type:"button",class:"modal-field-btn",onClick:t[52]||(t[52]=n=>g.value=!g.value)},[e("span",null,"Ships: "+r(Oe.value.length),1),e("img",{src:g.value?he(ot):he(at),alt:"",class:"caret-icon"},null,8,jp)]),g.value?(o(),i("div",Xp,[e("div",Qp,r(pn.value),1),Tt.value?(o(),i("div",Zp,"Loading ships...")):(o(!0),i(K,{key:1},se(nt.value,n=>(o(),i("div",{class:"list-row",key:n.id,onClick:d=>Xs(n.id)},[e("div",t1,r(n.label),1),be(e("input",{class:"check",type:"checkbox",value:n.id,"onUpdate:modelValue":t[53]||(t[53]=d=>Oe.value=d),onClick:t[54]||(t[54]=j(()=>{},["stop"]))},null,8,s1),[[yt,Oe.value]])],8,e1))),128))])):M("",!0)]),e("div",n1,[t[160]||(t[160]=e("div",{class:"modal-field-label"},"Cabins & Guests",-1)),e("button",{type:"button",class:"modal-field-btn",onClick:t[55]||(t[55]=n=>v.value=!v.value)},[ce.value?(o(),i("span",a1,"Flexible: "+r(ue.value)+" Guest"+r(ue.value!==1?"s":""),1)):(o(),i("span",o1,r(Y.value.length)+" Cabin"+r(Y.value.length!==1?"s":"")+", "+r(Be.value)+" Guest"+r(Be.value!==1?"s":""),1)),e("img",{src:v.value?he(ot):he(at),alt:"",class:"caret-icon"},null,8,i1)]),v.value?(o(),i("div",l1,[e("div",r1,[e("button",{type:"button",class:B(["sidebar-pill-btn",{active:ce.value}]),onClick:t[56]||(t[56]=n=>ce.value=!0)}," Flexible ",2),e("button",{type:"button",class:B(["sidebar-pill-btn",{active:!ce.value}]),onClick:t[57]||(t[57]=n=>ce.value=!1)}," Structured ",2)]),ce.value?(o(),i("div",c1,[e("div",u1,[t[154]||(t[154]=e("span",{class:"label"},"Total Guests",-1)),e("div",d1,[e("button",{type:"button",class:"btn-ctrl",disabled:ue.value<=1,onClick:t[58]||(t[58]=n=>ue.value--)}," − ",8,v1),e("span",p1,r(ue.value),1),e("button",{type:"button",class:"btn-ctrl",onClick:t[59]||(t[59]=n=>ue.value++)}," + ")])]),t[155]||(t[155]=e("p",{class:"sidebar-note"}," We will automatically find the best cabin combination for your group. ",-1))])):(o(),i("div",m1,[(o(!0),i(K,null,se(Y.value,(n,d)=>(o(),i("div",{key:n.id,class:"cabin-accordion-sidebar"},[e("div",f1,[e("div",h1,[e("span",g1,"CABIN "+r(d+1),1),e("span",b1,r(n.adults+n.children)+" guest"+r(n.adults+n.children!==1?"s":""),1)]),e("div",y1,[Y.value.length>1?(o(),i("button",{key:0,type:"button",class:"cabin-remove-btn-sidebar",onClick:j(p=>Zs(d),["stop"]),title:"Remove cabin"},[...t[156]||(t[156]=[e("svg",{width:"14",height:"14",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("path",{d:"M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"})],-1)])],8,k1)):M("",!0),e("button",{type:"button",class:"cabin-toggle-btn-sidebar",onClick:j(p=>en(d),["stop"])},[(o(),i("svg",{class:B(["cabin-chevron-sidebar",{expanded:n.expanded}]),width:"16",height:"16",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[...t[157]||(t[157]=[e("polyline",{points:"6 9 12 15 18 9"},null,-1)])],2))],8,w1)])]),n.expanded?(o(),i("div",_1,[e("div",C1,[t[158]||(t[158]=e("span",{class:"counter-label-sidebar"},"Adults",-1)),e("div",$1,[e("button",{type:"button",class:"btn-icon-sm",disabled:n.adults<=1,onClick:p=>Qt(d,"adults")}," − ",8,S1),e("span",x1,r(n.adults),1),e("button",{type:"button",class:"btn-icon-sm",disabled:n.adults+n.children>=qt,onClick:p=>Xt(d,"adults")}," + ",8,D1)])]),e("div",A1,[t[159]||(t[159]=e("span",{class:"counter-label-sidebar"},"Children",-1)),e("div",T1,[e("button",{type:"button",class:"btn-icon-sm",disabled:n.children<=0,onClick:p=>Qt(d,"children")}," − ",8,I1),e("span",N1,r(n.children),1),e("button",{type:"button",class:"btn-icon-sm",disabled:n.adults+n.children>=qt,onClick:p=>Xt(d,"children")}," + ",8,M1)])])])):M("",!0)]))),128)),ut.value?(o(),i("button",{key:0,type:"button",class:"btn-add-cabin-sidebar",onClick:Qs}," + Add Another Cabin ")):M("",!0)]))])):M("",!0)]),e("div",E1,[t[162]||(t[162]=e("div",{class:"modal-field-label"},"Dates",-1)),e("button",{type:"button",class:"modal-field-btn",onClick:t[60]||(t[60]=n=>E.value=!E.value)},[e("span",null,r(c.value?`${c.value} → ${k.value||"..."}`:"Select dates"),1),e("img",{src:E.value?he(ot):he(at),alt:"",class:"caret-icon"},null,8,R1)]),E.value?(o(),i("div",P1,[e("div",O1,[e("div",L1,[e("h4",B1,r(ln.value),1),e("div",{class:"calendar-nav-group"},[e("button",{class:"calendar-nav",onClick:dn,type:"button"}," ‹ "),e("button",{class:"calendar-nav",onClick:un,type:"button"}," › ")])]),e("div",F1,[t[161]||(t[161]=e("div",{class:"calendar-weekdays"},[e("div",{class:"weekday"},"Su"),e("div",{class:"weekday"},"Mo"),e("div",{class:"weekday"},"Tu"),e("div",{class:"weekday"},"We"),e("div",{class:"weekday"},"Th"),e("div",{class:"weekday"},"Fr"),e("div",{class:"weekday"},"Sa")],-1)),e("div",z1,[(o(!0),i(K,null,se(rn.value,n=>(o(),i("button",{key:n.key,class:B(["calendar-day",{"other-month":!n.isCurrentMonth,selected:n.isSelected,disabled:!n.isSelectable,past:n.isPast,"in-range":n.isInRange,"range-start":n.isRangeStart,"range-end":n.isRangeEnd}]),disabled:!n.isSelectable,onClick:d=>vn(n),type:"button"},r(n.date),11,U1))),128))])])])])):M("",!0)]),e("div",G1,[t[165]||(t[165]=e("div",{class:"modal-field-label"},"Trip Duration",-1)),e("div",V1,[e("div",K1,[t[163]||(t[163]=e("div",{class:"counter-text"},[e("div",{class:"counter-title"},"Min")],-1)),e("div",q1,[e("button",{type:"button",class:"btn-icon",disabled:P.value<=1,onClick:tn}," − ",8,W1),e("span",H1,r(P.value),1),e("button",{type:"button",class:"btn-icon",disabled:P.value>=D.value,onClick:sn}," + ",8,Y1)])]),e("div",J1,[t[164]||(t[164]=e("div",{class:"counter-text"},[e("div",{class:"counter-title"},"Max")],-1)),e("div",j1,[e("button",{type:"button",class:"btn-icon",disabled:D.value<=P.value,onClick:nn}," − ",8,X1),e("span",Q1,r(D.value),1),e("button",{type:"button",class:"btn-icon",disabled:D.value>=Xe,onClick:an}," + ",8,Z1)])]),e("div",em,[e("button",{type:"button",class:"btn-reset-duration",onClick:on,disabled:P.value===1&&D.value===Xe}," Reset to Any Duration ",8,tm)])])])]),e("div",{class:"mobile-filter-modal-footer"},[e("button",{class:"btn-apply-modal",onClick:oe}," Apply ")])])])):M("",!0)])),ke(Ks,{isOpen:qe.value,onClose:Ra,onNavigateToResults:Pa},null,8,["isOpen"])],64)}}},am={class:"plan-wrap plan-page"},om={class:"plan-content"},im={class:"steps",role:"tablist","aria-label":"Plan steps"},lm=["disabled"],rm=["disabled"],cm=["disabled"],um=["disabled"],dm={key:0},vm={class:"list"},pm={class:"list-text"},mm=["value","aria-label"],fm={key:1},hm={class:"list"},gm={class:"list-text"},bm=["value","aria-label"],ym={key:2},km={class:"date-range-display"},wm={class:"date-value"},_m={class:"date-value"},Cm={class:"custom-calendar"},$m={class:"calendar-header"},Sm={class:"calendar-title"},xm={class:"calendar-grid"},Dm={class:"calendar-days"},Am=["disabled","onClick"],Tm={key:3},Im={class:"counters"},Nm={class:"counter-row"},Mm={class:"counter-ctrls"},Em={class:"count"},Rm={class:"counter-row"},Pm={class:"counter-ctrls"},Om={class:"count"},Lm={class:"counter-row"},Bm={class:"counter-ctrls"},Fm={class:"count"},zm={class:"counter-row"},Um={class:"counter-ctrls"},Gm={class:"count"},Vm={key:4},Km={class:"mt-4"},qm={class:"mt-4"},Wm={class:"mt-4",style:{"text-align":"right"}},Hm={class:"bottom-bar"},Ym={class:"nav-inner",style:{display:"flex","align-items":"center","justify-content":"space-between"}},Jm={key:1},jm="Nusa Tenggara Timur",Xm={__name:"Plan",setup(S){const b=m(1),f=["Pulau Komodo","Labuan Bajo"],C=[],h=m(""),g=m(""),v=m(""),E=m(""),X=m(2),T=m(0),oe=m(0),te=m(0),Z=m(new Date().getMonth()),q=m(new Date().getFullYear()),W=["Destinations","Ships","Dates","Guests","Submit"],Se=x(()=>W[b.value-2]||""),Ce=x(()=>b.value<5?W[b.value-1]+" ›":"Submit ›");x(()=>new Date().toISOString().split("T")[0]);const ie=x(()=>`${["January","February","March","April","May","June","July","August","September","October","November","December"][Z.value]} ${q.value}`),O=x(()=>{const ne=new Date(q.value,Z.value,1),y=new Date(q.value,Z.value+1,0),Ie=new Date(ne),R=new Date;Ie.setDate(Ie.getDate()-Ie.getDay());const De=[],et=new Date(y);et.setDate(et.getDate()+(6-y.getDay()));for(let Ee=new Date(Ie);Ee<=et;Ee.setDate(Ee.getDate()+1)){Ee.getDay();const tt=Ee.getMonth()===Z.value,We=new Date(Ee);We.setHours(0,0,0,0);const pe=new Date(R);pe.setHours(0,0,0,0);const He=We<pe,Re=tt&&!He,Le=Ee.toISOString().split("T")[0];let _t=!1,je=!1,Ct=!1;if(v.value&&E.value&&tt){const ct=new Date(v.value+"T00:00:00"),st=new Date(E.value+"T00:00:00");We>=ct&&We<=st&&(_t=!0,We.getTime()===ct.getTime()&&(je=!0),We.getTime()===st.getTime()&&(Ct=!0))}De.push({key:Ee.getTime(),date:Ee.getDate(),fullDate:Le,isCurrentMonth:tt,isSelectable:Re,isPast:He,isSelected:v.value===Le||E.value===Le,isInRange:_t,isRangeStart:je,isRangeEnd:Ct})}return De}),H=x(()=>!!h.value),le=x(()=>!!h.value&&!!g.value),ve=x(()=>!!h.value&&!!g.value&&!!v.value);rt(h,()=>{g.value=""});function F(ne){b.value=ne}function G(){if(b.value===1&&!h.value)return qe("Please select a destination first.");if(b.value===2&&!g.value)return qe("Please select a ship first.");if(b.value===3&&!v.value)return qe("Please select a start date first.");b.value<5?b.value++:ge()}function w(){b.value>1&&b.value--}function ge(){const ne={region:jm,destination:h.value,ship:g.value,lodges:g.value?[g.value]:[],dateFrom:v.value,dateTo:E.value,adults:X.value,children:T.value,age3_9:oe.value,age0_2:te.value,totalGuests:X.value+T.value+oe.value+te.value,timestamp:Date.now()};localStorage.setItem("komodo_search_criteria",JSON.stringify(ne)),window.location.href="/results"}function fe(ne){ne==="adults"?X.value++:ne==="children"?T.value++:ne==="age3_9"?oe.value++:ne==="age0_2"&&te.value++}function xe(ne){ne==="adults"&&X.value>0?X.value--:ne==="children"&&T.value>0?T.value--:ne==="age3_9"&&oe.value>0?oe.value--:ne==="age0_2"&&te.value>0&&te.value--}function qe(ne){alert(ne)}function me(){Z.value===0?(Z.value=11,q.value--):Z.value--}function Te(){Z.value===11?(Z.value=0,q.value++):Z.value++}function Ze(ne){if(ne.isSelectable)if(!v.value||v.value&&E.value)v.value=ne.fullDate,E.value="";else{const y=new Date(v.value+"T00:00:00");new Date(ne.fullDate+"T00:00:00")<y?(E.value=v.value,v.value=ne.fullDate):E.value=ne.fullDate}}return(ne,y)=>{const Ie=Wt("router-link");return o(),i("section",am,[e("div",om,[e("div",im,[e("button",{class:B(["step",{"step-active":b.value===1}]),onClick:y[0]||(y[0]=R=>F(1))}," Step 1 ",2),e("button",{class:B(["step",{"step-active":b.value===2}]),onClick:y[1]||(y[1]=R=>F(2)),disabled:!H.value}," Step 2 ",10,lm),e("button",{class:B(["step",{"step-active":b.value===3}]),onClick:y[2]||(y[2]=R=>F(3)),disabled:!le.value}," Step 3 ",10,rm),e("button",{class:B(["step",{"step-active":b.value===4}]),onClick:y[3]||(y[3]=R=>F(4)),disabled:!ve.value}," Step 4 ",10,cm),e("button",{class:B(["step",{"step-active":b.value===5}]),onClick:y[4]||(y[4]=R=>F(5)),disabled:!ve.value}," Step 5 ",10,um)]),b.value===1?(o(),i("div",dm,[y[16]||(y[16]=e("h3",{class:"step-title"},"Destinations",-1)),y[17]||(y[17]=e("p",{class:"results-note"},[Q(" Region: "),e("span",{class:"semibold"},"Nusa Tenggara Timur")],-1)),y[18]||(y[18]=e("p",{class:"results-note"},"Select a destination you're interested in:",-1)),e("div",vm,[y[15]||(y[15]=e("div",{class:"list-heading"},"Nusa Tenggara Timur",-1)),(o(),i(K,null,se(f,R=>e("div",{class:"list-row",key:R},[e("div",pm,r(R),1),be(e("input",{class:"radio",type:"radio",name:"destination",value:R,"onUpdate:modelValue":y[5]||(y[5]=De=>h.value=De),"aria-label":`Destination ${R}`},null,8,mm),[[En,h.value]])])),64))])])):b.value===2?(o(),i("div",fm,[y[19]||(y[19]=e("h3",{class:"step-title"},"Ships",-1)),y[20]||(y[20]=e("p",{class:"results-note"},"Please select a ship:",-1)),e("div",hm,[(o(),i(K,null,se(C,R=>e("div",{class:"list-row",key:R},[e("div",gm,r(R),1),be(e("input",{class:"radio",type:"radio",name:"ship",value:R,"onUpdate:modelValue":y[6]||(y[6]=De=>g.value=De),"aria-label":`Ship ${R}`},null,8,bm),[[En,g.value]])])),64))])])):b.value===3?(o(),i("div",ym,[y[23]||(y[23]=e("h3",{class:"step-title"},"Dates",-1)),y[24]||(y[24]=e("p",{class:"results-note"},"Select your travel dates:",-1)),y[25]||(y[25]=e("p",{class:"results-note text-sm"}," Click to select start date, then click again to select end date. ",-1)),e("div",km,[e("span",wm,r(v.value||"Start date"),1),y[21]||(y[21]=e("span",{class:"date-arrow"},"→",-1)),e("span",_m,r(E.value||"End date"),1)]),e("div",Cm,[e("div",$m,[e("button",{class:"calendar-nav",onClick:me,type:"button"}," ‹ "),e("h4",Sm,r(ie.value),1),e("button",{class:"calendar-nav",onClick:Te,type:"button"}," › ")]),e("div",xm,[y[22]||(y[22]=Pe('<div class="calendar-weekdays"><div class="weekday">Su</div><div class="weekday">Mo</div><div class="weekday">Tu</div><div class="weekday">We</div><div class="weekday">Th</div><div class="weekday">Fr</div><div class="weekday">Sa</div></div>',1)),e("div",Dm,[(o(!0),i(K,null,se(O.value,R=>(o(),i("button",{key:R.key,class:B(["calendar-day",{"other-month":!R.isCurrentMonth,selected:R.isSelected,disabled:!R.isSelectable,past:R.isPast,"in-range":R.isInRange,"range-start":R.isRangeStart,"range-end":R.isRangeEnd}]),disabled:!R.isSelectable,onClick:De=>Ze(R),type:"button"},r(R.date),11,Am))),128))])])])])):b.value===4?(o(),i("div",Tm,[y[30]||(y[30]=e("h3",{class:"step-title"},"Guests",-1)),y[31]||(y[31]=e("p",{class:"results-note"}," Please indicate how many adults will need to be accommodated. ",-1)),y[32]||(y[32]=e("p",{class:"results-note"}," If your booking includes children, please enquire directly on the next step. ",-1)),y[33]||(y[33]=e("p",{class:"results-note"},"View our child policy for each lodge here.",-1)),e("div",Im,[e("div",Nm,[y[26]||(y[26]=e("div",{class:"counter-text"},[e("div",{class:"semibold"},"Adults"),e("div",{class:"muted text-sm"},"Ages 17+")],-1)),e("div",Mm,[e("button",{type:"button",class:"btn-icon",onClick:y[7]||(y[7]=R=>xe("adults"))}," − "),e("span",Em,r(X.value),1),e("button",{type:"button",class:"btn-icon",onClick:y[8]||(y[8]=R=>fe("adults"))}," + ")])]),e("div",Rm,[y[27]||(y[27]=e("div",{class:"counter-text"},[e("div",{class:"semibold"},"Children"),e("div",{class:"muted text-sm"},"Ages 10 - 16")],-1)),e("div",Pm,[e("button",{type:"button",class:"btn-icon",onClick:y[9]||(y[9]=R=>xe("children"))}," − "),e("span",Om,r(T.value),1),e("button",{type:"button",class:"btn-icon",onClick:y[10]||(y[10]=R=>fe("children"))}," + ")])]),e("div",Lm,[y[28]||(y[28]=e("div",{class:"counter-text"},[e("div",{class:"semibold"},"Ages 3 - 9")],-1)),e("div",Bm,[e("button",{type:"button",class:"btn-icon",onClick:y[11]||(y[11]=R=>xe("age3_9"))}," − "),e("span",Fm,r(oe.value),1),e("button",{type:"button",class:"btn-icon",onClick:y[12]||(y[12]=R=>fe("age3_9"))}," + ")])]),e("div",zm,[y[29]||(y[29]=e("div",{class:"counter-text"},[e("div",{class:"semibold"},"Ages 0 - 2")],-1)),e("div",Um,[e("button",{type:"button",class:"btn-icon",onClick:y[13]||(y[13]=R=>xe("age0_2"))}," − "),e("span",Gm,r(te.value),1),e("button",{type:"button",class:"btn-icon",onClick:y[14]||(y[14]=R=>fe("age0_2"))}," + ")])])])])):(o(),i("div",Vm,[y[37]||(y[37]=e("h3",{class:"step-title"},"Check Availability",-1)),y[38]||(y[38]=e("p",{class:"results-note"}," To see if we have availability for your preferred criteria, please click the button below. ",-1)),e("div",Km,[ke(Ie,{class:"btn-primary",to:"/results"},{default:Me(()=>[...y[34]||(y[34]=[Q("Check now",-1)])]),_:1})]),y[39]||(y[39]=e("div",{class:"section-divider",style:{margin:"1.5rem 0"}},null,-1)),y[40]||(y[40]=e("h4",{class:"section-title"}," Speak with a Komodo Cruises Travel Advisor ",-1)),y[41]||(y[41]=e("p",{class:"results-note"}," Need some help to plan your trip? Enquire below to contact one of our Komodo Cruises Travel Advisors. ",-1)),e("div",qm,[ke(Ie,{class:"btn-primary",to:"/results"},{default:Me(()=>[...y[35]||(y[35]=[Q("Enquire now",-1)])]),_:1})]),e("div",Wm,[ke(Ie,{to:"/",class:"nav-link"},{default:Me(()=>[...y[36]||(y[36]=[Q("Back to Search",-1)])]),_:1})])])),e("div",Hm,[e("div",Ym,[b.value>1?(o(),i("button",{key:0,class:"link-muted",onClick:w}," ‹ "+r(Se.value),1)):(o(),i("span",Jm)),e("button",{class:"btn-primary",onClick:G},r(Ce.value),1)])])])])}}},Qm={class:"payment-success-page"},Zm={class:"success-container"},ef={class:"success-content"},tf={class:"booking-card"},sf={class:"booking-header"},nf={class:"booking-id"},af={class:"value"},of={class:"booking-details"},lf={class:"detail-section"},rf={class:"detail-grid"},cf={class:"detail-item"},uf={class:"value"},df={class:"detail-item"},vf={class:"value"},pf={class:"detail-item"},mf={class:"value"},ff={class:"detail-section"},hf={class:"detail-grid"},gf={class:"detail-item"},bf={class:"value"},yf={class:"detail-item"},kf={class:"value"},wf={class:"detail-item"},_f={class:"value"},Cf={class:"detail-item"},$f={class:"value"},Sf={class:"detail-item"},xf={class:"value"},Df={class:"detail-section payment-section"},Af={class:"payment-breakdown"},Tf={class:"payment-row"},If={class:"payment-row total"},Nf={class:"total-amount"},Mf={class:"email-notice"},Ef={class:"email-content"},Rf={key:0},Pf={key:1},Of={key:2},Lf={class:"action-buttons"},Bf={__name:"PaymentSuccess",setup(S){const b=m("sending"),f=Ya({bookingId:"KC2025001",customerName:"Guest",email:"guest@email.com",phone:"-",shipName:"Komodo Cruise",cabinName:"-",itinerary:"-",travelDate:"To be confirmed",guests:2,pricePerCabin:0,totalAmount:0}),C=g=>g?new Intl.NumberFormat("en-US",{style:"currency",currency:"IDR",minimumFractionDigits:0}).format(g).replace("IDR","Rp"):"Rp 0",h=async()=>{try{b.value="sending",(await(await fetch("https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/api/send-confirmation-email",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({customerName:f.customerName,customerEmail:f.email,customerPhone:f.phone,bookingId:f.bookingId,shipName:f.shipName,cabinName:f.cabinName,itinerary:f.itinerary,travelDate:f.travelDate,guests:f.guests,pricePerCabin:f.pricePerCabin,totalAmount:f.totalAmount})})).json()).success?b.value="sent":b.value="failed"}catch(g){console.error("Failed to send email:",g),b.value="failed"}};return Qe(async()=>{try{const g=localStorage.getItem("komodo_last_enquiry");if(g){const v=JSON.parse(g);if(v.form&&(f.customerName=`${v.form.title||""} ${v.form.firstName||""} ${v.form.lastName||""}`.trim()||"Guest",f.email=v.form.email||"guest@email.com",f.phone=v.form.phone||"-"),v.itinerary&&v.itinerary.length>0){const E=v.itinerary[0];f.shipName=E.ship||"Komodo Cruise",f.cabinName=E.cabin||"-",f.itinerary=E.itinerary||"-",f.travelDate=E.date||"To be confirmed",f.guests=E.guests||2,f.pricePerCabin=E.pricePerCabin||0}f.totalAmount=v.amount||0,f.bookingId=v.invoiceId?`KC${Date.now().toString().slice(-8)}`:"KC2025001"}localStorage.removeItem("komodo_itinerary"),f.email&&f.email!=="guest@email.com"?await h():b.value="sent"}catch(g){console.error("Error loading booking data:",g),b.value="failed"}}),(g,v)=>{const E=Wt("router-link");return o(),i("div",Qm,[e("div",Zm,[v[26]||(v[26]=Pe('<div class="success-animation" data-v-5a35b571><div class="checkmark-circle" data-v-5a35b571><svg class="checkmark" viewBox="0 0 52 52" data-v-5a35b571><circle class="checkmark-circle-bg" cx="26" cy="26" r="25" fill="none" data-v-5a35b571></circle><path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" data-v-5a35b571></path></svg></div></div>',1)),e("div",ef,[v[22]||(v[22]=e("h1",{class:"success-title"},"Thank You for Your Purchase!",-1)),v[23]||(v[23]=e("p",{class:"success-subtitle"}," Your payment has been successfully processed ",-1)),e("div",tf,[e("div",sf,[v[1]||(v[1]=e("div",{class:"booking-badge"},[e("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("path",{d:"M22 11.08V12a10 10 0 1 1-5.93-9.14"}),e("polyline",{points:"22 4 12 14.01 9 11.01"})]),e("span",null,"Booking Confirmed")],-1)),e("div",nf,[v[0]||(v[0]=e("span",{class:"label"},"Booking ID",-1)),e("span",af,"#"+r(f.bookingId),1)])]),e("div",of,[e("div",lf,[v[5]||(v[5]=e("h3",{class:"section-title"},[e("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("path",{d:"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"}),e("circle",{cx:"12",cy:"7",r:"4"})]),Q(" Guest Information ")],-1)),e("div",rf,[e("div",cf,[v[2]||(v[2]=e("span",{class:"label"},"Name",-1)),e("span",uf,r(f.customerName),1)]),e("div",df,[v[3]||(v[3]=e("span",{class:"label"},"Email",-1)),e("span",vf,r(f.email),1)]),e("div",pf,[v[4]||(v[4]=e("span",{class:"label"},"Phone",-1)),e("span",mf,r(f.phone),1)])])]),e("div",ff,[v[11]||(v[11]=e("h3",{class:"section-title"},[e("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("path",{d:"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"})]),Q(" Trip Details ")],-1)),e("div",hf,[e("div",gf,[v[6]||(v[6]=e("span",{class:"label"},"Ship",-1)),e("span",bf,r(f.shipName),1)]),e("div",yf,[v[7]||(v[7]=e("span",{class:"label"},"Cabin Type",-1)),e("span",kf,r(f.cabinName),1)]),e("div",wf,[v[8]||(v[8]=e("span",{class:"label"},"Itinerary",-1)),e("span",_f,r(f.itinerary),1)]),e("div",Cf,[v[9]||(v[9]=e("span",{class:"label"},"Travel Date",-1)),e("span",$f,r(f.travelDate),1)]),e("div",Sf,[v[10]||(v[10]=e("span",{class:"label"},"Guests",-1)),e("span",xf,r(f.guests)+" Person(s)",1)])])]),e("div",Df,[v[14]||(v[14]=e("h3",{class:"section-title"},[e("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("rect",{x:"1",y:"4",width:"22",height:"16",rx:"2",ry:"2"}),e("line",{x1:"1",y1:"10",x2:"23",y2:"10"})]),Q(" Payment Summary ")],-1)),e("div",Af,[e("div",Tf,[e("span",null,r(f.cabinName)+" × "+r(f.guests),1),e("span",null,r(C(f.pricePerCabin))+" × "+r(f.guests),1)]),v[13]||(v[13]=e("div",{class:"payment-divider"},null,-1)),e("div",If,[v[12]||(v[12]=e("span",null,"Total Paid",-1)),e("span",Nf,r(C(f.totalAmount)),1)])]),v[15]||(v[15]=e("div",{class:"payment-status"},[e("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("path",{d:"M22 11.08V12a10 10 0 1 1-5.93-9.14"}),e("polyline",{points:"22 4 12 14.01 9 11.01"})]),e("span",null,"Payment Successful")],-1))])])]),e("div",Mf,[v[19]||(v[19]=e("div",{class:"email-icon"},[e("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("path",{d:"M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"}),e("polyline",{points:"22,6 12,13 2,6"})])],-1)),e("div",Ef,[v[17]||(v[17]=e("h4",null,"Check Your Email",-1)),e("p",null,[v[16]||(v[16]=Q(" A detailed receipt and booking confirmation has been sent to ",-1)),e("strong",null,r(f.email),1)]),v[18]||(v[18]=e("p",{class:"email-hint"}," Don't forget to check your spam folder if you don't see it within a few minutes. ",-1))]),e("div",{class:B(["email-status",b.value])},[b.value==="sending"?(o(),i("span",Rf,"Sending...")):b.value==="sent"?(o(),i("span",Pf,"✓ Email Sent")):b.value==="failed"?(o(),i("span",Of,"⚠ Will retry")):M("",!0)],2)]),v[24]||(v[24]=Pe('<div class="whats-next" data-v-5a35b571><h3 data-v-5a35b571>What Happens Next?</h3><div class="next-steps" data-v-5a35b571><div class="step" data-v-5a35b571><div class="step-number" data-v-5a35b571>1</div><div class="step-content" data-v-5a35b571><strong data-v-5a35b571>Email Confirmation</strong><p data-v-5a35b571> Check your inbox for your booking receipt and trip details </p></div></div><div class="step" data-v-5a35b571><div class="step-number" data-v-5a35b571>2</div><div class="step-content" data-v-5a35b571><strong data-v-5a35b571>Journey Designer Contact</strong><p data-v-5a35b571> Our team will reach out within 24 hours to finalize your itinerary </p></div></div><div class="step" data-v-5a35b571><div class="step-number" data-v-5a35b571>3</div><div class="step-content" data-v-5a35b571><strong data-v-5a35b571>Prepare for Adventure</strong><p data-v-5a35b571> Get your travel documents ready and pack for an unforgettable trip! </p></div></div></div></div>',1)),e("div",Lf,[ke(E,{to:"/",class:"btn-primary"},{default:Me(()=>[...v[20]||(v[20]=[e("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2"},[e("path",{d:"m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"}),e("polyline",{points:"9 22 9 12 15 12 15 22"})],-1),Q(" Back to Home ",-1)])]),_:1}),ke(E,{to:"/plan",class:"btn-secondary"},{default:Me(()=>[...v[21]||(v[21]=[Q(" Explore More Trips ",-1)])]),_:1})]),v[25]||(v[25]=e("div",{class:"support-info"},[e("p",null,"Need help? Contact our support team at"),e("a",{href:"mailto:support@komodocruises.com"},"support@komodocruises.com")],-1))])])])}}},Ff=vt(Bf,[["__scopeId","data-v-5a35b571"]]),zf={},Uf={class:"payment-result-page"},Gf={class:"payment-result-container"},Vf={class:"result-actions"};function Kf(S,b){const f=Wt("router-link");return o(),i("div",Uf,[e("div",Gf,[b[2]||(b[2]=Pe('<div class="result-icon failed" data-v-690b1a80><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-v-690b1a80><circle cx="12" cy="12" r="10" data-v-690b1a80></circle><line x1="15" y1="9" x2="9" y2="15" data-v-690b1a80></line><line x1="9" y1="9" x2="15" y2="15" data-v-690b1a80></line></svg></div><h1 class="result-title" data-v-690b1a80>Payment Failed</h1><p class="result-message" data-v-690b1a80> We&#39;re sorry, but your payment could not be processed. </p><div class="result-details" data-v-690b1a80><p data-v-690b1a80>This could be due to:</p><ul data-v-690b1a80><li data-v-690b1a80>Insufficient funds</li><li data-v-690b1a80>Card declined by issuer</li><li data-v-690b1a80>Payment session expired</li><li data-v-690b1a80>Technical issues</li></ul><p data-v-690b1a80>Please try again or contact our support team for assistance.</p></div>',4)),e("div",Vf,[ke(f,{to:"/results",class:"btn-secondary"},{default:Me(()=>[...b[0]||(b[0]=[Q("Try Again",-1)])]),_:1}),ke(f,{to:"/",class:"btn-primary"},{default:Me(()=>[...b[1]||(b[1]=[Q("Back to Home",-1)])]),_:1})])])])}const qf=vt(zf,[["render",Kf],["__scopeId","data-v-690b1a80"]]),Wf={class:"find-reservation-wrap"},Hf={class:"find-reservation-container"},Yf={class:"form-group"},Jf={class:"form-group"},jf={class:"form-actions"},Xf={__name:"FindReservation",setup(S){const b=m(""),f=m(""),C=()=>{!b.value||!f.value||alert("Feature coming soon: Find reservation "+b.value)};return(h,g)=>(o(),i("div",Wf,[e("div",Hf,[g[5]||(g[5]=e("h1",{class:"find-reservation-title"},"Find Your Reservation",-1)),e("form",{class:"find-reservation-form",onSubmit:j(C,["prevent"])},[e("div",Yf,[g[2]||(g[2]=e("label",{class:"form-label"},"Confirmation or Booking Number*",-1)),be(e("input",{type:"text","onUpdate:modelValue":g[0]||(g[0]=v=>b.value=v),class:"form-input",placeholder:"",required:""},null,512),[[kt,b.value]]),g[3]||(g[3]=e("div",{class:"form-help-text"}," *Confirmation number format: 12345678-1-ABC ",-1))]),e("div",Jf,[g[4]||(g[4]=e("label",{class:"form-label"},"Email*",-1)),be(e("input",{type:"email","onUpdate:modelValue":g[1]||(g[1]=v=>f.value=v),class:"form-input",placeholder:"",required:""},null,512),[[kt,f.value]])]),e("div",jf,[e("button",{type:"submit",class:B(["btn-find-reservation",{active:b.value&&f.value}])}," Find Reservation ",2)])],32),g[6]||(g[6]=e("div",{class:"find-reservation-footer"},[e("p",null,"Don't know your confirmation number?"),e("p",null," This number was included in an email sent at the time of booking. Please check your email to recover the number. ")],-1))])]))}},Qf=vt(Xf,[["__scopeId","data-v-9d81daa5"]]),Zf=Ja({history:ja(),routes:[{path:"/",component:Xr},{path:"/plan",component:Xm,meta:{planHeader:!0}},{path:"/results",component:nm},{path:"/payment-success",component:Ff},{path:"/payment-failed",component:qf},{path:"/find-reservation",component:Qf}]});Xa(kl).use(Zf).mount("#app");
+import {
+  r as m,
+  w as rt,
+  n as Fn,
+  o as Qe,
+  a as wt,
+  c as Yt,
+  b as o,
+  d as Me,
+  e as i,
+  f as M,
+  g as e,
+  h as Q,
+  i as B,
+  j,
+  T as xt,
+  k as x,
+  l as ke,
+  m as zn,
+  F as K,
+  p as se,
+  q as be,
+  t as r,
+  v as yt,
+  u as he,
+  s as Gs,
+  x as Wa,
+  y as Wt,
+  z as Ht,
+  A as Pe,
+  B as Ha,
+  C as Nn,
+  D as Mn,
+  E as ds,
+  G as kt,
+  H as En,
+  I as Ya,
+  J as Ja,
+  K as ja,
+  L as Xa,
+} from "./vendor-CwPUEyTs.js";
+(function () {
+  const b = document.createElement("link").relList;
+  if (b && b.supports && b.supports("modulepreload")) return;
+  for (const h of document.querySelectorAll('link[rel="modulepreload"]')) C(h);
+  new MutationObserver((h) => {
+    for (const g of h)
+      if (g.type === "childList")
+        for (const v of g.addedNodes)
+          v.tagName === "LINK" && v.rel === "modulepreload" && C(v);
+  }).observe(document, { childList: !0, subtree: !0 });
+  function f(h) {
+    const g = {};
+    return (
+      h.integrity && (g.integrity = h.integrity),
+      h.referrerPolicy && (g.referrerPolicy = h.referrerPolicy),
+      h.crossOrigin === "use-credentials"
+        ? (g.credentials = "include")
+        : h.crossOrigin === "anonymous"
+        ? (g.credentials = "omit")
+        : (g.credentials = "same-origin"),
+      g
+    );
+  }
+  function C(h) {
+    if (h.ep) return;
+    h.ep = !0;
+    const g = f(h);
+    fetch(h.href, g);
+  }
+})();
+const vt = (S, b) => {
+    const f = S.__vccOpts || S;
+    for (const [C, h] of b) f[C] = h;
+    return f;
+  },
+  Qa = { key: 0, class: "search-modal-fixed" },
+  Za = { class: "modal-top" },
+  eo = { class: "modal-controls" },
+  to = { class: "search-modal-inner" },
+  so = { class: "search-container" },
+  no = { class: "input-wrapper" },
+  ao = { class: "categories-container" },
+  oo = {
+    __name: "SearchModal",
+    props: { isOpen: Boolean },
+    emits: ["close"],
+    setup(S, { emit: b }) {
+      const f = S,
+        C = b,
+        h = m(null),
+        g = m(null),
+        v = (X) => {
+          g.value === X ? (g.value = null) : (g.value = X);
+        };
+      rt(
+        () => f.isOpen,
+        (X) => {
+          X
+            ? ((document.body.style.overflow = "hidden"),
+              Fn(() => {
+                var T;
+                (T = h.value) == null || T.focus();
+              }))
+            : ((document.body.style.overflow = ""), (g.value = null));
+        }
+      );
+      const E = (X) => {
+        X.key === "Escape" && f.isOpen && C("close");
+      };
+      return (
+        Qe(() => {
+          window.addEventListener("keydown", E);
+        }),
+        wt(() => {
+          window.removeEventListener("keydown", E),
+            (document.body.style.overflow = "");
+        }),
+        (X, T) => (
+          o(),
+          Yt(
+            xt,
+            { name: "fade" },
+            {
+              default: Me(() => [
+                S.isOpen
+                  ? (o(),
+                    i("div", Qa, [
+                      e("div", Za, [
+                        T[6] ||
+                          (T[6] = e(
+                            "div",
+                            { class: "modal-logo" },
+                            "Komodo Cruises",
+                            -1
+                          )),
+                        e("div", eo, [
+                          e(
+                            "button",
+                            {
+                              class: "close-btn",
+                              onClick:
+                                T[0] || (T[0] = (oe) => X.$emit("close")),
+                            },
+                            [
+                              ...(T[5] ||
+                                (T[5] = [
+                                  e(
+                                    "span",
+                                    { class: "btn-text" },
+                                    "Close Search",
+                                    -1
+                                  ),
+                                  Q(),
+                                  e("span", { class: "close-icon" }, "✕", -1),
+                                ])),
+                            ]
+                          ),
+                        ]),
+                      ]),
+                      e("div", to, [
+                        e("div", so, [
+                          e("div", no, [
+                            e(
+                              "input",
+                              {
+                                type: "text",
+                                placeholder: "Search...",
+                                class: "search-input",
+                                ref_key: "searchInput",
+                                ref: h,
+                              },
+                              null,
+                              512
+                            ),
+                            T[7] ||
+                              (T[7] = e(
+                                "button",
+                                { class: "search-submit" },
+                                [
+                                  e(
+                                    "svg",
+                                    {
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      width: "24",
+                                      height: "24",
+                                      viewBox: "0 0 24 24",
+                                      fill: "none",
+                                      stroke: "currentColor",
+                                      "stroke-width": "2",
+                                      "stroke-linecap": "round",
+                                      "stroke-linejoin": "round",
+                                    },
+                                    [
+                                      e("circle", {
+                                        cx: "11",
+                                        cy: "11",
+                                        r: "8",
+                                      }),
+                                      e("line", {
+                                        x1: "21",
+                                        y1: "21",
+                                        x2: "16.65",
+                                        y2: "16.65",
+                                      }),
+                                    ]
+                                  ),
+                                ],
+                                -1
+                              )),
+                          ]),
+                        ]),
+                        e("div", ao, [
+                          T[11] ||
+                            (T[11] = e(
+                              "p",
+                              { class: "categories-label" },
+                              "Refine your search",
+                              -1
+                            )),
+                          e(
+                            "div",
+                            {
+                              class: B([
+                                "categories-list",
+                                { "has-selection": g.value },
+                              ]),
+                            },
+                            [
+                              e(
+                                "a",
+                                {
+                                  href: "#",
+                                  class: B([
+                                    "category-link",
+                                    {
+                                      "is-selected": g.value === "Destinations",
+                                    },
+                                  ]),
+                                  onClick:
+                                    T[1] ||
+                                    (T[1] = j(
+                                      (oe) => v("Destinations"),
+                                      ["prevent"]
+                                    )),
+                                },
+                                "Destinations",
+                                2
+                              ),
+                              T[8] ||
+                                (T[8] = e(
+                                  "span",
+                                  { class: "separator" },
+                                  "•",
+                                  -1
+                                )),
+                              e(
+                                "a",
+                                {
+                                  href: "#",
+                                  class: B([
+                                    "category-link",
+                                    { "is-selected": g.value === "Ships" },
+                                  ]),
+                                  onClick:
+                                    T[2] ||
+                                    (T[2] = j((oe) => v("Ships"), ["prevent"])),
+                                },
+                                "Ships",
+                                2
+                              ),
+                              T[9] ||
+                                (T[9] = e(
+                                  "span",
+                                  { class: "separator" },
+                                  "•",
+                                  -1
+                                )),
+                              e(
+                                "a",
+                                {
+                                  href: "#",
+                                  class: B([
+                                    "category-link",
+                                    { "is-selected": g.value === "Cabins" },
+                                  ]),
+                                  onClick:
+                                    T[3] ||
+                                    (T[3] = j(
+                                      (oe) => v("Cabins"),
+                                      ["prevent"]
+                                    )),
+                                },
+                                "Cabins",
+                                2
+                              ),
+                              T[10] ||
+                                (T[10] = e(
+                                  "span",
+                                  { class: "separator" },
+                                  "•",
+                                  -1
+                                )),
+                              e(
+                                "a",
+                                {
+                                  href: "#",
+                                  class: B([
+                                    "category-link",
+                                    { "is-selected": g.value === "Blog" },
+                                  ]),
+                                  onClick:
+                                    T[4] ||
+                                    (T[4] = j((oe) => v("Blog"), ["prevent"])),
+                                },
+                                "Blog",
+                                2
+                              ),
+                            ],
+                            2
+                          ),
+                        ]),
+                      ]),
+                    ]))
+                  : M("", !0),
+              ]),
+              _: 1,
+            }
+          )
+        )
+      );
+    },
+  },
+  io = vt(oo, [["__scopeId", "data-v-c3c0dc80"]]),
+  lo = { key: 0, class: "menu-modal-fixed" },
+  ro = { class: "modal-top" },
+  co = { class: "modal-controls" },
+  uo = {
+    __name: "MenuModal",
+    props: { isOpen: Boolean },
+    emits: ["close", "open-search"],
+    setup(S, { emit: b }) {
+      const f = S,
+        C = b;
+      rt(
+        () => f.isOpen,
+        (g) => {
+          g
+            ? (document.body.style.overflow = "hidden")
+            : (document.body.style.overflow = "");
+        }
+      );
+      const h = (g) => {
+        g.key === "Escape" && f.isOpen && C("close");
+      };
+      return (
+        Qe(() => {
+          window.addEventListener("keydown", h);
+        }),
+        wt(() => {
+          window.removeEventListener("keydown", h),
+            (document.body.style.overflow = "");
+        }),
+        (g, v) => (
+          o(),
+          Yt(
+            xt,
+            { name: "fade" },
+            {
+              default: Me(() => [
+                S.isOpen
+                  ? (o(),
+                    i("div", lo, [
+                      e("div", ro, [
+                        v[4] ||
+                          (v[4] = e(
+                            "div",
+                            { class: "modal-logo" },
+                            "Komodo Cruises",
+                            -1
+                          )),
+                        e("div", co, [
+                          e(
+                            "button",
+                            {
+                              class: "control-btn",
+                              onClick:
+                                v[0] || (v[0] = (E) => g.$emit("open-search")),
+                            },
+                            [
+                              ...(v[2] ||
+                                (v[2] = [
+                                  e(
+                                    "svg",
+                                    {
+                                      width: "18",
+                                      height: "18",
+                                      viewBox: "0 0 24 24",
+                                      fill: "none",
+                                      stroke: "currentColor",
+                                      "stroke-width": "2",
+                                      class: "icon",
+                                    },
+                                    [
+                                      e("circle", {
+                                        cx: "11",
+                                        cy: "11",
+                                        r: "8",
+                                      }),
+                                      e("line", {
+                                        x1: "21",
+                                        y1: "21",
+                                        x2: "16.65",
+                                        y2: "16.65",
+                                      }),
+                                    ],
+                                    -1
+                                  ),
+                                  e(
+                                    "span",
+                                    { class: "btn-text" },
+                                    "Search",
+                                    -1
+                                  ),
+                                ])),
+                            ]
+                          ),
+                          e(
+                            "button",
+                            {
+                              class: "control-btn",
+                              onClick: v[1] || (v[1] = (E) => g.$emit("close")),
+                            },
+                            [
+                              ...(v[3] ||
+                                (v[3] = [
+                                  e("span", { class: "btn-text" }, "Close", -1),
+                                  Q(),
+                                  e("span", { class: "close-icon" }, "✕", -1),
+                                ])),
+                            ]
+                          ),
+                        ]),
+                      ]),
+                      v[5] ||
+                        (v[5] = e(
+                          "div",
+                          { class: "menu-content-container" },
+                          [
+                            e("div", { class: "col-left" }, [
+                              e("nav", { class: "main-nav" }, [
+                                e(
+                                  "a",
+                                  { href: "#", class: "main-link" },
+                                  "Our Collection"
+                                ),
+                                e(
+                                  "a",
+                                  { href: "#", class: "main-link" },
+                                  "Villa Collection"
+                                ),
+                                e(
+                                  "a",
+                                  { href: "#", class: "main-link" },
+                                  "Conservation"
+                                ),
+                                e(
+                                  "a",
+                                  { href: "#", class: "main-link" },
+                                  "Wildlife"
+                                ),
+                                e(
+                                  "a",
+                                  { href: "#", class: "main-link" },
+                                  "About Komodo"
+                                ),
+                              ]),
+                              e("div", { class: "social-icons" }, [
+                                e("a", { href: "#", class: "social-link" }, [
+                                  e(
+                                    "svg",
+                                    {
+                                      width: "20",
+                                      height: "20",
+                                      viewBox: "0 0 24 24",
+                                      fill: "none",
+                                      stroke: "currentColor",
+                                      "stroke-width": "2",
+                                      "stroke-linecap": "round",
+                                      "stroke-linejoin": "round",
+                                    },
+                                    [
+                                      e("rect", {
+                                        x: "2",
+                                        y: "2",
+                                        width: "20",
+                                        height: "20",
+                                        rx: "5",
+                                        ry: "5",
+                                      }),
+                                      e("path", {
+                                        d: "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z",
+                                      }),
+                                      e("line", {
+                                        x1: "17.5",
+                                        y1: "6.5",
+                                        x2: "17.51",
+                                        y2: "6.5",
+                                      }),
+                                    ]
+                                  ),
+                                ]),
+                                e("a", { href: "#", class: "social-link" }, [
+                                  e(
+                                    "svg",
+                                    {
+                                      width: "20",
+                                      height: "20",
+                                      viewBox: "0 0 24 24",
+                                      fill: "none",
+                                      stroke: "currentColor",
+                                      "stroke-width": "2",
+                                      "stroke-linecap": "round",
+                                      "stroke-linejoin": "round",
+                                    },
+                                    [
+                                      e("path", {
+                                        d: "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z",
+                                      }),
+                                    ]
+                                  ),
+                                ]),
+                                e("a", { href: "#", class: "social-link" }, [
+                                  e(
+                                    "svg",
+                                    {
+                                      width: "20",
+                                      height: "20",
+                                      viewBox: "0 0 24 24",
+                                      fill: "none",
+                                      stroke: "currentColor",
+                                      "stroke-width": "2",
+                                      "stroke-linecap": "round",
+                                      "stroke-linejoin": "round",
+                                    },
+                                    [
+                                      e("path", {
+                                        d: "M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z",
+                                      }),
+                                    ]
+                                  ),
+                                ]),
+                                e("a", { href: "#", class: "social-link" }, [
+                                  e(
+                                    "svg",
+                                    {
+                                      width: "20",
+                                      height: "20",
+                                      viewBox: "0 0 24 24",
+                                      fill: "none",
+                                      stroke: "currentColor",
+                                      "stroke-width": "2",
+                                      "stroke-linecap": "round",
+                                      "stroke-linejoin": "round",
+                                    },
+                                    [
+                                      e("path", {
+                                        d: "M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z",
+                                      }),
+                                      e("rect", {
+                                        x: "2",
+                                        y: "9",
+                                        width: "4",
+                                        height: "12",
+                                      }),
+                                      e("circle", { cx: "4", cy: "4", r: "2" }),
+                                    ]
+                                  ),
+                                ]),
+                                e("a", { href: "#", class: "social-link" }, [
+                                  e(
+                                    "svg",
+                                    {
+                                      width: "20",
+                                      height: "20",
+                                      viewBox: "0 0 24 24",
+                                      fill: "none",
+                                      stroke: "currentColor",
+                                      "stroke-width": "2",
+                                      "stroke-linecap": "round",
+                                      "stroke-linejoin": "round",
+                                    },
+                                    [
+                                      e("path", {
+                                        d: "M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z",
+                                      }),
+                                      e("polygon", {
+                                        points:
+                                          "9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02",
+                                      }),
+                                    ]
+                                  ),
+                                ]),
+                              ]),
+                            ]),
+                            e("div", { class: "col-right" }, [
+                              e("div", { class: "secondary-nav-grid" }, [
+                                e("div", { class: "sec-col" }, [
+                                  e(
+                                    "a",
+                                    { href: "#", class: "sec-link" },
+                                    "Photos & Videos"
+                                  ),
+                                  e(
+                                    "a",
+                                    { href: "#", class: "sec-link" },
+                                    "Blog"
+                                  ),
+                                  e(
+                                    "a",
+                                    { href: "#", class: "sec-link" },
+                                    "Indonesia Is..."
+                                  ),
+                                  e(
+                                    "a",
+                                    { href: "#", class: "sec-link" },
+                                    "Magazine"
+                                  ),
+                                  e(
+                                    "a",
+                                    { href: "#", class: "sec-link" },
+                                    "Rates"
+                                  ),
+                                  e(
+                                    "a",
+                                    { href: "#", class: "sec-link" },
+                                    "Exclusive Offers"
+                                  ),
+                                  e(
+                                    "a",
+                                    { href: "#", class: "sec-link" },
+                                    "Press Room"
+                                  ),
+                                  e(
+                                    "a",
+                                    { href: "#", class: "sec-link" },
+                                    "Careers"
+                                  ),
+                                ]),
+                                e("div", { class: "sec-col" }, [
+                                  e(
+                                    "a",
+                                    { href: "#", class: "sec-link icon-link" },
+                                    [
+                                      e(
+                                        "svg",
+                                        {
+                                          class: "nav-icon",
+                                          width: "16",
+                                          height: "16",
+                                          viewBox: "0 0 24 24",
+                                          fill: "none",
+                                          stroke: "currentColor",
+                                          "stroke-width": "2",
+                                          "stroke-linecap": "round",
+                                          "stroke-linejoin": "round",
+                                        },
+                                        [
+                                          e("path", {
+                                            d: "M4 19.5A2.5 2.5 0 0 1 6.5 17H20",
+                                          }),
+                                          e("path", {
+                                            d: "M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z",
+                                          }),
+                                        ]
+                                      ),
+                                      Q(" Resource Library "),
+                                    ]
+                                  ),
+                                  e(
+                                    "a",
+                                    { href: "#", class: "sec-link icon-link" },
+                                    [
+                                      e(
+                                        "svg",
+                                        {
+                                          class: "nav-icon",
+                                          width: "16",
+                                          height: "16",
+                                          viewBox: "0 0 24 24",
+                                          fill: "none",
+                                          stroke: "currentColor",
+                                          "stroke-width": "2",
+                                          "stroke-linecap": "round",
+                                          "stroke-linejoin": "round",
+                                        },
+                                        [
+                                          e("path", {
+                                            d: "M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4",
+                                          }),
+                                          e("polyline", {
+                                            points: "10 17 15 12 10 7",
+                                          }),
+                                          e("line", {
+                                            x1: "15",
+                                            y1: "12",
+                                            x2: "3",
+                                            y2: "12",
+                                          }),
+                                        ]
+                                      ),
+                                      Q(" Trade Login & Rates "),
+                                    ]
+                                  ),
+                                  e(
+                                    "a",
+                                    { href: "#", class: "sec-link icon-link" },
+                                    [
+                                      e(
+                                        "svg",
+                                        {
+                                          class: "nav-icon",
+                                          width: "16",
+                                          height: "16",
+                                          viewBox: "0 0 24 24",
+                                          fill: "none",
+                                          stroke: "currentColor",
+                                          "stroke-width": "2",
+                                          "stroke-linecap": "round",
+                                          "stroke-linejoin": "round",
+                                        },
+                                        [
+                                          e("path", { d: "M20 7h-9" }),
+                                          e("path", { d: "M14 17H5" }),
+                                          e("circle", {
+                                            cx: "17",
+                                            cy: "17",
+                                            r: "3",
+                                          }),
+                                          e("circle", {
+                                            cx: "7",
+                                            cy: "7",
+                                            r: "3",
+                                          }),
+                                        ]
+                                      ),
+                                      Q(" Suppliers "),
+                                    ]
+                                  ),
+                                ]),
+                              ]),
+                              e("div", { class: "contact-info" }, [
+                                e(
+                                  "p",
+                                  { class: "contact-email" },
+                                  "E. enquiries@komodocruises.com"
+                                ),
+                                e(
+                                  "p",
+                                  { class: "contact-phone" },
+                                  "T. +62 (0) 21 683 3424"
+                                ),
+                                e(
+                                  "a",
+                                  { href: "#", class: "view-contact" },
+                                  "View all contact information ›"
+                                ),
+                              ]),
+                            ]),
+                          ],
+                          -1
+                        )),
+                    ]))
+                  : M("", !0),
+              ]),
+              _: 1,
+            }
+          )
+        )
+      );
+    },
+  },
+  vo = vt(uo, [["__scopeId", "data-v-d4e9a465"]]),
+  po = "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/";
+function fs(S) {
+  const b = new URL(po),
+    f = new URLSearchParams();
+  for (const [C, h] of Object.entries(S)) h !== void 0 && f.set(C, h);
+  return (b.search = f.toString()), b.toString();
+}
+async function hs(S) {
+  if (!S.ok) throw new Error(`HTTP ${S.status}: ${S.statusText}`);
+  const b = await S.json();
+  if ((b == null ? void 0 : b.ok) === !1)
+    throw new Error(b.error || "API error");
+  return b;
+}
+async function mo(S, b = 3, f = 100) {
+  let C = null;
+  for (let h = 0; h <= b; h++)
+    try {
+      return await S();
+    } catch (g) {
+      if (
+        ((C = g),
+        !(
+          C.message.includes("429") ||
+          C.message.includes("500") ||
+          C.message.includes("503") ||
+          C.message.includes("504")
+        ) || h === b)
+      )
+        throw g;
+      const E = f * Math.pow(2, h);
+      console.warn(
+        `API request failed (attempt ${h + 1}), retrying in ${E}ms...`,
+        C.message
+      ),
+        await new Promise((X) => setTimeout(X, E));
+    }
+  throw C || new Error("Unknown error");
+}
+const Bs = new Map(),
+  Fs = new Map(),
+  Kt = new Map();
+let zs = null;
+const Us = new Map();
+async function Un() {
+  if (zs) return zs;
+  const S = fs({ resource: "operators" }),
+    b = await fetch(S),
+    f = await hs(b);
+  return (zs = f), f;
+}
+async function Rn(S) {
+  const b = `cabins|${S || ""}`;
+  if (Bs.has(b)) return Bs.get(b);
+  const f = fs({ resource: "cabins", sheet: S }),
+    C = await fetch(f),
+    h = await hs(C);
+  return Bs.set(b, h), h;
+}
+async function Gn() {
+  const S = "shipdetail";
+  if (Us.has(S)) return Us.get(S);
+  const b = fs({ resource: "shipdetail" }),
+    f = await fetch(b),
+    g = {
+      ok: !0,
+      resource: "shipdetail",
+      ships: ((await hs(f)).ships || []).map((v) => ({
+        id: v.id || "",
+        name: v.name || "",
+        description: v.description || "",
+        mainImage: v.image_main || "",
+        images: v.images || [],
+        specs: v.specs || {},
+      })),
+    };
+  Us.set(S, g);
+  try {
+    localStorage.setItem(S, JSON.stringify({ timestamp: Date.now(), data: g }));
+  } catch (v) {
+    console.warn("Quota exceeded or storage disabled", v);
+  }
+  return g;
+}
+async function vs(S, b) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(S))
+    throw new Error("Date must be in YYYY-MM-DD format");
+  const f = `${S}|${b || ""}`;
+  if (Fs.has(f)) return Fs.get(f);
+  if (Kt.has(f)) return Kt.get(f);
+  const C = fs({ resource: "availability", date: S }),
+    h = mo(() => fetch(C).then((g) => hs(g)), 3, 200)
+      .then((g) => (Fs.set(f, g), Kt.delete(f), g))
+      .catch((g) => {
+        throw (
+          (Kt.delete(f),
+          console.error(`Failed to get availability for ${S}:`, g),
+          g)
+        );
+      });
+  return Kt.set(f, h), h;
+}
+function Vn(S) {
+  const b = S.getFullYear(),
+    f = String(S.getMonth() + 1).padStart(2, "0"),
+    C = String(S.getDate()).padStart(2, "0");
+  return `${b}-${f}-${C}`;
+}
+function Pt(S) {
+  return new Date(S + "T00:00:00");
+}
+function fo() {
+  return Vn(new Date());
+}
+const Kn = "" + new URL("left-arrow-CTppQl_n.svg", import.meta.url).href,
+  Vs = "" + new URL("right-arrow-BeSe4_f_.svg", import.meta.url).href,
+  at = "" + new URL("down-arrow-BfUnB_1G.svg", import.meta.url).href,
+  ot = "" + new URL("up-arrow-CozmStYp.svg", import.meta.url).href,
+  ho = { key: 0, class: "modal-overlay" },
+  go = { class: "modal-container" },
+  bo = { class: "modal-body" },
+  yo = { class: "plan-wrap plan-page" },
+  ko = { class: "plan-content" },
+  wo = { class: "wizard-progress" },
+  _o = { class: "wizard-circle" },
+  Co = {
+    key: 0,
+    class: "wizard-check",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    "stroke-width": "3",
+  },
+  $o = { key: 1 },
+  So = { class: "wizard-circle" },
+  xo = {
+    key: 0,
+    class: "wizard-check",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    "stroke-width": "3",
+  },
+  Do = { key: 1 },
+  Ao = { class: "wizard-circle" },
+  To = {
+    key: 0,
+    class: "wizard-check",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    "stroke-width": "3",
+  },
+  Io = { key: 1 },
+  No = { class: "wizard-circle" },
+  Mo = {
+    key: 0,
+    class: "wizard-check",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    "stroke-width": "3",
+  },
+  Eo = { key: 1 },
+  Ro = { class: "wizard-circle" },
+  Po = {
+    key: 0,
+    class: "wizard-check",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    "stroke-width": "3",
+  },
+  Oo = { key: 1 },
+  Lo = { key: 0 },
+  Bo = { class: "list" },
+  Fo = { class: "list-text" },
+  zo = ["value", "aria-label"],
+  Uo = { key: 1 },
+  Go = { class: "list" },
+  Vo = { key: 0, class: "muted" },
+  Ko = { class: "ship-info" },
+  qo = { class: "ship-details-text" },
+  Wo = { class: "list-text" },
+  Ho = ["value", "aria-label"],
+  Yo = { key: 0, class: "muted" },
+  Jo = { key: 2 },
+  jo = { class: "date-range-display" },
+  Xo = { class: "date-value" },
+  Qo = { class: "date-value" },
+  Zo = { class: "trip-duration-section" },
+  ei = { class: "trip-duration-dropdown-wrapper" },
+  ti = { class: "trip-duration-value" },
+  si = ["src"],
+  ni = { key: 0, class: "trip-duration-menu" },
+  ai = { class: "counter-row duration-counter-row" },
+  oi = { class: "counter-ctrls" },
+  ii = ["disabled"],
+  li = { class: "count-display" },
+  ri = ["disabled"],
+  ci = { class: "counter-row duration-counter-row" },
+  ui = { class: "counter-ctrls" },
+  di = ["disabled"],
+  vi = { class: "count-display" },
+  pi = ["disabled"],
+  mi = { key: 0, class: "trip-duration-reset" },
+  fi = { class: "custom-calendar" },
+  hi = { class: "calendar-header" },
+  gi = { class: "calendar-title" },
+  bi = { class: "calendar-grid" },
+  yi = { class: "calendar-days" },
+  ki = ["disabled", "onClick"],
+  wi = { key: 3 },
+  _i = { class: "mode-toggle-container" },
+  Ci = { class: "mode-toggle" },
+  $i = { class: "text-center mb-6" },
+  Si = { key: 0, class: "results-note" },
+  xi = { key: 1, class: "results-note" },
+  Di = { key: 0, class: "flexible-guest-card" },
+  Ai = { class: "counter-row" },
+  Ti = { class: "counter-ctrls" },
+  Ii = ["disabled"],
+  Ni = { class: "count-display" },
+  Mi = { key: 1, class: "cabins-container" },
+  Ei = ["onClick"],
+  Ri = { class: "cabin-header-left" },
+  Pi = { class: "cabin-title" },
+  Oi = { class: "cabin-header-right" },
+  Li = { class: "cabin-summary" },
+  Bi = ["onClick"],
+  Fi = { key: 0, class: "cabin-body" },
+  zi = { class: "counter-row" },
+  Ui = { class: "counter-ctrls" },
+  Gi = ["disabled", "onClick"],
+  Vi = { class: "count" },
+  Ki = ["disabled", "onClick"],
+  qi = { class: "counter-row" },
+  Wi = { class: "counter-ctrls" },
+  Hi = ["disabled", "onClick"],
+  Yi = { class: "count" },
+  Ji = ["disabled", "onClick"],
+  ji = { class: "cabins-total" },
+  Xi = { class: "total-value" },
+  Qi = { key: 4 },
+  Zi = { class: "bottom-bar" },
+  el = { class: "nav-inner-footer" },
+  tl = ["src"],
+  sl = ["src"],
+  nl = { key: 0, class: "toast-notification" },
+  al = { class: "toast-message" },
+  ol = "Nusa Tenggara Timur",
+  bt = 30,
+  il = 4,
+  ps = 4,
+  ll = {
+    __name: "PlanModal",
+    props: { isOpen: Boolean },
+    emits: ["close", "navigate-to-results"],
+    setup(S, { emit: b }) {
+      const f = S,
+        C = b,
+        h = m(1),
+        g = ["Komodo National Park", "Labuan Bajo"],
+        v = [],
+        E = m([]),
+        X = m(!1),
+        T = m([]),
+        oe = m([]),
+        te = m(""),
+        Z = m(""),
+        q = m(1),
+        W = m(30);
+      function Se() {
+        q.value > 1 && q.value--;
+      }
+      function Ce() {
+        q.value < W.value && q.value++;
+      }
+      function ie() {
+        W.value > q.value && W.value--;
+      }
+      function O() {
+        W.value < bt && W.value++;
+      }
+      const H = m(!1);
+      x(() => {
+        const I = [];
+        for (let c = 1; c <= bt; c++) I.push(c);
+        return I;
+      });
+      const le = x(() =>
+        q.value === 1 && W.value === bt
+          ? "Any duration"
+          : q.value === W.value
+          ? `${q.value} ${q.value === 1 ? "day" : "days"}`
+          : `${q.value} - ${W.value} days`
+      );
+      function ve() {
+        (q.value = 1), (W.value = bt);
+      }
+      const F = m(!0),
+        G = m(2),
+        w = m([{ id: 1, adults: 2, children: 0, expanded: !0 }]),
+        ge = x(() => w.value.reduce((I, c) => I + c.adults + c.children, 0)),
+        fe = x(() => w.value.length < il),
+        xe = m(!1),
+        qe = m("");
+      let me = null;
+      const Te = m(new Date().getMonth()),
+        Ze = m(new Date().getFullYear());
+      function ne() {
+        const I = E.value.filter((D) => oe.value.includes(D.id)),
+          c = I.map((D) => D.label),
+          k = I.map((D) => D.sheet),
+          P = {
+            region: ol,
+            destination: T.value[0] || "",
+            destinations: T.value.slice(),
+            ships: c,
+            shipSheets: k,
+            ship: c[0] || "",
+            lodges: c.slice(),
+            dateFrom: te.value,
+            dateTo: Z.value,
+            minTripDuration: q.value,
+            maxTripDuration: W.value,
+            isFlexible: F.value,
+            flexibleGuests: F.value ? G.value : 0,
+            cabins: F.value
+              ? []
+              : w.value.map((D) => ({
+                  adults: D.adults,
+                  children: D.children,
+                  total: D.adults + D.children,
+                })),
+            totalCabins: F.value ? 0 : w.value.length,
+            totalGuests: F.value ? G.value : ge.value,
+            adults: F.value
+              ? G.value
+              : w.value.reduce((D, Y) => D + Y.adults, 0),
+            children: F.value ? 0 : w.value.reduce((D, Y) => D + Y.children, 0),
+            age3_9: 0,
+            age0_2: 0,
+            timestamp: Date.now(),
+          };
+        localStorage.setItem("komodo_search_criteria", JSON.stringify(P)),
+          C("navigate-to-results");
+      }
+      const y = ["Destinations", "Ships", "Dates", "Guests", "Submit"],
+        Ie = x(() => y[h.value - 2] || ""),
+        R = x(() => (h.value < 5 ? y[h.value - 1] : "Submit"));
+      x(() => fo());
+      const De = x(
+          () =>
+            `${
+              [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+              ][Te.value]
+            } ${Ze.value}`
+        ),
+        et = x(() => {
+          const I = new Date(Ze.value, Te.value, 1),
+            c = new Date(Ze.value, Te.value + 1, 0),
+            k = new Date(I),
+            P = new Date();
+          k.setDate(k.getDate() - k.getDay());
+          const D = [],
+            Y = new Date(c);
+          Y.setDate(Y.getDate() + (6 - c.getDay()));
+          for (let ce = new Date(k); ce <= Y; ce.setDate(ce.getDate() + 1)) {
+            ce.getDay();
+            const mt = ce.getMonth() === Te.value,
+              ue = new Date(ce);
+            ue.setHours(0, 0, 0, 0);
+            const Be = new Date(P);
+            Be.setHours(0, 0, 0, 0);
+            const ut = ue < Be,
+              jt = mt && !ut,
+              zt = Vn(ce);
+            let Fe = !1,
+              ze = !1,
+              Ue = !1;
+            if (te.value && Z.value && mt) {
+              const Ge = Pt(te.value),
+                Ve = Pt(Z.value);
+              ue >= Ge &&
+                ue <= Ve &&
+                ((Fe = !0),
+                ue.getTime() === Ge.getTime() && (ze = !0),
+                ue.getTime() === Ve.getTime() && (Ue = !0));
+            }
+            D.push({
+              key: ce.getTime(),
+              date: ce.getDate(),
+              fullDate: zt,
+              isCurrentMonth: mt,
+              isSelectable: jt,
+              isPast: ut,
+              isSelected: te.value === zt || Z.value === zt,
+              isInRange: Fe,
+              isRangeStart: ze,
+              isRangeEnd: Ue,
+            });
+          }
+          return D;
+        }),
+        Ee = x(() => {
+          if (!te.value || !Z.value) return bt;
+          const I = Pt(te.value),
+            k = Pt(Z.value).getTime() - I.getTime(),
+            P = Math.ceil(k / (1e3 * 60 * 60 * 24)) + 1;
+          return Math.min(P, bt);
+        });
+      x(() => {
+        const I = Ee.value,
+          c = [];
+        for (let k = 1; k <= I; k++) c.push(k);
+        return c;
+      });
+      const tt = x(() => T.value.length > 0),
+        We = x(() => T.value.length > 0 && oe.value.length > 0),
+        pe = x(() => T.value.length > 0 && oe.value.length > 0 && !!te.value);
+      rt(T, () => {
+        oe.value = [];
+      }),
+        rt(Ee, (I) => {
+          Fn(() => {
+            W.value > I && (W.value = I),
+              q.value > W.value && (q.value = W.value);
+          });
+        });
+      const He = {
+        bodyOverflow: "",
+        htmlOverflow: "",
+        bodyPadding: "",
+        htmlPadding: "",
+      };
+      rt(
+        () => f.isOpen,
+        (I) => {
+          I ? pt() : Lt();
+        },
+        { immediate: !0 }
+      ),
+        Qe(() => {
+          st();
+        }),
+        wt(() => {
+          Lt();
+        });
+      function Re() {
+        C("close");
+      }
+      function Le(I) {
+        h.value = I;
+      }
+      function _t() {
+        if (h.value === 1 && T.value.length === 0)
+          return nt("Please select at least one destination first.");
+        if (h.value === 2 && oe.value.length === 0)
+          return nt("Please select at least one ship first.");
+        if (h.value === 3 && !te.value)
+          return nt("Please select a start date first.");
+        h.value < 5 ? h.value++ : ne();
+      }
+      function je() {
+        h.value > 1 && h.value--;
+      }
+      function Ct() {
+        ne();
+      }
+      function ct() {
+        ne();
+      }
+      async function st() {
+        X.value = !0;
+        try {
+          let I, c;
+          try {
+            [I, c] = await Promise.all([
+              Un(),
+              Gn().catch(
+                (D) => (
+                  console.warn(
+                    "Failed to load ship details (likely quota exceeded):",
+                    D
+                  ),
+                  null
+                )
+              ),
+            ]);
+          } catch (D) {
+            console.warn("Critical failure loading operators:", D),
+              (E.value = Dt(v));
+            return;
+          }
+          const k = {};
+          c != null &&
+            c.ships &&
+            c.ships.forEach((D) => {
+              const Y = D.name ? D.name.toLowerCase().trim() : "";
+              Y && (k[Y] = D);
+            });
+          const P = ((I == null ? void 0 : I.operators) || [])
+            .map((D) => {
+              var Be, ut;
+              const Y = ((Be = D.operator) == null ? void 0 : Be.trim()) || "",
+                ce = ((ut = D.sourceSheet) == null ? void 0 : ut.trim()) || Y,
+                mt = Y.toLowerCase().trim(),
+                ue = k[mt];
+              return {
+                id: `${Y}__${ce}`,
+                label: Y,
+                sheet: ce,
+                image: (ue == null ? void 0 : ue.mainImage) || "",
+                description: (ue == null ? void 0 : ue.description) || "",
+                specs: (ue == null ? void 0 : ue.specs) || {},
+              };
+            })
+            .filter((D) => D.label && D.sheet);
+          E.value = P.length ? P : Dt(v);
+        } catch (I) {
+          console.warn("Failed to load operators/details:", I),
+            (E.value = Dt(v));
+        } finally {
+          X.value = !1;
+        }
+      }
+      function pt() {
+        const I = document.body,
+          c = document.documentElement;
+        if (!I || !c) return;
+        const k = window.innerWidth - c.clientWidth;
+        if (
+          ((He.bodyOverflow = I.style.overflow),
+          (He.htmlOverflow = c.style.overflow),
+          (He.bodyPadding = I.style.paddingRight),
+          (He.htmlPadding = c.style.paddingRight),
+          k > 0)
+        ) {
+          const P = `${k}px`;
+          (I.style.paddingRight = P), (c.style.paddingRight = P);
+        }
+        (I.style.overflow = "hidden"), (c.style.overflow = "hidden");
+      }
+      function Lt() {
+        const I = document.body,
+          c = document.documentElement;
+        !I ||
+          !c ||
+          ((I.style.overflow = He.bodyOverflow),
+          (c.style.overflow = He.htmlOverflow),
+          (I.style.paddingRight = He.bodyPadding),
+          (c.style.paddingRight = He.htmlPadding));
+      }
+      function Dt(I) {
+        return Array.isArray(I)
+          ? I.map((c) => {
+              var D, Y;
+              const k = ((D = c.label) == null ? void 0 : D.trim()) || "",
+                P = ((Y = c.sheet) == null ? void 0 : Y.trim()) || k;
+              return { id: c.id || `${k}__${P}`, label: k, sheet: P };
+            }).filter((c) => c.label && c.sheet)
+          : [];
+      }
+      function we() {
+        fe.value &&
+          w.value.push({
+            id: Date.now(),
+            adults: 2,
+            children: 0,
+            expanded: !0,
+          });
+      }
+      function Bt(I) {
+        w.value.length > 1 && w.value.splice(I, 1);
+      }
+      function Ft(I) {
+        w.value[I].expanded = !w.value[I].expanded;
+      }
+      function At(I, c) {
+        const k = w.value[I];
+        k.adults + k.children < ps && k[c]++;
+      }
+      function Jt(I, c) {
+        const k = w.value[I];
+        c === "adults" && k.adults > 1 && k.adults--,
+          c === "children" && k.children > 0 && k.children--;
+      }
+      function nt(I) {
+        (qe.value = I),
+          (xe.value = !0),
+          me && clearTimeout(me),
+          (me = setTimeout(() => {
+            xe.value = !1;
+          }, 3e3));
+      }
+      function Tt() {
+        Te.value === 0 ? ((Te.value = 11), Ze.value--) : Te.value--;
+      }
+      function Ne() {
+        Te.value === 11 ? ((Te.value = 0), Ze.value++) : Te.value++;
+      }
+      function Oe(I) {
+        if (I.isSelectable)
+          if (!te.value || (te.value && Z.value))
+            (te.value = I.fullDate), (Z.value = "");
+          else {
+            const c = Pt(te.value);
+            Pt(I.fullDate) < c
+              ? ((Z.value = te.value), (te.value = I.fullDate))
+              : (Z.value = I.fullDate);
+          }
+      }
+      return (I, c) => (
+        o(),
+        Yt(zn, { to: "body" }, [
+          ke(
+            xt,
+            { name: "modal-fade" },
+            {
+              default: Me(() => [
+                S.isOpen
+                  ? (o(),
+                    i("div", ho, [
+                      e("div", go, [
+                        e("div", { class: "modal-header" }, [
+                          e("div", { class: "modal-header-content" }, [
+                            c[13] ||
+                              (c[13] = e(
+                                "h2",
+                                { class: "modal-title" },
+                                "Plan your trip",
+                                -1
+                              )),
+                            e("button", { class: "modal-close", onClick: Re }, [
+                              ...(c[12] ||
+                                (c[12] = [
+                                  Q(" Close ", -1),
+                                  e("span", { class: "close-x" }, "✕", -1),
+                                ])),
+                            ]),
+                          ]),
+                        ]),
+                        e("div", bo, [
+                          e("section", yo, [
+                            e("div", ko, [
+                              e("div", wo, [
+                                e(
+                                  "div",
+                                  {
+                                    class: B([
+                                      "wizard-step",
+                                      {
+                                        completed: h.value > 1,
+                                        active: h.value === 1,
+                                      },
+                                    ]),
+                                    onClick: c[0] || (c[0] = (k) => Le(1)),
+                                  },
+                                  [
+                                    e("div", _o, [
+                                      h.value > 1
+                                        ? (o(),
+                                          i("svg", Co, [
+                                            ...(c[14] ||
+                                              (c[14] = [
+                                                e(
+                                                  "polyline",
+                                                  { points: "20 6 9 17 4 12" },
+                                                  null,
+                                                  -1
+                                                ),
+                                              ])),
+                                          ]))
+                                        : (o(), i("span", $o, "1")),
+                                    ]),
+                                    c[15] ||
+                                      (c[15] = e(
+                                        "span",
+                                        { class: "wizard-label" },
+                                        "Destinations",
+                                        -1
+                                      )),
+                                  ],
+                                  2
+                                ),
+                                e(
+                                  "div",
+                                  {
+                                    class: B([
+                                      "wizard-line",
+                                      { completed: h.value > 1 },
+                                    ]),
+                                  },
+                                  null,
+                                  2
+                                ),
+                                e(
+                                  "div",
+                                  {
+                                    class: B([
+                                      "wizard-step",
+                                      {
+                                        completed: h.value > 2,
+                                        active: h.value === 2,
+                                        disabled: !tt.value,
+                                      },
+                                    ]),
+                                    onClick:
+                                      c[1] || (c[1] = (k) => tt.value && Le(2)),
+                                  },
+                                  [
+                                    e("div", So, [
+                                      h.value > 2
+                                        ? (o(),
+                                          i("svg", xo, [
+                                            ...(c[16] ||
+                                              (c[16] = [
+                                                e(
+                                                  "polyline",
+                                                  { points: "20 6 9 17 4 12" },
+                                                  null,
+                                                  -1
+                                                ),
+                                              ])),
+                                          ]))
+                                        : (o(), i("span", Do, "2")),
+                                    ]),
+                                    c[17] ||
+                                      (c[17] = e(
+                                        "span",
+                                        { class: "wizard-label" },
+                                        "Ships",
+                                        -1
+                                      )),
+                                  ],
+                                  2
+                                ),
+                                e(
+                                  "div",
+                                  {
+                                    class: B([
+                                      "wizard-line",
+                                      { completed: h.value > 2 },
+                                    ]),
+                                  },
+                                  null,
+                                  2
+                                ),
+                                e(
+                                  "div",
+                                  {
+                                    class: B([
+                                      "wizard-step",
+                                      {
+                                        completed: h.value > 3,
+                                        active: h.value === 3,
+                                        disabled: !We.value,
+                                      },
+                                    ]),
+                                    onClick:
+                                      c[2] || (c[2] = (k) => We.value && Le(3)),
+                                  },
+                                  [
+                                    e("div", Ao, [
+                                      h.value > 3
+                                        ? (o(),
+                                          i("svg", To, [
+                                            ...(c[18] ||
+                                              (c[18] = [
+                                                e(
+                                                  "polyline",
+                                                  { points: "20 6 9 17 4 12" },
+                                                  null,
+                                                  -1
+                                                ),
+                                              ])),
+                                          ]))
+                                        : (o(), i("span", Io, "3")),
+                                    ]),
+                                    c[19] ||
+                                      (c[19] = e(
+                                        "span",
+                                        { class: "wizard-label" },
+                                        "Dates",
+                                        -1
+                                      )),
+                                  ],
+                                  2
+                                ),
+                                e(
+                                  "div",
+                                  {
+                                    class: B([
+                                      "wizard-line",
+                                      { completed: h.value > 3 },
+                                    ]),
+                                  },
+                                  null,
+                                  2
+                                ),
+                                e(
+                                  "div",
+                                  {
+                                    class: B([
+                                      "wizard-step",
+                                      {
+                                        completed: h.value > 4,
+                                        active: h.value === 4,
+                                        disabled: !pe.value,
+                                      },
+                                    ]),
+                                    onClick:
+                                      c[3] || (c[3] = (k) => pe.value && Le(4)),
+                                  },
+                                  [
+                                    e("div", No, [
+                                      h.value > 4
+                                        ? (o(),
+                                          i("svg", Mo, [
+                                            ...(c[20] ||
+                                              (c[20] = [
+                                                e(
+                                                  "polyline",
+                                                  { points: "20 6 9 17 4 12" },
+                                                  null,
+                                                  -1
+                                                ),
+                                              ])),
+                                          ]))
+                                        : (o(), i("span", Eo, "4")),
+                                    ]),
+                                    c[21] ||
+                                      (c[21] = e(
+                                        "span",
+                                        { class: "wizard-label" },
+                                        "Guests",
+                                        -1
+                                      )),
+                                  ],
+                                  2
+                                ),
+                                e(
+                                  "div",
+                                  {
+                                    class: B([
+                                      "wizard-line",
+                                      { completed: h.value > 4 },
+                                    ]),
+                                  },
+                                  null,
+                                  2
+                                ),
+                                e(
+                                  "div",
+                                  {
+                                    class: B([
+                                      "wizard-step",
+                                      {
+                                        completed: h.value === 5,
+                                        active: h.value === 5,
+                                        disabled: !pe.value,
+                                      },
+                                    ]),
+                                    onClick:
+                                      c[4] || (c[4] = (k) => pe.value && Le(5)),
+                                  },
+                                  [
+                                    e("div", Ro, [
+                                      h.value === 5
+                                        ? (o(),
+                                          i("svg", Po, [
+                                            ...(c[22] ||
+                                              (c[22] = [
+                                                e(
+                                                  "polyline",
+                                                  { points: "20 6 9 17 4 12" },
+                                                  null,
+                                                  -1
+                                                ),
+                                              ])),
+                                          ]))
+                                        : (o(), i("span", Oo, "5")),
+                                    ]),
+                                    c[23] ||
+                                      (c[23] = e(
+                                        "span",
+                                        { class: "wizard-label" },
+                                        "Submit",
+                                        -1
+                                      )),
+                                  ],
+                                  2
+                                ),
+                              ]),
+                              h.value === 1
+                                ? (o(),
+                                  i("div", Lo, [
+                                    c[25] ||
+                                      (c[25] = e(
+                                        "h3",
+                                        { class: "step-title" },
+                                        "Destinations",
+                                        -1
+                                      )),
+                                    c[26] ||
+                                      (c[26] = e(
+                                        "p",
+                                        { class: "results-note" },
+                                        " Select the destinations you're interested in: ",
+                                        -1
+                                      )),
+                                    e("div", Bo, [
+                                      c[24] ||
+                                        (c[24] = e(
+                                          "div",
+                                          { class: "list-heading" },
+                                          "Nusa Tenggara Timur",
+                                          -1
+                                        )),
+                                      (o(),
+                                      i(
+                                        K,
+                                        null,
+                                        se(g, (k) =>
+                                          e(
+                                            "div",
+                                            { class: "list-row", key: k },
+                                            [
+                                              e("div", Fo, r(k), 1),
+                                              be(
+                                                e(
+                                                  "input",
+                                                  {
+                                                    class: "check",
+                                                    type: "checkbox",
+                                                    value: k,
+                                                    "onUpdate:modelValue":
+                                                      c[5] ||
+                                                      (c[5] = (P) =>
+                                                        (T.value = P)),
+                                                    "aria-label": `Destination ${k}`,
+                                                  },
+                                                  null,
+                                                  8,
+                                                  zo
+                                                ),
+                                                [[yt, T.value]]
+                                              ),
+                                            ]
+                                          )
+                                        ),
+                                        64
+                                      )),
+                                    ]),
+                                  ]))
+                                : h.value === 2
+                                ? (o(),
+                                  i("div", Uo, [
+                                    c[27] ||
+                                      (c[27] = e(
+                                        "h3",
+                                        { class: "step-title" },
+                                        "Ships",
+                                        -1
+                                      )),
+                                    c[28] ||
+                                      (c[28] = e(
+                                        "p",
+                                        { class: "results-note" },
+                                        "Please select one or more ships:",
+                                        -1
+                                      )),
+                                    e("div", Go, [
+                                      X.value
+                                        ? (o(),
+                                          i("div", Vo, " Loading ships... "))
+                                        : (o(),
+                                          i(
+                                            K,
+                                            { key: 1 },
+                                            [
+                                              (o(!0),
+                                              i(
+                                                K,
+                                                null,
+                                                se(
+                                                  E.value,
+                                                  (k) => (
+                                                    o(),
+                                                    i(
+                                                      "div",
+                                                      {
+                                                        class: B([
+                                                          "list-row",
+                                                          {
+                                                            "has-details":
+                                                              !!k.image,
+                                                          },
+                                                        ]),
+                                                        key: k.id,
+                                                      },
+                                                      [
+                                                        e("div", Ko, [
+                                                          e("div", qo, [
+                                                            e(
+                                                              "div",
+                                                              Wo,
+                                                              r(k.label),
+                                                              1
+                                                            ),
+                                                          ]),
+                                                        ]),
+                                                        be(
+                                                          e(
+                                                            "input",
+                                                            {
+                                                              class: "check",
+                                                              type: "checkbox",
+                                                              value: k.id,
+                                                              "onUpdate:modelValue":
+                                                                c[6] ||
+                                                                (c[6] = (P) =>
+                                                                  (oe.value =
+                                                                    P)),
+                                                              "aria-label": `Ship ${k.label}`,
+                                                            },
+                                                            null,
+                                                            8,
+                                                            Ho
+                                                          ),
+                                                          [[yt, oe.value]]
+                                                        ),
+                                                      ],
+                                                      2
+                                                    )
+                                                  )
+                                                ),
+                                                128
+                                              )),
+                                              E.value.length === 0
+                                                ? (o(),
+                                                  i(
+                                                    "div",
+                                                    Yo,
+                                                    " No ships found from API. "
+                                                  ))
+                                                : M("", !0),
+                                            ],
+                                            64
+                                          )),
+                                    ]),
+                                  ]))
+                                : h.value === 3
+                                ? (o(),
+                                  i("div", Jo, [
+                                    c[34] ||
+                                      (c[34] = e(
+                                        "h3",
+                                        { class: "step-title" },
+                                        "Dates",
+                                        -1
+                                      )),
+                                    c[35] ||
+                                      (c[35] = e(
+                                        "p",
+                                        { class: "results-note" },
+                                        "Select your travel dates:",
+                                        -1
+                                      )),
+                                    e("div", jo, [
+                                      e(
+                                        "span",
+                                        Xo,
+                                        r(te.value || "Start date"),
+                                        1
+                                      ),
+                                      c[29] ||
+                                        (c[29] = e(
+                                          "span",
+                                          { class: "date-arrow" },
+                                          "→",
+                                          -1
+                                        )),
+                                      e(
+                                        "span",
+                                        Qo,
+                                        r(Z.value || "End date"),
+                                        1
+                                      ),
+                                    ]),
+                                    e("div", Zo, [
+                                      c[32] ||
+                                        (c[32] = e(
+                                          "span",
+                                          { class: "trip-duration-label" },
+                                          "Trip Duration",
+                                          -1
+                                        )),
+                                      e("div", ei, [
+                                        e(
+                                          "button",
+                                          {
+                                            type: "button",
+                                            class: B([
+                                              "trip-duration-dropdown",
+                                              { open: H.value },
+                                            ]),
+                                            onClick:
+                                              c[7] ||
+                                              (c[7] = (k) =>
+                                                (H.value = !H.value)),
+                                          },
+                                          [
+                                            e("span", ti, r(le.value), 1),
+                                            e(
+                                              "img",
+                                              {
+                                                src: H.value ? he(ot) : he(at),
+                                                alt: "",
+                                                class: "caret-icon",
+                                              },
+                                              null,
+                                              8,
+                                              si
+                                            ),
+                                          ],
+                                          2
+                                        ),
+                                        H.value
+                                          ? (o(),
+                                            i("div", ni, [
+                                              e("div", ai, [
+                                                c[30] ||
+                                                  (c[30] = e(
+                                                    "div",
+                                                    { class: "counter-text" },
+                                                    [
+                                                      e(
+                                                        "div",
+                                                        {
+                                                          class:
+                                                            "counter-title",
+                                                        },
+                                                        "Min"
+                                                      ),
+                                                    ],
+                                                    -1
+                                                  )),
+                                                e("div", oi, [
+                                                  e(
+                                                    "button",
+                                                    {
+                                                      type: "button",
+                                                      class: "btn-icon",
+                                                      disabled: q.value <= 1,
+                                                      onClick: j(Se, ["stop"]),
+                                                    },
+                                                    " − ",
+                                                    8,
+                                                    ii
+                                                  ),
+                                                  e("span", li, r(q.value), 1),
+                                                  e(
+                                                    "button",
+                                                    {
+                                                      type: "button",
+                                                      class: "btn-icon",
+                                                      disabled:
+                                                        q.value >= W.value,
+                                                      onClick: j(Ce, ["stop"]),
+                                                    },
+                                                    " + ",
+                                                    8,
+                                                    ri
+                                                  ),
+                                                ]),
+                                              ]),
+                                              e("div", ci, [
+                                                c[31] ||
+                                                  (c[31] = e(
+                                                    "div",
+                                                    { class: "counter-text" },
+                                                    [
+                                                      e(
+                                                        "div",
+                                                        {
+                                                          class:
+                                                            "counter-title",
+                                                        },
+                                                        "Max"
+                                                      ),
+                                                    ],
+                                                    -1
+                                                  )),
+                                                e("div", ui, [
+                                                  e(
+                                                    "button",
+                                                    {
+                                                      type: "button",
+                                                      class: "btn-icon",
+                                                      disabled:
+                                                        W.value <= q.value,
+                                                      onClick: j(ie, ["stop"]),
+                                                    },
+                                                    " − ",
+                                                    8,
+                                                    di
+                                                  ),
+                                                  e("span", vi, r(W.value), 1),
+                                                  e(
+                                                    "button",
+                                                    {
+                                                      type: "button",
+                                                      class: "btn-icon",
+                                                      disabled: W.value >= bt,
+                                                      onClick: j(O, ["stop"]),
+                                                    },
+                                                    " + ",
+                                                    8,
+                                                    pi
+                                                  ),
+                                                ]),
+                                              ]),
+                                              q.value > 1 || W.value < bt
+                                                ? (o(),
+                                                  i("div", mi, [
+                                                    e(
+                                                      "button",
+                                                      {
+                                                        type: "button",
+                                                        class: "btn-text-reset",
+                                                        onClick: j(ve, [
+                                                          "stop",
+                                                        ]),
+                                                      },
+                                                      " Reset to any duration "
+                                                    ),
+                                                  ]))
+                                                : M("", !0),
+                                            ]))
+                                          : M("", !0),
+                                      ]),
+                                    ]),
+                                    c[36] ||
+                                      (c[36] = e(
+                                        "p",
+                                        {
+                                          class:
+                                            "results-note text-sm calendar-instruction",
+                                        },
+                                        " Click to select start date, then click again to select end date. ",
+                                        -1
+                                      )),
+                                    e("div", fi, [
+                                      e("div", hi, [
+                                        e("h4", gi, r(De.value), 1),
+                                        e(
+                                          "div",
+                                          { class: "calendar-nav-group" },
+                                          [
+                                            e(
+                                              "button",
+                                              {
+                                                class: "calendar-nav",
+                                                onClick: Tt,
+                                                type: "button",
+                                              },
+                                              " ‹ "
+                                            ),
+                                            e(
+                                              "button",
+                                              {
+                                                class: "calendar-nav",
+                                                onClick: Ne,
+                                                type: "button",
+                                              },
+                                              " › "
+                                            ),
+                                          ]
+                                        ),
+                                      ]),
+                                      e("div", bi, [
+                                        c[33] ||
+                                          (c[33] = e(
+                                            "div",
+                                            { class: "calendar-weekdays" },
+                                            [
+                                              e(
+                                                "div",
+                                                { class: "weekday" },
+                                                "Su"
+                                              ),
+                                              e(
+                                                "div",
+                                                { class: "weekday" },
+                                                "Mo"
+                                              ),
+                                              e(
+                                                "div",
+                                                { class: "weekday" },
+                                                "Tu"
+                                              ),
+                                              e(
+                                                "div",
+                                                { class: "weekday" },
+                                                "We"
+                                              ),
+                                              e(
+                                                "div",
+                                                { class: "weekday" },
+                                                "Th"
+                                              ),
+                                              e(
+                                                "div",
+                                                { class: "weekday" },
+                                                "Fr"
+                                              ),
+                                              e(
+                                                "div",
+                                                { class: "weekday" },
+                                                "Sa"
+                                              ),
+                                            ],
+                                            -1
+                                          )),
+                                        e("div", yi, [
+                                          (o(!0),
+                                          i(
+                                            K,
+                                            null,
+                                            se(
+                                              et.value,
+                                              (k) => (
+                                                o(),
+                                                i(
+                                                  "button",
+                                                  {
+                                                    key: k.key,
+                                                    class: B([
+                                                      "calendar-day",
+                                                      {
+                                                        "other-month":
+                                                          !k.isCurrentMonth,
+                                                        selected: k.isSelected,
+                                                        disabled:
+                                                          !k.isSelectable,
+                                                        past: k.isPast,
+                                                        "in-range": k.isInRange,
+                                                        "range-start":
+                                                          k.isRangeStart,
+                                                        "range-end":
+                                                          k.isRangeEnd,
+                                                      },
+                                                    ]),
+                                                    disabled: !k.isSelectable,
+                                                    onClick: (P) => Oe(k),
+                                                    type: "button",
+                                                  },
+                                                  r(k.date),
+                                                  11,
+                                                  ki
+                                                )
+                                              )
+                                            ),
+                                            128
+                                          )),
+                                        ]),
+                                      ]),
+                                    ]),
+                                  ]))
+                                : h.value === 4
+                                ? (o(),
+                                  i("div", wi, [
+                                    c[43] ||
+                                      (c[43] = e(
+                                        "h3",
+                                        { class: "step-title" },
+                                        "Cabins & Guests",
+                                        -1
+                                      )),
+                                    e("div", _i, [
+                                      e("div", Ci, [
+                                        e(
+                                          "button",
+                                          {
+                                            type: "button",
+                                            class: B([
+                                              "mode-btn",
+                                              { active: F.value },
+                                            ]),
+                                            onClick:
+                                              c[8] ||
+                                              (c[8] = (k) => (F.value = !0)),
+                                          },
+                                          " Flexible ",
+                                          2
+                                        ),
+                                        e(
+                                          "button",
+                                          {
+                                            type: "button",
+                                            class: B([
+                                              "mode-btn",
+                                              { active: !F.value },
+                                            ]),
+                                            onClick:
+                                              c[9] ||
+                                              (c[9] = (k) => (F.value = !1)),
+                                          },
+                                          " Room Allocation ",
+                                          2
+                                        ),
+                                      ]),
+                                    ]),
+                                    e("div", $i, [
+                                      F.value
+                                        ? (o(),
+                                          i(
+                                            "p",
+                                            xi,
+                                            " Set total guests only. You can choose specific rooms later. "
+                                          ))
+                                        : (o(),
+                                          i(
+                                            "p",
+                                            Si,
+                                            " Configure guests for each cabin individually. "
+                                          )),
+                                    ]),
+                                    F.value
+                                      ? (o(),
+                                        i("div", Di, [
+                                          e("div", Ai, [
+                                            c[37] ||
+                                              (c[37] = e(
+                                                "div",
+                                                { class: "counter-text" },
+                                                [
+                                                  e(
+                                                    "div",
+                                                    { class: "counter-title" },
+                                                    "Total Guests"
+                                                  ),
+                                                  e(
+                                                    "div",
+                                                    {
+                                                      class: "counter-subtitle",
+                                                    },
+                                                    " We will find the best cabin combination for you "
+                                                  ),
+                                                ],
+                                                -1
+                                              )),
+                                            e("div", Ti, [
+                                              e(
+                                                "button",
+                                                {
+                                                  type: "button",
+                                                  class: "btn-icon",
+                                                  disabled: G.value <= 1,
+                                                  onClick:
+                                                    c[10] ||
+                                                    (c[10] = (k) => G.value--),
+                                                },
+                                                " − ",
+                                                8,
+                                                Ii
+                                              ),
+                                              e("span", Ni, r(G.value), 1),
+                                              e(
+                                                "button",
+                                                {
+                                                  type: "button",
+                                                  class: "btn-icon",
+                                                  onClick:
+                                                    c[11] ||
+                                                    (c[11] = (k) => G.value++),
+                                                },
+                                                " + "
+                                              ),
+                                            ]),
+                                          ]),
+                                        ]))
+                                      : (o(),
+                                        i("div", Mi, [
+                                          (o(!0),
+                                          i(
+                                            K,
+                                            null,
+                                            se(
+                                              w.value,
+                                              (k, P) => (
+                                                o(),
+                                                i(
+                                                  "div",
+                                                  {
+                                                    key: k.id,
+                                                    class: "cabin-accordion",
+                                                  },
+                                                  [
+                                                    e(
+                                                      "div",
+                                                      {
+                                                        class: "cabin-header",
+                                                        onClick: (D) => Ft(P),
+                                                      },
+                                                      [
+                                                        e("div", Ri, [
+                                                          e(
+                                                            "span",
+                                                            Pi,
+                                                            "CABIN " + r(P + 1),
+                                                            1
+                                                          ),
+                                                        ]),
+                                                        e("div", Oi, [
+                                                          e(
+                                                            "span",
+                                                            Li,
+                                                            r(
+                                                              k.adults +
+                                                                k.children
+                                                            ) +
+                                                              " guest" +
+                                                              r(
+                                                                k.adults +
+                                                                  k.children !==
+                                                                  1
+                                                                  ? "s"
+                                                                  : ""
+                                                              ),
+                                                            1
+                                                          ),
+                                                          w.value.length > 1
+                                                            ? (o(),
+                                                              i(
+                                                                "button",
+                                                                {
+                                                                  key: 0,
+                                                                  type: "button",
+                                                                  class:
+                                                                    "cabin-remove-btn",
+                                                                  onClick: j(
+                                                                    (D) =>
+                                                                      Bt(P),
+                                                                    ["stop"]
+                                                                  ),
+                                                                  title:
+                                                                    "Remove cabin",
+                                                                },
+                                                                [
+                                                                  ...(c[38] ||
+                                                                    (c[38] = [
+                                                                      e(
+                                                                        "svg",
+                                                                        {
+                                                                          width:
+                                                                            "16",
+                                                                          height:
+                                                                            "16",
+                                                                          viewBox:
+                                                                            "0 0 24 24",
+                                                                          fill: "none",
+                                                                          stroke:
+                                                                            "currentColor",
+                                                                          "stroke-width":
+                                                                            "2",
+                                                                        },
+                                                                        [
+                                                                          e(
+                                                                            "path",
+                                                                            {
+                                                                              d: "M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z",
+                                                                            }
+                                                                          ),
+                                                                        ],
+                                                                        -1
+                                                                      ),
+                                                                    ])),
+                                                                ],
+                                                                8,
+                                                                Bi
+                                                              ))
+                                                            : M("", !0),
+                                                          (o(),
+                                                          i(
+                                                            "svg",
+                                                            {
+                                                              class: B([
+                                                                "cabin-chevron",
+                                                                {
+                                                                  expanded:
+                                                                    k.expanded,
+                                                                },
+                                                              ]),
+                                                              width: "20",
+                                                              height: "20",
+                                                              viewBox:
+                                                                "0 0 24 24",
+                                                              fill: "none",
+                                                              stroke:
+                                                                "currentColor",
+                                                              "stroke-width":
+                                                                "2",
+                                                            },
+                                                            [
+                                                              ...(c[39] ||
+                                                                (c[39] = [
+                                                                  e(
+                                                                    "polyline",
+                                                                    {
+                                                                      points:
+                                                                        "6 9 12 15 18 9",
+                                                                    },
+                                                                    null,
+                                                                    -1
+                                                                  ),
+                                                                ])),
+                                                            ],
+                                                            2
+                                                          )),
+                                                        ]),
+                                                      ],
+                                                      8,
+                                                      Ei
+                                                    ),
+                                                    ke(
+                                                      xt,
+                                                      { name: "accordion" },
+                                                      {
+                                                        default: Me(() => [
+                                                          k.expanded
+                                                            ? (o(),
+                                                              i("div", Fi, [
+                                                                e("div", zi, [
+                                                                  c[40] ||
+                                                                    (c[40] = e(
+                                                                      "div",
+                                                                      {
+                                                                        class:
+                                                                          "counter-text",
+                                                                      },
+                                                                      [
+                                                                        e(
+                                                                          "div",
+                                                                          {
+                                                                            class:
+                                                                              "semibold",
+                                                                          },
+                                                                          "Adults"
+                                                                        ),
+                                                                        e(
+                                                                          "div",
+                                                                          {
+                                                                            class:
+                                                                              "muted text-sm",
+                                                                          },
+                                                                          "Ages 17+"
+                                                                        ),
+                                                                      ],
+                                                                      -1
+                                                                    )),
+                                                                  e("div", Ui, [
+                                                                    e(
+                                                                      "button",
+                                                                      {
+                                                                        type: "button",
+                                                                        class:
+                                                                          "btn-icon",
+                                                                        disabled:
+                                                                          k.adults <=
+                                                                          1,
+                                                                        onClick:
+                                                                          (D) =>
+                                                                            Jt(
+                                                                              P,
+                                                                              "adults"
+                                                                            ),
+                                                                      },
+                                                                      " − ",
+                                                                      8,
+                                                                      Gi
+                                                                    ),
+                                                                    e(
+                                                                      "span",
+                                                                      Vi,
+                                                                      r(
+                                                                        k.adults
+                                                                      ),
+                                                                      1
+                                                                    ),
+                                                                    e(
+                                                                      "button",
+                                                                      {
+                                                                        type: "button",
+                                                                        class:
+                                                                          "btn-icon",
+                                                                        disabled:
+                                                                          k.adults +
+                                                                            k.children >=
+                                                                          ps,
+                                                                        onClick:
+                                                                          (D) =>
+                                                                            At(
+                                                                              P,
+                                                                              "adults"
+                                                                            ),
+                                                                      },
+                                                                      " + ",
+                                                                      8,
+                                                                      Ki
+                                                                    ),
+                                                                  ]),
+                                                                ]),
+                                                                e("div", qi, [
+                                                                  c[41] ||
+                                                                    (c[41] = e(
+                                                                      "div",
+                                                                      {
+                                                                        class:
+                                                                          "counter-text",
+                                                                      },
+                                                                      [
+                                                                        e(
+                                                                          "div",
+                                                                          {
+                                                                            class:
+                                                                              "semibold",
+                                                                          },
+                                                                          "Children"
+                                                                        ),
+                                                                        e(
+                                                                          "div",
+                                                                          {
+                                                                            class:
+                                                                              "muted text-sm",
+                                                                          },
+                                                                          "Ages 3 - 16"
+                                                                        ),
+                                                                      ],
+                                                                      -1
+                                                                    )),
+                                                                  e("div", Wi, [
+                                                                    e(
+                                                                      "button",
+                                                                      {
+                                                                        type: "button",
+                                                                        class:
+                                                                          "btn-icon",
+                                                                        disabled:
+                                                                          k.children <=
+                                                                          0,
+                                                                        onClick:
+                                                                          (D) =>
+                                                                            Jt(
+                                                                              P,
+                                                                              "children"
+                                                                            ),
+                                                                      },
+                                                                      " − ",
+                                                                      8,
+                                                                      Hi
+                                                                    ),
+                                                                    e(
+                                                                      "span",
+                                                                      Yi,
+                                                                      r(
+                                                                        k.children
+                                                                      ),
+                                                                      1
+                                                                    ),
+                                                                    e(
+                                                                      "button",
+                                                                      {
+                                                                        type: "button",
+                                                                        class:
+                                                                          "btn-icon",
+                                                                        disabled:
+                                                                          k.adults +
+                                                                            k.children >=
+                                                                          ps,
+                                                                        onClick:
+                                                                          (D) =>
+                                                                            At(
+                                                                              P,
+                                                                              "children"
+                                                                            ),
+                                                                      },
+                                                                      " + ",
+                                                                      8,
+                                                                      Ji
+                                                                    ),
+                                                                  ]),
+                                                                ]),
+                                                                e(
+                                                                  "div",
+                                                                  {
+                                                                    class:
+                                                                      "cabin-note",
+                                                                  },
+                                                                  " Max " +
+                                                                    r(ps) +
+                                                                    " guests per cabin "
+                                                                ),
+                                                              ]))
+                                                            : M("", !0),
+                                                        ]),
+                                                        _: 2,
+                                                      },
+                                                      1024
+                                                    ),
+                                                  ]
+                                                )
+                                              )
+                                            ),
+                                            128
+                                          )),
+                                          fe.value
+                                            ? (o(),
+                                              i(
+                                                "button",
+                                                {
+                                                  key: 0,
+                                                  type: "button",
+                                                  class: "btn-add-cabin",
+                                                  onClick: we,
+                                                },
+                                                " + Add Another Cabin "
+                                              ))
+                                            : M("", !0),
+                                          e("div", ji, [
+                                            c[42] ||
+                                              (c[42] = e(
+                                                "span",
+                                                null,
+                                                "Total:",
+                                                -1
+                                              )),
+                                            e(
+                                              "span",
+                                              Xi,
+                                              r(w.value.length) +
+                                                " cabin" +
+                                                r(
+                                                  w.value.length !== 1
+                                                    ? "s"
+                                                    : ""
+                                                ) +
+                                                ", " +
+                                                r(ge.value) +
+                                                " guest" +
+                                                r(ge.value !== 1 ? "s" : ""),
+                                              1
+                                            ),
+                                          ]),
+                                        ])),
+                                  ]))
+                                : (o(),
+                                  i("div", Qi, [
+                                    c[44] ||
+                                      (c[44] = e(
+                                        "h3",
+                                        { class: "step-title" },
+                                        "Check Availability",
+                                        -1
+                                      )),
+                                    c[45] ||
+                                      (c[45] = e(
+                                        "p",
+                                        { class: "results-note" },
+                                        " To see if we have availability for your preferred criteria, please click the button below. ",
+                                        -1
+                                      )),
+                                    e("div", { class: "mt-4" }, [
+                                      e(
+                                        "button",
+                                        { class: "btn-primary", onClick: Ct },
+                                        " Check now "
+                                      ),
+                                    ]),
+                                    c[46] ||
+                                      (c[46] = e(
+                                        "div",
+                                        {
+                                          class: "section-divider",
+                                          style: { margin: "1.5rem 0" },
+                                        },
+                                        null,
+                                        -1
+                                      )),
+                                    c[47] ||
+                                      (c[47] = e(
+                                        "h4",
+                                        { class: "section-title" },
+                                        " Speak with a Komodo Cruises Travel Advisor ",
+                                        -1
+                                      )),
+                                    c[48] ||
+                                      (c[48] = e(
+                                        "p",
+                                        { class: "results-note" },
+                                        " Need some help to plan your trip? Enquire below to contact one of our Komodo Cruises Travel Advisors. ",
+                                        -1
+                                      )),
+                                    e("div", { class: "mt-4" }, [
+                                      e(
+                                        "button",
+                                        { class: "btn-primary", onClick: ct },
+                                        " Enquire now "
+                                      ),
+                                    ]),
+                                  ])),
+                              e("div", Zi, [
+                                e("div", el, [
+                                  h.value > 1
+                                    ? (o(),
+                                      i(
+                                        "button",
+                                        {
+                                          key: 0,
+                                          class: "link-muted text-icon-btn",
+                                          onClick: je,
+                                        },
+                                        [
+                                          e(
+                                            "img",
+                                            {
+                                              src: he(Kn),
+                                              alt: "Previous",
+                                              class: "nav-arrow",
+                                            },
+                                            null,
+                                            8,
+                                            tl
+                                          ),
+                                          Q(" " + r(Ie.value), 1),
+                                        ]
+                                      ))
+                                    : M("", !0),
+                                  e(
+                                    "button",
+                                    {
+                                      class: "btn-primary text-icon-btn",
+                                      onClick: _t,
+                                    },
+                                    [
+                                      Q(r(R.value) + " ", 1),
+                                      e(
+                                        "img",
+                                        {
+                                          src: he(Vs),
+                                          alt: "Next",
+                                          class: "nav-arrow white-filter",
+                                        },
+                                        null,
+                                        8,
+                                        sl
+                                      ),
+                                    ]
+                                  ),
+                                ]),
+                              ]),
+                            ]),
+                          ]),
+                        ]),
+                      ]),
+                    ]))
+                  : M("", !0),
+              ]),
+              _: 1,
+            }
+          ),
+          ke(
+            xt,
+            { name: "toast-slide" },
+            {
+              default: Me(() => [
+                xe.value
+                  ? (o(),
+                    i("div", nl, [
+                      c[49] ||
+                        (c[49] = e("span", { class: "toast-icon" }, "⚠️", -1)),
+                      e("span", al, r(qe.value), 1),
+                    ]))
+                  : M("", !0),
+              ]),
+              _: 1,
+            }
+          ),
+        ])
+      );
+    },
+  },
+  Ks = vt(ll, [["__scopeId", "data-v-5ae5e789"]]),
+  rl = { key: 0, class: "nav-inner plan-mode" },
+  cl = { key: 1, class: "nav-inner" },
+  ul = { class: "nav-left" },
+  dl = { class: "nav-lang" },
+  vl = {
+    width: "10",
+    height: "6",
+    viewBox: "0 0 10 6",
+    fill: "none",
+    stroke: "currentColor",
+    "stroke-width": "1.2",
+    style: { "margin-right": "6px" },
+  },
+  pl = { key: 0, class: "lang-dropdown" },
+  ml = ["onClick"],
+  fl = { class: "nav-center" },
+  hl = { class: "nav-right" },
+  gl = {
+    width: "16",
+    height: "16",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    "stroke-width": "1.5",
+    style: { "margin-left": "8px" },
+  },
+  bl = { key: 0, class: "site-footer mt-16" },
+  yl = { class: "footer-inner container text-sm" },
+  kl = {
+    __name: "App",
+    setup(S) {
+      const b = Gs(),
+        f = Wa(),
+        C = m(!1),
+        h = m(!1),
+        g = m(!1),
+        v = m(!1),
+        E = m(!1),
+        X = m("EN"),
+        T = m(!1),
+        oe = [
+          { code: "EN", label: "English" },
+          { code: "ID", label: "Indonesia" },
+          { code: "ZH", label: "Chinese" },
+          { code: "ES", label: "Spanish" },
+          { code: "FR", label: "French" },
+        ],
+        te = () => {
+          T.value = !T.value;
+        },
+        Z = (ie) => {
+          (X.value = ie.code), (T.value = !1);
+        },
+        q = () => {
+          C.value = window.scrollY > window.innerHeight * 0.8;
+          const ie = document.querySelectorAll('[data-nav-theme="light"]');
+          let O = !1;
+          ie.forEach((H) => {
+            const le = H.getBoundingClientRect();
+            le.top <= 80 && le.bottom >= 80 && (O = !0);
+          }),
+            (E.value = O);
+        },
+        W = () => {
+          (g.value = !1),
+            setTimeout(() => {
+              h.value = !0;
+            }, 300);
+        },
+        Se = () => {
+          f.path === "/results" ? b.push("/find-reservation") : (v.value = !0);
+        },
+        Ce = () => {
+          (v.value = !1), b.push("/results");
+        };
+      return (
+        Qe(() => {
+          window.addEventListener("scroll", q);
+        }),
+        wt(() => {
+          window.removeEventListener("scroll", q);
+        }),
+        (ie, O) => {
+          const H = Wt("router-link"),
+            le = Wt("router-view");
+          return (
+            o(),
+            i("div", null, [
+              ke(
+                io,
+                {
+                  isOpen: h.value,
+                  onClose: O[0] || (O[0] = (ve) => (h.value = !1)),
+                },
+                null,
+                8,
+                ["isOpen"]
+              ),
+              ke(
+                Ks,
+                {
+                  isOpen: v.value,
+                  onClose: O[1] || (O[1] = (ve) => (v.value = !1)),
+                  onNavigateToResults: Ce,
+                },
+                null,
+                8,
+                ["isOpen"]
+              ),
+              ke(
+                vo,
+                {
+                  isOpen: g.value,
+                  onClose: O[2] || (O[2] = (ve) => (g.value = !1)),
+                  onOpenSearch: W,
+                },
+                null,
+                8,
+                ["isOpen"]
+              ),
+              e(
+                "header",
+                {
+                  class: B([
+                    "nav-container",
+                    {
+                      "nav-overlay": ie.$route.path === "/",
+                      "home-nav": ie.$route.path === "/",
+                      scrolled: C.value,
+                      "nav-light-theme": E.value,
+                      "navbar-result":
+                        ie.$route.path === "/results" ||
+                        ie.$route.path === "/find-reservation",
+                    },
+                  ]),
+                },
+                [
+                  ie.$route.meta.planHeader
+                    ? (o(),
+                      i("nav", rl, [
+                        O[6] ||
+                          (O[6] = e(
+                            "div",
+                            {
+                              style: {
+                                display: "flex",
+                                "align-items": "center",
+                                gap: "0.75rem",
+                                color: "var(--ocean-900)",
+                              },
+                            },
+                            [
+                              e("div", { class: "brand" }, [
+                                e(
+                                  "span",
+                                  { class: "desktop-only" },
+                                  "Plan your trip"
+                                ),
+                                e(
+                                  "span",
+                                  { class: "mobile-only" },
+                                  "Plan trip"
+                                ),
+                              ]),
+                            ],
+                            -1
+                          )),
+                        ke(
+                          H,
+                          { class: "link-close close-btn-style", to: "/" },
+                          {
+                            default: Me(() => [
+                              ...(O[5] ||
+                                (O[5] = [
+                                  e("span", { class: "btn-text" }, "Close", -1),
+                                  e("span", { class: "close-icon" }, "âœ•", -1),
+                                ])),
+                            ]),
+                            _: 1,
+                          }
+                        ),
+                      ]))
+                    : (o(),
+                      i("nav", cl, [
+                        e("div", ul, [
+                          e(
+                            "span",
+                            {
+                              class: "nav-menu",
+                              onClick: O[3] || (O[3] = (ve) => (g.value = !0)),
+                              title: "Menu",
+                            },
+                            [
+                              ...(O[7] ||
+                                (O[7] = [
+                                  e(
+                                    "svg",
+                                    {
+                                      width: "24",
+                                      height: "24",
+                                      viewBox: "0 0 24 24",
+                                      fill: "none",
+                                      stroke: "currentColor",
+                                      "stroke-width": "1.2",
+                                    },
+                                    [
+                                      e("line", {
+                                        x1: "3",
+                                        y1: "12",
+                                        x2: "21",
+                                        y2: "12",
+                                      }),
+                                      e("line", {
+                                        x1: "3",
+                                        y1: "6",
+                                        x2: "21",
+                                        y2: "6",
+                                      }),
+                                      e("line", {
+                                        x1: "3",
+                                        y1: "18",
+                                        x2: "21",
+                                        y2: "18",
+                                      }),
+                                    ],
+                                    -1
+                                  ),
+                                ])),
+                            ]
+                          ),
+                          e(
+                            "div",
+                            {
+                              class: "nav-lang-wrapper",
+                              onClick: te,
+                              title: "Select Language",
+                            },
+                            [
+                              e("span", dl, [
+                                (o(),
+                                i("svg", vl, [
+                                  ...(O[8] ||
+                                    (O[8] = [
+                                      e(
+                                        "path",
+                                        { d: "M1 1L5 5L9 1" },
+                                        null,
+                                        -1
+                                      ),
+                                    ])),
+                                ])),
+                                Q(" " + r(X.value), 1),
+                              ]),
+                              T.value
+                                ? (o(),
+                                  i("div", pl, [
+                                    (o(),
+                                    i(
+                                      K,
+                                      null,
+                                      se(oe, (ve) =>
+                                        e(
+                                          "div",
+                                          {
+                                            key: ve.code,
+                                            class: "lang-option",
+                                            onClick: j((F) => Z(ve), ["stop"]),
+                                          },
+                                          r(ve.label),
+                                          9,
+                                          ml
+                                        )
+                                      ),
+                                      64
+                                    )),
+                                  ]))
+                                : M("", !0),
+                            ]
+                          ),
+                        ]),
+                        e("div", fl, [
+                          ke(
+                            H,
+                            { to: "/", class: "brand-link" },
+                            {
+                              default: Me(() => [
+                                ...(O[9] ||
+                                  (O[9] = [
+                                    e(
+                                      "span",
+                                      { class: "brand-chip" },
+                                      "KOMODO CRUISES",
+                                      -1
+                                    ),
+                                  ])),
+                              ]),
+                              _: 1,
+                            }
+                          ),
+                        ]),
+                        e("div", hl, [
+                          e(
+                            "button",
+                            {
+                              class: "nav-text-item nav-plan-item",
+                              onClick: Se,
+                              style: { "white-space": "nowrap" },
+                            },
+                            [
+                              ie.$route.path === "/results"
+                                ? (o(),
+                                  i(
+                                    K,
+                                    { key: 0 },
+                                    [Q(" FIND RESERVATION ")],
+                                    64
+                                  ))
+                                : (o(),
+                                  i(
+                                    K,
+                                    { key: 1 },
+                                    [
+                                      O[10] ||
+                                        (O[10] = e(
+                                          "span",
+                                          { class: "desktop-only" },
+                                          "PLAN YOUR TRIP",
+                                          -1
+                                        )),
+                                      O[11] ||
+                                        (O[11] = e(
+                                          "span",
+                                          { class: "mobile-only" },
+                                          "PLAN TRIP",
+                                          -1
+                                        )),
+                                    ],
+                                    64
+                                  )),
+                            ]
+                          ),
+                          O[15] ||
+                            (O[15] = e(
+                              "span",
+                              { class: "nav-text-item" },
+                              "LOGIN",
+                              -1
+                            )),
+                          e(
+                            "span",
+                            {
+                              class: "nav-search",
+                              onClick: O[4] || (O[4] = (ve) => (h.value = !0)),
+                              title: "Search",
+                            },
+                            [
+                              ...(O[12] ||
+                                (O[12] = [
+                                  e(
+                                    "svg",
+                                    {
+                                      width: "20",
+                                      height: "20",
+                                      viewBox: "0 0 24 24",
+                                      fill: "none",
+                                      stroke: "currentColor",
+                                      "stroke-width": "1.2",
+                                    },
+                                    [
+                                      e("circle", {
+                                        cx: "11",
+                                        cy: "11",
+                                        r: "8",
+                                      }),
+                                      e("line", {
+                                        x1: "21",
+                                        y1: "21",
+                                        x2: "16.65",
+                                        y2: "16.65",
+                                      }),
+                                    ],
+                                    -1
+                                  ),
+                                ])),
+                            ]
+                          ),
+                          ie.$route.path !== "/" &&
+                          ie.$route.path !== "/results" &&
+                          ie.$route.path !== "/find-reservation"
+                            ? (o(),
+                              Yt(
+                                H,
+                                { key: 0, to: "/plan", class: "btn-book-pill" },
+                                {
+                                  default: Me(() => [
+                                    O[14] || (O[14] = Q(" BOOK NOW ", -1)),
+                                    (o(),
+                                    i("svg", gl, [
+                                      ...(O[13] ||
+                                        (O[13] = [
+                                          e(
+                                            "path",
+                                            {
+                                              d: "M2 20h20M12 4v12m0 0l-4-4m4 4l4-4",
+                                            },
+                                            null,
+                                            -1
+                                          ),
+                                        ])),
+                                    ])),
+                                  ]),
+                                  _: 1,
+                                }
+                              ))
+                            : M("", !0),
+                        ]),
+                      ])),
+                ],
+                2
+              ),
+              ke(le),
+              !ie.$route.meta.planHeader &&
+              ie.$route.path !== "/" &&
+              ie.$route.path !== "/results"
+                ? (o(),
+                  i("footer", bl, [
+                    e(
+                      "div",
+                      yl,
+                      " Â© " + r(new Date().getFullYear()) + " Komodo Cruises ",
+                      1
+                    ),
+                  ]))
+                : M("", !0),
+            ])
+          );
+        }
+      );
+    },
+  },
+  wl = "" + new URL("Komodo-siX32_CS.mp4", import.meta.url).href,
+  _l = "" + new URL("dest-komodo-BZfQdiBM.png", import.meta.url).href,
+  Cl = "" + new URL("dest-labuan-bajo-H07b2mBM.png", import.meta.url).href,
+  $l = "" + new URL("dest-togean-DN15mR21.png", import.meta.url).href,
+  Sl = { class: "destination-carousel" },
+  xl = { class: "carousel-container" },
+  Dl = ["src", "alt"],
+  Al = { class: "carousel-content" },
+  Tl = { class: "carousel-content-left" },
+  Il = { class: "carousel-location" },
+  Nl = { class: "carousel-title" },
+  Ml = { class: "carousel-content-right" },
+  El = { class: "carousel-description" },
+  Rl = ["href"],
+  Pl = { class: "carousel-dots" },
+  Ol = ["onClick", "aria-label"],
+  Pn = 101,
+  On = 50,
+  Ll = {
+    __name: "DestinationCarousel",
+    setup(S) {
+      const b = [
+          {
+            location: "INDONESIA",
+            title: "Komodo National Park",
+            description:
+              "Home to the legendary Komodo dragons and pristine marine life. Discover ancient wilderness and untouched natural beauty.",
+            ctaText: "EXPLORE THE PARK",
+            ctaLink: "#",
+            image: _l,
+          },
+          {
+            location: "INDONESIA",
+            title: "Labuan Bajo",
+            description:
+              "Gateway to the Komodo Islands with stunning sunsets and vibrant culture. Experience the perfect blend of adventure and relaxation.",
+            ctaText: "DISCOVER LABUAN BAJO",
+            ctaLink: "#",
+            image: Cl,
+          },
+          {
+            location: "INDONESIA",
+            title: "Togean Islands",
+            description:
+              "Remote paradise with crystal-clear waters and untouched coral reefs. A hidden gem for those seeking true escape.",
+            ctaText: "VISIT TOGEAN",
+            ctaLink: "#",
+            image: $l,
+          },
+        ],
+        f = b.length,
+        C = x(() => {
+          const G = [];
+          for (let w = 0; w < Pn; w++)
+            b.forEach((ge, fe) => {
+              G.push({ ...ge, virtualKey: `set${w}-${fe}`, originalIndex: fe });
+            });
+          return G;
+        }),
+        h = Math.floor(Pn / 2) * f,
+        g = m(h),
+        v = m(typeof window < "u" ? window.innerWidth : 1200),
+        E = x(() => ((g.value % f) + f) % f),
+        X = x(() => b[E.value]),
+        T = x(() =>
+          v.value <= 480
+            ? v.value * 0.765
+            : v.value <= 768
+            ? v.value * 0.675
+            : Math.min(v.value * 0.5, 750)
+        ),
+        oe = x(() => (v.value <= 768 ? 10 : 20)),
+        te = x(() => {
+          const G = T.value + oe.value,
+            w = v.value / 2,
+            ge = T.value / 2;
+          return g.value * G - w + ge;
+        });
+      function Z(G) {
+        return G === g.value;
+      }
+      function q(G) {
+        return G === g.value - 1 || G === g.value + 1;
+      }
+      function W() {
+        g.value++;
+      }
+      function Se() {
+        g.value--;
+      }
+      function Ce(G) {
+        const w = E.value,
+          ge = G - w;
+        ge !== 0 && (g.value += ge);
+      }
+      function ie() {
+        v.value = window.innerWidth;
+      }
+      const O = m(0),
+        H = m(0);
+      function le(G) {
+        O.value = G.changedTouches[0].screenX;
+      }
+      function ve(G) {
+        H.value = G.changedTouches[0].screenX;
+      }
+      function F() {
+        const G = O.value - H.value,
+          w = G > On,
+          ge = G < -On;
+        w ? W() : ge && Se(), (O.value = 0), (H.value = 0);
+      }
+      return (
+        Qe(() => {
+          window.addEventListener("resize", ie);
+        }),
+        wt(() => {
+          window.removeEventListener("resize", ie);
+        }),
+        (G, w) => (
+          o(),
+          i("section", Sl, [
+            w[3] ||
+              (w[3] = e(
+                "h2",
+                { class: "carousel-heading" },
+                " Destinations. Where our passion meets your purpose. ",
+                -1
+              )),
+            w[4] ||
+              (w[4] = e(
+                "p",
+                { class: "carousel-subheading" },
+                [
+                  e("a", { href: "#" }, [
+                    Q("WHERE NEXT: VIEW ALL DESTINATIONS "),
+                    e("span", null, "→"),
+                  ]),
+                ],
+                -1
+              )),
+            e("div", xl, [
+              e(
+                "button",
+                {
+                  class: "carousel-nav carousel-nav-left",
+                  onClick: Se,
+                  "aria-label": "Previous destination",
+                },
+                [
+                  ...(w[0] ||
+                    (w[0] = [
+                      e("img", { src: Kn, alt: "Previous" }, null, -1),
+                    ])),
+                ]
+              ),
+              e(
+                "div",
+                {
+                  class: "carousel-viewport",
+                  onTouchstart: le,
+                  onTouchmove: ve,
+                  onTouchend: F,
+                },
+                [
+                  e(
+                    "div",
+                    {
+                      class: "carousel-track",
+                      style: Ht({ transform: `translateX(-${te.value}px)` }),
+                    },
+                    [
+                      (o(!0),
+                      i(
+                        K,
+                        null,
+                        se(
+                          C.value,
+                          (ge, fe) => (
+                            o(),
+                            i(
+                              "div",
+                              {
+                                key: ge.virtualKey,
+                                class: B([
+                                  "carousel-slide",
+                                  {
+                                    "active-slide": Z(fe),
+                                    "side-slide": q(fe),
+                                  },
+                                ]),
+                                style: Ht({
+                                  width: `${T.value}px`,
+                                  marginRight: `${oe.value}px`,
+                                }),
+                              },
+                              [
+                                e(
+                                  "img",
+                                  {
+                                    src: ge.image,
+                                    alt: ge.title,
+                                    class: "slide-image",
+                                  },
+                                  null,
+                                  8,
+                                  Dl
+                                ),
+                              ],
+                              6
+                            )
+                          )
+                        ),
+                        128
+                      )),
+                    ],
+                    4
+                  ),
+                ],
+                32
+              ),
+              e(
+                "button",
+                {
+                  class: "carousel-nav carousel-nav-right",
+                  onClick: W,
+                  "aria-label": "Next destination",
+                },
+                [
+                  ...(w[1] ||
+                    (w[1] = [e("img", { src: Vs, alt: "Next" }, null, -1)])),
+                ]
+              ),
+            ]),
+            e("div", Al, [
+              e("div", Tl, [
+                e("span", Il, r(X.value.location), 1),
+                e("h3", Nl, r(X.value.title), 1),
+              ]),
+              e("div", Ml, [
+                e("p", El, r(X.value.description), 1),
+                e(
+                  "a",
+                  { href: X.value.ctaLink, class: "carousel-cta" },
+                  [
+                    Q(r(X.value.ctaText) + " ", 1),
+                    w[2] || (w[2] = e("span", null, "→", -1)),
+                  ],
+                  8,
+                  Rl
+                ),
+              ]),
+            ]),
+            e("div", Pl, [
+              (o(),
+              i(
+                K,
+                null,
+                se(b, (ge, fe) =>
+                  e(
+                    "button",
+                    {
+                      key: fe,
+                      class: B(["carousel-dot", { active: fe === E.value }]),
+                      onClick: (xe) => Ce(fe),
+                      "aria-label": `Go to slide ${fe + 1}`,
+                    },
+                    null,
+                    10,
+                    Ol
+                  )
+                ),
+                64
+              )),
+            ]),
+          ])
+        )
+      );
+    },
+  },
+  Bl = vt(Ll, [["__scopeId", "data-v-9920d604"]]),
+  Fl = "" + new URL("ship-phinisi-voyager-D5TceIuH.png", import.meta.url).href,
+  zl = "" + new URL("ship-ocean-explorer-Yg5A13gl.png", import.meta.url).href,
+  Ul = "" + new URL("ship-coral-queen-DLsN9IeK.png", import.meta.url).href,
+  Gl = "" + new URL("ship-sunset-cruiser-B6Je6v6A.png", import.meta.url).href,
+  Vl = "" + new URL("ship-island-hopper-zr6jDabx.png", import.meta.url).href,
+  Kl = "" + new URL("ship-reef-dancer-w9AhwkP8.png", import.meta.url).href,
+  ql = { class: "ships-carousel" },
+  Wl = { class: "ships-container" },
+  Hl = { class: "ships-filters" },
+  Yl = ["onClick"],
+  Jl = { class: "ships-slider-wrapper" },
+  jl = { class: "ships-slider-container" },
+  Xl = ["disabled"],
+  Ql = { class: "ship-image-wrapper" },
+  Zl = ["src", "alt"],
+  er = { class: "ship-info" },
+  tr = { class: "ship-location" },
+  sr = { class: "ship-name" },
+  nr = ["disabled"],
+  Ln = 50,
+  ar = {
+    __name: "ShipsCarousel",
+    setup(S) {
+      const b = [
+          { id: "all", name: "All" },
+          { id: "komodo", name: "Komodo" },
+          { id: "labuan-bajo", name: "Labuan Bajo" },
+          { id: "togean", name: "Togean" },
+        ],
+        f = [
+          {
+            id: 1,
+            name: "Phinisi Voyager",
+            destination: "komodo",
+            locationName: "Komodo National Park",
+            image: Fl,
+          },
+          {
+            id: 2,
+            name: "Ocean Explorer",
+            destination: "komodo",
+            locationName: "Komodo National Park",
+            image: zl,
+          },
+          {
+            id: 3,
+            name: "Coral Queen",
+            destination: "labuan-bajo",
+            locationName: "Labuan Bajo",
+            image: Ul,
+          },
+          {
+            id: 4,
+            name: "Sunset Cruiser",
+            destination: "labuan-bajo",
+            locationName: "Labuan Bajo",
+            image: Gl,
+          },
+          {
+            id: 5,
+            name: "Island Hopper",
+            destination: "togean",
+            locationName: "Togean Islands",
+            image: Vl,
+          },
+          {
+            id: 6,
+            name: "Reef Dancer",
+            destination: "togean",
+            locationName: "Togean Islands",
+            image: Kl,
+          },
+        ],
+        C = m("all"),
+        h = m(0),
+        g = m(typeof window < "u" ? window.innerWidth : 1200),
+        v = x(() =>
+          C.value === "all" ? f : f.filter((F) => F.destination === C.value)
+        ),
+        E = x(() => {
+          if (g.value <= 640) return g.value * 0.75;
+          if (g.value <= 900) return 300;
+          const F = Math.min(g.value - 80, 1400),
+            G = 32 * 2;
+          return (F - G) / 3;
+        }),
+        X = x(() => (g.value <= 640 ? 16 : 32)),
+        T = x(() => h.value * (E.value + X.value)),
+        oe = x(() => (g.value <= 640 ? 1 : g.value <= 900 ? 2 : 3)),
+        te = x(() => v.value.length > oe.value),
+        Z = x(() => Math.max(0, v.value.length - oe.value));
+      function q(F) {
+        (C.value = F), (h.value = 0);
+      }
+      function W() {
+        h.value < Z.value && h.value++;
+      }
+      function Se() {
+        h.value > 0 && h.value--;
+      }
+      function Ce() {
+        g.value = window.innerWidth;
+      }
+      const ie = m(0),
+        O = m(0);
+      function H(F) {
+        ie.value = F.changedTouches[0].screenX;
+      }
+      function le(F) {
+        O.value = F.changedTouches[0].screenX;
+      }
+      function ve() {
+        const F = ie.value - O.value,
+          G = F > Ln,
+          w = F < -Ln;
+        G ? W() : w && Se(), (ie.value = 0), (O.value = 0);
+      }
+      return (
+        Qe(() => {
+          window.addEventListener("resize", Ce);
+        }),
+        wt(() => {
+          window.removeEventListener("resize", Ce);
+        }),
+        (F, G) => (
+          o(),
+          i("section", ql, [
+            e("div", Wl, [
+              G[0] ||
+                (G[0] = e(
+                  "div",
+                  { class: "ships-header" },
+                  [
+                    e(
+                      "h2",
+                      { class: "ships-heading" },
+                      "Explore our fleet collection"
+                    ),
+                    e(
+                      "p",
+                      { class: "ships-description" },
+                      " Our fleet of luxury vessels are designed for intimate journeys through Indonesia's most spectacular waters. Each ship offers unique experiences, from traditional phinisi craftsmanship to modern expedition yachts, ensuring unforgettable adventures across the archipelago. "
+                    ),
+                  ],
+                  -1
+                )),
+              e("div", Hl, [
+                (o(),
+                i(
+                  K,
+                  null,
+                  se(b, (w) =>
+                    e(
+                      "button",
+                      {
+                        key: w.id,
+                        class: B(["filter-btn", { active: C.value === w.id }]),
+                        onClick: (ge) => q(w.id),
+                      },
+                      r(w.name),
+                      11,
+                      Yl
+                    )
+                  ),
+                  64
+                )),
+              ]),
+            ]),
+            e("div", Jl, [
+              e("div", jl, [
+                te.value
+                  ? (o(),
+                    i(
+                      "button",
+                      {
+                        key: 0,
+                        class: "ships-nav ships-nav-left",
+                        onClick: Se,
+                        disabled: h.value === 0,
+                        "aria-label": "Previous ships",
+                      },
+                      [
+                        ...(G[1] ||
+                          (G[1] = [
+                            e(
+                              "svg",
+                              {
+                                width: "20",
+                                height: "20",
+                                viewBox: "0 0 24 24",
+                                fill: "none",
+                                stroke: "currentColor",
+                                "stroke-width": "2",
+                              },
+                              [e("polyline", { points: "15 18 9 12 15 6" })],
+                              -1
+                            ),
+                          ])),
+                      ],
+                      8,
+                      Xl
+                    ))
+                  : M("", !0),
+                e(
+                  "div",
+                  {
+                    class: "ships-viewport",
+                    onTouchstart: H,
+                    onTouchmove: le,
+                    onTouchend: ve,
+                  },
+                  [
+                    ke(
+                      xt,
+                      { name: "slide-up", mode: "out-in" },
+                      {
+                        default: Me(() => [
+                          (o(),
+                          i(
+                            "div",
+                            { class: "ships-track-wrapper", key: C.value },
+                            [
+                              e(
+                                "div",
+                                {
+                                  class: "ships-track",
+                                  style: Ht({
+                                    transform: `translateX(-${T.value}px)`,
+                                  }),
+                                },
+                                [
+                                  (o(!0),
+                                  i(
+                                    K,
+                                    null,
+                                    se(
+                                      v.value,
+                                      (w) => (
+                                        o(),
+                                        i(
+                                          "div",
+                                          {
+                                            key: w.id,
+                                            class: "ship-card",
+                                            style: Ht({
+                                              width: `${E.value}px`,
+                                              marginRight: `${X.value}px`,
+                                            }),
+                                          },
+                                          [
+                                            e("div", Ql, [
+                                              e(
+                                                "img",
+                                                {
+                                                  src: w.image,
+                                                  alt: w.name,
+                                                  class: "ship-image",
+                                                },
+                                                null,
+                                                8,
+                                                Zl
+                                              ),
+                                            ]),
+                                            e("div", er, [
+                                              e(
+                                                "span",
+                                                tr,
+                                                r(w.locationName),
+                                                1
+                                              ),
+                                              e("h3", sr, r(w.name), 1),
+                                            ]),
+                                          ],
+                                          4
+                                        )
+                                      )
+                                    ),
+                                    128
+                                  )),
+                                ],
+                                4
+                              ),
+                            ]
+                          )),
+                        ]),
+                        _: 1,
+                      }
+                    ),
+                  ],
+                  32
+                ),
+                te.value
+                  ? (o(),
+                    i(
+                      "button",
+                      {
+                        key: 1,
+                        class: "ships-nav ships-nav-right",
+                        onClick: W,
+                        disabled: h.value >= Z.value,
+                        "aria-label": "Next ships",
+                      },
+                      [
+                        ...(G[2] ||
+                          (G[2] = [
+                            e(
+                              "svg",
+                              {
+                                width: "20",
+                                height: "20",
+                                viewBox: "0 0 24 24",
+                                fill: "none",
+                                stroke: "currentColor",
+                                "stroke-width": "2",
+                              },
+                              [e("polyline", { points: "9 18 15 12 9 6" })],
+                              -1
+                            ),
+                          ])),
+                      ],
+                      8,
+                      nr
+                    ))
+                  : M("", !0),
+              ]),
+            ]),
+          ])
+        )
+      );
+    },
+  },
+  or = vt(ar, [["__scopeId", "data-v-82c1bf13"]]),
+  ir = "" + new URL("activity-snorkeling-B8hwZN3L.png", import.meta.url).href,
+  lr = "" + new URL("activity-relaxing-DX-9w-xF.png", import.meta.url).href,
+  rr = "" + new URL("activity-hiking-chrel6lc.png", import.meta.url).href,
+  cr = "" + new URL("activity-community-B7vG2Gb2.png", import.meta.url).href,
+  ur = "" + new URL("activity-wildlife-CZn9_LiH.png", import.meta.url).href,
+  dr = "" + new URL("activity-beach-oc9adSOS.png", import.meta.url).href,
+  vr = "" + new URL("activity-stargazing-BA4hSomZ.png", import.meta.url).href,
+  pr = { class: "activities-carousel", "data-nav-theme": "light" },
+  mr = { class: "activities-slider" },
+  fr = ["src", "alt"],
+  hr = { class: "activity-info" },
+  gr = { class: "activity-title" },
+  br = { class: "activity-desc" },
+  yr = { class: "activities-dots" },
+  kr = ["onClick", "aria-label"],
+  wr = ["disabled"],
+  _r = ["disabled"],
+  Bn = 50,
+  Cr = {
+    __name: "ActivitiesCarousel",
+    setup(S) {
+      const b = [
+          {
+            title: "Snorkeling & Diving",
+            description: "Explore vibrant coral reefs and marine life",
+            image: ir,
+          },
+          {
+            title: "Relaxing & Sunbathing",
+            description: "Unwind on pristine decks and secluded beaches",
+            image: lr,
+          },
+          {
+            title: "Hiking & Viewpoints",
+            description: "Trek to breathtaking panoramic vistas",
+            image: rr,
+          },
+          {
+            title: "Local Community Immersion",
+            description: "Connect with authentic Indonesian culture",
+            image: cr,
+          },
+          {
+            title: "Wildlife Spotting",
+            description: "Encounter Komodo dragons in their habitat",
+            image: ur,
+          },
+          {
+            title: "Beach Exploration",
+            description: "Discover hidden coves and pristine shores",
+            image: dr,
+          },
+          {
+            title: "Stargazing",
+            description: "Marvel at the Milky Way from open waters",
+            image: vr,
+          },
+        ],
+        f = m(0),
+        C = m(typeof window < "u" ? window.innerWidth : 1200),
+        h = m(null),
+        g = x(() => (C.value <= 768 ? C.value : C.value * 0.35)),
+        v = x(() => (C.value <= 768 ? 0 : f.value * g.value)),
+        E = x(() => (C.value <= 768 ? b.length - 1 : b.length - 2));
+      function X() {
+        f.value < E.value && f.value++;
+      }
+      function T() {
+        f.value > 0 && f.value--;
+      }
+      function oe(H) {
+        f.value = Math.min(H, E.value);
+      }
+      function te(H) {
+        if (C.value <= 768 && h.value) {
+          const le = C.value;
+          h.value.scrollTo({ left: H * le, behavior: "smooth" });
+        } else oe(H);
+      }
+      function Z() {
+        C.value = window.innerWidth;
+      }
+      const q = m(0),
+        W = m(0);
+      function Se(H) {
+        C.value > 768 && (q.value = H.changedTouches[0].screenX);
+      }
+      function Ce(H) {
+        C.value > 768 && (W.value = H.changedTouches[0].screenX);
+      }
+      function ie() {
+        if (C.value > 768) {
+          const H = q.value - W.value,
+            le = H > Bn,
+            ve = H < -Bn;
+          le ? X() : ve && T(), (q.value = 0), (W.value = 0);
+        }
+      }
+      function O(H) {
+        if (C.value <= 768) {
+          const le = H.target.scrollLeft,
+            ve = C.value,
+            F = Math.round(le / ve);
+          f.value = F;
+        }
+      }
+      return (
+        Qe(() => {
+          window.addEventListener("resize", Z);
+        }),
+        wt(() => {
+          window.removeEventListener("resize", Z);
+        }),
+        (H, le) => (
+          o(),
+          i("section", pr, [
+            le[2] ||
+              (le[2] = e(
+                "div",
+                { class: "activities-content" },
+                [
+                  e(
+                    "h2",
+                    { class: "activities-heading" },
+                    "What to experience?"
+                  ),
+                  e(
+                    "p",
+                    { class: "activities-description" },
+                    " From underwater adventures to peaceful sunsets, our carefully curated activities invite you to discover the magic of Indonesia's hidden treasures. "
+                  ),
+                  e(
+                    "button",
+                    { class: "activities-cta" },
+                    "Explore activities"
+                  ),
+                ],
+                -1
+              )),
+            e("div", mr, [
+              e(
+                "div",
+                {
+                  class: "activities-track",
+                  ref_key: "trackRef",
+                  ref: h,
+                  onScroll: O,
+                  onTouchstart: Se,
+                  onTouchmove: Ce,
+                  onTouchend: ie,
+                  style: Ht({ transform: `translateX(-${v.value}px)` }),
+                },
+                [
+                  (o(),
+                  i(
+                    K,
+                    null,
+                    se(b, (ve, F) =>
+                      e(
+                        "div",
+                        {
+                          key: F,
+                          class: B([
+                            "activity-slide",
+                            { active: F === f.value },
+                          ]),
+                        },
+                        [
+                          e(
+                            "img",
+                            {
+                              src: ve.image,
+                              alt: ve.title,
+                              class: "activity-image",
+                            },
+                            null,
+                            8,
+                            fr
+                          ),
+                          e("div", hr, [
+                            e("h3", gr, r(ve.title), 1),
+                            e("p", br, r(ve.description), 1),
+                          ]),
+                        ],
+                        2
+                      )
+                    ),
+                    64
+                  )),
+                ],
+                36
+              ),
+            ]),
+            e("div", yr, [
+              (o(),
+              i(
+                K,
+                null,
+                se(b, (ve, F) =>
+                  e(
+                    "button",
+                    {
+                      key: F,
+                      class: B(["activity-dot", { active: F === f.value }]),
+                      onClick: (G) => te(F),
+                      "aria-label": `Go to ${b[F].title}`,
+                    },
+                    null,
+                    10,
+                    kr
+                  )
+                ),
+                64
+              )),
+            ]),
+            le[3] ||
+              (le[3] = e(
+                "button",
+                { class: "activities-cta mobile-only" },
+                "Explore activities",
+                -1
+              )),
+            e(
+              "button",
+              {
+                class: "activities-nav activities-nav-left",
+                onClick: T,
+                disabled: f.value === 0,
+              },
+              [
+                ...(le[0] ||
+                  (le[0] = [
+                    e(
+                      "svg",
+                      {
+                        width: "24",
+                        height: "24",
+                        viewBox: "0 0 24 24",
+                        fill: "none",
+                        stroke: "currentColor",
+                        "stroke-width": "2",
+                      },
+                      [e("polyline", { points: "15 18 9 12 15 6" })],
+                      -1
+                    ),
+                  ])),
+              ],
+              8,
+              wr
+            ),
+            e(
+              "button",
+              {
+                class: "activities-nav activities-nav-right",
+                onClick: X,
+                disabled: f.value >= E.value,
+              },
+              [
+                ...(le[1] ||
+                  (le[1] = [
+                    e(
+                      "svg",
+                      {
+                        width: "24",
+                        height: "24",
+                        viewBox: "0 0 24 24",
+                        fill: "none",
+                        stroke: "currentColor",
+                        "stroke-width": "2",
+                      },
+                      [e("polyline", { points: "9 18 15 12 9 6" })],
+                      -1
+                    ),
+                  ])),
+              ],
+              8,
+              _r
+            ),
+          ])
+        )
+      );
+    },
+  },
+  $r = vt(Cr, [["__scopeId", "data-v-9abd6fc3"]]),
+  Sr = "" + new URL("home-landscape-wPTuluZw.png", import.meta.url).href,
+  xr = "" + new URL("home-conservation-DjIfDkiI.png", import.meta.url).href,
+  Dr = "" + new URL("home-culture-DX4UewC_.png", import.meta.url).href,
+  Ar = "" + new URL("home-legacy-Dkg62GSZ.png", import.meta.url).href,
+  Tr = ["muted"],
+  Ir = ["aria-label"],
+  Nr = {
+    key: 0,
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+  },
+  Mr = {
+    key: 1,
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+  },
+  Er = { class: "komodo-section" },
+  Rr = { class: "komodo-content" },
+  Pr = ["src"],
+  Or = { class: "komodo-section section-alt" },
+  Lr = { class: "komodo-content reverse" },
+  Br = ["src"],
+  Fr = { class: "komodo-section" },
+  zr = { class: "komodo-content" },
+  Ur = ["src"],
+  Gr = { class: "komodo-section section-alt" },
+  Vr = { class: "komodo-content reverse" },
+  Kr = ["src"],
+  qr = { class: "home-footer" },
+  Wr = { class: "home-footer-inner container" },
+  Hr = { class: "hf-top" },
+  Yr = { class: "hf-links" },
+  Jr = { class: "hf-bottom" },
+  jr = { class: "hf-copyright" },
+  Xr = {
+    __name: "Home",
+    setup(S) {
+      const b = Gs(),
+        f = m(!1),
+        C = m(!0),
+        h = m(null),
+        g = m(null),
+        v = m(null),
+        E = m(null),
+        X = m(null),
+        T = m(null),
+        oe = m(null),
+        te = m(null),
+        Z = m(null),
+        q = m(null);
+      let W = null;
+      function Se() {
+        [
+          { container: v.value, img: E.value },
+          { container: X.value, img: T.value },
+          { container: oe.value, img: te.value },
+          { container: Z.value, img: q.value },
+        ].forEach((w) => {
+          if (!w.container || !w.img) return;
+          const ge = w.container.getBoundingClientRect(),
+            fe = window.innerHeight;
+          if (ge.top < fe && ge.bottom > 0) {
+            const xe = fe / 2 - (ge.top + ge.height / 2),
+              qe = 0.15;
+            w.img.style.transform = `translateY(${xe * qe}px)`;
+          }
+        });
+      }
+      let Ce = !1;
+      function ie() {
+        Ce ||
+          (window.requestAnimationFrame(() => {
+            Se(), (Ce = !1);
+          }),
+          (Ce = !0));
+      }
+      function O() {
+        (C.value = !C.value),
+          !C.value && h.value && h.value.play().catch(() => {});
+      }
+      function H(G) {
+        G.forEach((w) => {
+          !w.isIntersecting && !C.value && (C.value = !0);
+        });
+      }
+      Qe(() => {
+        (W = new IntersectionObserver(H, { threshold: 0.1 })),
+          g.value && W.observe(g.value),
+          window.addEventListener("scroll", ie),
+          Se();
+      }),
+        wt(() => {
+          window.removeEventListener("scroll", ie), W && W.disconnect();
+        });
+      function le() {
+        f.value = !0;
+      }
+      function ve() {
+        f.value = !1;
+      }
+      function F() {
+        (f.value = !1), b.push("/results");
+      }
+      return (G, w) => (
+        o(),
+        i(
+          K,
+          null,
+          [
+            e(
+              "section",
+              { class: "hero-section", ref_key: "heroSectionRef", ref: g },
+              [
+                e(
+                  "video",
+                  {
+                    class: "hero-bg-video",
+                    autoplay: "",
+                    muted: C.value,
+                    loop: "",
+                    playsinline: "",
+                    ref_key: "heroVideo",
+                    ref: h,
+                  },
+                  [
+                    ...(w[0] ||
+                      (w[0] = [
+                        e("source", { src: wl, type: "video/mp4" }, null, -1),
+                      ])),
+                  ],
+                  8,
+                  Tr
+                ),
+                w[3] ||
+                  (w[3] = e(
+                    "div",
+                    null,
+                    [
+                      e("h1", { class: "hero-title" }, "Shores of Wonder"),
+                      e(
+                        "p",
+                        { class: "hero-sub" },
+                        " Embark on an exclusive voyage through the Komodo Islands. "
+                      ),
+                    ],
+                    -1
+                  )),
+                e(
+                  "button",
+                  {
+                    class: "hero-sound-control",
+                    onClick: O,
+                    "aria-label": C.value ? "Unmute" : "Mute",
+                  },
+                  [
+                    C.value
+                      ? (o(),
+                        i("svg", Nr, [
+                          ...(w[1] ||
+                            (w[1] = [
+                              e(
+                                "path",
+                                { d: "M11 5L6 9H2v6h4l5 4V5z" },
+                                null,
+                                -1
+                              ),
+                              e(
+                                "line",
+                                { x1: "23", y1: "9", x2: "17", y2: "15" },
+                                null,
+                                -1
+                              ),
+                              e(
+                                "line",
+                                { x1: "17", y1: "9", x2: "23", y2: "15" },
+                                null,
+                                -1
+                              ),
+                            ])),
+                        ]))
+                      : (o(),
+                        i("svg", Mr, [
+                          ...(w[2] ||
+                            (w[2] = [
+                              e(
+                                "path",
+                                { d: "M11 5L6 9H2v6h4l5 4V5z" },
+                                null,
+                                -1
+                              ),
+                              e(
+                                "path",
+                                {
+                                  d: "M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07",
+                                },
+                                null,
+                                -1
+                              ),
+                            ])),
+                        ])),
+                  ],
+                  8,
+                  Ir
+                ),
+              ],
+              512
+            ),
+            ke(Bl),
+            e("section", Er, [
+              e("div", Rr, [
+                w[5] ||
+                  (w[5] = e(
+                    "div",
+                    { class: "komodo-text" },
+                    [
+                      e(
+                        "h2",
+                        { class: "komodo-heading" },
+                        " A golden thread throughout every Komodo Cruises experience is a deep reverence for the wild and its power to heal. "
+                      ),
+                      e(
+                        "p",
+                        { class: "komodo-paragraph" },
+                        " Our phinisi vessels and curated voyages are designed to offer guests the freedom to reflect, inviting in wonder and wholeness. "
+                      ),
+                    ],
+                    -1
+                  )),
+                e(
+                  "div",
+                  { class: "komodo-media", ref_key: "mediaRef1", ref: v },
+                  [
+                    e(
+                      "img",
+                      {
+                        src: he(Sr),
+                        alt: "Komodo landscape",
+                        loading: "lazy",
+                        ref_key: "imgRef1",
+                        ref: E,
+                      },
+                      null,
+                      8,
+                      Pr
+                    ),
+                    w[4] ||
+                      (w[4] = e(
+                        "button",
+                        { class: "play-button", "aria-label": "Play video" },
+                        [
+                          e(
+                            "svg",
+                            {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              width: "24",
+                              height: "24",
+                              viewBox: "0 0 24 24",
+                              fill: "white",
+                            },
+                            [e("polygon", { points: "5,3 19,12 5,21" })]
+                          ),
+                        ],
+                        -1
+                      )),
+                  ],
+                  512
+                ),
+              ]),
+            ]),
+            e("section", Or, [
+              e("div", Lr, [
+                w[6] ||
+                  (w[6] = e(
+                    "div",
+                    { class: "komodo-text" },
+                    [
+                      e(
+                        "h2",
+                        { class: "komodo-heading" },
+                        " Dedicated to environmentally conscious hospitality and sustainable conservation since 2015. "
+                      ),
+                      e(
+                        "p",
+                        { class: "komodo-paragraph" },
+                        " Join us in our love for the natural world, to be part of something meaningful and bigger than ourselves. "
+                      ),
+                    ],
+                    -1
+                  )),
+                e(
+                  "div",
+                  { class: "komodo-media", ref_key: "mediaRef2", ref: X },
+                  [
+                    e(
+                      "img",
+                      {
+                        src: he(xr),
+                        alt: "Conservation efforts",
+                        loading: "lazy",
+                        ref_key: "imgRef2",
+                        ref: T,
+                      },
+                      null,
+                      8,
+                      Br
+                    ),
+                  ],
+                  512
+                ),
+              ]),
+            ]),
+            e("section", Fr, [
+              e("div", zr, [
+                w[7] ||
+                  (w[7] = e(
+                    "div",
+                    { class: "komodo-text" },
+                    [
+                      e(
+                        "h2",
+                        { class: "komodo-heading" },
+                        "Telling Komodo's stories."
+                      ),
+                      e(
+                        "p",
+                        { class: "komodo-subheading" },
+                        ' Komodo Cruises means "Place of Dragons" in local lore. '
+                      ),
+                      e(
+                        "p",
+                        { class: "komodo-paragraph" },
+                        " Our people share their passion for Indonesia's natural spaces and rich cultures, bringing you closer to both through stories and experiences. "
+                      ),
+                    ],
+                    -1
+                  )),
+                e(
+                  "div",
+                  { class: "komodo-media", ref_key: "mediaRef3", ref: oe },
+                  [
+                    e(
+                      "img",
+                      {
+                        src: he(Dr),
+                        alt: "Komodo stories",
+                        loading: "lazy",
+                        ref_key: "imgRef3",
+                        ref: te,
+                      },
+                      null,
+                      8,
+                      Ur
+                    ),
+                  ],
+                  512
+                ),
+              ]),
+            ]),
+            e("section", Gr, [
+              e("div", Vr, [
+                w[8] ||
+                  (w[8] = Pe(
+                    '<div class="komodo-text"><p class="komodo-subheading">A legacy unfolds</p><h2 class="komodo-heading"> It started in 2015 with a simple wooden boat and a deep passion for the ocean. </h2><p class="komodo-paragraph"> A legacy unfolded over decades, inspired by family values and a purpose to offer profound wildlife encounters. </p><div style="margin-top:1.5rem;"><button class="hero-cta" style="color:#333;border:1px solid rgba(0, 0, 0, 0.2);background:transparent;padding:0.8rem 2rem;font-size:0.95rem;text-transform:uppercase;letter-spacing:0.05em;"> Our Story </button></div></div>',
+                    1
+                  )),
+                e(
+                  "div",
+                  { class: "komodo-media", ref_key: "mediaRef4", ref: Z },
+                  [
+                    e(
+                      "img",
+                      {
+                        src: he(Ar),
+                        alt: "Our story",
+                        loading: "lazy",
+                        ref_key: "imgRef4",
+                        ref: q,
+                      },
+                      null,
+                      8,
+                      Kr
+                    ),
+                  ],
+                  512
+                ),
+              ]),
+            ]),
+            ke($r),
+            ke(or),
+            e("footer", qr, [
+              e("div", Wr, [
+                e("div", Hr, [
+                  w[12] ||
+                    (w[12] = e(
+                      "div",
+                      { class: "hf-brand" },
+                      [
+                        e("div", { class: "hf-logo" }, "KOMODO CRUISES"),
+                        e(
+                          "div",
+                          { class: "hf-copy" },
+                          "Rare journeys across the Komodo Islands."
+                        ),
+                      ],
+                      -1
+                    )),
+                  e("nav", Yr, [
+                    e(
+                      "a",
+                      { href: "#", onClick: j(le, ["prevent"]) },
+                      "Plan your trip"
+                    ),
+                    w[9] || (w[9] = e("a", { href: "#" }, "Experiences", -1)),
+                    w[10] || (w[10] = e("a", { href: "#" }, "Our story", -1)),
+                    w[11] || (w[11] = e("a", { href: "#" }, "Contact", -1)),
+                  ]),
+                  w[13] ||
+                    (w[13] = Pe(
+                      '<div class="hf-contact"><div class="hf-contact-title">Contact Us</div><div class="hf-contact-phone"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><a href="tel:+6285282296450">+62 852-8229-6450</a></div><div class="hf-contact-address"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg><span>Graha Permata Pancoran, Jl. KH. Guru Amin Blok A5, Pancoran, Jakarta Selatan 12780</span></div></div>',
+                      1
+                    )),
+                ]),
+                e("div", Jr, [
+                  e(
+                    "div",
+                    jr,
+                    " © " +
+                      r(new Date().getFullYear()) +
+                      " Komodo Cruises | PT CANARD MONEY INDONESIA ",
+                    1
+                  ),
+                  w[14] ||
+                    (w[14] = e(
+                      "div",
+                      { class: "hf-disclaimer" },
+                      " All voyages subject to weather and park regulations. ",
+                      -1
+                    )),
+                ]),
+              ]),
+            ]),
+            ke(
+              Ks,
+              { isOpen: f.value, onClose: ve, onNavigateToResults: F },
+              null,
+              8,
+              ["isOpen"]
+            ),
+          ],
+          64
+        )
+      );
+    },
+  },
+  Qr = "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io";
+async function Zr(S) {
+  try {
+    const b = await fetch(`${Qr}/api/create-invoice`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: S.amount,
+          payerEmail: S.payerEmail,
+          description: S.description,
+          customerName: S.customerName,
+          customerPhone: S.customerPhone,
+          items: S.items,
+          successRedirectUrl:
+            S.successRedirectUrl || `${window.location.origin}/payment-success`,
+          failureRedirectUrl:
+            S.failureRedirectUrl || `${window.location.origin}/payment-failed`,
+        }),
+      }),
+      f = await b.json();
+    if (!b.ok) throw new Error(f.message || "Failed to create invoice");
+    return f;
+  } catch (b) {
+    throw (console.error("Error creating Xendit invoice:", b), b);
+  }
+}
+function ec(S) {
+  if (S) window.location.href = S;
+  else throw new Error("Invoice URL is required");
+}
+function St(S) {
+  if (!S) return 0;
+  if (typeof S == "number") return S;
+  const b = String(S)
+    .replace(/[^\d.,]/g, "")
+    .replace(/\./g, "")
+    .replace(/,/g, "");
+  return parseInt(b) || 0;
+}
+const tc = { class: "results-wrap" },
+  sc = { key: 0, class: "simple-loader" },
+  nc = { key: 1, class: "results-container" },
+  ac = { class: "mobile-filter-summary" },
+  oc = { class: "filter-summary-content" },
+  ic = { class: "filter-summary-row" },
+  lc = { class: "filter-summary-item" },
+  rc = { class: "filter-summary-item" },
+  cc = { class: "results-layout" },
+  uc = { class: "results-main" },
+  dc = { key: 0, class: "error-state" },
+  vc = { class: "error-message" },
+  pc = { key: 1 },
+  mc = { class: "results-intro" },
+  fc = { key: 0, class: "success-message" },
+  hc = { key: 1, class: "no-availability" },
+  gc = { key: 0, class: "results-controls" },
+  bc = { class: "results-controls-left" },
+  yc = ["aria-expanded"],
+  kc = ["src"],
+  wc = ["onClick"],
+  _c = { class: "results-controls-right" },
+  Cc = { class: "results-count" },
+  $c = { class: "ship-selection-container" },
+  Sc = { class: "ship-selection-header" },
+  xc = { class: "ship-selection-subtitle" },
+  Dc = { class: "ship-selection-grid" },
+  Ac = ["onClick"],
+  Tc = { class: "ship-img-col" },
+  Ic = ["src", "alt"],
+  Nc = { class: "ship-card-content" },
+  Mc = { class: "ship-card-name" },
+  Ec = { key: 0, class: "ship-desc-sm" },
+  Rc = { key: 1, class: "ship-card-info" },
+  Pc = { class: "ship-card-capacity" },
+  Oc = { key: 2, class: "ship-card-info" },
+  Lc = { class: "cabin-results-section" },
+  Bc = { key: 0, class: "back-to-ships-bar" },
+  Fc = { class: "viewing-ship-label" },
+  zc = { key: 1, class: "no-availability" },
+  Uc = { key: 2, class: "lodge-results" },
+  Gc = {
+    class: "cabin-image",
+    style: { position: "relative", overflow: "hidden" },
+  },
+  Vc = ["src", "alt", "onError"],
+  Kc = ["onClick"],
+  qc = ["onClick"],
+  Wc = { class: "cabin-content" },
+  Hc = { class: "cabin-title-group" },
+  Yc = { class: "cabin-name" },
+  Jc = { class: "cabin-badge active" },
+  jc = { class: "cabin-specs" },
+  Xc = { class: "cabin-overview" },
+  Qc = { class: "overview-list" },
+  Zc = { key: 0, class: "overview-list" },
+  eu = ["onClick"],
+  tu = { key: 0, class: "trips-section" },
+  su = { class: "trip-primary" },
+  nu = { class: "trip-primary-info" },
+  au = { class: "trip-primary-date" },
+  ou = { class: "trip-primary-rooms" },
+  iu = ["onClick"],
+  lu = { key: 1, class: "more-dates-list" },
+  ru = ["onClick"],
+  cu = { class: "trip-alt-info" },
+  uu = { class: "trip-alt-date" },
+  du = { class: "trip-alt-rooms" },
+  vu = { key: 0, class: "trip-reserved-label" },
+  pu = { key: 1, class: "trip-select-action" },
+  mu = { class: "cabin-info-section" },
+  fu = { class: "cabin-info-left" },
+  hu = { class: "price-main" },
+  gu = { class: "price-value" },
+  bu = { class: "cabin-info-right" },
+  yu = ["onClick"],
+  ku = { key: 3, class: "pagination" },
+  wu = ["disabled"],
+  _u = { class: "pagination-pages" },
+  Cu = ["onClick"],
+  $u = ["disabled"],
+  Su = { key: 4, class: "no-results" },
+  xu = { class: "sidebar-section-wrapper" },
+  Du = { class: "sidebar-section check-availability-section" },
+  Au = { key: 0, class: "sidebar-skeleton" },
+  Tu = ["aria-expanded"],
+  Iu = { class: "caret" },
+  Nu = ["src"],
+  Mu = ["onClick"],
+  Eu = { class: "list-text result-list-text" },
+  Ru = ["value"],
+  Pu = ["aria-expanded"],
+  Ou = { class: "caret" },
+  Lu = ["src"],
+  Bu = { class: "dropdown-group-title" },
+  Fu = { key: 0, class: "muted" },
+  zu = ["onClick"],
+  Uu = { class: "list-text result-list-text" },
+  Gu = ["value"],
+  Vu = { key: 0, class: "muted" },
+  Ku = ["aria-expanded"],
+  qu = { key: 0 },
+  Wu = { key: 1 },
+  Hu = { class: "caret" },
+  Yu = ["src"],
+  Ju = { class: "sidebar-pill-container" },
+  ju = { key: 0, class: "sidebar-flexible-content" },
+  Xu = { class: "sidebar-counter-row" },
+  Qu = { class: "ctrls" },
+  Zu = ["disabled"],
+  ed = { class: "val" },
+  td = { key: 1, class: "cabins-container-sidebar" },
+  sd = { class: "cabin-header-sidebar-static" },
+  nd = { class: "cabin-header-left-sidebar" },
+  ad = { class: "cabin-title-sidebar" },
+  od = { class: "cabin-summary-sidebar" },
+  id = { class: "cabin-header-right-sidebar" },
+  ld = ["onClick"],
+  rd = ["onClick"],
+  cd = { key: 0, class: "cabin-body-sidebar" },
+  ud = { class: "counter-row-sidebar" },
+  dd = { class: "counter-ctrls-sidebar" },
+  vd = ["disabled", "onClick"],
+  pd = { class: "count-sidebar" },
+  md = ["disabled", "onClick"],
+  fd = { class: "counter-row-sidebar" },
+  hd = { class: "counter-ctrls-sidebar" },
+  gd = ["disabled", "onClick"],
+  bd = { class: "count-sidebar" },
+  yd = ["disabled", "onClick"],
+  kd = ["aria-expanded"],
+  wd = { class: "caret" },
+  _d = ["src"],
+  Cd = { class: "custom-calendar" },
+  $d = { class: "calendar-header" },
+  Sd = { class: "calendar-title" },
+  xd = { class: "calendar-grid" },
+  Dd = { class: "calendar-days" },
+  Ad = ["disabled", "onClick"],
+  Td = { class: "caret" },
+  Id = ["src"],
+  Nd = { key: 0, class: "custom-dropdown-menu" },
+  Md = { class: "trip-duration-range-content sidebar-duration" },
+  Ed = { class: "counter-row duration-counter-row" },
+  Rd = { class: "counter-ctrls" },
+  Pd = ["disabled"],
+  Od = { class: "count-display" },
+  Ld = ["disabled"],
+  Bd = { class: "counter-row duration-counter-row" },
+  Fd = { class: "counter-ctrls" },
+  zd = ["disabled"],
+  Ud = { class: "count-display" },
+  Gd = ["disabled"],
+  Vd = { class: "duration-reset-row" },
+  Kd = ["disabled"],
+  qd = { key: 0, class: "sidebar-track" },
+  Wd = { class: "itinerary-sticky" },
+  Hd = { key: 0, class: "itinerary-empty" },
+  Yd = { key: 1, class: "itinerary-list" },
+  Jd = { class: "itinerary-header" },
+  jd = { class: "itinerary-cabin-name" },
+  Xd = ["onClick"],
+  Qd = { class: "itinerary-info-row" },
+  Zd = { class: "itinerary-info-text" },
+  ev = { class: "itinerary-info-row" },
+  tv = { class: "itinerary-info-text" },
+  sv = { class: "itinerary-info-row guest-row-editable" },
+  nv = { class: "guest-info-wrap" },
+  av = { class: "itinerary-info-text" },
+  ov = ["onClick"],
+  iv = { class: "itinerary-price-row" },
+  lv = { class: "itinerary-price-left" },
+  rv = { class: "itinerary-price-label" },
+  cv = { class: "itinerary-price-value" },
+  uv = { key: 2, class: "itinerary-total" },
+  dv = { class: "itinerary-total-row" },
+  vv = { class: "itinerary-total-right" },
+  pv = { class: "itinerary-total-amount" },
+  mv = { key: 3, class: "itinerary-total-note" },
+  fv = { class: "modal-body modal-body-redesigned" },
+  hv = { class: "modal-info-section modal-info-left" },
+  gv = { class: "modal-cabin-header" },
+  bv = { class: "modal-cabin-name" },
+  yv = { class: "modal-cabin-specs" },
+  kv = { class: "modal-cabin-quote" },
+  wv = { class: "modal-overview-section" },
+  _v = { class: "modal-overview-grid" },
+  Cv = { class: "modal-overview-list" },
+  $v = { key: 0, class: "modal-overview-list" },
+  Sv = { class: "modal-amenities-section" },
+  xv = { class: "modal-amenities-grid" },
+  Dv = { class: "modal-amenities-list" },
+  Av = { key: 0, class: "modal-amenities-list" },
+  Tv = { class: "modal-image-section modal-image-right" },
+  Iv = ["src", "alt"],
+  Nv = { class: "modal-image-indicator" },
+  Mv = { class: "indicator-count" },
+  Ev = { class: "modal-bottom-section" },
+  Rv = { class: "modal-rate-info" },
+  Pv = { class: "modal-price-display" },
+  Ov = { class: "price-amount" },
+  Lv = { key: 0, class: "price-label" },
+  Bv = { class: "guest-modal-body" },
+  Fv = { class: "guest-counter-section" },
+  zv = { class: "guest-counter-row" },
+  Uv = { class: "guest-counter-controls" },
+  Gv = ["disabled"],
+  Vv = { class: "guest-counter-value" },
+  Kv = ["disabled"],
+  qv = { class: "guest-available-note" },
+  Wv = { key: 0 },
+  Hv = { class: "guest-modal-actions" },
+  Yv = { key: 4, class: "enquiry-modal-overlay" },
+  Jv = { class: "enquiry-modal-content" },
+  jv = { class: "enquiry-modal-body" },
+  Xv = { class: "enquiry-form-section" },
+  Qv = { class: "form-row" },
+  Zv = { class: "form-group form-group-small" },
+  ep = { class: "form-group" },
+  tp = { class: "form-group" },
+  sp = { class: "form-row" },
+  np = { class: "form-group" },
+  ap = { class: "phone-input" },
+  op = { class: "form-group" },
+  ip = { class: "form-row" },
+  lp = { class: "form-group" },
+  rp = { class: "form-group" },
+  cp = { class: "form-group" },
+  up = { class: "form-group" },
+  dp = { class: "form-checkboxes" },
+  vp = { class: "checkbox-label" },
+  pp = { class: "checkbox-label" },
+  mp = ["disabled"],
+  fp = { class: "enquiry-summary-section" },
+  hp = { class: "summary-items" },
+  gp = { class: "summary-item-header" },
+  bp = { class: "summary-lodge-name" },
+  yp = { class: "summary-item-details" },
+  kp = { class: "summary-cabin" },
+  wp = { class: "summary-guests" },
+  _p = { class: "summary-dates" },
+  Cp = { key: 0, class: "summary-pricing" },
+  $p = { class: "pricing-row" },
+  Sp = { class: "pricing-value" },
+  xp = { class: "pricing-row" },
+  Dp = { class: "pricing-label" },
+  Ap = { class: "pricing-value" },
+  Tp = { key: 0, class: "enquiry-total-section" },
+  Ip = { class: "enquiry-total" },
+  Np = { class: "enquiry-total-row" },
+  Mp = { class: "enquiry-total-amount" },
+  Ep = { key: 1, class: "enquiry-pricing-note" },
+  Rp = { class: "home-footer" },
+  Pp = { class: "home-footer-inner container" },
+  Op = { class: "hf-top" },
+  Lp = { class: "hf-links" },
+  Bp = { class: "hf-bottom" },
+  Fp = { class: "hf-copyright" },
+  zp = { class: "mobile-filter-modal" },
+  Up = { class: "mobile-filter-modal-header" },
+  Gp = { class: "mobile-filter-modal-body" },
+  Vp = { class: "modal-field-group" },
+  Kp = ["src"],
+  qp = { key: 0, class: "modal-field-dropdown" },
+  Wp = ["onClick"],
+  Hp = { class: "list-text result-list-text" },
+  Yp = ["value"],
+  Jp = { class: "modal-field-group" },
+  jp = ["src"],
+  Xp = { key: 0, class: "modal-field-dropdown" },
+  Qp = { class: "dropdown-group-title" },
+  Zp = { key: 0, class: "muted" },
+  e1 = ["onClick"],
+  t1 = { class: "list-text result-list-text" },
+  s1 = ["value"],
+  n1 = { class: "modal-field-group" },
+  a1 = { key: 0 },
+  o1 = { key: 1 },
+  i1 = ["src"],
+  l1 = {
+    key: 0,
+    class: "modal-field-dropdown cabin-panel",
+    style: { padding: "1rem" },
+  },
+  r1 = { class: "sidebar-pill-container" },
+  c1 = { key: 0, class: "sidebar-flexible-content" },
+  u1 = { class: "sidebar-counter-row" },
+  d1 = { class: "ctrls" },
+  v1 = ["disabled"],
+  p1 = { class: "val" },
+  m1 = { key: 1, class: "cabins-container-sidebar" },
+  f1 = { class: "cabin-header-sidebar-static" },
+  h1 = { class: "cabin-header-left-sidebar" },
+  g1 = { class: "cabin-title-sidebar" },
+  b1 = { class: "cabin-summary-sidebar" },
+  y1 = { class: "cabin-header-right-sidebar" },
+  k1 = ["onClick"],
+  w1 = ["onClick"],
+  _1 = { key: 0, class: "cabin-body-sidebar" },
+  C1 = { class: "counter-row-sidebar" },
+  $1 = { class: "counter-ctrls-sidebar" },
+  S1 = ["disabled", "onClick"],
+  x1 = { class: "count-sidebar" },
+  D1 = ["disabled", "onClick"],
+  A1 = { class: "counter-row-sidebar" },
+  T1 = { class: "counter-ctrls-sidebar" },
+  I1 = ["disabled", "onClick"],
+  N1 = { class: "count-sidebar" },
+  M1 = ["disabled", "onClick"],
+  E1 = { class: "modal-field-group" },
+  R1 = ["src"],
+  P1 = { key: 0, class: "modal-field-dropdown dates-panel" },
+  O1 = {
+    class: "custom-calendar",
+    style: { "max-width": "100%", "box-shadow": "none", border: "none" },
+  },
+  L1 = { class: "calendar-header" },
+  B1 = { class: "calendar-title" },
+  F1 = { class: "calendar-grid" },
+  z1 = { class: "calendar-days" },
+  U1 = ["disabled", "onClick"],
+  G1 = { class: "modal-field-group" },
+  V1 = { class: "trip-duration-range-content mobile-duration" },
+  K1 = { class: "counter-row duration-counter-row" },
+  q1 = { class: "counter-ctrls" },
+  W1 = ["disabled"],
+  H1 = { class: "count-display" },
+  Y1 = ["disabled"],
+  J1 = { class: "counter-row duration-counter-row" },
+  j1 = { class: "counter-ctrls" },
+  X1 = ["disabled"],
+  Q1 = { class: "count-display" },
+  Z1 = ["disabled"],
+  em = { class: "duration-reset-row" },
+  tm = ["disabled"],
+  Ot = "Rp",
+  ms = "Nusa Tenggara Timur",
+  Xe = 30,
+  sm = 4,
+  qt = 4,
+  nm = {
+    __name: "Results",
+    setup(S) {
+      const b = m({}),
+        f = m({}),
+        C = m(!1),
+        h = m(!1),
+        g = m(!1),
+        v = m(!1),
+        E = m(!1),
+        X = m(!1);
+      rt(C, (s) => {
+        s
+          ? (document.body.style.overflow = "hidden")
+          : (document.body.style.overflow = "");
+      });
+      function T() {
+        me.value || (me.value = {}),
+          (me.value.destinations = [...Ne.value]),
+          (me.value.ships = [...Oe.value]),
+          (me.value.dateFrom = c.value),
+          (me.value.dateTo = k.value),
+          (me.value.totalGuests = Be.value),
+          (lt.value = 1),
+          ns();
+      }
+      function oe() {
+        (h.value = !1),
+          (g.value = !1),
+          (v.value = !1),
+          (E.value = !1),
+          (X.value = !1),
+          (C.value = !1),
+          T();
+      }
+      function te(s, t) {
+        if (!s) return "Select dates";
+        const a = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ],
+          l = new Date(s),
+          u = a[l.getMonth()],
+          n = l.getDate();
+        if (!t) return `${u} ${n}`;
+        const d = new Date(t),
+          p = a[d.getMonth()],
+          N = d.getDate(),
+          _ = d.getFullYear();
+        return u === p && l.getFullYear() === _
+          ? `${u} ${n} - ${p} ${N} ${_}`
+          : `${u} ${n} - ${p} ${N} ${_}`;
+      }
+      function Z(s) {
+        if (!s || typeof s == "string") return [];
+        const t = [];
+        s.image_main && t.push(s.image_main),
+          Array.isArray(s.images) && t.push(...s.images);
+        for (let a = 1; a <= 10; a++) {
+          const l = `image_${a}`;
+          s[l] && t.push(s[l]);
+        }
+        return t.filter((a) => !!a && String(a).trim().length > 0).map(_n);
+      }
+      function q(s) {
+        const t = Z(s.detail) || [];
+        return t.length ? t : Z(s.raw) || [];
+      }
+      function W(s) {
+        return b.value[s] || 0;
+      }
+      function Se(s) {
+        return f.value[s] || "right";
+      }
+      function Ce(s, t, a, l) {
+        a > 0
+          ? ((b.value[s] = (t + a) % a), (f.value[s] = l))
+          : ((b.value[s] = 0), (f.value[s] = "right"));
+      }
+      function ie(s) {
+        const t = es.value.find((l) => l.key === s);
+        if (!t) return;
+        const a = q(t);
+        Ce(s, W(s) - 1, a.length, "left");
+      }
+      function O(s) {
+        const t = es.value.find((l) => l.key === s);
+        if (!t) return;
+        const a = q(t);
+        Ce(s, W(s) + 1, a.length, "right");
+      }
+      const H = m(0);
+      function le() {
+        if (!pe.value) return [];
+        const s = q(pe.value);
+        return s.length ? s : [pe.value.image || "/src/images/cabin.jpg"];
+      }
+      function ve() {
+        const s = le(),
+          t = H.value % (s.length || 1);
+        return s[t] || "/src/images/cabin.jpg";
+      }
+      function F() {
+        const t = le().length || 1;
+        H.value = (H.value - 1 + t) % t;
+      }
+      function G() {
+        const t = le().length || 1;
+        H.value = (H.value + 1) % t;
+      }
+      const w = (s) => {
+        if (s == null) return "Price on request";
+        const t =
+          typeof s == "string" ? parseFloat(s.replace(/[^0-9.-]+/g, "")) : s;
+        return isNaN(t)
+          ? s
+          : new Intl.NumberFormat("en-US", {
+              style: "currency",
+              currency: "IDR",
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            })
+              .format(t)
+              .replace("IDR", "Rp");
+      };
+      Qe(() => {
+        window.addEventListener("resize", () => {
+          window.innerWidth >= 640 &&
+            typeof C < "u" &&
+            C.value &&
+            (C.value = !1);
+        }),
+          Ha(() => {
+            try {
+              console.log("DEBUG selectedCabinDetail", Ut.value),
+                console.log("DEBUG selectedCabinPriceText", _s.value);
+            } catch (s) {
+              console.warn("DEBUG watchEffect error:", s);
+            }
+          });
+      });
+      const ge = Gs(),
+        fe = m(!0),
+        xe = m(""),
+        qe = m(!1),
+        me = m(null),
+        Te = m({}),
+        Ze = m([]),
+        ne = m(null),
+        y = m(new Map()),
+        Ie = m(new Map()),
+        R = m([]),
+        De = m(null),
+        et = m(null),
+        Ee = m(!1),
+        tt = m(!1),
+        We = m(!1),
+        pe = m(null),
+        He = m(1),
+        Re = m(2),
+        Le = m(!1),
+        _t = m(""),
+        je = m(null),
+        Ct = m({}),
+        ct = m({}),
+        st = m("recommended"),
+        pt = m(!1),
+        Lt = [
+          { value: "recommended", label: "Recommended" },
+          { value: "price_low", label: "Lowest Price" },
+          { value: "price_high", label: "Highest Price" },
+        ],
+        Dt = ["Komodo National Park", "Labuan Bajo"];
+      function we(s) {
+        if (!s) return "";
+        const t = s.match(/[-\w]{25,}/);
+        return t ? `https://lh3.googleusercontent.com/d/${t[0]}` : s;
+      }
+      const Bt = {
+        "SEMESTA VOYAGES": we(
+          "https://drive.google.com/file/d/1semesta_placeholder"
+        ),
+        "AKASSA CRUISE": we(
+          "https://drive.google.com/file/d/1akassa_placeholder"
+        ),
+        "DERYA LIVEABOARD": we(
+          "https://drive.google.com/file/d/1derya_placeholder"
+        ),
+        "GIONA LIVEABOARD": we(
+          "https://drive.google.com/file/d/1giona_placeholder"
+        ),
+        "DURYA LIVEABOARD": we(""),
+        "BARAKATI LIVEABOARD": we(""),
+        "ELBARIK CRUISE": we(""),
+        "ANGELICA LIVEBOARD": we(""),
+        "NAVILA LIVEBOARD": we(""),
+        KAMBIOLA: we(""),
+        "LAMBORAJO 2": we(""),
+        YUMANA: we(""),
+        SBVANREL: we(""),
+        "RAFFLES CRUISE": we(""),
+        "VINCA VOYAGE": we(""),
+        "AMORE BOAT": we(""),
+        "KUMAMBA 02": we(""),
+        "MAREE GALLERY": we(""),
+        "SORA GALLERY": we(""),
+        TARA: we(""),
+      };
+      function Ft(s) {
+        if (!s) return "";
+        const t = At(s);
+        if (t && t.mainImage) return t.mainImage;
+        const a = s.toUpperCase().trim();
+        if (Bt[a]) return Bt[a];
+        for (const [l, u] of Object.entries(Bt)) {
+          const n = l.toUpperCase().trim();
+          if (n.includes(a) || a.includes(n)) return u;
+        }
+        return "";
+      }
+      function At(s) {
+        if (!s) return null;
+        const t = s.toUpperCase().trim(),
+          a = t
+            .replace(/S$/i, "")
+            .replace(/LIVEABOARD/i, "LIVEBOARD")
+            .replace(/LIVEBOARD/i, "LIVEABOARD");
+        if (Ie.value.has(t)) return Ie.value.get(t);
+        for (const [l, u] of Ie.value.entries()) {
+          const n = l
+            .replace(/S$/i, "")
+            .replace(/LIVEABOARD/i, "LIVEBOARD")
+            .replace(/LIVEBOARD/i, "LIVEABOARD");
+          if (
+            l.includes(t) ||
+            t.includes(l) ||
+            n.includes(a) ||
+            a.includes(n) ||
+            l.split(" ")[0] === t.split(" ")[0]
+          )
+            return u;
+        }
+        return null;
+      }
+      const Jt = [],
+        nt = m([]),
+        Tt = m(!1),
+        Ne = m([]),
+        Oe = m([]),
+        I = m([]),
+        c = m(""),
+        k = m(""),
+        P = m(1),
+        D = m(30),
+        Y = m([{ id: 1, adults: 2, children: 0, expanded: !0 }]),
+        ce = m(!0),
+        mt = m(!1),
+        ue = m(2),
+        Be = x(() =>
+          ce.value
+            ? ue.value
+            : Y.value.reduce((s, t) => s + t.adults + t.children, 0)
+        ),
+        ut = x(() => Y.value.length < sm),
+        jt = x(() => {
+          if (!c.value || !k.value) return Xe;
+          const s = new Date(c.value + "T00:00:00"),
+            a = new Date(k.value + "T00:00:00").getTime() - s.getTime(),
+            l = Math.ceil(a / (1e3 * 60 * 60 * 24)) + 1;
+          return Math.min(l, Xe);
+        });
+      x(() => {
+        const s = jt.value,
+          t = [];
+        for (let a = 1; a <= s; a++) t.push(a);
+        return t;
+      });
+      const zt = x(() => {
+          const s = P.value,
+            t = D.value;
+          return s === 1 && t === Xe
+            ? "Any duration"
+            : s === t
+            ? `${s} ${s === 1 ? "day" : "days"}`
+            : `${s} - ${t} days`;
+        }),
+        Fe = m(!1),
+        ze = m(!1),
+        Ue = m(!1),
+        Ge = m(!1),
+        Ve = m(!1),
+        gs = m(!1),
+        bs = m(!1),
+        ys = m(!1),
+        ks = m(!1),
+        ws = m(!1),
+        qs = m(null),
+        Ws = m(null),
+        Hs = m(null),
+        Ys = m(null),
+        Js = m(null),
+        qn = m(null),
+        ft = m(new Date().getMonth()),
+        $t = m(new Date().getFullYear());
+      function Wn() {
+        (Fe.value = !1),
+          (ze.value = !1),
+          (Ue.value = !1),
+          (Ge.value = !1),
+          (Ve.value = !1);
+      }
+      function It(s) {
+        s === "regions"
+          ? ((Fe.value = !Fe.value),
+            (ze.value = Ue.value = Ge.value = Ve.value = !1))
+          : s === "ships"
+          ? ((ze.value = !ze.value),
+            (Fe.value = Ue.value = Ge.value = Ve.value = !1))
+          : s === "guests"
+          ? ((Ue.value = !Ue.value),
+            (Fe.value = ze.value = Ge.value = Ve.value = !1))
+          : s === "dates"
+          ? ((Ge.value = !Ge.value),
+            (Fe.value = ze.value = Ue.value = Ve.value = !1))
+          : s === "duration" &&
+            ((Ve.value = !Ve.value),
+            (Fe.value = ze.value = Ue.value = Ge.value = !1));
+      }
+      function js(s) {
+        const t = Ne.value.indexOf(s);
+        t >= 0 ? Ne.value.splice(t, 1) : Ne.value.push(s);
+      }
+      function Xs(s) {
+        const t = Oe.value.indexOf(s);
+        t >= 0 ? Oe.value.splice(t, 1) : Oe.value.push(s);
+      }
+      function Qs() {
+        ut.value &&
+          Y.value.push({
+            id: Date.now(),
+            adults: 2,
+            children: 0,
+            expanded: !0,
+          });
+      }
+      function Zs(s) {
+        Y.value.length > 1 && Y.value.splice(s, 1);
+      }
+      function en(s) {
+        Y.value[s].expanded = !Y.value[s].expanded;
+      }
+      function Xt(s, t) {
+        const a = Y.value[s];
+        a.adults + a.children < qt && a[t]++;
+      }
+      function Qt(s, t) {
+        const a = Y.value[s];
+        t === "adults" && a.adults > 1 && a.adults--,
+          t === "children" && a.children > 0 && a.children--;
+      }
+      function tn() {
+        P.value > 1 && P.value--;
+      }
+      function sn() {
+        P.value < D.value && P.value++;
+      }
+      function nn() {
+        D.value > P.value && D.value--;
+      }
+      function an() {
+        D.value < Xe && D.value++;
+      }
+      function on() {
+        (P.value = 1), (D.value = Xe);
+      }
+      x(() => Fa());
+      const ln = x(
+          () =>
+            `${
+              [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+              ][ft.value]
+            } ${$t.value}`
+        ),
+        rn = x(() => {
+          const s = new Date($t.value, ft.value, 1),
+            t = new Date($t.value, ft.value + 1, 0),
+            a = new Date(s),
+            l = new Date();
+          a.setDate(a.getDate() - a.getDay());
+          const u = [],
+            n = new Date(t);
+          n.setDate(n.getDate() + (6 - t.getDay()));
+          for (let d = new Date(a); d <= n; d.setDate(d.getDate() + 1)) {
+            d.getDay();
+            const p = d.getMonth() === ft.value,
+              N = new Date(d);
+            N.setHours(0, 0, 0, 0);
+            const _ = new Date(l);
+            _.setHours(0, 0, 0, 0);
+            const A = N < _,
+              $ = p && !A,
+              U = us(d);
+            let V = !1,
+              L = !1,
+              J = !1;
+            if (c.value && k.value && p) {
+              const re = new Date(c.value + "T00:00:00"),
+                ae = new Date(k.value + "T00:00:00");
+              N >= re &&
+                N <= ae &&
+                ((V = !0),
+                N.getTime() === re.getTime() && (L = !0),
+                N.getTime() === ae.getTime() && (J = !0));
+            }
+            u.push({
+              key: d.getTime(),
+              date: d.getDate(),
+              fullDate: U,
+              isCurrentMonth: p,
+              isSelectable: $,
+              isPast: A,
+              isSelected: c.value === U || k.value === U,
+              isInRange: V,
+              isRangeStart: L,
+              isRangeEnd: J,
+            });
+          }
+          return u;
+        });
+      function cn(s) {
+        let t = ft.value + s,
+          a = $t.value;
+        t > 11 && ((t = 0), (a += 1)),
+          t < 0 && ((t = 11), (a -= 1)),
+          (ft.value = t),
+          ($t.value = a);
+      }
+      function un() {
+        cn(1);
+      }
+      function dn() {
+        cn(-1);
+      }
+      function vn(s) {
+        if (s.isSelectable)
+          if (!c.value || (c.value && k.value))
+            (c.value = s.fullDate), (k.value = "");
+          else {
+            const t = new Date(c.value + "T00:00:00");
+            new Date(s.fullDate + "T00:00:00") < t
+              ? ((k.value = c.value), (c.value = s.fullDate))
+              : (k.value = s.fullDate);
+          }
+      }
+      const pn = x(() => {
+        if (Ne.value.length) return Ne.value[0];
+        const s = me.value;
+        return Array.isArray(s == null ? void 0 : s.destinations) &&
+          s.destinations.length
+          ? s.destinations[0]
+          : ms;
+      });
+      x(() => {
+        var l, u, n;
+        const s = me.value;
+        if (!s) return [];
+        const t = s.ships && s.ships.length ? s.ships : s.lodges || [],
+          a = [];
+        for (const d of t) {
+          const p = Te.value[d] || [];
+          let N = 0,
+            _ = 0;
+          for (const ae of p) {
+            const z = (
+              ((l = ae == null ? void 0 : ae.operators) == null
+                ? void 0
+                : l.flatMap((de) => de.cabins || [])) || []
+            ).reduce((de, Ke) => {
+              const Je = String(Ke).match(/\((\d+)\)/);
+              return de + (Je ? parseInt(Je[1], 10) : 0);
+            }, 0);
+            (N += z), (_ += z);
+          }
+          const A = p.length,
+            $ = A > 0 ? N / A : 0,
+            U = $ >= (s.totalGuests || 0),
+            V = Math.max(
+              1,
+              s.totalGuests || (s.adults || 0) + (s.children || 0)
+            ),
+            L =
+              p.find((ae) => (ae == null ? void 0 : ae.date) === s.dateFrom) ||
+              p[0],
+            re = (
+              ((n =
+                (u = L == null ? void 0 : L.operators) == null
+                  ? void 0
+                  : u[0]) == null
+                ? void 0
+                : n.cabins) || []
+            ).reduce((ae, _e) => {
+              const z = String(_e).match(/\((\d+)\)/),
+                de = z ? parseInt(z[1], 10) : 0;
+              return ae + (de >= V ? 1 : 0);
+            }, 0);
+          a.push({
+            lodge: d,
+            hasAvailability: U,
+            availableSlots: Math.floor($),
+            totalSlots: A > 0 ? Math.floor(_ / A) : 0,
+            image: "/src/images/cabin.jpg",
+            availableCabinsCount: re,
+            dateFrom: s.dateFrom,
+          });
+        }
+        return a;
+      });
+      const Hn = x(() => {
+        const s = me.value;
+        if (!s) return [];
+        const t = s.ships && s.ships.length ? s.ships : s.lodges || [],
+          a = s.dateFrom,
+          l = Math.max(1, s.totalGuests || (s.adults || 0) + (s.children || 0)),
+          u = [],
+          n = new Set();
+        for (const d of t) {
+          const p = Te.value[d] || [],
+            N = p.find((A) => (A == null ? void 0 : A.date) === a) || p[0],
+            _ = ((N == null ? void 0 : N.operators) || []).flatMap(
+              (A) => A.cabins || []
+            );
+          for (const A of _) {
+            const $ = as(A),
+              U = dt(A),
+              V = typeof A == "string" ? "" : Ns(A);
+            if (U == null || U >= l) {
+              const J =
+                (typeof A != "string" && A != null && A.id
+                  ? String(A.id).trim().toLowerCase()
+                  : null) || `${ye(d)}|${gt($)}`;
+              if (n.has(J)) continue;
+              n.add(J),
+                u.push({
+                  ship: d,
+                  cabinName: $,
+                  capacity: U,
+                  date: a,
+                  image: V,
+                });
+            }
+          }
+        }
+        return u;
+      });
+      x(() =>
+        Hn.value.map((s) => ({
+          cabinName: s.cabinName,
+          ship: s.ship,
+          date: s.date,
+          capacity: s.capacity,
+          image: s.image || "/src/images/cabin.jpg",
+        }))
+      ),
+        x(() => {
+          const s = me.value;
+          return s
+            ? Math.max(1, s.totalGuests || (s.adults || 0) + (s.children || 0))
+            : 1;
+        });
+      const Ut = x(() => {
+          const s = pe.value;
+          if (!s) return null;
+          const t = s.originalItem || s;
+          if (t.detail) return t.detail;
+          const a = y.value || new Map(),
+            l = `${ye(t.shipName || t.operatorLabel || "")}|${gt(t.cabinName)}`;
+          return a.get(l) || null;
+        }),
+        Yn = x(() => {
+          const s = Ut.value;
+          return (
+            (
+              (s == null ? void 0 : s.description) ||
+              (s == null ? void 0 : s.desc) ||
+              ""
+            ).trim() ||
+            "If you are desperate for a vacation, bring your friends or family and step away from it all."
+          );
+        }),
+        _s = x(() => {
+          const s = Ut.value,
+            t =
+              (s && (typeof s.price == "number" ? s.price : os(s))) ||
+              os(pe.value);
+          if (t == null) return "";
+          const a = Es(t, Ot);
+          return a ? Sn(a.amount, a.currency) : "";
+        }),
+        Jn = x(() => {
+          var a, l;
+          const s = Ut.value;
+          return s != null && s.capacity
+            ? s.capacity
+            : Ms((a = pe.value) == null ? void 0 : a.capacityText) ||
+                ((l = pe.value) == null ? void 0 : l.capacity) ||
+                "";
+        }),
+        Cs = x(() => {
+          var d;
+          const s = Ut.value,
+            t = s && typeof s == "object" && s.facilities ? s.facilities : null,
+            a = {
+              wifi: "Wi-Fi",
+              starlink: "Starlink",
+              jacuzzi: "Jacuzzi",
+              indoor_jacuzzi: "Indoor jacuzzi",
+              outdoor_jacuzzi: "Outdoor jacuzzi",
+              indoor_lounge: "Indoor lounge",
+              outdoor_lounge: "Outdoor lounge",
+              sundeck: "Sundeck",
+              seaview: "Sea view",
+              balcony: "Balcony",
+              private_bathroom: "Private bathroom",
+              shower: "Shower",
+              bathtub: "Bathtub",
+              outdoor_bathtub: "Outdoor bathtub",
+              king_bed: "King bed",
+              bar: "Bar",
+              hammock: "Hammock",
+              smart_tv: "Smart TV",
+              ac: "Air conditioning",
+            },
+            l = [];
+          if (t) for (const [p, N] of Object.entries(a)) t[p] && l.push(N);
+          if (l.length) return l;
+          const u = [];
+          return (
+            s &&
+              (s.facility_text && u.push(s.facility_text),
+              s.facilities_text && u.push(s.facilities_text),
+              s.api_name && u.push(s.api_name),
+              s.description && u.push(s.description)),
+            (d = pe.value) != null &&
+              d.capacityText &&
+              u.push(pe.value.capacityText),
+            wa(u.join(" "))
+          );
+        });
+      x(() => {
+        const s = me.value;
+        return s
+          ? Array.isArray(s.destinations) && s.destinations.length
+            ? s.destinations.join(", ")
+            : s.destination || ""
+          : "";
+      });
+      const jn = x(() => {
+          const s = me.value;
+          if (!s) return [];
+          const t = s.ships && s.ships.length ? s.ships : s.lodges || [],
+            a = s.shipSheets && s.shipSheets.length ? s.shipSheets : [],
+            l = new Set(),
+            u = (n) => {
+              const d = ye(
+                String(n)
+                  .replace(/normalized/gi, "")
+                  .replace(/cruise schedule/gi, "")
+              );
+              if (!d) return;
+              l.add(d);
+              const p = d.split(" ")[0];
+              p && l.add(p);
+            };
+          return t.forEach(u), a.forEach(u), Array.from(l);
+        }),
+        Zt = x(() => {
+          const s = me.value;
+          return s
+            ? s.ships && s.ships.length
+              ? s.ships
+              : s.lodges || []
+            : [];
+        }),
+        $s = x(() =>
+          Zt.value.length <= 1 || je.value
+            ? !1
+            : mn.value.filter((t) => t.hasAvailability).length > 0
+        ),
+        mn = x(() => {
+          const s = me.value,
+            t = ne.value,
+            a = P.value,
+            l = D.value,
+            u = y.value || new Map();
+          if (!s || !t || !Array.isArray(t.operators)) return [];
+          const n = Zt.value,
+            d = [];
+          for (const p of n) {
+            const N = t.operators.find((_) => {
+              const A = ye(_.operator || ""),
+                $ = ye(p);
+              return A === $ || A.includes($) || $.includes(A);
+            });
+            if (N) {
+              const _ = (N.cabins || []).filter((U) => {
+                  const V = Ts(U);
+                  if (V != null && V <= 0) return !1;
+                  if (a > 1 || l < Xe) {
+                    let L = 0;
+                    if (
+                      (U.trip_days
+                        ? (L = parseInt(U.trip_days, 10))
+                        : U.days
+                        ? (L = parseInt(U.days, 10))
+                        : U.raw &&
+                          (U.raw.trip_days
+                            ? (L = parseInt(U.raw.trip_days, 10))
+                            : U.raw.days && (L = parseInt(U.raw.days, 10))),
+                      !L)
+                    ) {
+                      const J = as(U),
+                        re = gt(J),
+                        ae = ye(p),
+                        _e = ye(N.operator || "");
+                      let z = u.get(`${ae}|${re}`);
+                      if ((!z && _e && (z = u.get(`${_e}|${re}`)), !z)) {
+                        const de = `|${re}`;
+                        for (const [Ke, Je] of u.entries())
+                          if (Ke.endsWith(de)) {
+                            z = Je;
+                            break;
+                          }
+                      }
+                      if (!z) {
+                        const de = ls(J);
+                        de && (z = u.get(`${ae}|${de}`));
+                      }
+                      z && (L = parseInt(z.trip_days || z.days || 0, 10));
+                    }
+                    if (L > 0 && (L < a || L > l)) return !1;
+                  }
+                  return !0;
+                }),
+                A = _.length,
+                $ = At(p);
+              if (A > 0) {
+                const U = _.reduce((V, L) => {
+                  const J = dt(L);
+                  return V + (J || 4);
+                }, 0);
+                d.push({
+                  name: p,
+                  operator: N.operator,
+                  cabinsCount: A,
+                  totalCapacity: U,
+                  hasAvailability: !0,
+                  image: ($ == null ? void 0 : $.mainImage) || Ft(p) || "",
+                  description: ($ == null ? void 0 : $.description) || "",
+                });
+              } else
+                d.push({
+                  name: p,
+                  operator: N.operator,
+                  cabinsCount: 0,
+                  totalCapacity: 0,
+                  hasAvailability: !1,
+                  image: ($ == null ? void 0 : $.mainImage) || Ft(p) || "",
+                  description: ($ == null ? void 0 : $.description) || "",
+                });
+            } else {
+              const _ = At(p);
+              d.push({
+                name: p,
+                operator: p,
+                cabinsCount: 0,
+                totalCapacity: 0,
+                hasAvailability: !1,
+                image: (_ == null ? void 0 : _.mainImage) || Ft(p) || "",
+                description: (_ == null ? void 0 : _.description) || "",
+              });
+            }
+          }
+          return d.filter((p) => p.hasAvailability);
+        });
+      function Xn(s) {
+        je.value = s;
+      }
+      function Qn() {
+        je.value = null;
+      }
+      const es = x(() => {
+          const s = me.value,
+            t = ne.value;
+          if (!s || !t || !Array.isArray(t.operators)) return [];
+          const a = jn.value,
+            l = y.value || new Map(),
+            u = new Map();
+          for (const N of t.operators) {
+            const _ = N.operator,
+              A = N.cabins || [];
+            for (const $ of A) {
+              const U = Ts($);
+              if (U != null && U <= 0) continue;
+              const V = as($),
+                L = kn($),
+                J = os($),
+                re = pa($, _);
+              if (a.length && !ka(re, a)) continue;
+              if (je.value) {
+                const Ae = ye(je.value),
+                  Rt = ye(re);
+                if (!Rt.includes(Ae) && !Ae.includes(Rt)) continue;
+              }
+              const ae =
+                  typeof $ != "string" && $ != null && $.id
+                    ? String($.id).trim().toLowerCase()
+                    : null,
+                _e = gt(V),
+                z = (typeof $ != "string" && ($.start_date || $.date)) || "",
+                de = ae || `${ye(re)}|${_e}|${z}` || `${ye(_)}|${_e}|${z}`,
+                Ke = `${ye(re)}|${_e}`,
+                Je = _ ? `${ye(_)}|${_e}` : null;
+              let $e = l.get(Ke);
+              if (
+                (!$e && Je && ($e = l.get(Je)),
+                !$e &&
+                  l.size > 0 &&
+                  Math.floor(Math.random() * 100) < 5 &&
+                  console.log("Cabin detail NOT found:", {
+                    shipName: re,
+                    operatorLabel: _,
+                    cabinKey: _e,
+                    searchKey1: Ke,
+                    searchKey2: Je,
+                    availableKeys: Array.from(l.keys())
+                      .filter((Rt) => Rt.includes(_e))
+                      .slice(0, 3),
+                  }),
+                !$e)
+              ) {
+                for (const [Ae, Rt] of l.entries())
+                  if (Ae.endsWith(`|${_e}`)) {
+                    $e = Rt;
+                    break;
+                  }
+              }
+              if (!$e) {
+                const Ae = `${ye(re)}|${ls(V)}`;
+                $e = l.get(Ae);
+              }
+              const Os = os($e) || J,
+                Ls = kn($e) || L,
+                Tn = Ts($e),
+                Vt = Tn ?? U,
+                za = Ns($e) || Ns($) || "/src/images/cabin.jpg",
+                Ua = typeof $ != "string" ? $.trip_days || $.days : null,
+                Ga = $e ? $e.trip_days || $e.days : null,
+                Va = Ua || Ga || null,
+                Ka =
+                  (typeof $ != "string" ? $.start_date || $.date : null) ||
+                  s.dateFrom,
+                In = u.get(de),
+                qa = {
+                  key: de,
+                  operatorLabel: _,
+                  shipName: re,
+                  cabinName: V,
+                  available: Vt,
+                  availableText: Vt != null ? `${Vt} available` : "Available",
+                  price: Os,
+                  capacityText: Ls,
+                  date: Ka,
+                  tripDays: Va,
+                  image: za,
+                  raw: $,
+                  detail: $e,
+                };
+              if (!In) u.set(de, qa);
+              else {
+                const Ae = { ...In };
+                Ae.available == null && Vt != null && (Ae.available = Vt),
+                  !Ae.price && Os && (Ae.price = Os),
+                  !Ae.capacityText && Ls && (Ae.capacityText = Ls),
+                  (Ae.availableText =
+                    Ae.available != null
+                      ? `${Ae.available} available`
+                      : "Available"),
+                  u.set(de, Ae);
+              }
+            }
+          }
+          const n = Array.from(u.values());
+          n.sort(
+            (N, _) =>
+              (N.operatorLabel || "").localeCompare(_.operatorLabel || "") ||
+              (N.cabinName || "").localeCompare(_.cabinName || "")
+          );
+          const d = s.dateFrom,
+            p = s.dateTo;
+          return d && p
+            ? n.filter((_) => {
+                const A = is(_);
+                return A ? ba(_.date, A, d, p) : !0;
+              })
+            : n;
+        }),
+        Zn = x(() => {
+          const s = es.value,
+            t = me.value || {},
+            a = t.isFlexible,
+            l = a ? t.flexibleGuests || 0 : t.totalGuests || 0,
+            u = t.cabins || [],
+            n = {};
+          for (const p of s) {
+            if (!p.date) continue;
+            const _ = `${ye(p.shipName || p.operatorLabel || "")}|${p.date}`;
+            let A = 2;
+            if (typeof dt == "function") A = dt(p) || 2;
+            else {
+              const V = (p.capacityText || "").match(/(\d+)/);
+              V && (A = parseInt(V[1]));
+            }
+            const $ = typeof p.available == "number" ? p.available : 1;
+            n[_] = (n[_] || 0) + A * $;
+          }
+          const d = new Map();
+          for (const p of s) {
+            const N = `${p.shipName || p.operatorLabel}|${p.cabinName}`;
+            d.has(N) || d.set(N, { ...p, trips: [], totalAvailable: 0 });
+            const _ = d.get(N),
+              A = p.date || "",
+              $ = Number(p.tripDays || is(p)) || 3;
+            if (!A) continue;
+            const V = `${ye(p.shipName || p.operatorLabel || "")}|${A}`,
+              L = n[V] || 0;
+            if (l > 0 && L < l) continue;
+            if (!a && u.length > 0) {
+              let ae = 2;
+              if (typeof dt == "function") ae = dt(p) || 2;
+              else {
+                const de = (p.capacityText || "").match(/(\d+)/);
+                de && (ae = parseInt(de[1]));
+              }
+              if (!u.some((z) => ae >= (z.total || z.adults + z.children)))
+                continue;
+            }
+            const J = new Date(A + "T00:00:00");
+            let re = !1;
+            for (const ae of _.trips) {
+              const _e = new Date(ae.date + "T00:00:00"),
+                z = Number(ae.tripDays) || 3,
+                de = new Date(_e);
+              if ((de.setDate(de.getDate() + z - 1), J >= _e && J <= de)) {
+                re = !0;
+                break;
+              }
+            }
+            if (!re) {
+              const ae = {
+                date: p.date,
+                tripDays: $,
+                available: p.available || 1,
+                key: p.key,
+                originalItem: p,
+              };
+              _.trips.push(ae),
+                (_.totalAvailable += ae.available || 1),
+                p.price &&
+                  (!_.price || St(p.price) < St(_.price)) &&
+                  (_.price = p.price);
+            }
+          }
+          return Array.from(d.values())
+            .map((p) => {
+              var _;
+              const N = p.trips.sort(
+                (A, $) => new Date(A.date) - new Date($.date)
+              );
+              return N.length === 0
+                ? null
+                : {
+                    ...p,
+                    id: p.key,
+                    uniqueKey: `${p.shipName}|${p.cabinName}`,
+                    title: ha(p),
+                    subtitle: na(p.operatorLabel),
+                    image: p.image,
+                    prices: [
+                      { label: "Start from", value: p.price || "Rp3,650,000" },
+                    ],
+                    availabilityCount:
+                      p.totalAvailable > 1
+                        ? `${p.totalAvailable} cabins available`
+                        : p.availableText,
+                    tripsCount: N.length,
+                    trips: N,
+                    date: Nt((_ = N[0]) == null ? void 0 : _.date),
+                    availabilityType: "standard",
+                    availabilityTitle: "Great news, we have availability!",
+                    availabilityText:
+                      "Select the result that best suits you from the list below and it will be added to the itinerary summary on the right.",
+                    originalItem: p,
+                    isGallery: !0,
+                  };
+            })
+            .filter((p) => p !== null);
+        }),
+        it = x(() => {
+          let s = [...Zn.value];
+          const t = P.value,
+            a = D.value;
+          return (
+            (t > 1 || a < Xe) &&
+              (s = s
+                .map((l) => {
+                  const u = (l.trips || []).filter((n) => {
+                    const d = Number(n.tripDays) || 0;
+                    return d >= t && d <= a;
+                  });
+                  return u.length === 0
+                    ? null
+                    : { ...l, trips: u, tripsCount: u.length };
+                })
+                .filter((l) => l !== null)),
+            st.value === "price_low"
+              ? s.sort((l, u) => {
+                  var p, N, _, A;
+                  const n = St(
+                      ((N = (p = l.prices) == null ? void 0 : p[0]) == null
+                        ? void 0
+                        : N.value) || "0"
+                    ),
+                    d = St(
+                      ((A = (_ = u.prices) == null ? void 0 : _[0]) == null
+                        ? void 0
+                        : A.value) || "0"
+                    );
+                  return n - d;
+                })
+              : st.value === "price_high" &&
+                s.sort((l, u) => {
+                  var p, N, _, A;
+                  const n = St(
+                    ((N = (p = l.prices) == null ? void 0 : p[0]) == null
+                      ? void 0
+                      : N.value) || "0"
+                  );
+                  return (
+                    St(
+                      ((A = (_ = u.prices) == null ? void 0 : _[0]) == null
+                        ? void 0
+                        : A.value) || "0"
+                    ) - n
+                  );
+                }),
+            s
+          );
+        }),
+        lt = m(1),
+        fn = m(!1);
+      function Ss() {
+        fn.value = window.innerWidth < 768;
+      }
+      Qe(() => {
+        Ss(), window.addEventListener("resize", Ss);
+      }),
+        Nn(() => {
+          window.removeEventListener("resize", Ss);
+        });
+      const xs = x(() => (fn.value ? 5 : 10)),
+        ts = x(() => Math.ceil(it.value.length / xs.value)),
+        ea = x(() => {
+          const s = (lt.value - 1) * xs.value,
+            t = s + xs.value;
+          return it.value.slice(s, t);
+        });
+      function Ds(s) {
+        s >= 1 &&
+          s <= ts.value &&
+          ((lt.value = s), window.scrollTo({ top: 0, behavior: "smooth" }));
+      }
+      function ta() {
+        Ds(lt.value + 1);
+      }
+      function sa() {
+        Ds(lt.value - 1);
+      }
+      rt(st, () => {
+        lt.value = 1;
+      }),
+        rt([P, D], () => {
+          lt.value = 1;
+        }),
+        rt(jt, (s) => {
+          D.value > s && (D.value = s),
+            P.value > D.value && (P.value = D.value);
+        });
+      const As = x(() => {
+          const s = De.value || {},
+            t = dt(s);
+          if (t) return t;
+          const a = Ms(s.capacityText);
+          return a || 4;
+        }),
+        ss = x(() => {
+          const s = R.value || [];
+          if (!s.length)
+            return {
+              hasPrice: !1,
+              total: 0,
+              formattedTotal: "",
+              pricedCount: 0,
+              missingCount: 0,
+            };
+          let t = "",
+            a = 0,
+            l = 0;
+          for (const n of s) {
+            const d = Es(n == null ? void 0 : n.price, t || Ot);
+            if (
+              !d ||
+              (t || (t = d.currency), t && d.currency && t !== d.currency)
+            )
+              continue;
+            const p = Number((n == null ? void 0 : n.guests) || 2),
+              N = Number(d.amount) * (Number.isFinite(p) ? p : 2);
+            (a += N), l++;
+          }
+          const u = l > 0;
+          return {
+            hasPrice: u,
+            total: a,
+            formattedTotal: u ? w(a) : "",
+            pricedCount: l,
+            missingCount: s.length - l,
+          };
+        });
+      function Nt(s) {
+        return s
+          ? new Date(s).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })
+          : "";
+      }
+      function hn(s, t) {
+        if (!s) return "";
+        const a = new Date(s + "T00:00:00"),
+          l = Number(t) || 1;
+        if (l <= 1) return Nt(s);
+        const u = new Date(a);
+        u.setDate(u.getDate() + l - 1);
+        const n = a.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+          }),
+          d = u.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          });
+        return `${n} - ${d}`;
+      }
+      function gn(s) {
+        return s ? Ba(s, 2) : "";
+      }
+      function na(s) {
+        if (!s) return "";
+        const t = s.trim().split(/[\s(]+/)[0];
+        return t.charAt(0).toUpperCase() + t.slice(1).toLowerCase();
+      }
+      function aa(s, t) {
+        (_t.value = t.key),
+          s.originalItem && (s.originalItem.selectedTrip = t),
+          Ct.value[t.key] || (Ct.value[t.key] = 1);
+      }
+      function oa(s) {
+        ct.value[s] = !ct.value[s];
+      }
+      function ht(s) {
+        return !s.trips || s.trips.length === 0
+          ? null
+          : s.trips.find((a) => a.key === _t.value) || s.trips[0];
+      }
+      function ia(s) {
+        if (!s.trips || s.trips.length <= 1) return [];
+        const t = ht(s);
+        return s.trips.filter((a) => a.key !== t.key);
+      }
+      function la(s) {
+        const t = ht(s);
+        if (!t) {
+          console.warn("No trip selected");
+          return;
+        }
+        const a = {
+          ...s.originalItem,
+          title: s.title,
+          date: t.date,
+          tripDays: t.tripDays,
+          available: t.available,
+          selectedTrip: t,
+        };
+        Dn(a);
+      }
+      async function ra() {
+        Tt.value = !0;
+        try {
+          const s = await Un();
+          if (
+            ((nt.value = (s.operators || [])
+              .map((t) => {
+                var u, n;
+                const a = ((u = t.operator) == null ? void 0 : u.trim()) || "",
+                  l = ((n = t.sourceSheet) == null ? void 0 : n.trim()) || a;
+                return { id: `${a}__${l}`, label: a, sheet: l };
+              })
+              .filter((t) => t.label && t.sheet)),
+            !Oe.value.length && I.value.length)
+          ) {
+            const t = [];
+            for (const a of I.value) {
+              const l = nt.value.find(
+                (u) => u.label === a.label && u.sheet === (a.sheet || u.sheet)
+              );
+              l && t.push(l.id);
+            }
+            Oe.value = t;
+          }
+        } catch (s) {
+          console.warn("Failed to load operators:", s),
+            (nt.value = Jt.map((t) => ({
+              id: t.id || `${t.label || ""}__${t.sheet || ""}`,
+              label: t.label,
+              sheet: t.sheet || t.label,
+            })));
+        } finally {
+          Tt.value = !1;
+        }
+      }
+      async function bn() {
+        try {
+          const a = await fetch(
+              "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/?resource=cabindetail"
+            ).then((n) => n.json()),
+            l = new Map(),
+            u = new Set();
+          a &&
+            Array.isArray(a.data) &&
+            a.data.forEach((n) => {
+              const d = n.operator || n.shipName || "";
+              u.add(d);
+              const p = new Set();
+              p.add(ye(d)),
+                p.add(
+                  ye(d.replace(/\s+(cruise|liveaboard|voyages?|boat)s?$/i, ""))
+                );
+              const N = d.toUpperCase().trim();
+              p.add(ye(N)),
+                p.add(
+                  ye(N.replace(/\s+(CRUISE|LIVEABOARD|VOYAGES?|BOAT)S?$/i, ""))
+                );
+              const _ = as(n),
+                A = gt(_);
+              p.forEach((V) => {
+                if (V.trim()) {
+                  const L = `${V}|${A}`;
+                  l.set(L, n);
+                }
+              });
+              const $ = (n.api_name || "").toString().trim();
+              if ($) {
+                const V = gt($);
+                p.forEach((L) => {
+                  if (L.trim()) {
+                    const J = `${L}|${V}`;
+                    l.set(J, n);
+                  }
+                });
+              }
+              const U = ls(_);
+              if (
+                (U &&
+                  p.forEach((V) => {
+                    const L = `${V}|${U}`;
+                    l.set(L, n);
+                  }),
+                $)
+              ) {
+                const V = ls($);
+                V &&
+                  p.forEach((L) => {
+                    const J = `${L}|${V}`;
+                    l.set(J, n);
+                  });
+              }
+            }),
+            (y.value = l),
+            console.log(`Loaded ${l.size} cabin details from API`, {
+              sampleKeys: Array.from(l.keys()).slice(0, 10),
+              totalEntries: l.size,
+              uniqueShipNames: Array.from(u).sort(),
+            });
+        } catch (s) {
+          console.warn("Failed to load cabindetail API", s);
+        }
+      }
+      async function ca() {
+        try {
+          const a = await fetch(
+              "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/?resource=shipdetail"
+            ).then((u) => u.json()),
+            l = new Map();
+          a &&
+            a.ok &&
+            Array.isArray(a.ships) &&
+            a.ships.forEach((u) => {
+              const n = (u.name || "").toUpperCase().trim();
+              if (n) {
+                const d = {
+                  ...u,
+                  mainImage: u.image_main || u.mainImage || "",
+                };
+                l.set(n, d);
+              }
+            }),
+            (Ie.value = l),
+            console.log(
+              `Loaded ${l.size} ship details from API`,
+              Array.from(l.keys())
+            );
+        } catch (s) {
+          console.warn("Failed to load shipdetail API", s);
+        }
+      }
+      async function ns() {
+        if (me.value) {
+          (fe.value = !0),
+            (xe.value = ""),
+            (Te.value = {}),
+            (Ze.value = []),
+            (ne.value = null);
+          try {
+            const s = me.value,
+              t = An(s.dateFrom, s.dateTo),
+              a = s.ships && s.ships.length ? s.ships : s.lodges || [],
+              l = s.shipSheets && s.shipSheets.length ? s.shipSheets : a;
+            console.log("[Results] Starting data load with", t.length, "dates"),
+              await Promise.all([
+                (async () => {
+                  try {
+                    const _ = await Gn();
+                    if (_ && _.ships) {
+                      const A = new Map();
+                      _.ships.forEach(($) => {
+                        const U = ($.name || "").toUpperCase().trim();
+                        U &&
+                          A.set(U, {
+                            ...$,
+                            mainImage: $.image_main || $.mainImage || "",
+                          });
+                      }),
+                        (Ie.value = A),
+                        console.log(
+                          "[Results] Ship details loaded:",
+                          A.size,
+                          "entries"
+                        );
+                    }
+                  } catch (_) {
+                    console.warn(
+                      "[Results] Failed to load ship details, continuing without:",
+                      _
+                    );
+                  }
+                })(),
+                (async () => {
+                  try {
+                    await bn();
+                  } catch (_) {
+                    console.warn(
+                      "[Results] Failed to load cabin details, continuing without:",
+                      _
+                    );
+                  }
+                })(),
+              ]);
+            let u = null;
+            const n = () => (
+                u || (u = Rn("Cruise Schedule - Normalized").catch(() => null)),
+                u
+              ),
+              d = {};
+            await Promise.all(
+              l.map(async (_, A) => {
+                const $ = a[A] || _;
+                let U = [];
+                try {
+                  const V = await Rn(_);
+                  Array.isArray(V == null ? void 0 : V.allCabins) &&
+                    (U = V.allCabins.map((L) =>
+                      String(L).split(" (")[0].trim()
+                    ));
+                } catch (V) {
+                  console.warn(`Failed to get cabins for sheet ${_}:`, V);
+                }
+                if (U.length === 0)
+                  try {
+                    const V = await n();
+                    if (V) {
+                      const L = ye($),
+                        J = (V.operators || []).find(
+                          (re) => ye(re.operator) === L
+                        );
+                      J &&
+                        Array.isArray(J.cabins) &&
+                        (U = J.cabins.map((re) =>
+                          String(re).split(" (")[0].trim()
+                        ));
+                    }
+                  } catch (V) {
+                    console.warn(`Failed to get global cabins for ${$}:`, V);
+                  }
+                d[_] = Array.from(new Set(U.map(gt)));
+              })
+            );
+            const p = await Promise.all(
+                l.map(async (_, A) => {
+                  var _e;
+                  const $ = a[A] || _,
+                    U = d[_] || [],
+                    V = t.map((z) =>
+                      vs(z, _).catch(
+                        (de) => (
+                          console.warn(
+                            `Failed to get availability for ${z} on ${_}:`,
+                            de
+                          ),
+                          null
+                        )
+                      )
+                    ),
+                    L = await Promise.all(V),
+                    J = L.map((z, de) =>
+                      !z || !z.operators || z.operators.length === 0 ? de : -1
+                    ).filter((z) => z >= 0);
+                  let re = [];
+                  if (J.length) {
+                    const z = J.map((Ke) =>
+                      vs(t[Ke], "Cruise Schedule - Normalized").catch(
+                        (Je) => (
+                          console.warn(
+                            `Failed to get fallback availability for ${t[Ke]}:`,
+                            Je
+                          ),
+                          null
+                        )
+                      )
+                    );
+                    re = (await Promise.all(z)).filter((Ke) => Ke !== null);
+                  }
+                  const ae = [];
+                  for (let z = 0; z < t.length; z++) {
+                    const de =
+                      L[z] && L[z].operators && L[z].operators.length
+                        ? L[z]
+                        : J.includes(z) && re.length > 0
+                        ? re[J.indexOf(z)]
+                        : null;
+                    if (de) {
+                      const Ke =
+                          ((_e = de.operators) == null
+                            ? void 0
+                            : _e.flatMap(($e) => $e.cabins || [])) || [],
+                        Je = U.length
+                          ? Ke.filter(($e) => U.includes(gt($e)))
+                          : Ke;
+                      ae.push({
+                        ...de,
+                        operators: [
+                          { operator: $, total: Je.length, cabins: Je },
+                        ],
+                      });
+                    }
+                  }
+                  return [$, ae];
+                })
+              ),
+              N = {};
+            for (const [_, A] of p) N[_] = A;
+            if (
+              ((Te.value = N),
+              (Ze.value = Object.values(N).flat()),
+              s != null && s.dateFrom)
+            )
+              try {
+                const A = An(s.dateFrom, s.dateTo || s.dateFrom).map(
+                    async (L) => {
+                      let J = null;
+                      try {
+                        J = await vs(L);
+                      } catch (re) {
+                        console.warn(
+                          `Failed primary availability fetch for ${L}, trying fallback:`,
+                          re
+                        );
+                      }
+                      if (!J || !J.operators || J.operators.length === 0)
+                        try {
+                          J = await vs(L, "Cruise Schedule - Normalized");
+                        } catch (re) {
+                          console.warn(
+                            `Failed fallback availability fetch for ${L}:`,
+                            re
+                          );
+                        }
+                      return { date: L, data: J };
+                    }
+                  ),
+                  $ = await Promise.all(A),
+                  U = new Map();
+                for (const { date: L, data: J } of $)
+                  if (!(!J || !J.operators))
+                    for (const re of J.operators) {
+                      const ae = re.operator;
+                      U.has(ae) || U.set(ae, { operator: ae, cabins: [] });
+                      const _e = U.get(ae);
+                      for (const z of re.cabins || []) {
+                        const de =
+                          typeof z == "string"
+                            ? { name: z, start_date: L }
+                            : { ...z, start_date: z.start_date || L };
+                        _e.cabins.push(de);
+                      }
+                    }
+                const V = {
+                  ok: !0,
+                  operators: Array.from(U.values()),
+                  total: Array.from(U.values()).reduce(
+                    (L, J) => L + J.cabins.length,
+                    0
+                  ),
+                };
+                (ne.value = V),
+                  console.log(
+                    "[Results] Loaded global availability:",
+                    V.total,
+                    "total cabins"
+                  );
+              } catch (_) {
+                console.debug("[Results] global availability error", _);
+              }
+            Ze.value.length === 0 &&
+              (xe.value =
+                "No availability data found for the selected dates and ships.");
+          } catch (s) {
+            (xe.value = `Failed to check availability: ${s.message}`),
+              console.error("[Results] Availability check error:", s);
+          } finally {
+            (fe.value = !1),
+              console.log("[Results] Availability check complete");
+          }
+        }
+      }
+      const ua = () => ns();
+      function da() {
+        try {
+          const s = nt.value.filter((u) => Oe.value.includes(u.id)),
+            t = s.map((u) => u.label),
+            a = s.map((u) => u.sheet),
+            l = {
+              region: ms,
+              destination: Ne.value[0] || "",
+              destinations: Ne.value.slice(),
+              ships: t,
+              shipSheets: a,
+              ship: t[0] || "",
+              lodges: t.slice(),
+              dateFrom: c.value,
+              dateTo: k.value || c.value,
+              minTripDuration: P.value,
+              maxTripDuration: D.value,
+              cabins: ce.value
+                ? []
+                : Y.value.map((u) => ({
+                    adults: u.adults,
+                    children: u.children,
+                    total: u.adults + u.children,
+                  })),
+              totalCabins: ce.value ? 0 : Y.value.length,
+              totalGuests: Be.value,
+              isFlexible: ce.value,
+              flexibleGuests: ce.value ? ue.value : 0,
+              adults: ce.value
+                ? ue.value
+                : Y.value.reduce((u, n) => u + n.adults, 0),
+              children: ce.value
+                ? 0
+                : Y.value.reduce((u, n) => u + n.children, 0),
+              age3_9: 0,
+              age0_2: 0,
+              timestamp: Date.now(),
+            };
+          if (
+            ((I.value = s.map((u) => ({ label: u.label, sheet: u.sheet }))),
+            localStorage.setItem("komodo_search_criteria", JSON.stringify(l)),
+            (me.value = l),
+            c.value)
+          ) {
+            const u = new Date(c.value);
+            (ft.value = u.getMonth()), ($t.value = u.getFullYear());
+          }
+          ns();
+        } catch (s) {
+          console.error("Failed to apply sidebar changes", s),
+            alert("Failed to apply changes");
+        }
+      }
+      function va(s) {
+        return [qs.value, Ws.value, Hs.value, Ys.value, Js.value].some(
+          (a) => a && (a === s || a.contains(s))
+        );
+      }
+      function yn(s) {
+        va(s.target) || Wn();
+      }
+      document.addEventListener("click", yn),
+        Nn(() => {
+          document.removeEventListener("click", yn);
+        }),
+        Qe(async () => {
+          Et();
+          try {
+            const s = localStorage.getItem("komodo_search_criteria");
+            if (s) {
+              me.value = JSON.parse(s);
+              const t = me.value || {};
+              (Ne.value = Array.isArray(t.destinations)
+                ? t.destinations.slice()
+                : t.destination
+                ? [t.destination]
+                : []),
+                (ce.value = !!t.isFlexible),
+                (ue.value = t.flexibleGuests || 2);
+              const a = Array.isArray(t.ships) ? t.ships : [],
+                l = Array.isArray(t.shipSheets) ? t.shipSheets : [];
+              if (
+                ((I.value = a.map((u, n) => ({ label: u, sheet: l[n] || "" }))),
+                (c.value = t.dateFrom || ""),
+                (k.value = t.dateTo || ""),
+                t.minTripDuration !== void 0
+                  ? (P.value = t.minTripDuration)
+                  : (P.value = 1),
+                t.maxTripDuration !== void 0
+                  ? (D.value = t.maxTripDuration)
+                  : (D.value = Xe),
+                Array.isArray(t.cabins) && t.cabins.length > 0
+                  ? (Y.value = t.cabins.map((u, n) => ({
+                      id: n + 1,
+                      adults: u.adults || 2,
+                      children: u.children || 0,
+                      expanded: n === 0,
+                    })))
+                  : (Y.value = [
+                      {
+                        id: 1,
+                        adults: t.totalGuests || t.adults || 2,
+                        children: 0,
+                        expanded: !0,
+                      },
+                    ]),
+                c.value)
+              ) {
+                const u = new Date(c.value);
+                (ft.value = u.getMonth()), ($t.value = u.getFullYear());
+              }
+            }
+            bn().catch((t) =>
+              console.warn("Failed to load details background:", t)
+            ),
+              ca().catch((t) =>
+                console.warn("Failed to load ship details background:", t)
+              ),
+              await Promise.all([ra(), ns()]);
+          } catch (s) {
+            console.error("Failed to load search criteria:", s),
+              (xe.value = "Failed to load search criteria");
+          }
+        });
+      function as(s) {
+        if (!s) return "";
+        if (typeof s == "string") return s.split(" (")[0].trim();
+        const t = (
+          s.name ||
+          s["cabin name"] ||
+          s.cabin_name ||
+          s.api_name ||
+          ""
+        ).toString();
+        return t ? t.split("(")[0].trim() : "";
+      }
+      function Ts(s) {
+        return !s || typeof s == "string"
+          ? null
+          : typeof s.available == "number"
+          ? s.available
+          : null;
+      }
+      function kn(s) {
+        if (!s) return "";
+        if (typeof s == "string") {
+          const t = s.match(/\(([^)]+)\)$/);
+          return t ? t[1] : "";
+        }
+        return typeof s.capacity == "number"
+          ? `${s.capacity} pax`
+          : s.capacity
+          ? s.capacity
+          : s.capacity_lock || "";
+      }
+      function os(s) {
+        return !s || typeof s == "string" ? "" : s.price_lock || s.price || "";
+      }
+      function pa(s, t) {
+        return s && typeof s != "string" && s.shipname
+          ? s.shipname
+          : (t || "").replace(/\([^)]*\)/g, "").trim();
+      }
+      function Is(s) {
+        if (!s) return "CABIN";
+        const t = s.detail || s;
+        if (t.cabin_type || t.type)
+          return (t.cabin_type || t.type).toUpperCase();
+        const a = s.cabinName || s.name || "";
+        return a.toLowerCase().includes("deluxe")
+          ? "DELUXE"
+          : a.toLowerCase().includes("suite")
+          ? "SUITE"
+          : a.toLowerCase().includes("master")
+          ? "MASTER"
+          : a.toLowerCase().includes("vip")
+          ? "VIP"
+          : "CABIN";
+      }
+      function ma(s) {
+        if (!s) return 2;
+        const t = s.detail || s;
+        if (typeof t.capacity == "number") return t.capacity;
+        const l = (t.capacityText || s.capacityText || "").match(/(\d+)/);
+        return l ? parseInt(l[1], 10) : 2;
+      }
+      function wn(s) {
+        if (!s) return "1 King";
+        const t = s.detail || s;
+        if (t.bed_type) return t.bed_type;
+        const a = t.facilities || {};
+        return a.king_bed
+          ? "1 King"
+          : a.twin_bed
+          ? "2 Twins"
+          : "1 King or 2 Twins";
+      }
+      function fa(s) {
+        if (!s) return "Private cabin";
+        const t = s.detail || s;
+        return t.size ? t.size : t.area ? t.area : "Private cabin";
+      }
+      function is(s) {
+        if (!s) return "";
+        if (s.tripDays) return s.tripDays;
+        const t = s.detail || s;
+        if (t.trip_days) return t.trip_days;
+        if (t.days) return t.days;
+        if (s.raw && typeof s.raw != "string") {
+          if (s.raw.trip_days) return s.raw.trip_days;
+          if (s.raw.days) return s.raw.days;
+        }
+        return "";
+      }
+      function ls(s) {
+        if (!s) return "";
+        let t = String(s).toLowerCase();
+        (t = t.replace(/\([^)]*\)/g, " ")), (t = t.replace(/[\-–—_/]+/g, " "));
+        const a = new Set([
+            "master",
+            "vip",
+            "suite",
+            "deluxe",
+            "superior",
+            "private",
+            "ocean",
+            "sea",
+            "view",
+            "balcony",
+            "bathtub",
+            "room",
+            "cabin",
+            "deck",
+            "upperdeck",
+            "maindeck",
+            "lowerdeck",
+          ]),
+          l = t
+            .split(/\s+/)
+            .map((u) => u.trim())
+            .filter((u) => u && !a.has(u))
+            .map((u) => u.replace(/[^a-z0-9]/g, ""))
+            .filter(Boolean);
+        return l.length ? l.sort().join(" ") : "";
+      }
+      function ha(s) {
+        const t = s && (s.detail || s),
+          a =
+            (t == null ? void 0 : t.cabin_name) ||
+            (t == null ? void 0 : t.api_name);
+        return a && String(a).trim()
+          ? String(a).trim()
+          : (s == null ? void 0 : s.cabinName) || "";
+      }
+      function ga(s, t) {
+        if (!s || !t) return null;
+        const a = new Date(s + "T00:00:00"),
+          l = new Date(a);
+        return l.setDate(l.getDate() + (Number(t) - 1)), l;
+      }
+      function ba(s, t, a, l) {
+        if (!s || !t || !a || !l) return !0;
+        const u = new Date(s + "T00:00:00"),
+          n = ga(s, t),
+          d = new Date(a + "T00:00:00"),
+          p = new Date(l + "T00:00:00");
+        return u <= p && n >= d;
+      }
+      function Mt(s) {
+        if (!s)
+          return [
+            "Private bathroom",
+            "Air conditioning",
+            "Sea view",
+            "Daily housekeeping",
+            "Private bathroom",
+            "Air conditioning",
+          ];
+        const t = s.detail || s,
+          a = [],
+          l = t.facilities || {},
+          u = {
+            wifi: "Complimentary Wi-Fi",
+            starlink: "Starlink Internet",
+            ac: "Air conditioning",
+            private_bathroom: "Private bathroom",
+            shower: "Walk-in shower",
+            bathtub: "Bathtub",
+            seaview: "Sea view",
+            balcony: "Private balcony",
+            sundeck: "Sundeck access",
+            jacuzzi: "Jacuzzi",
+            indoor_jacuzzi: "Indoor jacuzzi",
+            outdoor_jacuzzi: "Outdoor jacuzzi",
+            bar: "Mini bar",
+            smart_tv: "Smart TV",
+            king_bed: "King-size bed",
+          };
+        for (const [n, d] of Object.entries(u))
+          if ((l[n] && a.push(d), a.length >= 8)) break;
+        return (
+          a.length === 0 &&
+            a.push(
+              "All cabins are non-smoking",
+              "Private bathroom",
+              "Air conditioning",
+              "Daily housekeeping",
+              "Private bathroom",
+              "Air conditioning"
+            ),
+          a
+        );
+      }
+      function _n(s) {
+        if (!s) return "";
+        try {
+          const t = String(s),
+            a = Cn(t);
+          return a ? `https://lh3.googleusercontent.com/d/${a}=w1600` : t;
+        } catch {
+          return s;
+        }
+      }
+      function Cn(s) {
+        if (!s) return "";
+        const t = String(s).match(/\/d\/([^/?#]+)/),
+          a = String(s).match(/[?&]id=([^&]+)/);
+        return (t && t[1]) || (a && a[1]) || "";
+      }
+      function ya(s) {
+        const t = [],
+          a = String(s || ""),
+          l = Cn(a);
+        return (
+          a && t.push(a),
+          l &&
+            (t.push(`https://lh3.googleusercontent.com/d/${l}=w1600`),
+            t.push(`https://drive.google.com/uc?export=view&id=${l}`),
+            t.push(`https://drive.google.com/uc?export=download&id=${l}`),
+            t.push(`https://drive.google.com/thumbnail?id=${l}&sz=w1600`)),
+          Array.from(new Set(t))
+        );
+      }
+      function $n(s, t) {
+        const a = s == null ? void 0 : s.target;
+        if (!a) return;
+        const l = parseInt(a.getAttribute("data-try") || "0", 10),
+          u = ya(t);
+        l < u.length - 1
+          ? (a.setAttribute("data-try", String(l + 1)), (a.src = u[l + 1]))
+          : (a.src = "/src/images/cabin.jpg");
+      }
+      function Ns(s) {
+        if (!s || typeof s == "string") return "";
+        const t = [];
+        s.image_main && t.push(s.image_main),
+          Array.isArray(s.images) && t.push(...s.images);
+        for (let l = 1; l <= 10; l++) {
+          const u = `image_${l}`;
+          s[u] && t.push(s[u]);
+        }
+        const a = t.find((l) => !!l && String(l).trim().length > 0) || "";
+        return a ? _n(a) : "";
+      }
+      function dt(s) {
+        if (typeof s == "string") {
+          const a = s.match(/\(([^)]+)\)$/);
+          if (a && a[1]) {
+            const l = (a[1].match(/\d+/g) || []).map((u) => parseInt(u, 10));
+            if (l.length) return Math.max(...l);
+          }
+          return null;
+        }
+        const t = (
+          s.capacity ||
+          s.max_guests ||
+          s.sleeps ||
+          s.capacity_lock ||
+          ""
+        ).toString();
+        if (t) {
+          const a = (t.match(/\d+/g) || []).map((l) => parseInt(l, 10));
+          if (a.length) return Math.max(...a);
+        }
+        return null;
+      }
+      function ye(s) {
+        return s
+          ? String(s)
+              .replace(/\([^)]*\)/g, " ")
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, " ")
+              .trim()
+              .replace(/\s+/g, " ")
+          : "";
+      }
+      function gt(s) {
+        if (!s) return "";
+        let t = String(s);
+        t = t.replace(/\([^)]*\)$/, "").trim();
+        const a = t.split(/[-–—]/);
+        return (
+          (t = a[a.length - 1]),
+          t
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, " ")
+            .trim()
+            .replace(/\s+/g, " ")
+        );
+      }
+      function ka(s, t) {
+        const a = ye(s);
+        return t.some((l) => a.includes(l) || l.includes(a));
+      }
+      function wa(s) {
+        if (!s) return [];
+        const t = [],
+          a = s.match(/\(([^)]+)\)/g);
+        a && a.forEach((d) => t.push(d.replace(/[()]/g, " "))), t.push(s);
+        const u = t
+            .join(" | ")
+            .split(/[+|,\/]/)
+            .map((d) => d.replace(/\b(pax|guests?)\b/gi, "").trim())
+            .filter(Boolean)
+            .filter((d) => !/^\d+(\s*-\s*\d+)?$/.test(d))
+            .map((d) =>
+              d
+                .split(" ")
+                .map((p) =>
+                  p ? p[0].toUpperCase() + p.slice(1).toLowerCase() : ""
+                )
+                .filter(Boolean)
+                .join(" ")
+            ),
+          n = [];
+        for (const d of u) {
+          const p = d.toLowerCase();
+          n.some((N) => N.toLowerCase() === p) || n.push(d);
+        }
+        return n;
+      }
+      function Ms(s) {
+        if (!s) return null;
+        const a = String(s).match(/\d+/g);
+        if (!a || a.length === 0) return null;
+        const l = a.map((u) => parseInt(u, 10));
+        return Math.max(...l);
+      }
+      function Es(s, t = Ot) {
+        var N, _;
+        if (s == null) return null;
+        if (typeof s == "number" && !Number.isNaN(s))
+          return { amount: s, currency: t };
+        const a = String(s).trim();
+        if (!a) return null;
+        const l = a.match(/([^\d]*)([\d.,\s]+)/);
+        if (!l) return null;
+        let u =
+            ((N = l[1]) == null ? void 0 : N.replace(/from/gi, "").trim()) || t,
+          n = (_ = l[2]) == null ? void 0 : _.trim();
+        if (!n) return null;
+        (n = n.replace(/[\s,]/g, "")),
+          (n.match(/\./g) || []).length > 1 && (n = n.replace(/\./g, ""));
+        const p = parseFloat(n);
+        return Number.isNaN(p) ? null : { amount: p, currency: u };
+      }
+      function Sn(s, t = Ot) {
+        return Number.isFinite(s)
+          ? `${t || Ot} ${Math.round(s).toLocaleString("en-US")}`
+          : "";
+      }
+      function _a(s) {
+        if (!(s != null && s.price)) return "";
+        const t = Es(s.price, Ot);
+        if (!t) return "";
+        const a = Number((s == null ? void 0 : s.guests) || 2),
+          l = t.amount * (Number.isFinite(a) ? a : 2);
+        return Sn(l, t.currency);
+      }
+      function Ca(s) {
+        (pe.value = s), (Ee.value = !0), cs();
+      }
+      function Rs() {
+        (Ee.value = !1), (pe.value = null), (He.value = 1), Ps();
+      }
+      function $a() {
+        (We.value = !0), cs();
+      }
+      function Sa() {
+        (We.value = !1), Ps();
+      }
+      function rs() {
+        (tt.value = !1),
+          (De.value = null),
+          (Re.value = 2),
+          (et.value = null),
+          Ps();
+      }
+      function xa() {
+        const s = As.value;
+        Re.value = Math.min(s, Re.value + 1);
+      }
+      function Da() {
+        Re.value = Math.max(1, Re.value - 1);
+      }
+      function Aa() {
+        et.value !== null
+          ? (Ia(et.value, Re.value), rs())
+          : De.value && (Na(De.value, Re.value), rs());
+      }
+      function Ta(s, t) {
+        (De.value = {
+          cabinName: s.cabin,
+          shipName: s.ship,
+          date: s.date,
+          capacityText: s.capacity || "4 guests",
+          availableText: s.capacity ? `${s.capacity} capacity` : "Available",
+        }),
+          (et.value = t),
+          (Re.value = s.guests || 2),
+          (tt.value = !0),
+          cs();
+      }
+      function Ia(s, t) {
+        try {
+          const a = "komodo_itinerary",
+            l = JSON.parse(localStorage.getItem(a) || "[]");
+          l[s] &&
+            ((l[s].guests = t),
+            localStorage.setItem(a, JSON.stringify(l)),
+            Et());
+        } catch (a) {
+          console.error("Failed to update itinerary", a);
+        }
+      }
+      function xn(s) {
+        return R.value.some(
+          (t) =>
+            t.cabin === (s.title || s.cabinName) &&
+            t.ship === s.shipName &&
+            t.date === s.date
+        );
+      }
+      function Gt(s, t) {
+        if (!s || !t) return !1;
+        const a = s.originalItem;
+        if (!a) return !1;
+        const l = s.title || a.cabinName;
+        return R.value.some(
+          (u) => u.cabin === l && u.ship === a.shipName && u.date === t.date
+        );
+      }
+      function Dn(s) {
+        var t;
+        if (xn(s)) Ma(s);
+        else {
+          De.value = s;
+          const a = Number(
+            ((t = me.value) == null ? void 0 : t.totalGuests) || 2
+          );
+          let l = dt(s);
+          !l && s.originalItem && (l = dt(s.originalItem)),
+            !l && s.capacityText && (l = Ms(s.capacityText));
+          const u = l || 4;
+          (Re.value = Math.min(a, u)), (tt.value = !0), cs();
+        }
+      }
+      function Na(s, t = 2) {
+        try {
+          const a = "komodo_itinerary",
+            l = JSON.parse(localStorage.getItem(a) || "[]"),
+            u = s.title || s.cabinName;
+          if (
+            l.some(
+              (p) => p.cabin === u && p.ship === s.shipName && p.date === s.date
+            )
+          )
+            return;
+          const d = {
+            operator: s.operatorLabel,
+            ship: s.shipName,
+            cabin: u,
+            date: s.date,
+            price: s.price || null,
+            capacity: s.capacityText || null,
+            guests: t,
+            qty: 1,
+            addedAt: Date.now(),
+          };
+          l.push(d), localStorage.setItem(a, JSON.stringify(l)), Et();
+        } catch (a) {
+          console.error("Failed to add to itinerary", a);
+        }
+      }
+      function Ma(s) {
+        try {
+          const t = "komodo_itinerary",
+            a = JSON.parse(localStorage.getItem(t) || "[]"),
+            l = s.title || s.cabinName,
+            u = a.filter(
+              (n) =>
+                !(n.cabin === l && n.ship === s.shipName && n.date === s.date)
+            );
+          localStorage.setItem(t, JSON.stringify(u)), Et();
+        } catch (t) {
+          console.error("Failed to remove from itinerary", t);
+        }
+      }
+      function Ea() {
+        qe.value = !0;
+      }
+      function Ra() {
+        qe.value = !1;
+      }
+      function Pa() {
+        (qe.value = !1), ge.push("/results");
+      }
+      function Et() {
+        try {
+          const t = JSON.parse(
+            localStorage.getItem("komodo_itinerary") || "[]"
+          );
+          R.value = Array.isArray(t) ? t : [];
+        } catch {
+          R.value = [];
+        }
+      }
+      function Oa(s) {
+        try {
+          const t = "komodo_itinerary",
+            a = JSON.parse(localStorage.getItem(t) || "[]");
+          a.splice(s, 1), localStorage.setItem(t, JSON.stringify(a)), Et();
+        } catch (t) {
+          console.error("Failed to remove item", t);
+        }
+      }
+      const Ye = {
+        count: 0,
+        bodyOverflow: "",
+        htmlOverflow: "",
+        bodyPadding: "",
+        htmlPadding: "",
+      };
+      function cs() {
+        const s = document.body,
+          t = document.documentElement;
+        if (!(!s || !t)) {
+          if (Ye.count === 0) {
+            const a = window.innerWidth - t.clientWidth;
+            if (
+              ((Ye.bodyOverflow = s.style.overflow),
+              (Ye.htmlOverflow = t.style.overflow),
+              (Ye.bodyPadding = s.style.paddingRight),
+              (Ye.htmlPadding = t.style.paddingRight),
+              a > 0)
+            ) {
+              const l = `${a}px`;
+              (s.style.paddingRight = l), (t.style.paddingRight = l);
+            }
+            (s.style.overflow = "hidden"), (t.style.overflow = "hidden");
+          }
+          Ye.count++;
+        }
+      }
+      function Ps() {
+        const s = document.body,
+          t = document.documentElement;
+        !s ||
+          !t ||
+          (Ye.count !== 0 &&
+            (Ye.count--,
+            !(Ye.count > 0) &&
+              ((s.style.overflow = Ye.bodyOverflow),
+              (t.style.overflow = Ye.htmlOverflow),
+              (s.style.paddingRight = Ye.bodyPadding),
+              (t.style.paddingRight = Ye.htmlPadding))));
+      }
+      const ee = m({
+        title: "",
+        firstName: "",
+        lastName: "",
+        phoneCountry: "+62",
+        phoneNumber: "",
+        country: "",
+        email: "",
+        confirmEmail: "",
+        userType: "",
+        notes: "",
+        subscribeNews: !1,
+        consentData: !1,
+      });
+      async function La() {
+        if (!ee.value.firstName || !ee.value.lastName) {
+          alert("Please enter your first and last name");
+          return;
+        }
+        if (!ee.value.email || ee.value.email !== ee.value.confirmEmail) {
+          alert("Please ensure email addresses match");
+          return;
+        }
+        if (!ee.value.consentData) {
+          alert("Please consent to data collection to proceed");
+          return;
+        }
+        if (!R.value.length) {
+          alert("Please add at least one cabin to your itinerary");
+          return;
+        }
+        let s = 0;
+        const t = [];
+        for (const a of R.value) {
+          const l = St(a.price),
+            u = Number(a.guests || 2),
+            n = l * u;
+          (s += n),
+            t.push({
+              name: `${a.ship} - ${a.cabin}`,
+              quantity: u,
+              price: l,
+              category: "Cruise Cabin",
+            });
+        }
+        s <= 0 &&
+          ((s = 1e6),
+          t.push({
+            name: "Komodo Cruise Booking",
+            quantity: 1,
+            price: s,
+            category: "Cruise Booking",
+          })),
+          (Le.value = !0);
+        try {
+          const l = `Komodo Cruise Booking: ${R.value
+              .map((n) => `${n.ship} - ${n.cabin}`)
+              .join(", ")}`,
+            u = await Zr({
+              amount: s,
+              payerEmail: ee.value.email,
+              description: l,
+              customerName: `${ee.value.title ? ee.value.title + " " : ""}${
+                ee.value.firstName
+              } ${ee.value.lastName}`,
+              customerPhone: ee.value.phoneCountry + ee.value.phoneNumber,
+              items: t,
+            });
+          if (
+            (localStorage.setItem(
+              "komodo_last_enquiry",
+              JSON.stringify({
+                form: ee.value,
+                itinerary: R.value,
+                invoiceId: u.invoiceId,
+                invoiceUrl: u.invoiceUrl,
+                amount: s,
+                createdAt: new Date().toISOString(),
+              })
+            ),
+            u.invoiceUrl)
+          )
+            ec(u.invoiceUrl);
+          else throw new Error("No invoice URL received");
+        } catch (a) {
+          console.error("Failed to create payment:", a),
+            alert(`Failed to process payment: ${a.message}. Please try again.`);
+        } finally {
+          Le.value = !1;
+        }
+      }
+      function An(s, t) {
+        if (!s || !t) return s ? [s] : [];
+        const a = new Date(s),
+          l = new Date(t),
+          u = [];
+        for (let n = new Date(a); n <= l; n.setDate(n.getDate() + 1))
+          u.push(us(n));
+        return u;
+      }
+      function Ba(s, t) {
+        const a = new Date(s);
+        return a.setDate(a.getDate() + t), us(a);
+      }
+      function us(s) {
+        const t = s.getFullYear(),
+          a = String(s.getMonth() + 1).padStart(2, "0"),
+          l = String(s.getDate()).padStart(2, "0");
+        return `${t}-${a}-${l}`;
+      }
+      function Fa() {
+        return us(new Date());
+      }
+      return (
+        Et(),
+        (s, t) => {
+          var a, l, u;
+          return (
+            o(),
+            i(
+              K,
+              null,
+              [
+                e("div", tc, [
+                  fe.value
+                    ? (o(), i("div", sc, "Loading"))
+                    : (o(),
+                      i("div", nc, [
+                        e("div", ac, [
+                          e("div", oc, [
+                            e("div", ic, [
+                              e("div", lc, [
+                                t[62] ||
+                                  (t[62] = e(
+                                    "svg",
+                                    {
+                                      class: "filter-icon",
+                                      viewBox: "0 0 24 24",
+                                      fill: "none",
+                                      stroke: "currentColor",
+                                      "stroke-width": "1.5",
+                                    },
+                                    [
+                                      e("path", {
+                                        d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2",
+                                      }),
+                                      e("circle", {
+                                        cx: "12",
+                                        cy: "7",
+                                        r: "4",
+                                      }),
+                                    ],
+                                    -1
+                                  )),
+                                e(
+                                  "span",
+                                  null,
+                                  r(Y.value.length) +
+                                    " cabin" +
+                                    r(Y.value.length !== 1 ? "s" : "") +
+                                    ", " +
+                                    r(Be.value) +
+                                    " guest" +
+                                    r(Be.value !== 1 ? "s" : ""),
+                                  1
+                                ),
+                              ]),
+                              e("div", rc, [
+                                t[63] ||
+                                  (t[63] = Pe(
+                                    '<svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>',
+                                    1
+                                  )),
+                                e("span", null, r(te(c.value, k.value)), 1),
+                              ]),
+                            ]),
+                          ]),
+                          e(
+                            "button",
+                            {
+                              class: "filter-edit-btn",
+                              onClick: t[0] || (t[0] = (n) => (C.value = !0)),
+                              "aria-label": "Edit filters",
+                            },
+                            [
+                              ...(t[64] ||
+                                (t[64] = [
+                                  e(
+                                    "svg",
+                                    {
+                                      viewBox: "0 0 24 24",
+                                      fill: "none",
+                                      stroke: "currentColor",
+                                      "stroke-width": "2",
+                                    },
+                                    [
+                                      e("path", {
+                                        d: "M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7",
+                                      }),
+                                      e("path", {
+                                        d: "M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z",
+                                      }),
+                                    ],
+                                    -1
+                                  ),
+                                ])),
+                            ]
+                          ),
+                        ]),
+                        e("div", cc, [
+                          e("div", uc, [
+                            xe.value
+                              ? (o(),
+                                i("div", dc, [
+                                  e("p", vc, r(xe.value), 1),
+                                  e(
+                                    "button",
+                                    { onClick: ua, class: "btn-primary" },
+                                    "Try Again"
+                                  ),
+                                ]))
+                              : (o(),
+                                i("div", pc, [
+                                  t[83] ||
+                                    (t[83] = e(
+                                      "h2",
+                                      { class: "results-title" },
+                                      "Your Search Results",
+                                      -1
+                                    )),
+                                  e("div", mc, [
+                                    es.value.length &&
+                                    ($s.value || it.value.length > 0)
+                                      ? (o(),
+                                        i("div", fc, [
+                                          ...(t[65] ||
+                                            (t[65] = [
+                                              e(
+                                                "p",
+                                                { class: "desktop-only" },
+                                                [
+                                                  e(
+                                                    "strong",
+                                                    null,
+                                                    "Your preferred travel dates are available!"
+                                                  ),
+                                                  Q(
+                                                    " We have a team of Komodo Cruises Journey Designers who are ready to plan your trip. Simply select the results that suit your preferences best and submit your enquiry. "
+                                                  ),
+                                                ],
+                                                -1
+                                              ),
+                                              e(
+                                                "p",
+                                                { class: "mobile-only" },
+                                                [
+                                                  e(
+                                                    "strong",
+                                                    null,
+                                                    "Your preferred dates are available!"
+                                                  ),
+                                                  Q(
+                                                    " Select results below and submit your enquiry. "
+                                                  ),
+                                                ],
+                                                -1
+                                              ),
+                                              e(
+                                                "p",
+                                                {
+                                                  class:
+                                                    "results-note-muted desktop-only",
+                                                },
+                                                [
+                                                  e(
+                                                    "span",
+                                                    { class: "semibold" },
+                                                    "Note:"
+                                                  ),
+                                                  Q(
+                                                    " These results indicate availability and do not guarantee a booking. "
+                                                  ),
+                                                ],
+                                                -1
+                                              ),
+                                            ])),
+                                        ]))
+                                      : !mt.value && it.value.length > 0
+                                      ? (o(),
+                                        i("div", hc, [
+                                          ...(t[66] ||
+                                            (t[66] = [
+                                              Pe(
+                                                '<p class="desktop-only"><strong>Your preferred dates are unfortunately not available, but there is availability at other Komodo Cruises lodges or on alternate dates.</strong></p><p class="desktop-only"> We have a team of Komodo Cruises Journey Designers who are ready to plan your trip. Simply select the results that suit your preferences best and submit your enquiry. </p><p class="mobile-only"><strong>Dates not available.</strong> Check alternatives below and submit enquiry. </p><p class="results-note-muted desktop-only"><span class="semibold">Note:</span> These results indicate availability and do not guarantee a booking. </p>',
+                                                4
+                                              ),
+                                            ])),
+                                        ]))
+                                      : M("", !0),
+                                  ]),
+                                  it.value.length
+                                    ? (o(),
+                                      i("div", gc, [
+                                        e("div", bc, [
+                                          e(
+                                            "div",
+                                            {
+                                              class: "sort-dropdown",
+                                              ref_key: "sortDropdownRef",
+                                              ref: qn,
+                                            },
+                                            [
+                                              t[67] ||
+                                                (t[67] = e(
+                                                  "span",
+                                                  { class: "sort-label" },
+                                                  "SORT BY",
+                                                  -1
+                                                )),
+                                              e(
+                                                "button",
+                                                {
+                                                  type: "button",
+                                                  class: "sort-btn",
+                                                  onClick:
+                                                    t[1] ||
+                                                    (t[1] = (n) =>
+                                                      (pt.value = !pt.value)),
+                                                  "aria-expanded": pt.value,
+                                                },
+                                                [
+                                                  e(
+                                                    "span",
+                                                    null,
+                                                    r(
+                                                      ((a = Lt.find(
+                                                        (n) =>
+                                                          n.value === st.value
+                                                      )) == null
+                                                        ? void 0
+                                                        : a.label) ||
+                                                        "Recommended"
+                                                    ),
+                                                    1
+                                                  ),
+                                                  e(
+                                                    "img",
+                                                    {
+                                                      src: pt.value
+                                                        ? he(ot)
+                                                        : he(at),
+                                                      alt: "",
+                                                      class: "sort-caret",
+                                                    },
+                                                    null,
+                                                    8,
+                                                    kc
+                                                  ),
+                                                ],
+                                                8,
+                                                yc
+                                              ),
+                                              pt.value
+                                                ? (o(),
+                                                  i(
+                                                    "div",
+                                                    {
+                                                      key: 0,
+                                                      class:
+                                                        "sort-dropdown-panel",
+                                                      onClick:
+                                                        t[2] ||
+                                                        (t[2] = j(() => {}, [
+                                                          "stop",
+                                                        ])),
+                                                    },
+                                                    [
+                                                      (o(),
+                                                      i(
+                                                        K,
+                                                        null,
+                                                        se(Lt, (n) =>
+                                                          e(
+                                                            "button",
+                                                            {
+                                                              key: n.value,
+                                                              class: B([
+                                                                "sort-option",
+                                                                {
+                                                                  active:
+                                                                    st.value ===
+                                                                    n.value,
+                                                                },
+                                                              ]),
+                                                              onClick: (d) => {
+                                                                (st.value =
+                                                                  n.value),
+                                                                  (pt.value =
+                                                                    !1);
+                                                              },
+                                                            },
+                                                            r(n.label),
+                                                            11,
+                                                            wc
+                                                          )
+                                                        ),
+                                                        64
+                                                      )),
+                                                    ]
+                                                  ))
+                                                : M("", !0),
+                                            ],
+                                            512
+                                          ),
+                                        ]),
+                                        e("div", _c, [
+                                          e(
+                                            "span",
+                                            Cc,
+                                            r(it.value.length) +
+                                              " " +
+                                              r(
+                                                it.value.length === 1
+                                                  ? "Cabin"
+                                                  : "Cabins"
+                                              ),
+                                            1
+                                          ),
+                                        ]),
+                                      ]))
+                                    : M("", !0),
+                                  be(
+                                    e(
+                                      "div",
+                                      $c,
+                                      [
+                                        e("div", Sc, [
+                                          t[68] ||
+                                            (t[68] = e(
+                                              "h3",
+                                              { class: "ship-selection-title" },
+                                              "Select a Ship",
+                                              -1
+                                            )),
+                                          e(
+                                            "p",
+                                            xc,
+                                            " You selected " +
+                                              r(Zt.value.length) +
+                                              " ships. Please choose one to view available cabins. ",
+                                            1
+                                          ),
+                                        ]),
+                                        e("div", Dc, [
+                                          (o(!0),
+                                          i(
+                                            K,
+                                            null,
+                                            se(
+                                              mn.value,
+                                              (n) => (
+                                                o(),
+                                                i(
+                                                  "div",
+                                                  {
+                                                    key: n.name,
+                                                    class:
+                                                      "ship-selection-card",
+                                                    onClick: (d) => Xn(n.name),
+                                                  },
+                                                  [
+                                                    e("div", Tc, [
+                                                      e(
+                                                        "img",
+                                                        {
+                                                          src:
+                                                            n.image ||
+                                                            "/src/images/placeholder-ship.jpg",
+                                                          alt: n.name,
+                                                          class:
+                                                            "ship-thumbnail",
+                                                          referrerpolicy:
+                                                            "no-referrer",
+                                                          onError:
+                                                            t[3] ||
+                                                            (t[3] = (d) =>
+                                                              (d.target.src =
+                                                                "/src/images/cabin.jpg")),
+                                                        },
+                                                        null,
+                                                        40,
+                                                        Ic
+                                                      ),
+                                                    ]),
+                                                    e("div", Nc, [
+                                                      e("h4", Mc, r(n.name), 1),
+                                                      n.description
+                                                        ? (o(),
+                                                          i(
+                                                            "p",
+                                                            Ec,
+                                                            r(n.description),
+                                                            1
+                                                          ))
+                                                        : M("", !0),
+                                                      n.hasAvailability
+                                                        ? (o(),
+                                                          i("div", Rc, [
+                                                            e(
+                                                              "span",
+                                                              null,
+                                                              r(n.cabinsCount) +
+                                                                " cabin" +
+                                                                r(
+                                                                  n.cabinsCount !==
+                                                                    1
+                                                                    ? "s"
+                                                                    : ""
+                                                                ) +
+                                                                " available",
+                                                              1
+                                                            ),
+                                                            e(
+                                                              "span",
+                                                              Pc,
+                                                              "Up to " +
+                                                                r(
+                                                                  n.totalCapacity
+                                                                ) +
+                                                                " guests",
+                                                              1
+                                                            ),
+                                                          ]))
+                                                        : (o(),
+                                                          i("div", Oc, [
+                                                            ...(t[69] ||
+                                                              (t[69] = [
+                                                                e(
+                                                                  "span",
+                                                                  {
+                                                                    class:
+                                                                      "no-availability-text",
+                                                                  },
+                                                                  "No availability for selected dates",
+                                                                  -1
+                                                                ),
+                                                              ])),
+                                                          ])),
+                                                    ]),
+                                                    t[70] ||
+                                                      (t[70] = e(
+                                                        "div",
+                                                        {
+                                                          class:
+                                                            "ship-card-arrow",
+                                                        },
+                                                        [
+                                                          e(
+                                                            "svg",
+                                                            {
+                                                              width: "20",
+                                                              height: "20",
+                                                              viewBox:
+                                                                "0 0 24 24",
+                                                              fill: "none",
+                                                              stroke:
+                                                                "currentColor",
+                                                              "stroke-width":
+                                                                "2",
+                                                            },
+                                                            [
+                                                              e("polyline", {
+                                                                points:
+                                                                  "9 18 15 12 9 6",
+                                                              }),
+                                                            ]
+                                                          ),
+                                                        ],
+                                                        -1
+                                                      )),
+                                                  ],
+                                                  8,
+                                                  Ac
+                                                )
+                                              )
+                                            ),
+                                            128
+                                          )),
+                                        ]),
+                                      ],
+                                      512
+                                    ),
+                                    [[Mn, $s.value]]
+                                  ),
+                                  be(
+                                    e(
+                                      "div",
+                                      Lc,
+                                      [
+                                        je.value && Zt.value.length > 1
+                                          ? (o(),
+                                            i("div", Bc, [
+                                              e(
+                                                "button",
+                                                {
+                                                  class: "btn-back-ships",
+                                                  onClick: Qn,
+                                                },
+                                                [
+                                                  ...(t[71] ||
+                                                    (t[71] = [
+                                                      e(
+                                                        "svg",
+                                                        {
+                                                          width: "16",
+                                                          height: "16",
+                                                          viewBox: "0 0 24 24",
+                                                          fill: "none",
+                                                          stroke:
+                                                            "currentColor",
+                                                          "stroke-width": "2",
+                                                        },
+                                                        [
+                                                          e("polyline", {
+                                                            points:
+                                                              "15 18 9 12 15 6",
+                                                          }),
+                                                        ],
+                                                        -1
+                                                      ),
+                                                      Q(" Back to Ships ", -1),
+                                                    ])),
+                                                ]
+                                              ),
+                                              e("span", Fc, [
+                                                t[72] ||
+                                                  (t[72] = Q("Viewing: ", -1)),
+                                                e(
+                                                  "strong",
+                                                  null,
+                                                  r(je.value),
+                                                  1
+                                                ),
+                                              ]),
+                                            ]))
+                                          : M("", !0),
+                                        it.value.length === 0
+                                          ? (o(),
+                                            i("div", zc, [
+                                              ...(t[73] ||
+                                                (t[73] = [
+                                                  e(
+                                                    "div",
+                                                    { class: "desktop-only" },
+                                                    [
+                                                      e("p", null, [
+                                                        e(
+                                                          "strong",
+                                                          null,
+                                                          "No results found."
+                                                        ),
+                                                      ]),
+                                                      e(
+                                                        "p",
+                                                        null,
+                                                        " We could not find any availability matching your search. Please try adjusting your filters. "
+                                                      ),
+                                                    ],
+                                                    -1
+                                                  ),
+                                                  e(
+                                                    "div",
+                                                    { class: "mobile-only" },
+                                                    [
+                                                      e("p", null, [
+                                                        e(
+                                                          "strong",
+                                                          null,
+                                                          "No results found."
+                                                        ),
+                                                      ]),
+                                                      e(
+                                                        "p",
+                                                        null,
+                                                        "Please try adjusting your filters."
+                                                      ),
+                                                    ],
+                                                    -1
+                                                  ),
+                                                ])),
+                                            ]))
+                                          : M("", !0),
+                                        it.value.length
+                                          ? (o(),
+                                            i("div", Uc, [
+                                              (o(!0),
+                                              i(
+                                                K,
+                                                null,
+                                                se(
+                                                  ea.value,
+                                                  (n) => (
+                                                    o(),
+                                                    i(
+                                                      "div",
+                                                      {
+                                                        class: "cabin-card",
+                                                        key: n.uniqueKey,
+                                                      },
+                                                      [
+                                                        e("div", Gc, [
+                                                          ke(
+                                                            xt,
+                                                            {
+                                                              name:
+                                                                n.isGallery &&
+                                                                Se(n.id) ===
+                                                                  "left"
+                                                                  ? "slide-left"
+                                                                  : "slide-right",
+                                                            },
+                                                            {
+                                                              default: Me(
+                                                                () => [
+                                                                  (o(),
+                                                                  i(
+                                                                    "img",
+                                                                    {
+                                                                      src: n.isGallery
+                                                                        ? q(
+                                                                            n.originalItem
+                                                                          )[
+                                                                            W(
+                                                                              n.id
+                                                                            )
+                                                                          ] ||
+                                                                          "/src/images/cabin.jpg"
+                                                                        : n.image ||
+                                                                          "/src/images/cabin.jpg",
+                                                                      alt: n.title,
+                                                                      referrerpolicy:
+                                                                        "no-referrer",
+                                                                      decoding:
+                                                                        "async",
+                                                                      loading:
+                                                                        "lazy",
+                                                                      onError: (
+                                                                        d
+                                                                      ) =>
+                                                                        $n(
+                                                                          d,
+                                                                          n.image
+                                                                        ),
+                                                                      key: n.isGallery
+                                                                        ? W(
+                                                                            n.id
+                                                                          )
+                                                                        : 0,
+                                                                    },
+                                                                    null,
+                                                                    40,
+                                                                    Vc
+                                                                  )),
+                                                                ]
+                                                              ),
+                                                              _: 2,
+                                                            },
+                                                            1032,
+                                                            ["name"]
+                                                          ),
+                                                          n.isGallery
+                                                            ? (o(),
+                                                              i(
+                                                                K,
+                                                                { key: 0 },
+                                                                [
+                                                                  e(
+                                                                    "button",
+                                                                    {
+                                                                      class:
+                                                                        "gallery-nav gallery-prev",
+                                                                      onClick: (
+                                                                        d
+                                                                      ) =>
+                                                                        ie(
+                                                                          n.id
+                                                                        ),
+                                                                      "aria-label":
+                                                                        "Previous image",
+                                                                    },
+                                                                    " ‹ ",
+                                                                    8,
+                                                                    Kc
+                                                                  ),
+                                                                  e(
+                                                                    "button",
+                                                                    {
+                                                                      class:
+                                                                        "gallery-nav gallery-next",
+                                                                      onClick: (
+                                                                        d
+                                                                      ) =>
+                                                                        O(n.id),
+                                                                      "aria-label":
+                                                                        "Next image",
+                                                                    },
+                                                                    " › ",
+                                                                    8,
+                                                                    qc
+                                                                  ),
+                                                                ],
+                                                                64
+                                                              ))
+                                                            : M("", !0),
+                                                        ]),
+                                                        e("div", Wc, [
+                                                          e("div", Hc, [
+                                                            e(
+                                                              "h3",
+                                                              Yc,
+                                                              r(n.title),
+                                                              1
+                                                            ),
+                                                            e(
+                                                              "span",
+                                                              Jc,
+                                                              r(
+                                                                Is(
+                                                                  n.originalItem
+                                                                )
+                                                              ),
+                                                              1
+                                                            ),
+                                                          ]),
+                                                          e("div", jc, [
+                                                            e(
+                                                              "span",
+                                                              null,
+                                                              "Sleeps " +
+                                                                r(
+                                                                  ma(
+                                                                    n.originalItem
+                                                                  ) || 2
+                                                                ),
+                                                              1
+                                                            ),
+                                                            t[75] ||
+                                                              (t[75] = e(
+                                                                "span",
+                                                                {
+                                                                  class:
+                                                                    "specs-divider",
+                                                                },
+                                                                "|",
+                                                                -1
+                                                              )),
+                                                            e(
+                                                              "span",
+                                                              null,
+                                                              r(
+                                                                wn(
+                                                                  n.originalItem
+                                                                ) || "1 King"
+                                                              ),
+                                                              1
+                                                            ),
+                                                            is(n.originalItem)
+                                                              ? (o(),
+                                                                i(
+                                                                  K,
+                                                                  { key: 0 },
+                                                                  [
+                                                                    t[74] ||
+                                                                      (t[74] =
+                                                                        e(
+                                                                          "span",
+                                                                          {
+                                                                            class:
+                                                                              "specs-divider",
+                                                                          },
+                                                                          "|",
+                                                                          -1
+                                                                        )),
+                                                                    e(
+                                                                      "span",
+                                                                      null,
+                                                                      r(
+                                                                        is(
+                                                                          n.originalItem
+                                                                        )
+                                                                      ) +
+                                                                        " Days",
+                                                                      1
+                                                                    ),
+                                                                  ],
+                                                                  64
+                                                                ))
+                                                              : M("", !0),
+                                                          ]),
+                                                          e("div", Xc, [
+                                                            e("ul", Qc, [
+                                                              (o(!0),
+                                                              i(
+                                                                K,
+                                                                null,
+                                                                se(
+                                                                  Mt(
+                                                                    n.originalItem
+                                                                  ).slice(0, 3),
+                                                                  (d, p) => (
+                                                                    o(),
+                                                                    i(
+                                                                      "li",
+                                                                      {
+                                                                        key: p,
+                                                                      },
+                                                                      r(d),
+                                                                      1
+                                                                    )
+                                                                  )
+                                                                ),
+                                                                128
+                                                              )),
+                                                            ]),
+                                                            Mt(n.originalItem)
+                                                              .length > 3
+                                                              ? (o(),
+                                                                i("ul", Zc, [
+                                                                  (o(!0),
+                                                                  i(
+                                                                    K,
+                                                                    null,
+                                                                    se(
+                                                                      Mt(
+                                                                        n.originalItem
+                                                                      ).slice(
+                                                                        3,
+                                                                        6
+                                                                      ),
+                                                                      (
+                                                                        d,
+                                                                        p
+                                                                      ) => (
+                                                                        o(),
+                                                                        i(
+                                                                          "li",
+                                                                          {
+                                                                            key:
+                                                                              p +
+                                                                              3,
+                                                                          },
+                                                                          r(d),
+                                                                          1
+                                                                        )
+                                                                      )
+                                                                    ),
+                                                                    128
+                                                                  )),
+                                                                ]))
+                                                              : M("", !0),
+                                                          ]),
+                                                          e(
+                                                            "button",
+                                                            {
+                                                              class:
+                                                                "cabin-details-btn",
+                                                              onClick: (d) =>
+                                                                n.availabilityType ===
+                                                                  "standard" &&
+                                                                Ca(
+                                                                  n.originalItem
+                                                                ),
+                                                            },
+                                                            " CABIN DETAILS ",
+                                                            8,
+                                                            eu
+                                                          ),
+                                                          n.trips &&
+                                                          n.trips.length > 0
+                                                            ? (o(),
+                                                              i("div", tu, [
+                                                                e("div", su, [
+                                                                  e("div", nu, [
+                                                                    e(
+                                                                      "span",
+                                                                      au,
+                                                                      r(
+                                                                        hn(
+                                                                          ht(n)
+                                                                            .date,
+                                                                          ht(n)
+                                                                            .tripDays
+                                                                        )
+                                                                      ),
+                                                                      1
+                                                                    ),
+                                                                    e(
+                                                                      "span",
+                                                                      ou,
+                                                                      r(
+                                                                        ht(n)
+                                                                          .available ||
+                                                                          1
+                                                                      ) +
+                                                                        " cabin" +
+                                                                        r(
+                                                                          (ht(n)
+                                                                            .available ||
+                                                                            1) >
+                                                                            1
+                                                                            ? "s"
+                                                                            : ""
+                                                                        ) +
+                                                                        " available",
+                                                                      1
+                                                                    ),
+                                                                  ]),
+                                                                ]),
+                                                                n.trips.length >
+                                                                1
+                                                                  ? (o(),
+                                                                    i(
+                                                                      "button",
+                                                                      {
+                                                                        key: 0,
+                                                                        class:
+                                                                          "more-dates-toggle",
+                                                                        onClick:
+                                                                          j(
+                                                                            (
+                                                                              d
+                                                                            ) =>
+                                                                              oa(
+                                                                                n.uniqueKey
+                                                                              ),
+                                                                            [
+                                                                              "stop",
+                                                                            ]
+                                                                          ),
+                                                                      },
+                                                                      [
+                                                                        t[76] ||
+                                                                          (t[76] =
+                                                                            e(
+                                                                              "span",
+                                                                              null,
+                                                                              "MORE DATES",
+                                                                              -1
+                                                                            )),
+                                                                        e(
+                                                                          "span",
+                                                                          {
+                                                                            class:
+                                                                              B(
+                                                                                [
+                                                                                  "toggle-arrow",
+                                                                                  {
+                                                                                    expanded:
+                                                                                      ct
+                                                                                        .value[
+                                                                                        n
+                                                                                          .uniqueKey
+                                                                                      ],
+                                                                                  },
+                                                                                ]
+                                                                              ),
+                                                                          },
+                                                                          "▼",
+                                                                          2
+                                                                        ),
+                                                                      ],
+                                                                      8,
+                                                                      iu
+                                                                    ))
+                                                                  : M("", !0),
+                                                                n.trips.length >
+                                                                  1 &&
+                                                                ct.value[
+                                                                  n.uniqueKey
+                                                                ]
+                                                                  ? (o(),
+                                                                    i(
+                                                                      "div",
+                                                                      lu,
+                                                                      [
+                                                                        (o(!0),
+                                                                        i(
+                                                                          K,
+                                                                          null,
+                                                                          se(
+                                                                            ia(
+                                                                              n
+                                                                            ),
+                                                                            (
+                                                                              d,
+                                                                              p
+                                                                            ) => (
+                                                                              o(),
+                                                                              i(
+                                                                                "div",
+                                                                                {
+                                                                                  key: p,
+                                                                                  class:
+                                                                                    B(
+                                                                                      [
+                                                                                        "trip-option-alt",
+                                                                                        Gt(
+                                                                                          n,
+                                                                                          d
+                                                                                        )
+                                                                                          ? "trip-reserved"
+                                                                                          : "",
+                                                                                      ]
+                                                                                    ),
+                                                                                  onClick:
+                                                                                    (
+                                                                                      N
+                                                                                    ) =>
+                                                                                      !Gt(
+                                                                                        n,
+                                                                                        d
+                                                                                      ) &&
+                                                                                      aa(
+                                                                                        n,
+                                                                                        d
+                                                                                      ),
+                                                                                },
+                                                                                [
+                                                                                  e(
+                                                                                    "div",
+                                                                                    cu,
+                                                                                    [
+                                                                                      e(
+                                                                                        "span",
+                                                                                        uu,
+                                                                                        r(
+                                                                                          hn(
+                                                                                            d.date,
+                                                                                            d.tripDays
+                                                                                          )
+                                                                                        ),
+                                                                                        1
+                                                                                      ),
+                                                                                      e(
+                                                                                        "span",
+                                                                                        du,
+                                                                                        r(
+                                                                                          d.available ||
+                                                                                            1
+                                                                                        ) +
+                                                                                          " cabin" +
+                                                                                          r(
+                                                                                            (d.available ||
+                                                                                              1) >
+                                                                                              1
+                                                                                              ? "s"
+                                                                                              : ""
+                                                                                          ) +
+                                                                                          " available",
+                                                                                        1
+                                                                                      ),
+                                                                                    ]
+                                                                                  ),
+                                                                                  Gt(
+                                                                                    n,
+                                                                                    d
+                                                                                  )
+                                                                                    ? (o(),
+                                                                                      i(
+                                                                                        "span",
+                                                                                        vu,
+                                                                                        [
+                                                                                          ...(t[77] ||
+                                                                                            (t[77] =
+                                                                                              [
+                                                                                                e(
+                                                                                                  "span",
+                                                                                                  {
+                                                                                                    class:
+                                                                                                      "reserved-check-small",
+                                                                                                  },
+                                                                                                  "✓",
+                                                                                                  -1
+                                                                                                ),
+                                                                                                Q(
+                                                                                                  " Reserved ",
+                                                                                                  -1
+                                                                                                ),
+                                                                                              ])),
+                                                                                        ]
+                                                                                      ))
+                                                                                    : (o(),
+                                                                                      i(
+                                                                                        "span",
+                                                                                        pu,
+                                                                                        "Select"
+                                                                                      )),
+                                                                                ],
+                                                                                10,
+                                                                                ru
+                                                                              )
+                                                                            )
+                                                                          ),
+                                                                          128
+                                                                        )),
+                                                                      ]
+                                                                    ))
+                                                                  : M("", !0),
+                                                              ]))
+                                                            : M("", !0),
+                                                          e("div", mu, [
+                                                            e("div", fu, [
+                                                              (o(!0),
+                                                              i(
+                                                                K,
+                                                                null,
+                                                                se(
+                                                                  n.prices,
+                                                                  (d, p) => (
+                                                                    o(),
+                                                                    i(
+                                                                      "div",
+                                                                      {
+                                                                        key: p,
+                                                                        class:
+                                                                          "price-display",
+                                                                      },
+                                                                      [
+                                                                        e(
+                                                                          "p",
+                                                                          hu,
+                                                                          [
+                                                                            t[78] ||
+                                                                              (t[78] =
+                                                                                e(
+                                                                                  "span",
+                                                                                  {
+                                                                                    class:
+                                                                                      "price-label",
+                                                                                  },
+                                                                                  "From",
+                                                                                  -1
+                                                                                )),
+                                                                            e(
+                                                                              "span",
+                                                                              gu,
+                                                                              r(
+                                                                                w(
+                                                                                  d.value
+                                                                                )
+                                                                              ),
+                                                                              1
+                                                                            ),
+                                                                          ]
+                                                                        ),
+                                                                        t[79] ||
+                                                                          (t[79] =
+                                                                            e(
+                                                                              "p",
+                                                                              {
+                                                                                class:
+                                                                                  "price-sub",
+                                                                              },
+                                                                              "per person, per night",
+                                                                              -1
+                                                                            )),
+                                                                      ]
+                                                                    )
+                                                                  )
+                                                                ),
+                                                                128
+                                                              )),
+                                                            ]),
+                                                            e("div", bu, [
+                                                              e(
+                                                                "button",
+                                                                {
+                                                                  class: B([
+                                                                    "btn-reserve-now",
+                                                                    Gt(n, ht(n))
+                                                                      ? "btn-reserved"
+                                                                      : "",
+                                                                  ]),
+                                                                  onClick: (
+                                                                    d
+                                                                  ) => la(n),
+                                                                },
+                                                                [
+                                                                  Gt(n, ht(n))
+                                                                    ? (o(),
+                                                                      i(
+                                                                        K,
+                                                                        {
+                                                                          key: 0,
+                                                                        },
+                                                                        [
+                                                                          t[80] ||
+                                                                            (t[80] =
+                                                                              e(
+                                                                                "span",
+                                                                                {
+                                                                                  class:
+                                                                                    "reserved-check",
+                                                                                },
+                                                                                "✓",
+                                                                                -1
+                                                                              )),
+                                                                          t[81] ||
+                                                                            (t[81] =
+                                                                              Q(
+                                                                                " RESERVED ",
+                                                                                -1
+                                                                              )),
+                                                                        ],
+                                                                        64
+                                                                      ))
+                                                                    : (o(),
+                                                                      i(
+                                                                        K,
+                                                                        {
+                                                                          key: 1,
+                                                                        },
+                                                                        [
+                                                                          Q(
+                                                                            " RESERVE NOW "
+                                                                          ),
+                                                                        ],
+                                                                        64
+                                                                      )),
+                                                                ],
+                                                                10,
+                                                                yu
+                                                              ),
+                                                            ]),
+                                                          ]),
+                                                        ]),
+                                                      ]
+                                                    )
+                                                  )
+                                                ),
+                                                128
+                                              )),
+                                            ]))
+                                          : M("", !0),
+                                        ts.value > 1
+                                          ? (o(),
+                                            i("div", ku, [
+                                              e(
+                                                "button",
+                                                {
+                                                  class: "pagination-btn",
+                                                  onClick: sa,
+                                                  disabled: lt.value === 1,
+                                                },
+                                                " ‹ Previous ",
+                                                8,
+                                                wu
+                                              ),
+                                              e("div", _u, [
+                                                (o(!0),
+                                                i(
+                                                  K,
+                                                  null,
+                                                  se(
+                                                    ts.value,
+                                                    (n) => (
+                                                      o(),
+                                                      i(
+                                                        "button",
+                                                        {
+                                                          key: n,
+                                                          class: B([
+                                                            "pagination-page",
+                                                            {
+                                                              active:
+                                                                lt.value === n,
+                                                            },
+                                                          ]),
+                                                          onClick: (d) => Ds(n),
+                                                        },
+                                                        r(n),
+                                                        11,
+                                                        Cu
+                                                      )
+                                                    )
+                                                  ),
+                                                  128
+                                                )),
+                                              ]),
+                                              e(
+                                                "button",
+                                                {
+                                                  class: "pagination-btn",
+                                                  onClick: ta,
+                                                  disabled:
+                                                    lt.value === ts.value,
+                                                },
+                                                " Next › ",
+                                                8,
+                                                $u
+                                              ),
+                                            ]))
+                                          : M("", !0),
+                                        mt.value && !it.value.length
+                                          ? (o(),
+                                            i("div", Su, [
+                                              t[82] ||
+                                                (t[82] = e(
+                                                  "p",
+                                                  null,
+                                                  "No alternative options found for your criteria.",
+                                                  -1
+                                                )),
+                                              e(
+                                                "button",
+                                                {
+                                                  onClick: T,
+                                                  class: "btn-primary",
+                                                },
+                                                " Search Again "
+                                              ),
+                                            ]))
+                                          : M("", !0),
+                                      ],
+                                      512
+                                    ),
+                                    [[Mn, !$s.value]]
+                                  ),
+                                ])),
+                          ]),
+                          e("div", xu, [
+                            e("div", Du, [
+                              t[98] ||
+                                (t[98] = e(
+                                  "h3",
+                                  { class: "section-title-sidebar" },
+                                  "Check Availability",
+                                  -1
+                                )),
+                              fe.value
+                                ? (o(),
+                                  i("div", Au, [
+                                    ...(t[84] ||
+                                      (t[84] = [
+                                        Pe(
+                                          '<div class="skeleton-group"><div class="skeleton-label"></div><div class="skeleton-input"></div></div><div class="skeleton-group"><div class="skeleton-label"></div><div class="skeleton-input"></div></div><div class="skeleton-group"><div class="skeleton-label"></div><div class="skeleton-input"></div></div><div class="skeleton-group"><div class="skeleton-label"></div><div class="skeleton-input"></div></div><div class="skeleton-toggle"><div class="skeleton-text-lg"></div><div class="skeleton-circle"></div></div><div class="skeleton-btn"></div>',
+                                          6
+                                        ),
+                                      ])),
+                                  ]))
+                                : (o(),
+                                  i(
+                                    K,
+                                    { key: 1 },
+                                    [
+                                      e(
+                                        "div",
+                                        {
+                                          class: "list dropdown",
+                                          ref_key: "destDropdown",
+                                          ref: qs,
+                                        },
+                                        [
+                                          t[85] ||
+                                            (t[85] = e(
+                                              "div",
+                                              { class: "list-heading" },
+                                              "Destinations",
+                                              -1
+                                            )),
+                                          e(
+                                            "button",
+                                            {
+                                              type: "button",
+                                              class: B([
+                                                "select-summary",
+                                                Fe.value || bs.value
+                                                  ? "is-filled"
+                                                  : "",
+                                              ]),
+                                              onMouseenter:
+                                                t[4] ||
+                                                (t[4] = (n) => (bs.value = !0)),
+                                              onMouseleave:
+                                                t[5] ||
+                                                (t[5] = (n) => (bs.value = !1)),
+                                              onClick:
+                                                t[6] ||
+                                                (t[6] = j(
+                                                  (n) => It("regions"),
+                                                  ["stop"]
+                                                )),
+                                              "aria-expanded": Fe.value
+                                                ? "true"
+                                                : "false",
+                                            },
+                                            [
+                                              e(
+                                                "span",
+                                                null,
+                                                "Destinations: " +
+                                                  r(Ne.value.length),
+                                                1
+                                              ),
+                                              e("span", Iu, [
+                                                e(
+                                                  "img",
+                                                  {
+                                                    src: Fe.value
+                                                      ? he(ot)
+                                                      : he(at),
+                                                    alt: "",
+                                                    "aria-hidden": "true",
+                                                    class: "caret-icon",
+                                                  },
+                                                  null,
+                                                  8,
+                                                  Nu
+                                                ),
+                                              ]),
+                                            ],
+                                            42,
+                                            Tu
+                                          ),
+                                          Fe.value
+                                            ? (o(),
+                                              i(
+                                                "div",
+                                                {
+                                                  key: 0,
+                                                  class: "dropdown-panel",
+                                                  onClick:
+                                                    t[9] ||
+                                                    (t[9] = j(() => {}, [
+                                                      "stop",
+                                                    ])),
+                                                },
+                                                [
+                                                  e(
+                                                    "div",
+                                                    {
+                                                      class:
+                                                        "dropdown-group-title",
+                                                    },
+                                                    r(ms)
+                                                  ),
+                                                  (o(),
+                                                  i(
+                                                    K,
+                                                    null,
+                                                    se(Dt, (n) =>
+                                                      e(
+                                                        "div",
+                                                        {
+                                                          class: "list-row",
+                                                          key: n,
+                                                          onClick: (d) => js(n),
+                                                        },
+                                                        [
+                                                          e("div", Eu, r(n), 1),
+                                                          be(
+                                                            e(
+                                                              "input",
+                                                              {
+                                                                class: "check",
+                                                                type: "checkbox",
+                                                                value: n,
+                                                                "onUpdate:modelValue":
+                                                                  t[7] ||
+                                                                  (t[7] = (d) =>
+                                                                    (Ne.value =
+                                                                      d)),
+                                                                onClick:
+                                                                  t[8] ||
+                                                                  (t[8] =
+                                                                    j(() => {}, [
+                                                                      "stop",
+                                                                    ])),
+                                                              },
+                                                              null,
+                                                              8,
+                                                              Ru
+                                                            ),
+                                                            [[yt, Ne.value]]
+                                                          ),
+                                                        ],
+                                                        8,
+                                                        Mu
+                                                      )
+                                                    ),
+                                                    64
+                                                  )),
+                                                ]
+                                              ))
+                                            : M("", !0),
+                                        ],
+                                        512
+                                      ),
+                                      e(
+                                        "div",
+                                        {
+                                          class: "list dropdown",
+                                          ref_key: "shipsDropdown",
+                                          ref: Ws,
+                                        },
+                                        [
+                                          t[86] ||
+                                            (t[86] = e(
+                                              "div",
+                                              { class: "list-heading" },
+                                              "Ships",
+                                              -1
+                                            )),
+                                          e(
+                                            "button",
+                                            {
+                                              type: "button",
+                                              class: B([
+                                                "select-summary",
+                                                ze.value || gs.value
+                                                  ? "is-filled"
+                                                  : "",
+                                              ]),
+                                              onMouseenter:
+                                                t[10] ||
+                                                (t[10] = (n) =>
+                                                  (gs.value = !0)),
+                                              onMouseleave:
+                                                t[11] ||
+                                                (t[11] = (n) =>
+                                                  (gs.value = !1)),
+                                              onClick:
+                                                t[12] ||
+                                                (t[12] = j(
+                                                  (n) => It("ships"),
+                                                  ["stop"]
+                                                )),
+                                              "aria-expanded": ze.value
+                                                ? "true"
+                                                : "false",
+                                            },
+                                            [
+                                              e(
+                                                "span",
+                                                null,
+                                                "Ships: " + r(Oe.value.length),
+                                                1
+                                              ),
+                                              e("span", Ou, [
+                                                e(
+                                                  "img",
+                                                  {
+                                                    src: ze.value
+                                                      ? he(ot)
+                                                      : he(at),
+                                                    alt: "",
+                                                    "aria-hidden": "true",
+                                                    class: "caret-icon",
+                                                  },
+                                                  null,
+                                                  8,
+                                                  Lu
+                                                ),
+                                              ]),
+                                            ],
+                                            42,
+                                            Pu
+                                          ),
+                                          ze.value
+                                            ? (o(),
+                                              i(
+                                                "div",
+                                                {
+                                                  key: 0,
+                                                  class: "dropdown-panel",
+                                                  onClick:
+                                                    t[15] ||
+                                                    (t[15] = j(() => {}, [
+                                                      "stop",
+                                                    ])),
+                                                },
+                                                [
+                                                  e("div", Bu, r(pn.value), 1),
+                                                  Tt.value
+                                                    ? (o(),
+                                                      i(
+                                                        "div",
+                                                        Fu,
+                                                        "Loading ships..."
+                                                      ))
+                                                    : (o(),
+                                                      i(
+                                                        K,
+                                                        { key: 1 },
+                                                        [
+                                                          (o(!0),
+                                                          i(
+                                                            K,
+                                                            null,
+                                                            se(
+                                                              nt.value,
+                                                              (n) => (
+                                                                o(),
+                                                                i(
+                                                                  "div",
+                                                                  {
+                                                                    class:
+                                                                      "list-row",
+                                                                    key: n.id,
+                                                                    onClick: (
+                                                                      d
+                                                                    ) =>
+                                                                      Xs(n.id),
+                                                                  },
+                                                                  [
+                                                                    e(
+                                                                      "div",
+                                                                      Uu,
+                                                                      r(
+                                                                        n.label
+                                                                      ),
+                                                                      1
+                                                                    ),
+                                                                    be(
+                                                                      e(
+                                                                        "input",
+                                                                        {
+                                                                          class:
+                                                                            "check",
+                                                                          type: "checkbox",
+                                                                          value:
+                                                                            n.id,
+                                                                          "onUpdate:modelValue":
+                                                                            t[13] ||
+                                                                            (t[13] =
+                                                                              (
+                                                                                d
+                                                                              ) =>
+                                                                                (Oe.value =
+                                                                                  d)),
+                                                                          onClick:
+                                                                            t[14] ||
+                                                                            (t[14] =
+                                                                              j(() => {}, [
+                                                                                "stop",
+                                                                              ])),
+                                                                        },
+                                                                        null,
+                                                                        8,
+                                                                        Gu
+                                                                      ),
+                                                                      [
+                                                                        [
+                                                                          yt,
+                                                                          Oe.value,
+                                                                        ],
+                                                                      ]
+                                                                    ),
+                                                                  ],
+                                                                  8,
+                                                                  zu
+                                                                )
+                                                              )
+                                                            ),
+                                                            128
+                                                          )),
+                                                          nt.value.length === 0
+                                                            ? (o(),
+                                                              i(
+                                                                "div",
+                                                                Vu,
+                                                                " No ships found from API. "
+                                                              ))
+                                                            : M("", !0),
+                                                        ],
+                                                        64
+                                                      )),
+                                                ]
+                                              ))
+                                            : M("", !0),
+                                        ],
+                                        512
+                                      ),
+                                      e(
+                                        "div",
+                                        {
+                                          class: "list dropdown",
+                                          ref_key: "guestsDropdown",
+                                          ref: Hs,
+                                        },
+                                        [
+                                          t[93] ||
+                                            (t[93] = e(
+                                              "div",
+                                              { class: "list-heading" },
+                                              "Cabins & Guests",
+                                              -1
+                                            )),
+                                          e(
+                                            "button",
+                                            {
+                                              type: "button",
+                                              class: B([
+                                                "select-summary",
+                                                Ue.value || ys.value
+                                                  ? "is-filled"
+                                                  : "",
+                                              ]),
+                                              onMouseenter:
+                                                t[16] ||
+                                                (t[16] = (n) =>
+                                                  (ys.value = !0)),
+                                              onMouseleave:
+                                                t[17] ||
+                                                (t[17] = (n) =>
+                                                  (ys.value = !1)),
+                                              onClick:
+                                                t[18] ||
+                                                (t[18] = j(
+                                                  (n) => It("guests"),
+                                                  ["stop"]
+                                                )),
+                                              "aria-expanded": Ue.value
+                                                ? "true"
+                                                : "false",
+                                            },
+                                            [
+                                              ce.value
+                                                ? (o(),
+                                                  i(
+                                                    "span",
+                                                    qu,
+                                                    "Flexible: " +
+                                                      r(ue.value) +
+                                                      " Guest" +
+                                                      r(
+                                                        ue.value !== 1
+                                                          ? "s"
+                                                          : ""
+                                                      ),
+                                                    1
+                                                  ))
+                                                : (o(),
+                                                  i(
+                                                    "span",
+                                                    Wu,
+                                                    r(Y.value.length) +
+                                                      " Cabin" +
+                                                      r(
+                                                        Y.value.length !== 1
+                                                          ? "s"
+                                                          : ""
+                                                      ) +
+                                                      ", " +
+                                                      r(Be.value) +
+                                                      " Guest" +
+                                                      r(
+                                                        Be.value !== 1
+                                                          ? "s"
+                                                          : ""
+                                                      ),
+                                                    1
+                                                  )),
+                                              e("span", Hu, [
+                                                e(
+                                                  "img",
+                                                  {
+                                                    src: Ue.value
+                                                      ? he(ot)
+                                                      : he(at),
+                                                    alt: "",
+                                                    "aria-hidden": "true",
+                                                    class: "caret-icon",
+                                                  },
+                                                  null,
+                                                  8,
+                                                  Yu
+                                                ),
+                                              ]),
+                                            ],
+                                            42,
+                                            Ku
+                                          ),
+                                          Ue.value
+                                            ? (o(),
+                                              i(
+                                                "div",
+                                                {
+                                                  key: 0,
+                                                  class:
+                                                    "dropdown-panel cabin-dropdown-panel",
+                                                  onClick:
+                                                    t[23] ||
+                                                    (t[23] = j(() => {}, [
+                                                      "stop",
+                                                    ])),
+                                                },
+                                                [
+                                                  e("div", Ju, [
+                                                    e(
+                                                      "button",
+                                                      {
+                                                        type: "button",
+                                                        class: B([
+                                                          "sidebar-pill-btn",
+                                                          { active: ce.value },
+                                                        ]),
+                                                        onClick:
+                                                          t[19] ||
+                                                          (t[19] = (n) =>
+                                                            (ce.value = !0)),
+                                                      },
+                                                      " Flexible ",
+                                                      2
+                                                    ),
+                                                    e(
+                                                      "button",
+                                                      {
+                                                        type: "button",
+                                                        class: B([
+                                                          "sidebar-pill-btn",
+                                                          { active: !ce.value },
+                                                        ]),
+                                                        onClick:
+                                                          t[20] ||
+                                                          (t[20] = (n) =>
+                                                            (ce.value = !1)),
+                                                      },
+                                                      " Structured ",
+                                                      2
+                                                    ),
+                                                  ]),
+                                                  ce.value
+                                                    ? (o(),
+                                                      i("div", ju, [
+                                                        e("div", Xu, [
+                                                          t[87] ||
+                                                            (t[87] = e(
+                                                              "span",
+                                                              {
+                                                                class: "label",
+                                                              },
+                                                              "Total Guests",
+                                                              -1
+                                                            )),
+                                                          e("div", Qu, [
+                                                            e(
+                                                              "button",
+                                                              {
+                                                                type: "button",
+                                                                class:
+                                                                  "btn-ctrl",
+                                                                disabled:
+                                                                  ue.value <= 1,
+                                                                onClick:
+                                                                  t[21] ||
+                                                                  (t[21] = (
+                                                                    n
+                                                                  ) =>
+                                                                    ue.value--),
+                                                              },
+                                                              " − ",
+                                                              8,
+                                                              Zu
+                                                            ),
+                                                            e(
+                                                              "span",
+                                                              ed,
+                                                              r(ue.value),
+                                                              1
+                                                            ),
+                                                            e(
+                                                              "button",
+                                                              {
+                                                                type: "button",
+                                                                class:
+                                                                  "btn-ctrl",
+                                                                onClick:
+                                                                  t[22] ||
+                                                                  (t[22] = (
+                                                                    n
+                                                                  ) =>
+                                                                    ue.value++),
+                                                              },
+                                                              " + "
+                                                            ),
+                                                          ]),
+                                                        ]),
+                                                        t[88] ||
+                                                          (t[88] = e(
+                                                            "p",
+                                                            {
+                                                              class:
+                                                                "sidebar-note",
+                                                            },
+                                                            " We will automatically find the best cabin combination for your group. ",
+                                                            -1
+                                                          )),
+                                                      ]))
+                                                    : (o(),
+                                                      i("div", td, [
+                                                        (o(!0),
+                                                        i(
+                                                          K,
+                                                          null,
+                                                          se(
+                                                            Y.value,
+                                                            (n, d) => (
+                                                              o(),
+                                                              i(
+                                                                "div",
+                                                                {
+                                                                  key: n.id,
+                                                                  class:
+                                                                    "cabin-accordion-sidebar",
+                                                                },
+                                                                [
+                                                                  e("div", sd, [
+                                                                    e(
+                                                                      "div",
+                                                                      nd,
+                                                                      [
+                                                                        e(
+                                                                          "span",
+                                                                          ad,
+                                                                          "CABIN " +
+                                                                            r(
+                                                                              d +
+                                                                                1
+                                                                            ),
+                                                                          1
+                                                                        ),
+                                                                        e(
+                                                                          "span",
+                                                                          od,
+                                                                          r(
+                                                                            n.adults +
+                                                                              n.children
+                                                                          ) +
+                                                                            " guest" +
+                                                                            r(
+                                                                              n.adults +
+                                                                                n.children !==
+                                                                                1
+                                                                                ? "s"
+                                                                                : ""
+                                                                            ),
+                                                                          1
+                                                                        ),
+                                                                      ]
+                                                                    ),
+                                                                    e(
+                                                                      "div",
+                                                                      id,
+                                                                      [
+                                                                        Y.value
+                                                                          .length >
+                                                                        1
+                                                                          ? (o(),
+                                                                            i(
+                                                                              "button",
+                                                                              {
+                                                                                key: 0,
+                                                                                type: "button",
+                                                                                class:
+                                                                                  "cabin-remove-btn-sidebar",
+                                                                                onClick:
+                                                                                  j(
+                                                                                    (
+                                                                                      p
+                                                                                    ) =>
+                                                                                      Zs(
+                                                                                        d
+                                                                                      ),
+                                                                                    [
+                                                                                      "stop",
+                                                                                    ]
+                                                                                  ),
+                                                                                title:
+                                                                                  "Remove cabin",
+                                                                              },
+                                                                              [
+                                                                                ...(t[89] ||
+                                                                                  (t[89] =
+                                                                                    [
+                                                                                      e(
+                                                                                        "svg",
+                                                                                        {
+                                                                                          width:
+                                                                                            "14",
+                                                                                          height:
+                                                                                            "14",
+                                                                                          viewBox:
+                                                                                            "0 0 24 24",
+                                                                                          fill: "none",
+                                                                                          stroke:
+                                                                                            "currentColor",
+                                                                                          "stroke-width":
+                                                                                            "2",
+                                                                                        },
+                                                                                        [
+                                                                                          e(
+                                                                                            "path",
+                                                                                            {
+                                                                                              d: "M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z",
+                                                                                            }
+                                                                                          ),
+                                                                                        ],
+                                                                                        -1
+                                                                                      ),
+                                                                                    ])),
+                                                                              ],
+                                                                              8,
+                                                                              ld
+                                                                            ))
+                                                                          : M(
+                                                                              "",
+                                                                              !0
+                                                                            ),
+                                                                        e(
+                                                                          "button",
+                                                                          {
+                                                                            type: "button",
+                                                                            class:
+                                                                              "cabin-toggle-btn-sidebar",
+                                                                            onClick:
+                                                                              j(
+                                                                                (
+                                                                                  p
+                                                                                ) =>
+                                                                                  en(
+                                                                                    d
+                                                                                  ),
+                                                                                [
+                                                                                  "stop",
+                                                                                ]
+                                                                              ),
+                                                                          },
+                                                                          [
+                                                                            (o(),
+                                                                            i(
+                                                                              "svg",
+                                                                              {
+                                                                                class:
+                                                                                  B(
+                                                                                    [
+                                                                                      "cabin-chevron-sidebar",
+                                                                                      {
+                                                                                        expanded:
+                                                                                          n.expanded,
+                                                                                      },
+                                                                                    ]
+                                                                                  ),
+                                                                                width:
+                                                                                  "16",
+                                                                                height:
+                                                                                  "16",
+                                                                                viewBox:
+                                                                                  "0 0 24 24",
+                                                                                fill: "none",
+                                                                                stroke:
+                                                                                  "currentColor",
+                                                                                "stroke-width":
+                                                                                  "2",
+                                                                              },
+                                                                              [
+                                                                                ...(t[90] ||
+                                                                                  (t[90] =
+                                                                                    [
+                                                                                      e(
+                                                                                        "polyline",
+                                                                                        {
+                                                                                          points:
+                                                                                            "6 9 12 15 18 9",
+                                                                                        },
+                                                                                        null,
+                                                                                        -1
+                                                                                      ),
+                                                                                    ])),
+                                                                              ],
+                                                                              2
+                                                                            )),
+                                                                          ],
+                                                                          8,
+                                                                          rd
+                                                                        ),
+                                                                      ]
+                                                                    ),
+                                                                  ]),
+                                                                  n.expanded
+                                                                    ? (o(),
+                                                                      i(
+                                                                        "div",
+                                                                        cd,
+                                                                        [
+                                                                          e(
+                                                                            "div",
+                                                                            ud,
+                                                                            [
+                                                                              t[91] ||
+                                                                                (t[91] =
+                                                                                  e(
+                                                                                    "span",
+                                                                                    {
+                                                                                      class:
+                                                                                        "counter-label-sidebar",
+                                                                                    },
+                                                                                    "Adults",
+                                                                                    -1
+                                                                                  )),
+                                                                              e(
+                                                                                "div",
+                                                                                dd,
+                                                                                [
+                                                                                  e(
+                                                                                    "button",
+                                                                                    {
+                                                                                      type: "button",
+                                                                                      class:
+                                                                                        "btn-icon-sm",
+                                                                                      disabled:
+                                                                                        n.adults <=
+                                                                                        1,
+                                                                                      onClick:
+                                                                                        (
+                                                                                          p
+                                                                                        ) =>
+                                                                                          Qt(
+                                                                                            d,
+                                                                                            "adults"
+                                                                                          ),
+                                                                                    },
+                                                                                    " − ",
+                                                                                    8,
+                                                                                    vd
+                                                                                  ),
+                                                                                  e(
+                                                                                    "span",
+                                                                                    pd,
+                                                                                    r(
+                                                                                      n.adults
+                                                                                    ),
+                                                                                    1
+                                                                                  ),
+                                                                                  e(
+                                                                                    "button",
+                                                                                    {
+                                                                                      type: "button",
+                                                                                      class:
+                                                                                        "btn-icon-sm",
+                                                                                      disabled:
+                                                                                        n.adults +
+                                                                                          n.children >=
+                                                                                        qt,
+                                                                                      onClick:
+                                                                                        (
+                                                                                          p
+                                                                                        ) =>
+                                                                                          Xt(
+                                                                                            d,
+                                                                                            "adults"
+                                                                                          ),
+                                                                                    },
+                                                                                    " + ",
+                                                                                    8,
+                                                                                    md
+                                                                                  ),
+                                                                                ]
+                                                                              ),
+                                                                            ]
+                                                                          ),
+                                                                          e(
+                                                                            "div",
+                                                                            fd,
+                                                                            [
+                                                                              t[92] ||
+                                                                                (t[92] =
+                                                                                  e(
+                                                                                    "span",
+                                                                                    {
+                                                                                      class:
+                                                                                        "counter-label-sidebar",
+                                                                                    },
+                                                                                    "Children",
+                                                                                    -1
+                                                                                  )),
+                                                                              e(
+                                                                                "div",
+                                                                                hd,
+                                                                                [
+                                                                                  e(
+                                                                                    "button",
+                                                                                    {
+                                                                                      type: "button",
+                                                                                      class:
+                                                                                        "btn-icon-sm",
+                                                                                      disabled:
+                                                                                        n.children <=
+                                                                                        0,
+                                                                                      onClick:
+                                                                                        (
+                                                                                          p
+                                                                                        ) =>
+                                                                                          Qt(
+                                                                                            d,
+                                                                                            "children"
+                                                                                          ),
+                                                                                    },
+                                                                                    " − ",
+                                                                                    8,
+                                                                                    gd
+                                                                                  ),
+                                                                                  e(
+                                                                                    "span",
+                                                                                    bd,
+                                                                                    r(
+                                                                                      n.children
+                                                                                    ),
+                                                                                    1
+                                                                                  ),
+                                                                                  e(
+                                                                                    "button",
+                                                                                    {
+                                                                                      type: "button",
+                                                                                      class:
+                                                                                        "btn-icon-sm",
+                                                                                      disabled:
+                                                                                        n.adults +
+                                                                                          n.children >=
+                                                                                        qt,
+                                                                                      onClick:
+                                                                                        (
+                                                                                          p
+                                                                                        ) =>
+                                                                                          Xt(
+                                                                                            d,
+                                                                                            "children"
+                                                                                          ),
+                                                                                    },
+                                                                                    " + ",
+                                                                                    8,
+                                                                                    yd
+                                                                                  ),
+                                                                                ]
+                                                                              ),
+                                                                            ]
+                                                                          ),
+                                                                        ]
+                                                                      ))
+                                                                    : M("", !0),
+                                                                ]
+                                                              )
+                                                            )
+                                                          ),
+                                                          128
+                                                        )),
+                                                        ut.value
+                                                          ? (o(),
+                                                            i(
+                                                              "button",
+                                                              {
+                                                                key: 0,
+                                                                type: "button",
+                                                                class:
+                                                                  "btn-add-cabin-sidebar",
+                                                                onClick: Qs,
+                                                              },
+                                                              " + Add Another Cabin "
+                                                            ))
+                                                          : M("", !0),
+                                                      ])),
+                                                ]
+                                              ))
+                                            : M("", !0),
+                                        ],
+                                        512
+                                      ),
+                                      e(
+                                        "div",
+                                        {
+                                          class: "list dropdown",
+                                          ref_key: "datesDropdown",
+                                          ref: Ys,
+                                        },
+                                        [
+                                          t[95] ||
+                                            (t[95] = e(
+                                              "div",
+                                              { class: "list-heading" },
+                                              "Dates",
+                                              -1
+                                            )),
+                                          e(
+                                            "button",
+                                            {
+                                              type: "button",
+                                              class: B([
+                                                "select-summary",
+                                                Ge.value || ks.value
+                                                  ? "is-filled"
+                                                  : "",
+                                              ]),
+                                              onMouseenter:
+                                                t[24] ||
+                                                (t[24] = (n) =>
+                                                  (ks.value = !0)),
+                                              onMouseleave:
+                                                t[25] ||
+                                                (t[25] = (n) =>
+                                                  (ks.value = !1)),
+                                              onClick:
+                                                t[26] ||
+                                                (t[26] = j(
+                                                  (n) => It("dates"),
+                                                  ["stop"]
+                                                )),
+                                              "aria-expanded": Ge.value
+                                                ? "true"
+                                                : "false",
+                                            },
+                                            [
+                                              e(
+                                                "span",
+                                                null,
+                                                r(
+                                                  c.value
+                                                    ? `${c.value} → ${
+                                                        k.value || "..."
+                                                      }`
+                                                    : "Select dates"
+                                                ),
+                                                1
+                                              ),
+                                              e("span", wd, [
+                                                e(
+                                                  "img",
+                                                  {
+                                                    src: Ge.value
+                                                      ? he(ot)
+                                                      : he(at),
+                                                    alt: "",
+                                                    "aria-hidden": "true",
+                                                    class: "caret-icon",
+                                                  },
+                                                  null,
+                                                  8,
+                                                  _d
+                                                ),
+                                              ]),
+                                            ],
+                                            42,
+                                            kd
+                                          ),
+                                          Ge.value
+                                            ? (o(),
+                                              i(
+                                                "div",
+                                                {
+                                                  key: 0,
+                                                  class:
+                                                    "dropdown-panel date-dropdown-panel",
+                                                  onClick:
+                                                    t[27] ||
+                                                    (t[27] = j(() => {}, [
+                                                      "stop",
+                                                    ])),
+                                                },
+                                                [
+                                                  e("div", Cd, [
+                                                    e("div", $d, [
+                                                      e(
+                                                        "h4",
+                                                        Sd,
+                                                        r(ln.value),
+                                                        1
+                                                      ),
+                                                      e(
+                                                        "div",
+                                                        {
+                                                          class:
+                                                            "calendar-nav-group",
+                                                        },
+                                                        [
+                                                          e(
+                                                            "button",
+                                                            {
+                                                              class:
+                                                                "calendar-nav",
+                                                              onClick: dn,
+                                                              type: "button",
+                                                            },
+                                                            " ‹ "
+                                                          ),
+                                                          e(
+                                                            "button",
+                                                            {
+                                                              class:
+                                                                "calendar-nav",
+                                                              onClick: un,
+                                                              type: "button",
+                                                            },
+                                                            " › "
+                                                          ),
+                                                        ]
+                                                      ),
+                                                    ]),
+                                                    e("div", xd, [
+                                                      t[94] ||
+                                                        (t[94] = Pe(
+                                                          '<div class="calendar-weekdays"><div class="weekday">Su</div><div class="weekday">Mo</div><div class="weekday">Tu</div><div class="weekday">We</div><div class="weekday">Th</div><div class="weekday">Fr</div><div class="weekday">Sa</div></div>',
+                                                          1
+                                                        )),
+                                                      e("div", Dd, [
+                                                        (o(!0),
+                                                        i(
+                                                          K,
+                                                          null,
+                                                          se(
+                                                            rn.value,
+                                                            (n) => (
+                                                              o(),
+                                                              i(
+                                                                "button",
+                                                                {
+                                                                  key: n.key,
+                                                                  class: B([
+                                                                    "calendar-day",
+                                                                    {
+                                                                      "other-month":
+                                                                        !n.isCurrentMonth,
+                                                                      selected:
+                                                                        n.isSelected,
+                                                                      disabled:
+                                                                        !n.isSelectable,
+                                                                      past: n.isPast,
+                                                                      "in-range":
+                                                                        n.isInRange,
+                                                                      "range-start":
+                                                                        n.isRangeStart,
+                                                                      "range-end":
+                                                                        n.isRangeEnd,
+                                                                    },
+                                                                  ]),
+                                                                  disabled:
+                                                                    !n.isSelectable,
+                                                                  onClick: (
+                                                                    d
+                                                                  ) => vn(n),
+                                                                  type: "button",
+                                                                },
+                                                                r(n.date),
+                                                                11,
+                                                                Ad
+                                                              )
+                                                            )
+                                                          ),
+                                                          128
+                                                        )),
+                                                      ]),
+                                                    ]),
+                                                  ]),
+                                                ]
+                                              ))
+                                            : M("", !0),
+                                        ],
+                                        512
+                                      ),
+                                      e(
+                                        "div",
+                                        {
+                                          class: B([
+                                            "list dropdown",
+                                            { active: Ve.value },
+                                          ]),
+                                          onMouseenter:
+                                            t[30] ||
+                                            (t[30] = (n) => (ws.value = !0)),
+                                          onMouseleave:
+                                            t[31] ||
+                                            (t[31] = (n) => (ws.value = !1)),
+                                          ref_key: "durationDropdown",
+                                          ref: Js,
+                                        },
+                                        [
+                                          e(
+                                            "div",
+                                            {
+                                              class: "list-heading",
+                                              onClick:
+                                                t[28] ||
+                                                (t[28] = (n) => It("duration")),
+                                            },
+                                            " Trip Duration "
+                                          ),
+                                          e(
+                                            "button",
+                                            {
+                                              type: "button",
+                                              class: B([
+                                                "select-summary",
+                                                {
+                                                  "is-filled":
+                                                    Ve.value || ws.value,
+                                                },
+                                              ]),
+                                              onClick:
+                                                t[29] ||
+                                                (t[29] = (n) => It("duration")),
+                                            },
+                                            [
+                                              e("span", null, r(zt.value), 1),
+                                              e("span", Td, [
+                                                e(
+                                                  "img",
+                                                  {
+                                                    src: Ve.value
+                                                      ? he(ot)
+                                                      : he(at),
+                                                    class: "caret-icon",
+                                                  },
+                                                  null,
+                                                  8,
+                                                  Id
+                                                ),
+                                              ]),
+                                            ],
+                                            2
+                                          ),
+                                          Ve.value
+                                            ? (o(),
+                                              i("div", Nd, [
+                                                e("div", Md, [
+                                                  e("div", Ed, [
+                                                    t[96] ||
+                                                      (t[96] = e(
+                                                        "div",
+                                                        {
+                                                          class: "counter-text",
+                                                        },
+                                                        [
+                                                          e(
+                                                            "div",
+                                                            {
+                                                              class:
+                                                                "counter-title",
+                                                            },
+                                                            "Min"
+                                                          ),
+                                                        ],
+                                                        -1
+                                                      )),
+                                                    e("div", Rd, [
+                                                      e(
+                                                        "button",
+                                                        {
+                                                          type: "button",
+                                                          class: "btn-icon",
+                                                          disabled:
+                                                            P.value <= 1,
+                                                          onClick: j(tn, [
+                                                            "stop",
+                                                          ]),
+                                                        },
+                                                        " − ",
+                                                        8,
+                                                        Pd
+                                                      ),
+                                                      e(
+                                                        "span",
+                                                        Od,
+                                                        r(P.value),
+                                                        1
+                                                      ),
+                                                      e(
+                                                        "button",
+                                                        {
+                                                          type: "button",
+                                                          class: "btn-icon",
+                                                          disabled:
+                                                            P.value >= D.value,
+                                                          onClick: j(sn, [
+                                                            "stop",
+                                                          ]),
+                                                        },
+                                                        " + ",
+                                                        8,
+                                                        Ld
+                                                      ),
+                                                    ]),
+                                                  ]),
+                                                  e("div", Bd, [
+                                                    t[97] ||
+                                                      (t[97] = e(
+                                                        "div",
+                                                        {
+                                                          class: "counter-text",
+                                                        },
+                                                        [
+                                                          e(
+                                                            "div",
+                                                            {
+                                                              class:
+                                                                "counter-title",
+                                                            },
+                                                            "Max"
+                                                          ),
+                                                        ],
+                                                        -1
+                                                      )),
+                                                    e("div", Fd, [
+                                                      e(
+                                                        "button",
+                                                        {
+                                                          type: "button",
+                                                          class: "btn-icon",
+                                                          disabled:
+                                                            D.value <= P.value,
+                                                          onClick: j(nn, [
+                                                            "stop",
+                                                          ]),
+                                                        },
+                                                        " − ",
+                                                        8,
+                                                        zd
+                                                      ),
+                                                      e(
+                                                        "span",
+                                                        Ud,
+                                                        r(D.value),
+                                                        1
+                                                      ),
+                                                      e(
+                                                        "button",
+                                                        {
+                                                          type: "button",
+                                                          class: "btn-icon",
+                                                          disabled:
+                                                            D.value >= Xe,
+                                                          onClick: j(an, [
+                                                            "stop",
+                                                          ]),
+                                                        },
+                                                        " + ",
+                                                        8,
+                                                        Gd
+                                                      ),
+                                                    ]),
+                                                  ]),
+                                                  e("div", Vd, [
+                                                    e(
+                                                      "button",
+                                                      {
+                                                        type: "button",
+                                                        class:
+                                                          "btn-reset-duration",
+                                                        onClick: j(on, [
+                                                          "stop",
+                                                        ]),
+                                                        disabled:
+                                                          P.value === 1 &&
+                                                          D.value === Xe,
+                                                      },
+                                                      " Reset to Any Duration ",
+                                                      8,
+                                                      Kd
+                                                    ),
+                                                  ]),
+                                                ]),
+                                              ]))
+                                            : M("", !0),
+                                        ],
+                                        34
+                                      ),
+                                      e("div", { class: "sidebar-actions" }, [
+                                        e(
+                                          "button",
+                                          { class: "btn-primary", onClick: da },
+                                          " Apply "
+                                        ),
+                                      ]),
+                                    ],
+                                    64
+                                  )),
+                            ]),
+                            fe.value
+                              ? M("", !0)
+                              : (o(),
+                                i("div", qd, [
+                                  e("div", Wd, [
+                                    t[109] ||
+                                      (t[109] = e(
+                                        "h3",
+                                        { class: "itinerary-title" },
+                                        "Your Itinerary",
+                                        -1
+                                      )),
+                                    t[110] ||
+                                      (t[110] = e(
+                                        "p",
+                                        { class: "itinerary-description" },
+                                        " This is a summary of the accommodation you have selected. After submitting your booking request, a Komodo Cruises Journey Designer will make contact to book and confirm your trip. ",
+                                        -1
+                                      )),
+                                    t[111] ||
+                                      (t[111] = e(
+                                        "div",
+                                        { class: "itinerary-divider" },
+                                        null,
+                                        -1
+                                      )),
+                                    R.value.length === 0
+                                      ? (o(),
+                                        i(
+                                          "div",
+                                          Hd,
+                                          " You haven't selected any options yet. "
+                                        ))
+                                      : (o(),
+                                        i("ul", Yd, [
+                                          (o(!0),
+                                          i(
+                                            K,
+                                            null,
+                                            se(
+                                              R.value,
+                                              (n, d) => (
+                                                o(),
+                                                i(
+                                                  "li",
+                                                  {
+                                                    key: n.addedAt,
+                                                    class: "itinerary-item",
+                                                  },
+                                                  [
+                                                    e("div", Jd, [
+                                                      e("div", null, [
+                                                        t[99] ||
+                                                          (t[99] = e(
+                                                            "div",
+                                                            {
+                                                              class:
+                                                                "itinerary-type",
+                                                            },
+                                                            "CABIN",
+                                                            -1
+                                                          )),
+                                                        e(
+                                                          "div",
+                                                          jd,
+                                                          r(n.cabin),
+                                                          1
+                                                        ),
+                                                      ]),
+                                                      e(
+                                                        "button",
+                                                        {
+                                                          class:
+                                                            "itinerary-remove-btn-top",
+                                                          onClick: (p) => Oa(d),
+                                                          title:
+                                                            "Remove from itinerary",
+                                                        },
+                                                        [
+                                                          ...(t[100] ||
+                                                            (t[100] = [
+                                                              e(
+                                                                "svg",
+                                                                {
+                                                                  class:
+                                                                    "action-icon",
+                                                                  viewBox:
+                                                                    "0 0 24 24",
+                                                                  fill: "none",
+                                                                  stroke:
+                                                                    "currentColor",
+                                                                  "stroke-width":
+                                                                    "1.5",
+                                                                },
+                                                                [
+                                                                  e("line", {
+                                                                    x1: "18",
+                                                                    y1: "6",
+                                                                    x2: "6",
+                                                                    y2: "18",
+                                                                  }),
+                                                                  e("line", {
+                                                                    x1: "6",
+                                                                    y1: "6",
+                                                                    x2: "18",
+                                                                    y2: "18",
+                                                                  }),
+                                                                ],
+                                                                -1
+                                                              ),
+                                                            ])),
+                                                        ],
+                                                        8,
+                                                        Xd
+                                                      ),
+                                                    ]),
+                                                    e("div", Qd, [
+                                                      t[102] ||
+                                                        (t[102] = Pe(
+                                                          '<svg class="itinerary-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>',
+                                                          1
+                                                        )),
+                                                      e("span", Zd, [
+                                                        e(
+                                                          "strong",
+                                                          null,
+                                                          r(Nt(n.date)),
+                                                          1
+                                                        ),
+                                                        t[101] ||
+                                                          (t[101] = Q(
+                                                            " – ",
+                                                            -1
+                                                          )),
+                                                        e(
+                                                          "strong",
+                                                          null,
+                                                          r(Nt(gn(n.date))),
+                                                          1
+                                                        ),
+                                                      ]),
+                                                    ]),
+                                                    e("div", ev, [
+                                                      t[103] ||
+                                                        (t[103] = Pe(
+                                                          '<svg class="itinerary-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 15h18l-1.5 6h-15L3 15z"></path><rect x="5" y="8" width="14" height="7" rx="1"></rect><path d="M8 8V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3"></path><line x1="2" y1="15" x2="22" y2="15"></line></svg>',
+                                                          1
+                                                        )),
+                                                      e(
+                                                        "span",
+                                                        tv,
+                                                        r(n.ship),
+                                                        1
+                                                      ),
+                                                    ]),
+                                                    e("div", sv, [
+                                                      e("div", nv, [
+                                                        t[104] ||
+                                                          (t[104] = e(
+                                                            "svg",
+                                                            {
+                                                              class:
+                                                                "itinerary-icon",
+                                                              viewBox:
+                                                                "0 0 24 24",
+                                                              fill: "none",
+                                                              stroke:
+                                                                "currentColor",
+                                                              "stroke-width":
+                                                                "1.5",
+                                                            },
+                                                            [
+                                                              e("path", {
+                                                                d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2",
+                                                              }),
+                                                              e("circle", {
+                                                                cx: "12",
+                                                                cy: "7",
+                                                                r: "4",
+                                                              }),
+                                                            ],
+                                                            -1
+                                                          )),
+                                                        e(
+                                                          "span",
+                                                          av,
+                                                          r(n.guests || 2) +
+                                                            " adult" +
+                                                            r(
+                                                              (n.guests || 2) >
+                                                                1
+                                                                ? "s"
+                                                                : ""
+                                                            ),
+                                                          1
+                                                        ),
+                                                      ]),
+                                                      e(
+                                                        "button",
+                                                        {
+                                                          class:
+                                                            "btn-edit-item",
+                                                          onClick: j(
+                                                            (p) => Ta(n, d),
+                                                            ["stop"]
+                                                          ),
+                                                          title: "Edit Guests",
+                                                        },
+                                                        [
+                                                          ...(t[105] ||
+                                                            (t[105] = [
+                                                              e(
+                                                                "svg",
+                                                                {
+                                                                  xmlns:
+                                                                    "http://www.w3.org/2000/svg",
+                                                                  width: "14",
+                                                                  height: "14",
+                                                                  viewBox:
+                                                                    "0 0 24 24",
+                                                                  fill: "none",
+                                                                  stroke:
+                                                                    "currentColor",
+                                                                  "stroke-width":
+                                                                    "2",
+                                                                  "stroke-linecap":
+                                                                    "round",
+                                                                  "stroke-linejoin":
+                                                                    "round",
+                                                                },
+                                                                [
+                                                                  e("path", {
+                                                                    d: "M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7",
+                                                                  }),
+                                                                  e("path", {
+                                                                    d: "M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z",
+                                                                  }),
+                                                                ],
+                                                                -1
+                                                              ),
+                                                            ])),
+                                                        ],
+                                                        8,
+                                                        ov
+                                                      ),
+                                                    ]),
+                                                    e("div", iv, [
+                                                      e("div", lv, [
+                                                        t[106] ||
+                                                          (t[106] = e(
+                                                            "svg",
+                                                            {
+                                                              class:
+                                                                "itinerary-icon",
+                                                              viewBox:
+                                                                "0 0 24 24",
+                                                              fill: "none",
+                                                              stroke:
+                                                                "currentColor",
+                                                              "stroke-width":
+                                                                "1.5",
+                                                            },
+                                                            [
+                                                              e("rect", {
+                                                                x: "2",
+                                                                y: "6",
+                                                                width: "20",
+                                                                height: "12",
+                                                                rx: "2",
+                                                              }),
+                                                              e("circle", {
+                                                                cx: "12",
+                                                                cy: "12",
+                                                                r: "2",
+                                                              }),
+                                                              e("path", {
+                                                                d: "M6 12h.01M18 12h.01",
+                                                              }),
+                                                            ],
+                                                            -1
+                                                          )),
+                                                        e(
+                                                          "span",
+                                                          rv,
+                                                          r(n.cabin),
+                                                          1
+                                                        ),
+                                                      ]),
+                                                      e(
+                                                        "span",
+                                                        cv,
+                                                        r(w(n.price)),
+                                                        1
+                                                      ),
+                                                    ]),
+                                                  ]
+                                                )
+                                              )
+                                            ),
+                                            128
+                                          )),
+                                        ])),
+                                    ss.value.hasPrice
+                                      ? (o(),
+                                        i("div", uv, [
+                                          e("div", dv, [
+                                            t[108] ||
+                                              (t[108] = e(
+                                                "span",
+                                                {
+                                                  class:
+                                                    "itinerary-total-label-simple",
+                                                },
+                                                "EST. TOTAL",
+                                                -1
+                                              )),
+                                            e("div", vv, [
+                                              e(
+                                                "span",
+                                                pv,
+                                                r(ss.value.formattedTotal),
+                                                1
+                                              ),
+                                              t[107] ||
+                                                (t[107] = e(
+                                                  "span",
+                                                  {
+                                                    class: "itinerary-tax-note",
+                                                  },
+                                                  "(Tax Included)",
+                                                  -1
+                                                )),
+                                            ]),
+                                          ]),
+                                        ]))
+                                      : R.value.length
+                                      ? (o(),
+                                        i(
+                                          "p",
+                                          mv,
+                                          " Pricing for the selected cabins will be confirmed by our Journey Designers. "
+                                        ))
+                                      : M("", !0),
+                                    R.value.length
+                                      ? (o(),
+                                        i(
+                                          "button",
+                                          {
+                                            key: 4,
+                                            class: "btn-send-enquiry",
+                                            onClick: $a,
+                                          },
+                                          " Send Availability Enquiry "
+                                        ))
+                                      : M("", !0),
+                                    t[112] ||
+                                      (t[112] = e(
+                                        "a",
+                                        {
+                                          href: "#",
+                                          class: "link-speak-with-us",
+                                        },
+                                        [
+                                          Q(" Speak with us "),
+                                          e("img", { src: Vs, alt: "" }),
+                                        ],
+                                        -1
+                                      )),
+                                  ]),
+                                ])),
+                          ]),
+                        ]),
+                      ])),
+                  Ee.value && pe.value
+                    ? (o(),
+                      i(
+                        "div",
+                        { key: 2, class: "modal-overlay", onClick: Rs },
+                        [
+                          e(
+                            "div",
+                            {
+                              class: "modal-content modal-content-redesigned",
+                              onClick: t[34] || (t[34] = j(() => {}, ["stop"])),
+                            },
+                            [
+                              e(
+                                "button",
+                                { class: "modal-close-details", onClick: Rs },
+                                "✕"
+                              ),
+                              e("div", fv, [
+                                e("div", hv, [
+                                  e("div", gv, [
+                                    e("h2", bv, r(Is(pe.value)), 1),
+                                    t[113] ||
+                                      (t[113] = e(
+                                        "p",
+                                        { class: "modal-cabin-subtitle" },
+                                        "Room",
+                                        -1
+                                      )),
+                                  ]),
+                                  e(
+                                    "div",
+                                    yv,
+                                    " Sleeps " +
+                                      r(Jn.value || 2) +
+                                      " | " +
+                                      r(wn(pe.value)) +
+                                      " | " +
+                                      r(fa(pe.value)),
+                                    1
+                                  ),
+                                  e(
+                                    "blockquote",
+                                    kv,
+                                    ' "' + r(Yn.value) + '" ',
+                                    1
+                                  ),
+                                  e("div", wv, [
+                                    t[114] ||
+                                      (t[114] = e(
+                                        "h3",
+                                        { class: "modal-section-title" },
+                                        "OVERVIEW",
+                                        -1
+                                      )),
+                                    e("div", _v, [
+                                      e("ul", Cv, [
+                                        (o(!0),
+                                        i(
+                                          K,
+                                          null,
+                                          se(
+                                            Mt(pe.value).slice(0, 4),
+                                            (n, d) => (
+                                              o(), i("li", { key: d }, r(n), 1)
+                                            )
+                                          ),
+                                          128
+                                        )),
+                                      ]),
+                                      Mt(pe.value).length > 4
+                                        ? (o(),
+                                          i("ul", $v, [
+                                            (o(!0),
+                                            i(
+                                              K,
+                                              null,
+                                              se(
+                                                Mt(pe.value).slice(4, 8),
+                                                (n, d) => (
+                                                  o(),
+                                                  i(
+                                                    "li",
+                                                    { key: d + 4 },
+                                                    r(n),
+                                                    1
+                                                  )
+                                                )
+                                              ),
+                                              128
+                                            )),
+                                          ]))
+                                        : M("", !0),
+                                    ]),
+                                  ]),
+                                  e("div", Sv, [
+                                    t[115] ||
+                                      (t[115] = e(
+                                        "h3",
+                                        { class: "modal-section-title" },
+                                        "AMENITIES & FEATURES",
+                                        -1
+                                      )),
+                                    e("div", xv, [
+                                      e("ul", Dv, [
+                                        (o(!0),
+                                        i(
+                                          K,
+                                          null,
+                                          se(
+                                            Cs.value.slice(0, 3),
+                                            (n, d) => (
+                                              o(), i("li", { key: d }, r(n), 1)
+                                            )
+                                          ),
+                                          128
+                                        )),
+                                      ]),
+                                      Cs.value.length > 3
+                                        ? (o(),
+                                          i("ul", Av, [
+                                            (o(!0),
+                                            i(
+                                              K,
+                                              null,
+                                              se(
+                                                Cs.value.slice(3, 6),
+                                                (n, d) => (
+                                                  o(),
+                                                  i(
+                                                    "li",
+                                                    { key: d + 3 },
+                                                    r(n),
+                                                    1
+                                                  )
+                                                )
+                                              ),
+                                              128
+                                            )),
+                                          ]))
+                                        : M("", !0),
+                                    ]),
+                                  ]),
+                                ]),
+                                e("div", Tv, [
+                                  (o(),
+                                  i(
+                                    "img",
+                                    {
+                                      src: ve(),
+                                      alt: pe.value.cabinName,
+                                      referrerpolicy: "no-referrer",
+                                      class: "modal-cabin-image",
+                                      key: H.value,
+                                      onError:
+                                        t[32] ||
+                                        (t[32] = (n) => $n(n, pe.value.image)),
+                                    },
+                                    null,
+                                    40,
+                                    Iv
+                                  )),
+                                  e(
+                                    "button",
+                                    {
+                                      class:
+                                        "modal-gallery-nav modal-gallery-prev",
+                                      onClick: F,
+                                      "aria-label": "Previous",
+                                    },
+                                    " ‹ "
+                                  ),
+                                  e(
+                                    "button",
+                                    {
+                                      class:
+                                        "modal-gallery-nav modal-gallery-next",
+                                      onClick: G,
+                                      "aria-label": "Next",
+                                    },
+                                    " › "
+                                  ),
+                                  e("div", Nv, [
+                                    Q(r(Is(pe.value)) + " ", 1),
+                                    e(
+                                      "span",
+                                      Mv,
+                                      r(H.value + 1) +
+                                        " of " +
+                                        r(le().length || 1),
+                                      1
+                                    ),
+                                  ]),
+                                ]),
+                              ]),
+                              e("div", Ev, [
+                                e("div", Rv, [
+                                  e("div", Pv, [
+                                    e(
+                                      "span",
+                                      Ov,
+                                      r(_s.value || "Price on request"),
+                                      1
+                                    ),
+                                    _s.value
+                                      ? (o(), i("span", Lv, "/Night"))
+                                      : M("", !0),
+                                  ]),
+                                  t[116] ||
+                                    (t[116] = e(
+                                      "span",
+                                      { class: "price-note" },
+                                      "Excluding taxes and fees",
+                                      -1
+                                    )),
+                                ]),
+                                e(
+                                  "button",
+                                  {
+                                    class: "modal-book-btn",
+                                    onClick:
+                                      t[33] ||
+                                      (t[33] = (n) => {
+                                        Dn(pe.value), Rs();
+                                      }),
+                                  },
+                                  r(
+                                    xn(pe.value)
+                                      ? "Remove from itinerary"
+                                      : "RESERVE NOW"
+                                  ),
+                                  1
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]
+                      ))
+                    : M("", !0),
+                  tt.value
+                    ? (o(),
+                      i(
+                        "div",
+                        { key: 3, class: "guest-modal-overlay", onClick: rs },
+                        [
+                          e(
+                            "div",
+                            {
+                              class: "guest-modal-content",
+                              onClick: t[35] || (t[35] = j(() => {}, ["stop"])),
+                            },
+                            [
+                              e(
+                                "button",
+                                { class: "guest-modal-close", onClick: rs },
+                                "✕"
+                              ),
+                              t[119] ||
+                                (t[119] = e(
+                                  "div",
+                                  { class: "guest-modal-header" },
+                                  [
+                                    e(
+                                      "h3",
+                                      { class: "guest-modal-title" },
+                                      "Number of Guests"
+                                    ),
+                                  ],
+                                  -1
+                                )),
+                              e("div", Bv, [
+                                t[118] ||
+                                  (t[118] = e(
+                                    "p",
+                                    { class: "guest-modal-description" },
+                                    " Please indicate how many guests will be accommodated: ",
+                                    -1
+                                  )),
+                                e("div", Fv, [
+                                  e("div", zv, [
+                                    t[117] ||
+                                      (t[117] = e(
+                                        "div",
+                                        { class: "guest-counter-label" },
+                                        "Guests",
+                                        -1
+                                      )),
+                                    e("div", Uv, [
+                                      e(
+                                        "button",
+                                        {
+                                          type: "button",
+                                          class: "guest-counter-btn",
+                                          onClick: Da,
+                                          disabled: Re.value <= 1,
+                                        },
+                                        " − ",
+                                        8,
+                                        Gv
+                                      ),
+                                      e("span", Vv, r(Re.value), 1),
+                                      e(
+                                        "button",
+                                        {
+                                          type: "button",
+                                          class: "guest-counter-btn",
+                                          onClick: xa,
+                                          disabled: Re.value >= As.value,
+                                        },
+                                        " + ",
+                                        8,
+                                        Kv
+                                      ),
+                                    ]),
+                                  ]),
+                                  e("div", qv, [
+                                    Q(
+                                      r(
+                                        ((l = De.value) == null
+                                          ? void 0
+                                          : l.availableText) || "1 available"
+                                      ) + " ",
+                                      1
+                                    ),
+                                    (u = De.value) != null && u.capacityText
+                                      ? (o(),
+                                        i(
+                                          "span",
+                                          Wv,
+                                          " • Max " + r(As.value) + " guests",
+                                          1
+                                        ))
+                                      : M("", !0),
+                                  ]),
+                                ]),
+                                e("div", Hv, [
+                                  e(
+                                    "button",
+                                    { class: "btn-submit-guest", onClick: Aa },
+                                    r(
+                                      et.value !== null
+                                        ? "Update Itinerary"
+                                        : "Add to Itinerary"
+                                    ),
+                                    1
+                                  ),
+                                ]),
+                              ]),
+                            ]
+                          ),
+                        ]
+                      ))
+                    : M("", !0),
+                  We.value
+                    ? (o(),
+                      i("div", Yv, [
+                        e("div", Jv, [
+                          e("div", { class: "enquiry-modal-header" }, [
+                            t[120] ||
+                              (t[120] = e(
+                                "h2",
+                                { class: "enquiry-modal-title" },
+                                "Plan your Trip",
+                                -1
+                              )),
+                            e(
+                              "button",
+                              { class: "enquiry-modal-close", onClick: Sa },
+                              " Close ✕ "
+                            ),
+                          ]),
+                          e("div", jv, [
+                            e("div", Xv, [
+                              t[138] ||
+                                (t[138] = e(
+                                  "p",
+                                  { class: "enquiry-intro" },
+                                  " Please complete the form below and one of our Journey Designers will contact you shortly to plan your trip. ",
+                                  -1
+                                )),
+                              e(
+                                "form",
+                                {
+                                  class: "enquiry-form",
+                                  onSubmit: j(La, ["prevent"]),
+                                },
+                                [
+                                  e("div", Qv, [
+                                    e("div", Zv, [
+                                      t[122] ||
+                                        (t[122] = e(
+                                          "label",
+                                          { class: "form-label" },
+                                          "Title",
+                                          -1
+                                        )),
+                                      be(
+                                        e(
+                                          "select",
+                                          {
+                                            class: "form-control",
+                                            "onUpdate:modelValue":
+                                              t[36] ||
+                                              (t[36] = (n) =>
+                                                (ee.value.title = n)),
+                                          },
+                                          [
+                                            ...(t[121] ||
+                                              (t[121] = [
+                                                Pe(
+                                                  '<option value="">Select</option><option value="Mr">Mr</option><option value="Mrs">Mrs</option><option value="Ms">Ms</option><option value="Dr">Dr</option>',
+                                                  5
+                                                ),
+                                              ])),
+                                          ],
+                                          512
+                                        ),
+                                        [[ds, ee.value.title]]
+                                      ),
+                                    ]),
+                                    e("div", ep, [
+                                      t[123] ||
+                                        (t[123] = e(
+                                          "label",
+                                          { class: "form-label" },
+                                          "First Name",
+                                          -1
+                                        )),
+                                      be(
+                                        e(
+                                          "input",
+                                          {
+                                            type: "text",
+                                            class: "form-control",
+                                            "onUpdate:modelValue":
+                                              t[37] ||
+                                              (t[37] = (n) =>
+                                                (ee.value.firstName = n)),
+                                            required: "",
+                                          },
+                                          null,
+                                          512
+                                        ),
+                                        [[kt, ee.value.firstName]]
+                                      ),
+                                    ]),
+                                    e("div", tp, [
+                                      t[124] ||
+                                        (t[124] = e(
+                                          "label",
+                                          { class: "form-label" },
+                                          "Last Name",
+                                          -1
+                                        )),
+                                      be(
+                                        e(
+                                          "input",
+                                          {
+                                            type: "text",
+                                            class: "form-control",
+                                            "onUpdate:modelValue":
+                                              t[38] ||
+                                              (t[38] = (n) =>
+                                                (ee.value.lastName = n)),
+                                            required: "",
+                                          },
+                                          null,
+                                          512
+                                        ),
+                                        [[kt, ee.value.lastName]]
+                                      ),
+                                    ]),
+                                  ]),
+                                  e("div", sp, [
+                                    e("div", np, [
+                                      t[126] ||
+                                        (t[126] = e(
+                                          "label",
+                                          { class: "form-label" },
+                                          "Contact Number",
+                                          -1
+                                        )),
+                                      e("div", ap, [
+                                        be(
+                                          e(
+                                            "select",
+                                            {
+                                              class: "phone-country",
+                                              "onUpdate:modelValue":
+                                                t[39] ||
+                                                (t[39] = (n) =>
+                                                  (ee.value.phoneCountry = n)),
+                                            },
+                                            [
+                                              ...(t[125] ||
+                                                (t[125] = [
+                                                  Pe(
+                                                    '<option value="+62">🇮🇩 +62</option><option value="+1">🇺🇸 +1</option><option value="+44">🇬🇧 +44</option><option value="+61">🇦🇺 +61</option><option value="+65">🇸🇬 +65</option><option value="+60">🇲🇾 +60</option>',
+                                                    6
+                                                  ),
+                                                ])),
+                                            ],
+                                            512
+                                          ),
+                                          [[ds, ee.value.phoneCountry]]
+                                        ),
+                                        be(
+                                          e(
+                                            "input",
+                                            {
+                                              type: "tel",
+                                              class: "form-control",
+                                              "onUpdate:modelValue":
+                                                t[40] ||
+                                                (t[40] = (n) =>
+                                                  (ee.value.phoneNumber = n)),
+                                              placeholder: "812345678",
+                                            },
+                                            null,
+                                            512
+                                          ),
+                                          [[kt, ee.value.phoneNumber]]
+                                        ),
+                                      ]),
+                                    ]),
+                                    e("div", op, [
+                                      t[128] ||
+                                        (t[128] = e(
+                                          "label",
+                                          { class: "form-label" },
+                                          "Country",
+                                          -1
+                                        )),
+                                      be(
+                                        e(
+                                          "select",
+                                          {
+                                            class: "form-control",
+                                            "onUpdate:modelValue":
+                                              t[41] ||
+                                              (t[41] = (n) =>
+                                                (ee.value.country = n)),
+                                          },
+                                          [
+                                            ...(t[127] ||
+                                              (t[127] = [
+                                                Pe(
+                                                  '<option value="">Select Country</option><option value="Indonesia">Indonesia</option><option value="United States">United States</option><option value="United Kingdom">United Kingdom</option><option value="Australia">Australia</option><option value="Singapore">Singapore</option><option value="Malaysia">Malaysia</option>',
+                                                  7
+                                                ),
+                                              ])),
+                                          ],
+                                          512
+                                        ),
+                                        [[ds, ee.value.country]]
+                                      ),
+                                    ]),
+                                  ]),
+                                  e("div", ip, [
+                                    e("div", lp, [
+                                      t[129] ||
+                                        (t[129] = e(
+                                          "label",
+                                          { class: "form-label" },
+                                          "Email",
+                                          -1
+                                        )),
+                                      be(
+                                        e(
+                                          "input",
+                                          {
+                                            type: "email",
+                                            class: "form-control",
+                                            "onUpdate:modelValue":
+                                              t[42] ||
+                                              (t[42] = (n) =>
+                                                (ee.value.email = n)),
+                                            required: "",
+                                          },
+                                          null,
+                                          512
+                                        ),
+                                        [[kt, ee.value.email]]
+                                      ),
+                                    ]),
+                                    e("div", rp, [
+                                      t[130] ||
+                                        (t[130] = e(
+                                          "label",
+                                          { class: "form-label" },
+                                          "Confirm Email Address",
+                                          -1
+                                        )),
+                                      be(
+                                        e(
+                                          "input",
+                                          {
+                                            type: "email",
+                                            class: "form-control",
+                                            "onUpdate:modelValue":
+                                              t[43] ||
+                                              (t[43] = (n) =>
+                                                (ee.value.confirmEmail = n)),
+                                            required: "",
+                                          },
+                                          null,
+                                          512
+                                        ),
+                                        [[kt, ee.value.confirmEmail]]
+                                      ),
+                                    ]),
+                                  ]),
+                                  e("div", cp, [
+                                    t[132] ||
+                                      (t[132] = e(
+                                        "label",
+                                        { class: "form-label" },
+                                        "I am a:",
+                                        -1
+                                      )),
+                                    be(
+                                      e(
+                                        "select",
+                                        {
+                                          class: "form-control",
+                                          "onUpdate:modelValue":
+                                            t[44] ||
+                                            (t[44] = (n) =>
+                                              (ee.value.userType = n)),
+                                        },
+                                        [
+                                          ...(t[131] ||
+                                            (t[131] = [
+                                              e(
+                                                "option",
+                                                { value: "" },
+                                                "Select",
+                                                -1
+                                              ),
+                                              e(
+                                                "option",
+                                                { value: "guest" },
+                                                "Guest",
+                                                -1
+                                              ),
+                                              e(
+                                                "option",
+                                                { value: "agent" },
+                                                "Travel Agent",
+                                                -1
+                                              ),
+                                            ])),
+                                        ],
+                                        512
+                                      ),
+                                      [[ds, ee.value.userType]]
+                                    ),
+                                  ]),
+                                  e("div", up, [
+                                    t[133] ||
+                                      (t[133] = e(
+                                        "label",
+                                        { class: "form-label" },
+                                        "Is there anything else you'd like to let us know?",
+                                        -1
+                                      )),
+                                    be(
+                                      e(
+                                        "textarea",
+                                        {
+                                          class: "form-control form-textarea",
+                                          rows: "4",
+                                          "onUpdate:modelValue":
+                                            t[45] ||
+                                            (t[45] = (n) =>
+                                              (ee.value.notes = n)),
+                                        },
+                                        null,
+                                        512
+                                      ),
+                                      [[kt, ee.value.notes]]
+                                    ),
+                                  ]),
+                                  e("div", dp, [
+                                    e("label", vp, [
+                                      be(
+                                        e(
+                                          "input",
+                                          {
+                                            type: "checkbox",
+                                            "onUpdate:modelValue":
+                                              t[46] ||
+                                              (t[46] = (n) =>
+                                                (ee.value.subscribeNews = n)),
+                                          },
+                                          null,
+                                          512
+                                        ),
+                                        [[yt, ee.value.subscribeNews]]
+                                      ),
+                                      t[134] ||
+                                        (t[134] = e(
+                                          "span",
+                                          null,
+                                          "Sign up to receive news and blog posts from Komodo Cruises",
+                                          -1
+                                        )),
+                                    ]),
+                                    e("label", pp, [
+                                      be(
+                                        e(
+                                          "input",
+                                          {
+                                            type: "checkbox",
+                                            "onUpdate:modelValue":
+                                              t[47] ||
+                                              (t[47] = (n) =>
+                                                (ee.value.consentData = n)),
+                                            required: "",
+                                          },
+                                          null,
+                                          512
+                                        ),
+                                        [[yt, ee.value.consentData]]
+                                      ),
+                                      t[135] ||
+                                        (t[135] = e(
+                                          "span",
+                                          null,
+                                          "I consent to my submitted data being collected and stored",
+                                          -1
+                                        )),
+                                    ]),
+                                  ]),
+                                  t[136] ||
+                                    (t[136] = e(
+                                      "p",
+                                      { class: "form-note" },
+                                      [
+                                        e("strong", null, "PLEASE NOTE:"),
+                                        Q(
+                                          " These results indicate availability and do not guarantee a booking. One of our Journey Designers will contact you shortly to plan your trip. "
+                                        ),
+                                      ],
+                                      -1
+                                    )),
+                                  e(
+                                    "button",
+                                    {
+                                      type: "submit",
+                                      class: "btn-submit-enquiry",
+                                      disabled: Le.value,
+                                    },
+                                    r(
+                                      Le.value
+                                        ? "PROCESSING..."
+                                        : "PROCEED TO PAYMENT"
+                                    ),
+                                    9,
+                                    mp
+                                  ),
+                                  t[137] ||
+                                    (t[137] = e(
+                                      "p",
+                                      { class: "form-recaptcha" },
+                                      " This form is protected by reCAPTCHA Enterprise and the Google Privacy Policy and Terms of Service apply. ",
+                                      -1
+                                    )),
+                                ],
+                                32
+                              ),
+                            ]),
+                            e("div", fp, [
+                              t[142] ||
+                                (t[142] = e(
+                                  "h3",
+                                  { class: "summary-title" },
+                                  "Your Itinerary",
+                                  -1
+                                )),
+                              t[143] ||
+                                (t[143] = e(
+                                  "p",
+                                  { class: "summary-description" },
+                                  " This is a summary of the accommodation you've selected. One of our Komodo Cruises Journey Designers will contact you shortly to plan your trip. ",
+                                  -1
+                                )),
+                              e("div", hp, [
+                                (o(!0),
+                                i(
+                                  K,
+                                  null,
+                                  se(
+                                    R.value,
+                                    (n, d) => (
+                                      o(),
+                                      i(
+                                        "div",
+                                        { key: d, class: "summary-item" },
+                                        [
+                                          e("div", gp, [
+                                            e("h4", bp, r(n.ship), 1),
+                                          ]),
+                                          e("div", yp, [
+                                            e("p", kp, r(n.cabin), 1),
+                                            e(
+                                              "p",
+                                              wp,
+                                              r(n.guests || 2) +
+                                                " Guest" +
+                                                r(
+                                                  (n.guests || 2) > 1 ? "s" : ""
+                                                ),
+                                              1
+                                            ),
+                                            e(
+                                              "p",
+                                              _p,
+                                              r(Nt(n.date)) +
+                                                " → " +
+                                                r(Nt(gn(n.date))),
+                                              1
+                                            ),
+                                          ]),
+                                          n.price
+                                            ? (o(),
+                                              i("div", Cp, [
+                                                e("div", $p, [
+                                                  t[139] ||
+                                                    (t[139] = e(
+                                                      "span",
+                                                      {
+                                                        class: "pricing-label",
+                                                      },
+                                                      "Price per cabin",
+                                                      -1
+                                                    )),
+                                                  e("span", Sp, r(n.price), 1),
+                                                ]),
+                                                e("div", xp, [
+                                                  e(
+                                                    "span",
+                                                    Dp,
+                                                    "× " +
+                                                      r(n.guests || 2) +
+                                                      " guest" +
+                                                      r(
+                                                        (n.guests || 2) > 1
+                                                          ? "s"
+                                                          : ""
+                                                      ),
+                                                    1
+                                                  ),
+                                                  e("span", Ap, r(_a(n)), 1),
+                                                ]),
+                                              ]))
+                                            : M("", !0),
+                                        ]
+                                      )
+                                    )
+                                  ),
+                                  128
+                                )),
+                              ]),
+                              ss.value.hasPrice
+                                ? (o(),
+                                  i("div", Tp, [
+                                    t[141] ||
+                                      (t[141] = e(
+                                        "div",
+                                        { class: "enquiry-total-divider" },
+                                        null,
+                                        -1
+                                      )),
+                                    e("div", Ip, [
+                                      e("div", Np, [
+                                        t[140] ||
+                                          (t[140] = e(
+                                            "span",
+                                            { class: "enquiry-total-label" },
+                                            "Total Price",
+                                            -1
+                                          )),
+                                        e(
+                                          "span",
+                                          Mp,
+                                          r(ss.value.formattedTotal),
+                                          1
+                                        ),
+                                      ]),
+                                    ]),
+                                  ]))
+                                : R.value.length
+                                ? (o(),
+                                  i(
+                                    "p",
+                                    Ep,
+                                    " Pricing for the selected cabins will be confirmed by our Journey Designers. "
+                                  ))
+                                : M("", !0),
+                            ]),
+                          ]),
+                        ]),
+                      ]))
+                    : M("", !0),
+                  e("footer", Rp, [
+                    e("div", Pp, [
+                      e("div", Op, [
+                        t[147] ||
+                          (t[147] = e(
+                            "div",
+                            { class: "hf-brand" },
+                            [
+                              e("div", { class: "hf-logo" }, "KOMODO CRUISES"),
+                              e(
+                                "div",
+                                { class: "hf-copy" },
+                                "Rare journeys across the Komodo Islands."
+                              ),
+                            ],
+                            -1
+                          )),
+                        e("nav", Lp, [
+                          e(
+                            "a",
+                            { href: "#", onClick: j(Ea, ["prevent"]) },
+                            "Plan your trip"
+                          ),
+                          t[144] ||
+                            (t[144] = e("a", { href: "#" }, "Experiences", -1)),
+                          t[145] ||
+                            (t[145] = e("a", { href: "#" }, "Our story", -1)),
+                          t[146] ||
+                            (t[146] = e("a", { href: "#" }, "Contact", -1)),
+                        ]),
+                        t[148] ||
+                          (t[148] = Pe(
+                            '<div class="hf-contact"><div class="hf-contact-title">Contact Us</div><div class="hf-contact-phone"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><a href="tel:+6285282296450">+62 852-8229-6450</a></div><div class="hf-contact-address"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg><span>Graha Permata Pancoran, Jl. KH. Guru Amin Blok A5, Pancoran, Jakarta Selatan 12780</span></div></div>',
+                            1
+                          )),
+                      ]),
+                      e("div", Bp, [
+                        e(
+                          "div",
+                          Fp,
+                          " © " +
+                            r(new Date().getFullYear()) +
+                            " Komodo Cruises | PT CANARD MONEY INDONESIA ",
+                          1
+                        ),
+                        t[149] ||
+                          (t[149] = e(
+                            "div",
+                            { class: "hf-disclaimer" },
+                            " All voyages subject to weather and park regulations. ",
+                            -1
+                          )),
+                      ]),
+                    ]),
+                  ]),
+                ]),
+                (o(),
+                Yt(zn, { to: "body" }, [
+                  C.value
+                    ? (o(),
+                      i(
+                        "div",
+                        {
+                          key: 0,
+                          class: "mobile-filter-modal-overlay",
+                          onClick:
+                            t[61] ||
+                            (t[61] = j((n) => (C.value = !1), ["self"])),
+                        },
+                        [
+                          e("div", zp, [
+                            e("div", Up, [
+                              t[151] ||
+                                (t[151] = e(
+                                  "h3",
+                                  null,
+                                  "Check Availability",
+                                  -1
+                                )),
+                              e(
+                                "button",
+                                {
+                                  class: "modal-close-btn",
+                                  onClick:
+                                    t[48] || (t[48] = (n) => (C.value = !1)),
+                                },
+                                [
+                                  ...(t[150] ||
+                                    (t[150] = [
+                                      e("span", null, "Close", -1),
+                                      Q(" ✕ ", -1),
+                                    ])),
+                                ]
+                              ),
+                            ]),
+                            e("div", Gp, [
+                              e("div", Vp, [
+                                t[152] ||
+                                  (t[152] = e(
+                                    "div",
+                                    { class: "modal-field-label" },
+                                    "Destinations",
+                                    -1
+                                  )),
+                                e(
+                                  "button",
+                                  {
+                                    type: "button",
+                                    class: "modal-field-btn",
+                                    onClick:
+                                      t[49] ||
+                                      (t[49] = (n) => (h.value = !h.value)),
+                                  },
+                                  [
+                                    e(
+                                      "span",
+                                      null,
+                                      "Destinations: " + r(Ne.value.length),
+                                      1
+                                    ),
+                                    e(
+                                      "img",
+                                      {
+                                        src: h.value ? he(ot) : he(at),
+                                        alt: "",
+                                        class: "caret-icon",
+                                      },
+                                      null,
+                                      8,
+                                      Kp
+                                    ),
+                                  ]
+                                ),
+                                h.value
+                                  ? (o(),
+                                    i("div", qp, [
+                                      e(
+                                        "div",
+                                        { class: "dropdown-group-title" },
+                                        r(ms)
+                                      ),
+                                      (o(),
+                                      i(
+                                        K,
+                                        null,
+                                        se(Dt, (n) =>
+                                          e(
+                                            "div",
+                                            {
+                                              class: "list-row",
+                                              key: n,
+                                              onClick: (d) => js(n),
+                                            },
+                                            [
+                                              e("div", Hp, r(n), 1),
+                                              be(
+                                                e(
+                                                  "input",
+                                                  {
+                                                    class: "check",
+                                                    type: "checkbox",
+                                                    value: n,
+                                                    "onUpdate:modelValue":
+                                                      t[50] ||
+                                                      (t[50] = (d) =>
+                                                        (Ne.value = d)),
+                                                    onClick:
+                                                      t[51] ||
+                                                      (t[51] = j(() => {}, [
+                                                        "stop",
+                                                      ])),
+                                                  },
+                                                  null,
+                                                  8,
+                                                  Yp
+                                                ),
+                                                [[yt, Ne.value]]
+                                              ),
+                                            ],
+                                            8,
+                                            Wp
+                                          )
+                                        ),
+                                        64
+                                      )),
+                                    ]))
+                                  : M("", !0),
+                              ]),
+                              e("div", Jp, [
+                                t[153] ||
+                                  (t[153] = e(
+                                    "div",
+                                    { class: "modal-field-label" },
+                                    "Ships",
+                                    -1
+                                  )),
+                                e(
+                                  "button",
+                                  {
+                                    type: "button",
+                                    class: "modal-field-btn",
+                                    onClick:
+                                      t[52] ||
+                                      (t[52] = (n) => (g.value = !g.value)),
+                                  },
+                                  [
+                                    e(
+                                      "span",
+                                      null,
+                                      "Ships: " + r(Oe.value.length),
+                                      1
+                                    ),
+                                    e(
+                                      "img",
+                                      {
+                                        src: g.value ? he(ot) : he(at),
+                                        alt: "",
+                                        class: "caret-icon",
+                                      },
+                                      null,
+                                      8,
+                                      jp
+                                    ),
+                                  ]
+                                ),
+                                g.value
+                                  ? (o(),
+                                    i("div", Xp, [
+                                      e("div", Qp, r(pn.value), 1),
+                                      Tt.value
+                                        ? (o(),
+                                          i("div", Zp, "Loading ships..."))
+                                        : (o(!0),
+                                          i(
+                                            K,
+                                            { key: 1 },
+                                            se(
+                                              nt.value,
+                                              (n) => (
+                                                o(),
+                                                i(
+                                                  "div",
+                                                  {
+                                                    class: "list-row",
+                                                    key: n.id,
+                                                    onClick: (d) => Xs(n.id),
+                                                  },
+                                                  [
+                                                    e("div", t1, r(n.label), 1),
+                                                    be(
+                                                      e(
+                                                        "input",
+                                                        {
+                                                          class: "check",
+                                                          type: "checkbox",
+                                                          value: n.id,
+                                                          "onUpdate:modelValue":
+                                                            t[53] ||
+                                                            (t[53] = (d) =>
+                                                              (Oe.value = d)),
+                                                          onClick:
+                                                            t[54] ||
+                                                            (t[54] =
+                                                              j(() => {}, [
+                                                                "stop",
+                                                              ])),
+                                                        },
+                                                        null,
+                                                        8,
+                                                        s1
+                                                      ),
+                                                      [[yt, Oe.value]]
+                                                    ),
+                                                  ],
+                                                  8,
+                                                  e1
+                                                )
+                                              )
+                                            ),
+                                            128
+                                          )),
+                                    ]))
+                                  : M("", !0),
+                              ]),
+                              e("div", n1, [
+                                t[160] ||
+                                  (t[160] = e(
+                                    "div",
+                                    { class: "modal-field-label" },
+                                    "Cabins & Guests",
+                                    -1
+                                  )),
+                                e(
+                                  "button",
+                                  {
+                                    type: "button",
+                                    class: "modal-field-btn",
+                                    onClick:
+                                      t[55] ||
+                                      (t[55] = (n) => (v.value = !v.value)),
+                                  },
+                                  [
+                                    ce.value
+                                      ? (o(),
+                                        i(
+                                          "span",
+                                          a1,
+                                          "Flexible: " +
+                                            r(ue.value) +
+                                            " Guest" +
+                                            r(ue.value !== 1 ? "s" : ""),
+                                          1
+                                        ))
+                                      : (o(),
+                                        i(
+                                          "span",
+                                          o1,
+                                          r(Y.value.length) +
+                                            " Cabin" +
+                                            r(Y.value.length !== 1 ? "s" : "") +
+                                            ", " +
+                                            r(Be.value) +
+                                            " Guest" +
+                                            r(Be.value !== 1 ? "s" : ""),
+                                          1
+                                        )),
+                                    e(
+                                      "img",
+                                      {
+                                        src: v.value ? he(ot) : he(at),
+                                        alt: "",
+                                        class: "caret-icon",
+                                      },
+                                      null,
+                                      8,
+                                      i1
+                                    ),
+                                  ]
+                                ),
+                                v.value
+                                  ? (o(),
+                                    i("div", l1, [
+                                      e("div", r1, [
+                                        e(
+                                          "button",
+                                          {
+                                            type: "button",
+                                            class: B([
+                                              "sidebar-pill-btn",
+                                              { active: ce.value },
+                                            ]),
+                                            onClick:
+                                              t[56] ||
+                                              (t[56] = (n) => (ce.value = !0)),
+                                          },
+                                          " Flexible ",
+                                          2
+                                        ),
+                                        e(
+                                          "button",
+                                          {
+                                            type: "button",
+                                            class: B([
+                                              "sidebar-pill-btn",
+                                              { active: !ce.value },
+                                            ]),
+                                            onClick:
+                                              t[57] ||
+                                              (t[57] = (n) => (ce.value = !1)),
+                                          },
+                                          " Structured ",
+                                          2
+                                        ),
+                                      ]),
+                                      ce.value
+                                        ? (o(),
+                                          i("div", c1, [
+                                            e("div", u1, [
+                                              t[154] ||
+                                                (t[154] = e(
+                                                  "span",
+                                                  { class: "label" },
+                                                  "Total Guests",
+                                                  -1
+                                                )),
+                                              e("div", d1, [
+                                                e(
+                                                  "button",
+                                                  {
+                                                    type: "button",
+                                                    class: "btn-ctrl",
+                                                    disabled: ue.value <= 1,
+                                                    onClick:
+                                                      t[58] ||
+                                                      (t[58] = (n) =>
+                                                        ue.value--),
+                                                  },
+                                                  " − ",
+                                                  8,
+                                                  v1
+                                                ),
+                                                e("span", p1, r(ue.value), 1),
+                                                e(
+                                                  "button",
+                                                  {
+                                                    type: "button",
+                                                    class: "btn-ctrl",
+                                                    onClick:
+                                                      t[59] ||
+                                                      (t[59] = (n) =>
+                                                        ue.value++),
+                                                  },
+                                                  " + "
+                                                ),
+                                              ]),
+                                            ]),
+                                            t[155] ||
+                                              (t[155] = e(
+                                                "p",
+                                                { class: "sidebar-note" },
+                                                " We will automatically find the best cabin combination for your group. ",
+                                                -1
+                                              )),
+                                          ]))
+                                        : (o(),
+                                          i("div", m1, [
+                                            (o(!0),
+                                            i(
+                                              K,
+                                              null,
+                                              se(
+                                                Y.value,
+                                                (n, d) => (
+                                                  o(),
+                                                  i(
+                                                    "div",
+                                                    {
+                                                      key: n.id,
+                                                      class:
+                                                        "cabin-accordion-sidebar",
+                                                    },
+                                                    [
+                                                      e("div", f1, [
+                                                        e("div", h1, [
+                                                          e(
+                                                            "span",
+                                                            g1,
+                                                            "CABIN " + r(d + 1),
+                                                            1
+                                                          ),
+                                                          e(
+                                                            "span",
+                                                            b1,
+                                                            r(
+                                                              n.adults +
+                                                                n.children
+                                                            ) +
+                                                              " guest" +
+                                                              r(
+                                                                n.adults +
+                                                                  n.children !==
+                                                                  1
+                                                                  ? "s"
+                                                                  : ""
+                                                              ),
+                                                            1
+                                                          ),
+                                                        ]),
+                                                        e("div", y1, [
+                                                          Y.value.length > 1
+                                                            ? (o(),
+                                                              i(
+                                                                "button",
+                                                                {
+                                                                  key: 0,
+                                                                  type: "button",
+                                                                  class:
+                                                                    "cabin-remove-btn-sidebar",
+                                                                  onClick: j(
+                                                                    (p) =>
+                                                                      Zs(d),
+                                                                    ["stop"]
+                                                                  ),
+                                                                  title:
+                                                                    "Remove cabin",
+                                                                },
+                                                                [
+                                                                  ...(t[156] ||
+                                                                    (t[156] = [
+                                                                      e(
+                                                                        "svg",
+                                                                        {
+                                                                          width:
+                                                                            "14",
+                                                                          height:
+                                                                            "14",
+                                                                          viewBox:
+                                                                            "0 0 24 24",
+                                                                          fill: "none",
+                                                                          stroke:
+                                                                            "currentColor",
+                                                                          "stroke-width":
+                                                                            "2",
+                                                                        },
+                                                                        [
+                                                                          e(
+                                                                            "path",
+                                                                            {
+                                                                              d: "M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z",
+                                                                            }
+                                                                          ),
+                                                                        ],
+                                                                        -1
+                                                                      ),
+                                                                    ])),
+                                                                ],
+                                                                8,
+                                                                k1
+                                                              ))
+                                                            : M("", !0),
+                                                          e(
+                                                            "button",
+                                                            {
+                                                              type: "button",
+                                                              class:
+                                                                "cabin-toggle-btn-sidebar",
+                                                              onClick: j(
+                                                                (p) => en(d),
+                                                                ["stop"]
+                                                              ),
+                                                            },
+                                                            [
+                                                              (o(),
+                                                              i(
+                                                                "svg",
+                                                                {
+                                                                  class: B([
+                                                                    "cabin-chevron-sidebar",
+                                                                    {
+                                                                      expanded:
+                                                                        n.expanded,
+                                                                    },
+                                                                  ]),
+                                                                  width: "16",
+                                                                  height: "16",
+                                                                  viewBox:
+                                                                    "0 0 24 24",
+                                                                  fill: "none",
+                                                                  stroke:
+                                                                    "currentColor",
+                                                                  "stroke-width":
+                                                                    "2",
+                                                                },
+                                                                [
+                                                                  ...(t[157] ||
+                                                                    (t[157] = [
+                                                                      e(
+                                                                        "polyline",
+                                                                        {
+                                                                          points:
+                                                                            "6 9 12 15 18 9",
+                                                                        },
+                                                                        null,
+                                                                        -1
+                                                                      ),
+                                                                    ])),
+                                                                ],
+                                                                2
+                                                              )),
+                                                            ],
+                                                            8,
+                                                            w1
+                                                          ),
+                                                        ]),
+                                                      ]),
+                                                      n.expanded
+                                                        ? (o(),
+                                                          i("div", _1, [
+                                                            e("div", C1, [
+                                                              t[158] ||
+                                                                (t[158] = e(
+                                                                  "span",
+                                                                  {
+                                                                    class:
+                                                                      "counter-label-sidebar",
+                                                                  },
+                                                                  "Adults",
+                                                                  -1
+                                                                )),
+                                                              e("div", $1, [
+                                                                e(
+                                                                  "button",
+                                                                  {
+                                                                    type: "button",
+                                                                    class:
+                                                                      "btn-icon-sm",
+                                                                    disabled:
+                                                                      n.adults <=
+                                                                      1,
+                                                                    onClick: (
+                                                                      p
+                                                                    ) =>
+                                                                      Qt(
+                                                                        d,
+                                                                        "adults"
+                                                                      ),
+                                                                  },
+                                                                  " − ",
+                                                                  8,
+                                                                  S1
+                                                                ),
+                                                                e(
+                                                                  "span",
+                                                                  x1,
+                                                                  r(n.adults),
+                                                                  1
+                                                                ),
+                                                                e(
+                                                                  "button",
+                                                                  {
+                                                                    type: "button",
+                                                                    class:
+                                                                      "btn-icon-sm",
+                                                                    disabled:
+                                                                      n.adults +
+                                                                        n.children >=
+                                                                      qt,
+                                                                    onClick: (
+                                                                      p
+                                                                    ) =>
+                                                                      Xt(
+                                                                        d,
+                                                                        "adults"
+                                                                      ),
+                                                                  },
+                                                                  " + ",
+                                                                  8,
+                                                                  D1
+                                                                ),
+                                                              ]),
+                                                            ]),
+                                                            e("div", A1, [
+                                                              t[159] ||
+                                                                (t[159] = e(
+                                                                  "span",
+                                                                  {
+                                                                    class:
+                                                                      "counter-label-sidebar",
+                                                                  },
+                                                                  "Children",
+                                                                  -1
+                                                                )),
+                                                              e("div", T1, [
+                                                                e(
+                                                                  "button",
+                                                                  {
+                                                                    type: "button",
+                                                                    class:
+                                                                      "btn-icon-sm",
+                                                                    disabled:
+                                                                      n.children <=
+                                                                      0,
+                                                                    onClick: (
+                                                                      p
+                                                                    ) =>
+                                                                      Qt(
+                                                                        d,
+                                                                        "children"
+                                                                      ),
+                                                                  },
+                                                                  " − ",
+                                                                  8,
+                                                                  I1
+                                                                ),
+                                                                e(
+                                                                  "span",
+                                                                  N1,
+                                                                  r(n.children),
+                                                                  1
+                                                                ),
+                                                                e(
+                                                                  "button",
+                                                                  {
+                                                                    type: "button",
+                                                                    class:
+                                                                      "btn-icon-sm",
+                                                                    disabled:
+                                                                      n.adults +
+                                                                        n.children >=
+                                                                      qt,
+                                                                    onClick: (
+                                                                      p
+                                                                    ) =>
+                                                                      Xt(
+                                                                        d,
+                                                                        "children"
+                                                                      ),
+                                                                  },
+                                                                  " + ",
+                                                                  8,
+                                                                  M1
+                                                                ),
+                                                              ]),
+                                                            ]),
+                                                          ]))
+                                                        : M("", !0),
+                                                    ]
+                                                  )
+                                                )
+                                              ),
+                                              128
+                                            )),
+                                            ut.value
+                                              ? (o(),
+                                                i(
+                                                  "button",
+                                                  {
+                                                    key: 0,
+                                                    type: "button",
+                                                    class:
+                                                      "btn-add-cabin-sidebar",
+                                                    onClick: Qs,
+                                                  },
+                                                  " + Add Another Cabin "
+                                                ))
+                                              : M("", !0),
+                                          ])),
+                                    ]))
+                                  : M("", !0),
+                              ]),
+                              e("div", E1, [
+                                t[162] ||
+                                  (t[162] = e(
+                                    "div",
+                                    { class: "modal-field-label" },
+                                    "Dates",
+                                    -1
+                                  )),
+                                e(
+                                  "button",
+                                  {
+                                    type: "button",
+                                    class: "modal-field-btn",
+                                    onClick:
+                                      t[60] ||
+                                      (t[60] = (n) => (E.value = !E.value)),
+                                  },
+                                  [
+                                    e(
+                                      "span",
+                                      null,
+                                      r(
+                                        c.value
+                                          ? `${c.value} → ${k.value || "..."}`
+                                          : "Select dates"
+                                      ),
+                                      1
+                                    ),
+                                    e(
+                                      "img",
+                                      {
+                                        src: E.value ? he(ot) : he(at),
+                                        alt: "",
+                                        class: "caret-icon",
+                                      },
+                                      null,
+                                      8,
+                                      R1
+                                    ),
+                                  ]
+                                ),
+                                E.value
+                                  ? (o(),
+                                    i("div", P1, [
+                                      e("div", O1, [
+                                        e("div", L1, [
+                                          e("h4", B1, r(ln.value), 1),
+                                          e(
+                                            "div",
+                                            { class: "calendar-nav-group" },
+                                            [
+                                              e(
+                                                "button",
+                                                {
+                                                  class: "calendar-nav",
+                                                  onClick: dn,
+                                                  type: "button",
+                                                },
+                                                " ‹ "
+                                              ),
+                                              e(
+                                                "button",
+                                                {
+                                                  class: "calendar-nav",
+                                                  onClick: un,
+                                                  type: "button",
+                                                },
+                                                " › "
+                                              ),
+                                            ]
+                                          ),
+                                        ]),
+                                        e("div", F1, [
+                                          t[161] ||
+                                            (t[161] = e(
+                                              "div",
+                                              { class: "calendar-weekdays" },
+                                              [
+                                                e(
+                                                  "div",
+                                                  { class: "weekday" },
+                                                  "Su"
+                                                ),
+                                                e(
+                                                  "div",
+                                                  { class: "weekday" },
+                                                  "Mo"
+                                                ),
+                                                e(
+                                                  "div",
+                                                  { class: "weekday" },
+                                                  "Tu"
+                                                ),
+                                                e(
+                                                  "div",
+                                                  { class: "weekday" },
+                                                  "We"
+                                                ),
+                                                e(
+                                                  "div",
+                                                  { class: "weekday" },
+                                                  "Th"
+                                                ),
+                                                e(
+                                                  "div",
+                                                  { class: "weekday" },
+                                                  "Fr"
+                                                ),
+                                                e(
+                                                  "div",
+                                                  { class: "weekday" },
+                                                  "Sa"
+                                                ),
+                                              ],
+                                              -1
+                                            )),
+                                          e("div", z1, [
+                                            (o(!0),
+                                            i(
+                                              K,
+                                              null,
+                                              se(
+                                                rn.value,
+                                                (n) => (
+                                                  o(),
+                                                  i(
+                                                    "button",
+                                                    {
+                                                      key: n.key,
+                                                      class: B([
+                                                        "calendar-day",
+                                                        {
+                                                          "other-month":
+                                                            !n.isCurrentMonth,
+                                                          selected:
+                                                            n.isSelected,
+                                                          disabled:
+                                                            !n.isSelectable,
+                                                          past: n.isPast,
+                                                          "in-range":
+                                                            n.isInRange,
+                                                          "range-start":
+                                                            n.isRangeStart,
+                                                          "range-end":
+                                                            n.isRangeEnd,
+                                                        },
+                                                      ]),
+                                                      disabled: !n.isSelectable,
+                                                      onClick: (d) => vn(n),
+                                                      type: "button",
+                                                    },
+                                                    r(n.date),
+                                                    11,
+                                                    U1
+                                                  )
+                                                )
+                                              ),
+                                              128
+                                            )),
+                                          ]),
+                                        ]),
+                                      ]),
+                                    ]))
+                                  : M("", !0),
+                              ]),
+                              e("div", G1, [
+                                t[165] ||
+                                  (t[165] = e(
+                                    "div",
+                                    { class: "modal-field-label" },
+                                    "Trip Duration",
+                                    -1
+                                  )),
+                                e("div", V1, [
+                                  e("div", K1, [
+                                    t[163] ||
+                                      (t[163] = e(
+                                        "div",
+                                        { class: "counter-text" },
+                                        [
+                                          e(
+                                            "div",
+                                            { class: "counter-title" },
+                                            "Min"
+                                          ),
+                                        ],
+                                        -1
+                                      )),
+                                    e("div", q1, [
+                                      e(
+                                        "button",
+                                        {
+                                          type: "button",
+                                          class: "btn-icon",
+                                          disabled: P.value <= 1,
+                                          onClick: tn,
+                                        },
+                                        " − ",
+                                        8,
+                                        W1
+                                      ),
+                                      e("span", H1, r(P.value), 1),
+                                      e(
+                                        "button",
+                                        {
+                                          type: "button",
+                                          class: "btn-icon",
+                                          disabled: P.value >= D.value,
+                                          onClick: sn,
+                                        },
+                                        " + ",
+                                        8,
+                                        Y1
+                                      ),
+                                    ]),
+                                  ]),
+                                  e("div", J1, [
+                                    t[164] ||
+                                      (t[164] = e(
+                                        "div",
+                                        { class: "counter-text" },
+                                        [
+                                          e(
+                                            "div",
+                                            { class: "counter-title" },
+                                            "Max"
+                                          ),
+                                        ],
+                                        -1
+                                      )),
+                                    e("div", j1, [
+                                      e(
+                                        "button",
+                                        {
+                                          type: "button",
+                                          class: "btn-icon",
+                                          disabled: D.value <= P.value,
+                                          onClick: nn,
+                                        },
+                                        " − ",
+                                        8,
+                                        X1
+                                      ),
+                                      e("span", Q1, r(D.value), 1),
+                                      e(
+                                        "button",
+                                        {
+                                          type: "button",
+                                          class: "btn-icon",
+                                          disabled: D.value >= Xe,
+                                          onClick: an,
+                                        },
+                                        " + ",
+                                        8,
+                                        Z1
+                                      ),
+                                    ]),
+                                  ]),
+                                  e("div", em, [
+                                    e(
+                                      "button",
+                                      {
+                                        type: "button",
+                                        class: "btn-reset-duration",
+                                        onClick: on,
+                                        disabled:
+                                          P.value === 1 && D.value === Xe,
+                                      },
+                                      " Reset to Any Duration ",
+                                      8,
+                                      tm
+                                    ),
+                                  ]),
+                                ]),
+                              ]),
+                            ]),
+                            e("div", { class: "mobile-filter-modal-footer" }, [
+                              e(
+                                "button",
+                                { class: "btn-apply-modal", onClick: oe },
+                                " Apply "
+                              ),
+                            ]),
+                          ]),
+                        ]
+                      ))
+                    : M("", !0),
+                ])),
+                ke(
+                  Ks,
+                  { isOpen: qe.value, onClose: Ra, onNavigateToResults: Pa },
+                  null,
+                  8,
+                  ["isOpen"]
+                ),
+              ],
+              64
+            )
+          );
+        }
+      );
+    },
+  },
+  am = { class: "plan-wrap plan-page" },
+  om = { class: "plan-content" },
+  im = { class: "steps", role: "tablist", "aria-label": "Plan steps" },
+  lm = ["disabled"],
+  rm = ["disabled"],
+  cm = ["disabled"],
+  um = ["disabled"],
+  dm = { key: 0 },
+  vm = { class: "list" },
+  pm = { class: "list-text" },
+  mm = ["value", "aria-label"],
+  fm = { key: 1 },
+  hm = { class: "list" },
+  gm = { class: "list-text" },
+  bm = ["value", "aria-label"],
+  ym = { key: 2 },
+  km = { class: "date-range-display" },
+  wm = { class: "date-value" },
+  _m = { class: "date-value" },
+  Cm = { class: "custom-calendar" },
+  $m = { class: "calendar-header" },
+  Sm = { class: "calendar-title" },
+  xm = { class: "calendar-grid" },
+  Dm = { class: "calendar-days" },
+  Am = ["disabled", "onClick"],
+  Tm = { key: 3 },
+  Im = { class: "counters" },
+  Nm = { class: "counter-row" },
+  Mm = { class: "counter-ctrls" },
+  Em = { class: "count" },
+  Rm = { class: "counter-row" },
+  Pm = { class: "counter-ctrls" },
+  Om = { class: "count" },
+  Lm = { class: "counter-row" },
+  Bm = { class: "counter-ctrls" },
+  Fm = { class: "count" },
+  zm = { class: "counter-row" },
+  Um = { class: "counter-ctrls" },
+  Gm = { class: "count" },
+  Vm = { key: 4 },
+  Km = { class: "mt-4" },
+  qm = { class: "mt-4" },
+  Wm = { class: "mt-4", style: { "text-align": "right" } },
+  Hm = { class: "bottom-bar" },
+  Ym = {
+    class: "nav-inner",
+    style: {
+      display: "flex",
+      "align-items": "center",
+      "justify-content": "space-between",
+    },
+  },
+  Jm = { key: 1 },
+  jm = "Nusa Tenggara Timur",
+  Xm = {
+    __name: "Plan",
+    setup(S) {
+      const b = m(1),
+        f = ["Pulau Komodo", "Labuan Bajo"],
+        C = [],
+        h = m(""),
+        g = m(""),
+        v = m(""),
+        E = m(""),
+        X = m(2),
+        T = m(0),
+        oe = m(0),
+        te = m(0),
+        Z = m(new Date().getMonth()),
+        q = m(new Date().getFullYear()),
+        W = ["Destinations", "Ships", "Dates", "Guests", "Submit"],
+        Se = x(() => W[b.value - 2] || ""),
+        Ce = x(() => (b.value < 5 ? W[b.value - 1] + " ›" : "Submit ›"));
+      x(() => new Date().toISOString().split("T")[0]);
+      const ie = x(
+          () =>
+            `${
+              [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+              ][Z.value]
+            } ${q.value}`
+        ),
+        O = x(() => {
+          const ne = new Date(q.value, Z.value, 1),
+            y = new Date(q.value, Z.value + 1, 0),
+            Ie = new Date(ne),
+            R = new Date();
+          Ie.setDate(Ie.getDate() - Ie.getDay());
+          const De = [],
+            et = new Date(y);
+          et.setDate(et.getDate() + (6 - y.getDay()));
+          for (let Ee = new Date(Ie); Ee <= et; Ee.setDate(Ee.getDate() + 1)) {
+            Ee.getDay();
+            const tt = Ee.getMonth() === Z.value,
+              We = new Date(Ee);
+            We.setHours(0, 0, 0, 0);
+            const pe = new Date(R);
+            pe.setHours(0, 0, 0, 0);
+            const He = We < pe,
+              Re = tt && !He,
+              Le = Ee.toISOString().split("T")[0];
+            let _t = !1,
+              je = !1,
+              Ct = !1;
+            if (v.value && E.value && tt) {
+              const ct = new Date(v.value + "T00:00:00"),
+                st = new Date(E.value + "T00:00:00");
+              We >= ct &&
+                We <= st &&
+                ((_t = !0),
+                We.getTime() === ct.getTime() && (je = !0),
+                We.getTime() === st.getTime() && (Ct = !0));
+            }
+            De.push({
+              key: Ee.getTime(),
+              date: Ee.getDate(),
+              fullDate: Le,
+              isCurrentMonth: tt,
+              isSelectable: Re,
+              isPast: He,
+              isSelected: v.value === Le || E.value === Le,
+              isInRange: _t,
+              isRangeStart: je,
+              isRangeEnd: Ct,
+            });
+          }
+          return De;
+        }),
+        H = x(() => !!h.value),
+        le = x(() => !!h.value && !!g.value),
+        ve = x(() => !!h.value && !!g.value && !!v.value);
+      rt(h, () => {
+        g.value = "";
+      });
+      function F(ne) {
+        b.value = ne;
+      }
+      function G() {
+        if (b.value === 1 && !h.value)
+          return qe("Please select a destination first.");
+        if (b.value === 2 && !g.value) return qe("Please select a ship first.");
+        if (b.value === 3 && !v.value)
+          return qe("Please select a start date first.");
+        b.value < 5 ? b.value++ : ge();
+      }
+      function w() {
+        b.value > 1 && b.value--;
+      }
+      function ge() {
+        const ne = {
+          region: jm,
+          destination: h.value,
+          ship: g.value,
+          lodges: g.value ? [g.value] : [],
+          dateFrom: v.value,
+          dateTo: E.value,
+          adults: X.value,
+          children: T.value,
+          age3_9: oe.value,
+          age0_2: te.value,
+          totalGuests: X.value + T.value + oe.value + te.value,
+          timestamp: Date.now(),
+        };
+        localStorage.setItem("komodo_search_criteria", JSON.stringify(ne)),
+          (window.location.href = "/results");
+      }
+      function fe(ne) {
+        ne === "adults"
+          ? X.value++
+          : ne === "children"
+          ? T.value++
+          : ne === "age3_9"
+          ? oe.value++
+          : ne === "age0_2" && te.value++;
+      }
+      function xe(ne) {
+        ne === "adults" && X.value > 0
+          ? X.value--
+          : ne === "children" && T.value > 0
+          ? T.value--
+          : ne === "age3_9" && oe.value > 0
+          ? oe.value--
+          : ne === "age0_2" && te.value > 0 && te.value--;
+      }
+      function qe(ne) {
+        alert(ne);
+      }
+      function me() {
+        Z.value === 0 ? ((Z.value = 11), q.value--) : Z.value--;
+      }
+      function Te() {
+        Z.value === 11 ? ((Z.value = 0), q.value++) : Z.value++;
+      }
+      function Ze(ne) {
+        if (ne.isSelectable)
+          if (!v.value || (v.value && E.value))
+            (v.value = ne.fullDate), (E.value = "");
+          else {
+            const y = new Date(v.value + "T00:00:00");
+            new Date(ne.fullDate + "T00:00:00") < y
+              ? ((E.value = v.value), (v.value = ne.fullDate))
+              : (E.value = ne.fullDate);
+          }
+      }
+      return (ne, y) => {
+        const Ie = Wt("router-link");
+        return (
+          o(),
+          i("section", am, [
+            e("div", om, [
+              e("div", im, [
+                e(
+                  "button",
+                  {
+                    class: B(["step", { "step-active": b.value === 1 }]),
+                    onClick: y[0] || (y[0] = (R) => F(1)),
+                  },
+                  " Step 1 ",
+                  2
+                ),
+                e(
+                  "button",
+                  {
+                    class: B(["step", { "step-active": b.value === 2 }]),
+                    onClick: y[1] || (y[1] = (R) => F(2)),
+                    disabled: !H.value,
+                  },
+                  " Step 2 ",
+                  10,
+                  lm
+                ),
+                e(
+                  "button",
+                  {
+                    class: B(["step", { "step-active": b.value === 3 }]),
+                    onClick: y[2] || (y[2] = (R) => F(3)),
+                    disabled: !le.value,
+                  },
+                  " Step 3 ",
+                  10,
+                  rm
+                ),
+                e(
+                  "button",
+                  {
+                    class: B(["step", { "step-active": b.value === 4 }]),
+                    onClick: y[3] || (y[3] = (R) => F(4)),
+                    disabled: !ve.value,
+                  },
+                  " Step 4 ",
+                  10,
+                  cm
+                ),
+                e(
+                  "button",
+                  {
+                    class: B(["step", { "step-active": b.value === 5 }]),
+                    onClick: y[4] || (y[4] = (R) => F(5)),
+                    disabled: !ve.value,
+                  },
+                  " Step 5 ",
+                  10,
+                  um
+                ),
+              ]),
+              b.value === 1
+                ? (o(),
+                  i("div", dm, [
+                    y[16] ||
+                      (y[16] = e(
+                        "h3",
+                        { class: "step-title" },
+                        "Destinations",
+                        -1
+                      )),
+                    y[17] ||
+                      (y[17] = e(
+                        "p",
+                        { class: "results-note" },
+                        [
+                          Q(" Region: "),
+                          e(
+                            "span",
+                            { class: "semibold" },
+                            "Nusa Tenggara Timur"
+                          ),
+                        ],
+                        -1
+                      )),
+                    y[18] ||
+                      (y[18] = e(
+                        "p",
+                        { class: "results-note" },
+                        "Select a destination you're interested in:",
+                        -1
+                      )),
+                    e("div", vm, [
+                      y[15] ||
+                        (y[15] = e(
+                          "div",
+                          { class: "list-heading" },
+                          "Nusa Tenggara Timur",
+                          -1
+                        )),
+                      (o(),
+                      i(
+                        K,
+                        null,
+                        se(f, (R) =>
+                          e("div", { class: "list-row", key: R }, [
+                            e("div", pm, r(R), 1),
+                            be(
+                              e(
+                                "input",
+                                {
+                                  class: "radio",
+                                  type: "radio",
+                                  name: "destination",
+                                  value: R,
+                                  "onUpdate:modelValue":
+                                    y[5] || (y[5] = (De) => (h.value = De)),
+                                  "aria-label": `Destination ${R}`,
+                                },
+                                null,
+                                8,
+                                mm
+                              ),
+                              [[En, h.value]]
+                            ),
+                          ])
+                        ),
+                        64
+                      )),
+                    ]),
+                  ]))
+                : b.value === 2
+                ? (o(),
+                  i("div", fm, [
+                    y[19] ||
+                      (y[19] = e("h3", { class: "step-title" }, "Ships", -1)),
+                    y[20] ||
+                      (y[20] = e(
+                        "p",
+                        { class: "results-note" },
+                        "Please select a ship:",
+                        -1
+                      )),
+                    e("div", hm, [
+                      (o(),
+                      i(
+                        K,
+                        null,
+                        se(C, (R) =>
+                          e("div", { class: "list-row", key: R }, [
+                            e("div", gm, r(R), 1),
+                            be(
+                              e(
+                                "input",
+                                {
+                                  class: "radio",
+                                  type: "radio",
+                                  name: "ship",
+                                  value: R,
+                                  "onUpdate:modelValue":
+                                    y[6] || (y[6] = (De) => (g.value = De)),
+                                  "aria-label": `Ship ${R}`,
+                                },
+                                null,
+                                8,
+                                bm
+                              ),
+                              [[En, g.value]]
+                            ),
+                          ])
+                        ),
+                        64
+                      )),
+                    ]),
+                  ]))
+                : b.value === 3
+                ? (o(),
+                  i("div", ym, [
+                    y[23] ||
+                      (y[23] = e("h3", { class: "step-title" }, "Dates", -1)),
+                    y[24] ||
+                      (y[24] = e(
+                        "p",
+                        { class: "results-note" },
+                        "Select your travel dates:",
+                        -1
+                      )),
+                    y[25] ||
+                      (y[25] = e(
+                        "p",
+                        { class: "results-note text-sm" },
+                        " Click to select start date, then click again to select end date. ",
+                        -1
+                      )),
+                    e("div", km, [
+                      e("span", wm, r(v.value || "Start date"), 1),
+                      y[21] ||
+                        (y[21] = e("span", { class: "date-arrow" }, "→", -1)),
+                      e("span", _m, r(E.value || "End date"), 1),
+                    ]),
+                    e("div", Cm, [
+                      e("div", $m, [
+                        e(
+                          "button",
+                          {
+                            class: "calendar-nav",
+                            onClick: me,
+                            type: "button",
+                          },
+                          " ‹ "
+                        ),
+                        e("h4", Sm, r(ie.value), 1),
+                        e(
+                          "button",
+                          {
+                            class: "calendar-nav",
+                            onClick: Te,
+                            type: "button",
+                          },
+                          " › "
+                        ),
+                      ]),
+                      e("div", xm, [
+                        y[22] ||
+                          (y[22] = Pe(
+                            '<div class="calendar-weekdays"><div class="weekday">Su</div><div class="weekday">Mo</div><div class="weekday">Tu</div><div class="weekday">We</div><div class="weekday">Th</div><div class="weekday">Fr</div><div class="weekday">Sa</div></div>',
+                            1
+                          )),
+                        e("div", Dm, [
+                          (o(!0),
+                          i(
+                            K,
+                            null,
+                            se(
+                              O.value,
+                              (R) => (
+                                o(),
+                                i(
+                                  "button",
+                                  {
+                                    key: R.key,
+                                    class: B([
+                                      "calendar-day",
+                                      {
+                                        "other-month": !R.isCurrentMonth,
+                                        selected: R.isSelected,
+                                        disabled: !R.isSelectable,
+                                        past: R.isPast,
+                                        "in-range": R.isInRange,
+                                        "range-start": R.isRangeStart,
+                                        "range-end": R.isRangeEnd,
+                                      },
+                                    ]),
+                                    disabled: !R.isSelectable,
+                                    onClick: (De) => Ze(R),
+                                    type: "button",
+                                  },
+                                  r(R.date),
+                                  11,
+                                  Am
+                                )
+                              )
+                            ),
+                            128
+                          )),
+                        ]),
+                      ]),
+                    ]),
+                  ]))
+                : b.value === 4
+                ? (o(),
+                  i("div", Tm, [
+                    y[30] ||
+                      (y[30] = e("h3", { class: "step-title" }, "Guests", -1)),
+                    y[31] ||
+                      (y[31] = e(
+                        "p",
+                        { class: "results-note" },
+                        " Please indicate how many adults will need to be accommodated. ",
+                        -1
+                      )),
+                    y[32] ||
+                      (y[32] = e(
+                        "p",
+                        { class: "results-note" },
+                        " If your booking includes children, please enquire directly on the next step. ",
+                        -1
+                      )),
+                    y[33] ||
+                      (y[33] = e(
+                        "p",
+                        { class: "results-note" },
+                        "View our child policy for each lodge here.",
+                        -1
+                      )),
+                    e("div", Im, [
+                      e("div", Nm, [
+                        y[26] ||
+                          (y[26] = e(
+                            "div",
+                            { class: "counter-text" },
+                            [
+                              e("div", { class: "semibold" }, "Adults"),
+                              e("div", { class: "muted text-sm" }, "Ages 17+"),
+                            ],
+                            -1
+                          )),
+                        e("div", Mm, [
+                          e(
+                            "button",
+                            {
+                              type: "button",
+                              class: "btn-icon",
+                              onClick: y[7] || (y[7] = (R) => xe("adults")),
+                            },
+                            " − "
+                          ),
+                          e("span", Em, r(X.value), 1),
+                          e(
+                            "button",
+                            {
+                              type: "button",
+                              class: "btn-icon",
+                              onClick: y[8] || (y[8] = (R) => fe("adults")),
+                            },
+                            " + "
+                          ),
+                        ]),
+                      ]),
+                      e("div", Rm, [
+                        y[27] ||
+                          (y[27] = e(
+                            "div",
+                            { class: "counter-text" },
+                            [
+                              e("div", { class: "semibold" }, "Children"),
+                              e(
+                                "div",
+                                { class: "muted text-sm" },
+                                "Ages 10 - 16"
+                              ),
+                            ],
+                            -1
+                          )),
+                        e("div", Pm, [
+                          e(
+                            "button",
+                            {
+                              type: "button",
+                              class: "btn-icon",
+                              onClick: y[9] || (y[9] = (R) => xe("children")),
+                            },
+                            " − "
+                          ),
+                          e("span", Om, r(T.value), 1),
+                          e(
+                            "button",
+                            {
+                              type: "button",
+                              class: "btn-icon",
+                              onClick: y[10] || (y[10] = (R) => fe("children")),
+                            },
+                            " + "
+                          ),
+                        ]),
+                      ]),
+                      e("div", Lm, [
+                        y[28] ||
+                          (y[28] = e(
+                            "div",
+                            { class: "counter-text" },
+                            [e("div", { class: "semibold" }, "Ages 3 - 9")],
+                            -1
+                          )),
+                        e("div", Bm, [
+                          e(
+                            "button",
+                            {
+                              type: "button",
+                              class: "btn-icon",
+                              onClick: y[11] || (y[11] = (R) => xe("age3_9")),
+                            },
+                            " − "
+                          ),
+                          e("span", Fm, r(oe.value), 1),
+                          e(
+                            "button",
+                            {
+                              type: "button",
+                              class: "btn-icon",
+                              onClick: y[12] || (y[12] = (R) => fe("age3_9")),
+                            },
+                            " + "
+                          ),
+                        ]),
+                      ]),
+                      e("div", zm, [
+                        y[29] ||
+                          (y[29] = e(
+                            "div",
+                            { class: "counter-text" },
+                            [e("div", { class: "semibold" }, "Ages 0 - 2")],
+                            -1
+                          )),
+                        e("div", Um, [
+                          e(
+                            "button",
+                            {
+                              type: "button",
+                              class: "btn-icon",
+                              onClick: y[13] || (y[13] = (R) => xe("age0_2")),
+                            },
+                            " − "
+                          ),
+                          e("span", Gm, r(te.value), 1),
+                          e(
+                            "button",
+                            {
+                              type: "button",
+                              class: "btn-icon",
+                              onClick: y[14] || (y[14] = (R) => fe("age0_2")),
+                            },
+                            " + "
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                  ]))
+                : (o(),
+                  i("div", Vm, [
+                    y[37] ||
+                      (y[37] = e(
+                        "h3",
+                        { class: "step-title" },
+                        "Check Availability",
+                        -1
+                      )),
+                    y[38] ||
+                      (y[38] = e(
+                        "p",
+                        { class: "results-note" },
+                        " To see if we have availability for your preferred criteria, please click the button below. ",
+                        -1
+                      )),
+                    e("div", Km, [
+                      ke(
+                        Ie,
+                        { class: "btn-primary", to: "/results" },
+                        {
+                          default: Me(() => [
+                            ...(y[34] || (y[34] = [Q("Check now", -1)])),
+                          ]),
+                          _: 1,
+                        }
+                      ),
+                    ]),
+                    y[39] ||
+                      (y[39] = e(
+                        "div",
+                        {
+                          class: "section-divider",
+                          style: { margin: "1.5rem 0" },
+                        },
+                        null,
+                        -1
+                      )),
+                    y[40] ||
+                      (y[40] = e(
+                        "h4",
+                        { class: "section-title" },
+                        " Speak with a Komodo Cruises Travel Advisor ",
+                        -1
+                      )),
+                    y[41] ||
+                      (y[41] = e(
+                        "p",
+                        { class: "results-note" },
+                        " Need some help to plan your trip? Enquire below to contact one of our Komodo Cruises Travel Advisors. ",
+                        -1
+                      )),
+                    e("div", qm, [
+                      ke(
+                        Ie,
+                        { class: "btn-primary", to: "/results" },
+                        {
+                          default: Me(() => [
+                            ...(y[35] || (y[35] = [Q("Enquire now", -1)])),
+                          ]),
+                          _: 1,
+                        }
+                      ),
+                    ]),
+                    e("div", Wm, [
+                      ke(
+                        Ie,
+                        { to: "/", class: "nav-link" },
+                        {
+                          default: Me(() => [
+                            ...(y[36] || (y[36] = [Q("Back to Search", -1)])),
+                          ]),
+                          _: 1,
+                        }
+                      ),
+                    ]),
+                  ])),
+              e("div", Hm, [
+                e("div", Ym, [
+                  b.value > 1
+                    ? (o(),
+                      i(
+                        "button",
+                        { key: 0, class: "link-muted", onClick: w },
+                        " ‹ " + r(Se.value),
+                        1
+                      ))
+                    : (o(), i("span", Jm)),
+                  e(
+                    "button",
+                    { class: "btn-primary", onClick: G },
+                    r(Ce.value),
+                    1
+                  ),
+                ]),
+              ]),
+            ]),
+          ])
+        );
+      };
+    },
+  },
+  Qm = { class: "payment-success-page" },
+  Zm = { class: "success-container" },
+  ef = { class: "success-content" },
+  tf = { class: "booking-card" },
+  sf = { class: "booking-header" },
+  nf = { class: "booking-id" },
+  af = { class: "value" },
+  of = { class: "booking-details" },
+  lf = { class: "detail-section" },
+  rf = { class: "detail-grid" },
+  cf = { class: "detail-item" },
+  uf = { class: "value" },
+  df = { class: "detail-item" },
+  vf = { class: "value" },
+  pf = { class: "detail-item" },
+  mf = { class: "value" },
+  ff = { class: "detail-section" },
+  hf = { class: "detail-grid" },
+  gf = { class: "detail-item" },
+  bf = { class: "value" },
+  yf = { class: "detail-item" },
+  kf = { class: "value" },
+  wf = { class: "detail-item" },
+  _f = { class: "value" },
+  Cf = { class: "detail-item" },
+  $f = { class: "value" },
+  Sf = { class: "detail-item" },
+  xf = { class: "value" },
+  Df = { class: "detail-section payment-section" },
+  Af = { class: "payment-breakdown" },
+  Tf = { class: "payment-row" },
+  If = { class: "payment-row total" },
+  Nf = { class: "total-amount" },
+  Mf = { class: "email-notice" },
+  Ef = { class: "email-content" },
+  Rf = { key: 0 },
+  Pf = { key: 1 },
+  Of = { key: 2 },
+  Lf = { class: "action-buttons" },
+  Bf = {
+    __name: "PaymentSuccess",
+    setup(S) {
+      const b = m("sending"),
+        f = Ya({
+          bookingId: "KC2025001",
+          customerName: "Guest",
+          email: "guest@email.com",
+          phone: "-",
+          shipName: "Komodo Cruise",
+          cabinName: "-",
+          itinerary: "-",
+          travelDate: "To be confirmed",
+          guests: 2,
+          pricePerCabin: 0,
+          totalAmount: 0,
+        }),
+        C = (g) =>
+          g
+            ? new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "IDR",
+                minimumFractionDigits: 0,
+              })
+                .format(g)
+                .replace("IDR", "Rp")
+            : "Rp 0",
+        h = async () => {
+          try {
+            (b.value = "sending"),
+              (
+                await (
+                  await fetch(
+                    "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/api/send-confirmation-email",
+                    {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        customerName: f.customerName,
+                        customerEmail: f.email,
+                        customerPhone: f.phone,
+                        bookingId: f.bookingId,
+                        shipName: f.shipName,
+                        cabinName: f.cabinName,
+                        itinerary: f.itinerary,
+                        travelDate: f.travelDate,
+                        guests: f.guests,
+                        pricePerCabin: f.pricePerCabin,
+                        totalAmount: f.totalAmount,
+                      }),
+                    }
+                  )
+                ).json()
+              ).success
+                ? (b.value = "sent")
+                : (b.value = "failed");
+          } catch (g) {
+            console.error("Failed to send email:", g), (b.value = "failed");
+          }
+        };
+      return (
+        Qe(async () => {
+          try {
+            const g = localStorage.getItem("komodo_last_enquiry");
+            if (g) {
+              const v = JSON.parse(g);
+              if (
+                (v.form &&
+                  ((f.customerName =
+                    `${v.form.title || ""} ${v.form.firstName || ""} ${
+                      v.form.lastName || ""
+                    }`.trim() || "Guest"),
+                  (f.email = v.form.email || "guest@email.com"),
+                  (f.phone = v.form.phone || "-")),
+                v.itinerary && v.itinerary.length > 0)
+              ) {
+                const E = v.itinerary[0];
+                (f.shipName = E.ship || "Komodo Cruise"),
+                  (f.cabinName = E.cabin || "-"),
+                  (f.itinerary = E.itinerary || "-"),
+                  (f.travelDate = E.date || "To be confirmed"),
+                  (f.guests = E.guests || 2),
+                  (f.pricePerCabin = E.pricePerCabin || 0);
+              }
+              (f.totalAmount = v.amount || 0),
+                (f.bookingId = v.invoiceId
+                  ? `KC${Date.now().toString().slice(-8)}`
+                  : "KC2025001");
+            }
+            localStorage.removeItem("komodo_itinerary"),
+              f.email && f.email !== "guest@email.com"
+                ? await h()
+                : (b.value = "sent");
+          } catch (g) {
+            console.error("Error loading booking data:", g),
+              (b.value = "failed");
+          }
+        }),
+        (g, v) => {
+          const E = Wt("router-link");
+          return (
+            o(),
+            i("div", Qm, [
+              e("div", Zm, [
+                v[26] ||
+                  (v[26] = Pe(
+                    '<div class="success-animation" data-v-5a35b571><div class="checkmark-circle" data-v-5a35b571><svg class="checkmark" viewBox="0 0 52 52" data-v-5a35b571><circle class="checkmark-circle-bg" cx="26" cy="26" r="25" fill="none" data-v-5a35b571></circle><path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" data-v-5a35b571></path></svg></div></div>',
+                    1
+                  )),
+                e("div", ef, [
+                  v[22] ||
+                    (v[22] = e(
+                      "h1",
+                      { class: "success-title" },
+                      "Thank You for Your Purchase!",
+                      -1
+                    )),
+                  v[23] ||
+                    (v[23] = e(
+                      "p",
+                      { class: "success-subtitle" },
+                      " Your payment has been successfully processed ",
+                      -1
+                    )),
+                  e("div", tf, [
+                    e("div", sf, [
+                      v[1] ||
+                        (v[1] = e(
+                          "div",
+                          { class: "booking-badge" },
+                          [
+                            e(
+                              "svg",
+                              {
+                                viewBox: "0 0 24 24",
+                                fill: "none",
+                                stroke: "currentColor",
+                                "stroke-width": "2",
+                              },
+                              [
+                                e("path", {
+                                  d: "M22 11.08V12a10 10 0 1 1-5.93-9.14",
+                                }),
+                                e("polyline", {
+                                  points: "22 4 12 14.01 9 11.01",
+                                }),
+                              ]
+                            ),
+                            e("span", null, "Booking Confirmed"),
+                          ],
+                          -1
+                        )),
+                      e("div", nf, [
+                        v[0] ||
+                          (v[0] = e(
+                            "span",
+                            { class: "label" },
+                            "Booking ID",
+                            -1
+                          )),
+                        e("span", af, "#" + r(f.bookingId), 1),
+                      ]),
+                    ]),
+                    e("div", of, [
+                      e("div", lf, [
+                        v[5] ||
+                          (v[5] = e(
+                            "h3",
+                            { class: "section-title" },
+                            [
+                              e(
+                                "svg",
+                                {
+                                  viewBox: "0 0 24 24",
+                                  fill: "none",
+                                  stroke: "currentColor",
+                                  "stroke-width": "2",
+                                },
+                                [
+                                  e("path", {
+                                    d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2",
+                                  }),
+                                  e("circle", { cx: "12", cy: "7", r: "4" }),
+                                ]
+                              ),
+                              Q(" Guest Information "),
+                            ],
+                            -1
+                          )),
+                        e("div", rf, [
+                          e("div", cf, [
+                            v[2] ||
+                              (v[2] = e(
+                                "span",
+                                { class: "label" },
+                                "Name",
+                                -1
+                              )),
+                            e("span", uf, r(f.customerName), 1),
+                          ]),
+                          e("div", df, [
+                            v[3] ||
+                              (v[3] = e(
+                                "span",
+                                { class: "label" },
+                                "Email",
+                                -1
+                              )),
+                            e("span", vf, r(f.email), 1),
+                          ]),
+                          e("div", pf, [
+                            v[4] ||
+                              (v[4] = e(
+                                "span",
+                                { class: "label" },
+                                "Phone",
+                                -1
+                              )),
+                            e("span", mf, r(f.phone), 1),
+                          ]),
+                        ]),
+                      ]),
+                      e("div", ff, [
+                        v[11] ||
+                          (v[11] = e(
+                            "h3",
+                            { class: "section-title" },
+                            [
+                              e(
+                                "svg",
+                                {
+                                  viewBox: "0 0 24 24",
+                                  fill: "none",
+                                  stroke: "currentColor",
+                                  "stroke-width": "2",
+                                },
+                                [
+                                  e("path", {
+                                    d: "M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z",
+                                  }),
+                                ]
+                              ),
+                              Q(" Trip Details "),
+                            ],
+                            -1
+                          )),
+                        e("div", hf, [
+                          e("div", gf, [
+                            v[6] ||
+                              (v[6] = e(
+                                "span",
+                                { class: "label" },
+                                "Ship",
+                                -1
+                              )),
+                            e("span", bf, r(f.shipName), 1),
+                          ]),
+                          e("div", yf, [
+                            v[7] ||
+                              (v[7] = e(
+                                "span",
+                                { class: "label" },
+                                "Cabin Type",
+                                -1
+                              )),
+                            e("span", kf, r(f.cabinName), 1),
+                          ]),
+                          e("div", wf, [
+                            v[8] ||
+                              (v[8] = e(
+                                "span",
+                                { class: "label" },
+                                "Itinerary",
+                                -1
+                              )),
+                            e("span", _f, r(f.itinerary), 1),
+                          ]),
+                          e("div", Cf, [
+                            v[9] ||
+                              (v[9] = e(
+                                "span",
+                                { class: "label" },
+                                "Travel Date",
+                                -1
+                              )),
+                            e("span", $f, r(f.travelDate), 1),
+                          ]),
+                          e("div", Sf, [
+                            v[10] ||
+                              (v[10] = e(
+                                "span",
+                                { class: "label" },
+                                "Guests",
+                                -1
+                              )),
+                            e("span", xf, r(f.guests) + " Person(s)", 1),
+                          ]),
+                        ]),
+                      ]),
+                      e("div", Df, [
+                        v[14] ||
+                          (v[14] = e(
+                            "h3",
+                            { class: "section-title" },
+                            [
+                              e(
+                                "svg",
+                                {
+                                  viewBox: "0 0 24 24",
+                                  fill: "none",
+                                  stroke: "currentColor",
+                                  "stroke-width": "2",
+                                },
+                                [
+                                  e("rect", {
+                                    x: "1",
+                                    y: "4",
+                                    width: "22",
+                                    height: "16",
+                                    rx: "2",
+                                    ry: "2",
+                                  }),
+                                  e("line", {
+                                    x1: "1",
+                                    y1: "10",
+                                    x2: "23",
+                                    y2: "10",
+                                  }),
+                                ]
+                              ),
+                              Q(" Payment Summary "),
+                            ],
+                            -1
+                          )),
+                        e("div", Af, [
+                          e("div", Tf, [
+                            e(
+                              "span",
+                              null,
+                              r(f.cabinName) + " × " + r(f.guests),
+                              1
+                            ),
+                            e(
+                              "span",
+                              null,
+                              r(C(f.pricePerCabin)) + " × " + r(f.guests),
+                              1
+                            ),
+                          ]),
+                          v[13] ||
+                            (v[13] = e(
+                              "div",
+                              { class: "payment-divider" },
+                              null,
+                              -1
+                            )),
+                          e("div", If, [
+                            v[12] ||
+                              (v[12] = e("span", null, "Total Paid", -1)),
+                            e("span", Nf, r(C(f.totalAmount)), 1),
+                          ]),
+                        ]),
+                        v[15] ||
+                          (v[15] = e(
+                            "div",
+                            { class: "payment-status" },
+                            [
+                              e(
+                                "svg",
+                                {
+                                  viewBox: "0 0 24 24",
+                                  fill: "none",
+                                  stroke: "currentColor",
+                                  "stroke-width": "2",
+                                },
+                                [
+                                  e("path", {
+                                    d: "M22 11.08V12a10 10 0 1 1-5.93-9.14",
+                                  }),
+                                  e("polyline", {
+                                    points: "22 4 12 14.01 9 11.01",
+                                  }),
+                                ]
+                              ),
+                              e("span", null, "Payment Successful"),
+                            ],
+                            -1
+                          )),
+                      ]),
+                    ]),
+                  ]),
+                  e("div", Mf, [
+                    v[19] ||
+                      (v[19] = e(
+                        "div",
+                        { class: "email-icon" },
+                        [
+                          e(
+                            "svg",
+                            {
+                              viewBox: "0 0 24 24",
+                              fill: "none",
+                              stroke: "currentColor",
+                              "stroke-width": "2",
+                            },
+                            [
+                              e("path", {
+                                d: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z",
+                              }),
+                              e("polyline", { points: "22,6 12,13 2,6" }),
+                            ]
+                          ),
+                        ],
+                        -1
+                      )),
+                    e("div", Ef, [
+                      v[17] || (v[17] = e("h4", null, "Check Your Email", -1)),
+                      e("p", null, [
+                        v[16] ||
+                          (v[16] = Q(
+                            " A detailed receipt and booking confirmation has been sent to ",
+                            -1
+                          )),
+                        e("strong", null, r(f.email), 1),
+                      ]),
+                      v[18] ||
+                        (v[18] = e(
+                          "p",
+                          { class: "email-hint" },
+                          " Don't forget to check your spam folder if you don't see it within a few minutes. ",
+                          -1
+                        )),
+                    ]),
+                    e(
+                      "div",
+                      { class: B(["email-status", b.value]) },
+                      [
+                        b.value === "sending"
+                          ? (o(), i("span", Rf, "Sending..."))
+                          : b.value === "sent"
+                          ? (o(), i("span", Pf, "✓ Email Sent"))
+                          : b.value === "failed"
+                          ? (o(), i("span", Of, "⚠ Will retry"))
+                          : M("", !0),
+                      ],
+                      2
+                    ),
+                  ]),
+                  v[24] ||
+                    (v[24] = Pe(
+                      '<div class="whats-next" data-v-5a35b571><h3 data-v-5a35b571>What Happens Next?</h3><div class="next-steps" data-v-5a35b571><div class="step" data-v-5a35b571><div class="step-number" data-v-5a35b571>1</div><div class="step-content" data-v-5a35b571><strong data-v-5a35b571>Email Confirmation</strong><p data-v-5a35b571> Check your inbox for your booking receipt and trip details </p></div></div><div class="step" data-v-5a35b571><div class="step-number" data-v-5a35b571>2</div><div class="step-content" data-v-5a35b571><strong data-v-5a35b571>Journey Designer Contact</strong><p data-v-5a35b571> Our team will reach out within 24 hours to finalize your itinerary </p></div></div><div class="step" data-v-5a35b571><div class="step-number" data-v-5a35b571>3</div><div class="step-content" data-v-5a35b571><strong data-v-5a35b571>Prepare for Adventure</strong><p data-v-5a35b571> Get your travel documents ready and pack for an unforgettable trip! </p></div></div></div></div>',
+                      1
+                    )),
+                  e("div", Lf, [
+                    ke(
+                      E,
+                      { to: "/", class: "btn-primary" },
+                      {
+                        default: Me(() => [
+                          ...(v[20] ||
+                            (v[20] = [
+                              e(
+                                "svg",
+                                {
+                                  viewBox: "0 0 24 24",
+                                  fill: "none",
+                                  stroke: "currentColor",
+                                  "stroke-width": "2",
+                                },
+                                [
+                                  e("path", {
+                                    d: "m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z",
+                                  }),
+                                  e("polyline", {
+                                    points: "9 22 9 12 15 12 15 22",
+                                  }),
+                                ],
+                                -1
+                              ),
+                              Q(" Back to Home ", -1),
+                            ])),
+                        ]),
+                        _: 1,
+                      }
+                    ),
+                    ke(
+                      E,
+                      { to: "/plan", class: "btn-secondary" },
+                      {
+                        default: Me(() => [
+                          ...(v[21] ||
+                            (v[21] = [Q(" Explore More Trips ", -1)])),
+                        ]),
+                        _: 1,
+                      }
+                    ),
+                  ]),
+                  v[25] ||
+                    (v[25] = e(
+                      "div",
+                      { class: "support-info" },
+                      [
+                        e("p", null, "Need help? Contact our support team at"),
+                        e(
+                          "a",
+                          { href: "mailto:support@komodocruises.com" },
+                          "support@komodocruises.com"
+                        ),
+                      ],
+                      -1
+                    )),
+                ]),
+              ]),
+            ])
+          );
+        }
+      );
+    },
+  },
+  Ff = vt(Bf, [["__scopeId", "data-v-5a35b571"]]),
+  zf = {},
+  Uf = { class: "payment-result-page" },
+  Gf = { class: "payment-result-container" },
+  Vf = { class: "result-actions" };
+function Kf(S, b) {
+  const f = Wt("router-link");
+  return (
+    o(),
+    i("div", Uf, [
+      e("div", Gf, [
+        b[2] ||
+          (b[2] = Pe(
+            '<div class="result-icon failed" data-v-690b1a80><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-v-690b1a80><circle cx="12" cy="12" r="10" data-v-690b1a80></circle><line x1="15" y1="9" x2="9" y2="15" data-v-690b1a80></line><line x1="9" y1="9" x2="15" y2="15" data-v-690b1a80></line></svg></div><h1 class="result-title" data-v-690b1a80>Payment Failed</h1><p class="result-message" data-v-690b1a80> We&#39;re sorry, but your payment could not be processed. </p><div class="result-details" data-v-690b1a80><p data-v-690b1a80>This could be due to:</p><ul data-v-690b1a80><li data-v-690b1a80>Insufficient funds</li><li data-v-690b1a80>Card declined by issuer</li><li data-v-690b1a80>Payment session expired</li><li data-v-690b1a80>Technical issues</li></ul><p data-v-690b1a80>Please try again or contact our support team for assistance.</p></div>',
+            4
+          )),
+        e("div", Vf, [
+          ke(
+            f,
+            { to: "/results", class: "btn-secondary" },
+            {
+              default: Me(() => [...(b[0] || (b[0] = [Q("Try Again", -1)]))]),
+              _: 1,
+            }
+          ),
+          ke(
+            f,
+            { to: "/", class: "btn-primary" },
+            {
+              default: Me(() => [
+                ...(b[1] || (b[1] = [Q("Back to Home", -1)])),
+              ]),
+              _: 1,
+            }
+          ),
+        ]),
+      ]),
+    ])
+  );
+}
+const qf = vt(zf, [
+    ["render", Kf],
+    ["__scopeId", "data-v-690b1a80"],
+  ]),
+  Wf = { class: "find-reservation-wrap" },
+  Hf = { class: "find-reservation-container" },
+  Yf = { class: "form-group" },
+  Jf = { class: "form-group" },
+  jf = { class: "form-actions" },
+  Xf = {
+    __name: "FindReservation",
+    setup(S) {
+      const b = m(""),
+        f = m(""),
+        C = () => {
+          !b.value ||
+            !f.value ||
+            alert("Feature coming soon: Find reservation " + b.value);
+        };
+      return (h, g) => (
+        o(),
+        i("div", Wf, [
+          e("div", Hf, [
+            g[5] ||
+              (g[5] = e(
+                "h1",
+                { class: "find-reservation-title" },
+                "Find Your Reservation",
+                -1
+              )),
+            e(
+              "form",
+              { class: "find-reservation-form", onSubmit: j(C, ["prevent"]) },
+              [
+                e("div", Yf, [
+                  g[2] ||
+                    (g[2] = e(
+                      "label",
+                      { class: "form-label" },
+                      "Confirmation or Booking Number*",
+                      -1
+                    )),
+                  be(
+                    e(
+                      "input",
+                      {
+                        type: "text",
+                        "onUpdate:modelValue":
+                          g[0] || (g[0] = (v) => (b.value = v)),
+                        class: "form-input",
+                        placeholder: "",
+                        required: "",
+                      },
+                      null,
+                      512
+                    ),
+                    [[kt, b.value]]
+                  ),
+                  g[3] ||
+                    (g[3] = e(
+                      "div",
+                      { class: "form-help-text" },
+                      " *Confirmation number format: 12345678-1-ABC ",
+                      -1
+                    )),
+                ]),
+                e("div", Jf, [
+                  g[4] ||
+                    (g[4] = e("label", { class: "form-label" }, "Email*", -1)),
+                  be(
+                    e(
+                      "input",
+                      {
+                        type: "email",
+                        "onUpdate:modelValue":
+                          g[1] || (g[1] = (v) => (f.value = v)),
+                        class: "form-input",
+                        placeholder: "",
+                        required: "",
+                      },
+                      null,
+                      512
+                    ),
+                    [[kt, f.value]]
+                  ),
+                ]),
+                e("div", jf, [
+                  e(
+                    "button",
+                    {
+                      type: "submit",
+                      class: B([
+                        "btn-find-reservation",
+                        { active: b.value && f.value },
+                      ]),
+                    },
+                    " Find Reservation ",
+                    2
+                  ),
+                ]),
+              ],
+              32
+            ),
+            g[6] ||
+              (g[6] = e(
+                "div",
+                { class: "find-reservation-footer" },
+                [
+                  e("p", null, "Don't know your confirmation number?"),
+                  e(
+                    "p",
+                    null,
+                    " This number was included in an email sent at the time of booking. Please check your email to recover the number. "
+                  ),
+                ],
+                -1
+              )),
+          ]),
+        ])
+      );
+    },
+  },
+  Qf = vt(Xf, [["__scopeId", "data-v-9d81daa5"]]),
+  Zf = Ja({
+    history: ja(),
+    routes: [
+      { path: "/", component: Xr },
+      { path: "/plan", component: Xm, meta: { planHeader: !0 } },
+      { path: "/results", component: nm },
+      { path: "/payment-success", component: Ff },
+      { path: "/payment-failed", component: qf },
+      { path: "/find-reservation", component: Qf },
+    ],
+  });
+Xa(kl).use(Zf).mount("#app");

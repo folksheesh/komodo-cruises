@@ -137,12 +137,19 @@
     align-items: stretch;
   }
 
+  /* CRITICAL: Override the fixed flex-basis from desktop */
   .sidebar-section-wrapper {
-    min-width: 100%;
-    max-width: 100%;
-    width: 100%;
+    flex: none !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
     order: 2;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem;
   }
 
   .results-main {
@@ -151,15 +158,37 @@
 
   /* DISABLE STICKY on mobile */
   .sidebar-track {
-    flex: none;
+    flex: none !important;
+    height: auto !important;
+    display: block !important;
   }
 
+  /* Itinerary section - ensure it's ALWAYS visible */
   .itinerary-sticky {
-    position: static;
-    /* Remove sticky behavior */
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    position: static !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 1.5rem !important;
+    background: white !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    display: block !important;
+  }
+
+  /* Ensure itinerary content is visible */
+  .itinerary-title,
+  .itinerary-description,
+  .itinerary-empty,
+  .itinerary-list {
+    display: block !important;
+  }
+
+  .itinerary-empty {
+    color: #6b7280;
+    text-align: center;
+    padding: 1rem 0;
   }
 }
 
@@ -431,7 +460,6 @@
 
 @media (max-width: 640px) {
   .cabin-card {
-    border-radius: 8px;
     margin: 0 -0.5rem;
   }
 
@@ -4477,7 +4505,6 @@ div.modal-content.modal-content-redesigned {
 .ship-selection-card {
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 12px;
   padding: 0;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -4771,7 +4798,6 @@ div.modal-content.modal-content-redesigned {
   .ship-selection-card {
     flex-direction: column;
     padding: 0;
-    border-radius: 14px;
   }
 
   .ship-selection-card::before {
@@ -4953,9 +4979,8 @@ div.modal-content.modal-content-redesigned {
     display: none !important;
   }
 
-  /* Hide Results Title and Itinerary on Mobile - Intro MUST be visible for status messages */
-  .results-title,
-  .sidebar-track {
+  /* Hide Results Title on Mobile - Itinerary should remain visible */
+  .results-title {
     display: none !important;
   }
 }
