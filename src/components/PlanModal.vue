@@ -232,159 +232,164 @@
                 <!-- Step 3: Dates -->
                 <div v-else-if="step === 3">
                   <h3 class="step-title">Dates</h3>
-                  <p class="results-note">Select your travel dates:</p>
 
-                  <!-- Date Range Display Box -->
-                  <div class="date-range-display">
-                    <span class="date-value">{{
-                      dateFrom || "Start date"
-                    }}</span>
-                    <span class="date-arrow">→</span>
-                    <span class="date-value">{{ dateTo || "End date" }}</span>
-                  </div>
+                  <!-- Grid Layout: 2 columns, 4 rows -->
+                  <div class="dates-grid">
+                    <!-- ROW 1: Labels -->
+                    <p class="results-note dates-grid-label">
+                      Select your travel dates:
+                    </p>
+                    <p class="results-note dates-grid-label">Trip Duration:</p>
 
-                  <!-- Trip Duration Section (Always Open) -->
-                  <div class="trip-duration-section trip-duration-always-open">
-                    <span class="trip-duration-label">Trip Duration</span>
-                    <div class="trip-duration-content-wrapper">
-                      <!-- Display current range summary -->
-                      <div class="trip-duration-summary">
-                        {{ displayTripDuration }}
-                      </div>
-                      <!-- Min/Max Controls (Always Visible) -->
-                      <div class="trip-duration-controls">
-                        <!-- Min Duration Row -->
-                        <div class="counter-row duration-counter-row">
-                          <div class="counter-text">
-                            <div class="counter-title">Min</div>
-                          </div>
-                          <div class="counter-ctrls">
-                            <button
-                              type="button"
-                              class="btn-icon"
-                              :disabled="minTripDuration <= 1"
-                              @click="decrementMinDuration"
-                            >
-                              −
-                            </button>
-                            <span class="count-display">{{
-                              minTripDuration
-                            }}</span>
-                            <button
-                              type="button"
-                              class="btn-icon"
-                              :disabled="minTripDuration >= maxTripDuration"
-                              @click="incrementMinDuration"
-                            >
-                              +
-                            </button>
-                          </div>
-                        </div>
-                        <!-- Max Duration Row -->
-                        <div class="counter-row duration-counter-row">
-                          <div class="counter-text">
-                            <div class="counter-title">Max</div>
-                          </div>
-                          <div class="counter-ctrls">
-                            <button
-                              type="button"
-                              class="btn-icon"
-                              :disabled="maxTripDuration <= minTripDuration"
-                              @click="decrementMaxDuration"
-                            >
-                              −
-                            </button>
-                            <span class="count-display">{{
-                              maxTripDuration
-                            }}</span>
-                            <button
-                              type="button"
-                              class="btn-icon"
-                              :disabled="maxTripDuration >= MAX_TRIP_DURATION"
-                              @click="incrementMaxDuration"
-                            >
-                              +
-                            </button>
-                          </div>
-                        </div>
+                    <!-- ROW 2: Date Range Display | Trip Duration Summary -->
+                    <div class="date-range-display">
+                      <span class="date-value">{{
+                        dateFrom || "Start date"
+                      }}</span>
+                      <span class="date-arrow">→</span>
+                      <span class="date-value">{{ dateTo || "End date" }}</span>
+                    </div>
+                    <div class="trip-duration-summary">
+                      {{ displayTripDuration }}
+                    </div>
 
-                        <!-- Reset Button -->
-                        <div
-                          class="trip-duration-reset"
-                          v-if="
-                            minTripDuration > 1 ||
-                            maxTripDuration < MAX_TRIP_DURATION
-                          "
-                        >
+                    <!-- ROW 3: Instruction text -->
+                    <p class="results-note text-sm calendar-instruction">
+                      Click to select start date, then click again to select end
+                      date.
+                    </p>
+                    <p class="results-note text-sm duration-instruction">
+                      Adjust min and max trip duration.
+                    </p>
+
+                    <!-- ROW 4: Calendar | Trip Duration Controls -->
+                    <div class="custom-calendar">
+                      <div class="calendar-header">
+                        <h4 class="calendar-title">{{ currentMonthYear }}</h4>
+                        <div class="calendar-nav-group">
                           <button
+                            class="calendar-nav"
+                            @click="prevMonth"
                             type="button"
-                            class="btn-text-reset"
-                            @click="resetTripDuration"
                           >
-                            Reset to any duration
+                            ‹
+                          </button>
+                          <button
+                            class="calendar-nav"
+                            @click="nextMonth"
+                            type="button"
+                          >
+                            ›
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="calendar-grid">
+                        <div class="calendar-weekdays">
+                          <div class="weekday">Su</div>
+                          <div class="weekday">Mo</div>
+                          <div class="weekday">Tu</div>
+                          <div class="weekday">We</div>
+                          <div class="weekday">Th</div>
+                          <div class="weekday">Fr</div>
+                          <div class="weekday">Sa</div>
+                        </div>
+
+                        <div class="calendar-days">
+                          <button
+                            v-for="day in calendarDays"
+                            :key="day.key"
+                            class="calendar-day"
+                            :class="{
+                              'other-month': !day.isCurrentMonth,
+                              selected: day.isSelected,
+                              disabled: !day.isSelectable,
+                              past: day.isPast,
+                              'in-range': day.isInRange,
+                              'range-start': day.isRangeStart,
+                              'range-end': day.isRangeEnd,
+                            }"
+                            :disabled="!day.isSelectable"
+                            @click="selectDate(day)"
+                            type="button"
+                          >
+                            {{ day.date }}
                           </button>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  <!-- Instruction text above calendar -->
-                  <p class="results-note text-sm calendar-instruction">
-                    Click to select start date, then click again to select end
-                    date.
-                  </p>
-
-                  <div class="custom-calendar">
-                    <div class="calendar-header">
-                      <h4 class="calendar-title">{{ currentMonthYear }}</h4>
-                      <div class="calendar-nav-group">
-                        <button
-                          class="calendar-nav"
-                          @click="prevMonth"
-                          type="button"
-                        >
-                          ‹
-                        </button>
-                        <button
-                          class="calendar-nav"
-                          @click="nextMonth"
-                          type="button"
-                        >
-                          ›
-                        </button>
+                    <!-- Trip Duration Controls -->
+                    <div class="trip-duration-controls-grid">
+                      <!-- Min Duration Row -->
+                      <div class="counter-row duration-counter-row">
+                        <div class="counter-text">
+                          <div class="counter-title">Min</div>
+                        </div>
+                        <div class="counter-ctrls">
+                          <button
+                            type="button"
+                            class="btn-icon"
+                            :disabled="minTripDuration <= 1"
+                            @click="decrementMinDuration"
+                          >
+                            −
+                          </button>
+                          <span class="count-display">{{
+                            minTripDuration
+                          }}</span>
+                          <button
+                            type="button"
+                            class="btn-icon"
+                            :disabled="minTripDuration >= maxTripDuration"
+                            @click="incrementMinDuration"
+                          >
+                            +
+                          </button>
+                        </div>
                       </div>
-                    </div>
-
-                    <div class="calendar-grid">
-                      <div class="calendar-weekdays">
-                        <div class="weekday">Su</div>
-                        <div class="weekday">Mo</div>
-                        <div class="weekday">Tu</div>
-                        <div class="weekday">We</div>
-                        <div class="weekday">Th</div>
-                        <div class="weekday">Fr</div>
-                        <div class="weekday">Sa</div>
+                      <!-- Max Duration Row -->
+                      <div class="counter-row duration-counter-row">
+                        <div class="counter-text">
+                          <div class="counter-title">Max</div>
+                        </div>
+                        <div class="counter-ctrls">
+                          <button
+                            type="button"
+                            class="btn-icon"
+                            :disabled="maxTripDuration <= minTripDuration"
+                            @click="decrementMaxDuration"
+                          >
+                            −
+                          </button>
+                          <span class="count-display">{{
+                            maxTripDuration
+                          }}</span>
+                          <button
+                            type="button"
+                            class="btn-icon"
+                            :disabled="maxTripDuration >= MAX_TRIP_DURATION"
+                            @click="incrementMaxDuration"
+                          >
+                            +
+                          </button>
+                        </div>
                       </div>
 
-                      <div class="calendar-days">
+                      <!-- Reset Button -->
+                      <div
+                        class="trip-duration-reset"
+                        v-if="
+                          minTripDuration > 1 ||
+                          maxTripDuration < MAX_TRIP_DURATION
+                        "
+                      >
                         <button
-                          v-for="day in calendarDays"
-                          :key="day.key"
-                          class="calendar-day"
-                          :class="{
-                            'other-month': !day.isCurrentMonth,
-                            selected: day.isSelected,
-                            disabled: !day.isSelectable,
-                            past: day.isPast,
-                            'in-range': day.isInRange,
-                            'range-start': day.isRangeStart,
-                            'range-end': day.isRangeEnd,
-                          }"
-                          :disabled="!day.isSelectable"
-                          @click="selectDate(day)"
                           type="button"
+                          class="btn-text-reset"
+                          @click="resetTripDuration"
                         >
-                          {{ day.date }}
+                          Reset to any duration
                         </button>
                       </div>
                     </div>

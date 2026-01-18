@@ -438,51 +438,32 @@
                       CABIN DETAILS
                     </button>
 
-                    <!-- Trip Dates Section (Luxury Dropdown Style) -->
+                    <!-- Trip Dates Section (Compact Inline Style) -->
                     <div
                       v-if="item.trips && item.trips.length > 0"
-                      class="trips-section"
+                      class="trips-section-compact"
                     >
-                      <!-- Primary Trip - Shows selected trip or first trip -->
-                      <div class="trip-primary">
-                        <div class="trip-primary-info">
-                          <span class="trip-primary-date">{{
-                            formatTripDateRange(
-                              getDisplayTrip(item).date,
-                              getDisplayTrip(item).tripDays
-                            )
-                          }}</span>
-                          <span class="trip-primary-rooms"
-                            >{{ getDisplayTrip(item).available || 1 }} cabin{{
-                              (getDisplayTrip(item).available || 1) > 1
-                                ? "s"
-                                : ""
-                            }}
-                            available</span
-                          >
-                        </div>
+                      <!-- Primary Trip Date - Compact Display -->
+                      <div class="trip-date-row">
+                        <span class="trip-date-text">{{
+                          formatTripDateRange(
+                            getDisplayTrip(item).date,
+                            getDisplayTrip(item).tripDays
+                          )
+                        }}</span>
+                        <span class="trip-availability-badge"
+                          >{{ getDisplayTrip(item).available || 1 }} cabin{{
+                            (getDisplayTrip(item).available || 1) > 1 ? "s" : ""
+                          }}</span
+                        >
                       </div>
 
-                      <!-- More Dates Toggle (Only if more than 1 trip) -->
-                      <button
-                        v-if="item.trips.length > 1"
-                        class="more-dates-toggle"
-                        @click.stop="toggleMoreDates(item.uniqueKey)"
-                      >
-                        <span>MORE DATES</span>
-                        <span
-                          class="toggle-arrow"
-                          :class="{ expanded: expandedTrips[item.uniqueKey] }"
-                          >▼</span
-                        >
-                      </button>
-
-                      <!-- Expandable Dates List -->
+                      <!-- Expandable Dates List (Only visible when expanded) -->
                       <div
                         v-if="
                           item.trips.length > 1 && expandedTrips[item.uniqueKey]
                         "
-                        class="more-dates-list"
+                        class="more-dates-dropdown"
                       >
                         <div
                           v-for="(trip, tIdx) in getOtherTrips(item)"
@@ -505,8 +486,7 @@
                             <span class="trip-alt-rooms"
                               >{{ trip.available || 1 }} cabin{{
                                 (trip.available || 1) > 1 ? "s" : ""
-                              }}
-                              available</span
+                              }}</span
                             >
                           </div>
                           <span
@@ -517,12 +497,18 @@
                           </span>
                           <span v-else class="trip-select-action">Select</span>
                         </div>
+                        <!-- Less Dates Button -->
+                        <button
+                          class="less-dates-toggle"
+                          @click.stop="toggleMoreDates(item.uniqueKey)"
+                        >
+                          <span>LESS DATES</span>
+                          <span class="toggle-arrow expanded">▲</span>
+                        </button>
                       </div>
                     </div>
 
-                    <!-- <div class="cabin-divider"></div> -->
-
-                    <!-- Info Section -->
+                    <!-- Info Section with Buttons -->
                     <div class="cabin-info-section">
                       <div class="cabin-info-left">
                         <template
@@ -540,7 +526,26 @@
                           </div>
                         </template>
                       </div>
-                      <div class="cabin-info-right">
+                      <div class="cabin-info-right cabin-buttons-row">
+                        <!-- More Dates Button (Only if more than 1 trip and not expanded) -->
+                        <button
+                          v-if="item.trips && item.trips.length > 1"
+                          class="btn-more-dates"
+                          :class="{ active: expandedTrips[item.uniqueKey] }"
+                          @click.stop="toggleMoreDates(item.uniqueKey)"
+                        >
+                          <span>{{
+                            expandedTrips[item.uniqueKey]
+                              ? "LESS DATES"
+                              : "MORE DATES"
+                          }}</span>
+                          <span
+                            class="btn-arrow"
+                            :class="{ expanded: expandedTrips[item.uniqueKey] }"
+                            >▼</span
+                          >
+                        </button>
+                        <!-- Reserve Button -->
                         <button
                           :class="[
                             'btn-reserve-now',

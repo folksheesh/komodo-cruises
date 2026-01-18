@@ -277,6 +277,181 @@
   margin-left: 20px;
 }
 
+/* ============================================
+   DATES GRID LAYOUT: 2 columns, 4 rows
+   Row by row alignment for clean visual layout
+   ============================================ */
+.dates-grid {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 0.5rem 2rem;
+  align-items: start;
+  margin-top: 0.5rem;
+}
+
+/* Row 1: Labels */
+.dates-grid-label {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+/* Row 2: Date Range & Duration Summary - matching styles */
+.dates-grid .date-range-display {
+  margin: 0;
+  width: 100%;
+  max-width: 320px;
+}
+
+.dates-grid .trip-duration-summary {
+  display: flex;
+  align-items: center;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--ocean-15a, #e5e5e5);
+  background: #fff;
+  font-size: 0.95rem;
+  color: var(--ocean-900, #223f62);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Row 3: Instruction text - matching styles */
+.dates-grid .calendar-instruction,
+.dates-grid .duration-instruction {
+  font-size: 0.85rem;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0.25rem 0;
+  line-height: 1.4;
+}
+
+/* Row 4: Calendar & Duration Controls */
+.dates-grid .custom-calendar {
+  max-width: 320px;
+}
+
+.dates-grid .trip-duration-controls-grid {
+  background: #fff;
+  border: 1px solid var(--ocean-15a, #e5e5e5);
+  padding: 0.75rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.dates-grid .trip-duration-controls-grid .duration-counter-row {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.dates-grid .trip-duration-controls-grid .duration-counter-row:last-of-type {
+  border-bottom: none;
+}
+
+.dates-grid .trip-duration-controls-grid .trip-duration-reset {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Mobile: Stack to single column with logical order */
+@media (max-width: 768px) {
+  .dates-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* All children get initial order, then override by class */
+  .dates-grid>* {
+    order: 99;
+  }
+
+  /* Group 1: Date Selection (orders 1-4) */
+  .dates-grid>p.dates-grid-label:first-child {
+    order: 1;
+  }
+
+  .dates-grid>.date-range-display {
+    order: 2;
+  }
+
+  .dates-grid>.calendar-instruction {
+    order: 3;
+  }
+
+  .dates-grid>.custom-calendar {
+    order: 4;
+  }
+
+  /* Group 2: Trip Duration (orders 5-8) with visual separator */
+  .dates-grid>p.dates-grid-label:nth-child(2) {
+    order: 5;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .dates-grid>.trip-duration-summary {
+    order: 6;
+  }
+
+  .dates-grid>.duration-instruction {
+    order: 7;
+  }
+
+  .dates-grid>.trip-duration-controls-grid {
+    order: 8;
+  }
+
+  /* Full width on mobile */
+  .dates-grid .date-range-display,
+  .dates-grid .trip-duration-summary,
+  .dates-grid .custom-calendar,
+  .dates-grid .trip-duration-controls-grid {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .dates-grid {
+    gap: 0.5rem;
+  }
+
+  .dates-grid .date-range-display {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .dates-grid .trip-duration-summary {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .dates-grid .custom-calendar {
+    padding: 1rem;
+  }
+
+  .dates-grid .trip-duration-controls-grid {
+    padding: 0.625rem 0.75rem;
+  }
+}
+
+/* Legacy two-column support */
+.dates-two-column {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-top: 0.5rem;
+}
+
+.dates-column-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.dates-column-right {
+  flex: 0 0 auto;
+  width: 220px;
+}
+
 /* Custom Calendar Container */
 .custom-calendar {
   /* margin-top: 0.5rem; */
