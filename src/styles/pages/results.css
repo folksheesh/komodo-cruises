@@ -5492,6 +5492,127 @@ body:has(.mobile-filter-modal-overlay) {
   cursor: not-allowed;
 }
 
+/* ===== Always Open Trip Duration Sidebar ===== */
+.trip-duration-always-open {
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.trip-duration-always-open .list-heading {
+  margin-bottom: 0.5rem;
+}
+
+.trip-duration-summary-sidebar {
+  font-size: 0.95rem;
+  color: #2d4059;
+  font-weight: 500;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  padding: 0.75rem 1rem;
+  margin: 0;
+}
+
+.trip-duration-always-open .trip-duration-range-content {
+  border: 1px solid #e5e7eb;
+  border-top: none;
+  padding: 0.75rem 1rem;
+  background: #fff;
+  margin-top: 0;
+}
+
+.trip-duration-always-open .duration-counter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.trip-duration-always-open .duration-counter-row:last-of-type {
+  border-bottom: none;
+}
+
+.trip-duration-always-open .counter-text {
+  flex: 1;
+}
+
+.trip-duration-always-open .counter-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #2d4059;
+}
+
+.trip-duration-always-open .counter-ctrls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.trip-duration-always-open .count-display {
+  min-width: 1.5rem;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2d4059;
+}
+
+.trip-duration-always-open .btn-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(45, 64, 89, 0.35);
+  background: #fff;
+  color: #2d4059;
+  cursor: pointer;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.trip-duration-always-open .btn-icon:hover:not(:disabled) {
+  border-color: #2d4059;
+  background: rgba(45, 64, 89, 0.05);
+}
+
+.trip-duration-always-open .btn-icon:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.trip-duration-always-open .duration-reset-row {
+  margin-top: 0.75rem;
+  padding-top: 0.625rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.trip-duration-always-open .btn-reset-duration {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #6b7280;
+  background: #fafafa;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.trip-duration-always-open .btn-reset-duration:hover:not(:disabled) {
+  background: #f3f4f6;
+  color: #2d4059;
+  border-color: #d1d5db;
+}
+
+.trip-duration-always-open .btn-reset-duration:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* ===== Mobile Filter Modal Trip Duration Range Styles ===== */
 .mobile-duration {
   margin-top: 0.5rem;

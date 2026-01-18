@@ -1055,102 +1055,84 @@
                 </div>
               </div>
 
-              <!-- Trip Duration Range Filter -->
+              <!-- Trip Duration Range Filter (Always Open) -->
               <div
-                class="list dropdown"
-                :class="{ active: openDuration }"
-                @mouseenter="hoverDuration = true"
-                @mouseleave="hoverDuration = false"
+                class="list trip-duration-always-open"
                 ref="durationDropdown"
               >
-                <div class="list-heading" @click="toggleDropdown('duration')">
-                  Trip Duration
+                <div class="list-heading">Trip Duration</div>
+                <div class="trip-duration-summary-sidebar">
+                  {{ displayTripDuration }}
                 </div>
-                <button
-                  type="button"
-                  class="select-summary"
-                  :class="{ 'is-filled': openDuration || hoverDuration }"
-                  @click="toggleDropdown('duration')"
-                >
-                  <span>{{ displayTripDuration }}</span>
-                  <span class="caret">
-                    <img
-                      :src="openDuration ? upArrowIcon : downArrowIcon"
-                      class="caret-icon"
-                    />
-                  </span>
-                </button>
 
-                <div v-if="openDuration" class="custom-dropdown-menu">
-                  <div class="trip-duration-range-content sidebar-duration">
-                    <!-- Min Duration -->
-                    <div class="counter-row duration-counter-row">
-                      <div class="counter-text">
-                        <div class="counter-title">Min</div>
-                      </div>
-                      <div class="counter-ctrls">
-                        <button
-                          type="button"
-                          class="btn-icon"
-                          :disabled="formMinTripDuration <= 1"
-                          @click.stop="decrementFormMinDuration"
-                        >
-                          −
-                        </button>
-                        <span class="count-display">{{
-                          formMinTripDuration
-                        }}</span>
-                        <button
-                          type="button"
-                          class="btn-icon"
-                          :disabled="formMinTripDuration >= formMaxTripDuration"
-                          @click.stop="incrementFormMinDuration"
-                        >
-                          +
-                        </button>
-                      </div>
+                <div class="trip-duration-range-content sidebar-duration">
+                  <!-- Min Duration -->
+                  <div class="counter-row duration-counter-row">
+                    <div class="counter-text">
+                      <div class="counter-title">Min</div>
                     </div>
-                    <!-- Max Duration -->
-                    <div class="counter-row duration-counter-row">
-                      <div class="counter-text">
-                        <div class="counter-title">Max</div>
-                      </div>
-                      <div class="counter-ctrls">
-                        <button
-                          type="button"
-                          class="btn-icon"
-                          :disabled="formMaxTripDuration <= formMinTripDuration"
-                          @click.stop="decrementFormMaxDuration"
-                        >
-                          −
-                        </button>
-                        <span class="count-display">{{
-                          formMaxTripDuration
-                        }}</span>
-                        <button
-                          type="button"
-                          class="btn-icon"
-                          :disabled="formMaxTripDuration >= MAX_TRIP_DURATION"
-                          @click.stop="incrementFormMaxDuration"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-                    <!-- Reset Button -->
-                    <div class="duration-reset-row">
+                    <div class="counter-ctrls">
                       <button
                         type="button"
-                        class="btn-reset-duration"
-                        @click.stop="resetTripDuration"
-                        :disabled="
-                          formMinTripDuration === 1 &&
-                          formMaxTripDuration === MAX_TRIP_DURATION
-                        "
+                        class="btn-icon"
+                        :disabled="formMinTripDuration <= 1"
+                        @click="decrementFormMinDuration"
                       >
-                        Reset to Any Duration
+                        −
+                      </button>
+                      <span class="count-display">{{
+                        formMinTripDuration
+                      }}</span>
+                      <button
+                        type="button"
+                        class="btn-icon"
+                        :disabled="formMinTripDuration >= formMaxTripDuration"
+                        @click="incrementFormMinDuration"
+                      >
+                        +
                       </button>
                     </div>
+                  </div>
+                  <!-- Max Duration -->
+                  <div class="counter-row duration-counter-row">
+                    <div class="counter-text">
+                      <div class="counter-title">Max</div>
+                    </div>
+                    <div class="counter-ctrls">
+                      <button
+                        type="button"
+                        class="btn-icon"
+                        :disabled="formMaxTripDuration <= formMinTripDuration"
+                        @click="decrementFormMaxDuration"
+                      >
+                        −
+                      </button>
+                      <span class="count-display">{{
+                        formMaxTripDuration
+                      }}</span>
+                      <button
+                        type="button"
+                        class="btn-icon"
+                        :disabled="formMaxTripDuration >= MAX_TRIP_DURATION"
+                        @click="incrementFormMaxDuration"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Reset Button -->
+                  <div class="duration-reset-row">
+                    <button
+                      type="button"
+                      class="btn-reset-duration"
+                      @click="resetTripDuration"
+                      :disabled="
+                        formMinTripDuration === 1 &&
+                        formMaxTripDuration === MAX_TRIP_DURATION
+                      "
+                    >
+                      Reset to Any Duration
+                    </button>
                   </div>
                 </div>
               </div>

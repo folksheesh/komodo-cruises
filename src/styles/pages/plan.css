@@ -1015,6 +1015,33 @@
   margin-bottom: 1rem;
 }
 
+/* Trip Duration Section - Always Open variant */
+.trip-duration-always-open {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.trip-duration-content-wrapper {
+  max-width: 320px;
+  width: 100%;
+}
+
+.trip-duration-summary {
+  font-size: 1rem;
+  color: var(--ocean-900, #223f62);
+  font-weight: 500;
+  padding: 0.5rem 0;
+  margin-bottom: 0.25rem;
+}
+
+.trip-duration-controls {
+  background: #fff;
+  border: 1px solid var(--ocean-15a, #e5e5e5);
+  padding: 0.5rem 1rem;
+}
+
 .trip-duration-label {
   font-size: 0.95rem;
   color: rgba(0, 0, 0, 0.6);

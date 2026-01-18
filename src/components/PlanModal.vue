@@ -243,33 +243,16 @@
                     <span class="date-value">{{ dateTo || "End date" }}</span>
                   </div>
 
-                  <!-- Trip Duration Dropdown Section -->
-                  <div class="trip-duration-section">
+                  <!-- Trip Duration Section (Always Open) -->
+                  <div class="trip-duration-section trip-duration-always-open">
                     <span class="trip-duration-label">Trip Duration</span>
-                    <div class="trip-duration-dropdown-wrapper">
-                      <!-- Dropdown Header -->
-                      <button
-                        type="button"
-                        class="trip-duration-dropdown"
-                        :class="{ open: showDurationDropdown }"
-                        @click="showDurationDropdown = !showDurationDropdown"
-                      >
-                        <span class="trip-duration-value">{{
-                          displayTripDuration
-                        }}</span>
-                        <img
-                          :src="
-                            showDurationDropdown ? upArrowIcon : downArrowIcon
-                          "
-                          alt=""
-                          class="caret-icon"
-                        />
-                      </button>
-                      <!-- Dropdown Content with Min/Max Controls -->
-                      <div
-                        v-if="showDurationDropdown"
-                        class="trip-duration-menu"
-                      >
+                    <div class="trip-duration-content-wrapper">
+                      <!-- Display current range summary -->
+                      <div class="trip-duration-summary">
+                        {{ displayTripDuration }}
+                      </div>
+                      <!-- Min/Max Controls (Always Visible) -->
+                      <div class="trip-duration-controls">
                         <!-- Min Duration Row -->
                         <div class="counter-row duration-counter-row">
                           <div class="counter-text">
@@ -280,7 +263,7 @@
                               type="button"
                               class="btn-icon"
                               :disabled="minTripDuration <= 1"
-                              @click.stop="decrementMinDuration"
+                              @click="decrementMinDuration"
                             >
                               −
                             </button>
@@ -291,7 +274,7 @@
                               type="button"
                               class="btn-icon"
                               :disabled="minTripDuration >= maxTripDuration"
-                              @click.stop="incrementMinDuration"
+                              @click="incrementMinDuration"
                             >
                               +
                             </button>
@@ -307,7 +290,7 @@
                               type="button"
                               class="btn-icon"
                               :disabled="maxTripDuration <= minTripDuration"
-                              @click.stop="decrementMaxDuration"
+                              @click="decrementMaxDuration"
                             >
                               −
                             </button>
@@ -318,7 +301,7 @@
                               type="button"
                               class="btn-icon"
                               :disabled="maxTripDuration >= MAX_TRIP_DURATION"
-                              @click.stop="incrementMaxDuration"
+                              @click="incrementMaxDuration"
                             >
                               +
                             </button>
@@ -336,7 +319,7 @@
                           <button
                             type="button"
                             class="btn-text-reset"
-                            @click.stop="resetTripDuration"
+                            @click="resetTripDuration"
                           >
                             Reset to any duration
                           </button>
