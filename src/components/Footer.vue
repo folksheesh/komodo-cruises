@@ -10,7 +10,7 @@
         <nav class="hf-links">
           <a href="#" @click.prevent="$emit('open-plan')">Plan your trip</a>
           <router-link to="/plan">Experiences</router-link>
-          <router-link to="/policies#privacy">Privacy & Policies</router-link>
+          <router-link to="/policies#privacy">Terms and Conditions</router-link>
           <a href="mailto:hello@komodocruises.com">Contact</a>
         </nav>
         <div class="hf-contact">

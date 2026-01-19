@@ -4,18 +4,21 @@
       <p class="eyebrow">Compliance and guest trust</p>
       <h1>Privacy, Terms, and Refund Policy</h1>
       <p class="lead">
-        We protect every reservation, guest profile, and payment record with the same
-        care we give to our voyages. This page outlines how we collect and use data,
-        the terms that govern each booking, and how refunds are handled.
+        We protect every reservation, guest profile, and payment record with the
+        same care we give to our voyages. This page outlines how we collect and
+        use data, the terms that govern each booking, and how refunds are
+        handled.
       </p>
       <div class="meta-row">
         <span>Last updated: 19 January 2026</span>
-        <span>Applies to all Komodo Cruises digital channels and services.</span>
+        <span
+          >Applies to all Komodo Cruises digital channels and services.</span
+        >
       </div>
       <div class="policy-anchors">
         <a href="#privacy">Privacy & Data Protection</a>
-        <a href="#terms">Syarat & Ketentuan</a>
-        <a href="#refund">Ketentuan Pengembalian</a>
+        <a href="#terms">Terms & Conditions</a>
+        <a href="#refund">Refund Policy</a>
       </div>
     </section>
 
@@ -24,83 +27,83 @@
         <p class="eyebrow">Privacy & Policies</p>
         <h2>Privacy & Data Protection</h2>
         <p>
-          Kami hanya mengumpulkan data yang diperlukan untuk merencanakan perjalanan,
-          memproses pembayaran, dan memberikan layanan tamu yang aman. Semua data
-          diproses sesuai hukum perlindungan data yang berlaku di Indonesia dan
-          standar internasional yang relevan.
+          We only collect data necessary to plan trips, process payments, and
+          provide secure guest services. All data is processed in accordance
+          with applicable data protection laws in Indonesia and relevant
+          international standards.
         </p>
         <ul>
           <li>
-            Data yang dikumpulkan: identitas kontak, preferensi perjalanan,
-            detail pembayaran yang di-tokenisasi, serta riwayat komunikasi layanan
-            tamu.
+            Collected data: contact identity, travel preferences, tokenized
+            payment details, and guest service communication history.
           </li>
           <li>
-            Cara penggunaan: verifikasi pemesanan, personalisasi pengalaman di atas
-            kapal, kepatuhan keselamatan, penagihan, dan dukungan pasca-perjalanan.
+            Usage: booking verification, onboard experience personalization,
+            safety compliance, billing, and post-trip support.
           </li>
           <li>
-            Penyimpanan & retensi: data disimpan di infrastruktur yang diaudit;
-            informasi pembayaran tidak disimpan dalam bentuk penuh; retensi mengikuti
-            kebutuhan operasional dan kewajiban hukum.
+            Storage & retention: data is stored on audited infrastructure;
+            payment information is not stored in full; retention follows
+            operational needs and legal obligations.
           </li>
           <li>
-            Keamanan: enkripsi saat transit dan saat tersimpan, kontrol akses
-            berbasis peran, audit log, serta pemantauan keamanan berkelanjutan.
+            Security: encryption in transit and at rest, role-based access
+            control, audit logs, and continuous security monitoring.
           </li>
           <li>
-            Hak subjek data: Anda dapat meminta akses, koreksi, atau penghapusan
-            data tertentu, kecuali data yang wajib disimpan untuk kepatuhan.
+            Data subject rights: You may request access, correction, or deletion
+            of certain data, except for data required to be gathered for
+            compliance.
           </li>
           <li>
-            Berbagi data: hanya dengan mitra operasional yang mendukung perjalanan
-            (contoh: pelabuhan, asuransi, penyedia pembayaran) dengan perjanjian
-            kerahasiaan yang ketat.
+            Data sharing: only with operational partners supporting the trip
+            (e.g., ports, insurance, payment providers) under strict
+            confidentiality agreements.
           </li>
         </ul>
         <p>
-          Untuk pertanyaan privasi, hubungi privacy@komodocruises.com. Kami
-          merespons permintaan valid dalam jangka waktu wajar sesuai peraturan.
+          For privacy inquiries, contact privacy@komodocruises.com. We respond
+          to valid requests within a reasonable timeframe as per regulations.
         </p>
       </div>
     </section>
 
     <section id="terms" class="policy-section">
       <div class="container policy-card">
-        <p class="eyebrow">Syarat & Ketentuan</p>
+        <p class="eyebrow">Terms & Conditions</p>
         <h2>Terms and Conditions</h2>
         <p>
-          Syarat berikut berlaku untuk semua pemesanan, pembayaran, dan penggunaan
-          layanan Komodo Cruises. Dengan melanjutkan pemesanan, Anda menyetujui
-          ketentuan ini.
+          The following terms apply to all bookings, payments, and use of Komodo
+          Cruises services. By proceeding with a booking, you agree to these
+          terms.
         </p>
         <ul>
           <li>
-            Pemesanan: konfirmasi berlaku setelah pembayaran deposit diterima;
-            sisa pembayaran mengikuti jadwal invoice yang dikirim resmi.
+            Booking: confirmation is valid upon receipt of deposit payment;
+            balance payment follows the officially sent invoice schedule.
           </li>
           <li>
-            Harga dan pajak: semua harga dapat berubah sebelum konfirmasi; tarif
-            dapat mencakup biaya taman nasional, layanan kapal, dan pajak yang
-            berlaku pada tanggal pelayaran.
+            Prices and taxes: all prices are subject to change prior to
+            confirmation; rates may include national park fees, boat services,
+            and taxes applicable on the sailing date.
           </li>
           <li>
-            Perubahan jadwal: perubahan tanggal atau rute tergantung ketersediaan,
-            regulasi pelabuhan, kondisi cuaca, atau faktor keselamatan.
+            Schedule changes: date or route changes depend on availability, port
+            regulations, weather conditions, or safety factors.
           </li>
           <li>
-            Kewajiban tamu: tamu wajib mengikuti briefing keselamatan, ketentuan
-            lingkungan, serta instruksi kru selama pelayaran.
+            Guest obligations: guests are required to follow safety briefings,
+            environmental regulations, and crew instructions during the cruise.
           </li>
           <li>
-            Force majeure: penjadwalan dapat disesuaikan akibat kondisi cuaca,
-            kebijakan otoritas, atau keadaan darurat; kami akan memberikan opsi
-            penjadwalan ulang yang wajar.
+            Force majeure: scheduling may be adjusted due to weather conditions,
+            authority policies, or emergencies; we will provide reasonable
+            rescheduling options.
           </li>
           <li>
-            Batasan tanggung jawab: perlindungan asuransi perjalanan sangat
-            dianjurkan; Komodo Cruises tidak bertanggung jawab atas kehilangan
-            barang pribadi di luar kelalaian yang terbukti.
+            Liability details: travel insurance protection is highly
+            recommended; Komodo Cruises is not responsible for loss of personal
+            items beyond proven negligence.
           </li>
         </ul>
       </div>
@@ -108,41 +111,41 @@
 
     <section id="refund" class="policy-section">
       <div class="container policy-card">
-        <p class="eyebrow">Ketentuan Pengembalian</p>
+        <p class="eyebrow">Refund Policy</p>
         <h2>Refund and Cancellation Policy</h2>
         <p>
-          Kami berupaya transparan dalam penanganan pembatalan dan pengembalian.
-          Kebijakan ini mengikuti kategori waktu pembatalan dari tanggal keberangkatan.
+          We strive for transparency in handling cancellations and refunds. This
+          policy follows cancellation time categories from the departure date.
         </p>
         <ul>
           <li>
-            Pembatalan >60 hari sebelum keberangkatan: pengembalian deposit dikurangi
-            biaya administrasi bank dan pemrosesan.
+            Cancellation >60 days before departure: deposit refund minus bank
+            administration and processing fees.
           </li>
           <li>
-            Pembatalan 30-60 hari: pengembalian hingga 50% dari total pembayaran yang
-            telah diterima, setelah dikurangi biaya yang sudah terjadi.
+            Cancellation 30-60 days: refund up to 50% of total payment received,
+            after deducting incurred costs.
           </li>
           <li>
-            Pembatalan &lt;30 hari atau no-show: pembayaran tidak dapat dikembalikan
-            karena slot perjalanan dan kru telah disiapkan penuh.
+            Cancellation &lt;30 days or no-show: payment is non-refundable as
+            trip slots and crew have been fully prepared.
           </li>
           <li>
-            Penjadwalan ulang: dapat dilakukan satu kali sepanjang ketersediaan dan
-            mengikuti selisih harga jika berlaku.
+            Rescheduling: can be done once subject to availability and price
+            difference if applicable.
           </li>
           <li>
-            Pengembalian ke rekening awal: semua refund dikirim ke metode pembayaran
-            asal untuk mematuhi standar kepatuhan dan anti-fraud.
+            Refund to original account: all refunds are sent to the original
+            payment method to comply with compliance and anti-fraud standards.
           </li>
           <li>
-            Proses waktu: permintaan refund yang disetujui akan diproses 7-14 hari
-            kerja setelah dokumentasi lengkap diterima.
+            Processing time: approved refund requests will be processed 7-14
+            business days after complete documentation is received.
           </li>
         </ul>
         <p>
-          Untuk dukungan terkait refund, hubungi billing@komodocruises.com dengan
-          nomor pemesanan dan detail bukti pembayaran.
+          For refund support, contact billing@komodocruises.com with booking
+          number and payment proof details.
         </p>
       </div>
     </section>
