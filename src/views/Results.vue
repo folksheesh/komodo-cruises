@@ -737,7 +737,7 @@
                       />
                     </div>
                     <div v-if="shipsList.length === 0" class="muted">
-                      No ships found from API.
+                      No ships found.
                     </div>
                   </template>
                   <!-- <div class="dropdown-footer" @click="nextDropdown('ships')">
@@ -1790,76 +1790,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Results footer (same as home footer) -->
-    <footer class="home-footer">
-      <div class="home-footer-inner container">
-        <!-- Top row: Brand + Links -->
-        <div class="hf-top">
-          <div class="hf-brand">
-            <div class="hf-logo">KOMODO CRUISES</div>
-            <div class="hf-copy">Rare journeys across the Komodo Islands.</div>
-          </div>
-          <nav class="hf-links">
-            <a href="#" @click.prevent="openPlanModal">Plan your trip</a>
-            <a href="#">Experiences</a>
-            <a href="#">Our story</a>
-            <a href="#">Contact</a>
-          </nav>
-          <div class="hf-contact">
-            <div class="hf-contact-title">Contact Us</div>
-            <div class="hf-contact-phone">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-                />
-              </svg>
-              <a href="tel:+6285282296450">+62 852-8229-6450</a>
-            </div>
-            <div class="hf-contact-address">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              <span
-                >Graha Permata Pancoran, Jl. KH. Guru Amin Blok A5, Pancoran,
-                Jakarta Selatan 12780</span
-              >
-            </div>
-          </div>
-        </div>
-        <!-- Bottom row: Copyright -->
-        <div class="hf-bottom">
-          <div class="hf-copyright">
-            © {{ new Date().getFullYear() }} Komodo Cruises | PT CANARD MONEY
-            INDONESIA
-          </div>
-          <div class="hf-disclaimer">
-            All voyages subject to weather and park regulations.
-          </div>
-        </div>
-      </div>
-    </footer>
   </div>
 
   <!-- Mobile Filter Modal (fullscreen) -->
@@ -2323,13 +2253,6 @@
       </div>
     </div>
   </Teleport>
-
-  <!-- Plan Modal -->
-  <PlanModal
-    :isOpen="isPlanModalOpen"
-    @close="closePlanModal"
-    @navigate-to-results="navigateToResults"
-  />
 </template>
 
 <script setup>
@@ -2344,7 +2267,7 @@ import {
 import { useRouter } from "vue-router";
 import downArrowIcon from "../images/arrows/down-arrow.svg";
 import upArrowIcon from "../images/arrows/up-arrow.svg";
-import PlanModal from "../components/PlanModal.vue";
+
 // DEBUG LOGGING: Uncomment for troubleshooting price/detail mapping
 // (Letakkan di bawah semua computed agar tidak ReferenceError)
 
@@ -2614,6 +2537,53 @@ const selectedTripKey = ref(""); // Track selected trip for reservation
 const selectedShipForView = ref(null); // Track which ship to show cabins for (null = show ship selection)
 const selectedRoomQuantities = ref({}); // Track room quantities per trip: { [tripKey]: quantity }
 const expandedTrips = ref({}); // Track which cabin's "More Dates" is expanded
+
+// Reactively populate shipAvailability whenever global availability or details change.
+// This handles the case where details load after availability.
+watchEffect(() => {
+  const g = globalStartAvailability.value;
+  const details = detailCabinMap.value;
+  if (!g || !g.operators) {
+    shipAvailability.value = {};
+    return;
+  }
+
+  const saMap = {};
+  for (const op of g.operators) {
+    for (const c of op.cabins || []) {
+      // Resolve Ship Key
+      let key = op.operator;
+      const base = getCabinBaseName(c);
+      const cKey = normalizeCabinName(base);
+      const opKey = normalizeName(op.operator);
+
+      if (details) {
+        const d = details.get(`${opKey}|${cKey}`);
+        if (d && d.shipName) key = d.shipName;
+        else if (d && d.operator) key = d.operator;
+      }
+
+      if (!saMap[key]) saMap[key] = [];
+
+      // Re-bucket by date
+      const date = c.start_date || c.date;
+      if (!date) continue;
+
+      let dayObj = saMap[key].find((x) => x.date === date);
+      if (!dayObj) {
+        dayObj = { date, operators: [] };
+        saMap[key].push(dayObj);
+      }
+      let opObj = dayObj.operators.find((o) => o.operator === op.operator);
+      if (!opObj) {
+        opObj = { operator: op.operator, cabins: [] };
+        dayObj.operators.push(opObj);
+      }
+      opObj.cabins.push(c);
+    }
+  }
+  shipAvailability.value = saMap;
+});
 
 // Sort By state
 const sortBy = ref("recommended");
@@ -3340,126 +3310,110 @@ const needsShipSelection = computed(() => {
 // Get available ships with availability info
 const availableShipsForSelection = computed(() => {
   const sc = searchCriteria.value;
-  const g = globalStartAvailability.value;
   const minDur = formMinTripDuration.value;
   const maxDur = formMaxTripDuration.value;
   const detailMap = detailCabinMap.value || new Map();
+  const sa = shipAvailability.value || {};
 
-  if (!sc || !g || !Array.isArray(g.operators)) return [];
+  if (!sc) return [];
 
   const ships = shipsFromCriteria.value;
   const result = [];
 
   for (const shipName of ships) {
-    const matchingOp = g.operators.find((op) => {
-      const opName = normalizeName(op.operator || "");
-      const targetName = normalizeName(shipName);
-      return (
-        opName === targetName ||
-        opName.includes(targetName) ||
-        targetName.includes(opName)
-      );
+    const shipEntries = sa[shipName] || [];
+    // Flatten all cabins for this ship across all dates/operators
+    const allCabins = shipEntries.flatMap((d) =>
+      (d.operators || []).flatMap((o) => o.cabins || []),
+    );
+    // Find operator name (fallback)
+    const operatorName = shipEntries[0]?.operators?.[0]?.operator || "";
+
+    // Filter cabins based on duration and availability
+    const validCabins = allCabins.filter((cb) => {
+      const available = getCabinAvailable(cb);
+      if (available != null && available <= 0) return false;
+
+      // Only filter by duration if not using default full range
+      if (minDur > 1 || maxDur < MAX_TRIP_DURATION) {
+        let d = 0;
+        // Strategy 1: Direct properties
+        if (cb.trip_days) d = parseInt(cb.trip_days, 10);
+        else if (cb.days) d = parseInt(cb.days, 10);
+        else if (cb.raw) {
+          if (cb.raw.trip_days) d = parseInt(cb.raw.trip_days, 10);
+          else if (cb.raw.days) d = parseInt(cb.raw.days, 10);
+        }
+
+        // Strategy 2: Extensive Detail Map Lookup matching allStartDateCabins logic
+        if (!d) {
+          const baseName = getCabinBaseName(cb);
+          const cabinKey = normalizeCabinName(baseName);
+          const shipNorm = normalizeName(shipName);
+          const opNorm = normalizeName(operatorName);
+
+          let detail = detailMap.get(`${shipNorm}|${cabinKey}`);
+
+          if (!detail && opNorm) {
+            detail = detailMap.get(`${opNorm}|${cabinKey}`);
+          }
+
+          // Fallback: scan by cabin name only
+          if (!detail) {
+            const suffix = `|${cabinKey}`;
+            for (const [dk, dv] of detailMap.entries()) {
+              if (dk.endsWith(suffix)) {
+                detail = dv;
+                break;
+              }
+            }
+          }
+
+          // Fallback: canonical
+          if (!detail) {
+            const canon = canonicalizeCabinLabel(baseName);
+            if (canon) {
+              detail = detailMap.get(`${shipNorm}|${canon}`);
+            }
+          }
+
+          if (detail) {
+            d = parseInt(detail.trip_days || detail.days || 0, 10);
+          }
+        }
+
+        // Only filter if duration is KNOWN and outside range
+        // If duration is unknown (d=0), include the cabin anyway
+        if (d > 0 && (d < minDur || d > maxDur)) return false;
+      }
+      return true;
     });
 
-    if (matchingOp) {
-      // Filter cabins based on duration and availability
-      const validCabins = (matchingOp.cabins || []).filter((cb) => {
-        const available = getCabinAvailable(cb);
-        if (available != null && available <= 0) return false;
+    const totalCabins = validCabins.length;
 
-        // Only filter by duration if not using default full range
-        if (minDur > 1 || maxDur < MAX_TRIP_DURATION) {
-          let d = 0;
-          // Strategy 1: Direct properties
-          if (cb.trip_days) d = parseInt(cb.trip_days, 10);
-          else if (cb.days) d = parseInt(cb.days, 10);
-          else if (cb.raw) {
-            if (cb.raw.trip_days) d = parseInt(cb.raw.trip_days, 10);
-            else if (cb.raw.days) d = parseInt(cb.raw.days, 10);
-          }
+    // Lookup ship details (image, desc)
+    const shipDetail = getShipDetailByName(shipName);
+    const opDisplay = operatorName || shipDetail?.operator || shipName;
 
-          // Strategy 2: Extensive Detail Map Lookup matching allStartDateCabins logic
-          if (!d) {
-            const baseName = getCabinBaseName(cb);
-            const cabinKey = normalizeCabinName(baseName);
-            const shipNorm = normalizeName(shipName);
-            const opNorm = normalizeName(matchingOp.operator || "");
-
-            let detail = detailMap.get(`${shipNorm}|${cabinKey}`);
-
-            if (!detail && opNorm) {
-              detail = detailMap.get(`${opNorm}|${cabinKey}`);
-            }
-
-            // Fallback: scan by cabin name only
-            if (!detail) {
-              const suffix = `|${cabinKey}`;
-              for (const [dk, dv] of detailMap.entries()) {
-                if (dk.endsWith(suffix)) {
-                  detail = dv;
-                  break;
-                }
-              }
-            }
-
-            // Fallback: canonical
-            if (!detail) {
-              const canon = canonicalizeCabinLabel(baseName);
-              if (canon) {
-                detail = detailMap.get(`${shipNorm}|${canon}`);
-              }
-            }
-
-            if (detail) {
-              d = parseInt(detail.trip_days || detail.days || 0, 10);
-            }
-          }
-
-          // Only filter if duration is KNOWN and outside range
-          // If duration is unknown (d=0), include the cabin anyway
-          if (d > 0 && (d < minDur || d > maxDur)) return false;
-        }
-        return true;
-      });
-
-      const totalCabins = validCabins.length;
-
-      // Lookup ship details (image, desc) using consistent helper function
-      const shipDetail = getShipDetailByName(shipName);
-
-      if (totalCabins > 0) {
-        const totalCapacity = validCabins.reduce((sum, cab) => {
-          const cap = extractCapacityNumber(cab);
-          return sum + (cap || 4);
-        }, 0);
-
-        result.push({
-          name: shipName,
-          operator: matchingOp.operator,
-          cabinsCount: totalCabins,
-          totalCapacity: totalCapacity,
-          hasAvailability: true,
-          image: shipDetail?.mainImage || getShipImage(shipName) || "",
-          description: shipDetail?.description || "",
-        });
-      } else {
-        result.push({
-          name: shipName,
-          operator: matchingOp.operator,
-          cabinsCount: 0,
-          totalCapacity: 0,
-          hasAvailability: false,
-          image: shipDetail?.mainImage || getShipImage(shipName) || "",
-          description: shipDetail?.description || "",
-        });
-      }
-    } else {
-      // Lookup ship details even if no operator match
-      const shipDetail = getShipDetailByName(shipName);
+    if (totalCabins > 0) {
+      const totalCapacity = validCabins.reduce((sum, cab) => {
+        const cap = extractCapacityNumber(cab);
+        return sum + (cap || 4);
+      }, 0);
 
       result.push({
         name: shipName,
-        operator: shipName,
+        operator: opDisplay,
+        cabinsCount: totalCabins,
+        totalCapacity: totalCapacity,
+        hasAvailability: true,
+        image: shipDetail?.mainImage || getShipImage(shipName) || "",
+        description: shipDetail?.description || "",
+      });
+    } else {
+      result.push({
+        name: shipName,
+        operator: opDisplay,
         cabinsCount: 0,
         totalCapacity: 0,
         hasAvailability: false,
@@ -4144,14 +4098,22 @@ function decreaseRoomQty(trip) {
 async function loadShipsList() {
   shipsLoading.value = true;
   try {
-    const res = await getOperators();
-    shipsList.value = (res.operators || [])
-      .map((op) => {
-        const label = op.operator?.trim() || "";
-        const sheet = op.sourceSheet?.trim() || label;
-        return { id: `${label}__${sheet}`, label, sheet };
+    const res = await getShipDetails();
+    shipsList.value = (res.ships || [])
+      .map((s) => {
+        const label = s.name || "";
+        const sheet = s.operator || label;
+        return {
+          id: label,
+          label,
+          sheet,
+          operator: s.operator,
+        };
       })
-      .filter((s) => s.label && s.sheet);
+      .filter((s) => s.label);
+
+    // Sort alphabetically
+    shipsList.value.sort((a, b) => a.label.localeCompare(b.label));
 
     if (!formShipIds.value.length && savedShipPairs.value.length) {
       const ids = [];
@@ -4179,7 +4141,7 @@ async function loadDetailCabins() {
   try {
     // Use local API endpoint for cabin details
     const baseUrl = import.meta.env.DEV
-      ? "https://i4k08k4w4g40wkg0wcw0w88w.49.13.148.202.sslip.io/"
+      ? "http://localhost:3000/"
       : "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io";
     const url = `${baseUrl}/?resource=cabindetail`;
     const res = await fetch(url).then((r) => r.json());
@@ -4190,12 +4152,21 @@ async function loadDetailCabins() {
 
     if (res && Array.isArray(res.data)) {
       res.data.forEach((cb) => {
-        const shipName = cb.operator || cb.shipName || "";
+        // Prioritize boat_name from new JSON structure, fallback to shipName or operator
+        const shipName = cb.boat_name || cb.shipName || cb.operator || "";
         shipNamesFromAPI.add(shipName); // Track original name from API
 
         // Create multiple normalized ship name variants for better matching
         const shipVariants = new Set();
         shipVariants.add(normalizeName(shipName)); // e.g., "semesta voyage"
+
+        // Also add operator as variant if different (e.g. key by Akassa AND Derya)
+        if (
+          cb.operator &&
+          normalizeName(cb.operator) !== normalizeName(shipName)
+        ) {
+          shipVariants.add(normalizeName(cb.operator));
+        }
         shipVariants.add(
           normalizeName(
             shipName.replace(/\s+(cruise|liveaboard|voyages?|boat)s?$/i, ""),
@@ -4269,7 +4240,7 @@ async function loadDetailCabins() {
 async function loadShipDetails() {
   try {
     const baseUrl = import.meta.env.DEV
-      ? "https://i4k08k4w4g40wkg0wcw0w88w.49.13.148.202.sslip.io/"
+      ? "http://localhost:3000/"
       : "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io";
     const url = `${baseUrl}/?resource=shipdetail`;
     const res = await fetch(url).then((r) => r.json());
@@ -4277,14 +4248,24 @@ async function loadShipDetails() {
     const map = new Map();
     if (res && res.ok && Array.isArray(res.ships)) {
       res.ships.forEach((ship) => {
-        const normalized = (ship.name || "").toUpperCase().trim();
+        const shipName = ship.name || ship.boat_name || ship.ship_name || "";
+        const normalized = String(shipName).toUpperCase().trim();
         if (normalized) {
           // Transform image_main to mainImage for consistency
           const transformed = {
             ...ship,
+            name: shipName,
             mainImage: ship.image_main || ship.mainImage || "",
           };
           map.set(normalized, transformed);
+
+          // Add operator mapping if different
+          if (ship.operator) {
+            const opNorm = String(ship.operator).toUpperCase().trim();
+            if (opNorm && opNorm !== normalized) {
+              map.set(opNorm, transformed);
+            }
+          }
         }
       });
     }
@@ -4325,12 +4306,23 @@ async function checkAvailability() {
           if (shipDetailsData && shipDetailsData.ships) {
             const newMap = new Map();
             shipDetailsData.ships.forEach((ship) => {
-              const normalized = (ship.name || "").toUpperCase().trim();
+              const shipName =
+                ship.name || ship.boat_name || ship.ship_name || "";
+              const normalized = String(shipName).toUpperCase().trim();
               if (normalized) {
-                newMap.set(normalized, {
+                const transformed = {
                   ...ship,
+                  name: shipName,
                   mainImage: ship.image_main || ship.mainImage || "",
-                });
+                };
+                newMap.set(normalized, transformed);
+
+                if (ship.operator) {
+                  const opNorm = String(ship.operator).toUpperCase().trim();
+                  if (opNorm && opNorm !== normalized) {
+                    newMap.set(opNorm, transformed);
+                  }
+                }
               }
             });
             shipDetailsMap.value = newMap;
@@ -4561,6 +4553,9 @@ async function checkAvailability() {
         };
 
         globalStartAvailability.value = combinedAvailability;
+
+        shipAvailability.value = {}; // Clear temporarily, watcher will populate
+
         console.log(
           "[Results] Loaded global availability:",
           combinedAvailability.total,

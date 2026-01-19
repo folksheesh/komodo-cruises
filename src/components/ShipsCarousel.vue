@@ -80,7 +80,6 @@
                   </div>
                   <div class="ship-info">
                     <span class="ship-location">{{ ship.locationName }}</span>
-                    <h3 class="ship-name">{{ ship.name }}</h3>
                   </div>
                 </div>
               </div>

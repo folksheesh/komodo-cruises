@@ -303,7 +303,7 @@ const sendConfirmationEmail = async () => {
     emailStatus.value = "sending";
 
     const response = await fetch(
-      "https://i4k08k4w4g40wkg0wcw0w88w.49.13.148.202.sslip.io/api/send-confirmation-email",
+      "http://localhost:3000/api/send-confirmation-email",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

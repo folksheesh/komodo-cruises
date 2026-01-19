@@ -10,7 +10,7 @@
 }
 
 .plan-content {
-  max-width: 750px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 2.5rem var(--edge-pad);
 }
@@ -305,22 +305,43 @@
 .dates-grid .trip-duration-summary {
   display: flex;
   align-items: center;
-  padding: 0.875rem 1rem;
+  padding: 0.625rem 0.875rem;
   border: 1px solid var(--ocean-15a, #e5e5e5);
   background: #fff;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--ocean-900, #223f62);
   font-weight: 500;
   margin: 0;
 }
 
+/* Standalone trip duration summary (not in grid) */
+.trip-duration-summary {
+  display: inline-block;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--ocean-15a, #e5e5e5);
+  background: #fff;
+  font-size: 0.9rem;
+  color: var(--ocean-900, #223f62);
+  font-weight: 500;
+  margin: 0.25rem 0;
+}
+
 /* Row 3: Instruction text - matching styles */
 .dates-grid .calendar-instruction,
 .dates-grid .duration-instruction {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: rgba(0, 0, 0, 0.6);
-  margin: 0.25rem 0;
-  line-height: 1.4;
+  margin: 0.15rem 0;
+  line-height: 1.3;
+}
+
+/* Standalone instruction text */
+.duration-instruction,
+.calendar-instruction {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0.15rem 0 0.5rem 0;
+  line-height: 1.3;
 }
 
 /* Row 4: Calendar & Duration Controls */
@@ -332,7 +353,7 @@
   background: #fff;
   border: 1px solid var(--ocean-15a, #e5e5e5);
   padding: 0.75rem 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .dates-grid .trip-duration-controls-grid .duration-counter-row {
@@ -454,13 +475,212 @@
 
 /* Custom Calendar Container */
 .custom-calendar {
-  /* margin-top: 0.5rem; */
   border: 1px solid var(--ocean-15a);
-  padding: 1.25rem;
+  padding: 0.875rem;
   background: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  /* Added shadow */
-  max-width: 320px;
+  flex: 1;
+  min-width: 280px;
+}
+
+/* Dates Top Row - Side by side layout */
+/* Dates Top Row - Stacked layout (Trip Duration Top, Dates Bottom) */
+.dates-top-row {
+  display: flex;
+  flex-direction: column;
+  /* Stack vertically */
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dates-left,
+.dates-right {
+  width: 100%;
+  /* Full width */
+  min-width: 0;
+}
+
+/* Trip Duration first */
+.dates-right {
+  order: -1;
+}
+
+.dates-section-label {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ocean-900);
+}
+
+/* Date Range Display - Add max-width to prevent overflow */
+.date-range-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  height: 56px;
+  /* Increased height */
+  border: 1px solid var(--ocean-15a);
+  background: #fff;
+  font-size: 0.95rem;
+  color: var(--ocean-900);
+  width: 100%;
+  /* Take full width */
+  box-sizing: border-box;
+}
+
+.date-range-display .date-value {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.date-range-display .date-arrow {
+  color: var(--ocean-70a);
+  font-size: 1rem;
+  margin: 0 0.5rem;
+}
+
+/* Trip Duration Simple Control */
+.trip-duration-simple {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  height: 56px;
+  /* Matching height */
+  border: 1px solid var(--ocean-15a);
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  /* Take full width */
+  box-sizing: border-box;
+}
+
+.trip-duration-simple .trip-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ocean-900);
+}
+
+.trip-duration-simple .trip-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.trip-duration-simple .trip-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ocean-900);
+  min-width: 2rem;
+  text-align: center;
+}
+
+.btn-icon-small {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--ocean-15a);
+  background: #fff;
+  color: var(--ocean-900);
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-icon-small:hover:not(:disabled) {
+  border-color: var(--ocean-900);
+  background: var(--ocean-900);
+  color: #fff;
+}
+
+.btn-icon-small:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Mobile Navigation Visibility */
+.mobile-only-nav {
+  display: none;
+}
+
+/* Trip Duration Dual Control */
+.trip-duration-dual {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  height: 56px;
+  border: 1px solid var(--ocean-15a);
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.duration-col {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.duration-col .trip-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ocean-900);
+}
+
+.duration-col .trip-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.duration-divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--ocean-15a);
+  margin: 0 0.5rem;
+}
+
+.trip-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ocean-900);
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+/* Dual Calendar Container - 2 calendars side by side */
+.dual-calendar-container {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+/* CSS Cleaned up */
+/* CSS Cleaned up */
+
+.btn-icon-small:hover:not(:disabled) {
+  border-color: var(--ocean-900);
+  background: var(--ocean-900);
+  color: #fff;
+}
+
+.btn-icon-small:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Dual Calendar Container - 2 calendars side by side */
+.dual-calendar-container {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
 }
 
 /* Calendar Header - Month Title Left, Nav Right */
@@ -485,6 +705,12 @@
   gap: 0.5rem;
 }
 
+.calendar-nav-placeholder {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: inline-block;
+}
+
 .calendar-nav {
   background: none;
   border: none;
@@ -502,6 +728,17 @@
 
 .calendar-nav:hover {
   background: var(--ocean-15a);
+}
+
+.calendar-nav:disabled,
+.calendar-nav.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.calendar-nav:disabled:hover,
+.calendar-nav.disabled:hover {
+  background: none;
 }
 
 /* Calendar Grid */
@@ -1511,5 +1748,104 @@
   .ship-thumbnail {
     width: 60px;
     height: 45px;
+  }
+
+  /* Stack calendars vertically on mobile */
+  .dual-calendar-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .custom-calendar {
+    max-width: 100%;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  /* Hide second calendar on mobile */
+  .dual-calendar-container .custom-calendar:nth-child(2) {
+    display: none;
+  }
+
+  /* Stack dates-top-row vertically on mobile (Same as desktop now) */
+  .dates-top-row {
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Show mobile nav, hide desktop placeholder */
+  .mobile-only-nav {
+    display: block;
+  }
+
+  .desktop-only-placeholder {
+    display: none;
+  }
+
+  .dates-left,
+  .dates-right {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Adjust date range and trip duration for mobile */
+  /* Adjust date range and trip duration for mobile */
+  .date-range-display,
+  .trip-duration-dual {
+    height: 56px;
+    /* Fixed matching height */
+    min-height: 56px;
+    padding: 0 1rem;
+    width: 100%;
+    /* Force full width */
+  }
+
+  /* Compact spacing for trip duration on mobile */
+  .trip-duration-dual {
+    padding: 0 0.5rem;
+  }
+
+  .duration-col {
+    gap: 0.5rem;
+  }
+
+  .duration-col .trip-label {
+    font-size: 0.8rem;
+  }
+
+  .btn-icon-small {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+
+  /* Distribute date width equally on mobile */
+  .date-range-display .date-value {
+    flex: 1;
+    text-align: center;
+  }
+
+  .dates-section-label {
+    font-size: 0.85rem;
+  }
+
+  /* Adjust calendar sizing for mobile */
+  .calendar-header {
+    margin-bottom: 0.75rem;
+  }
+
+  .calendar-title {
+    font-size: 1rem;
+  }
+
+  .calendar-day {
+    height: 36px;
+    font-size: 0.9rem;
+  }
+
+  .weekday {
+    font-size: 0.75rem;
+    padding: 0.5rem 0;
   }
 }

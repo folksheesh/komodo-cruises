@@ -4,6 +4,7 @@ import { useRouter, useRoute } from "vue-router";
 import SearchModal from "./components/SearchModal.vue";
 import MenuModal from "./components/MenuModal.vue";
 import PlanModal from "./components/PlanModal.vue";
+import Footer from "./components/Footer.vue";
 
 const router = useRouter();
 const route = useRoute();
@@ -241,17 +242,6 @@ onUnmounted(() => {
       </nav>
     </header>
     <router-view />
-    <footer
-      v-if="
-        !$route.meta.planHeader &&
-        $route.path !== '/' &&
-        $route.path !== '/results'
-      "
-      class="site-footer mt-16"
-    >
-      <div class="footer-inner container text-sm">
-        Â© {{ new Date().getFullYear() }} Komodo Cruises
-      </div>
-    </footer>
+    <Footer v-if="!$route.meta.planHeader" @open-plan="openPlanModal" />
   </div>
 </template>

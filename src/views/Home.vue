@@ -193,87 +193,11 @@
   <ShipsCarousel />
 
   <!-- Home footer (visible on /) -->
-  <footer class="home-footer">
-    <div class="home-footer-inner container">
-      <!-- Top row: Brand + Links -->
-      <div class="hf-top">
-        <div class="hf-brand">
-          <div class="hf-logo">KOMODO CRUISES</div>
-          <div class="hf-copy">Rare journeys across the Komodo Islands.</div>
-        </div>
-        <nav class="hf-links">
-          <a href="#" @click.prevent="openPlanModal">Plan your trip</a>
-          <a href="#">Experiences</a>
-          <a href="#">Our story</a>
-          <a href="#">Contact</a>
-        </nav>
-        <div class="hf-contact">
-          <div class="hf-contact-title">Contact Us</div>
-          <div class="hf-contact-phone">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-              />
-            </svg>
-            <a href="tel:+6285282296450">+62 852-8229-6450</a>
-          </div>
-          <div class="hf-contact-address">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
-            <span
-              >Graha Permata Pancoran, Jl. KH. Guru Amin Blok A5, Pancoran,
-              Jakarta Selatan 12780</span
-            >
-          </div>
-        </div>
-      </div>
-      <!-- Bottom row: Copyright -->
-      <div class="hf-bottom">
-        <div class="hf-copyright">
-          © {{ new Date().getFullYear() }} Komodo Cruises | PT CANARD MONEY
-          INDONESIA
-        </div>
-        <div class="hf-disclaimer">
-          All voyages subject to weather and park regulations.
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Plan Modal -->
-  <PlanModal
-    :isOpen="isPlanModalOpen"
-    @close="closePlanModal"
-    @navigate-to-results="navigateToResults"
-  />
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
-import PlanModal from "../components/PlanModal.vue";
 import DestinationCarousel from "../components/DestinationCarousel.vue";
 import ShipsCarousel from "../components/ShipsCarousel.vue";
 import ActivitiesCarousel from "../components/ActivitiesCarousel.vue";
@@ -285,7 +209,7 @@ import homeCultureImg from "../images/home-culture.png";
 import homeLegacyImg from "../images/home-legacy.png";
 
 const router = useRouter();
-const isPlanModalOpen = ref(false);
+
 const isMuted = ref(true);
 const heroVideo = ref(null);
 const heroSectionRef = ref(null);
@@ -378,17 +302,4 @@ onUnmounted(() => {
     observer.disconnect();
   }
 });
-
-function openPlanModal() {
-  isPlanModalOpen.value = true;
-}
-
-function closePlanModal() {
-  isPlanModalOpen.value = false;
-}
-
-function navigateToResults() {
-  isPlanModalOpen.value = false;
-  router.push("/results");
-}
 </script>

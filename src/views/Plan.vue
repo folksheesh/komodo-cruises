@@ -50,7 +50,9 @@
         <p class="results-note">
           Region: <span class="semibold">Nusa Tenggara Timur</span>
         </p>
-        <p class="results-note">Select a destination you're interested in:</p>
+        <p class="results-note">
+          Select the destinations you're interested in:
+        </p>
 
         <div class="list">
           <div class="list-heading">Nusa Tenggara Timur</div>
@@ -58,11 +60,10 @@
           <div class="list-row" v-for="d in DESTINATIONS" :key="d">
             <div class="list-text">{{ d }}</div>
             <input
-              class="radio"
-              type="radio"
-              name="destination"
+              class="check"
+              type="checkbox"
               :value="d"
-              v-model="destination"
+              v-model="selectedDestinations"
               :aria-label="`Destination ${d}`"
             />
           </div>
@@ -95,9 +96,9 @@
       <div v-else-if="step === 3">
         <h3 class="step-title">Dates</h3>
         <p class="results-note">Select your travel dates:</p>
-        <p class="results-note text-sm">
+        <!-- <p class="results-note text-sm">
           Click to select start date, then click again to select end date.
-        </p>
+        </p> -->
 
         <div class="date-range-display">
           <span class="date-value">{{ dateFrom || "Start date" }}</span>
@@ -291,11 +292,25 @@ const REGION_NAME = "Nusa Tenggara Timur";
 const DESTINATIONS = ["Pulau Komodo", "Labuan Bajo"];
 const SHIPS = []; // Data kapal diambil dari API, bukan hardcoded
 
-const destination = ref("");
+const selectedDestinations = ref([...DESTINATIONS]); // Default: semua destinasi terpilih
+const destination = ref(""); // Keep for compatibility
 const ship = ref("");
 
-const dateFrom = ref("");
-const dateTo = ref(""); // Keep for compatibility but not used in UI
+// Default tanggal: hari ini sampai 2 hari setelahnya (3 hari trip)
+const getDefaultDates = () => {
+  const today = new Date();
+  const startDate = today.toISOString().split("T")[0];
+  const endDate = new Date(today);
+  endDate.setDate(endDate.getDate() + 2);
+  return {
+    start: startDate,
+    end: endDate.toISOString().split("T")[0],
+  };
+};
+
+const defaultDates = getDefaultDates();
+const dateFrom = ref(defaultDates.start);
+const dateTo = ref(defaultDates.end);
 const adults = ref(2);
 const children = ref(0);
 const age3_9 = ref(0);
@@ -308,7 +323,7 @@ const currentYear = ref(new Date().getFullYear());
 const labels = ["Destinations", "Ships", "Dates", "Guests", "Submit"];
 const prevLabel = computed(() => labels[step.value - 2] || "");
 const nextLabel = computed(() =>
-  step.value < 5 ? labels[step.value - 1] + " ›" : "Submit ›"
+  step.value < 5 ? labels[step.value - 1] + " ›" : "Submit ›",
 );
 
 /** Calendar computed properties */
@@ -398,18 +413,20 @@ const calendarDays = computed(() => {
   return days;
 });
 
-/** Guards untuk step navigation */
-const canGoStep2 = computed(() => !!destination.value);
-const canGoStep3 = computed(() => !!destination.value && !!ship.value);
-const canGoStep4 = computed(
-  () => !!destination.value && !!ship.value && !!dateFrom.value
-);
+/** Guards untuk step navigation - tidak ada blocking, user bisa langsung next */
+const canGoStep2 = computed(() => true);
+const canGoStep3 = computed(() => true);
+const canGoStep4 = computed(() => true);
 
 /** ===== Effects ===== */
-watch(destination, () => {
-  // reset ship saat ganti destinasi
-  ship.value = "";
-});
+watch(
+  selectedDestinations,
+  () => {
+    // reset ship saat ganti destinasi
+    ship.value = "";
+  },
+  { deep: true },
+);
 
 /** ===== Actions ===== */
 function go(n) {
@@ -417,13 +434,12 @@ function go(n) {
 }
 
 function next() {
-  // guard ringan biar UX jelas
-  if (step.value === 1 && !destination.value)
-    return toast("Please select a destination first.");
-  if (step.value === 2 && !ship.value)
-    return toast("Please select a ship first.");
-  if (step.value === 3 && !dateFrom.value)
-    return toast("Please select a start date first.");
+  // Step 1: Jika tidak ada destinasi dipilih, pilih semua
+  if (step.value === 1 && selectedDestinations.value.length === 0) {
+    selectedDestinations.value = [...DESTINATIONS];
+  }
+
+  // Lanjut ke step berikutnya tanpa blocking
   if (step.value < 5) step.value++;
   else goResults();
 }
@@ -433,10 +449,16 @@ function prev() {
 }
 
 function goResults() {
+  // Jika tidak ada destinasi dipilih, pilih semua
+  if (selectedDestinations.value.length === 0) {
+    selectedDestinations.value = [...DESTINATIONS];
+  }
+
   // Save search criteria to localStorage for Results page
   const searchCriteria = {
     region: REGION_NAME,
-    destination: destination.value,
+    destinations: selectedDestinations.value,
+    destination: selectedDestinations.value.join(", "), // Untuk kompatibilitas
     ship: ship.value,
     lodges: ship.value ? [ship.value] : [],
     dateFrom: dateFrom.value,
@@ -451,7 +473,7 @@ function goResults() {
 
   localStorage.setItem(
     "komodo_search_criteria",
-    JSON.stringify(searchCriteria)
+    JSON.stringify(searchCriteria),
   );
   window.location.href = "/results";
 }

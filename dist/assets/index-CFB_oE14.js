@@ -784,7 +784,7 @@ const dt = (x, b) => {
     },
   },
   uo = dt(co, [["__scopeId", "data-v-d4e9a465"]]),
-  vo = "https://i4k08k4w4g40wkg0wcw0w88w.49.13.148.202.sslip.io/";
+  vo = "http://localhost:3000/";
 function fs(x) {
   const b = new URL(vo),
     f = new URLSearchParams();
@@ -6270,7 +6270,7 @@ const ec = { class: "results-wrap" },
       async function bn() {
         try {
           const a = await fetch(
-              "https://i4k08k4w4g40wkg0wcw0w88w.49.13.148.202.sslip.io/?resource=cabindetail",
+              "http://localhost:3000/?resource=cabindetail",
             ).then((n) => n.json()),
             r = new Map(),
             c = new Set();
@@ -6337,7 +6337,7 @@ const ec = { class: "results-wrap" },
       async function ra() {
         try {
           const a = await fetch(
-              "https://i4k08k4w4g40wkg0wcw0w88w.49.13.148.202.sslip.io/?resource=shipdetail",
+              "http://localhost:3000/?resource=shipdetail",
             ).then((c) => c.json()),
             r = new Map();
           (a &&
@@ -13187,7 +13187,7 @@ const ec = { class: "results-wrap" },
               (
                 await (
                   await fetch(
-                    "https://i4k08k4w4g40wkg0wcw0w88w.49.13.148.202.sslip.io/api/send-confirmation-email",
+                    "http://localhost:3000/api/send-confirmation-email",
                     {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },

@@ -223,7 +223,7 @@
                         />
                       </div>
                       <div v-if="shipsList.length === 0" class="muted">
-                        No ships found from API.
+                        No ships found.
                       </div>
                     </template>
                   </div>
@@ -233,55 +233,119 @@
                 <div v-else-if="step === 3">
                   <h3 class="step-title">Dates</h3>
 
-                  <!-- Grid Layout: 2 columns, 4 rows -->
-                  <div class="dates-grid">
-                    <!-- ROW 1: Labels -->
-                    <p class="results-note dates-grid-label">
-                      Select your travel dates:
-                    </p>
-                    <p class="results-note dates-grid-label">Trip Duration:</p>
-
-                    <!-- ROW 2: Date Range Display | Trip Duration Summary -->
-                    <div class="date-range-display">
-                      <span class="date-value">{{
-                        dateFrom || "Start date"
-                      }}</span>
-                      <span class="date-arrow">→</span>
-                      <span class="date-value">{{ dateTo || "End date" }}</span>
+                  <!-- Date Range and Trip Duration in one row -->
+                  <div class="dates-top-row">
+                    <!-- Left: Date Selection -->
+                    <div class="dates-left">
+                      <p class="results-note dates-section-label">
+                        Select your travel dates:
+                      </p>
+                      <div class="date-range-display">
+                        <span class="date-value">{{
+                          dateFrom || "Start date"
+                        }}</span>
+                        <span class="date-arrow">→</span>
+                        <span class="date-value">{{
+                          dateTo || "End date"
+                        }}</span>
+                      </div>
+                      <!-- <p class="results-note text-sm calendar-instruction">
+                        Click to select start date, then click again to select
+                        end date.
+                      </p> -->
                     </div>
-                    <div class="trip-duration-summary">
-                      {{ displayTripDuration }}
+
+                    <!-- Right: Trip Duration (Simple) -->
+                    <div class="dates-right">
+                      <p class="results-note dates-section-label">
+                        Trip Duration:
+                      </p>
+                      <div class="trip-duration-dual">
+                        <!-- Min -->
+                        <div class="duration-col">
+                          <span class="trip-label">Min</span>
+                          <div class="trip-controls">
+                            <button
+                              type="button"
+                              class="btn-icon-small"
+                              :disabled="minTripDuration <= 1"
+                              @click="decrementMinDuration"
+                            >
+                              −
+                            </button>
+                            <span class="trip-value">{{
+                              minTripDuration
+                            }}</span>
+                            <button
+                              type="button"
+                              class="btn-icon-small"
+                              :disabled="minTripDuration >= maxTripDuration"
+                              @click="incrementMinDuration"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+
+                        <div class="duration-divider"></div>
+
+                        <!-- Max -->
+                        <div class="duration-col">
+                          <span class="trip-label">Max</span>
+                          <div class="trip-controls">
+                            <button
+                              type="button"
+                              class="btn-icon-small"
+                              :disabled="maxTripDuration <= minTripDuration"
+                              @click="decrementMaxDuration"
+                            >
+                              −
+                            </button>
+                            <span class="trip-value">{{
+                              maxTripDuration
+                            }}</span>
+                            <button
+                              type="button"
+                              class="btn-icon-small"
+                              :disabled="maxTripDuration >= 15"
+                              @click="incrementMaxDuration"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="results-note text-sm duration-instruction">
+                        Adjust min and max trip duration.
+                      </p>
                     </div>
+                  </div>
 
-                    <!-- ROW 3: Instruction text -->
-                    <p class="results-note text-sm calendar-instruction">
-                      Click to select start date, then click again to select end
-                      date.
-                    </p>
-                    <p class="results-note text-sm duration-instruction">
-                      Adjust min and max trip duration.
-                    </p>
-
-                    <!-- ROW 4: Calendar | Trip Duration Controls -->
+                  <!-- 2-Month Calendar Container -->
+                  <div class="dual-calendar-container">
+                    <!-- First Month Calendar -->
                     <div class="custom-calendar">
                       <div class="calendar-header">
+                        <button
+                          class="calendar-nav"
+                          :class="{ disabled: !canGoPrevMonth }"
+                          :disabled="!canGoPrevMonth"
+                          @click="prevMonth"
+                          type="button"
+                        >
+                          ‹
+                        </button>
                         <h4 class="calendar-title">{{ currentMonthYear }}</h4>
-                        <div class="calendar-nav-group">
-                          <button
-                            class="calendar-nav"
-                            @click="prevMonth"
-                            type="button"
-                          >
-                            ‹
-                          </button>
-                          <button
-                            class="calendar-nav"
-                            @click="nextMonth"
-                            type="button"
-                          >
-                            ›
-                          </button>
-                        </div>
+                        <span
+                          class="calendar-nav-placeholder desktop-only-placeholder"
+                        ></span>
+                        <button
+                          class="calendar-nav mobile-only-nav"
+                          @click="nextMonth"
+                          type="button"
+                        >
+                          ›
+                        </button>
                       </div>
 
                       <div class="calendar-grid">
@@ -319,78 +383,52 @@
                       </div>
                     </div>
 
-                    <!-- Trip Duration Controls -->
-                    <div class="trip-duration-controls-grid">
-                      <!-- Min Duration Row -->
-                      <div class="counter-row duration-counter-row">
-                        <div class="counter-text">
-                          <div class="counter-title">Min</div>
-                        </div>
-                        <div class="counter-ctrls">
-                          <button
-                            type="button"
-                            class="btn-icon"
-                            :disabled="minTripDuration <= 1"
-                            @click="decrementMinDuration"
-                          >
-                            −
-                          </button>
-                          <span class="count-display">{{
-                            minTripDuration
-                          }}</span>
-                          <button
-                            type="button"
-                            class="btn-icon"
-                            :disabled="minTripDuration >= maxTripDuration"
-                            @click="incrementMinDuration"
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-                      <!-- Max Duration Row -->
-                      <div class="counter-row duration-counter-row">
-                        <div class="counter-text">
-                          <div class="counter-title">Max</div>
-                        </div>
-                        <div class="counter-ctrls">
-                          <button
-                            type="button"
-                            class="btn-icon"
-                            :disabled="maxTripDuration <= minTripDuration"
-                            @click="decrementMaxDuration"
-                          >
-                            −
-                          </button>
-                          <span class="count-display">{{
-                            maxTripDuration
-                          }}</span>
-                          <button
-                            type="button"
-                            class="btn-icon"
-                            :disabled="maxTripDuration >= MAX_TRIP_DURATION"
-                            @click="incrementMaxDuration"
-                          >
-                            +
-                          </button>
-                        </div>
+                    <!-- Second Month Calendar -->
+                    <div class="custom-calendar">
+                      <div class="calendar-header">
+                        <span class="calendar-nav-placeholder"></span>
+                        <h4 class="calendar-title">{{ secondMonthYear }}</h4>
+                        <button
+                          class="calendar-nav"
+                          @click="nextMonth"
+                          type="button"
+                        >
+                          ›
+                        </button>
                       </div>
 
-                      <!-- Reset Button -->
-                      <div
-                        class="trip-duration-reset"
-                        v-if="
-                          minTripDuration > 1 ||
-                          maxTripDuration < MAX_TRIP_DURATION
-                        "
-                      >
-                        <button
-                          type="button"
-                          class="btn-text-reset"
-                          @click="resetTripDuration"
-                        >
-                          Reset to any duration
-                        </button>
+                      <div class="calendar-grid">
+                        <div class="calendar-weekdays">
+                          <div class="weekday">Su</div>
+                          <div class="weekday">Mo</div>
+                          <div class="weekday">Tu</div>
+                          <div class="weekday">We</div>
+                          <div class="weekday">Th</div>
+                          <div class="weekday">Fr</div>
+                          <div class="weekday">Sa</div>
+                        </div>
+
+                        <div class="calendar-days">
+                          <button
+                            v-for="day in calendarDaysSecond"
+                            :key="day.key"
+                            class="calendar-day"
+                            :class="{
+                              'other-month': !day.isCurrentMonth,
+                              selected: day.isSelected,
+                              disabled: !day.isSelectable,
+                              past: day.isPast,
+                              'in-range': day.isInRange,
+                              'range-start': day.isRangeStart,
+                              'range-end': day.isRangeEnd,
+                            }"
+                            :disabled="!day.isSelectable"
+                            @click="selectDate(day)"
+                            type="button"
+                          >
+                            {{ day.date }}
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -720,18 +758,31 @@ const SHIPS_CONFIG = []; // Data kapal diambil dari API, bukan hardcoded
 const shipsList = ref([]);
 const shipsLoading = ref(false);
 
-// Multiple destinations selection
-const selectedDestinations = ref([]);
-// Selected ship sheets (array of sheet names)
+// Multiple destinations selection - default semua terpilih
+const selectedDestinations = ref([...DESTINATIONS]);
+// Selected ship sheets (array of sheet names) - akan di-populate setelah load ships
 const selectedShipIds = ref([]);
 
-const dateFrom = ref("");
-const dateTo = ref(""); // Keep for compatibility but not used in UI
+// Default tanggal: hari ini sampai 2 hari setelahnya (3 hari trip)
+const getDefaultDates = () => {
+  const today = new Date();
+  const startDate = formatDateToString(today);
+  const endDate = new Date(today);
+  endDate.setDate(endDate.getDate() + 2);
+  return {
+    start: startDate,
+    end: formatDateToString(endDate),
+  };
+};
+
+const defaultDates = getDefaultDates();
+const dateFrom = ref(defaultDates.start);
+const dateTo = ref(defaultDates.end);
 
 // Trip duration (min/max range)
-const MAX_TRIP_DURATION = 30; // Maximum days for a trip
+const MAX_TRIP_DURATION = 15; // Maximum days for a trip
 const minTripDuration = ref(1); // Minimum trip duration
-const maxTripDuration = ref(30); // Maximum trip duration
+const maxTripDuration = ref(15); // Maximum trip duration
 
 // Increment/decrement functions for trip duration
 function decrementMinDuration() {
@@ -814,7 +865,7 @@ const cabins = ref([{ id: 1, adults: 2, children: 0, expanded: true }]);
 
 // Computed: total guests across all cabins
 const totalGuests = computed(() =>
-  cabins.value.reduce((sum, c) => sum + c.adults + c.children, 0)
+  cabins.value.reduce((sum, c) => sum + c.adults + c.children, 0),
 );
 
 const canAddCabin = computed(() => cabins.value.length < MAX_CABINS);
@@ -834,7 +885,7 @@ function goResults() {
   // Save search criteria to localStorage for Results page
   // Map selected sheets back to labels for display
   const selectedEntries = shipsList.value.filter((s) =>
-    selectedShipIds.value.includes(s.id)
+    selectedShipIds.value.includes(s.id),
   );
   const selectedLabels = selectedEntries.map((s) => s.label);
   const selectedSheets = selectedEntries.map((s) => s.sheet);
@@ -883,7 +934,7 @@ function goResults() {
 
   localStorage.setItem(
     "komodo_search_criteria",
-    JSON.stringify(searchCriteria)
+    JSON.stringify(searchCriteria),
   );
   emit("navigate-to-results");
 }
@@ -891,28 +942,63 @@ function goResults() {
 const labels = ["Destinations", "Ships", "Dates", "Guests", "Submit"];
 const prevLabel = computed(() => labels[step.value - 2] || "");
 const nextLabel = computed(() =>
-  step.value < 5 ? labels[step.value - 1] : "Submit"
+  step.value < 5 ? labels[step.value - 1] : "Submit",
 );
 
 /** Calendar computed properties */
 const minDate = computed(() => getTodayString());
 
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
 const currentMonthYear = computed(() => {
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
   return `${monthNames[currentMonth.value]} ${currentYear.value}`;
+});
+
+// Second month (next month) computed
+const secondMonth = computed(() => {
+  if (currentMonth.value === 11) {
+    return 0;
+  }
+  return currentMonth.value + 1;
+});
+
+const secondYear = computed(() => {
+  if (currentMonth.value === 11) {
+    return currentYear.value + 1;
+  }
+  return currentYear.value;
+});
+
+const secondMonthYear = computed(() => {
+  return `${monthNames[secondMonth.value]} ${secondYear.value}`;
+});
+
+// Check if we can go to previous month (can't go before current month)
+const canGoPrevMonth = computed(() => {
+  const today = new Date();
+  const currentViewMonth = currentMonth.value;
+  const currentViewYear = currentYear.value;
+  const todayMonth = today.getMonth();
+  const todayYear = today.getFullYear();
+
+  // Can go back only if current view is after today's month
+  if (currentViewYear > todayYear) return true;
+  if (currentViewYear === todayYear && currentViewMonth > todayMonth)
+    return true;
+  return false;
 });
 
 const calendarDays = computed(() => {
@@ -979,6 +1065,69 @@ const calendarDays = computed(() => {
   return days;
 });
 
+// Calendar days for second month
+const calendarDaysSecond = computed(() => {
+  const firstDay = new Date(secondYear.value, secondMonth.value, 1);
+  const lastDay = new Date(secondYear.value, secondMonth.value + 1, 0);
+  const startDate = new Date(firstDay);
+  const today = new Date();
+
+  // Start from Sunday of the week containing the 1st
+  startDate.setDate(startDate.getDate() - startDate.getDay());
+
+  const days = [];
+  const endDate = new Date(lastDay);
+  endDate.setDate(endDate.getDate() + (6 - lastDay.getDay()));
+
+  for (
+    let date = new Date(startDate);
+    date <= endDate;
+    date.setDate(date.getDate() + 1)
+  ) {
+    const isCurrentMonth = date.getMonth() === secondMonth.value;
+
+    // Normalize date for comparison to ignore time
+    const dDate = new Date(date);
+    dDate.setHours(0, 0, 0, 0);
+    const dToday = new Date(today);
+    dToday.setHours(0, 0, 0, 0);
+
+    const isPast = dDate < dToday;
+    const isSelectable = isCurrentMonth && !isPast;
+
+    const dateString = formatDateToString(date);
+
+    // Check if in range
+    let isInRange = false;
+    let isRangeStart = false;
+    let isRangeEnd = false;
+    if (dateFrom.value && dateTo.value && isCurrentMonth) {
+      const fromDate = parseDateString(dateFrom.value);
+      const toDate = parseDateString(dateTo.value);
+      if (dDate >= fromDate && dDate <= toDate) {
+        isInRange = true;
+        if (dDate.getTime() === fromDate.getTime()) isRangeStart = true;
+        if (dDate.getTime() === toDate.getTime()) isRangeEnd = true;
+      }
+    }
+
+    days.push({
+      key: date.getTime() + 1000, // Offset to avoid key collision
+      date: date.getDate(),
+      fullDate: dateString,
+      isCurrentMonth,
+      isSelectable,
+      isPast,
+      isSelected: dateFrom.value === dateString || dateTo.value === dateString,
+      isInRange,
+      isRangeStart,
+      isRangeEnd,
+    });
+  }
+
+  return days;
+});
+
 /** Trip duration - dibatasi oleh rentang tanggal yang dipilih */
 const maxAllowedDuration = computed(() => {
   // Jika belum ada dateTo, gunakan MAX_TRIP_DURATION
@@ -1004,18 +1153,10 @@ const availableDurations = computed(() => {
   return durations;
 });
 
-/** Guards untuk step navigation */
-const canGoStep2 = computed(() => selectedDestinations.value.length > 0);
-const canGoStep3 = computed(
-  () =>
-    selectedDestinations.value.length > 0 && selectedShipIds.value.length > 0
-);
-const canGoStep4 = computed(
-  () =>
-    selectedDestinations.value.length > 0 &&
-    selectedShipIds.value.length > 0 &&
-    !!dateFrom.value
-);
+/** Guards untuk step navigation - tidak ada blocking, user bisa langsung next */
+const canGoStep2 = computed(() => true);
+const canGoStep3 = computed(() => true);
+const canGoStep4 = computed(() => true);
 
 /** ===== Effects ===== */
 watch(selectedDestinations, () => {
@@ -1055,7 +1196,7 @@ watch(
       restorePageScroll();
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 onMounted(() => {
@@ -1078,13 +1219,17 @@ function go(n) {
 }
 
 function next() {
-  // guard ringan biar UX jelas
-  if (step.value === 1 && selectedDestinations.value.length === 0)
-    return toast("Please select at least one destination first.");
-  if (step.value === 2 && selectedShipIds.value.length === 0)
-    return toast("Please select at least one ship first.");
-  if (step.value === 3 && !dateFrom.value)
-    return toast("Please select a start date first.");
+  // Step 1: Jika tidak ada destinasi dipilih, pilih semua
+  if (step.value === 1 && selectedDestinations.value.length === 0) {
+    selectedDestinations.value = [...DESTINATIONS];
+  }
+
+  // Step 2: Jika tidak ada ship dipilih, pilih semua
+  if (step.value === 2 && selectedShipIds.value.length === 0) {
+    selectedShipIds.value = shipsList.value.map((s) => s.id);
+  }
+
+  // Lanjut ke step berikutnya tanpa blocking
   if (step.value < 5) step.value++;
   else goResults();
 }
@@ -1114,7 +1259,7 @@ async function loadShips() {
         getShipDetails().catch((e) => {
           console.warn(
             "Failed to load ship details (likely quota exceeded):",
-            e
+            e,
           );
           return null; // Return null so Promise.all continues
         }),
@@ -1136,29 +1281,24 @@ async function loadShips() {
       });
     }
 
-    const normalized = (opsRes?.operators || [])
-      .map((op) => {
-        const label = op.operator?.trim() || "";
-        const sheet = op.sourceSheet?.trim() || label;
+    const ships = detailsRes?.ships || [];
+    const normalized = ships.map((s) => {
+      const label = s.name || "";
+      const sheet = s.operator || label;
 
-        // Match with details
-        const key = label.toLowerCase().trim();
-        const detail = detailsMap[key];
-
-        return {
-          id: `${label}__${sheet}`,
-          label,
-          sheet,
-          // Add details if found
-          image: detail?.mainImage || "",
-          description: detail?.description || "",
-          specs: detail?.specs || {},
-        };
-      })
-      .filter((s) => s.label && s.sheet);
+      return {
+        id: label,
+        label,
+        sheet,
+        operator: s.operator,
+        image: s.mainImage || s.image_main || "",
+        description: s.description || "",
+        specs: s.specs || {},
+      };
+    });
 
     shipsList.value = normalized.length
-      ? normalized
+      ? normalized.sort((a, b) => a.label.localeCompare(b.label))
       : normalizeConfigShips(SHIPS_CONFIG);
   } catch (e) {
     console.warn("Failed to load operators/details:", e);
@@ -1261,6 +1401,9 @@ function toast(msg) {
 
 /** Calendar methods */
 function prevMonth() {
+  // Prevent going to past months
+  if (!canGoPrevMonth.value) return;
+
   if (currentMonth.value === 0) {
     currentMonth.value = 11;
     currentYear.value--;
@@ -1556,7 +1699,9 @@ function selectDate(day) {
   border-radius: 0.25rem;
   text-decoration: none;
   text-underline-offset: 3px;
-  transition: color 0.18s ease, opacity 0.18s ease;
+  transition:
+    color 0.18s ease,
+    opacity 0.18s ease;
   opacity: 0.96;
   /* subtle base for smoother fade in/out */
   font-weight: 500;
@@ -1905,7 +2050,8 @@ function selectDate(day) {
   max-height: 250px;
   overflow-y: auto;
   z-index: 50;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 

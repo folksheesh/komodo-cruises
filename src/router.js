@@ -5,6 +5,7 @@ import Plan from "./views/Plan.vue";
 import PaymentSuccess from "./views/PaymentSuccess.vue";
 import PaymentFailed from "./views/PaymentFailed.vue";
 import FindReservation from "./views/FindReservation.vue";
+import Policies from "./views/Policies.vue";
 
 export default createRouter({
   history: createWebHistory(),
@@ -15,5 +16,6 @@ export default createRouter({
     { path: "/payment-success", component: PaymentSuccess },
     { path: "/payment-failed", component: PaymentFailed },
     { path: "/find-reservation", component: FindReservation },
+    { path: "/policies", component: Policies },
   ],
 });

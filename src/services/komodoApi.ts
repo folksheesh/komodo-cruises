@@ -1,7 +1,7 @@
 // Use local API during development, switch to production URL when deployed
 const BASE_URL = (import.meta as any).env?.DEV
-  ? "https://i4k08k4w4g40wkg0wcw0w88w.49.13.148.202.sslip.io/"
-  : "https://i4k08k4w4g40wkg0wcw0w88w.49.13.148.202.sslip.io/";
+  ? "http://localhost:3000/"
+  : "http://localhost:3000/";
 
 
 // Types
@@ -19,7 +19,12 @@ export type CabinOperator = { operator: string; cabins: CabinItem[] };
 export type CabinsResponse = { ok: true; resource: 'cabins'; operators: CabinOperator[]; allCabins: string[] };
 export type AvailabilityOperator = { operator: string; total: number; cabins: CabinItem[] };
 export type AvailabilityResponse = { ok: true; date: string; total: number; operators: AvailabilityOperator[] };
-export type OperatorItem = { operator: string; sourceSheet: string };
+export type OperatorItem = { 
+  operator?: string; 
+  operator_name?: string; 
+  sourceSheet?: string;
+  [key: string]: any; 
+};
 export type OperatorsResponse = { ok: true; resource: 'operators'; total: number; operators: OperatorItem[] };
 
 export type ShipDetail = {
