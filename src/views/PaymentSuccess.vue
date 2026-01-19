@@ -303,7 +303,7 @@ const sendConfirmationEmail = async () => {
     emailStatus.value = "sending";
 
     const response = await fetch(
-      "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/api/send-confirmation-email",
+      "https://i4k08k4w4g40wkg0wcw0w88w.49.13.148.202.sslip.io/api/send-confirmation-email",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -320,7 +320,7 @@ const sendConfirmationEmail = async () => {
           pricePerCabin: bookingData.pricePerCabin,
           totalAmount: bookingData.totalAmount,
         }),
-      }
+      },
     );
 
     const result = await response.json();
@@ -416,7 +416,8 @@ onMounted(async () => {
   stroke-width: 2;
   stroke: #10b981;
   stroke-miterlimit: 10;
-  animation: fill 0.4s ease-in-out 0.4s forwards,
+  animation:
+    fill 0.4s ease-in-out 0.4s forwards,
     scale 0.3s ease-in-out 0.9s both;
 }
 

@@ -332,7 +332,7 @@
   background: #fff;
   border: 1px solid var(--ocean-15a, #e5e5e5);
   padding: 0.75rem 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
 }
 
 .dates-grid .trip-duration-controls-grid .duration-counter-row {

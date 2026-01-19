@@ -405,7 +405,7 @@
                       <ul class="overview-list">
                         <li
                           v-for="(feature, fIdx) in getCabinOverview(
-                            item.originalItem
+                            item.originalItem,
                           ).slice(0, 3)"
                           :key="fIdx"
                         >
@@ -418,7 +418,7 @@
                       >
                         <li
                           v-for="(feature, fIdx) in getCabinOverview(
-                            item.originalItem
+                            item.originalItem,
                           ).slice(3, 6)"
                           :key="fIdx + 3"
                         >
@@ -432,7 +432,7 @@
                       class="cabin-details-btn"
                       @click="
                         item.availabilityType === 'standard' &&
-                          viewCabinDetails(item.originalItem)
+                        viewCabinDetails(item.originalItem)
                       "
                     >
                       CABIN DETAILS
@@ -448,7 +448,7 @@
                         <span class="trip-date-text">{{
                           formatTripDateRange(
                             getDisplayTrip(item).date,
-                            getDisplayTrip(item).tripDays
+                            getDisplayTrip(item).tripDays,
                           )
                         }}</span>
                         <span class="trip-availability-badge"
@@ -476,7 +476,7 @@
                           ]"
                           @click="
                             !isTripInItinerary(item, trip) &&
-                              selectTrip(item, trip)
+                            selectTrip(item, trip)
                           "
                         >
                           <div class="trip-alt-info">
@@ -1370,7 +1370,7 @@
                 <ul class="modal-overview-list">
                   <li
                     v-for="(feature, idx) in getCabinOverview(
-                      selectedCabin
+                      selectedCabin,
                     ).slice(0, 4)"
                     :key="idx"
                   >
@@ -1383,7 +1383,7 @@
                 >
                   <li
                     v-for="(feature, idx) in getCabinOverview(
-                      selectedCabin
+                      selectedCabin,
                     ).slice(4, 8)"
                     :key="idx + 4"
                   >
@@ -1401,7 +1401,7 @@
                   <li
                     v-for="(facility, idx) in selectedCabinFacilities.slice(
                       0,
-                      3
+                      3,
                     )"
                     :key="idx"
                   >
@@ -1415,7 +1415,7 @@
                   <li
                     v-for="(facility, idx) in selectedCabinFacilities.slice(
                       3,
-                      6
+                      6,
                     )"
                     :key="idx + 3"
                   >
@@ -2494,7 +2494,7 @@ function nextImage(cabinKey) {
     cabinKey,
     getGalleryIndex(cabinKey) + 1,
     imgs.length,
-    "right"
+    "right",
   );
 }
 
@@ -2645,16 +2645,16 @@ function convertGDriveUrl(url) {
 const SHIP_IMAGES = {
   // Active operators (from ?resource=operators)
   "SEMESTA VOYAGES": convertGDriveUrl(
-    "https://drive.google.com/file/d/1semesta_placeholder"
+    "https://drive.google.com/file/d/1semesta_placeholder",
   ),
   "AKASSA CRUISE": convertGDriveUrl(
-    "https://drive.google.com/file/d/1akassa_placeholder"
+    "https://drive.google.com/file/d/1akassa_placeholder",
   ),
   "DERYA LIVEABOARD": convertGDriveUrl(
-    "https://drive.google.com/file/d/1derya_placeholder"
+    "https://drive.google.com/file/d/1derya_placeholder",
   ),
   "GIONA LIVEABOARD": convertGDriveUrl(
-    "https://drive.google.com/file/d/1giona_placeholder"
+    "https://drive.google.com/file/d/1giona_placeholder",
   ),
 
   // Additional ships from Ship Detail sheet (for future use)
@@ -2768,7 +2768,7 @@ const formFlexibleGuests = ref(2);
 const guestsTotal = computed(() =>
   formIsFlexible.value
     ? formFlexibleGuests.value
-    : cabins.value.reduce((sum, c) => sum + c.adults + c.children, 0)
+    : cabins.value.reduce((sum, c) => sum + c.adults + c.children, 0),
 );
 const canAddCabin = computed(() => cabins.value.length < MAX_CABINS);
 
@@ -3122,7 +3122,7 @@ const availabilityResults = computed(() => {
     const hasAvailability = avg >= (sc.totalGuests || 0);
     const minCap = Math.max(
       1,
-      sc.totalGuests || (sc.adults || 0) + (sc.children || 0)
+      sc.totalGuests || (sc.adults || 0) + (sc.children || 0),
     );
     const startDay = perDay.find((d) => d?.date === sc.dateFrom) || perDay[0];
     const startCabinsAll = startDay?.operators?.[0]?.cabins || [];
@@ -3151,7 +3151,7 @@ const cabinResults = computed(() => {
   const date = sc.dateFrom;
   const minCap = Math.max(
     1,
-    sc.totalGuests || (sc.adults || 0) + (sc.children || 0)
+    sc.totalGuests || (sc.adults || 0) + (sc.children || 0),
   );
   const items = [];
   const seen = new Set();
@@ -3192,7 +3192,7 @@ const cabinCards = computed(() =>
     date: r.date,
     capacity: r.capacity,
     image: r.image || "/src/images/cabin.jpg",
-  }))
+  })),
 );
 
 const minCapacity = computed(() => {
@@ -3209,7 +3209,7 @@ const selectedCabinDetail = computed(() => {
   if (source.detail) return source.detail;
   const map = detailCabinMap.value || new Map();
   const key = `${normalizeName(
-    source.shipName || source.operatorLabel || ""
+    source.shipName || source.operatorLabel || "",
   )}|${normalizeCabinName(source.cabinName)}`;
   return map.get(key) || null;
 });
@@ -3304,7 +3304,7 @@ const selectedShipMatchers = computed(() => {
     const n = normalizeName(
       String(s)
         .replace(/normalized/gi, "")
-        .replace(/cruise schedule/gi, "")
+        .replace(/cruise schedule/gi, ""),
     );
     if (!n) return;
     set.add(n);
@@ -3332,7 +3332,7 @@ const needsShipSelection = computed(() => {
   }
   // Check if any ships have availability (filter out unavailable ships)
   const availableCount = availableShipsForSelection.value.filter(
-    (s) => s.hasAvailability
+    (s) => s.hasAvailability,
   ).length;
   return availableCount > 0;
 });
@@ -3575,7 +3575,7 @@ const allStartDateCabins = computed(() => {
       // Try canonical label match
       if (!detail) {
         const canonKey = `${normalizeName(shipName)}|${canonicalizeCabinLabel(
-          name
+          name,
         )}`;
         detail = detailMap.get(canonKey);
       }
@@ -3638,7 +3638,7 @@ const allStartDateCabins = computed(() => {
   items.sort(
     (a, b) =>
       (a.operatorLabel || "").localeCompare(b.operatorLabel || "") ||
-      (a.cabinName || "").localeCompare(b.cabinName || "")
+      (a.cabinName || "").localeCompare(b.cabinName || ""),
   );
 
   // Filter by date range if user selected both start and end dates
@@ -3653,7 +3653,7 @@ const allStartDateCabins = computed(() => {
         item.date,
         tripDays,
         userDateFrom,
-        userDateTo
+        userDateTo,
       );
     });
     return filteredItems;
@@ -3747,7 +3747,7 @@ const displayItems = computed(() => {
       // Does this cabin fit ANY of the requested room configurations?
       // (Assuming checking individual fit is what's implied by "cocok dengan minimal satu kamar")
       const fitsAny = requestedCabins.some(
-        (req) => cap >= (req.total || req.adults + req.children)
+        (req) => cap >= (req.total || req.adults + req.children),
       );
       if (!fitsAny) {
         continue;
@@ -3802,7 +3802,7 @@ const displayItems = computed(() => {
     .map((group) => {
       // Sort trips by date
       const sortedTrips = group.trips.sort(
-        (a, b) => new Date(a.date) - new Date(b.date)
+        (a, b) => new Date(a.date) - new Date(b.date),
       );
 
       // If no trips survived filtering (e.g. ship capacity valid for some dates but not others?)
@@ -3990,7 +3990,7 @@ const itineraryTotals = computed(() => {
   for (const item of items) {
     const parsed = parsePriceValue(
       item?.price,
-      detectedCurrency || DEFAULT_CURRENCY
+      detectedCurrency || DEFAULT_CURRENCY,
     );
     if (!parsed) {
       continue;
@@ -4088,7 +4088,7 @@ function getDisplayTrip(item) {
   if (!item.trips || item.trips.length === 0) return null;
   // Find selected trip from this cabin's trips
   const selectedTrip = item.trips.find(
-    (trip) => trip.key === selectedTripKey.value
+    (trip) => trip.key === selectedTripKey.value,
   );
   return selectedTrip || item.trips[0];
 }
@@ -4157,7 +4157,7 @@ async function loadShipsList() {
       const ids = [];
       for (const pair of savedShipPairs.value) {
         const match = shipsList.value.find(
-          (s) => s.label === pair.label && s.sheet === (pair.sheet || s.sheet)
+          (s) => s.label === pair.label && s.sheet === (pair.sheet || s.sheet),
         );
         if (match) ids.push(match.id);
       }
@@ -4179,7 +4179,7 @@ async function loadDetailCabins() {
   try {
     // Use local API endpoint for cabin details
     const baseUrl = import.meta.env.DEV
-      ? "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/"
+      ? "https://i4k08k4w4g40wkg0wcw0w88w.49.13.148.202.sslip.io/"
       : "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io";
     const url = `${baseUrl}/?resource=cabindetail`;
     const res = await fetch(url).then((r) => r.json());
@@ -4198,8 +4198,8 @@ async function loadDetailCabins() {
         shipVariants.add(normalizeName(shipName)); // e.g., "semesta voyage"
         shipVariants.add(
           normalizeName(
-            shipName.replace(/\s+(cruise|liveaboard|voyages?|boat)s?$/i, "")
-          )
+            shipName.replace(/\s+(cruise|liveaboard|voyages?|boat)s?$/i, ""),
+          ),
         ); // e.g., "semesta"
 
         // Also add uppercase variant
@@ -4207,8 +4207,8 @@ async function loadDetailCabins() {
         shipVariants.add(normalizeName(upperShip));
         shipVariants.add(
           normalizeName(
-            upperShip.replace(/\s+(CRUISE|LIVEABOARD|VOYAGES?|BOAT)S?$/i, "")
-          )
+            upperShip.replace(/\s+(CRUISE|LIVEABOARD|VOYAGES?|BOAT)S?$/i, ""),
+          ),
         );
 
         // Key by NAME CABIN (base) -> detail
@@ -4269,7 +4269,7 @@ async function loadDetailCabins() {
 async function loadShipDetails() {
   try {
     const baseUrl = import.meta.env.DEV
-      ? "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io/"
+      ? "https://i4k08k4w4g40wkg0wcw0w88w.49.13.148.202.sslip.io/"
       : "https://uo044o8swkcgo4s4cgockc08.49.13.148.202.sslip.io";
     const url = `${baseUrl}/?resource=shipdetail`;
     const res = await fetch(url).then((r) => r.json());
@@ -4291,7 +4291,7 @@ async function loadShipDetails() {
     shipDetailsMap.value = map;
     console.log(
       `Loaded ${map.size} ship details from API`,
-      Array.from(map.keys())
+      Array.from(map.keys()),
     );
   } catch (e) {
     console.warn("Failed to load shipdetail API", e);
@@ -4337,13 +4337,13 @@ async function checkAvailability() {
             console.log(
               "[Results] Ship details loaded:",
               newMap.size,
-              "entries"
+              "entries",
             );
           }
         } catch (err) {
           console.warn(
             "[Results] Failed to load ship details, continuing without:",
-            err
+            err,
           );
         }
       })(),
@@ -4354,7 +4354,7 @@ async function checkAvailability() {
         } catch (err) {
           console.warn(
             "[Results] Failed to load cabin details, continuing without:",
-            err
+            err,
           );
         }
       })(),
@@ -4364,7 +4364,7 @@ async function checkAvailability() {
     const getGlobalCabinsOnce = () => {
       if (!globalCabinsPromise) {
         globalCabinsPromise = getCabins("Cruise Schedule - Normalized").catch(
-          () => null
+          () => null,
         );
       }
       return globalCabinsPromise;
@@ -4391,7 +4391,7 @@ async function checkAvailability() {
             if (globalCab) {
               const target = normalizeName(label);
               const op = (globalCab.operators || []).find(
-                (o) => normalizeName(o.operator) === target
+                (o) => normalizeName(o.operator) === target,
               );
               if (op && Array.isArray(op.cabins)) {
                 allowed = op.cabins.map((c) => String(c).split(" (")[0].trim());
@@ -4402,9 +4402,9 @@ async function checkAvailability() {
           }
         }
         allowedBySheet[sheet] = Array.from(
-          new Set(allowed.map(normalizeCabinName))
+          new Set(allowed.map(normalizeCabinName)),
         );
-      })
+      }),
     );
 
     const perShipEntries = await Promise.all(
@@ -4417,10 +4417,10 @@ async function checkAvailability() {
           getAvailability(date, sheet).catch((err) => {
             console.warn(
               `Failed to get availability for ${date} on ${sheet}:`,
-              err
+              err,
             );
             return null;
-          })
+          }),
         );
 
         const primaryDays = await Promise.all(primaryPromises);
@@ -4428,7 +4428,7 @@ async function checkAvailability() {
         // Identify which dates failed
         const needFallbackIdx = primaryDays
           .map((day, idx) =>
-            !day || !day.operators || day.operators.length === 0 ? idx : -1
+            !day || !day.operators || day.operators.length === 0 ? idx : -1,
           )
           .filter((idx) => idx >= 0);
 
@@ -4440,11 +4440,11 @@ async function checkAvailability() {
               (err) => {
                 console.warn(
                   `Failed to get fallback availability for ${dates[idx]}:`,
-                  err
+                  err,
                 );
                 return null;
-              }
-            )
+              },
+            ),
           );
           const fbResults = await Promise.all(fbPromises);
           fallbackDays = fbResults.filter((d) => d !== null);
@@ -4459,8 +4459,8 @@ async function checkAvailability() {
             primaryDays[idx].operators.length
               ? primaryDays[idx]
               : needFallbackIdx.includes(idx) && fallbackDays.length > 0
-              ? fallbackDays[needFallbackIdx.indexOf(idx)]
-              : null;
+                ? fallbackDays[needFallbackIdx.indexOf(idx)]
+                : null;
 
           if (day) {
             const allCabins =
@@ -4478,7 +4478,7 @@ async function checkAvailability() {
           }
         }
         return [label, perShipResults];
-      })
+      }),
     );
 
     const perShip = {};
@@ -4493,7 +4493,7 @@ async function checkAvailability() {
       try {
         const allDates = generateDateRange(
           sc.dateFrom,
-          sc.dateTo || sc.dateFrom
+          sc.dateTo || sc.dateFrom,
         );
         const allAvailabilityPromises = allDates.map(async (date) => {
           let dayData = null;
@@ -4502,7 +4502,7 @@ async function checkAvailability() {
           } catch (err) {
             console.warn(
               `Failed primary availability fetch for ${date}, trying fallback:`,
-              err
+              err,
             );
           }
 
@@ -4514,12 +4514,12 @@ async function checkAvailability() {
             try {
               dayData = await getAvailability(
                 date,
-                "Cruise Schedule - Normalized"
+                "Cruise Schedule - Normalized",
               );
             } catch (err) {
               console.warn(
                 `Failed fallback availability fetch for ${date}:`,
-                err
+                err,
               );
             }
           }
@@ -4556,7 +4556,7 @@ async function checkAvailability() {
           operators: Array.from(combinedOperatorsMap.values()),
           total: Array.from(combinedOperatorsMap.values()).reduce(
             (sum, op) => sum + op.cabins.length,
-            0
+            0,
           ),
         };
 
@@ -4564,7 +4564,7 @@ async function checkAvailability() {
         console.log(
           "[Results] Loaded global availability:",
           combinedAvailability.total,
-          "total cabins"
+          "total cabins",
         );
       } catch (e) {
         console.debug("[Results] global availability error", e);
@@ -4589,7 +4589,7 @@ const loadResults = () => checkAvailability();
 function applySidebarChanges() {
   try {
     const selectedEntries = shipsList.value.filter((s) =>
-      formShipIds.value.includes(s.id)
+      formShipIds.value.includes(s.id),
     );
     const labels = selectedEntries.map((s) => s.label);
     const sheets = selectedEntries.map((s) => s.sheet);
@@ -4695,8 +4695,8 @@ onMounted(async () => {
       formDestinations.value = Array.isArray(sc.destinations)
         ? sc.destinations.slice()
         : sc.destination
-        ? [sc.destination]
-        : [];
+          ? [sc.destination]
+          : [];
 
       // Load flexible state
       formIsFlexible.value = !!sc.isFlexible;
@@ -4749,12 +4749,12 @@ onMounted(async () => {
     }
     // Start loading detail cabins in background (non-blocking)
     loadDetailCabins().catch((err) =>
-      console.warn("Failed to load details background:", err)
+      console.warn("Failed to load details background:", err),
     );
 
     // Start loading ship details in background (non-blocking)
     loadShipDetails().catch((err) =>
-      console.warn("Failed to load ship details background:", err)
+      console.warn("Failed to load ship details background:", err),
     );
 
     // Run critical API calls in parallel
@@ -4983,7 +4983,7 @@ function getCabinOverview(item) {
       "Air conditioning",
       "Daily housekeeping",
       "Private bathroom",
-      "Air conditioning"
+      "Air conditioning",
     );
   }
 
@@ -5123,7 +5123,7 @@ function extractFacilitiesFromText(text) {
       .split(" ")
       .map((w) => (w ? w[0].toUpperCase() + w.slice(1).toLowerCase() : ""))
       .filter(Boolean)
-      .join(" ")
+      .join(" "),
   );
 
   const unique = [];
@@ -5276,7 +5276,7 @@ function isInItinerary(item) {
     (it) =>
       it.cabin === (item.title || item.cabinName) &&
       it.ship === item.shipName &&
-      it.date === item.date
+      it.date === item.date,
   );
 }
 
@@ -5292,7 +5292,7 @@ function isTripInItinerary(displayItem, trip) {
     (it) =>
       it.cabin === targetName &&
       it.ship === originalItem.shipName &&
-      it.date === trip.date
+      it.date === trip.date,
   );
 }
 
@@ -5330,7 +5330,7 @@ function addToItinerary(item, guests = 2) {
       (it) =>
         it.cabin === targetName &&
         it.ship === item.shipName &&
-        it.date === item.date
+        it.date === item.date,
     );
     if (exists) return;
     const entry = {
@@ -5363,7 +5363,7 @@ function removeFromItinerary(item) {
           it.cabin === targetName &&
           it.ship === item.shipName &&
           it.date === item.date
-        )
+        ),
     );
     localStorage.setItem(key, JSON.stringify(filtered));
     loadItinerary();
@@ -5537,7 +5537,7 @@ async function submitEnquiry() {
         invoiceUrl: invoiceResponse.invoiceUrl,
         amount: totalAmount,
         createdAt: new Date().toISOString(),
-      })
+      }),
     );
 
     if (invoiceResponse.invoiceUrl) {
@@ -5610,7 +5610,8 @@ loadItinerary();
 .slide-right-leave-active,
 .slide-left-enter-active,
 .slide-left-leave-active {
-  transition: transform 0.18s cubic-bezier(0.55, 0, 0.1, 1),
+  transition:
+    transform 0.18s cubic-bezier(0.55, 0, 0.1, 1),
     opacity 0.18s cubic-bezier(0.55, 0, 0.1, 1);
 }
 
